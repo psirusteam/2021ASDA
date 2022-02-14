@@ -3,6 +3,7 @@ library (sas7bdat)
 library (survey)
 library(srvyr)
 library(haven)
+library(statar)
 
 dir()
 
@@ -38,39 +39,55 @@ subnhanes <- subset(nhanessvy2 , AGE >= 18)
 names (nhanessvy2)
 
 #ncs-r next
-ncsr <- read_sas("P:/ASDA 2/Data sets/ncsr/ncsr_sub_5apr2017.sas7bdat")
+ncsr <- read_dta("Data/ncsr_analysis_examples_c1_c10_2011.dta")
 names(ncsr)
 #create factor versions with labels
 ncsr$racec <- factor(ncsr$racecat, levels = 1: 4, labels =c("Other", "Hispanic", "Black", "White"))
-ncsr$mar3catc <- factor(ncsr$MAR3CAT, levels = 1: 3, labels =c("Married", "Previously Married", "Never Married"))
-ncsr$ed4catc <- factor(ncsr$ED4CAT, levels = 1: 4, labels =c("0-11", "12", "13-15","16+"))
-ncsr$sexc <- factor(ncsr$SEX, levels = 1:2, labels=c("Male","Female"))
+ncsr$mar3catc <- factor(ncsr$mar3cat, levels = 1: 3, labels =c("Married", "Previously Married", "Never Married"))
+ncsr$ed4catc <- factor(ncsr$ed4cat, levels = 1: 4, labels =c("0-11", "12", "13-15","16+"))
+ncsr$sexc <- factor(ncsr$sex, levels = 1:2, labels=c("Male","Female"))
 ncsr$ag4catc <- factor(ncsr$ag4cat, levels = 1:4, labels=c("18-29", "30-44", "45-59", "60+"))
-ncsrsvyp1 <- svydesign(strata=~SESTRAT, id=~SECLUSTR, weights=~NCSRWTSH, data=ncsr, nest=T)
+ncsrsvyp1 <- svydesign(strata=~sestrat, id=~seclustr, weights=~ncsrwtsh, data=ncsr, nest=T)
 names (ncsrsvyp1)
-ncsrp2 <- subset(ncsr, !is.na(NCSRWTLG))
-ncsrsvyp2 <- svydesign(strata=~SESTRAT, id=~SECLUSTR, weights=~NCSRWTLG, data=ncsrp2, nest=T)
+ncsrp2 <- subset(ncsr, !is.na(ncsrwtlg))
+ncsrsvyp2 <- svydesign(strata=~sestrat, id=~seclustr, weights=~ncsrwtsh, data=ncsrp2, nest=T)
 names (ncsrsvyp2)
-ncsr$popweight <- (ncsr$NCSRWTSH*(209128094/9282))
-ncsrsvypop <- svydesign(strata=~SESTRAT, id=~SECLUSTR, weights=~popweight, data=ncsr, nest=T)
+ncsr$popweight <- (ncsr$ncsrwtsh*(209128094/9282))
+ncsrsvypop <- svydesign(strata=~sestrat, id=~seclustr, weights=~popweight, data=ncsr, nest=T)
 summary(ncsrsvypop)
 #hrs, similar needs for ASDA2
 #both hh and r weights are needed plus financial respondent for hh level analysis
-hrs <- read_sas("p:/ASDA 2/Data sets/hrs 2012/hrs_sub_28sep2016.sas7bdat")
+
+hrs <- read_sas("Data/hrs_analysis_ex_c1_c9_2011.sas7bdat")
 summary(hrs)
-hrssvyhh <- svydesign(strata=~STRATUM, id=~SECU, weights=~NWGTHH , data=hrs, nest=T)
+hrssvyhh <- svydesign(strata=~STRATUM, id=~SECU, weights=~KWGTHH , data=hrs, nest=T)
 summary(hrssvyhh)
-hrssvysub <-subset(hrssvyhh, NFINR==1)
+hrssvysub <-subset(hrssvyhh, KFINR==1)
 summary(hrssvysub)
 
-hrssvyr <- svydesign(strata=~STRATUM, id=~SECU, weights=~NWGTR , data=hrs, nest=T)
+hrssvyr <- svydesign(strata=~STRATUM, id=~SECU, weights=~KWGTR , data=hrs, nest=T)
 summary(hrssvyr)
+
+
 #section 2 chapter 5 analysis examples replication, ASDA2
 # figures 5.1 and 5.2
-svyhist(~LBXTC , subset (nhanessvy2, age >=18), main="", col="grey80", xlab ="Histogram of Total Cholesterol")
+svyhist(
+  ~ LBXTC ,
+  subset (nhanessvy2, AGEC >= 18),
+  main = "",
+  col = "grey80",
+  xlab = "Histogram of Total Cholesterol"
+)
 #CREATE A VARIABLE CALLED GENDER FOR BOXPLOT
 nhanessvy2<-update(nhanessvy2, gender=cut(RIAGENDR, c(1, 2, Inf), right=F))
-svyboxplot(LBXTC~gender , subset (nhanessvy2, age >=18), col="grey80", ylab="Total Cholesterol", xlab ="1=Male 2=Female")
+svyboxplot(
+  LBXTC ~ gender ,
+  subset (nhanessvy2, AGE >= 18),
+  col = "grey80",
+  ylab = "Total Cholesterol",
+  xlab = "1=Male 2=Female"
+)
+
 #Example 5.3
 svytotal (~mde, ncsrsvypop, deff=T)
 confint(svytotal(~mde, ncsrsvypop))
@@ -80,7 +97,7 @@ ex53 <- svyby (~mde, ~mar3catc, ncsrsvypop, svytotal, deff=T)
 ex53
 confint(ex53)
 #Example 5.4 HH Level Wealth/Total Assets
-svyby (~H11ATOTA, ~I(NFINR==1), hrssvyhh, na.rm=T, svytotal)
+svyby (~H8ATOTA, ~I(KFINR==1), hrssvyhh, na.rm=T, svytotal)
 confint(svyby (~H11ATOTA, ~I(NFINR==1), hrssvyhh, na.rm=T, ci=T, svytotal))
 #Example 5.5 HRS HH Income
 svyby (~H11ITOT, ~I(NFINR==1), hrssvyhh, na.rm=T, svymean)
