@@ -1,0 +1,45 @@
+---
+title: "Variable continua"
+author: "CEPAL"
+date: "14/2/2022"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+```
+
+## Lectura de la base 
+```{r}
+library(TeachingSampling)
+data("BigCity")
+
+
+```
+## Lectura de la base 
+```{r}
+library(survey)
+library(srvyr)
+
+diseno <- BigCity %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = ,
+    nest = T
+  )
+
+  
+  svydesign(strata = ~SDMVSTRA, 
+                        id = ~SDMVPSU, 
+                        weights = ~WTMEC2YR, 
+                        data = nhanesdata, 
+                        nest = T)
+
+```
+
