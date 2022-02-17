@@ -139,7 +139,8 @@ sub_hrssvyhh_c <- subset( hrssvyhh_c , KFINR==1)
 svygini( ~H8ATOTA, design = sub_hrssvyhh_c) 
 svylorenz( ~H8ATOTA, sub_hrssvyhh_c, seq(0,1,.1), alpha = .01 ) 
 #Example 5.11 Relationship between 2 continuous variables, note this is weighted and design based 
-svyplot(LBXTC~LBDHDD, subset(subnhanes, AGE>=18), style="bubble", ylab="HDL", xlab="Total Cholesterol") 
+svyplot(LBXTC~LBDHDD, subset(subnhanes, AGE>=18),
+        style="bubble", ylab="HDL", xlab="Total Cholesterol") 
 #EXAMPLE 5.11 Correlation between Total and High Cholesterol, NHANES DATA 
 #create standardized versions of variables first, then use in regression 
 nhanesdata$stdlbxtc <- (nhanesdata$LBXTC-194.4355)/41.05184 
@@ -186,3 +187,5 @@ coef(ex5_16)
 SE(ex5_16)
 contrast <- svycontrast(ex5_16, list(avg=c(.5,.5), diff=c(1,-1)))
 print(contrast)
+
+?svrVar()

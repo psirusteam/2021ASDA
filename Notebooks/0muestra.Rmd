@@ -52,116 +52,6 @@ Gambino & Silva (2009)
 - Gutiérrez, H. A. (2016)  *Estrategias de muestreo: diseño de encuestas y estimación de parámetros*. Ediciones de la U.
 - Gutiérrez, H. A. (2017)  `TeachingSampling`. *R package*.
 
-# Estimación de la varianza
-
-## Desventajas
-
-- Como se vio anteriormente, si el diseño sin reemplazo tiene $r$ etapas es necesario hacer $r$ cálculos de varianza.
-- Además es necesario escribir las expresiones algebraicas correspondientes en cada diseño particular.
-- Lo anterior en una encuesta a gran escala puede llegar a ser muy tedioso, costoso y además muy demorado. 
-- Este proceso no es sistemático y puede estar sujeto a errores matemáticos y computacionales.
-
-
-## Aproximaciones (1)
-
-Una posible solución al problema es mantener la primera parte del estimador de la varianza como estimador general de la misma. 
-
-\begin{equation}
-\widehat{Var}_2(\hat{t}_{\pi})=
-\sum\sum_{sI}\frac{\Delta_{Iij}}{\pi_{Ii}}\frac{\hat{t}_i}{\pi_{Ii}}\frac{\hat{t}_j}{\pi_{Ij}}
-\end{equation}
-
-- Este estimador sobre-estima la varianza para las unidades primarias de muestreo.
-
-## Aproximaciones (2)
-
-Otra posible solución para estimar la varianza del estimador de Horvitz-Thompson, es asumir que el muestreo en la primera etapa se llevó a cabo con reemplazo. Así, la estimación (sesgada) de la varianza estaría dada por:
-
-\begin{equation}
-\widehat{Var}_3(\hat{t}_{\pi})=\frac{1}{m_I(m_I-1)}\sum_{i=1}^{m_I}\left(\frac{\hat{t}_i}{p_{Ii}}-\hat{t}_{\pi}\right)^2
-\end{equation}
-
-## Aproximaciones (2)
-
-Un caso especial del anterior término se tiene suponiendo que $\pi_{Ii}=n_Ip_{Ii}$, si el muestreo en la primera etapa fue aleatorio simple, entonces $p_{Ii}=\frac{1}{N}$. El estimador de la varianza, bajo la anterior condición es:
-
-\begin{equation*}
-\widehat{Var}(\hat{t}_{\pi})=\frac{N_I^2}{m_I(m_I-1)}\sum_{i=1}^{m_I}\left(\hat{t}_i-\frac{\sum_{i=1}^{m_I}\hat{t}_i}{m_I}\right)^2
-=\frac{N_I^2}{m_I}S^2_{\hat{t}_i}
-\end{equation*}
-
-## La técnica del último conglomerado
-
-- Para la estimación de la varianza de los estimadores de interés en encuestas multi-etápicas, los programas computacionales existentes utilizan una aproximación conocida como la técnica del último conglomerado. 
-
-- Esta aproximación, que sólo tiene en cuenta la varianza de los estimadores en la primera etapa, supone que ese muestreo fue realizado con reemplazo.
-
-- Los procedimientos de muestreo en etapas posteriores de la selección son ignorados a menos que el factor de corrección para poblaciones finitas sea importante a nivel municipal. 
-
-## La técnica del último conglomerado
-
-Se supone un diseño de muestreo en varias etapas (dos o más) en donde la primera etapa supone la selección de una muestra $s_I$ de $m_I$ unidades primarias de muestreo (UPM) $U_i$ ($i\in s_I$) de tal forma que
-
-- Si la selección se realizó con reeemplazo, la $i$-ésima UPM tiene probabhilidad de selección $p_{I_i}$.
-- Si la selección se realizó sin reeemplazo, la $i$-ésima UPM tiene probabilidad de inclusión $\pi_{I_i}$. 
-
-## La técnica del último conglomerado
-
-En las subsiguientes etapas de muestreo, se procede a seleccionar una muestra de elementos para cada una de las UPM seleccionadas en la primera etapa de muestreo. Dentro de la $i$-ésima UPM se selecciona una muestra $s_i$ de elementos.
-
-En particular la probabilidad condicional de que el $k$-ésimo elemento pertenzca a la muestra dada que la UPM que la contiene ha sido seleccionada en la muestra de la primera etapa está dada por la siguiente expresión:
-
-\begin{equation*}
-\pi_{k|i} = Pr(k \in s_i | i \in s_I)
-\end{equation*}
-
-## La técnica del último conglomerado
-
-Por ejemplo, si el muestreo es sin reemplazo en todas sus etapas, la probabilidad de inclusión del $k$-ésimo elemento a la muestra $s$ está dada por
-
-\begin{align*}
-\label{piki}
-\pi_k & = Pr(k \in s)\\ 
-& = Pr(k \in s_i, i \in s_I) \\
-& = Pr(k \in s_i | i \in s_I) Pr(i \in s_I) = \pi_{k|i} \times \pi_{I_i}
-\end{align*}
-
-## La técnica del último conglomerado
-
-Dado que el inverso de las probabilidades de inclusión son un ponderador natural, entonces se definen las siguientes cantidades:
-
-1. $d_{I_i} = \frac{1}{\pi_I}$, que es el factor de expansión de la $i$-ésima UPM.
-2. $d_{k|i} = \frac{1}{\pi_{k|i}}$, que es el factor de expansión del $k$-ésimo elemento dentro de la $i$-ésima UPM.
-3. $d_k = d_{I_i} \times d_{k|i}$, que es el factor de expansión final del $k$-ésimo elemento para toda la población $U$.
-
-## La técnica del último conglomerado
-
-En general, el estimador del total toma la siguiente forma:
-
-\begin{align*}
-\hat{t}_{y} =\sum_k d_k y_k  
-= \sum_h\sum_i\sum_k d_k y_k 
-= \sum_h\sum_i\sum_k  d_{I_i} \ d_{k|i} y_k 
-\end{align*}
-
-Y la aproximación al último conglomerado es:
-
-\begin{align}
-\widehat{Var}(\hat{t}_{y,p})
-=\sum_h \frac{m_{Ih}}{m_{Ih}-1}\sum_i\left( \breve{t}_{y_{ih}} - \bar{\breve{t}}_{y_h} \right)^2
-\end{align}
-
-En donde $\breve{t}_{y_i} = \sum_{k \in s_i} d_k y_k$ y $\bar{\breve{t}}_{y}=\frac{1}{m_I}\sum_{i=1}^{m_I}\breve{t}_{y_i}$ 
-
-
-## La técnica del último conglomerado
-
-- Este procedimiento tiende a sobrestimar la varianza verdadera.
-
-- Resulta ser una técnica apetecida por los investigadores puesto que utiliza directamente los pesos finales de muestreo o factores de expansión que son publicados por los INE.
-
-- Si la fracción de muestreo de UPM en los estratos es significativa, es posible ajustar la varianza añadiendo un término de ajuste dentro de cada estrato.
-
 
 # Muestreo aleatorio simple en dos etapas estratificado
 
@@ -268,14 +158,14 @@ sam.HH <- data.frame(HHID = unique(clusterII$HHID)[sam])
 clusterHH <- left_join(sam.HH, clusterII, by = "HHID") 
 clusterHH$dki <- Ni[1]/ni[1]
 clusterHH$dk <- clusterHH$dI * clusterHH$dki
-data = clusterHH
+sam_data = clusterHH
 ```
 
 ## Práctica en `R`
 
 
 ```{r}
-head(data, 10)
+head(sam_data, 10)
 ```
 
 ## Práctica en `R`
@@ -290,251 +180,84 @@ for (i in 2:length(Ni)) {
       clusterHH$dki <- Ni[i]/ni[i]
       clusterHH$dk <- clusterHH$dI * clusterHH$dki
       data1 = clusterHH
-      data = rbind(data, data1)
+      sam_data = rbind(sam_data, data1)
 }
+encuesta <- sam_data
 ```
 
 ## Práctica en `R`
 ```{r}
-dim(data)
-sum(data$dk)
-attach(data)
+dim(encuesta)
+sum(encuesta$dk)
+nrow(BigCity)
+attach(encuesta)
 
-estima <- data.frame(Income, Expenditure)
-area <- as.factor(PSU)
-stratum <- as.factor(Stratum)
 ```
 
 ## Práctica en `R`
-
+Definir diseño muestral con la librería `srvyr`
 ```{r}
-hist(data$dk)
+library(srvyr)
+
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = dk,
+    nest = T
+  )
+
+sum(weights(diseno))
 ```
-
-## Práctica en `R`
-
-```{r}
-boxplot(data$dk ~ data$Stratum)
-```
-
-
-## Práctica en `R`
-```{r}
-E.UC(stratum, area, dk, estima)
-```
-
-# Muestreo autoponderado en dos etapas estratificado
-
-## Muestreo autoponderado en dos etapas estratificado
-
-En muchas encuestas de dos etapas es común asumir que en la primera etapa de muestreo se selecciona una muestra $S_I$ de unidades primarias de muestreo en cada estrato $h$ cuyas probabilidades de inclusión son proporcionales al tamaño de las mismas (número de hogares o personas).
-
-\begin{equation}
-\pi_{Ii}=\frac{N_i}{N}n_I \ \ \ \ \ i\in U_I
-\end{equation}
-
-## Muestreo autoponderado en dos etapas estratificado
-
-Más adelante, en la segunda etapa de muestreo, se seleccionan muestras $s_i$ $i\in S_I$ de hogares de tamaño constante $n_i=n_0$ para cada unidad primaria incluida en la muestra. 
-
-Por lo tanto, la probabilidad de inclusión de las unidades secundarias será
-\begin{equation}
-\pi_{k|i}=\frac{n_0}{N_i} \ \ \ \ \ i\in S_I
-\end{equation}
-
-## Muestreo autoponderado en dos etapas estratificado
-
-La probabilidad de inclusión general del $k$-ésimo elemento en el estrato $h$ es constante y está dada por
-\begin{equation}
-\pi_k=\pi_{Ii}\pi_{k|i}=n_{Ih}\frac{N_i}{N_h}\frac{n_0}{N_i}=n_{Ih}\frac{n_0}{N_h}=\frac{n_h}{N_h}=c_h \ \ \ \ \ k\in U_i
-\end{equation}
-
-## Muestreo autoponderado en dos etapas estratificado
-
-El estimador de Horvitz-Thompson toma la siguiente forma
-
-\begin{equation}
-\hat{t}_{y,\pi}
-=\sum_h\sum_i\sum_k\frac{y_k}{\pi_k}
-=\sum_h\frac{N_h}{n_h}\sum_i\sum_{k}y_k
-\end{equation}
-
-## Muestreo estratificado en dos etapas autoponderado
-
-1. Nótese la facilidad de cálculo del estimador. 
-2. Esta clase de diseños auto-ponderados se utilizan cuando se desea controlar el trabajo de campo.
-3. El número de entrevistas en cada unidad primaria incluida en la muestra será constante.
-
-## Muestreo estratificado en dos etapas autoponderado
-
-Para utilizar los prinicpios de estimación del último conglomerado en este diseño particular se definen las siguientes cantidades:
-
-1. $d_{I_i} = \dfrac{N_{Ih}}{n_{Ih}N_i}$, que es el factor de expansión de la $i$-ésima UPM en el estrato $h$.
-2. $d_{k|i} = \dfrac{N_{i}}{n_{0}}$, que es el factor de expansión del $k$-ésimo hogar para la $i$-ésima UPM.
-3. $d_k = d_{I_i} \times d_{k|i} = \dfrac{N_{Ih}}{n_{Ih}N_i} \times \dfrac{N_{i}}{n_{0}} = \dfrac{N_h}{n_h}$, que es el factor de expansión final del $k$-ésimo elemento para toda la población $U$.
 
 
 ## Práctica en `R`
+Calibrando los pesos muestrales, para ello empleamos la función `calibrate` de la librería `survey`
 ```{r}
-data('BigCity')
-FrameI <- BigCity %>% group_by(PSU) %>%
-summarise(Stratum = unique(Stratum),
-          Households = length(unique(HHID)),
-          Income = sum(Income),
-          Expenditure = sum(Expenditure))
-            
-attach(FrameI)
+library(survey)
+totales <- colSums(model.matrix(~ -1 + Zone:Sex, BigCity)) # Obtener totales Pob. 
+diseno_cal <- calibrate(diseno, ~-1 + Zone:Sex, totales, calfun = "linear")  
+
+sum(weights(diseno))
+sum(weights(diseno_cal))
+nrow(BigCity)
+encuesta$wk <- weights(diseno_cal)
 ```
 
 
 ## Práctica en `R`
 
-
 ```{r}
-head(FrameI, 10)
-```
-
-
-## Práctica en `R`
-```{r}
-sizes = FrameI %>% group_by(Stratum) %>%
-        summarise(NIh = n(), nIh = 2)
-        
-NIh <- sizes$NIh
-nIh <- sizes$nIh
-```
-
-## Práctica en `R`
-
-
-```{r}
-head(sizes, 10)
-```
-
-## Práctica en `R`
-
-
-```{r}
-resI <- S.STpiPS(Stratum, Households, nIh)
-head(resI, 10)
-```
-
-## Práctica en `R`
-
-\footnotesize
-```{r}
-samI <- resI[, 1]
-piI <- resI[, 2]
-UI <- levels(as.factor(FrameI$PSU))
-sampleI <- data.frame(PSU = UI[samI], dI = 1/piI)
-
-FrameII <- left_join(sampleI, 
-           BigCity[which(BigCity$PSU %in% sampleI[,1]), ])
-
-attach(FrameII)
-```
-
-## Práctica en `R`
-
-
-```{r}
-head(FrameII, 10)
-```
-
-
-
-## Práctica en `R`
-```{r}
-HHdb <- FrameII %>% 
-        group_by(PSU) %>%
-        summarise(Ni = length(unique(HHID)),
-                     ni = 4)
-Ni <- as.numeric(HHdb$Ni)
-ni <- 4
-```
-
-## Práctica en `R`
-
-
-```{r}
-head(HHdb, 10)
-```
-
-## Práctica en `R`
-
-\footnotesize
-```{r}
-sam = S.SI(Ni[1], ni)
-clusterII = FrameII[which(FrameII$PSU == sampleI$PSU[1]), ]
-sam.HH <- data.frame(HHID = unique(clusterII$HHID)[sam])
-clusterHH <- left_join(sam.HH, clusterII, by = "HHID") 
-clusterHH$dki <- Ni[1]/ni
-clusterHH$dk <- clusterHH$dI * clusterHH$dki
-data = clusterHH
-```
-
-## Práctica en `R`
-
-
-```{r}
-head(data, 10)
-```
-
-## Práctica en `R`
-
-\footnotesize
-```{r}
-for (i in 2:length(Ni)) {
-      sam = S.SI(Ni[i], ni)
-      clusterII = FrameII[which(FrameII$PSU == sampleI$PSU[i]), ]
-      sam.HH <- data.frame(HHID = unique(clusterII$HHID)[sam])
-      clusterHH <- left_join(sam.HH, clusterII, by = "HHID") 
-      clusterHH$dki <- Ni[i]/ni
-      clusterHH$dk <- clusterHH$dI * clusterHH$dki
-      data1 = clusterHH
-      data = rbind(data, data1)
-}
-```
-
-## Práctica en `R`
-```{r}
-sum(data$dk)
-dim(data)
-attach(data)
-estima <- data.frame(Income, Expenditure)
-area <- as.factor(PSU)
-stratum <- as.factor(Stratum)
+par(mfrow = c(1,2))
+hist(encuesta$dk)
+hist(encuesta$wk)
 ```
 
 ## Práctica en `R`
 
 ```{r}
-hist(data$dk)
-```
-
-## Práctica en `R`
-
-```{r}
-boxplot(data$dk ~ data$Stratum)
+plot(encuesta$dk,encuesta$wk)
 ```
 
 
 ## Práctica en `R`
 ```{r}
-E.UC(stratum, area, dk, estima)
+boxplot(encuesta$wk ~ encuesta$Stratum)
 ```
 
-## ¡Gracias! {.build}
+## Práctica en `R`
+```{r}
+Region <- as.numeric(gsub(pattern = "\\D", replacement =  "", x = encuesta$Stratum))
 
-<div class="white">
+encuesta$Region <- cut(Region, breaks = 5, labels = c("Norte","Sur","Centro","Occidente","Oriente"))
 
-Andrés Gutiérrez
+encuesta %<>% mutate(CatAge= case_when(Age <= 5 ~ "0-5",
+                                      Age <= 15 ~ "6-15",
+                                      Age <= 30 ~ "16-30",
+                                      Age <= 45 ~ "31-45",
+                                      Age <= 60 ~ "46-60",
+                                      TRUE ~ "Más de 60"))
 
-*Experto Regional en Estadísticas Sociales*
-  
-*Division de Estadísticas*
-  
-*Email: andres.GUTIERREZ@cepal.org*
-  
-<div>
+saveRDS(object = encuesta, file = "../Data/encuesta.rds")
+```
 
