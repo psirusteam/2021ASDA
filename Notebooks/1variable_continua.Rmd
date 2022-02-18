@@ -6,7 +6,8 @@ output: beamer_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
 library (survey)
 library(srvyr)
 library(convey)
@@ -231,46 +232,6 @@ diseno %>% group_by(Zone, Sex) %>%
 
 ```
 
-## Estimación de la proporción de hombres
-
-```{r}
-diseno %>% mutate(Hombres = (Sex == "Male")) %>%
-  summarise(
-    Prop = survey_mean(Hombres, level = 0.95,
-                       vartype =  c("se", "ci"))) %>%
-  data.frame()
-```
-
-## Estimación de la proporción de hombres en la zona rural
-
-```{r}
-sub_Rural %>% mutate(Hombres = (Sex == "Male")) %>%
-  summarise(
-    Prop = survey_mean(Hombres, level = 0.95,
-                       vartype =  c("se", "ci"))) %>%
-  data.frame()
-```
-
-## Estimación de la proporción de mujeres menor de 18 años
-
-```{r}
-sub_Mujer %>% mutate(Menor_18 = Age < 18) %>%
-  summarise(
-    Prop = survey_mean(Menor_18, level = 0.95,
-                       vartype =  c("se", "ci"))) %>%
-  data.frame()
-```
-
-## Estimación de la varianza y desviación estándar de los ingresos
-
-```{r}
-(tab_var <- diseno %>% summarise(
-    Var = survey_var(Income, level = 0.95,
-                         vartype =  c("se", "ci"), 
-                       deff = TRUE)))
-sqrt(tab_var)
-
-```
 
 ## Estimación de la desviación estándar de los ingresos por sub-grupo
 
@@ -484,7 +445,9 @@ svyttest(Income ~ Sex, diseno %>% filter(Age > 18))
 ## Contrastes 
 
 ```{r}
-(prom_region <- svyby(~Income, ~Region, diseno, svymean, na.rm=T, covmat = TRUE))
+(prom_region <- svyby(~Income, ~Region, diseno, 
+                      svymean, na.rm=T, covmat = TRUE,
+                      vartype = c("se", "ci")))
 
 # Paso 1: diferencia de estimaciones (Norte - Sur) 
 527 - 627 
@@ -503,7 +466,8 @@ sqrt(1909 + 2856 - 2*0)
 
 ## contrastes
 ```{r}
-svycontrast(prom_region, list(diff_NS=c(1,-1,0,0,0))) %>% 
+svycontrast(prom_region,
+            list(diff_NS = c(1, -1, 0, 0, 0))) %>%
   data.frame()
 
 ```
@@ -513,15 +477,13 @@ svycontrast(prom_region, list(diff_NS=c(1,-1,0,0,0))) %>%
 
 ```{r}
 
-svycontrast(prom_region,
-            list(
+svycontrast(prom_region, list(
               Norte_sur = c(1, 1, 0, 0, 0),
               centro = c(0, 0, 1, 0, 0),
               Occidente_Oriente = c(0, 0, 0, 1, 1)
             )) %>% data.frame()
 
-sqrt(1909 + 2856 - 2*0)
-sqrt(6867)
+sqrt(1909 + 2856 - 2*0) ; sqrt(6867);
 sqrt(2817 + 1069 - 2*0)
 
 ```
@@ -530,24 +492,42 @@ sqrt(2817 + 1069 - 2*0)
 ## Contrastes no independiente
 
 ```{r}
-prom_sex <- svyby(~Income, ~Sex, diseno, svymean, na.rm=T,covmat = TRUE)
-svycontrast(prom_sex, list(diff_Sexo = c(1,-1)))
+(prom_sexo <- svyby(~Income, ~Sex, diseno,
+                   svymean, na.rm=T,covmat = TRUE,
+                   vartype = c("se", "ci")))
+
 
 ```
 
 ## Contrastes no independiente
+```{r}
+svycontrast(prom_sexo, list(diff_Sexo = c(1, -1))) %>% 
+  data.frame()
+```
+
+
+## Contrastes no independiente
 
 ```{r}
-vcov(prom_sex)
+vcov(prom_sexo)
 # Note que el error estandar  de la diferencia es igual a 
 sqrt(582 + 733 - 2*449)
 ```
 
 
 ## Contrastes no independiente
-```{r}
-sum_region <- svyby(~Income, ~Region, diseno, svytotal, na.rm=T,covmat = TRUE)
 
+```{r}
+(sum_region <- svyby( ~ Income,  ~ Region,
+                     diseno, svytotal, na.rm = T,
+                     covmat = TRUE,
+                     vartype = c("se", "ci")))
+
+```
+
+## Contrastes no independiente
+
+```{r}
 svycontrast(sum_region,
             list(
               Agregado_NCS = c(1, 1, 1, 0, 0)

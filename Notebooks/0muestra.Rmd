@@ -251,12 +251,16 @@ Region <- as.numeric(gsub(pattern = "\\D", replacement =  "", x = encuesta$Strat
 
 encuesta$Region <- cut(Region, breaks = 5, labels = c("Norte","Sur","Centro","Occidente","Oriente"))
 
-encuesta %<>% mutate(CatAge= case_when(Age <= 5 ~ "0-5",
+encuesta %<>% mutate(CatAge = case_when(Age <= 5 ~ "0-5",
                                       Age <= 15 ~ "6-15",
                                       Age <= 30 ~ "16-30",
                                       Age <= 45 ~ "31-45",
                                       Age <= 60 ~ "46-60",
-                                      TRUE ~ "Más de 60"))
+                                      TRUE ~ "Más de 60"), 
+                    CatAge = factor(CatAge, 
+                                    levels = c("0-5", "6-15", "16-30", "31-45",
+                                    "46-60", "Más de 60" ),
+                                    ordered = TRUE))
 
 saveRDS(object = encuesta, file = "../Data/encuesta.rds")
 ```

@@ -1,0 +1,372 @@
+---
+title: "Variable categórica"
+author: "CEPAL"
+date: "17/2/2022"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+```
+
+## Lectura de la base
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds")
+```
+
+## Definir diseño de la muestra con `srvyr`
+
+```{r}
+library(srvyr)
+
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  ) %>% mutate(Uno = 1)
+
+```
+
+## Sub-grupos
+
+Extraer sub-grupos de la encuesta.
+
+```{r}
+sub_Urbano <- diseno %>%  filter(Zone == "Urban")
+sub_Rural  <- diseno %>%  filter(Zone == "Rural")
+sub_Mujer  <- diseno %>%  filter(Sex == "Female")
+sub_Hombre <- diseno %>%  filter(Sex == "Male")
+```
+
+## Estimación de proporción de urbano y rural 
+
+```{r}
+(prop_zona <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     prop = survey_mean(vartype = c("se","ci"), 
+                        proportion = TRUE )))
+
+(prop_zona2 <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci") )))
+
+
+```
+
+## Poporsión de hombres y mujeres en la zona urbana y rural
+
+```{r}
+(prop_sexoU <- sub_Urbano %>% group_by(Sex) %>% 
+   summarise(
+     n = unweighted(n()),
+     prop = survey_prop(vartype = c("se","ci"))))
+
+(prop_sexoR <- sub_Rural %>% group_by(Sex) %>% 
+   summarise(
+     n = unweighted(n()),
+     prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+## Poporsión de hombres en la zona urbana y rural
+
+```{r}
+(prop_ZonaH <- sub_Hombre %>% group_by(Zone) %>% 
+   summarise(
+     n = unweighted(n()),
+     prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+## Poporsión de hombres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
+   summarise(
+     n = unweighted(n()),
+     prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+
+## Estimación de la proporción de personas menor a 18 años
+
+```{r}
+diseno %>% mutate(edad_18 = case_when(
+  Age<18~"menor a 18 años",
+  TRUE ~ "mayor o igual a 18 años")) %>%
+  group_by(edad_18) %>% 
+  summarise(
+    Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+## Estimación de la proporción de personas menor a 18 años en zona rural
+
+```{r}
+sub_Rural %>% mutate(edad_18 = case_when(
+  Age<18~"menor a 18 años",
+  TRUE ~ "mayor o igual a 18 años")) %>%
+  group_by(edad_18) %>% 
+  summarise(
+    Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+## Estimación de la proporción de mujeres rango de edad
+
+```{r}
+sub_Mujer %>% mutate(edad_rango = case_when(
+  Age>= 18 & Age <=35  ~ "18 - 35",
+  TRUE ~ "Otro")) %>%
+  group_by(edad_rango) %>% 
+  summarise(
+    Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+## Tabla Zona Vs Sexo
+
+```{r, tab2, eval=FALSE}
+(
+  prop_sexo_zona <- diseno %>%
+    group_by(Sex, Zone) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci")),
+         n = unweighted(n())) %>% 
+    data.frame()
+)
+
+```
+
+## Tabla Zona Vs Sexo
+
+```{r, tab2, echo = FALSE, eval = TRUE}
+```
+
+
+## Diagrama de barras Zona Vs Sexo
+
+```{r, hist2, eval=FALSE}
+require(ggplot2)
+ggplot(data = prop_sexo_zona,
+       aes(
+         x = Zone,
+         y = prop,
+         ymax = prop_upp,
+         ymin = prop_low,
+         fill = Sex
+       )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.3)
+
+```
+
+## Diagrama de barras Zona Vs Sexo
+
+```{r, hist2, echo = FALSE, eval = TRUE}
+```
+
+## Prueba de independencia. 
+
+```{r}
+svychisq(~Sex + Zone, diseno, statistic="F")
+
+```
+
+## Prueba de independencia. 
+
+```{r}
+svychisq(~Sex + Zone, 
+         subset(diseno, Region == "Centro"), 
+         statistic="F")
+```
+
+## Prueba de independencia. 
+
+```{r}
+svychisq(~Sex + Zone, 
+         subset(diseno, Region == "Sur"), 
+         statistic="F")
+```
+
+## Prueba de independencia. 
+
+```{r}
+diseno %>% filter(Employment == "Inactive") %>% 
+  group_by(Sex) %>% 
+  summarise(
+    prop = survey_prop(vartype =  c("se", "ci")))
+
+```
+
+## Prueba de independencia. 
+
+```{r}
+
+svychisq(~Sex + Zone, 
+         subset(diseno, Employment == "Inactive"), 
+         statistic="F")
+```
+
+## Tabla con más de dos categorías  Sexo Vs empleo. 
+
+```{r, tab1, eval = FALSE}
+(
+  prop_sexo_empleo <- diseno %>%
+    filter(!is.na(Employment)) %>% 
+    group_by(Sex, Employment) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci")),
+              n = unweighted(n())) %>% 
+    data.frame()
+)
+
+```
+## Tabla del gasto Sexo Vs Rango de edad. 
+
+```{r, tab1, eval = TRUE, echo=FALSE}
+```
+
+## Diagrama de barras del gasto Sexo Vs empleo. 
+
+```{r, bar2, eval=FALSE}
+require(ggplot2)
+ggplot(data = prop_sexo_empleo,
+       aes(
+         x = Sex,
+         y = prop,
+         ymax = prop_upp,
+         ymin = prop_low,
+         fill = Employment
+       )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.3)
+
+```
+
+## Diagrama de barras del gasto Sexo Vs Rango de edad. 
+
+```{r, bar2, echo = FALSE, eval = TRUE}
+```
+
+
+## Tabla con más de dos categorías  Sexo Vs Region 
+
+```{r, tab3, eval = FALSE}
+(
+  prop_region_sexo <- diseno %>%
+    group_by(Region, Sex) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci")),
+              n = unweighted(n())) %>% 
+    data.frame()
+)
+
+```
+## Tabla con más de dos categorías  Sexo Vs Region 
+
+```{r, tab3, eval = TRUE, echo=FALSE}
+```
+
+## Diagrama de barras con más de dos categorías  Sexo Vs Region 
+
+```{r, bar3, eval=FALSE}
+ggplot(data = prop_region_sexo,
+       aes(
+         x = Region,
+         y = prop,
+         ymax = prop_upp,
+         ymin = prop_low,
+         fill = Sex
+       )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.3)
+
+```
+
+## Diagrama de barras del gasto Sexo Vs Región 
+
+```{r, bar3, echo = FALSE, eval = TRUE}
+```
+
+
+## Tabla con más de dos categorías  Sexo Vs Region zona urbana
+
+```{r, tab4, eval = FALSE}
+(
+  prop_region_sexo_zonaU <- sub_Urbano %>%
+    group_by(Region, Sex) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci")),
+              n = unweighted(n())) %>% 
+    data.frame()
+)
+
+```
+## Tabla con más de dos categorías  Sexo Vs Region zona urbana
+
+```{r, tab4, eval = TRUE, echo=FALSE}
+```
+
+## Diagrama de barras con más de dos categorías  Sexo Vs Region zona urbana 
+
+```{r, bar4, eval=FALSE}
+ggplot(data = prop_region_sexo_zonaU,
+       aes(
+         x = Region,
+         y = prop,
+         ymax = prop_upp,
+         ymin = prop_low,
+         fill = Sex
+       )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.3)
+
+```
+
+## Diagrama de barras con más de dos categorías  Sexo Vs Region zona urbana
+
+```{r, bar4, echo = FALSE, eval = TRUE}
+```
+
+
+## glm del Zona en función del ingreso 
+
+```{r, echo = TRUE, eval = TRUE}
+mod <- svyglm(as.factor(Zone) ~ Income, 
+              design=diseno, family=quasibinomial)
+summary(mod)$coefficients
+```
+
+## glm del Zona en función del ingreso 
+
+```{r, echo = TRUE, eval = TRUE}
+mod2 <- svyglm(as.factor(Sex) ~ Income, 
+               design=diseno, family=quasibinomial)
+summary(mod2)$coefficients
+
+```
+
+
+## Tablas con más de dos categorías. 
+
+```{r, echo = TRUE, eval = TRUE}
+(prop_edad <- diseno %>% group_by(CatAge) %>% 
+    summarise(
+      prop = survey_mean( 
+        vartype = c("se", "ci"))))
+```
