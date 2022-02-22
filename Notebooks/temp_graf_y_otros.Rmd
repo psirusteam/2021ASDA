@@ -1,0 +1,75 @@
+---
+title: "Temporal_gráficos y otros"
+author: "CEPAL"
+date: "21/2/2022"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Tabla Zona Vs Sexo
+
+```{r, tab2, eval=FALSE}
+(
+  prop_sexo_zona <- diseno %>%
+    mutate(pobreza = ifelse(Poverty != "NotPoor",
+                   "pobre", "no pobre" )) %>% 
+    group_by(Sex, Zone, pobreza) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci"))) %>% 
+    data.frame()
+)
+
+```
+
+## Tabla Zona Vs Sexo
+
+```{r, tab2, echo = FALSE, eval = TRUE}
+```
+
+
+## Diagrama de barras Zona Vs Sexo
+
+```{r, hist2, eval=FALSE}
+require(ggplot2)
+ggplot(data = prop_sexo_zona,
+       aes(
+         x = Zone,
+         y = prop,
+         ymax = prop_upp,
+         ymin = prop_low,
+         fill = Sex
+       )) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_errorbar(position = position_dodge(width = 0.9),
+                width = 0.3)
+
+```
+
+## Diagrama de barras Zona Vs Sexo
+
+```{r, hist2, echo = FALSE, eval = TRUE}
+```
+
+
+
+
+## glm del Zona en función del ingreso 
+
+```{r, echo = TRUE, eval = TRUE}
+mod <- svyglm(as.factor(Zone) ~ Income, 
+              design=diseno, family=quasibinomial)
+summary(mod)$coefficients
+```
+
+## glm del Zona en función del ingreso 
+
+```{r, echo = TRUE, eval = TRUE}
+mod2 <- svyglm(as.factor(Sex) ~ Income, 
+               design=diseno, family=quasibinomial)
+summary(mod2)$coefficients
+
+```

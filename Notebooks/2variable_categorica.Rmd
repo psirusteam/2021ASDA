@@ -32,9 +32,20 @@ diseno <- encuesta %>%
     ids = PSU,
     weights = wk,
     nest = T
-  ) %>% mutate(Uno = 1)
+  )
 
 ```
+
+## definir nuevas variables
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo = ifelse(Employment == "Unemployed", 1, 0),
+  edad_18 = case_when(Age < 18 ~ "< 18 años",
+                      TRUE ~ ">= 18 años")
+)
+```
+
 
 ## Sub-grupos
 
@@ -46,6 +57,65 @@ sub_Rural  <- diseno %>%  filter(Zone == "Rural")
 sub_Mujer  <- diseno %>%  filter(Sex == "Female")
 sub_Hombre <- diseno %>%  filter(Sex == "Male")
 ```
+
+
+## Estimación de tamaño  
+
+```{r}
+(tamano_zona <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     n = unweighted(n()),
+     Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+
+```{r}
+(tamano_pobreza <- diseno %>% group_by(Poverty) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+
+```{r}
+(tamano_pobreza <- diseno %>% 
+   group_by(pobreza) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+
+```{r}
+(tamano_ocupacion <- diseno %>% 
+   group_by(Employment) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+
+```{r tabs0, echo=TRUE, eval=FALSE}
+(tamano_ocupacion_pobreza <- diseno %>% 
+   group_by(Employment, Poverty) %>% 
+   cascade(
+       Nd = survey_total(vartype = c("se","ci")), 
+       .fill = "Total") %>% 
+   data.frame()
+   )
+
+```
+
+## Estimación de tamaño 
+
+```{r tabs0, echo=FALSE, eval=TRUE}
+```
+
 
 ## Estimación de proporción de urbano y rural 
 
@@ -82,40 +152,96 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 ```{r}
 (prop_ZonaH <- sub_Hombre %>% group_by(Zone) %>% 
    summarise(
-     n = unweighted(n()),
      prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+## Poporsión de mujeres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
+   summarise(
+    prop = survey_prop(vartype = c("se","ci"))))
 
 ```
 
 ## Poporsión de hombres en la zona urbana y rural
 
 ```{r}
-(prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
+(prop_ZonaH_Pobreza <- sub_Hombre %>%
+   group_by(Zone, Poverty) %>% 
    summarise(
-     n = unweighted(n()),
-     prop = survey_prop(vartype = c("se","ci"))))
+     prop = survey_prop(vartype = c("se","ci")))%>%
+   data.frame())
+
+```
+
+## Poporsión de mujeres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM_Pobreza <- sub_Mujer %>% 
+   group_by(Zone, Poverty) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci"))) %>%
+   data.frame())
+
+```
+
+## Poporsión de hombres en la zona y empleado
+
+```{r}
+(prop_ZonaH_Ocupacion <- sub_Hombre %>%
+   group_by(Zone, Employment) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci")))%>%
+   data.frame())
+
+```
+
+## Poporsión de mujeres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM_Ocupacion <- sub_Mujer %>% 
+   group_by(Zone, Employment) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci"))) %>%
+   data.frame())
 
 ```
 
 
-## Estimación de la proporción de personas menor a 18 años
 
-```{r}
-diseno %>% mutate(edad_18 = case_when(
-  Age<18~"menor a 18 años",
-  TRUE ~ "mayor o igual a 18 años")) %>%
-  group_by(edad_18) %>% 
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs01, echo=TRUE, eval=FALSE}
+diseno %>% 
+group_by(edad_18, pobreza) %>% 
   summarise(
     Prop = survey_prop(vartype =  c("se", "ci"))) %>%
   data.frame()
 ```
 
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs01, echo=FALSE, eval=TRUE}
+```
+
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs2, echo=TRUE, eval=FALSE}
+diseno %>% 
+  group_by(edad_18, desempleo) %>% 
+  summarise(
+    Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs2, echo=FALSE, eval=TRUE}
+```
+
+
 ## Estimación de la proporción de personas menor a 18 años en zona rural
 
 ```{r}
-sub_Rural %>% mutate(edad_18 = case_when(
-  Age<18~"menor a 18 años",
-  TRUE ~ "mayor o igual a 18 años")) %>%
+sub_Rural %>%
   group_by(edad_18) %>% 
   summarise(
     Prop = survey_prop(vartype =  c("se", "ci"))) %>%
@@ -128,7 +254,20 @@ sub_Rural %>% mutate(edad_18 = case_when(
 sub_Mujer %>% mutate(edad_rango = case_when(
   Age>= 18 & Age <=35  ~ "18 - 35",
   TRUE ~ "Otro")) %>%
-  group_by(edad_rango) %>% 
+  group_by(edad_rango, Employment) %>% 
+  summarise(
+    Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+
+## Estimación de la proporción de hombres rango de edad
+
+```{r}
+sub_Hombre %>% mutate(edad_rango = case_when(
+  Age>= 18 & Age <=35  ~ "18 - 35",
+  TRUE ~ "Otro")) %>%
+  group_by(edad_rango, Employment) %>% 
   summarise(
     Prop = survey_prop(vartype =  c("se", "ci"))) %>%
   data.frame()
@@ -138,11 +277,10 @@ sub_Mujer %>% mutate(edad_rango = case_when(
 
 ```{r, tab2, eval=FALSE}
 (
-  prop_sexo_zona <- diseno %>%
-    group_by(Sex, Zone) %>%
+  prop_sexo_zona <- diseno %>% 
+    group_by(Sex, Zone, pobreza) %>%
     summarise(
-      prop = survey_prop(vartype = c("se", "ci")),
-         n = unweighted(n())) %>% 
+      prop = survey_prop(vartype = c("se", "ci"))) %>% 
     data.frame()
 )
 
@@ -153,220 +291,196 @@ sub_Mujer %>% mutate(edad_rango = case_when(
 ```{r, tab2, echo = FALSE, eval = TRUE}
 ```
 
+## Tablas de doble entrada. 
 
-## Diagrama de barras Zona Vs Sexo
-
-```{r, hist2, eval=FALSE}
-require(ggplot2)
-ggplot(data = prop_sexo_zona,
-       aes(
-         x = Zone,
-         y = prop,
-         ymax = prop_upp,
-         ymin = prop_low,
-         fill = Sex
-       )) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_errorbar(position = position_dodge(width = 0.9),
-                width = 0.3)
-
+```{r}
+tab_Sex_Pobr <- svyby(~Sex,  ~pobreza, diseno, svymean)
+tab_Sex_Pobr %>% select(-se.SexFemale, -se.SexMale)
+tab_Sex_Pobr %>% select(-SexFemale, -SexMale)
 ```
 
-## Diagrama de barras Zona Vs Sexo
+## Tablas de doble entrada. 
 
-```{r, hist2, echo = FALSE, eval = TRUE}
+```{r}
+confint(tab_Sex_Pobr) %>% as.data.frame()
 ```
 
 ## Prueba de independencia. 
 
 ```{r}
-svychisq(~Sex + Zone, diseno, statistic="F")
-
+svychisq(~Sex + pobreza, diseno, statistic="F")
 ```
+
+## Tablas de doble entrada. 
+
+```{r}
+tab_Sex_Ocupa <- svyby(~Sex,  ~Employment, diseno, svymean)
+tab_Sex_Ocupa %>% select(-se.SexFemale, -se.SexMale)
+tab_Sex_Ocupa %>% select(-SexFemale, -SexMale)
+```
+## Tablas de doble entrada 
+```{r}
+confint(tab_Sex_Ocupa) %>% as.data.frame()
+```
+
 
 ## Prueba de independencia. 
 
 ```{r}
-svychisq(~Sex + Zone, 
-         subset(diseno, Region == "Centro"), 
-         statistic="F")
+svychisq(~Sex + Employment, 
+         design = diseno,  statistic="F")
 ```
+
+
+## Tablas de doble entrada. 
+
+```{r}
+tab_region_pobreza <- 
+  svyby(~as.factor(pobreza),  ~Region, diseno, svymean)
+tab_region_pobreza %>% 
+  select(-"se.as.factor(pobreza)0",
+         -"se.as.factor(pobreza)1")
+
+```
+
+## Tablas de doble entrada.
+```{r}
+tab_region_pobreza %>% 
+ select("se.as.factor(pobreza)0",
+        "se.as.factor(pobreza)1")
+```
+
 
 ## Prueba de independencia. 
 
 ```{r}
-svychisq(~Sex + Zone, 
-         subset(diseno, Region == "Sur"), 
-         statistic="F")
+svychisq(~Region + pobreza, 
+         design = diseno,  statistic="F")
 ```
 
-## Prueba de independencia. 
-
-```{r}
-diseno %>% filter(Employment == "Inactive") %>% 
-  group_by(Sex) %>% 
-  summarise(
-    prop = survey_prop(vartype =  c("se", "ci")))
-
-```
-
-## Prueba de independencia. 
-
-```{r}
-
-svychisq(~Sex + Zone, 
-         subset(diseno, Employment == "Inactive"), 
-         statistic="F")
-```
-
-## Tabla con más de dos categorías  Sexo Vs empleo. 
-
-```{r, tab1, eval = FALSE}
-(
-  prop_sexo_empleo <- diseno %>%
-    filter(!is.na(Employment)) %>% 
-    group_by(Sex, Employment) %>%
-    summarise(
-      prop = survey_prop(vartype = c("se", "ci")),
-              n = unweighted(n())) %>% 
-    data.frame()
-)
-
-```
-## Tabla del gasto Sexo Vs Rango de edad. 
-
-```{r, tab1, eval = TRUE, echo=FALSE}
-```
-
-## Diagrama de barras del gasto Sexo Vs empleo. 
-
-```{r, bar2, eval=FALSE}
-require(ggplot2)
-ggplot(data = prop_sexo_empleo,
-       aes(
-         x = Sex,
-         y = prop,
-         ymax = prop_upp,
-         ymin = prop_low,
-         fill = Employment
-       )) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_errorbar(position = position_dodge(width = 0.9),
-                width = 0.3)
-
-```
-
-## Diagrama de barras del gasto Sexo Vs Rango de edad. 
-
-```{r, bar2, echo = FALSE, eval = TRUE}
-```
-
-
-## Tabla con más de dos categorías  Sexo Vs Region 
-
-```{r, tab3, eval = FALSE}
-(
-  prop_region_sexo <- diseno %>%
-    group_by(Region, Sex) %>%
-    summarise(
-      prop = survey_prop(vartype = c("se", "ci")),
-              n = unweighted(n())) %>% 
-    data.frame()
-)
-
-```
-## Tabla con más de dos categorías  Sexo Vs Region 
-
-```{r, tab3, eval = TRUE, echo=FALSE}
-```
-
-## Diagrama de barras con más de dos categorías  Sexo Vs Region 
-
-```{r, bar3, eval=FALSE}
-ggplot(data = prop_region_sexo,
-       aes(
-         x = Region,
-         y = prop,
-         ymax = prop_upp,
-         ymin = prop_low,
-         fill = Sex
-       )) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_errorbar(position = position_dodge(width = 0.9),
-                width = 0.3)
-
-```
-
-## Diagrama de barras del gasto Sexo Vs Región 
-
-```{r, bar3, echo = FALSE, eval = TRUE}
-```
-
-
-## Tabla con más de dos categorías  Sexo Vs Region zona urbana
-
-```{r, tab4, eval = FALSE}
-(
-  prop_region_sexo_zonaU <- sub_Urbano %>%
-    group_by(Region, Sex) %>%
-    summarise(
-      prop = survey_prop(vartype = c("se", "ci")),
-              n = unweighted(n())) %>% 
-    data.frame()
-)
-
-```
-## Tabla con más de dos categorías  Sexo Vs Region zona urbana
-
-```{r, tab4, eval = TRUE, echo=FALSE}
-```
-
-## Diagrama de barras con más de dos categorías  Sexo Vs Region zona urbana 
-
-```{r, bar4, eval=FALSE}
-ggplot(data = prop_region_sexo_zonaU,
-       aes(
-         x = Region,
-         y = prop,
-         ymax = prop_upp,
-         ymin = prop_low,
-         fill = Sex
-       )) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_errorbar(position = position_dodge(width = 0.9),
-                width = 0.3)
-
-```
-
-## Diagrama de barras con más de dos categorías  Sexo Vs Region zona urbana
-
-```{r, bar4, echo = FALSE, eval = TRUE}
-```
-
-
-## glm del Zona en función del ingreso 
+## Razón de obbs
 
 ```{r, echo = TRUE, eval = TRUE}
-mod <- svyglm(as.factor(Zone) ~ Income, 
-              design=diseno, family=quasibinomial)
-summary(mod)$coefficients
+(tab_Sex <- svyby(~pobreza,  ~Sex, diseno,
+                 svymean, vartype = c("se", "ci")))
+svycontrast(tab_Sex, quote(`Female`/`Male`)  )
 ```
 
-## glm del Zona en función del ingreso 
+## Razón de obbs
 
 ```{r, echo = TRUE, eval = TRUE}
-mod2 <- svyglm(as.factor(Sex) ~ Income, 
-               design=diseno, family=quasibinomial)
-summary(mod2)$coefficients
+tab_Sex_Pobr <- 
+   svymean(~interaction (Sex, pobreza), diseno, 
+             se=T, na.rm=T, ci=T, keep.vars=T) 
+  tab_Sex_Pobr %>%  as.data.frame()
+
+```
+
+## Razón de obbs
+\footnotesize
+```{r, echo = TRUE, eval = TRUE}
+svycontrast(tab_Sex_Pobr, 
+            quote((`interaction(Sex, pobreza)Female.0`/
+                     `interaction(Sex, pobreza)Female.1`)/
+                  (`interaction(Sex, pobreza)Male.0`/
+                     `interaction(Sex, pobreza)Male.1`) ))
+```
+
+## Razón de obbs
+
+$$
+ \frac{\frac{P(Sex = Male \mid pobreza = 1 )}{P(Sex = Female \mid pobreza = 1 )}}{
+ \frac{P(Sex = Male \mid pobreza = 0 )}{P(Sex = Female \mid pobreza = 0 )}
+ }
+$$
+\footnotesize
+```{r, echo = TRUE, eval = TRUE}
+svycontrast(tab_Sex_Pobr, 
+            quote((`interaction(Sex, pobreza)Male.1`/
+                     `interaction(Sex, pobreza)Female.1`)/
+                  (`interaction(Sex, pobreza)Male.0`/
+                   `interaction(Sex, pobreza)Female.0`)))
 
 ```
 
 
-## Tablas con más de dos categorías. 
+## Contrastes 
 
-```{r, echo = TRUE, eval = TRUE}
-(prop_edad <- diseno %>% group_by(CatAge) %>% 
-    summarise(
-      prop = survey_mean( 
-        vartype = c("se", "ci"))))
+```{r}
+(tab_sex_pobreza <- svyby(~pobreza, ~Sex, 
+                          diseno , 
+                      svymean, na.rm=T, covmat = TRUE,
+                      vartype = c("se", "ci")))
+
+# Paso 1: diferencia de estimaciones 
+0.3937		 - 0.4047		 
+
+
+```
+## contrastes
+```{r}
+# Paso 2: error estándar de la diferencia
+vcov(tab_sex_pobreza)
+
+sqrt(0.0009227 + 0.0007294 - 2*0.0006551)
+
+```
+
+
+## contrastes
+```{r}
+svycontrast(tab_sex_pobreza,
+            list(diff_Sex = c(1, -1))) %>%
+  data.frame()
+
+```
+
+
+## Contrastes 
+
+```{r}
+(tab_sex_desempleo <- svyby(~desempleo, ~Sex, 
+                          diseno %>% filter(!is.na(desempleo)) , 
+                      svymean, na.rm=T, covmat = TRUE,
+                      vartype = c("se", "ci")))
+# diferencia de estimaciones 
+0.07237 - 0.02854	
+
+```
+
+## Contrastes 
+```{r}
+vcov(tab_sex_desempleo)
+
+sqrt(0.000037026 + 0.00015547 - 2*0.000013369)
+svycontrast(tab_sex_desempleo,
+            list(diff_Sex = c(-1, 1))) %>%
+  data.frame()
+
+```
+
+
+## Contrastes 
+
+```{r}
+(tab_region_desempleo <- svyby(~desempleo, ~Region, 
+                          diseno %>% filter(!is.na(desempleo)) , 
+                      svymean, na.rm=T, covmat = TRUE,
+                      vartype = c("se", "ci")))
+
+```
+
+
+```{r}
+vcov(tab_region_desempleo)
+```
+
+## Contrastes 
+
+```{r}
+(tab_region_pobreza <- svyby(~pobreza, ~Region, 
+                          diseno %>% filter(!is.na(desempleo)) , 
+                      svymean, na.rm=T, covmat = TRUE,
+                      vartype = c("se", "ci")))
+
 ```
