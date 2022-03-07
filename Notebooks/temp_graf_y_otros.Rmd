@@ -73,3 +73,44 @@ mod2 <- svyglm(as.factor(Sex) ~ Income,
 summary(mod2)$coefficients
 
 ```
+
+```{r}
+require(svydiags)
+df_qq <- tibble(
+  Empirica = Hmisc::wtd.quantile(
+    x = svystdres(fit_svy_qwgt)$stdresids,
+    weights = encuesta$wk2, 
+    probs = seq(0.01,.99,len=1000) 
+                      ),
+Teorica = qnorm(p = seq(0.01,0.99,len=1000)))
+
+par(mfrow = c(1,2))
+ggplot(data = df_qq, aes(y = Empirica, x = Teorica)) +
+  geom_point() +  geom_abline(slope = 1)
+```
+
+
+## Estimación del dato
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\boldsymbol{x}_{obs,i}\hat{\boldsymbol{\beta}}\\
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\beta_{3}x_{3i}+\beta_{4}x_{4i}+\beta_{5}x_{5i} 
+$$
+
+```{r}
+coef(mod_svy)
+```
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=71.802 +1.089x_{1i}+47.618x_{2i}+9.199x_{3i}+1.174x_{4i}
+$$
+
+```{r}
+ model.matrix(mod_svy) %>%
+  as.data.frame()%>% slice(1:2)
+```
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=71.802  +1.089(247.9)+47.618(0)+9.199(1)+1.174(55)
+$$
+

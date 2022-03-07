@@ -1,0 +1,748 @@
+---
+title: "Modelos de regresión"
+author: "CEPAL"
+date: "17/2/2022"
+output: beamer_presentation
+editor_options: 
+  markdown: 
+    wrap: 90
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+```
+
+## Lectura de la base
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds")
+data("BigCity", package = "TeachingSampling")
+```
+
+## Definir diseño de la muestra con `srvyr`
+
+```{r}
+library(srvyr)
+
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+
+```
+
+## Sub-grupos
+
+Extraer sub-grupos de la encuesta.
+
+```{r}
+sub_Urbano <- diseno %>%  filter(Zone == "Urban")
+sub_Rural  <- diseno %>%  filter(Zone == "Rural")
+sub_Mujer  <- diseno %>%  filter(Sex == "Female")
+sub_Hombre <- diseno %>%  filter(Sex == "Male")
+```
+
+```{r, echo=FALSE, eval=TRUE}
+theme_cepal <- function(...) theme_light(10) + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="bottom", 
+        legend.justification = "left", 
+        legend.direction="horizontal",
+        plot.title = element_text(size = 20, hjust = 0.5),
+        ...) 
+```
+
+## Modelo de regresión 
+
+$$
+y=\boldsymbol{\beta}_{0}+\boldsymbol{\beta}_{1}x+\epsilon
+$$
+$$
+E\left(y\mid x\right)=B_{0}+B_{1}x
+$$
+donde 
+$ B = [B_0, B1]$
+y el estimador de $B$ esta dado por: 
+$$
+\hat{B}=\boldsymbol{\left(X^{T}WX\right)^{-1}X^{T}Wy}
+$$
+$$
+F\left(B\right)=\sum_{i=1}^{N}\left(y_{i}-\boldsymbol{x}_{i}\boldsymbol{B}\right)^{2}
+$$
+
+$$
+\widehat{WSSE}_{pop}=\sum_{h}^{H}\sum_{\alpha}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}w_{h\alpha i}\left(y_{hai}-\boldsymbol{x}_{h\alpha i}\boldsymbol{B}\right)^{2}
+$$
+## Modelo nulo (Q_W)
+
+```{r}
+modNul <- svyglm(Income ~ 1, design = diseno)
+fit_Nul <- lm(wk ~ 1, data = encuesta)
+qw <- predict(fit_Nul)
+
+encuesta %<>% mutate(wk1 = wk/qw)
+
+diseno_qwgt <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk1,
+    nest = T
+  )
+modNul_qw <- svyglm(Income ~ 1, design = diseno_qwgt)
+
+```
+
+## scaterplot con los datos poblacionales
+
+```{r, plot1, echo = TRUE, eval = FALSE}
+library(ggplot2); library(ggpmisc)
+plot_BigCity <- 
+  ggplot(data = BigCity,
+         aes(x = Expenditure, y = Income)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              formula = y ~ x) +
+  theme_cepal()
+
+plot_BigCity + stat_poly_eq(formula = y~x, 
+  aes(label = paste(..eq.label..,
+   ..rr.label.., sep = "~~~")), parse = TRUE)
+
+```
+
+## scaterplot con los datos poblacionales
+
+```{r, plot1, echo = FALSE, eval = TRUE}
+```
+
+## modelo poblacional
+
+```{r, tab1, results='asis', echo=TRUE, eval = FALSE}
+fit <- lm(Income ~ Expenditure, data = BigCity)
+stargazer(fit, header = FALSE, title = "Modelo BigCity", 
+          style = "ajps")
+```
+
+## modelo poblacional
+
+```{r, tab1, results = 'asis', echo=FALSE, eval=TRUE}
+```
+
+## scaterplot con los datos encuesta sin ponderar
+
+```{r, plot2, echo = TRUE, eval = FALSE}
+plot_sin <- 
+  ggplot(data = encuesta,
+         aes(x = Expenditure, y = Income)) +
+  geom_point() +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              formula = y ~ x) +
+  theme_cepal()
+plot_sin + stat_poly_eq(formula = y~x, 
+  aes(label = paste(..eq.label..,
+     ..rr.label.., sep = "~~~")), parse = TRUE)
+```
+
+## scaterplot con los datos encuesta sin ponderar
+
+```{r, plot2, echo = FALSE, eval = TRUE}
+```
+
+## modelo sin ponderar
+
+```{r, tab2, echo = TRUE, eval = FALSE}
+fit_sinP <- lm(Income ~ Expenditure, data = encuesta)
+stargazer(fit_sinP, header = FALSE,
+          title = "Modelo encuesta Sin ponderar", 
+          style = "ajps")
+```
+
+## Modelo sin ponderar
+
+```{r, tab2, results='asis', echo = FALSE, eval = TRUE}
+```
+
+## scaterplot con los datos encuesta ponderado
+
+```{r, plot3, echo = TRUE, eval = FALSE}
+plot_Ponde <- 
+  ggplot(data = encuesta,
+         aes(x = Expenditure, y = Income)) +
+  geom_point(aes(size = wk)) +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              formula = y ~ x, 
+              mapping = aes(weight = wk)) +
+  theme_cepal()
+plot_Ponde + stat_poly_eq(formula = y~x, 
+  aes(weight = wk, 
+    label = paste(..eq.label..,
+      ..rr.label.., sep = "~~~")), 
+  parse = TRUE)
+```
+
+## scaterplot con los datos encuesta sin ponderar
+
+```{r, plot3, echo = FALSE, eval = TRUE}
+```
+
+## modelo ponderado lm
+
+```{r, tab3, echo = TRUE, eval = FALSE}
+fit_Ponde <- lm(Income ~ Expenditure, 
+                data = encuesta, weights = wk)
+stargazer(fit_Ponde, header = FALSE,
+          title = "Modelo encuesta ponderada", 
+          style = "ajps")
+```
+
+## Modelo ponderado lm
+
+```{r, tab3, results='asis', echo = FALSE, eval = TRUE}
+```
+
+## modelo ponderado svyglm
+
+```{r, tab4, echo = TRUE, eval = TRUE}
+fit_svy <- svyglm(Income ~ Expenditure, design = diseno)
+modNul <- svyglm(Income ~ 1, design = diseno)
+s1 <- summary(fit_svy)
+s0 <-summary(modNul)
+```
+
+## Calculo del $R^2$
+
+$$
+R^2=1-\frac{SSE}{SST}
+$$
+donde
+$SSE=\sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}=\left(y_{i}-\boldsymbol{x}_{i}\boldsymbol{B}\right)^{2}$
+
+$$
+R_{weighted}^{2}=1-\frac{WSSE}{WSST}
+$$
+## Calculo del $R^2$
+
+```{r, echo = TRUE, eval = TRUE}
+s1$dispersion
+s0$dispersion
+(R2 = 1-78320/149477)
+n = sum(diseno_qwgt$variables$wk)
+(R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
+```
+
+## Resumen del modelo
+
+```{r, tab4a, results='asis', echo = FALSE, eval = TRUE}
+stargazer(fit_svy, header = FALSE,
+          title = "Modelo encuesta ponderada, svyglm", 
+          style = "ajps")
+```
+
+## Comparando los resultados
+
+```{r, plot4, echo=TRUE, eval=FALSE}
+df_model <- data.frame(
+  intercept = c(coefficients(fit)[1],
+               coefficients(fit_sinP)[1], 
+               coefficients(fit_Ponde)[1],
+               coefficients(fit_svy)[1]), 
+  slope = c(coefficients(fit)[2],
+               coefficients(fit_sinP)[2], 
+               coefficients(fit_Ponde)[2],
+               coefficients(fit_svy)[2]),
+  Modelo = c("Población", "Sin ponderar", 
+             "Ponderado(lm)", "Ponderado(svyglm)"))
+plot_BigCity +  geom_abline( data = df_model,
+    mapping = aes( slope = slope,
+      intercept = intercept, linetype = Modelo,
+      color = Modelo ), size = 2
+  )
+
+```
+
+## Comparando los resultados
+
+```{r, plot4, echo=FALSE, eval=TRUE}
+```
+
+## Comparando los resultados
+
+```{r, echo = FALSE, eval = TRUE}
+library('modelsummary')
+options("modelsummary_format_numeric_latex" = "plain")
+modelsummary(list(Pob = fit, 
+                  "Sin Pond" = fit_sinP,
+                  "Ponde(lm)" = fit_Ponde,
+                  "Ponde(svyglm)" = fit_svy), 
+             statistic = c("p.v = ({p.value})"),
+             output = "markdown", gof_omit = 'BIC|Log' )
+
+```
+
+## Metodología de los Q_Weighting de pfefferman
+
+```{r}
+fit_wgt <- lm(wk ~ Expenditure, data = encuesta)
+wgt_hat <- predict(fit_wgt)
+encuesta %<>% mutate(wk2 = wk/wgt_hat)
+
+diseno_qwgt <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk2,
+    nest = T
+  )
+
+```
+
+## Modelos empleando los Q_Weighting
+
+```{r}
+fit_Ponde_qwgt <- lm(Income ~ Expenditure, 
+                     data = encuesta, weights = wk2)
+fit_svy_qwgt <- svyglm(Income ~ Expenditure,
+                       design = diseno_qwgt)
+modNul <- svyglm(Income ~ 1, design = diseno_qwgt)
+```
+
+## Calculo del $R^2$
+
+```{r}
+
+s1 <- summary(fit_svy_qwgt)
+s0 <- summary(modNul)
+s1$dispersion
+s0$dispersion
+(R2 = 1-78053/148800)
+n = sum(diseno_qwgt$variables$wk2)
+(R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
+
+```
+
+## Modelos empleando los Q_Weighting
+
+```{r,echo=FALSE}
+modelsummary(list("lm(wgt)" = fit_Ponde,
+                  "svyglm(wgt)" = fit_svy, 
+                  "lm(qwgt)" = fit_Ponde_qwgt,
+                  "svyglm(qwgt)" = fit_svy_qwgt), 
+             output = "markdown", 
+              statistic = c("p.v = ({p.value})"),
+             title = "Comprando modelos con Q Weighting",
+             gof_omit = 'BIC|Log')
+```
+
+## Modelo escogido
+
+```{r, mod1, echo=TRUE, eval=FALSE, results='asis'}
+mod_svy <- svyglm(
+  Income ~ Expenditure + Zone + Sex + Age^2 ,
+                       design = diseno_qwgt)
+stargazer(mod_svy, header = FALSE,
+           title = "Modelo completo", 
+           style = "ajps",  omit.stat=c("bic", "ll"))
+```
+
+## Resumen del modelo escogido
+
+```{r,mod1, echo=FALSE,eval=TRUE,  results='asis'}
+```
+
+## Calculo del $R^2$
+
+```{r}
+s1 <- summary(mod_svy)
+s0 <- summary(modNul)
+s1$dispersion
+s0$dispersion
+(R2 = 1-76821/148800)
+n = sum(diseno_qwgt$variables$wk2)
+(R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
+
+```
+
+## Residuales estándarizados 
+$$
+r_{pi}=\left(y_{i}-\mu_{i}\left(\hat{\boldsymbol{B}}_{w}\right)\right)\sqrt{\frac{w_{i}}{V\left(\hat{\mu}_{i}\right)}}
+$$
+
+$$
+H=W^{1/2}X\left(X^{T}WX\right)^{-1}W^{1/2}
+$$
+donde 
+$$
+W=diag\left\{ \frac{w_{1}}{V\left(\hat{\mu}_{1}\right)\left[g'\left(\mu_{1}\right)\right]^{2}},\ldots,\frac{w_{n}}{V\left(\hat{\mu}_{1}\right)\left[g'\left(\mu_{n}\right)\right]^{2}}\right\} 
+$$
+
+con $g$ es una función de enlace que es especificada mediante un modelo lineal generalizado. 
+
+## Diagnostico del modelo
+
+```{r}
+par(mfrow = c(2,2))
+plot(mod_svy)
+```
+
+```{r, plot5, echo = TRUE, eval=FALSE}
+```
+
+## Pruebas de normalidad
+
+-   $H_0$: Los errores proviene de una distribución normal.
+-   $H_1$: Los errores no proviene de una distribución normal.
+
+Algunas librerías que podemos emplear son:
+
+```{r, echo = TRUE, eval=TRUE}
+library(normtest) ###REALIZA 5 PRUEBAS DE NORMALIDAD###
+library(nortest) ###REALIZA 10 PRUEBAS DE NORMALIDAD###
+library(moments) ###REALIZA 1 PRUEBA DE NORMALIDAD###
+library(svydiags)
+stdresids = as.numeric(svystdres(mod_svy)$stdresids)
+diseno_qwgt$variables %<>% mutate(stdresids = stdresids)
+```
+
+## Histograma de los residuales
+
+```{r, hist1, echo = TRUE, eval = FALSE}
+ggplot(data = diseno_qwgt$variables,
+       aes(x = stdresids)) +
+  geom_histogram(aes(y = ..density..)) +
+  geom_density() +
+  geom_function(fun = dnorm, colour = "red") +
+  theme_cepal()
+```
+
+## Histograma de los residuales
+
+```{r, hist1, echo=FALSE, eval = TRUE}
+```
+
+## Pruebas de normalidad Kolmogorov-Smirnov
+
+```{r}
+nortest::lillie.test(diseno_qwgt$variables$stdresids)
+```
+
+## Varianza constante
+
+```{r, plot6, echo=TRUE, eval=FALSE,size="tiny"}
+library(patchwork)
+diseno_qwgt$variables %<>% 
+  mutate(pred = predict(mod_svy))
+g2 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Expenditure, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+g3 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Age^2, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+g4 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Zone, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+g5 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Sex, y = stdresids))+
+  geom_point() +  geom_hline(yintercept = 0) +
+  theme_cepal()
+
+(g2|g3)/(g4|g5)
+```
+
+## Varianza constante
+
+```{r, plot6, echo=FALSE, eval=TRUE}
+```
+
+## Distancia de cook 
+$$
+c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
+$$
+
+donde, 
+
+  - $w_i^* =$ Pesos de la encuesta. 
+  - $w_i$ Elementos por fuera de la diagonal de la matriz hat 
+  - $e_i=$ residuales
+  - $p=$ número de parámetros del modelo de regresión. 
+  - $\phi =$ parámetro de dispersión en el glm 
+  - $\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right) =$ estimación de varianza linealizada de la ecuación de puntuación, que se utiliza para pseudo MLE en modelos lineales generalizados ajustados a datos de encuestas de muestras complejas
+  
+  
+## Detección de observaciones influyentes (Distancia de cook)
+
+```{r, dcook, eval=FALSE}
+d_cook = data.frame(cook = svyCooksD(mod_svy), 
+                    id = 1:length(svyCooksD(mod_svy)))
+ggplot(d_cook, aes(y = cook, x = id)) + geom_point() + 
+  theme_bw(20)
+```
+
+## Detección de observaciones influyentes (Distancia de cook)
+
+```{r, dcook, eval=TRUE, echo=FALSE}
+```
+
+## $D_fBetas_{(i)}$
+
+$$
+D_fBeta_{(i)} = \hat{B}-\hat{B}_{\left(i\right)}=\frac{\left(\boldsymbol{X}^{t}\boldsymbol{X}\right)^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}}{1-h_{ii}}
+$$
+
+Donde $\hat{B}_{(i)}$ es el vector de parámetros estimados una vez se ha eliminado la i-ésima observación, $h_{ii}$ es el correspondiende elemento de la matriz *H*  y $\hat{e}_i$ es el residual de la i-ésima observación. 
+La i-ésima observación es influyente para $B_j$ si $\mid D_{f}Beta_{\left(i\right)j}\mid\geq\frac{2}{\sqrt{n}}$
+
+
+## Detección de observaciones influyentes (dfbetas)
+
+```{r}
+d_dfbetas = data.frame(t(svydfbetas(mod_svy)$Dfbetas))
+colnames(d_dfbetas) <- paste0("Beta_", 1:5)
+d_dfbetas %>% slice(1:10L)
+```
+
+## Detección de observaciones influyentes (dfbetas)
+
+```{r eval=TRUE, echo=TRUE}
+d_dfbetas$id <- 1:nrow(d_dfbetas)
+d_dfbetas <- reshape2::melt(d_dfbetas,  id.vars = "id")
+cutoff <- svydfbetas(mod_svy)$cutoff
+d_dfbetas %<>%
+  mutate(
+    Criterio = ifelse(abs(value) > cutoff, "Si", "No"))
+
+tex_label <- d_dfbetas %>% 
+  filter(Criterio == "Si") %>%
+  arrange(desc(abs(value))) %>% slice(1:10L)
+```
+
+## Detección de observaciones influyentes (dfbetas)
+
+```{r eval=FALSE, plot_dfbetas, echo=TRUE}
+ggplot(d_dfbetas, aes(y = abs(value), x = id)) +
+  geom_point(aes(col = Criterio)) +
+  geom_text(data = tex_label,
+            angle = 45,
+            vjust = -1,
+            aes(label = id)) +
+  geom_hline(aes(yintercept = cutoff)) +
+  facet_wrap(. ~ variable, nrow = 2) +
+  scale_color_manual(
+    values = c("Si" = "red", "No" = "black")) +
+  theme_cepal()
+```
+
+## Detección de observaciones influyentes (dfbetas)
+
+```{r eval=TRUE, plot_dfbetas, echo=FALSE}
+```
+
+## Detección de observaciones influyentes (valores hat)
+
+```{r, hat, eval=FALSE, echo=TRUE}
+vec_hat <- svyhat(mod_svy, doplot = FALSE)
+d_hat = data.frame(hat = vec_hat, 
+                    id = 1:length(vec_hat))
+d_hat %<>% mutate(
+  C_cutoff = ifelse(hat > (3 * mean(hat)), "Si", "No"))
+
+ggplot(d_hat, aes(y = hat, x = id)) +
+  geom_point(aes(col = C_cutoff)) + 
+  geom_hline(yintercept = (3 * mean(d_hat$hat))) +
+  scale_color_manual(
+    values = c("Si" = "red", "No" = "black"))+
+  theme_cepal()
+```
+
+## Detección de observaciones influyentes (valores hat)
+
+```{r, hat, eval=TRUE, echo=FALSE}
+```
+
+## Estadístico DfFits 
+
+$$
+DfFits\left(i\right)=\frac{\left[\left(\hat{B}-\hat{B}_{\left(i\right)}\right)^{t}\left(\boldsymbol{X}^{t}\boldsymbol{X}\right)\left(\hat{B}-\hat{B}_{\left(i\right)}\right)\right]^{1/2}}{\hat{\sigma}_{\left(i\right)}}
+$$
+
+La i-ésima observación se considera influyente en el ajuste del modelo si $\mid DfFits\left(i\right)\mid\geq2\sqrt{\frac{p}{n}}$
+
+## Detección de observaciones influyentes (dffit)
+
+```{r,plot_dffit, echo=TRUE, eval=FALSE}
+d_dffits = data.frame(
+  dffits = svydffits(mod_svy)$Dffits, 
+  id = 1:length(svydffits(mod_svy)$Dffits))
+
+cutoff <- svydffits(mod_svy)$cutoff
+
+d_dffits %<>% mutate(
+    C_cutoff = ifelse(abs(dffits) > cutoff, "Si", "No"))
+ggplot(d_dffits, aes(y = abs(dffits), x = id)) +
+  geom_point(aes(col = C_cutoff)) + 
+  geom_hline(yintercept = cutoff) + 
+   scale_color_manual(
+    values = c("Si" = "red", "No" = "black"))+
+  theme_cepal()
+```
+
+## Detección de observaciones influyentes (dffit)
+
+```{r,plot_dffit, echo=FALSE, eval=TRUE}
+```
+
+## Inferencia sobre los parámetros del modelo
+$$
+t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
+$$
+
+$$
+\hat{B}\pm t_{\left(1-\frac{\alpha}{2},df\right)}\times se\left(\hat{B}\right)
+$$
+
+## Estimación del dato
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\boldsymbol{x}_{obs,i}\hat{\boldsymbol{\beta}}
+$$
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\beta_{3}x_{3i}+\beta_{4}x_{4i} 
+$$
+
+
+```{r, echo=FALSE}
+coef(mod_svy) %>% data.frame(Estimado = .)
+```
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=71.518 +1.090x_{1i}+47.645x_{2i}+9.171x_{3i}+1.169x_{4i}
+$$
+
+## Estimación del dato
+
+```{r, echo=FALSE}
+ model.matrix(mod_svy) %>%
+  as.data.frame()%>% slice(1:7)
+```
+
+
+$$
+\hat{y_i}=71.518  +1.090(247.9)+47.645(0)+9.171(1)+1.169(55) = 415.2
+$$
+
+## Estimando el IC de predicción 
+
+$$
+var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i}
+$$
+
+
+```{r}
+vcov(mod_svy)
+```
+
+
+```{r, echo=TRUE}
+xobs <- model.matrix(mod_svy) %>%
+  data.frame() %>% slice(1) %>% as.matrix()
+cov_beta <- vcov(mod_svy) %>% as.matrix()
+as.numeric(sqrt((xobs)%*%cov_beta%*%t(xobs)))
+```
+
+## Intervalo de confianza para la predicción
+
+$$
+\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)}
+$$
+
+
+## Utilizando la función predict
+
+```{r}
+pred <- data.frame(predict(mod_svy, type="link")) 
+pred_IC <- data.frame(
+  confint(predict(mod_svy, type="link"))) 
+colnames(pred_IC) <- c("Lim_Inf", "Lim_Sup")
+pred <- bind_cols(pred,pred_IC)
+pred$Expenditure <- encuesta$Expenditure
+pred %>% slice(1:6L)
+```
+
+
+## scaterplot de la predicción 
+
+```{r, plot_pred, echo=TRUE,eval=FALSE}
+pd <- position_dodge(width = 0.2)
+ggplot(pred %>% slice(1:100L), 
+       aes(x = Expenditure , y = link)) +
+  geom_errorbar(
+    aes(ymin = Lim_Inf, 
+        ymax = Lim_Sup),
+                width = .1, linetype = 1) +
+  geom_point(size = 2, position = pd) +
+  theme_bw()
+```
+
+## scaterplot de la predicción 
+
+
+```{r, plot_pred, echo=FALSE,eval=TRUE}
+```
+
+
+## Predicción fuera de las observaciones. 
+
+```{r}
+datos_nuevos <- data.frame(Expenditure = 1600, 
+                           Age = 40, Sex = "Male", 
+                           Zone = "Urban")
+```
+
+
+$$
+\hat{y_i}=71.518  +1.090(1600)+47.645(1)+9.171(1)+1.169(40) = 1919
+$$
+
+
+$$
+var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i} + \hat{\sigma}^2_{yx}
+$$
+
+```{r}
+x_noObs = matrix(c(1,1600,1,1,40),nrow = 1)
+as.numeric(sqrt(x_noObs%*%cov_beta%*%t(x_noObs)))
+```
+
+## Intervalo de confianza para la predicción
+
+$$
+\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)+\hat{\sigma}_{yx}^{2}}
+$$
+
+## Predicción fuera de las observaciones.
+
+```{r}
+predict(mod_svy, newdata = datos_nuevos, type =  "link")
+confint(predict(mod_svy,newdata = datos_nuevos))
+```
