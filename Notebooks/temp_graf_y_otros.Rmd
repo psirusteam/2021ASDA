@@ -114,3 +114,10 @@ $$
 \hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=71.802  +1.089(247.9)+47.618(0)+9.199(1)+1.174(55)
 $$
 
+
+
+
+
+summary(margins(fit, variables = "x1", design=myDesisgn[myDesisgn$variables$x3 == 1]))
+svyglm(y~x, data=data, subset = z == 1)
+
