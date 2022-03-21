@@ -4,6 +4,7 @@ library (survey)
 library(srvyr)
 library(haven)
 library(statar)
+library(TeachingSampling)
 
 dir()
 
