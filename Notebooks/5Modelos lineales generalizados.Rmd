@@ -77,14 +77,95 @@ prop.table(tab, margin = 2)
 ```
 
 ## Prueba de independencia F 
-```{r}
-summary(tab, statistic = "F")
-```
+$$
+\hat{\pi}_{rc}=\frac{n_{r+}}{n_{++}}\times\frac{n_{+c}}{n_{++}}
+$$
+
+$$
+\chi_{pearsom}^{2}=n_{++}\times\sum_{r}\sum_{c}\left(\frac{\left(p_{rc}-\hat{\pi}_{rc}\right)^{2}}{\hat{\pi}_{rc}}\right)
+$$
+
+$$
+G^{2}=2\times n_{++}\times\sum_{r}\sum_{c}p_{cr}\times\ln\left(\frac{p_{rc}}{\hat{\pi}_{rc}}\right)
+$$
+donde, $R$ es el número de filas y $C$ representa el número de columnas, la prueba tiene $(R-1)\times (C-1)$ grados de libertad.  
+
+## Prueba de independencia F 
+
+$$
+\chi^2_{(R-S)} = \chi^2_{(Pearson)}\big/GDEFF
+$$
+
+$$
+G^2_{(R-S)}  =  G^2\big/GDEFF
+$$
+
+con $GDEFF$ el efecto generalizado del diseño, esta dado por 
+
+\footnotesize
+$$
+GDEFF=\frac{\sum_{r}\sum_{c}\left(1-p_{rc}\right)d^{2}\left(p_{rc}\right)-\sum_{r}\left(1-p_{r+}\right)d^{2}\left(p_{r+}\right)-\sum_{c}\left(1-p_{+c}\right)d^{2}\left(p_{+c}\right)}{\left(R-1\right)\left(C-1\right)}
+$$
+
+
+## Prueba de independencia F 
+
+$$
+F_{R-S,Pearson}=\chi_{R-S}^{2}\big/\left[\left(R-1\right)\left(C-1\right)\right]\sim F_{\left(R-1\right)\left(C-1\right),\left(R-1\right)\left(C-1\right)df}
+$$
+
+$$
+F_{R-S,LRT}=G_{R-S}^{2}\big/\left(C-1\right)\sim F_{\left(C-1\right),df}
+$$
+
+donde $C$ es el número de columnas de la tabla cruzada 
+
 
 ## Prueba de independencia ChiSq 
 ```{r}
  summary(tab, statistic = "Chisq")
 ```
+
+## Prueba de independencia F 
+```{r}
+summary(tab, statistic = "F")
+```
+
+## Estadístico de Wald 
+
+$$
+Q_{wald}=\hat{\boldsymbol{Y}^{t}}\left(\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}\right)^{-1}\hat{\boldsymbol{Y}}
+$$
+donde, 
+
+$$
+\hat{\boldsymbol{Y}}=\left(\hat{N}-E\right)
+$$
+es un vector de $R\times C$ de  diferencias entre los recuentos de celdas observadas y esperadas, esto es, $\hat{N}_{rc}-E_{rc}$ 
+
+La matriz  $\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}$, representa la matriz de varianza-covarianza estimada para el vector de diferencias.
+
+## Estadístico de Wald 
+
+La matriz $\boldsymbol{H}$  es la inversa de la matriz $\boldsymbol{J}$ dada por: 
+$$
+\boldsymbol{J}=-\left[\frac{\delta^{2}\ln PL\left(\boldsymbol{B}\right)}{\delta^{2}\boldsymbol{B}}\right] \mid \boldsymbol{B}=\hat{\boldsymbol{B}}
+$$
+
+$$
+\sum_{h}\sum_{a}\sum_{i}x_{hai}^{t}x_{hai}w_{hai}\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\left(1-\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\right)
+$$
+Bajo la hipótesis nula, el estadístico 
+$$
+Q_{wald}\sim\chi_{\left(R-1\right)\times\left(C-1\right)}^{2}
+$$
+
+## Estadístico de Wald 
+
+$$
+F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\right)\left(C-1\right)df}\sim F_{\left(R-1\right)\left(C-1\right),df-\left(R-1\right)\left(C-1\right)+1}
+$$
+
 
 ## Prueba de independencia Wald 
 ```{r}
@@ -141,6 +222,45 @@ anova(mod1, mod2)
 $$
 g(\pi(x))=logit(\pi(x)) = z = \ln\left(\frac{\pi(x)}{1-\pi(x)}\right) = B_0 + B_1x_1+\dots+B_px_p
 $$
+$$
+\hat{\pi}\left(\boldsymbol{x}\right)=\frac{\exp\left(\boldsymbol{X\hat{B}}\right)}{1-\exp\left(\boldsymbol{X\hat{B}}\right)}=\frac{\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}{1-\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}
+$$
+
+$$
+PL\left(\boldsymbol{B}\mid X\right)=\prod_{i=1}^{n}\left\{ \pi\left(x_{i}\right)^{y_{i}}\left(1-\pi\left(x_{i}\right)\right)^{^{1-y_{i}}}\right\} ^{w_{i}}
+$$
+
+con 
+$$
+\pi\left(x_{i}\right)=\frac{\exp\left(x_{i}\boldsymbol{B}\right)}{1-\exp\left(x_{i}\boldsymbol{B}\right)}
+$$
+$$
+var\left(\boldsymbol{\hat{B}}\right)=\boldsymbol{J}^{-1}var\left(S\left(\hat{\boldsymbol{B}}\right)\right)\boldsymbol{J}^{-1}
+$$
+
+$$
+S\left(B\right)=\sum_{h}\sum_{a}\sum_{i}w_{hai}\boldsymbol{D}_{hai}^{t}\left[\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)\left(1-\pi_{hai}\left(\boldsymbol{B}\right)\right)\right]^{-1}\left(y_{hai}-\pi_{hai}\left(\boldsymbol{B}\right)\right)=0
+$$
+
+$$
+D_{hai} = \frac{\delta\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)}{\delta B_{j}}
+$$
+$j=0,\dots,p$
+
+## Prueba de Wald para los parámetros del modelo
+
+$$
+G=-2\ln\left[\frac{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{reduced}}{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{full}}\right]
+$$
+
+$$
+\hat{\psi}=\exp\left(\hat{B}_{1}\right)
+$$
+
+$$
+CI\left(\psi\right)=\exp\left(\hat{B}_{j}\pm t_{df,1-\frac{\alpha}{2}}se\left(\hat{B}_{j}\right)\right)
+$$
+
 
 ## Tablas de contingencia 
 

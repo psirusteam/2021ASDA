@@ -115,9 +115,108 @@ $$
 $$
 
 
+```{r}
+dim(BigCity)
+encuesta %>% 
+select(HHID, PSU, Stratum)%>% unique() %>% 
+  group_by(Stratum) %>% tally()
+
+## y = Income, x = Expenditure, colour = Stratum Importante. 
+## y = Income, x = Expenditure, colour = Sex
+## y = Income, x = Expenditure, colour = Region
+
+
+encuesta %>% select(HHID, Stratum)%>% unique() %>%  
+  group_by(Stratum)  %>% tally() %>% arrange(desc(n)) %>% select(-n) %>% slice(1:2L) %>% 
+inner_join(encuesta) %>% 
+  ggplot(data = ., aes(y = Income, x = Expenditure, colour = paste0(Stratum) )) + 
+  geom_point() + theme( legend.position="none") +
+  geom_smooth( formula = y ~ x, method = "lm", se = F) +
+  ylim(c(-1,5000))
+```
+
+
+## Modelo Nulo
+
+Y ~ int 
 
 
 
-summary(margins(fit, variables = "x1", design=myDesisgn[myDesisgn$variables$x3 == 1]))
-svyglm(y~x, data=data, subset = z == 1)
+## Modelo con int aleaterio 
+
+Y~ B0 + B1gasto
+B0 = b0 + b1estrato  
+## Modelo con int y pendiente aleatroia 
+
+y ~ B0 + B1gasto 
+
+B0 = b0 + b1estrato
+
+B1 = a1 + a2estrato
+
+y ~  gasto + (1 + gasto|estrato)
+
+## Modelo con int y pendiente aleatroia 
+
+y ~ B0 + B1gasto + B2Zona 
+
+B0 = b0 + b1estrato + b2mu_gasto_estrato
+
+B1 = a1 + a2estrato + a2mu_gasto_estrato
+
+B2 = c1 + c2estrato + c2mu_gasto_estrato
+
+y ~  gasto + (1 + gasto|estrato + gasto|zona)
+
+
+
+## Modelo con int aleaterio 
+
+Y~ B0 + B1gasto
+B0 = b0 + b1estrato  
+## Modelo con int y pendiente aleatroia 
+Poberza extrema 
+y ~ B0 + B1gasto 
+
+B0 = b0 + b1estrato
+
+B1 = a1 + a2estrato
+
+y ~  gasto + (1 + gasto|estrato)
+
+## Modelo con int y pendiente aleatroia 
+
+y ~ B0 + B1gasto + B2Zona 
+
+B0 = b0 + b1estrato + b2mu_gasto_estrato
+
+B1 = a1 + a2estrato + a2mu_gasto_estrato
+
+B2 = c1 + c2estrato + c2mu_gasto_estrato
+
+y ~  gasto + (1 + gasto|estrato + gasto|zona)
+
+
+
+
+
+
+## Pisa
+Ingreso_medio ~ esc
+%varianRend ~ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

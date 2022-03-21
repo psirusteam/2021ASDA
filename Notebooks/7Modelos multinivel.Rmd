@@ -1,0 +1,878 @@
+---
+title: "Modelos multinivel"
+author: "CEPAL"
+date: "21/3/2022"
+output: beamer_presentation
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(ggplot2)
+#rm(list = ls())
+```
+
+
+
+## Lectura de la base
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds")
+```
+
+## Creando theme_cepal
+
+```{r, echo=TRUE, eval=TRUE}
+theme_cepal <- function(...) theme_light(10) + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="bottom", 
+        legend.justification = "left", 
+        legend.direction="horizontal",
+        plot.title = element_text(size = 20, hjust = 0.5),
+        ...) 
+```
+
+
+## Introducción a los modelos multinivel.
+
+```{r, plot_mult0, echo=TRUE, eval=FALSE}
+encuesta_plot <- encuesta %>%
+  dplyr::select(HHID, Stratum) %>% unique() %>%
+  group_by(Stratum)  %>% tally() %>% 
+  arrange(desc(n)) %>% dplyr::select(-n) %>% 
+  slice(1:6L) %>%
+  inner_join(encuesta) %>% filter(Expenditure <700) %>% 
+  dplyr::select(Income, Expenditure, Stratum, 
+         Sex, Region, Zone) 
+encuesta_plot  %>% slice(1:6L)
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult0, echo=FALSE, eval=TRUE}
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult1,echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot, aes(y = Income, x = Expenditure)) + 
+  geom_jitter() +
+  theme( legend.position="none",
+         plot.title = element_text(hjust = 0.5)) +
+  geom_smooth( formula = y ~ x, method = "lm", se = F) + 
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{i}\\sim\\hat{\\beta}_{0}+\\hat{\\beta}_{1}Gasto_{i}+\\epsilon_{i}$")) +
+  theme_cepal()
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult1, echo=FALSE,eval=TRUE}
+```
+
+## Introducción a los modelos multinivel.
+```{r}
+B1 <- coef(lm(Income ~ Expenditure, data = encuesta_plot))[2]
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(B0 = coef(lm(Income ~ 1))[1]) %>% 
+  mutate(B1 = B1))
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult2,echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = coef_Mod,
+              mapping=aes(slope=B1, 
+                          intercept=B0, colour = Stratum)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0j}+\\hat{\\beta}_{1}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult2, echo=FALSE,eval=TRUE}
+```
+
+
+
+## Introducción a los modelos multinivel.
+```{r}
+B0 <- coef(lm(Income ~ Expenditure, data = encuesta_plot))[1]
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(B1 = coef(lm(Income ~ -1 + Expenditure))[1]) %>% 
+  mutate(B0 = B0))
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult3,echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = coef_Mod,
+              mapping=aes(slope=B1, 
+                          intercept=B0, colour = Stratum)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0}+\\hat{\\beta}_{1j}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult3, echo=FALSE,eval=TRUE}
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult4,echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+    geom_smooth( formula = y ~ x, method = "lm", se = F) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0j}+\\hat{\\beta}_{1j}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult4, echo=FALSE,eval=TRUE}
+```
+
+## Introducción a los modelos multinivel.
+
+Dos tipos de índices son relevantes en los análisis multinivel: 
+  
+  - Los coeficientes de regresión, generalmente denominados como los parámetros fijos del modelo. 
+  
+  - Las estimaciones de la varianza, generalmente denominadas parámetros aleatorios del modelo.
+  
+Cualquier análisis de regresión multinivel siempre debe comenzar con el cálculo de las estimaciones de varianza de Nivel 1 y Nivel 2 para la variable dependiente.
+
+## Introducción a los modelos multinivel.
+
+  - El primer paso recomendado en el análisis de regresión multinivel consiste en una descomposición de la varianza de la variable dependiente en los diferentes niveles. 
+
+**Ejemplo**
+La varianza del ingreso se descompondrá en dos componentes: 
+
+  - La varianza dentro dentro del estrato 
+  - la varianza entre los estratos.
+
+Estos dos componentes de varianza se pueden obtener una regresión multinivel.
+
+## Introducción a los modelos multinivel.
+Un modelo básico es: 
+
+$y_{ij}=\beta_{0j}+\epsilon_{ij}$
+
+$\beta_{0j}=\gamma_{00}+\tau_{0j}$
+
+  - $y_{ij}=$  Los ingresos de la persona $i$ en el estrato $j$. 
+  - $\beta_{0j}=$ El intercepto en el estrato $j$.
+  - $\epsilon_{ij}$ El residual de la persona $i$ en el estrato $j$.
+  - $\gamma_{00}=$  El intercepto en general.
+  - $\tau_{0j}=$ Efecto aleatorio para el intercepto.
+  
+donde, $\tau_{0j}\sim N\left(0,\sigma_{\tau}^{2}\right)$ y $\epsilon_{ij}\sim N\left(0,\sigma_{\epsilon}^{2}\right)$. 
+
+La correlación intra clásica  esta dada por: $$\rho=\frac{\sigma_{\tau}^{2}}{\sigma_{\tau}^{2}+\sigma_{\epsilon}^{2}}$$
+
+## Modelos multinivel en muestras complejas. 
+
+  - Aunque existe evidencia suficiente de que las ponderaciones de muestreo deben usarse en el modelado
+multinivel (MLM) para obtener estimaciones no sesgadas[^3], y también sobre cómo deben
+usarse estas ponderaciones en los análisis de un solo nivel, hay poca discusión en la literatura sobre qué y cómo usar pesos de muestreo en MLM. 
+
+  - Actualmente, diferentes autores recomiendan cuatro enfoques diferentes sobre cómo usar los pesos
+de muestreo en modelos jerárquicos. 
+
+
+[^3]: Cai, T. (2013). Investigation of ways to handle sampling weights for multilevel model analyses. Sociological Methodology, 43(1), 178-219.
+
+## Introducción modelos multinivel. 
+
+- Pfefermann et al. (1998) y Asparouhov (2006) aconsejan utilizar un enfoque de pseudomáxima
+verosimilitud para calcular estimaciones dentro y entre los diferentes niveles utilizando la técnica de
+maximización de mínimos cuadrados generalizados ponderados por probabilidad (PWGLS) para obtener
+estimaciones no sesgadas.[^4][^5]
+
+- Rabe-Hesketh y Skrondal (2006) proporcionan técnicas de maximización de expectativas para maximizar la pseudoverosimilitud[^6] 
+
+[^4]: Pfeffermann, D., Skinner, C. J., Holmes, D. J., Goldstein, H., & Rasbash, J. (1998). Weighting for unequal selection probabilities in multilevel models. Journal of the Royal Statistical Society: series B (statistical methodology), 60(1), 23-40.
+[^5]: Asparouhov, T. (2006). General multi-level modeling with sampling weights. Communications in Statistics—Theory and Methods, 35(3), 439-460.
+[^6]: Asparouhov, T., & Muthen, B. (2006, August). Multilevel modeling of complex survey data. In Proceedings of the joint statistical meeting in Seattle (pp. 2718-2726).
+
+## Estimación de pseudo máxima verosimilitud
+La función de log-verosimilitud para la población esta dada por:
+
+$$
+L_{U}\left(\theta\right)=\sum_{i\in U}\log\left[f\left(\boldsymbol{y}_{i};\theta\right)\right]
+$$
+El estimador de máxima verosimilitud esta dada por: 
+
+$$
+\frac{\partial L_{U}\left(\theta\right)}{\partial\theta}=0
+$$
+La dificultad que encontramos aquí, es transferir los pesos muéstrales a los niveles inferiores, por ejemplo UPMs -> Stratum.
+
+Pfeffermann et al. (1998) argumentaron que debido a la estructura de datos agrupados, ya no se asume que las observaciones sean independientes y que la probabilidad logarítmica se convierta en una suma entre los elementos de nivel uno y dos en lugar de una simple suma de las contribuciones de los elementos.
+
+## Modelo Nulo 
+
+$$
+Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
+$$
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+
+## Ajuste de pesos (alternativa a los Modelo q-weighted) 
+```{r, echo=TRUE,eval=TRUE}
+mod_qw <- lm(wk ~ Age + Sex + Region + Zone,
+             data = encuesta)
+encuesta$wk2 <-   encuesta$wk/predict(mod_qw)
+# alternativa los q-weighted
+n = nrow(encuesta)
+encuesta <- encuesta %>% mutate(wk3 = n*wk/sum(wk))
+encuesta %>% summarise(fep = sum(wk),
+                       q_wei = sum(wk2),
+                       fep2 = sum(wk3) )
+```
+
+## Comparando los pesos. 
+```{r, qw0, echo=TRUE,eval=FALSE}
+ggplot(encuesta, aes(x = wk2, y = wk3)) + 
+  geom_point() + theme_bw() + 
+  labs(x = "q-weighted", y = "Alternativa")
+```
+
+
+## Comparando los pesos. 
+```{r, qw0, echo=FALSE,eval=TRUE}
+```
+
+
+
+## Modelo Nulo 
+
+```{r, mod_null, echo=TRUE,eval=FALSE}
+library(lme4) 
+
+mod_null  <- lmer( Income  ~ ( 1  |  Stratum ),
+                   data  =  encuesta, 
+             weights  =  wk2 ) 
+mod_null2  <- lmer( Income  ~ ( 1  |  Stratum ), 
+                    data  =  encuesta, 
+             weights  =  wk3 ) 
+coef_mod_null <- bind_cols(coef( mod_null )$Stratum, 
+          coef(mod_null2 )$Stratum)
+colnames(coef_mod_null) <- c("Intercept Mod 1",
+                             "Intercept Mod 2")
+coef_mod_null %>% slice(1:12)
+```
+
+
+## Modelo Nulo 
+```{r, mod_null, echo=FALSE,eval=TRUE}
+```
+
+## Modelo Nulo 
+```{r}
+mod_null
+```
+
+## Modelo Nulo 
+```{r}
+#library(sjstats)
+sjstats::icc(mod_null)
+(tab_pred <- data.frame(Pred = predict(mod_null), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+
+
+## Modelo con intercepto aleatoria 
+
+$$
+Ingreso_{ij}=\beta_{0}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+```{r, mod_Int_Aleatorio, echo=TRUE,eval=TRUE}
+mod_Int_Aleatorio <- lmer(
+  Income ~ Expenditure  + (1 | Stratum),
+  data = encuesta, weights  =  wk2)
+
+sjstats::icc(mod_Int_Aleatorio)
+```
+
+## Modelo con intercepto aleatoria 
+```{r}
+coef(mod_Int_Aleatorio)$Stratum %>% slice(1:10L)
+```
+
+##  Modelo con intercepto aleatoria
+```{r,plot_mod_Int_Aleatorio, echo=TRUE, eval=FALSE}
+Coef_Estimado <- inner_join(
+  coef(mod_Int_Aleatorio)$Stratum %>% 
+       add_rownames(var = "Stratum"),
+encuesta_plot %>% select(Stratum) %>% distinct())
+
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = Coef_Estimado,
+              mapping=aes(slope=Expenditure, 
+                          intercept=`(Intercept)`, 
+                          colour = Stratum))+
+  theme_cepal()
+```
+
+##  Modelo con intercepto aleatoria
+```{r,plot_mod_Int_Aleatorio, echo=FALSE, eval=TRUE}
+```
+
+## Predicción del modelo 
+
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_Int_Aleatorio), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+$$
+Ingreso_{ij}=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+
+```{r, mod_Int_y_pen_Aleatorio, echo=TRUE,eval=TRUE}
+mod_Pen_Aleatorio <- lmer(
+  Income ~ Expenditure  + (1 + Expenditure| Stratum),
+  data = encuesta, weights  =  wk2)
+
+sjstats::icc(mod_Pen_Aleatorio)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r}
+coef(mod_Pen_Aleatorio)$Stratum %>% slice(1:10L)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio, echo=TRUE, eval=FALSE}
+Coef_Estimado <- inner_join(
+  coef(mod_Pen_Aleatorio)$Stratum %>% 
+       add_rownames(var = "Stratum"),
+encuesta_plot %>% select(Stratum) %>% distinct())
+
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = Coef_Estimado,
+              mapping=aes(slope=Expenditure, 
+                          intercept=`(Intercept)`, 
+                          colour = Stratum))+
+  theme_cepal()
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio, echo=FALSE, eval=TRUE}
+```
+
+## Predicción del modelo 
+
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_Pen_Aleatorio), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+
+
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+$$
+Ingreso_{ij}=\beta_{0j}+\beta_{1j}Gasto_{ij}+\beta_{2j}Zona_{ij} +\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \gamma_{02}\mu_{j}  + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{1j}
+$$
+$$
+\beta_{2j} = \gamma_{20}+\gamma_{21}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{2j}
+$$
+
+donde $\mu_{j}$ es el gasto medio en el estrato $j$.
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r, mod_Int_y_pen_Aleatorio2, echo=TRUE,eval=TRUE}
+media_estrato <- encuesta %>% group_by(Stratum) %>% 
+  summarise(mu = mean(Expenditure))
+encuesta <- inner_join(encuesta, 
+                       media_estrato, by = "Stratum")  
+
+mod_Pen_Aleatorio2 <- lmer(
+  Income ~ 1 + Expenditure + Zone + mu + 
+    (1 + Expenditure + Zone + mu | Stratum ),
+    data = encuesta, weights  =  wk2)
+sjstats::icc(mod_Pen_Aleatorio2)
+```
+
+
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_Pen_Aleatorio2), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio211, echo=TRUE, eval=FALSE}
+as.data.frame( model.matrix(mod_Pen_Aleatorio2)) %>% 
+  distinct()
+```
+
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado <- inner_join(
+  coef(mod_Pen_Aleatorio2)$Stratum %>%
+    add_rownames(var = "Stratum"),
+  encuesta_plot %>% select(Stratum, Zone) %>% distinct()
+))
+
+```
+
+## Modelo con intercepto y pendiente aleatoria
+\scriptsize 
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado %<>% inner_join(
+  media_estrato, by = "Stratum"))
+```
+\normalsize
+El modelo para el estrato _idStrt001_ viene dado por: 
+$$
+\hat{y}_{ij}=154.4+1.7418Expenditure_{ij}+77.353Zone_{ij}+\left(-0.6954\right)\mu_{j}
+$$
+$$
+\hat{y}_{ij}=154.4+1.7418Expenditure+77.353\left(0\right)+\left(-0.6954\right)\left(255.2\right)
+$$
+$$
+\hat{y}_{ij}=-23.07+1.7418Expenditure
+$$
+
+
+## Modelo con intercepto y pendiente aleatoria
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado %<>%  mutate(B0 = ifelse(
+Zone == "Urban", `(Intercept)` + mu.y * mu.x + ZoneUrban,
+              `(Intercept)` + mu.y * mu.x)) %>%
+  select(Stratum, Zone, B0, Expenditure))
+```
+
+## Modelo con intercepto y pendiente aleatoria
+```{r,plot_mod_Pen_Aleatorio212, echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) +
+  geom_jitter() +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5)) +
+  facet_grid( ~ Zone) +
+  geom_abline(
+    data = Coef_Estimado,
+    mapping = aes(
+      slope = Expenditure,
+      intercept = B0,
+      colour = Stratum
+    )
+  ) +
+  theme_cepal()
+```
+
+## Modelo con intercepto y pendiente aleatoria
+```{r,plot_mod_Pen_Aleatorio212, echo=FALSE, eval=TRUE}
+```
+
+
+
+## Introducción a los modelos logístico  multinivel.
+Sea la variable $y_{ij} = 1$ si el individuo $i$ en el estrato $j$ esta por enciam de la linea de pobreza y $y_{ij} = 0$  en caso contrario, la variable $y_{ij}$ se puede modelar mediante el modelo
+logístico: 
+$$
+Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac{\exp\left(\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}\right)}{1-\exp\left(\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}\right)}
+$$ 
+ó
+
+$$
+\log\left(\frac{\pi_{ij}}{1-\pi_{ij}}\right)=\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}
+$$
+donde $\pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)$.
+
+
+Un modelo básico es: 
+
+$y_{ij}=\beta_{0j}+\epsilon_{ij}$
+
+$\beta_{0j}=\gamma_{00}+\tau_{0j}$
+
+  - $y_{ij}=$  Los ingresos de la persona $i$ en el estrato $j$. 
+  - $\beta_{0j}=$ El intercepto en el estrato $j$.
+  - $\epsilon_{ij}$ El residual de la persona $i$ en el estrato $j$.
+  - $\gamma_{00}=$  El intercepto en general.
+  - $\tau_{0j}=$ Efecto aleatorio para el intercepto.
+  
+donde, $\tau_{0j}\sim N\left(0,\sigma_{\tau}^{2}\right)$ y $\epsilon_{ij}\sim N\left(0,\sigma_{\epsilon}^{2}\right)$. 
+
+La correlación intra clásica  esta dada por: $$\rho=\frac{\sigma_{\tau}^{2}}{\sigma_{\tau}^{2}+\sigma_{\epsilon}^{2}}$$
+
+
+## Modelo Nulo 
+
+```{r, mod_null2, echo=TRUE,eval=FALSE}
+library(lme4) 
+encuesta <- encuesta %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+
+mod_logist_null  <- glmer( pobreza  ~ ( 1  |  Stratum ),
+                   data  =  encuesta, 
+             weights  =  wk2,
+             family = binomial(link = "logit") )
+
+
+coef( mod_logist_null )$Stratum %>% slice(1:12)
+```
+
+
+## Modelo Nulo 
+```{r, mod_null2, echo=FALSE,eval=TRUE}
+```
+
+## Modelo Nulo 
+```{r}
+library(sjstats)
+mod_logist_null
+```
+
+## Modelo Nulo 
+\footnotesize
+```{r}
+sjstats::icc(mod_logist_null)
+(tab_pred <- data.frame(
+  Pred = predict(mod_logist_null, type = "response"), 
+  pobreza = encuesta$pobreza, 
+  Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Estimación de la propoción total con $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+weighted.mean(encuesta$pobreza, encuesta$wk2)
+weighted.mean(tab_pred$Pred, encuesta$wk2)
+```
+
+
+## Modelo con intercepto aleatoria 
+
+$$
+logit(\pi_{ij})=\beta_{0}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+```{r, mod_Int_Aleatorio02, echo=TRUE,eval=TRUE}
+mod_logit_Int_Aleatorio <- glmer(
+  pobreza ~ Expenditure  + (1 | Stratum),
+  data = encuesta, family = binomial(link = "logit"),
+  weights  =  wk2)
+
+sjstats::icc(mod_logit_Int_Aleatorio)
+```
+
+## Modelo con intercepto aleatoria 
+```{r}
+coef(mod_logit_Int_Aleatorio)$Stratum %>% slice(1:10L)
+```
+
+##  Modelo con intercepto aleatoria
+\footnotesize
+```{r,plot_mod_Int_Aleatorio02, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred <- mutate(dat_pred,
+       Proba = predict(mod_logit_Int_Aleatorio, 
+                       newdata = dat_pred , type = "response"))
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+
+```
+
+##  Modelo con intercepto aleatoria
+```{r,plot_mod_Int_Aleatorio02, echo=FALSE, eval=TRUE}
+```
+
+
+## Predicción del modelo 
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Int_Aleatorio,
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum, 
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Estimación de la propoción total con $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+tab_pred %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+$$
+logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+\footnotesize
+```{r, mod_Int_y_pen_Aleatorio02, echo=TRUE,eval=TRUE}
+mod_logit_Pen_Aleatorio <- glmer(
+  pobreza ~ Expenditure  + (1 + Expenditure| Stratum),
+  data = encuesta, weights  =  wk2, 
+  binomial(link = "logit"))
+
+sjstats::icc(mod_logit_Pen_Aleatorio)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r}
+coef(mod_logit_Pen_Aleatorio)$Stratum %>% slice(1:10L)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+\footnotesize
+```{r,plot_mod_Pen_Aleatorio02, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred <- mutate(dat_pred,
+       Proba = predict(mod_logit_Pen_Aleatorio, 
+                       newdata = dat_pred , type = "response"))
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio02, echo=FALSE, eval=TRUE}
+```
+
+## Predicción del modelo 
+
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Pen_Aleatorio,
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum, 
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Estimación de la propoción total con $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+tab_pred %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+$$
+logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\beta_{2j}Zona_{ij} +\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \gamma_{02}\mu_{j}  + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{1j}
+$$
+$$
+\beta_{2j} = \gamma_{20}+\gamma_{21}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{2j}
+$$
+
+donde $\mu_{j}$ es el gasto medio en el estrato $j$.
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r, mod_Int_y_pen_Aleatorio002, echo=TRUE,eval=TRUE}
+mod_logit_Pen_Aleatorio2 <- glmer(
+  pobreza ~ 1 + Expenditure + Zone + mu +
+    (1 + Expenditure + Zone + mu | Stratum ),
+    data = encuesta, weights  =  wk2, 
+  binomial(link = "logit"))
+sjstats::icc(mod_logit_Pen_Aleatorio2)
+```
+
+## Gráfica del modelo obtenido
+\scriptsize
+```{r,plot_mod_Pen_Aleatorio002, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum, Zone, mu) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred$Proba = predict(mod_logit_Pen_Aleatorio2, 
+                       newdata = dat_pred , type = "response")
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +facet_grid(.~Zone)+
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio002, echo=FALSE, eval=TRUE}
+```
+
+## Predicción del modelo 
+
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Pen_Aleatorio2, 
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum,
+           Zone = encuesta$Zone,
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:6L) 
+```
+
+## Estimación de la propoción total con $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+tab_pred %>% group_by(Zone) %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+

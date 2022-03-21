@@ -1,0 +1,49 @@
+---
+title: "Imputacion"
+author: "Stalyn Guerrero"
+date: "21/3/2022"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Crear valores perdidos ingresos y desocupación (desocupado o ocupado)
+
+Pipt estrato valores perdidos a los ingresos más altos. 
+
+Realizar parte practica
+## Tabla resumen 12.1
+Tablas de resumen antes y despues de imputar. 
+Incluir algunos métodos imputación (no multiple).
+- na.omit 
+- Cold-deck 
+- hot-deck
+- imputación por media
+- imputación por media condicional
+- Imputación por regresión 
+- Vecino más cercano. 
+- Vecino más cercano con regresión. 
+   paso 1 regresión 
+   paso 2 predicción 
+   paso 3 comparar las predicciones de perdidos y no perdidos
+   paso 4 el valor imputado será el valor más próximo a mi valor perdido (términos de predicción)
+   *NOTA* Se toma es el valor observado. 
+   
+## Imputación multiple
+Incluir el gráfico 12.5
+
+¿qué es un valor plausible? 
+
+Realizar la estimación para ingresos y desocupados. 
+
+## Mostrar las imputaciones en la base 10 valores plausibles  
+
+## incluir sección 12.4.4.1 
+Incluir las ecuación 12.1 y 12.2 
+NOTA Hacer el paso a paso 
+## incluir sección box 12.2
+
+## Imputación fraccional. 
+
