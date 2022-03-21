@@ -575,7 +575,7 @@ ggplot(data = encuesta_plot,
 Sea la variable $y_{ij} = 1$ si el individuo $i$ en el estrato $j$ esta por enciam de la linea de pobreza y $y_{ij} = 0$  en caso contrario, la variable $y_{ij}$ se puede modelar mediante el modelo
 logístico: 
 $$
-Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac{\exp\left(\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}\right)}{1-\exp\left(\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}\right)}
+Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac{1}{1+\exp\left(\boldsymbol{-\beta}_{j}\boldsymbol{x}_{ij}\right)}
 $$ 
 ó
 
@@ -584,14 +584,104 @@ $$
 $$
 donde $\pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)$.
 
+## Ejemplos de modelo logit 
+```{r, plot_logit_mult0, echo=TRUE, eval=FALSE}
+encuesta_plot <- encuesta %>%
+  dplyr::select(Stratum,Expenditure) %>% unique() %>%
+  group_by(Stratum)  %>% 
+  summarise(sd = sd(Expenditure)) %>% 
+  arrange(desc(sd)) %>% dplyr::select(-sd) %>% 
+  slice(1:20L) %>%
+  inner_join(encuesta) %>%  
+  dplyr::select(Poverty, Expenditure, Stratum, 
+         Sex, Region, Zone) 
+encuesta_plot %>% slice(1:15L)
+```
 
-Un modelo básico es: 
+## Ejemplos de modelo logit 
+```{r, plot_logit_mult0, echo=FALSE, eval=TRUE}
+```
 
-$y_{ij}=\beta_{0j}+\epsilon_{ij}$
+
+## Ejemplos de modelo logit 
+```{r, modl_logit1, echo=TRUE,eval=FALSE}
+encuesta <- encuesta %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+encuesta_plot %<>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+
+ggplot(data = encuesta, 
+       aes(y = pobreza, x = Expenditure)) + 
+  geom_point() + 
+  geom_smooth(
+    formula = y~x, method = "glm",
+    se=FALSE, 
+    method.args = list(family=binomial(link = "logit"))) +
+  theme_bw()
+```
+
+## Ejemplos de modelo logit 
+```{r, modl_logit1, echo=FALSE,eval=TRUE}
+```
+
+## Ejemplos de modelo logit 
+```{r, echo=TRUE,eval=TRUE}
+auxLogit <- function(x,b0,b1){
+  1/(1+exp(-(b0+b1*x)))
+}
+B0 = coef(glm(pobreza~1,data = encuesta_plot,
+     family=binomial(link = "logit")))
+
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(B1 = coef(glm(pobreza ~  -1 + Expenditure,
+              family=binomial(link = "logit")))) %>% 
+mutate(B0 = B0)) %>% slice(1:6L)
+```
+
+## Ejemplos de modelo logit 
+```{r,modl_logit2, echo=TRUE,eval=FALSE}
+# Creando las variables respuesta 
+pred_logit <- coef_Mod %>%  
+  mutate(Expenditure = list(seq(0,2000, length =100))) %>% 
+    tidyr::unnest_legacy()
+pred_logit %<>% mutate(Prob = auxLogit(Expenditure,B0,B1)) 
+  
+ggplot(data = pred_logit, 
+       aes(y = Prob, x = Expenditure, colour = Stratum)) + 
+  geom_line() +
+   theme_bw() +
+  theme(legend.position = "none")
+```
+
+## Ejemplos de modelo logit 
+```{r, modl_logit2, echo=FALSE,eval=TRUE}
+```
+
+## Ejemplos de modelo logit 
+```{r, modl_logit3, echo=TRUE,eval=FALSE}
+ggplot(data = encuesta_plot, 
+       aes(y = pobreza, x = Expenditure, colour = Stratum)) + 
+  geom_point() + 
+  geom_smooth(
+    formula = y~x, method = "glm",
+    se=FALSE, 
+    method.args = list(family=binomial(link = "logit")))+
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+## Ejemplos de modelo logit 
+```{r, modl_logit3, echo=FALSE,eval=TRUE}
+```
+
+
+## Un modelo básico es: 
+
+$logit( \pi_{ij})=\beta_{0j}+\epsilon_{ij}$
 
 $\beta_{0j}=\gamma_{00}+\tau_{0j}$
 
-  - $y_{ij}=$  Los ingresos de la persona $i$ en el estrato $j$. 
+  - $\pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)$. 
   - $\beta_{0j}=$ El intercepto en el estrato $j$.
   - $\epsilon_{ij}$ El residual de la persona $i$ en el estrato $j$.
   - $\gamma_{00}=$  El intercepto en general.
@@ -606,9 +696,6 @@ La correlación intra clásica  esta dada por: $$\rho=\frac{\sigma_{\tau}^{2}}{\
 
 ```{r, mod_null2, echo=TRUE,eval=FALSE}
 library(lme4) 
-encuesta <- encuesta %>% mutate(
-  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
-
 mod_logist_null  <- glmer( pobreza  ~ ( 1  |  Stratum ),
                    data  =  encuesta, 
              weights  =  wk2,
@@ -640,7 +727,7 @@ sjstats::icc(mod_logist_null)
   slice(1:6L) # Son las pendientes aleatorias
 ```
 
-## Estimación de la propoción total con $y$ y $\hat{y}$
+## Estimación de la propoción para $y$ y $\hat{y}$
 
 ```{r, echo=TRUE}
 weighted.mean(encuesta$pobreza, encuesta$wk2)
@@ -711,7 +798,7 @@ ggplot(data = dat_pred,
   slice(1:6L) # Son las pendientes aleatorias
 ```
 
-## Estimación de la propoción total con $y$ y $\hat{y}$
+## Estimación de la propoción para $y$ y $\hat{y}$
 
 ```{r, echo=TRUE}
 tab_pred %>% 
@@ -786,10 +873,10 @@ ggplot(data = dat_pred,
            pobreza = encuesta$pobreza, 
            Stratum = encuesta$Stratum, 
            wk2 = encuesta$wk2)) %>% distinct() %>% 
-  slice(1:6L) # Son las pendientes aleatorias
+  slice(1:6L) 
 ```
 
-## Estimación de la propoción total con $y$ y $\hat{y}$
+## Estimación de la propoción para $y$ y $\hat{y}$
 
 ```{r, echo=TRUE}
 tab_pred %>% 
@@ -867,7 +954,7 @@ ggplot(data = dat_pred,
   slice(1:6L) 
 ```
 
-## Estimación de la propoción total con $y$ y $\hat{y}$
+## Estimación de la propoción para $y$ y $\hat{y}$
 
 ```{r, echo=TRUE}
 tab_pred %>% group_by(Zone) %>% 

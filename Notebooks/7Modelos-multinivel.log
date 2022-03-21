@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  21 MAR 2022 10:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  21 MAR 2022 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1245,22 +1245,24 @@ Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Al
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
 
-(./7Modelos-multinivel.vrb
-Overfull \hbox (83.62401pt too wide) in paragraph at lines 26--26
-[]\T1/lmtt/m/n/10.95 ## Generalized linear mixed model fit by maximum likelihood (Laplace[] 
+(./7Modelos-multinivel.vrb) [55
+
+]
+<7Modelos-multinivel_files/figure-beamer/modl_logit1-1.pdf, id=455, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/modl_logit1-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/modl_logit1-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/modl_logit1-1.pdf  used on input line 1178.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[56
+
+ <./7Modelos-multinivel_files/figure-beamer/modl_logit1-1.pdf>]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb)
+Overfull \vbox (15.16309pt too high) detected at line 1210
  []
 
-) [55
-
-]
-\openout4 = `7Modelos-multinivel.vrb'.
-
-(./7Modelos-multinivel.vrb) [56
-
-]
-\openout4 = `7Modelos-multinivel.vrb'.
-
-(./7Modelos-multinivel.vrb) [57
+[57
 
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
@@ -1268,42 +1270,44 @@ Overfull \hbox (83.62401pt too wide) in paragraph at lines 26--26
 (./7Modelos-multinivel.vrb) [58
 
 ]
-\openout4 = `7Modelos-multinivel.vrb'.
+<7Modelos-multinivel_files/figure-beamer/modl_logit2-1.pdf, id=479, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/modl_logit2-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/modl_logit2-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/modl_logit2-1.pdf  used on input line 1234.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[59
 
-(./7Modelos-multinivel.vrb) [59
-
-]
+ <./7Modelos-multinivel_files/figure-beamer/modl_logit2-1.pdf>]
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [60
 
 ]
-<7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf, id=484, 722.7pt x 505.89pt>
-File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf Graphic file (type pdf)
-<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf>
-Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf  used on input line 1319.
+<7Modelos-multinivel_files/figure-beamer/modl_logit3-1.pdf, id=497, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/modl_logit3-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/modl_logit3-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/modl_logit3-1.pdf  used on input line 1256.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [61
 
- <./7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf>]
-\openout4 = `7Modelos-multinivel.vrb'.
-
-(./7Modelos-multinivel.vrb) [62
+ <./7Modelos-multinivel_files/figure-beamer/modl_logit3-1.pdf>] [62
 
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [63
 
-]
-\openout4 = `7Modelos-multinivel.vrb'.
-
-(./7Modelos-multinivel.vrb) [64
+] [64
 
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
 
-(./7Modelos-multinivel.vrb) [65
+(./7Modelos-multinivel.vrb
+Overfull \hbox (83.62401pt too wide) in paragraph at lines 26--26
+[]\T1/lmtt/m/n/10.95 ## Generalized linear mixed model fit by maximum likelihood (Laplace[] 
+ []
+
+) [65
 
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
@@ -1311,14 +1315,11 @@ Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Al
 (./7Modelos-multinivel.vrb) [66
 
 ]
-<7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf, id=527, 722.7pt x 505.89pt>
-File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf Graphic file (type pdf)
-<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf>
-Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf  used on input line 1463.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[67
+\openout4 = `7Modelos-multinivel.vrb'.
 
- <./7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf>]
+(./7Modelos-multinivel.vrb) [67
+
+]
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [68
@@ -1328,27 +1329,30 @@ Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Al
 
 (./7Modelos-multinivel.vrb) [69
 
-] [70
-
 ]
 \openout4 = `7Modelos-multinivel.vrb'.
 
-(./7Modelos-multinivel.vrb) [71
+(./7Modelos-multinivel.vrb) [70
 
 ]
+<7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf, id=567, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf  used on input line 1502.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[71
+
+ <./7Modelos-multinivel_files/figure-beamer/plot_mod_Int_Aleatorio02-1.pdf>]
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [72
 
 ]
-<7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf, id=571, 722.7pt x 505.89pt>
-File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf Graphic file (type pdf)
-<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf>
-Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf  used on input line 1584.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[73
+\openout4 = `7Modelos-multinivel.vrb'.
 
- <./7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf>]
+(./7Modelos-multinivel.vrb) [73
+
+]
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [74
@@ -1357,6 +1361,59 @@ Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Al
 \openout4 = `7Modelos-multinivel.vrb'.
 
 (./7Modelos-multinivel.vrb) [75
+
+]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [76
+
+]
+<7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf, id=610, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf  used on input line 1646.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[77
+
+ <./7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio02-1.pdf>]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [78
+
+]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [79
+
+] [80
+
+]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [81
+
+]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [82
+
+]
+<7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf, id=653, 722.7pt x 505.89pt>
+File: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf Graphic file (type pdf)
+<use 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf>
+Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf  used on input line 1767.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[83
+
+ <./7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Aleatorio002-1.pdf>]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [84
+
+]
+\openout4 = `7Modelos-multinivel.vrb'.
+
+(./7Modelos-multinivel.vrb) [85
 
 ]
 \tf@nav=\write6
@@ -1370,18 +1427,18 @@ Package pdftex.def Info: 7Modelos-multinivel_files/figure-beamer/plot_mod_Pen_Al
 
 (./7Modelos-multinivel.aux) ) 
 Here is how much of TeX's memory you used:
- 26608 strings out of 480216
- 522391 string characters out of 5893255
- 781169 words of memory out of 5000000
- 43535 multiletter control sequences out of 15000+600000
+ 26691 strings out of 480216
+ 524545 string characters out of 5893255
+ 783315 words of memory out of 5000000
+ 43575 multiletter control sequences out of 15000+600000
  587949 words of font info for 185 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,11n,104p,1016b,489s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on 7Modelos-multinivel.pdf (75 pages, 1152035 bytes).
+{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on 7Modelos-multinivel.pdf (85 pages, 1242002 bytes).
 PDF statistics:
- 744 PDF objects out of 1000 (max. 8388607)
- 582 compressed objects within 6 object streams
- 225 named destinations out of 1000 (max. 500000)
- 71798 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 841 PDF objects out of 1000 (max. 8388607)
+ 658 compressed objects within 7 object streams
+ 255 named destinations out of 1000 (max. 500000)
+ 71813 words of extra memory for PDF output out of 74296 (max. 10000000)
 

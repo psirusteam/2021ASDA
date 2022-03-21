@@ -6,8 +6,24 @@ output: beamer_presentation
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(ggplot2)
+#rm(list = ls())
 ```
+
+
 
 ## Crear valores perdidos ingresos y desocupación (desocupado o ocupado)
 
