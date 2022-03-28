@@ -353,7 +353,7 @@ plot9_Ponde | plot10_Ponde
 ```
 
 ## Boxplot 
-
+\scriptsize
 ```{r, echo = TRUE, eval = TRUE}
 colorZona <- c(Urban = "#48C9B0", Rural = "#117864")
 plot9_Ponde + scale_fill_manual(values = colorZona)|
@@ -385,7 +385,7 @@ plot11_Ponde | plot12_Ponde
 ```
 
 ## Boxplot 
-
+\scriptsize
 ```{r, hist9a, echo = TRUE, eval = TRUE}
 colorSex <-  c(Male = "#5DADE2", Female = "#2874A6")
 plot11_Ponde + scale_fill_manual(values = colorSex)|
@@ -423,7 +423,7 @@ plot13_Ponde | plot14_Ponde
 ```
 
 ## Boxplot 
-\scriptsize
+\tiny
 ```{r, echo = TRUE, eval = TRUE}
 colorRegion <-  c(Norte = "#D6EAF8", Sur = "#85C1E9", 
 Centro = "#3498DB", Occidente = "#2E86C1", Oriente = "#21618C")
@@ -435,41 +435,52 @@ plot14_Ponde + scale_fill_manual(values = colorRegion)
 
 ## Boxplot 
 
-```{r, hist11, echo = TRUE, eval = FALSE}
+```{r, hist11, echo = TRUE, eval = TRUE}
 plot15_Ponde <-
   ggplot(encuesta,
          aes(x = Income, y = Zone, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
-  ggtitle("Ponderado") + scale_fill_manual(values = colorSex) +
+  ggtitle("Ponderado") +
+  scale_fill_manual(values = colorSex) +
   coord_flip()
+```
+
+## Boxplot 
+```{r, hist11a, echo = TRUE, eval = FALSE}
 plot16_Ponde <-
   ggplot(encuesta,
-         aes(x = Expenditure, y = Zone, weight = wk)) +
+   aes(x = Expenditure, y = Zone, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
-  ggtitle("Ponderado") + scale_fill_manual(values = colorSex) +
+  ggtitle("Ponderado") + 
+  scale_fill_manual(values = colorSex) +
   coord_flip()
 plot15_Ponde/plot16_Ponde
 ```
 
 ## Boxplot 
 
-```{r, hist11, echo = FALSE, eval = TRUE}
+```{r, hist11a, echo = FALSE, eval = TRUE}
 ```
 
 
 ## Boxplot 
 
-```{r, hist12, echo = TRUE, eval = FALSE}
+```{r, hist12, echo = TRUE, eval = TRUE}
 plot17_Ponde <-
   ggplot(encuesta,
-         aes(x = Income, y = Region, weight = wk)) +
+    aes(x = Income, y = Region, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
   ggtitle("Ponderado") +
   scale_fill_manual(values = colorSex) +
   coord_flip()
+```
+
+## Boxplot 
+```{r, hist12a, echo = TRUE, eval = FALSE}
 plot18_Ponde <-
   ggplot(encuesta,
-         aes(x = Expenditure, y = Region, weight = wk)) +
+   aes(x = Expenditure, 
+       y = Region, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
   ggtitle("Ponderado") +
   scale_fill_manual(values = colorSex) +
@@ -480,7 +491,7 @@ plot17_Ponde/plot18_Ponde
 
 ## Boxplot 
 
-```{r, hist12, echo = FALSE, eval = TRUE}
+```{r, hist12a, echo = FALSE, eval = TRUE}
 ```
 
 
@@ -489,7 +500,9 @@ plot17_Ponde/plot18_Ponde
 ```{r, hist13, echo = TRUE, eval = FALSE}
 plot19_Ponde <-
   ggplot(encuesta,
-         aes(y = Income, x = Expenditure, weight = wk)) +
+         aes(y = Income, 
+             x = Expenditure,
+             weight = wk)) +
   geom_point() + theme_cepal()
 plot19_Ponde
 ```
@@ -505,7 +518,8 @@ plot19_Ponde
 plot20_Ponde <-
   ggplot(encuesta,
          aes(y = Income, x = Expenditure)) +
-  geom_point(aes(size = wk), alpha = 0.3) + theme_cepal()
+  geom_point(aes(size = wk), alpha = 0.3) +
+  theme_cepal()
 plot20_Ponde
 ```
 
@@ -520,7 +534,8 @@ plot20_Ponde
 plot21_Ponde <-
   ggplot(encuesta,
          aes(y = Income, x = Expenditure)) +
-  geom_point(aes(col = wk), alpha = 0.3) + theme_cepal()
+  geom_point(aes(col = wk), alpha = 0.3) +
+  theme_cepal()
 plot21_Ponde
 ```
 
@@ -534,8 +549,11 @@ plot21_Ponde
 ```{r, hist16, echo = TRUE, eval = FALSE}
 plot22_Ponde <-
   ggplot(encuesta,
-         aes(y = Income, x = Expenditure, shape = Zone)) +
-  geom_point(aes(size = wk, color = Zone), alpha = 0.3) +
+         aes(y = Income, 
+             x = Expenditure,
+             shape = Zone)) +
+  geom_point(aes(size = wk, 
+                 color = Zone), alpha = 0.3) +
   labs(size = "Peso") +
   scale_color_manual(values = colorZona) +
   theme_cepal() 
@@ -552,8 +570,12 @@ plot22_Ponde
 ```{r, hist17, echo = TRUE, eval = FALSE}
 plot23_Ponde <-
   ggplot(encuesta,
-         aes(y = Income, x = Expenditure, shape = Sex)) +
-  geom_point(aes(size = wk, color = Sex), alpha = 0.3) +
+         aes(y = Income,
+             x = Expenditure,
+             shape = Sex)) +
+  geom_point(aes(size = wk,
+                 color = Sex),
+             alpha = 0.3) +
   labs(size = "Peso") +
   scale_color_manual(values = colorSex) +
   theme_cepal()
@@ -570,8 +592,12 @@ plot23_Ponde
 ```{r, hist18, echo = TRUE, eval = FALSE}
 plot24_Ponde <-
   ggplot(encuesta,
-         aes(y = Income, x = Expenditure, shape = Region)) +
-  geom_point(aes(size = wk, color = Region), alpha = 0.3) +
+         aes(y = Income,
+             x = Expenditure,
+             shape = Region)) +
+  geom_point(aes(size = wk,
+                 color = Region),
+             alpha = 0.3) +
   labs(size = "Peso") +
   scale_color_manual(values = colorRegion) +
   theme_cepal()
@@ -586,18 +612,20 @@ plot24_Ponde
 # Diagrama de barras para variables categoricas  
 
 ## Diagrama de barras
-```{r, hist19, echo = TRUE, eval = FALSE}
+```{r, hist19, echo = TRUE, eval = TRUE}
 tamano_zona <- diseno %>% group_by(Zone) %>% 
    summarise(
     Nd = survey_total(vartype = c("se","ci")))
+```
+
+## Diagrama de barras
+```{r, hist19a, echo = TRUE, eval = FALSE}
 plot25_Ponde <- ggplot(data = tamano_zona,
-       aes(
-         x = Zone,
+       aes(x = Zone,
          y = Nd,
          ymax = Nd_upp,
          ymin = Nd_low,
-         fill = Zone
-       )) +
+         fill = Zone )) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(position = position_dodge(width = 0.9),
                 width = 0.3) + theme_bw()
@@ -605,17 +633,20 @@ plot25_Ponde
 ```
 
 ## Diagrama de barras
-```{r, hist19, echo = FALSE, eval = TRUE}
+```{r, hist19a, echo = FALSE, eval = TRUE}
 ```
 
 ## Diagrama de barras
-```{r, hist20, echo = TRUE, eval = FALSE}
+```{r, hist20, echo = TRUE, eval = TRUE}
 tamano_pobreza <- diseno %>% group_by(Poverty) %>% 
    summarise(
        Nd = survey_total(vartype = c("se","ci")))
+```
+
+## Diagrama de barras
+```{r, hist20a, echo = TRUE, eval = FALSE}
 plot26_Ponde <- ggplot(data = tamano_pobreza,
-       aes(
-         x = Poverty,
+       aes( x = Poverty,
          y = Nd,
          ymax = Nd_upp,
          ymin = Nd_low,
@@ -628,25 +659,28 @@ plot26_Ponde
 ```
 
 ## Diagrama de barras
-```{r, hist20, echo = FALSE, eval = TRUE}
+```{r, hist20a, echo = FALSE, eval = TRUE}
 ```
 
 ## Diagrama de barras
-```{r, hist21, echo = TRUE, eval = FALSE}
+```{r, hist21, echo = TRUE, eval = TRUE}
 tamano_ocupacion_pobreza <- diseno %>% 
    group_by(desempleo, Poverty) %>% 
    summarise(
        Nd = survey_total(vartype = c("se","ci")), 
        .fill = "Total") %>% 
    data.frame()
-plot27_Ponde <- ggplot(data = tamano_ocupacion_pobreza,
-       aes(
-         x = Poverty,
+```
+
+## Diagrama de barras
+```{r, hist21a, echo = TRUE, eval = FALSE}
+plot27_Ponde <- 
+  ggplot(data = tamano_ocupacion_pobreza,
+       aes(x = Poverty,
          y = Nd,
          ymax = Nd_upp,
          ymin = Nd_low,
-         fill = as.factor(desempleo)
-       )) +
+         fill = as.factor(desempleo)  )) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(position = position_dodge(width = 0.9),
                 width = 0.3) + theme_bw()
@@ -655,18 +689,24 @@ plot27_Ponde
 
 ## Diagrama de barras
 
-```{r, hist21, echo = FALSE, eval = TRUE}
+```{r, hist21a, echo = FALSE, eval = TRUE}
 ```
 
 
 ## Diagrama de barras
-```{r, hist22, echo = TRUE, eval = FALSE}
+```{r, hist22, echo = TRUE, eval = TRUE}
 prop_ZonaH_Pobreza <- sub_Hombre %>%
    group_by(Zone, Poverty) %>% 
    summarise(
-     prop = survey_prop(vartype = c("se","ci")))%>%
+     prop = survey_prop(
+       vartype = c("se","ci"))) %>%
    data.frame()
-plot28_Ponde <- ggplot(data = prop_ZonaH_Pobreza,
+```
+
+## Diagrama de barras
+```{r, hist22a, echo = TRUE, eval = FALSE}
+plot28_Ponde <- ggplot(
+  data = prop_ZonaH_Pobreza,
        aes(x = Poverty, y = prop,
          ymax = prop_upp, ymin = prop_low,
          fill = Zone
@@ -680,17 +720,21 @@ plot28_Ponde
 
 ## Diagrama de barras
 
-```{r, hist22, echo = FALSE, eval = TRUE}
+```{r, hist22a, echo = FALSE, eval = TRUE}
 ```
 
 
 ## Diagrama de barras
-```{r, hist23, echo = TRUE, eval = FALSE}
+```{r, hist23, echo = TRUE, eval = TRUE}
 prop_RegionH_Pobreza <- sub_Hombre %>%
    group_by(Region, pobreza) %>% 
    summarise(
      prop = survey_prop(vartype = c("se","ci")))%>%
    data.frame()
+```
+
+## Diagrama de barras
+```{r, hist23a, echo = TRUE, eval = FALSE}
 plot29_Ponde <- ggplot(data = prop_RegionH_Pobreza,
        aes(x = Region, y = prop,
          ymax = prop_upp, ymin = prop_low,
@@ -705,7 +749,7 @@ plot29_Ponde
 
 ## Diagrama de barras
 
-```{r, hist23, echo = FALSE, eval = TRUE}
+```{r, hist23a, echo = FALSE, eval = TRUE}
 ```
 
 # Creando mapas 
@@ -715,7 +759,8 @@ plot29_Ponde
 ```{r, hist24, echo = TRUE, eval = FALSE}
 library(sf)
 library(tmap)
-shapeBigCity <- read_sf( "../Data/shapeBigCity/BigCity.shp")
+shapeBigCity <- read_sf(
+  "../Data/shapeBigCity/BigCity.shp")
 tm_shape(shapeBigCity) + 
 tm_polygons(col = "Region")
 ```
@@ -771,7 +816,8 @@ shape_temp + tm_polygons(
 ## mapas con tmap.
 
 ```{r, hist27, echo = TRUE, eval = FALSE}
-prom_region_Sex <- diseno %>% group_by(Region, Zone , Sex, pobreza) %>% 
+prom_region_Sex <- diseno %>%
+  group_by(Region, Zone , Sex, pobreza) %>% 
   summarise(prop = survey_mean(vartype = "cv")) %>% 
   filter(pobreza == 1, Zone == "Rural", Sex == "Female")
 
@@ -813,45 +859,6 @@ shape_temp + tm_polygons(
 ```{r, hist28, echo = FALSE, eval = TRUE}
 ```
 
-
-## mapas con sf
-
-```{r,  echo = TRUE, eval = TRUE}
-pattern <- function(x, pattern) {
-  ex = list(
-    horizontal = c(1, 2),
-    vertical = c(1, 4),
-    left2right = c(2, 4),
-    right2left = c(1, 3)
-  )
-  fillgrid = st_make_grid(x)
-  endsf = lapply(1:length(fillgrid), function(j)
-    sf::st_linestring(sf::st_coordinates(fillgrid[j])[ex[[pattern]], 1:2]))
-  endsf = sf::st_sfc(endsf, crs = sf::st_crs(x))
-  endsf = sf::st_intersection(endsf, x)
-  endsf = endsf[sf::st_geometry_type(endsf)
-                %in% c("LINESTRING", "MULTILINESTRING")]
-  endsf = sf::st_line_merge(sf::st_union(endsf))
-  return(endsf)
-}
-```
-
-## mapas con sf
-```{r,hist29, echo = TRUE, eval = FALSE}
-temp_shape <- shapeBigCity %>%
-   left_join(
-     prom_region_Sex ,  by = "Region")
-
-serbgrid = pattern(x = temp_shape[temp_shape$prop_cv>0.2,],pattern =  "vertical")
-
-par(mar = c(0, 0, 0, 0))
-plot(st_geometry(temp_shape), border = 'red', 
-                 axes = FALSE)
-plot(serbgrid, add = T)
-
-```
-
-
 ## mapas con ggplot
 
 ```{r,hist30, echo = TRUE, eval = TRUE}
@@ -871,7 +878,7 @@ map.RM <- ggplot() +
 ```
 
 ## mapas con ggplot
-
+\scriptsize
 ```{r,hist31, echo = TRUE, eval = FALSE}
 # Crear la leyenda para el mapa
 legend1 <- bi_legend(pal = "GrPink",  dim = k, 

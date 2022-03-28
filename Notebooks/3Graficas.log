@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  28 MAR 2022 07:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  28 MAR 2022 16:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1024,10 +1024,10 @@ Package pdftex.def Info: 3Graficas_files/figure-beamer/hist8-1.pdf  used on inpu
 <3Graficas_files/figure-beamer/unnamed-chunk-8-1.pdf, id=329, 722.7pt x 505.89pt>
 File: 3Graficas_files/figure-beamer/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use 3Graficas_files/figure-beamer/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/unnamed-chunk-8-1.pdf  used on input line 11.
+Package pdftex.def Info: 3Graficas_files/figure-beamer/unnamed-chunk-8-1.pdf  used on input line 13.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 )
-Overfull \vbox (20.66905pt too high) detected at line 586
+Overfull \vbox (5.58698pt too high) detected at line 588
  []
 
 [38
@@ -1038,10 +1038,10 @@ Overfull \vbox (20.66905pt too high) detected at line 586
 (./3Graficas.vrb) [39
 
 ]
-<3Graficas_files/figure-beamer/hist9-1.pdf, id=347, 722.7pt x 505.89pt>
+<3Graficas_files/figure-beamer/hist9-1.pdf, id=348, 722.7pt x 505.89pt>
 File: 3Graficas_files/figure-beamer/hist9-1.pdf Graphic file (type pdf)
 <use 3Graficas_files/figure-beamer/hist9-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9-1.pdf  used on input line 612.
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9-1.pdf  used on input line 614.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [40
 
@@ -1049,13 +1049,13 @@ Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9-1.pdf  used on inpu
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb
-<3Graficas_files/figure-beamer/hist9a-1.pdf, id=359, 722.7pt x 505.89pt>
+<3Graficas_files/figure-beamer/hist9a-1.pdf, id=360, 722.7pt x 505.89pt>
 File: 3Graficas_files/figure-beamer/hist9a-1.pdf Graphic file (type pdf)
 <use 3Graficas_files/figure-beamer/hist9a-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9a-1.pdf  used on input line 11.
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9a-1.pdf  used on input line 13.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 )
-Overfull \vbox (20.66905pt too high) detected at line 625
+Overfull \vbox (5.58698pt too high) detected at line 629
  []
 
 [41
@@ -1069,7 +1069,7 @@ File: 3Graficas_files/figure-beamer/hist9a-1.pdf Graphic file (type pdf)
 Package pdftex.def Info: 3Graficas_files/figure-beamer/hist9a-1.pdf  used on input line 11.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 )
-Overfull \vbox (20.66905pt too high) detected at line 638
+Overfull \vbox (20.66905pt too high) detected at line 642
  []
 
 [42
@@ -1080,10 +1080,10 @@ Overfull \vbox (20.66905pt too high) detected at line 638
 (./3Graficas.vrb) [43
 
 ]
-<3Graficas_files/figure-beamer/hist10-1.pdf, id=384, 722.7pt x 505.89pt>
+<3Graficas_files/figure-beamer/hist10-1.pdf, id=385, 722.7pt x 505.89pt>
 File: 3Graficas_files/figure-beamer/hist10-1.pdf Graphic file (type pdf)
 <use 3Graficas_files/figure-beamer/hist10-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist10-1.pdf  used on input line 664.
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist10-1.pdf  used on input line 668.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [44
 
@@ -1091,13 +1091,13 @@ Package pdftex.def Info: 3Graficas_files/figure-beamer/hist10-1.pdf  used on inp
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb
-<3Graficas_files/figure-beamer/unnamed-chunk-9-1.pdf, id=396, 722.7pt x 505.89pt>
+<3Graficas_files/figure-beamer/unnamed-chunk-9-1.pdf, id=397, 722.7pt x 505.89pt>
 File: 3Graficas_files/figure-beamer/unnamed-chunk-9-1.pdf Graphic file (type pdf)
 <use 3Graficas_files/figure-beamer/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: 3Graficas_files/figure-beamer/unnamed-chunk-9-1.pdf  used on input line 14.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 )
-Overfull \vbox (15.08698pt too high) detected at line 680
+Overfull \vbox (3.27309pt too high) detected at line 684
  []
 
 [45
@@ -1108,249 +1108,235 @@ Overfull \vbox (15.08698pt too high) detected at line 680
 (./3Graficas.vrb) [46
 
 ]
-<3Graficas_files/figure-beamer/hist11-1.pdf, id=416, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist11-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist11-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist11-1.pdf  used on input line 706.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[47
-
- <./3Graficas_files/figure-beamer/hist11-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
-(./3Graficas.vrb) [48
+(./3Graficas.vrb) [47
 
 ]
-<3Graficas_files/figure-beamer/hist12-1.pdf, id=434, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist12-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist12-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist12-1.pdf  used on input line 735.
+<3Graficas_files/figure-beamer/hist11a-1.pdf, id=422, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist11a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist11a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist11a-1.pdf  used on input line 720.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[49
+[48
 
- <./3Graficas_files/figure-beamer/hist12-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist11a-1.pdf>]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [49
+
+]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [50
 
 ]
-<3Graficas_files/figure-beamer/hist13-1.pdf, id=453, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist13-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist13-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist13-1.pdf  used on input line 753.
+<3Graficas_files/figure-beamer/hist12a-1.pdf, id=447, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist12a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist12a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist12a-1.pdf  used on input line 758.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [51
 
- <./3Graficas_files/figure-beamer/hist13-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist12a-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [52
 
 ]
-<3Graficas_files/figure-beamer/hist14-1.pdf, id=471, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist14-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist14-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist14-1.pdf  used on input line 771.
+<3Graficas_files/figure-beamer/hist13-1.pdf, id=465, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist13-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist13-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist13-1.pdf  used on input line 778.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [53
 
- <./3Graficas_files/figure-beamer/hist14-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist13-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [54
 
 ]
-<3Graficas_files/figure-beamer/hist15-1.pdf, id=493, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist15-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist15-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist15-1.pdf  used on input line 789.
+<3Graficas_files/figure-beamer/hist14-1.pdf, id=483, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist14-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist14-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist14-1.pdf  used on input line 797.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [55
 
- <./3Graficas_files/figure-beamer/hist15-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist14-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [56
 
 ]
-<3Graficas_files/figure-beamer/hist16-1.pdf, id=517, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist16-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist16-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist16-1.pdf  used on input line 810.
+<3Graficas_files/figure-beamer/hist15-1.pdf, id=506, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist15-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist15-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist15-1.pdf  used on input line 816.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [57
 
- <./3Graficas_files/figure-beamer/hist16-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist15-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [58
 
 ]
-<3Graficas_files/figure-beamer/hist17-1.pdf, id=540, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist17-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist17-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist17-1.pdf  used on input line 831.
+<3Graficas_files/figure-beamer/hist16-1.pdf, id=529, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist16-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist16-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist16-1.pdf  used on input line 840.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [59
 
- <./3Graficas_files/figure-beamer/hist17-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist16-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [60
 
 ]
-<3Graficas_files/figure-beamer/hist18-1.pdf, id=562, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist18-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist18-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist18-1.pdf  used on input line 852.
+<3Graficas_files/figure-beamer/hist17-1.pdf, id=552, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist17-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist17-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist17-1.pdf  used on input line 865.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [61
 
- <./3Graficas_files/figure-beamer/hist18-1.pdf>] [62
-
-]
+ <./3Graficas_files/figure-beamer/hist17-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
-(./3Graficas.vrb) [63
+(./3Graficas.vrb) [62
 
 ]
-<3Graficas_files/figure-beamer/hist19-1.pdf, id=592, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist19-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist19-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist19-1.pdf  used on input line 884.
+<3Graficas_files/figure-beamer/hist18-1.pdf, id=575, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist18-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist18-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist18-1.pdf  used on input line 890.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[64
+[63
 
- <./3Graficas_files/figure-beamer/hist19-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist18-1.pdf>] [64
+
+]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [65
 
 ]
-<3Graficas_files/figure-beamer/hist20-1.pdf, id=610, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist20-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist20-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist20-1.pdf  used on input line 912.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[66
-
- <./3Graficas_files/figure-beamer/hist20-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
-(./3Graficas.vrb)
-Overfull \vbox (1.76454pt too high) detected at line 938
- []
-
-[67
+(./3Graficas.vrb) [66
 
 ]
-<3Graficas_files/figure-beamer/hist21-1.pdf, id=629, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist21-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist21-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist21-1.pdf  used on input line 943.
+<3Graficas_files/figure-beamer/hist19a-1.pdf, id=610, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist19a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist19a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist19a-1.pdf  used on input line 928.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[68
+[67
 
- <./3Graficas_files/figure-beamer/hist21-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist19a-1.pdf>]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [68
+
+]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [69
 
 ]
-<3Graficas_files/figure-beamer/hist22-1.pdf, id=647, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist22-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist22-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist22-1.pdf  used on input line 971.
+<3Graficas_files/figure-beamer/hist20a-1.pdf, id=635, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist20a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist20a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist20a-1.pdf  used on input line 963.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [70
 
- <./3Graficas_files/figure-beamer/hist22-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist20a-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [71
 
 ]
-<3Graficas_files/figure-beamer/hist23-1.pdf, id=666, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist23-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist23-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist23-1.pdf  used on input line 999.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[72
+\openout4 = `3Graficas.vrb'.
 
- <./3Graficas_files/figure-beamer/hist23-1.pdf>] [73
+(./3Graficas.vrb) [72
 
 ]
+<3Graficas_files/figure-beamer/hist21a-1.pdf, id=660, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist21a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist21a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist21a-1.pdf  used on input line 1001.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[73
+
+ <./3Graficas_files/figure-beamer/hist21a-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [74
 
 ]
-<3Graficas_files/figure-beamer/hist24-1.pdf, id=692, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist24-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist24-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist24-1.pdf  used on input line 1020.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[75
-
- <./3Graficas_files/figure-beamer/hist24-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
-(./3Graficas.vrb) [76
+(./3Graficas.vrb) [75
 
 ]
-<3Graficas_files/figure-beamer/hist25-1.pdf, id=710, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist25-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist25-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist25-1.pdf  used on input line 1046.
+<3Graficas_files/figure-beamer/hist22a-1.pdf, id=685, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist22a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist22a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist22a-1.pdf  used on input line 1039.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[77
+[76
 
- <./3Graficas_files/figure-beamer/hist25-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist22a-1.pdf>]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [77
+
+]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [78
 
 ]
-\openout4 = `3Graficas.vrb'.
+<3Graficas_files/figure-beamer/hist23a-1.pdf, id=709, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist23a-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist23a-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist23a-1.pdf  used on input line 1075.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[79
 
-(./3Graficas.vrb) [79
+ <./3Graficas_files/figure-beamer/hist23a-1.pdf>] [80
 
 ]
-<3Graficas_files/figure-beamer/hist27-1.pdf, id=735, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist27-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist27-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist27-1.pdf  used on input line 1095.
-(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
-[80
-
- <./3Graficas_files/figure-beamer/hist27-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [81
 
 ]
-<3Graficas_files/figure-beamer/hist28-1.pdf, id=753, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist28-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist28-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist28-1.pdf  used on input line 1114.
+<3Graficas_files/figure-beamer/hist24-1.pdf, id=735, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist24-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist24-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist24-1.pdf  used on input line 1097.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [82
 
- <./3Graficas_files/figure-beamer/hist28-1.pdf>]
+ <./3Graficas_files/figure-beamer/hist24-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [83
 
 ]
-\openout4 = `3Graficas.vrb'.
+<3Graficas_files/figure-beamer/hist25-1.pdf, id=753, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist25-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist25-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist25-1.pdf  used on input line 1123.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[84
 
-(./3Graficas.vrb
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 12.
-(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)) [84
-
-]
+ <./3Graficas_files/figure-beamer/hist25-1.pdf>]
 \openout4 = `3Graficas.vrb'.
 
 (./3Graficas.vrb) [85
@@ -1361,12 +1347,43 @@ File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 (./3Graficas.vrb) [86
 
 ]
-<3Graficas_files/figure-beamer/hist31-1.pdf, id=793, 722.7pt x 505.89pt>
-File: 3Graficas_files/figure-beamer/hist31-1.pdf Graphic file (type pdf)
-<use 3Graficas_files/figure-beamer/hist31-1.pdf>
-Package pdftex.def Info: 3Graficas_files/figure-beamer/hist31-1.pdf  used on input line 1203.
+<3Graficas_files/figure-beamer/hist27-1.pdf, id=778, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist27-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist27-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist27-1.pdf  used on input line 1173.
 (pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
 [87
+
+ <./3Graficas_files/figure-beamer/hist27-1.pdf>]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [88
+
+]
+<3Graficas_files/figure-beamer/hist28-1.pdf, id=797, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist28-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist28-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist28-1.pdf  used on input line 1192.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[89
+
+ <./3Graficas_files/figure-beamer/hist28-1.pdf>]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [90
+
+]
+\openout4 = `3Graficas.vrb'.
+
+(./3Graficas.vrb) [91
+
+]
+<3Graficas_files/figure-beamer/hist31-1.pdf, id=823, 722.7pt x 505.89pt>
+File: 3Graficas_files/figure-beamer/hist31-1.pdf Graphic file (type pdf)
+<use 3Graficas_files/figure-beamer/hist31-1.pdf>
+Package pdftex.def Info: 3Graficas_files/figure-beamer/hist31-1.pdf  used on input line 1240.
+(pdftex.def)             Requested size: 307.2923pt x 215.1046pt.
+[92
 
  <./3Graficas_files/figure-beamer/hist31-1.pdf>]
 \tf@nav=\write6
@@ -1380,18 +1397,18 @@ Package pdftex.def Info: 3Graficas_files/figure-beamer/hist31-1.pdf  used on inp
 
 (./3Graficas.aux) ) 
 Here is how much of TeX's memory you used:
- 24693 strings out of 480216
- 484161 string characters out of 5893255
- 747079 words of memory out of 5000000
- 41764 multiletter control sequences out of 15000+600000
- 486677 words of font info for 51 fonts, out of 8000000 for 9000
+ 24691 strings out of 480216
+ 483950 string characters out of 5893255
+ 746080 words of memory out of 5000000
+ 41741 multiletter control sequences out of 15000+600000
+ 486693 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,104p,1006b,438s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on 3Graficas.pdf (87 pages, 736756 bytes).
+ 99i,11n,104p,1006b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on 3Graficas.pdf (92 pages, 739222 bytes).
 PDF statistics:
- 912 PDF objects out of 1000 (max. 8388607)
- 727 compressed objects within 8 object streams
- 261 named destinations out of 1000 (max. 500000)
+ 941 PDF objects out of 1000 (max. 8388607)
+ 752 compressed objects within 8 object streams
+ 276 named destinations out of 1000 (max. 500000)
  10472 words of extra memory for PDF output out of 12000 (max. 10000000)
 

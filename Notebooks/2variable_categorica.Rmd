@@ -135,7 +135,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de hombres y mujeres en la zona urbana y rural
+## Propoción de hombres y mujeres en la zona urbana y rural
 
 ```{r}
 (prop_sexoU <- sub_Urbano %>% group_by(Sex) %>% 
@@ -144,7 +144,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
      prop = survey_prop(vartype = c("se","ci"))))
 ```
 
-## Poporsión de hombres y mujeres en la zona urbana y rural
+## Propoción de hombres y mujeres en la zona urbana y rural
 ```{r}
 (prop_sexoR <- sub_Rural %>% group_by(Sex) %>% 
    summarise(
@@ -153,7 +153,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de hombres en la zona urbana y rural
+## Propoción de hombres en la zona urbana y rural
 
 ```{r}
 (prop_ZonaH <- sub_Hombre %>% group_by(Zone) %>% 
@@ -162,7 +162,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de mujeres en la zona urbana y rural
+## Propoción de mujeres en la zona urbana y rural
 
 ```{r}
 (prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
@@ -171,7 +171,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de hombres en la zona urbana y rural
+## Propoción de hombres en la zona urbana y rural
 
 ```{r}
 (prop_ZonaH_Pobreza <- sub_Hombre %>%
@@ -182,7 +182,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de mujeres en la zona urbana y rural
+## Propoción de mujeres en la zona urbana y rural
 
 ```{r}
 (prop_ZonaM_Pobreza <- sub_Mujer %>% 
@@ -193,7 +193,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de hombres en la zona y empleado
+## Propoción de hombres en la zona y empleado
 
 ```{r}
 (prop_ZonaH_Ocupacion <- sub_Hombre %>%
@@ -204,7 +204,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ```
 
-## Poporsión de mujeres en la zona urbana y rural
+## Propoción de mujeres en la zona urbana y rural
 
 ```{r}
 (prop_ZonaM_Ocupacion <- sub_Mujer %>% 
