@@ -148,9 +148,12 @@ svyboxplot(
 
 ```{r, box2, eval = FALSE, echo=TRUE}
 library(ggplot2)
-ggplot(data = encuesta, 
-       aes(y = Income, x = Zone, weight = wk)) +
-  geom_boxplot() + ylim(c(0, 1000))
+ggplot(data = encuesta,
+       aes(y = Income, x = Zone,
+           weight = wk)) +
+  geom_boxplot() +
+  ylim(c(0, 1000)) +
+  theme_bw()
 
 ```
 
@@ -212,26 +215,37 @@ confint(svymean (~Expenditure, diseno, deff=T))
 
 ```{r}
 diseno %>% group_by(Sex) %>%
-  cascade(Media = survey_mean(Expenditure, level = 0.95,
-                         vartype =  c("se", "ci")), 
-          .fill = "El gasto medio"  ) %>% arrange(desc(Sex))
+  cascade(
+    Media = survey_mean(
+      Expenditure, level = 0.95,
+       vartype =  c("se", "ci")), 
+        .fill = "El gasto medio"  ) %>%
+  arrange(desc(Sex))
+```
+
+## Estimación de la media por sub-grupos
+```{r}
 diseno %>% group_by(Zone) %>%
-  cascade(Media = survey_mean(Expenditure, level = 0.95,
-                         vartype =  c("se", "ci")), 
-          .fill = "El gasto medio")%>% arrange(desc(Zone))
+  cascade(
+    Media = survey_mean(
+      Expenditure, level = 0.95,
+       vartype =  c("se", "ci")), 
+        .fill = "El gasto medio")%>%
+  arrange(desc(Zone))
 
 
 ```
 
 ## Estimación de medias por sub-grupos
-
+\scriptsize
 ```{r}
 diseno %>% group_by(Zone, Sex) %>%
-  cascade( 
-    Media = survey_mean(Expenditure, level = 0.95,
-                         vartype =  c("se", "ci")), 
-    .fill = "El gasto medio") %>%
-  arrange(desc(Zone), desc(Sex)) %>% 
+  cascade(
+    Media = survey_mean(
+      Expenditure, level = 0.95,
+       vartype =  c("se", "ci")),
+        .fill = "El gasto medio") %>%
+  arrange(desc(Zone), desc(Sex)) %>%
   data.frame()
 
 ```
@@ -411,7 +425,10 @@ library(convey)
 diseno_gini <- convey_prep(diseno)
 svygini( ~Income, design = diseno_gini) %>%
   data.frame()
+```
 
+## Estimación del índice de GINI
+```{r}
 svygini( ~Expenditure, design = diseno_gini) %>%
   data.frame()
 
@@ -454,7 +471,7 @@ svyttest(Income ~ Sex, diseno %>% filter(Age > 18))
                       vartype = c("se", "ci")))
 
 # Paso 1: diferencia de estimaciones (Norte - Sur) 
-527 - 627 
+461.9124 - 592.2575	 
 
 
 ```
@@ -463,7 +480,7 @@ svyttest(Income ~ Sex, diseno %>% filter(Age > 18))
 # Paso 2: error estándar de la diferencia
 vcov(prom_region)
 
-sqrt(1909 + 2856 - 2*0)
+sqrt(759.8 + 3755 - 2*0)
 
 ```
 
@@ -478,17 +495,17 @@ svycontrast(prom_region,
 
 
 ## Contrastes 
-
+\scriptsize
 ```{r}
 
 svycontrast(prom_region, list(
-              Norte_sur = c(1, 1, 0, 0, 0),
+           Norte_sur = c(1, 1, 0, 0, 0),
               centro = c(0, 0, 1, 0, 0),
-              Occidente_Oriente = c(0, 0, 0, 1, 1)
+   Occidente_Oriente = c(0, 0, 0, 1, 1)
             )) %>% data.frame()
 
-sqrt(1909 + 2856 - 2*0) ; sqrt(6867);
-sqrt(2817 + 1069 - 2*0)
+sqrt(759.8 + 3755 - 2*0) ; sqrt(2594);
+sqrt(2591 + 1022 - 2*0)
 
 ```
 
@@ -496,16 +513,18 @@ sqrt(2817 + 1069 - 2*0)
 ## Contrastes no independiente
 
 ```{r}
-(prom_sexo <- svyby(~Income, ~Sex, diseno,
-                   svymean, na.rm=T,covmat = TRUE,
-                   vartype = c("se", "ci")))
+(prom_sexo <-
+   svyby(~Income, ~Sex, diseno,
+         svymean, na.rm=T,covmat = TRUE,
+         vartype = c("se", "ci")))
 
 
 ```
 
 ## Contrastes no independiente
 ```{r}
-svycontrast(prom_sexo, list(diff_Sexo = c(1, -1))) %>% 
+svycontrast(prom_sexo, 
+            list(diff_Sexo = c(1, -1))) %>% 
   data.frame()
 ```
 
@@ -515,7 +534,7 @@ svycontrast(prom_sexo, list(diff_Sexo = c(1, -1))) %>%
 ```{r}
 vcov(prom_sexo)
 # Note que el error estandar  de la diferencia es igual a 
-sqrt(582 + 733 - 2*449)
+sqrt(512.3 + 591.6 - 2*308.8)
 ```
 
 
@@ -537,15 +556,25 @@ svycontrast(sum_region,
               Agregado_NCS = c(1, 1, 1, 0, 0)
               )) %>% data.frame()
 
-# Note que el error estandar  de la diferencia es igual a 
-sqrt(582 + 733 - 2*449)
+
 ```
 
 ## Contrastes
 
-```{r}
-vcov(sum_region)
+```{r, c1, echo=TRUE, eval=FALSE}
+require(kableExtra)
+# Note que el error estandar  de la diferencia es igual a 
+vcov(sum_region) %>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
 
+\tiny
+```{r, c1, echo=FALSE, eval=TRUE}
+```
+
+\normalsize
+```{r}
 sqrt(2805154074898 + 3839259031856 + 7559032807016 )
 
 ```
@@ -553,19 +582,27 @@ sqrt(2805154074898 + 3839259031856 + 7559032807016 )
 ## Contrastes no independiente
 
 ```{r}
-(prom_edad <- svyby(~Income, ~CatAge, diseno, svymean, na.rm=T,covmat = TRUE))
+(prom_edad <- svyby(~Income, ~CatAge, diseno,
+                    svymean, na.rm=T,covmat = TRUE))
+```
 
+## Contrastes no independiente
+```{r}
 svycontrast(prom_edad,
-            list(
-              agregado_edad = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)
-              )) %>% data.frame()
+  list(
+  agregado_edad = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)
+      )) %>% data.frame()
 
 ```
 
 ## Contrastes no independiente
-
+\scriptsize
 ```{r}
 vcov(prom_edad)
+```
+
+\normalsize
+```{r}
 (1/6)*sqrt(4888 + 646 + 1611 + 2197 + 1181 + 5553 
        + 2*22 + 2*(-1289) + 2*864 + 2*(-1387) + 2*189 +
        2*454 + 2*441 + 2*347 + 2*856 +
@@ -575,12 +612,20 @@ vcov(prom_edad)
 ```
 
 ## Contrastes no independiente
+```{r,c2, echo=TRUE, eval=FALSE}
+(razon_sexo <- svyby(~Income, ~Sex,
+                     denominator = ~Expenditure,
+                     diseno, svyratio, 
+                     na.rm=T, covmat = TRUE, 
+                     vartype = c("se", "ci")))
+```
 
+\scriptsize
+```{r,c2, echo=FALSE, eval=TRUE}
+```
+
+## Contrastes no independiente
 ```{r}
-
-(razon_sexo <- svyby(~Income, ~Sex, denominator = ~Expenditure,
-                     diseno, svyratio, na.rm=T, covmat = TRUE, vartype = c("se", "ci")))
-
 svycontrast(razon_sexo,
             list(
               diff_sexo = c(1, -1)
@@ -594,6 +639,6 @@ svycontrast(razon_sexo,
 ```{r}
 
 vcov(razon_sexo)
-sqrt(0.0034 + 0.0024 - 2*0.0022)
+sqrt(0.0013 + 0.0020 - 2*0.0011)
 
 ```

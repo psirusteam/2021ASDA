@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  24 MAR 2022 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.15)  24 MAR 2022 15:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -935,12 +935,12 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
 File: Imagenes/Cap 8/fig1.png Graphic file (type png)
 <use Imagenes/Cap 8/fig1.png>
 Package pdftex.def Info: Imagenes/Cap 8/fig1.png  used on input line 204.
-(pdftex.def)             Requested size: 150.56093pt x 94.42586pt.
+(pdftex.def)             Requested size: 188.20302pt x 118.0335pt.
 <Imagenes/Cap 8/fig2.png, id=42, 451.6875pt x 301.125pt>
 File: Imagenes/Cap 8/fig2.png Graphic file (type png)
 <use Imagenes/Cap 8/fig2.png>
 Package pdftex.def Info: Imagenes/Cap 8/fig2.png  used on input line 204.
-(pdftex.def)             Requested size: 150.56671pt x 100.3778pt.
+(pdftex.def)             Requested size: 188.20496pt x 125.46996pt.
 [4
 
  <./Imagenes/Cap 8/fig1.png> <./Imagenes/Cap 8/fig2.png>]
@@ -1741,7 +1741,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  99i,11n,104p,1017b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on 8Imputacion-multiple.pdf (133 pages, 928929 bytes).
+Output written on 8Imputacion-multiple.pdf (133 pages, 928953 bytes).
 PDF statistics:
  1227 PDF objects out of 1440 (max. 8388607)
  984 compressed objects within 10 object streams

@@ -112,7 +112,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 ```
 
 ## Estimación de tamaño 
-
+\scriptsize
 ```{r tabs0, echo=FALSE, eval=TRUE}
 ```
 
@@ -124,7 +124,10 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
    summarise(
      prop = survey_mean(vartype = c("se","ci"), 
                         proportion = TRUE )))
+```
 
+## Estimación de proporción de urbano y rural 
+```{r}
 (prop_zona2 <- diseno %>% group_by(Zone) %>% 
    summarise(
      prop = survey_prop(vartype = c("se","ci") )))
@@ -139,7 +142,10 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
    summarise(
      n = unweighted(n()),
      prop = survey_prop(vartype = c("se","ci"))))
+```
 
+## Poporsión de hombres y mujeres en la zona urbana y rural
+```{r}
 (prop_sexoR <- sub_Rural %>% group_by(Sex) %>% 
    summarise(
      n = unweighted(n()),
@@ -263,7 +269,7 @@ sub_Mujer %>% mutate(edad_rango = case_when(
 
 ## Estimación de la proporción de hombres rango de edad
 
-```{r}
+```{r, tab_01, echo=TRUE,eval=FALSE}
 sub_Hombre %>% mutate(edad_rango = case_when(
   Age>= 18 & Age <=35  ~ "18 - 35",
   TRUE ~ "Otro")) %>%
@@ -271,6 +277,10 @@ sub_Hombre %>% mutate(edad_rango = case_when(
   summarise(
     Prop = survey_prop(vartype =  c("se", "ci"))) %>%
   data.frame()
+```
+
+\scriptsize
+```{r,tab_01, echo=FALSE,eval=TRUE}
 ```
 
 ## Tabla Zona Vs Sexo
@@ -287,7 +297,7 @@ sub_Hombre %>% mutate(edad_rango = case_when(
 ```
 
 ## Tabla Zona Vs Sexo
-
+\scriptsize
 ```{r, tab2, echo = FALSE, eval = TRUE}
 ```
 
@@ -313,11 +323,14 @@ svychisq(~Sex + pobreza, diseno, statistic="F")
 
 ## Tablas de doble entrada. 
 
-```{r}
-tab_Sex_Ocupa <- svyby(~Sex,  ~Employment, diseno, svymean)
-tab_Sex_Ocupa %>% select(-se.SexFemale, -se.SexMale)
-tab_Sex_Ocupa %>% select(-SexFemale, -SexMale)
+```{r, tab_02, echo=TRUE,eval=FALSE}
+(tab_Sex_Ocupa <- svyby(~Sex,  ~Employment,
+                       diseno, svymean))
 ```
+\scriptsize
+```{r, tab_02, echo=FALSE,eval=TRUE}
+```
+
 ## Tablas de doble entrada 
 ```{r}
 confint(tab_Sex_Ocupa) %>% as.data.frame()
@@ -419,10 +432,13 @@ svycontrast(tab_Sex_Pobr,
 ```
 ## contrastes
 ```{r}
+library(kableExtra)
 # Paso 2: error estándar de la diferencia
-vcov(tab_sex_pobreza)
+vcov(tab_sex_pobreza)%>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
 
-sqrt(0.0009227 + 0.0007294 - 2*0.0006551)
+sqrt(0.0007435 + 0.0014202 - 2*0.0008486)
 
 ```
 
@@ -439,20 +455,27 @@ svycontrast(tab_sex_pobreza,
 ## Contrastes 
 
 ```{r}
-(tab_sex_desempleo <- svyby(~desempleo, ~Sex, 
-                          diseno %>% filter(!is.na(desempleo)) , 
-                      svymean, na.rm=T, covmat = TRUE,
-                      vartype = c("se", "ci")))
+(tab_sex_desempleo <- svyby(
+  ~desempleo, ~Sex, 
+    diseno %>% filter(!is.na(desempleo)) , 
+     svymean, na.rm=T, covmat = TRUE,
+     vartype = c("se", "ci")))
 # diferencia de estimaciones 
-0.07237 - 0.02854	
+0.0770 - 0.0265 	
 
 ```
 
 ## Contrastes 
 ```{r}
-vcov(tab_sex_desempleo)
+vcov(tab_sex_desempleo) %>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
 
-sqrt(0.000037026 + 0.00015547 - 2*0.000013369)
+sqrt(0.000049961 + 0.000203901 - 2*0.000009386)
+```
+
+## Contrastes 
+```{r}
 svycontrast(tab_sex_desempleo,
             list(diff_Sex = c(-1, 1))) %>%
   data.frame()
@@ -463,24 +486,33 @@ svycontrast(tab_sex_desempleo,
 ## Contrastes 
 
 ```{r}
-(tab_region_desempleo <- svyby(~desempleo, ~Region, 
-                          diseno %>% filter(!is.na(desempleo)) , 
-                      svymean, na.rm=T, covmat = TRUE,
-                      vartype = c("se", "ci")))
+(tab_region_desempleo <- svyby(
+  ~desempleo, ~Region, 
+    diseno %>% filter(!is.na(desempleo)) , 
+    svymean, na.rm=T, covmat = TRUE,
+     vartype = c("se", "ci")))
 
 ```
 
+## Contrastes 
+```{r, tab_03, echo=TRUE, eval=FALSE}
+vcov(tab_region_desempleo)%>%
+  data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
 
-```{r}
-vcov(tab_region_desempleo)
+\scriptsize
+```{r, tab_03, echo=FALSE, eval=TRUE}
 ```
 
 ## Contrastes 
 
 ```{r}
-(tab_region_pobreza <- svyby(~pobreza, ~Region, 
-                          diseno %>% filter(!is.na(desempleo)) , 
-                      svymean, na.rm=T, covmat = TRUE,
-                      vartype = c("se", "ci")))
+(tab_region_pobreza <- svyby(
+  ~pobreza, ~Region, 
+    diseno %>% filter(!is.na(desempleo)) , 
+     svymean, na.rm=T, covmat = TRUE,
+      vartype = c("se", "ci")))
 
 ```

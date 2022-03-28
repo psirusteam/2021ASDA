@@ -70,26 +70,34 @@ theme_cepal <- function(...) theme_light(10) +
         legend.position="bottom", 
         legend.justification = "left", 
         legend.direction="horizontal",
-        plot.title = element_text(size = 20, hjust = 0.5),
+  plot.title = element_text(size = 20, hjust = 0.5),
         ...) 
 ```
 
 
-# Grícas de variables continuas. 
+# Gráficas de variables continuas. 
 
 ## Histogramas 
 
-```{r, hist1, echo = TRUE, eval = FALSE}
+```{r, hist1, echo = TRUE, eval = TRUE}
 library(ggplot2) ; library(patchwork)
 plot1_Ponde <- ggplot(encuesta, 
-                      aes(x = Income, weight = wk))+
+             aes(x = Income, weight = wk))+
   geom_histogram(aes(y = ..density..)) + ylab("") +
   ggtitle("Ponderado") + theme_cepal()
+```
 
-plot1_SinPonde <- ggplot(encuesta, aes(x = Income))+
+## Histogramas 
+
+```{r, hist1a, echo = TRUE, eval = TRUE}
+plot1_SinPonde <- 
+  ggplot(encuesta, aes(x = Income))+
   geom_histogram(aes(y = ..density..)) + ylab("") +
     ggtitle("Sin ponderar") + theme_cepal()
+```
 
+## Histogramas 
+```{r, hist1b, echo = TRUE, eval = FALSE}
 plot1_censo <- ggplot(BigCity, aes(x = Income))+
   geom_histogram(aes(y = ..density..)) + ylab("") +
    ggtitle("Poblacional") + theme_cepal() +
@@ -99,22 +107,29 @@ plot1_censo | plot1_Ponde | plot1_SinPonde
 ```
 
 ## Histograma 
-```{r, hist1, echo = FALSE, eval = TRUE}
+```{r, hist1b, echo = FALSE, eval = TRUE}
 ```
 
 
 ## Histogramas 
 
-```{r, hist2, echo = TRUE, eval = FALSE}
-plot2_Ponde <- ggplot(encuesta, 
-                      aes(x = Expenditure, weight = wk))+
+```{r, hist2, echo = TRUE, eval = TRUE}
+plot2_Ponde <- ggplot(encuesta,
+           aes(x = Expenditure, weight = wk)) +
   geom_histogram(aes(y = ..density..)) + ylab("") +
   ggtitle("Ponderado") + theme_cepal()
+```
 
+## Histogramas 
+
+```{r, hist2a, echo = TRUE, eval = TRUE}
 plot2_SinPonde <- ggplot(encuesta, aes(x = Expenditure))+
   geom_histogram(aes(y = ..density..)) + ylab("") +
     ggtitle("Sin ponderar") + theme_cepal()
+```
 
+## Histogramas 
+```{r, hist2b, echo = TRUE, eval = FALSE}
 plot2_censo <- ggplot(BigCity, aes(x = Expenditure))+
   geom_histogram(aes(y = ..density..)) + ylab("") +
    ggtitle("Poblacional") + theme_cepal() +
@@ -125,23 +140,29 @@ plot2_censo | plot2_Ponde | plot2_SinPonde
 
 ## Histogramas
 
-```{r, hist2, echo = FALSE, eval = TRUE}
+```{r, hist2b, echo = FALSE, eval = TRUE}
 ```
 
 ## Histogramas por sub-grupos
 
-```{r, hist3, echo = TRUE, eval = FALSE}
+```{r, hist3, echo = TRUE, eval = TRUE}
 plot3_Ponde <- ggplot(encuesta,
                       aes(x = Income, weight = wk)) +
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
   ylab("") +  ggtitle("Ponderado") + theme_cepal()
+```
 
+## Histogramas por sub-grupos
+```{r, hist3a, echo = TRUE, eval = TRUE}
 plot3_SinPonde <- ggplot(encuesta, aes(x = Income)) +
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
     ggtitle("Sin ponderar") + theme_cepal() + ylab("")
+```
 
+## Histogramas por sub-grupos
+```{r, hist3b, echo = TRUE, eval = FALSE}
 plot3_censo <- ggplot(BigCity, aes(x = Income))+
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
@@ -152,24 +173,32 @@ plot3_censo | plot3_Ponde | plot3_SinPonde
 
 ## Histogramas por sub-grupos
 
-```{r, hist3, echo = FALSE, eval = TRUE}
+```{r, hist3b, echo = FALSE, eval = TRUE}
 ```
 
 
 ## Histogramas por sub-grupos
 
-```{r, hist4, echo = TRUE, eval = FALSE}
+```{r, hist4, echo = TRUE, eval = TRUE}
 plot4_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+                aes(x = Expenditure, weight = wk)) +
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
   ylab("") +  ggtitle("Ponderado") + theme_cepal()
+```
 
-plot4_SinPonde <- ggplot(encuesta, aes(x = Expenditure)) +
+## Histogramas por sub-grupos
+```{r, hist4a, echo = TRUE, eval = TRUE}
+plot4_SinPonde <- ggplot(encuesta,
+                         aes(x = Expenditure)) +
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
-    ggtitle("Sin ponderar") + theme_cepal()  + ylab("")
+    ggtitle("Sin ponderar") + 
+    theme_cepal()  + ylab("")
+```
 
+## Histogramas por sub-grupos
+```{r, hist4b, echo = TRUE, eval = FALSE}
 plot4_censo <- ggplot(BigCity, aes(x = Expenditure))+
   geom_histogram(aes(y = ..density.., fill = Zone) , 
                  alpha = 0.5, position = "identity") +
@@ -181,23 +210,29 @@ plot4_censo | plot4_Ponde | plot4_SinPonde
 
 ## Histogramas por sub-grupos
 
-```{r, hist4, echo = FALSE, eval = TRUE}
+```{r, hist4b, echo = FALSE, eval = TRUE}
 ```
 
 ## Histogramas por sub-grupos
 
-```{r, hist5, echo = TRUE, eval = FALSE}
+```{r, hist5, echo = TRUE, eval = TRUE}
 plot5_Ponde <- ggplot(encuesta,
                       aes(x = Income, weight = wk)) +
   geom_histogram(aes(y = ..density.., fill = Sex) , 
                  alpha = 0.5, position = "identity") +
   ylab("") +  ggtitle("Ponderado") + theme_cepal()
+```
 
+## Histogramas por sub-grupos
+```{r, hist5a, echo = TRUE, eval = TRUE}
 plot5_SinPonde <- ggplot(encuesta, aes(x = Income)) +
   geom_histogram(aes(y = ..density.., fill = Sex) , 
                  alpha = 0.5, position = "identity") +
     ggtitle("Sin ponderar") + theme_cepal()  + ylab("")
+```
 
+## Histogramas por sub-grupos
+```{r, hist5b, echo = TRUE, eval = FALSE}
 plot5_censo <- ggplot(BigCity, aes(x = Income))+
   geom_histogram(aes(y = ..density.., fill = Sex) , 
                  alpha = 0.5, position = "identity") +
@@ -215,21 +250,27 @@ plot5_censo | plot5_Ponde | plot5_SinPonde
 
 ## Histogramas por sub-grupos
 
-```{r, hist6, echo = TRUE, eval = FALSE}
+```{r, hist6, echo = TRUE, eval = TRUE}
 plot6_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+              aes(x = Expenditure, weight = wk)) +
   geom_histogram(aes(y = ..density.., fill = Sex) , 
                  alpha = 0.5, position = "identity") +
   ylab("") +  ggtitle("Ponderado") + theme_cepal()
+```
 
+## Histogramas por sub-grupos
+```{r, hist6a, echo = TRUE, eval = TRUE}
 plot6_SinPonde <- ggplot(encuesta, aes(x = Expenditure)) +
   geom_histogram(aes(y = ..density.., fill = Sex) , 
-                 alpha = 0.5, position = "identity") +
+            alpha = 0.5, position = "identity") +
     ggtitle("Sin ponderar") + theme_cepal()  + ylab("")
+```
 
+
+```{r, hist6b, echo = TRUE, eval = FALSE}
 plot6_censo <- ggplot(BigCity, aes(x = Expenditure))+
   geom_histogram(aes(y = ..density.., fill = Sex) , 
-                 alpha = 0.5, position = "identity") +
+            alpha = 0.5, position = "identity") +
    ggtitle("Poblacional") + theme_cepal() +
    xlim(0, 1500)  + ylab("")
 plot6_censo | plot6_Ponde | plot6_SinPonde 
@@ -238,7 +279,7 @@ plot6_censo | plot6_Ponde | plot6_SinPonde
 
 ## Histogramas por sub-grupos
 
-```{r, hist6, echo = FALSE, eval = TRUE}
+```{r, hist6b, echo = FALSE, eval = TRUE}
 ```
 
 ## Agregando densidad
@@ -270,12 +311,12 @@ plot6_Ponde + geom_density(aes(fill = Sex), alpha = 0.3)
 
 ```{r, hist7, echo = TRUE, eval = FALSE}
 plot7_Ponde <- ggplot(encuesta,
-                      aes(x = Income, weight = wk)) +
+                  aes(x = Income, weight = wk)) +
   geom_boxplot() + ggtitle("Ponderado") + 
   coord_flip() + theme_cepal()
 
 plot8_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+                  aes(x = Expenditure, weight = wk)) +
   geom_boxplot() +  ggtitle("Ponderado") +
   coord_flip() + theme_cepal()
 
@@ -298,7 +339,7 @@ plot9_Ponde <- ggplot(encuesta,
   coord_flip() + theme_cepal()
 
 plot10_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+               aes(x = Expenditure, weight = wk)) +
   geom_boxplot(aes(fill = Zone)) +
   ggtitle("Ponderado") +
   coord_flip() + theme_cepal()
@@ -324,13 +365,13 @@ plot10_Ponde + scale_fill_manual(values = colorZona)
 
 ```{r, hist9, echo = TRUE, eval = FALSE}
 plot11_Ponde <- ggplot(encuesta,
-                      aes(x = Income, weight = wk)) +
+                aes(x = Income, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
   ggtitle("Ponderado") + 
   coord_flip() + theme_cepal()
 
 plot12_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+              aes(x = Expenditure, weight = wk)) +
   geom_boxplot(aes(fill = Sex)) +
   ggtitle("Ponderado") +
   coord_flip() + theme_cepal()
@@ -362,13 +403,13 @@ plot12_Ponde + scale_fill_manual(values = colorSex)
 
 ```{r, hist10, echo = TRUE, eval = FALSE}
 plot13_Ponde <- ggplot(encuesta,
-                      aes(x = Income, weight = wk)) +
+               aes(x = Income, weight = wk)) +
   geom_boxplot(aes(fill = Region)) +
   ggtitle("Ponderado") + 
   coord_flip() + theme_cepal()
 
 plot14_Ponde <- ggplot(encuesta,
-                      aes(x = Expenditure, weight = wk)) +
+              aes(x = Expenditure, weight = wk)) +
   geom_boxplot(aes(fill = Region)) +
   ggtitle("Ponderado") +
   coord_flip() + theme_cepal()
@@ -382,7 +423,7 @@ plot13_Ponde | plot14_Ponde
 ```
 
 ## Boxplot 
-
+\scriptsize
 ```{r, echo = TRUE, eval = TRUE}
 colorRegion <-  c(Norte = "#D6EAF8", Sur = "#85C1E9", 
 Centro = "#3498DB", Occidente = "#2E86C1", Oriente = "#21618C")
