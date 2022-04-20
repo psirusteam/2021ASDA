@@ -703,7 +703,7 @@ $$
  model.matrix(mod_svy) %>%
   as.data.frame()%>% slice(1:7)
 ```
-
+\footnotesize
 $$
 \hat{y_i}= 91.6319 +1.0893(247.9) + 48.7667(0) + 8.0933(1) + 0.0115(55^2) = 404.6
 $$
@@ -714,17 +714,19 @@ $$
 var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i}
 $$
 
-\small
+\scriptsize
 ```{r}
 vcov(mod_svy)
 ```
 
+## Estimando el IC de predicción
 
-\normalsize
 ```{r, echo=TRUE}
 xobs <- model.matrix(mod_svy) %>%
   data.frame() %>% slice(1) %>% as.matrix()
+
 cov_beta <- vcov(mod_svy) %>% as.matrix()
+
 as.numeric(sqrt((xobs)%*%cov_beta%*%t(xobs)))
 ```
 
@@ -736,7 +738,7 @@ $$
 
 ## Utilizando la función predict
 
-```{r}
+```{r,pred01, echo=TRUE,eval=FALSE}
 pred <- data.frame(predict(mod_svy, type = "link"))
 pred_IC <- data.frame(
   confint(predict(mod_svy, type = "link")))
@@ -744,6 +746,10 @@ colnames(pred_IC) <- c("Lim_Inf", "Lim_Sup")
 pred <- bind_cols(pred, pred_IC)
 pred$Expenditure <- encuesta$Expenditure
 pred %>% slice(1:6L)
+```
+
+## Utilizando la función predict
+```{r,pred01, echo=FALSE,eval=TRUE}
 ```
 
 ## Scaterplot de la predicción
@@ -772,11 +778,11 @@ datos_nuevos <- data.frame(Expenditure = 1600,
                            Age2 = 40^2, Sex = "Male", 
                            Zone = "Urban")
 ```
-
+\footnotesize 
 $$
 \hat{y_i}= 91.6319 +1.0893(1600) + 48.7667(0) + 8.0933(1) + 0.0115(40^2) =  1910
 $$
-
+\normalsize
 $$
 var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i} + \hat{\sigma}^2_{yx}
 $$

@@ -68,7 +68,7 @@ library(survey)
 ```
 
 ## Tablas de doble entrada para el proporción 
-
+\footnotesize
 ```{r}
 (tab_pobreza_sexo <- svyby(~factor(pobreza), ~Sex,
       FUN = svymean, design = as.svrepdesign(diseno), 
@@ -161,7 +161,7 @@ Q_{wald}\sim\chi_{\left(R-1\right)\times\left(C-1\right)}^{2}
 $$
 
 ## Estadístico de Wald 
-
+\footnotesize
 $$
 F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\right)\left(C-1\right)df}\sim F_{\left(R-1\right)\left(C-1\right),df-\left(R-1\right)\left(C-1\right)+1}
 $$
@@ -238,6 +238,8 @@ $$
 var\left(\boldsymbol{\hat{B}}\right)=\boldsymbol{J}^{-1}var\left(S\left(\hat{\boldsymbol{B}}\right)\right)\boldsymbol{J}^{-1}
 $$
 
+## Modelo de regresión logistica 
+\footnotesize
 $$
 S\left(B\right)=\sum_{h}\sum_{a}\sum_{i}w_{hai}\boldsymbol{D}_{hai}^{t}\left[\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)\left(1-\pi_{hai}\left(\boldsymbol{B}\right)\right)\right]^{-1}\left(y_{hai}-\pi_{hai}\left(\boldsymbol{B}\right)\right)=0
 $$
@@ -288,25 +290,33 @@ tb_temp
 ## Pearson's X^2: Rao & Scott adjustment
 pobreza_sex <-  svychisq(
   formula = ~pobreza + Sex, design = diseno)
+tidy( pobreza_sex) %>% select(-method)
+```
+
+## Prueba de independencia ChiSq 
+```{r, echo=T,results="asis"}
 pobreza_Zona <- svychisq(
   formula = ~pobreza + Zone, design = diseno)
+tidy(pobreza_Zona) %>% select(-method)
+```
+
+## Prueba de independencia ChiSq 
+```{r, echo=T,results="asis"}
 pobreza_Region <- svychisq(
   formula = ~pobreza + Region, design = diseno)
-bind_rows( tidy( pobreza_sex),
-           tidy(pobreza_Zona),
-           tidy(pobreza_Region)) %>% 
-  dplyr::select(-method)
+   tidy(pobreza_Region) %>% select(-method)
 ```
 
 ## Modelo log lineal ajustado
 ```{r}
-mod_loglin <- svyglm(pobreza ~ Sex + Zone + Region,
-                     family=quasibinomial, design=diseno)
-tidy(mod_loglin)
+mod_loglin <- svyglm(
+  pobreza ~ Sex + Zone + Region,
+   family=quasibinomial, design=diseno)
+tidy(mod_loglin) 
 ```
 
 ## Plot de la distribución de los betas
-
+\small
 ```{r}
 plot_summs(mod_loglin, 
            scale = TRUE, plot.distributions = TRUE)
