@@ -1,9 +1,7 @@
 ---
 title: "Análisis de encuestas de hogares con R"
-subtitle: "Módulo 4: Análisis gráfico en R"
-author: |
-  | Andrés Gutiérrez, Ph.D.
-  | Stalyn Guerrero, M.Sc. 
+subtitle: "Módulo 5: Análisis gráfico en R"
+author: ""
 date: "CEPAL - Unidad de Estadísticas Sociales"
 output:
   beamer_presentation:
@@ -37,14 +35,14 @@ library(printr)
 
 ```{r}
 data(BigCity, package = "TeachingSampling")
-encuesta <- readRDS("../Data/encuesta_pba.rds")
+encuesta <- readRDS("../Data/encuesta.rds")
 ```
 
 ## Definir diseño de la muestra con `srvyr`
+Definiendo el diseño muestral, esto se hace de forma análoga a la anterio. 
 \scriptsize
 ```{r}
 library(srvyr)
-
 diseno <- encuesta %>%
   as_survey_design(
     strata = Stratum,
@@ -54,7 +52,8 @@ diseno <- encuesta %>%
   )
 ```
 
-## definir nuevas variables
+## Definir nuevas variables
+Creando nuevas variales, para ello se hace uso de la función `mutate`.
 \scriptsize
 ```{r, tabs1, echo=TRUE, eval=TRUE}
 diseno <- diseno %>% mutate(
@@ -70,7 +69,7 @@ diseno <- diseno %>% mutate(
 
 ## Sub-grupos
 
-Extraer sub-grupos de la encuesta.
+Dividiendo la muestra en sub grupos. 
 
 ```{r}
 sub_Urbano <- diseno %>% filter(Zone == "Urban")
@@ -80,7 +79,7 @@ sub_Hombre <- diseno %>% filter(Sex == "Male")
 ```
 
 ## Creando tema para las gráficas 
-
+Para tener un estilo estandar las gráficas se define el siguiente tema. 
 ```{r}
 theme_cepal <- function(...) {
   theme_light(10) +
@@ -102,22 +101,24 @@ theme_cepal <- function(...) {
 # Gráficas de variables continuas. 
 
 ## Histogramas 
+Las gráficas son realizadas principalmente con la librería `ggplot2`y nos apoyamos en la librería `patchwork` para organizar la visual la visual de las gráficas. 
 
 ```{r, hist1, echo = TRUE, eval = TRUE}
 library(ggplot2)
 library(patchwork)
 plot1_Ponde <- ggplot(
-  encuesta,
-  aes(x = Income, weight = wk)
+  data = encuesta,              # Fuente de datos.
+  aes(x = Income, weight = wk)  # Parámetros gráficos general. 
 ) +
-  geom_histogram(aes(y = ..density..)) +
-  ylab("") +
-  ggtitle("Ponderado") +
-  theme_cepal()
+  geom_histogram(               # Parámetro geométrico.
+    aes(y = ..density..)) +     # Parámetros del gráfico    
+  ylab("") +                    # Nombre para el eje Y
+  ggtitle("Ponderado") +        # Titulo. 
+  theme_cepal()                 # Aplicando tema
 ```
 
 ## Histogramas 
-
+De forma análoga se define el gráfico siguiente, note que en este caso se omitió el parámetro `weight`.  
 ```{r, hist1a, echo = TRUE, eval = TRUE}
 plot1_SinPonde <-
   ggplot(encuesta, aes(x = Income)) +
@@ -128,7 +129,8 @@ plot1_SinPonde <-
 ```
 
 ## Histogramas 
-\scriptsize
+Para el siguiente dato se tomó la base poblacional (BigCity).  
+
 ```{r, hist1b, echo = TRUE, eval = FALSE}
 plot1_censo <- ggplot(BigCity, aes(x = Income)) +
   geom_histogram(aes(y = ..density..)) +
@@ -136,7 +138,7 @@ plot1_censo <- ggplot(BigCity, aes(x = Income)) +
   ggtitle("Poblacional") +
   theme_cepal() +
   xlim(0, 2500)
-
+# Organizando la salida gráfica
 plot1_censo | plot1_Ponde | plot1_SinPonde
 ```
 
@@ -146,10 +148,10 @@ plot1_censo | plot1_Ponde | plot1_SinPonde
 
 
 ## Histogramas 
-
+Ahora, repetimos la secuencia de gráficos para la variable *Expenditure*
 ```{r, hist2, echo = TRUE, eval = TRUE}
 plot2_Ponde <- ggplot(
-  encuesta,
+  data =  encuesta,
   aes(x = Expenditure, weight = wk)
 ) +
   geom_histogram(aes(y = ..density..)) +
@@ -161,11 +163,12 @@ plot2_Ponde <- ggplot(
 ## Histogramas 
 \scriptsize
 ```{r, hist2a, echo = TRUE, eval = TRUE}
-plot2_SinPonde <- ggplot(encuesta, aes(x = Expenditure)) +
-  geom_histogram(aes(y = ..density..)) +
-  ylab("") +
-  ggtitle("Sin ponderar") +
-  theme_cepal()
+plot2_SinPonde <- ggplot(data = encuesta,
+      aes(x = Expenditure)) +
+      geom_histogram(aes(y = ..density..)) +
+      ylab("") +
+      ggtitle("Sin ponderar") +
+      theme_cepal()
 ```
 
 ## Histogramas 
@@ -187,15 +190,18 @@ plot2_censo | plot2_Ponde | plot2_SinPonde
 ```
 
 ## Histogramas por sub-grupos
+Cuando el interés es realizar comparaciones entre dos o más agrupaciones, es posible hacer uso del parámetro `fill`, el cual "rellena" las barras del histograma con diferentes colores según sea el grupo.   
+
 \scriptsize
 ```{r, hist3, echo = TRUE, eval = TRUE}
 plot3_Ponde <- ggplot(
   encuesta,
   aes(x = Income, weight = wk)
 ) +
-  geom_histogram(aes(y = ..density.., fill = Zone),
+  geom_histogram(
+    aes(y = ..density.., fill = Zone),
     alpha = 0.5,
-    position = "identity"
+    position = "identity" # Para que las barras no estén apiladas.
   ) +
   ylab("") +
   ggtitle("Ponderado") +
@@ -203,6 +209,7 @@ plot3_Ponde <- ggplot(
 ```
 
 ## Histogramas por sub-grupos
+La sintaxis es homologa a la anterior, sin embargo, se retiro el parámetro `weight`.
 ```{r, hist3a, echo = TRUE, eval = TRUE}
 plot3_SinPonde <- ggplot(encuesta, aes(x = Income)) +
   geom_histogram(aes(y = ..density.., fill = Zone),
@@ -233,7 +240,7 @@ plot3_censo | plot3_Ponde | plot3_SinPonde
 
 
 ## Histogramas por sub-grupos
-
+Ahora, repetimos la secuencia de gráficos para la variable *Expenditure*
 ```{r, hist4, echo = TRUE, eval = TRUE}
 plot4_Ponde <- ggplot(
   encuesta,
@@ -280,7 +287,7 @@ plot4_censo | plot4_Ponde | plot4_SinPonde
 ```
 
 ## Histogramas por sub-grupos
-
+Ahora, repetimos la secuencia de gráficos para la variable *Income*, pero haremos el relleno por la variable *sexo*. 
 ```{r, hist5, echo = TRUE, eval = TRUE}
 plot5_Ponde <- ggplot(
   encuesta,
@@ -325,6 +332,7 @@ plot5_censo | plot5_Ponde | plot5_SinPonde
 
 
 ## Histogramas por sub-grupos
+Ahora, repetimos la secuencia de gráficos para la variable *Expenditure* y el relleno por la variable *sexo*. 
 
 ```{r, hist6, echo = TRUE, eval = TRUE}
 plot6_Ponde <- ggplot(
@@ -370,21 +378,24 @@ plot6_censo | plot6_Ponde | plot6_SinPonde
 ```
 
 ## Agregando densidad
+Dadas las cualidades de la librería ggplot2, podemos agregar nuevas capas a la gráfica. Por ejemplo, la densidad con la función `geom_density` e incorporamos el parámetro `alpha` que regula la transparencia del relleno. 
 \scriptsize
-```{r}
+```{r, out.width="60%", fig.align="center"}
 plot1_Ponde + geom_density(fill = "blue", alpha = 0.3) |
   plot2_Ponde + geom_density(fill = "blue", alpha = 0.3)
 ```
 
 ## Agregando densidad
 \scriptsize
-```{r}
+Al hacer `aes(fill = Zone)` permite que la densidad sea agregada para cada una de las agrupaciones.
+```{r,out.width="60%", fig.align="center"}
 plot3_Ponde + geom_density(aes(fill = Zone), alpha = 0.3) |
   plot4_Ponde + geom_density(aes(fill = Zone), alpha = 0.3)
 ```
 
 
 ## Agregando densidad
+En está oportunidad se agrega la desnidad por sexo
 \scriptsize
 ```{r}
 plot5_Ponde + geom_density(aes(fill = Sex), alpha = 0.3) |
@@ -392,6 +403,7 @@ plot5_Ponde + geom_density(aes(fill = Sex), alpha = 0.3) |
 ```
 
 ## Boxplot 
+Otro gráfico que podemos hacer son los diagrames de caja, para esto deben emplear la función `geom_boxplot`.
 \scriptsize
 ```{r, hist7, echo = TRUE, eval = FALSE}
 plot7_Ponde <- ggplot(
@@ -422,6 +434,7 @@ plot7_Ponde | plot8_Ponde
 
 
 ## Boxplot 
+Esto diagramas también permiten la comparación  entre dos o más niveles de agrupamiento.  
 \scriptsize
 ```{r, hist8, echo = TRUE, eval = FALSE}
 plot9_Ponde <- ggplot(
@@ -451,14 +464,16 @@ plot9_Ponde | plot10_Ponde
 ```
 
 ## Boxplot 
+Ahora, si desean personalizar los colores del relleno debe hacer uso de la función `scale_fill_manual`. 
 \scriptsize
-```{r, echo = TRUE, eval = TRUE}
+```{r, echo = TRUE, eval = TRUE, out.width="60%", fig.align="center"}
 colorZona <- c(Urban = "#48C9B0", Rural = "#117864")
 plot9_Ponde + scale_fill_manual(values = colorZona) |
   plot10_Ponde + scale_fill_manual(values = colorZona)
 ```
 
 ## Boxplot 
+Comparando los ingresos y gastos por sexo. 
 \scriptsize
 ```{r, hist9, echo = TRUE, eval = FALSE}
 plot11_Ponde <- ggplot(
@@ -488,6 +503,7 @@ plot11_Ponde | plot12_Ponde
 ```
 
 ## Boxplot 
+Definiendo el color del relleno para hombres y mujeres. 
 \scriptsize
 ```{r, hist9a, echo = TRUE, eval = FALSE}
 colorSex <- c(Male = "#5DADE2", Female = "#2874A6")
@@ -502,6 +518,7 @@ plot11_Ponde + scale_fill_manual(values = colorSex) |
 
 
 ## Boxplot 
+Realizando la comparación para más de dos categorías. 
 \scriptsize
 ```{r, hist10, echo = TRUE, eval = FALSE}
 plot13_Ponde <- ggplot(
@@ -531,6 +548,7 @@ plot13_Ponde | plot14_Ponde
 ```
 
 ## Boxplot 
+Personalizando los coles cuando hay más de  dos categorías. 
 \scriptsize
 ```{r, plot13_Ponde, echo = TRUE, eval = FALSE}
 colorRegion <- c(
@@ -541,12 +559,13 @@ plot13_Ponde + scale_fill_manual(values = colorRegion) |
 plot14_Ponde + scale_fill_manual(values = colorRegion)
 ```
 \scriptsize
-```{r, plot13_Ponde, echo = FALSE, eval = TRUE}
+```{r, plot13_Ponde, echo = FALSE, eval = TRUE, out.width="50%", fig.align="center"}
 ```
 
 
 
 ## Boxplot 
+La función `geom_boxplot`permite realizar comparaciones con más de dos variables al tiempo. A continuación se compara los ingresos por sexo en las diferentes zonas.  
 
 ```{r, hist11, echo = TRUE, eval = TRUE}
 plot15_Ponde <-
@@ -561,6 +580,7 @@ plot15_Ponde <-
 ```
 
 ## Boxplot 
+De forma análoga podemos realizar la comparación de los gastos por sexo en las diferentes zonas.  
 ```{r, hist11a, echo = TRUE, eval = FALSE}
 plot16_Ponde <-
   ggplot(
@@ -581,7 +601,7 @@ plot15_Ponde / plot16_Ponde
 
 
 ## Boxplot 
-
+Podemos extender las comparaciones variables que tienen más de dos categorías.  
 ```{r, hist12, echo = TRUE, eval = TRUE}
 plot17_Ponde <-
   ggplot(
@@ -620,6 +640,8 @@ plot17_Ponde / plot18_Ponde
 
 ## Scaterplot  
 
+Un gráfico de interés son los de puntos o Scaterplot, que nos ayudan a ver correlación entre las variables, para realizar este tipo de gráfico usamos la función `geom_point`   
+
 ```{r, hist13, echo = TRUE, eval = FALSE}
 plot19_Ponde <-
   ggplot(
@@ -636,12 +658,12 @@ plot19_Ponde
 ```
 
 ## Scaterplot  
-
-```{r, hist13, echo = FALSE, eval = TRUE}
+Note, que este caso el parámetro `weight` no esta aportando información visual al gráfico.
+```{r, hist13, echo = FALSE, eval = TRUE, out.width="40%"}
 ```
 
 ## Scaterplot  
-
+El parámetro `weight` lo podemos usar controlar el tamaño de los puntos de esa forma tener un mejor panorama del comportamiento de la muestra. 
 ```{r, hist14, echo = TRUE, eval = FALSE}
 plot20_Ponde <-
   ggplot(
@@ -659,7 +681,7 @@ plot20_Ponde
 ```
 
 ## Scaterplot  
-
+Otra forma de usar la variable `wk`, es asignar la intensidad del color según el valor de la variable. 
 ```{r, hist15, echo = TRUE, eval = FALSE}
 plot21_Ponde <-
   ggplot(
@@ -677,20 +699,17 @@ plot21_Ponde
 ```
 
 ## Scaterplot  
+Podemos extender las bondades de los gráfico de `ggplot2` para obtener mayor información de las muestra. Por ejemplo, agrupar los datos por Zona, para lograr esto se introduce el parámetro `shape`.  
 
 ```{r, hist16, echo = TRUE, eval = FALSE}
 plot22_Ponde <-
   ggplot(
     encuesta,
     aes(
-      y = Income,
-      x = Expenditure,
-      shape = Zone
-    )
-  ) +
-  geom_point(aes(
-    size = wk,
-    color = Zone
+      y = Income, x = Expenditure,
+      shape = Zone) # Formas por zona
+  ) + geom_point(aes(
+    size = wk, color = Zone
   ), alpha = 0.3) +
   labs(size = "Peso") +
   scale_color_manual(values = colorZona) +
@@ -704,6 +723,7 @@ plot22_Ponde
 ```
 
 ## Scaterplot  
+De forma similar podemos obtener el resultado por sexo. 
 \scriptsize
 ```{r, hist17, echo = TRUE, eval = FALSE}
 plot23_Ponde <-
@@ -733,6 +753,7 @@ plot23_Ponde
 ```
 
 ## Scaterplot  
+Un resultado equivalente se obtiene por región. 
 \scriptsize
 ```{r, hist18, echo = TRUE, eval = FALSE}
 plot24_Ponde <-
@@ -764,29 +785,32 @@ plot24_Ponde
 # Diagrama de barras para variables categoricas  
 
 ## Diagrama de barras
+Para realizar estos gráfico un primer paso es realizar las estimaciones puntuales. 
 ```{r, hist19, echo = TRUE, eval = TRUE}
-tamano_zona <- diseno %>%
+(tamano_zona <- diseno %>%
   group_by(Zone) %>%
   summarise(
     Nd = survey_total(vartype = c("se", "ci"))
-  )
+  ))
 ```
 
 ## Diagrama de barras
 \scriptsize
 ```{r, hist19a, echo = TRUE, eval = FALSE}
 plot25_Ponde <- ggplot(
-  data = tamano_zona,
+  data = tamano_zona, # fuente de los datos
   aes(
-    x = Zone,
-    y = Nd,
-    ymax = Nd_upp,
-    ymin = Nd_low,
-    fill = Zone
+    x = Zone,         # Valores en el eje x
+    y = Nd,           # Altura de la barras 
+    ymax = Nd_upp,    # Limite superior del IC
+    ymin = Nd_low,    # Limite inferior del IC
+    fill = Zone       # Color del relleno
   )
 ) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_errorbar(
+  geom_bar(
+    stat = "identity",# Valor incluido en la tabla 
+    position = "dodge") +
+  geom_errorbar(      # Gráfica del IC.
     position = position_dodge(width = 0.9),
     width = 0.3
   ) +
@@ -799,15 +823,17 @@ plot25_Ponde
 ```
 
 ## Diagrama de barras
+Como se ha visto en los gráficos anteriores podemos extender a muchas categorías. 
 ```{r, hist20, echo = TRUE, eval = TRUE}
-tamano_pobreza <- diseno %>%
+(tamano_pobreza <- diseno %>%
   group_by(Poverty) %>%
   summarise(
     Nd = survey_total(vartype = c("se", "ci"))
-  )
+  ))
 ```
 
 ## Diagrama de barras
+El gráfico se obtiene con una sintaxis homologa a la anterior. 
 \scriptsize
 ```{r, hist20a, echo = TRUE, eval = FALSE}
 plot26_Ponde <- ggplot(
@@ -834,17 +860,23 @@ plot26_Ponde
 ```
 
 ## Diagrama de barras
+
+De forma similar a los gráficos de Caja es posible realizar comparaciones entre más dos variables. 
+
 ```{r, hist21, echo = TRUE, eval = TRUE}
 tamano_ocupacion_pobreza <- diseno %>%
   group_by(desempleo, Poverty) %>%
   summarise(
-    Nd = survey_total(vartype = c("se", "ci")),
-    .fill = "Total"
-  ) %>%
-  data.frame()
+    Nd = survey_total(vartype = c("se", "ci"))
+  ) %>%   as.data.frame() %>% 
+  mutate(
+    desempleo = ifelse(is.na(desempleo),
+                       "Ninos",desempleo))
+
 ```
 
 ## Diagrama de barras
+El gráfico para la tabla anterior queda de la siguiente forma. 
 \scriptsize
 ```{r, hist21a, echo = TRUE, eval = FALSE}
 plot27_Ponde <-
@@ -874,18 +906,20 @@ plot27_Ponde
 
 
 ## Diagrama de barras
+En estos gráficos podemos presentar proporciones por variables. 
 ```{r, hist22, echo = TRUE, eval = TRUE}
-prop_ZonaH_Pobreza <- sub_Hombre %>%
+(prop_ZonaH_Pobreza <- sub_Hombre %>%
   group_by(Zone, Poverty) %>%
   summarise(
     prop = survey_prop(
       vartype = c("se", "ci")
     )
   ) %>%
-  data.frame()
+  data.frame())
 ```
 
 ## Diagrama de barras
+Después de tener la tabla con los valores a presentar el gráfico se realiza con la siguiente sintaxis. 
 ```{r, hist22a, echo = TRUE, eval = FALSE}
 plot28_Ponde <- ggplot(
   data = prop_ZonaH_Pobreza,
@@ -893,16 +927,13 @@ plot28_Ponde <- ggplot(
     x = Poverty, y = prop,
     ymax = prop_upp, ymin = prop_low,
     fill = Zone
-  )
-) +
+  )) + 
   geom_bar(stat = "identity", position = "dodge") +
   geom_errorbar(
     position = position_dodge(width = 0.9),
     width = 0.3
-  ) +
-  scale_fill_manual(values = colorZona) +
-  theme_bw()
-plot28_Ponde
+  ) + scale_fill_manual(values = colorZona) +
+  theme_bw();plot28_Ponde
 ```
 
 ## Diagrama de barras
@@ -912,6 +943,7 @@ plot28_Ponde
 
 
 ## Diagrama de barras
+Proporción de hombres en condición de pobreza por región 
 ```{r, hist23, echo = TRUE, eval = TRUE}
 prop_RegionH_Pobreza <- sub_Hombre %>%
   group_by(Region, pobreza) %>%
@@ -922,6 +954,7 @@ prop_RegionH_Pobreza <- sub_Hombre %>%
 ```
 
 ## Diagrama de barras
+
 ```{r, hist23a, echo = TRUE, eval = FALSE}
 plot29_Ponde <- ggplot(
   data = prop_RegionH_Pobreza,
@@ -947,7 +980,8 @@ plot29_Ponde
 
 # Creando mapas 
 
-## mapas con tmap.
+## Mapas con tmap.
+Para realizar el mapa hay que contar con el archivo de *shepefile*
 ```{r, hist24, echo=FALSE, eval=FALSE}
 temp <- "V:/DAT/SAECEPAL/Recursos/Análisis de Encuestas"
 library(sf)
@@ -961,42 +995,45 @@ tm_shape(shapeBigCity) +
 library(sf)
 library(tmap)
 shapeBigCity <- read_sf("/Data/shapeBigCity/BigCity.shp")
-tm_shape(shapeBigCity) +
-  tm_polygons(col = "Region")
+```
+La forma más simple de crear el mapa es con la sintaxis. 
+```{r, echo = TRUE, eval = FALSE}
+tm_shape(shapeBigCity) + # shepefile
+  tm_polygons(col = "Region") # Variable de interés. 
 ```
 
-## mapas con tmap.
-
+## Mapas con tmap.
+El mapa resultante es: 
 ```{r, hist24, echo = FALSE, eval = TRUE}
 ```
 
-## mapas con tmap.
+## Mapas con tmap.
 \scriptsize
 ```{r, hist25, echo = TRUE, eval = FALSE}
 brks <- c(0, .2, .4, .6, 0.8, 1)
 shape_temp <- tm_shape(
-  shapeBigCity %>%
-    left_join(
+  shapeBigCity %>%      # shapefile
+    left_join(          # Agregando una variable
       prop_RegionH_Pobreza %>%
-        filter(pobreza == 1),
+        filter(pobreza == 1), # Filtrando el nivel de interés. 
       by = "Region"
     )
 )
 
 shape_temp + tm_polygons(
-  "prop",
-  breaks = brks,
-  title = "pobreza",
-  palette = "YlOrRd"
-) + tm_layout(asp = 0)
+  "prop",              # Nombre de la columna
+  breaks = brks,       # Puntos de corte 
+  title = "pobreza",   # Titilo del labels. 
+  palette = "YlOrRd"   # Paleta y dirección de colores
+) 
 ```
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist25, echo = FALSE, eval = TRUE}
 ```
 
-## mapas con tmap.
+## Mapas con tmap.
 \scriptsize
 ```{r, hist26, echo = TRUE, eval = FALSE}
 (prom_region <- svyby(~Income, ~Region, diseno,
@@ -1022,13 +1059,13 @@ shape_temp + tm_polygons(
 ```
 
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist26, echo = FALSE, eval = TRUE}
 ```
 
 
-## mapas con tmap.
+## Mapas con tmap.
 \scriptsize
 ```{r, hist27, echo = TRUE, eval = FALSE}
 prom_region_Sex <- diseno %>%
@@ -1050,19 +1087,19 @@ shape_temp + tm_polygons(
 ) + tm_layout(asp = 0)
 ```
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist27, echo = FALSE, eval = TRUE}
 ```
 
 
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist27, echo = FALSE, eval = TRUE}
 ```
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist28, echo = TRUE, eval = FALSE}
 shape_temp + tm_polygons(
@@ -1076,12 +1113,12 @@ shape_temp + tm_polygons(
 
 
 
-## mapas con tmap.
+## Mapas con tmap.
 
 ```{r, hist28, echo = FALSE, eval = TRUE}
 ```
 
-## mapas con ggplot
+## Mapas con ggplot
 \scriptsize
 ```{r,hist30, echo = TRUE, eval = TRUE}
 library(biscale)
