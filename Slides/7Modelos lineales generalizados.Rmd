@@ -1,0 +1,512 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Modulo 6: Modelos lineales generalizados"
+author: |
+  | Andrés Gutiérrez, Ph.D.
+  | Stalyn Guerrero M.Sc. 
+date: "CEPAL - Unidad de Estadísticas Sociales"
+output:
+  beamer_presentation:
+    colortheme: dove
+    fonttheme: default
+    incremental: yes
+    theme: Berkeley
+    toc: yes
+    slide_level: 2
+    #highlight: pygments
+  ioslides_presentation:
+    incremental: yes
+    widescreen: yes
+    toc: yes
+  slidy_presentation:
+    incremental: yes
+Email: andres.gutierrez@cepal.org
+editor_options:
+  markdown:
+    wrap: 90
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+rm(list = ls())
+```
+
+## Lectura de la base
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds")
+data("BigCity", package = "TeachingSampling")
+```
+
+## Definir diseño de la muestra con `srvyr`
+
+```{r}
+library(srvyr)
+
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+
+```
+
+
+## definir nuevas variables
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo = ifelse(Employment == "Unemployed", 1, 0))
+```
+
+
+## Tablas de doble entrada para el tamaño 
+
+```{r}
+library(survey)
+(tab_pobreza_sexo <- svyby(~factor(pobreza), ~Sex,
+      FUN = svytotal, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, ci=T, keep.var=TRUE))
+(tab <- svytable(~pobreza + Sex, design = diseno))
+```
+
+## Tablas de doble entrada para el proporción 
+\footnotesize
+```{r}
+(tab_pobreza_sexo <- svyby(~factor(pobreza), ~Sex,
+      FUN = svymean, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, ci=T, keep.var=TRUE))
+prop.table(tab, margin = 2)
+```
+
+## Prueba de independencia F 
+$$
+\hat{\pi}_{rc}=\frac{n_{r+}}{n_{++}}\times\frac{n_{+c}}{n_{++}}
+$$
+
+$$
+\chi_{pearsom}^{2}=n_{++}\times\sum_{r}\sum_{c}\left(\frac{\left(p_{rc}-\hat{\pi}_{rc}\right)^{2}}{\hat{\pi}_{rc}}\right)
+$$
+
+$$
+G^{2}=2\times n_{++}\times\sum_{r}\sum_{c}p_{cr}\times\ln\left(\frac{p_{rc}}{\hat{\pi}_{rc}}\right)
+$$
+donde, $R$ es el número de filas y $C$ representa el número de columnas, la prueba tiene $(R-1)\times (C-1)$ grados de libertad.  
+
+## Prueba de independencia F 
+
+$$
+\chi^2_{(R-S)} = \chi^2_{(Pearson)}\big/GDEFF
+$$
+
+$$
+G^2_{(R-S)}  =  G^2\big/GDEFF
+$$
+
+con $GDEFF$ el efecto generalizado del diseño, esta dado por 
+
+\footnotesize
+$$
+GDEFF=\frac{\sum_{r}\sum_{c}\left(1-p_{rc}\right)d^{2}\left(p_{rc}\right)-\sum_{r}\left(1-p_{r+}\right)d^{2}\left(p_{r+}\right)-\sum_{c}\left(1-p_{+c}\right)d^{2}\left(p_{+c}\right)}{\left(R-1\right)\left(C-1\right)}
+$$
+
+
+## Prueba de independencia F 
+
+$$
+F_{R-S,Pearson}=\chi_{R-S}^{2}\big/\left[\left(R-1\right)\left(C-1\right)\right]\sim F_{\left(R-1\right)\left(C-1\right),\left(R-1\right)\left(C-1\right)df}
+$$
+
+$$
+F_{R-S,LRT}=G_{R-S}^{2}\big/\left(C-1\right)\sim F_{\left(C-1\right),df}
+$$
+
+donde $C$ es el número de columnas de la tabla cruzada 
+
+
+## Prueba de independencia ChiSq 
+```{r}
+ summary(tab, statistic = "Chisq")
+```
+
+## Prueba de independencia F 
+```{r}
+summary(tab, statistic = "F")
+```
+
+## Estadístico de Wald 
+
+$$
+Q_{wald}=\hat{\boldsymbol{Y}^{t}}\left(\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}\right)^{-1}\hat{\boldsymbol{Y}}
+$$
+donde, 
+
+$$
+\hat{\boldsymbol{Y}}=\left(\hat{N}-E\right)
+$$
+es un vector de $R\times C$ de  diferencias entre los recuentos de celdas observadas y esperadas, esto es, $\hat{N}_{rc}-E_{rc}$ 
+
+La matriz  $\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}$, representa la matriz de varianza-covarianza estimada para el vector de diferencias.
+
+## Estadístico de Wald 
+
+La matriz $\boldsymbol{H}$  es la inversa de la matriz $\boldsymbol{J}$ dada por: 
+$$
+\boldsymbol{J}=-\left[\frac{\delta^{2}\ln PL\left(\boldsymbol{B}\right)}{\delta^{2}\boldsymbol{B}}\right] \mid \boldsymbol{B}=\hat{\boldsymbol{B}}
+$$
+
+$$
+\sum_{h}\sum_{a}\sum_{i}x_{hai}^{t}x_{hai}w_{hai}\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\left(1-\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\right)
+$$
+Bajo la hipótesis nula, el estadístico 
+$$
+Q_{wald}\sim\chi_{\left(R-1\right)\times\left(C-1\right)}^{2}
+$$
+
+## Estadístico de Wald 
+\footnotesize
+$$
+F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\right)\left(C-1\right)df}\sim F_{\left(R-1\right)\left(C-1\right),df-\left(R-1\right)\left(C-1\right)+1}
+$$
+
+
+## Prueba de independencia Wald 
+```{r}
+summary(tab, statistic = "Wald")
+```
+
+## Prueba de independencia adjWald 
+```{r}
+summary(tab, statistic = "adjWald")
+```
+
+## Prueba de independencia lincom 
+```{r}
+ summary(tab, statistic = "lincom")
+```
+
+## Prueba de independencia saddlepoint 
+```{r}
+summary(tab, statistic = "saddlepoint")
+```
+
+## Modelo log lineal para tablas de contingencia 
+
+$$
+\log(p_{ijk}) = \mu + \lambda_i^X + \lambda_j^Y + \lambda_k^Z + \lambda_{ij}^{XY}  ,   
+$$
+
+donde:
+
+  - $p_{ijk}=$ la proporción esperada en la celda bajo el modelo. 
+
+  - $\mu = \log(p_{0})=\frac{1}{\#\ de\ celdas}$
+
+## Modelo log lineal para tablas de contingencia 
+
+```{r}
+mod1 <- svyloglin(~pobreza+Sex + pobreza:Sex , diseno)
+(s1 <- summary(mod1))
+```
+
+## Modelo log lineal para tablas de contingencia 
+```{r}
+mod2 <- svyloglin(~pobreza+Sex, diseno)
+(s2 <- summary(mod2))
+```
+
+## Modelo log lineal para tablas de contingencia 
+```{r}
+anova(mod1, mod2)
+```
+
+## Modelo de regresión logistica 
+
+$$
+g(\pi(x))=logit(\pi(x)) = z = \ln\left(\frac{\pi(x)}{1-\pi(x)}\right) = B_0 + B_1x_1+\dots+B_px_p
+$$
+$$
+\hat{\pi}\left(\boldsymbol{x}\right)=\frac{\exp\left(\boldsymbol{X\hat{B}}\right)}{1-\exp\left(\boldsymbol{X\hat{B}}\right)}=\frac{\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}{1-\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}
+$$
+
+$$
+PL\left(\boldsymbol{B}\mid X\right)=\prod_{i=1}^{n}\left\{ \pi\left(x_{i}\right)^{y_{i}}\left(1-\pi\left(x_{i}\right)\right)^{^{1-y_{i}}}\right\} ^{w_{i}}
+$$
+
+con 
+$$
+\pi\left(x_{i}\right)=\frac{\exp\left(x_{i}\boldsymbol{B}\right)}{1-\exp\left(x_{i}\boldsymbol{B}\right)}
+$$
+$$
+var\left(\boldsymbol{\hat{B}}\right)=\boldsymbol{J}^{-1}var\left(S\left(\hat{\boldsymbol{B}}\right)\right)\boldsymbol{J}^{-1}
+$$
+
+## Modelo de regresión logistica 
+\footnotesize
+$$
+S\left(B\right)=\sum_{h}\sum_{a}\sum_{i}w_{hai}\boldsymbol{D}_{hai}^{t}\left[\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)\left(1-\pi_{hai}\left(\boldsymbol{B}\right)\right)\right]^{-1}\left(y_{hai}-\pi_{hai}\left(\boldsymbol{B}\right)\right)=0
+$$
+
+$$
+D_{hai} = \frac{\delta\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)}{\delta B_{j}}
+$$
+$j=0,\dots,p$
+
+## Prueba de Wald para los parámetros del modelo
+
+$$
+G=-2\ln\left[\frac{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{reduced}}{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{full}}\right]
+$$
+
+$$
+\hat{\psi}=\exp\left(\hat{B}_{1}\right)
+$$
+
+$$
+CI\left(\psi\right)=\exp\left(\hat{B}_{j}\pm t_{df,1-\frac{\alpha}{2}}se\left(\hat{B}_{j}\right)\right)
+$$
+
+
+## Tablas de contingencia 
+
+```{r, echo=FALSE}
+tb_temp <- svyby(~pobreza, ~Sex,
+      FUN = svymean, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, vartype = c("se", "ci"), keep.var=TRUE) %>% data.frame()
+rownames(tb_temp)= NULL
+tb_temp
+tb_temp <- svyby(~pobreza, ~Zone,
+      FUN = svymean, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, vartype = c("se", "ci"), keep.var=TRUE) %>% data.frame()
+rownames(tb_temp)= NULL
+tb_temp
+tb_temp <- svyby(~pobreza, ~Region,
+      FUN = svymean, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, vartype = c("se", "ci"), keep.var=TRUE) %>% data.frame()
+rownames(tb_temp)= NULL
+tb_temp
+```
+
+
+## Prueba de independencia ChiSq 
+```{r, echo=T,results="asis"}
+## Pearson's X^2: Rao & Scott adjustment
+pobreza_sex <-  svychisq(
+  formula = ~pobreza + Sex, design = diseno)
+tidy( pobreza_sex) %>% select(-method)
+```
+
+## Prueba de independencia ChiSq 
+```{r, echo=T,results="asis"}
+pobreza_Zona <- svychisq(
+  formula = ~pobreza + Zone, design = diseno)
+tidy(pobreza_Zona) %>% select(-method)
+```
+
+## Prueba de independencia ChiSq 
+```{r, echo=T,results="asis"}
+pobreza_Region <- svychisq(
+  formula = ~pobreza + Region, design = diseno)
+   tidy(pobreza_Region) %>% select(-method)
+```
+
+## Modelo log lineal ajustado
+```{r}
+mod_loglin <- svyglm(
+  pobreza ~ Sex + Zone + Region,
+   family=quasibinomial, design=diseno)
+tidy(mod_loglin) 
+```
+
+## Plot de la distribución de los betas
+\small
+```{r}
+plot_summs(mod_loglin, 
+           scale = TRUE, plot.distributions = TRUE)
+```
+
+## Modelo log lineal ajustado
+```{r}
+bind_cols(
+data.frame(exp_estimado = exp(coef(mod_loglin))),
+as.data.frame(exp(confint(mod_loglin)))
+)
+```
+
+## Estadístico de Wald sobre los parámetros
+
+```{r}
+regTermTest(model = mod_loglin, ~Sex)
+regTermTest(model = mod_loglin, ~Zone)
+regTermTest(model = mod_loglin, ~Region)
+```
+
+
+## Efecto del modelo. 
+```{r, plot_effecto,  echo=TRUE, eval=FALSE}
+effe_sex <- effect_plot(mod_loglin, pred = Sex,
+                        interval = TRUE)
+effe_Zona <-effect_plot(mod_loglin, pred = Zone, 
+                        interval = TRUE)
+effe_Region <- effect_plot(mod_loglin, pred = Region,
+                           interval = TRUE)
+(effe_sex |effe_Zona)/effe_Region
+```
+
+## Efecto del modelo.
+```{r, plot_effecto,  echo=FALSE, eval=TRUE}
+```
+ 
+
+## Modelo log lineal ajustado con interacciones
+```{r}
+mod_loglin_int <- svyglm(pobreza ~ Sex + Zone + Region +
+                           Sex:Zone + Sex:Region,
+                     family=quasibinomial, design=diseno)
+tab_mod <- tidy(mod_loglin_int) %>% arrange(p.value)
+tab_mod %>% slice(1:6)
+```
+
+## Modelo log lineal ajustado con interacciones
+```{r}
+tab_mod %>% slice(7:12)
+```
+
+## Plot de la distribución de los betas
+
+```{r}
+plot_summs(mod_loglin_int, mod_loglin, scale = TRUE, plot.distributions = TRUE)
+```
+
+## Modelo log lineal ajustado
+```{r, echo=FALSE}
+bind_cols(
+data.frame(exp_estimado = exp(coef(mod_loglin_int))),
+as.data.frame(exp(confint(mod_loglin_int)))
+)
+```
+
+## Estadístico de Wald sobre los parámetros
+
+```{r}
+regTermTest(model = mod_loglin_int, ~Sex)
+regTermTest(model = mod_loglin_int, ~Zone)
+regTermTest(model = mod_loglin_int, ~Region)
+```
+
+## Estadístico de Wald sobre los parámetros
+
+```{r}
+regTermTest(model = mod_loglin_int, ~Sex:Zone)
+regTermTest(model = mod_loglin_int, ~Sex:Region)
+```
+
+## Efecto del modelo. 
+```{r, plot_effecto2,  echo=TRUE, eval=FALSE}
+effe_sex <- effect_plot(mod_loglin_int, pred = Sex,
+                        interval = TRUE)
+effe_Zona <-effect_plot(mod_loglin_int, pred = Zone, 
+                        interval = TRUE)
+effe_Region <- effect_plot(mod_loglin_int, pred = Region,
+                           interval = TRUE)
+(effe_sex |effe_Zona)/effe_Region
+```
+
+## Efecto del modelo.
+```{r, plot_effecto2,  echo=FALSE, eval=TRUE}
+```
+
+
+## Modelo log lineal ajustado con Q_Weighting
+```{r}
+fit_wgt <- lm(wk ~  Sex + Zone + Region , data = encuesta)
+wgt_hat <- predict(fit_wgt)
+encuesta %<>% mutate(wk2 = wk/wgt_hat)
+
+diseno_qwgt <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk2,
+    nest = T
+  )
+```
+
+
+## Modelo log lineal ajustado con Q_Weighting
+```{r,mod_qwt,echo=TRUE,eval=FALSE}
+diseno_qwgt <- diseno_qwgt %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+
+mod_loglin_qwgt <- svyglm(pobreza ~ Sex + Zone + Region,
+                     family=quasibinomial,
+                     design=diseno_qwgt)
+(tab_mod <- tidy(mod_loglin_qwgt) )
+```
+
+## Modelo log lineal ajustado con Q_Weighting
+```{r,mod_qwt,echo=FALSE,eval=TRUE}
+```
+
+## Plot de la distribución de los betas
+
+```{r}
+plot_summs(mod_loglin, mod_loglin_qwgt, 
+           scale = TRUE, plot.distributions = TRUE)
+```
+
+## Modelo log lineal ajustado
+```{r, echo=FALSE}
+bind_cols(
+data.frame(exp_estimado = exp(coef(mod_loglin_qwgt))),
+as.data.frame(exp(confint(mod_loglin_qwgt)))
+)
+```
+
+## Estadístico de Wald sobre los parámetros
+
+```{r}
+regTermTest(model = mod_loglin_qwgt, ~Sex)
+regTermTest(model = mod_loglin_qwgt, ~Zone)
+regTermTest(model = mod_loglin_qwgt, ~Region)
+```
+
+## Efecto del modelo. 
+```{r, plot_effecto3,  echo=TRUE, eval=FALSE}
+effe_sex <- effect_plot(mod_loglin_qwgt, pred = Sex,
+                        interval = TRUE)
+effe_Zona <-effect_plot(mod_loglin_qwgt, pred = Zone, 
+                        interval = TRUE)
+effe_Region <- effect_plot(mod_loglin_qwgt, pred = Region,
+                           interval = TRUE)
+(effe_sex |effe_Zona)/effe_Region
+```
+
+## Efecto del modelo.
+```{r, plot_effecto3,  echo=FALSE, eval=TRUE}
+```
+
+
+## ¡Gracias!
+
+::: yellow
+*Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::
+
+
+  
