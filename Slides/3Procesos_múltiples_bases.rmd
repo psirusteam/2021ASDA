@@ -1,9 +1,7 @@
 ---
 title: "Análisis de encuestas de hogares con R"
-subtitle: "Módulo 3: Procesamiento de múltiples encuestas de hogares en R"
-author: |
-  | Andrés Gutiérrez, Ph.D.
-  | Stalyn Guerrero, M.Sc. 
+subtitle: "Módulo 4: Procesamiento de múltiples encuestas de hogares en R"
+author: "" 
 date: "CEPAL - Unidad de Estadísticas Sociales"
 output:
   beamer_presentation:
@@ -89,7 +87,7 @@ sapply(rep(10, 5), rnorm , simplify = TRUE)
 ```
 
 
-### Familia de funciones `map`
+## Familia de funciones `map`
 La familia `map` amplio las posibilidades para trabajar con los elementos de las listas.
 `map` hace parte del paquete `purrr`, el cual cuenta con funciones adicionales como: 
 
@@ -200,13 +198,14 @@ data_path %<>% mutate(
 ```
 
 ## Definir el diseño (resultado)
+Definir el diseño muestral de esta forma es posible dado que las bases han pasado por un proceso de estandarización 
 
 ![](Imagenes/Otros/Lectura%20multiple%20base2.PNG)
 
 # Variables continuas
 
 ## Estimación de promedios en multiples encuestas
-
+En está sintaxis es incluida la función `unnest` que permite "desanidar" los resultados en un objeto tipo `tibble`
 ```{r, tab_mult010, eval=FALSE}
 library(tidyr)
 data_path %>% mutate(ingreso_medios = diseno %>%
@@ -216,6 +215,8 @@ data_path %>% mutate(ingreso_medios = diseno %>%
   select(pais,ingreso_medios) %>%
   unnest(ingreso_medios)
 ```
+Para que la comparación sea justa entre los países, se compran los resultados en términos de lp así  $ingreso = \frac{ingcorte}{lp}$
+
 
 ## Estimación de promedios en multiples encuestas (Resultado)
 
@@ -223,13 +224,15 @@ data_path %>% mutate(ingreso_medios = diseno %>%
 ```
 
 ## Estimación de promedios por sexo en multiples encuestas
-
+Cuando tiene un conocimiento claro de las bases de datos, es posible generar resultados por niveles de agregación que sean transversales, por ejemplo, Sexo, área, Divisiones administrativas. 
 ```{r, tab_mult02, eval=FALSE}
 data_path %>% mutate(
   ingreso_medios = diseno %>%
-           map( ~ .x %>% group_by(sexo) %>%
-    summarise(ingreso = survey_mean(ingcorte / lp)))) %>%
-  select(pais, ingreso_medios) %>%
+    map(~ .x %>% 
+          group_by(sexo) %>%
+          summarise(
+            ingreso = survey_mean(ingcorte / lp)))) %>%
+          select(pais, ingreso_medios) %>%
   unnest(ingreso_medios) %>%
   head(14)
 ```
@@ -243,7 +246,8 @@ data_path %>% mutate(
 
 ```{r, tab_mult03, eval=FALSE}
 data_path %>% mutate(ingreso_medios = diseno %>%
-             map(~.x %>% group_by(areageo2) %>% 
+             map(~.x %>%
+                   group_by(areageo2) %>% 
             summarise(
              ingreso = survey_mean(ingcorte/lp)))) %>% 
   select(pais,ingreso_medios) %>%
@@ -315,6 +319,8 @@ temp <- data_path[1:3,] %>% mutate(
 ```{r, tab_mult06, eval=TRUE, echo=FALSE}
 ```
 
+# Operando múltiples variables en una base. 
+
 ## Procesando múltimples variables en la encuesta. 
 
 En estas ocasión es de interés procesar obtener resultados para múltiples preguntas que tienen características similares, para este ejemplo tomaremos las variables, `sys_pe` , `gan_pe` ,  `yemp_pe` , `yjub_pe`, `yotr_pe` y `yto_pe`. Para esto procedemos así: 
@@ -335,7 +341,7 @@ encuesta_BOL2020 <- data_path$path[2] %>%
         upm = `_upm`,
         estrato = `_estrato`,
         fep = `_fep`)
-# definir diseno 
+# Definir diseño 
 diseno = as_survey_design(
       .data = encuesta_BOL2020,
       ids = upm,
@@ -345,7 +351,7 @@ diseno = as_survey_design(
 ```
 
 ## Estimando los resultados. 
-
+Para operar con múltiples variables se hace uso de la funciones terminadas en `_at` para un listado de variables, `_all` cuando la operación aplica a todas las variables de la base o `_if` si es para un tipo de variables. 
 ```{r, eval=TRUE}
 resul_mult <- diseno %>%
   filter(edad >= 15, sexo == 2) %>% 
@@ -354,8 +360,10 @@ resul_mult <- diseno %>%
   summarise_at(.vars =  all_of(name_var),
    ~survey_mean(.))
 ```
+Aquí se introduce las funciones `mutate_at` y `summrise_at` si por tener el listado de variables definido en `name_var`. 
 
-
+## Estimando los resultados. 
+Después de organizar la tabla de salida se llega 
 ```{r, eval=TRUE, echo=FALSE}
 resul_mult  %>% gather(key = "variable") %>%
   mutate(
@@ -373,7 +381,7 @@ resul_mult  %>% gather(key = "variable") %>%
 
 ## Estimando los resultados, condicionada. 
 En esta rutina como obtener estimaciones cuando tenemos que hacer filtro para cada variable
-
+\tiny
 ```{r, eval=TRUE}
 resul_mult_cond <- map_dfc(
   name_var,
@@ -384,7 +392,7 @@ resul_mult_cond <- map_dfc(
 )
 ```
 
-
+\scriptsize
 ```{r, eval=TRUE, echo=FALSE}
 resul_mult_cond  %>% gather(key = "variable") %>%
   mutate(
@@ -402,7 +410,7 @@ resul_mult_cond  %>% gather(key = "variable") %>%
 
 
 ## Estimando los resultados por grupo. 
-
+En el procesamiento es posible incluir niveles de agregación. 
 ```{r, eval=TRUE}
 resul_mult_grupo <- diseno %>%
   filter(edad >= 15, sexo == 2) %>% 
@@ -432,6 +440,8 @@ resul_mult_grupo  %>%
 
 ```
 
+# Operando múltiples variables en múltiples archivos. 
+
 ## Estimando de resultados en múltiples variables en múltiples archivos
 
 ```{r}
@@ -442,7 +452,7 @@ data_path %<>%
     ~ read_dta(.x) %>% 
       mutate(upm = `_upm`,
              estrato = `_estrato`, fep = `_fep`)),
-    # Definicion del diseño
+    # Definición del diseño
     diseno = encuesta %>% map(
       ~ as_survey_design(
         .data = .x,
@@ -455,6 +465,7 @@ data_path %<>%
 ```
 
 ## Procesando los multiples archivos en múltiples variables. 
+El proceso es una generalización de las sintaxis vista previamente. 
 
 ```{r}
 multi_archivo <- data_path %>% transmute(pais,

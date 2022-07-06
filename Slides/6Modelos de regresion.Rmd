@@ -1,9 +1,7 @@
 ---
 title: "Análisis de encuestas de hogares con R"
 subtitle: "Módulo 5: Modelos de regresión"
-author: |
-  | Andrés Gutiérrez, Ph.D.
-  | Stalyn Guerrero, M.Sc. 
+author: ""
 date: "CEPAL - Unidad de Estadísticas Sociales"
 output:
   beamer_presentation:
@@ -41,17 +39,13 @@ library(broom)
 ```
 
 ## Lectura de la base
-
+El proceso inicia con la lectura de la muestra y definición del objeto `survey.design` 
 ```{r}
+options(survey.lonely.psu="adjust")
 encuesta <- readRDS("../Data/encuesta.rds")
 data("BigCity", package = "TeachingSampling")
-```
 
-## Definir diseño de la muestra con `srvyr`
-
-```{r}
 library(srvyr)
-options(survey.lonely.psu="adjust")
 diseno <- encuesta %>%
   as_survey_design(
     strata = Stratum,
@@ -59,12 +53,11 @@ diseno <- encuesta %>%
     weights = wk,
     nest = T
   )
-
 ```
 
 ## Sub-grupos
 
-Extraer sub-grupos de la encuesta.
+Dividir la muestra en sub-grupos de la encuesta.
 
 ```{r}
 sub_Urbano <- diseno %>%  filter(Zone == "Urban")
@@ -94,7 +87,7 @@ $$
 $$
 E\left(y\mid x\right)=B_{0}+B_{1}x
 $$
-donde $ B = [B_0, B1]$ y el estimador de $B$ esta dado por: 
+donde $B = [B_0, B1]$ y el estimador de $B$ esta dado por: 
 
 $$
 \hat{B}=\boldsymbol{\left(X^{T}WX\right)^{-1}X^{T}Wy}
@@ -109,7 +102,7 @@ $$
 $$
 
 ## Modelo nulo (Q_W)
-
+El primer modelo ajustado es utilizado para construir los **qweights**, que serán de útilidad más adelante.   
 ```{r}
 modNul <- svyglm(Income ~ 1, design = diseno)
 fit_Nul <- lm(wk ~ 1, data = encuesta)
@@ -128,8 +121,8 @@ modNul_qw <- svyglm(Income ~ 1, design = diseno_qwgt)
 
 ```
 
-## Scaterplot con los datos poblacionales
-
+## Scatterplot con los datos poblacionales
+Para observar que existe una correlación entre el ingreso y el gasto es construido un scatterplot.
 ```{r, plot1, echo = TRUE, eval = FALSE}
 library(ggplot2); library(ggpmisc)
 plot_BigCity <- 
@@ -143,28 +136,32 @@ plot_BigCity <-
 
 plot_BigCity + stat_poly_eq(formula = y~x, 
   aes(label = paste(..eq.label..,
-   ..rr.label.., sep = "~~~")), parse = TRUE)
+   ..rr.label.., sep = "~~~"),size = 3), parse = TRUE)
 
 ```
 
-## Scaterplot con los datos poblacionales
-
+## Scatterplot con los datos poblacionales
+El resultado obtenido es: 
 ```{r, plot1, echo = FALSE, eval = TRUE}
 ```
 
 ## Modelo poblacional
-
+El modelo poblacional es estimado con `lm`
 ```{r, tab1, results='asis', echo=TRUE, eval = TRUE}
 library(modelsummary)
 fit <- lm(Income ~ Expenditure, data = BigCity)
+```
+La función `modelsummary` permite tener la siguiente tabla
+
+```{r, results='asis', echo=FALSE, eval = TRUE}
 modelsummary(list(Pob = fit),statistic = NULL, 
              title = "Modelo BigCity",
               output = "markdown", 
              gof_omit = 'BIC|Log|AIC|F' )
 ```
 
-## Scaterplot con los datos encuesta sin ponderar
-
+## Scatterplot con los datos encuesta sin ponderar
+Ahora, una sintaxis similar permite construir el scatterplot en la muestra. 
 ```{r, plot2, echo = TRUE, eval = FALSE}
 plot_sin <- 
   ggplot(data = encuesta,
@@ -176,16 +173,17 @@ plot_sin <-
   theme_cepal()
 plot_sin + stat_poly_eq(formula = y~x, 
   aes(label = paste(..eq.label..,
-     ..rr.label.., sep = "~~~")), parse = TRUE)
+     ..rr.label.., sep = "~~~"), size = 5),
+  parse = TRUE)
 ```
 
-## Scaterplot con los datos encuesta sin ponderar
+## Scatterplot con los datos encuesta sin ponderar
 
 ```{r, plot2, echo = FALSE, eval = TRUE}
 ```
 
 ## Modelo sin ponderar
-
+El modelo ignorando los factores de expansión quedas así: 
 ```{r, tab2, echo = TRUE, eval = FALSE}
 fit_sinP <- lm(Income ~ Expenditure, data = encuesta)
 stargazer(fit_sinP, header = FALSE,
@@ -198,8 +196,8 @@ stargazer(fit_sinP, header = FALSE,
 ```{r, tab2, results='asis', echo = FALSE, eval = TRUE}
 ```
 
-## Scaterplot con los datos encuesta ponderado
-
+## Scatterplot con los datos encuesta ponderado
+Para que el gráfico tenga en cuenta las ponderaciones debe agregar ` mapping = aes(weight = wk)` en la función `geom_smooth`.
 ```{r, plot3, echo = TRUE, eval = FALSE}
 plot_Ponde <- 
   ggplot(data = encuesta,
@@ -214,16 +212,16 @@ plot_Ponde + stat_poly_eq(formula = y~x,
   aes(weight = wk, 
     label = paste(..eq.label..,
       ..rr.label.., sep = "~~~")), 
-  parse = TRUE)
+  parse = TRUE,size = 5)
 ```
 
-## Scaterplot con los datos encuesta sin ponderar
+## Scatterplot con los datos encuesta sin ponderar
 
 ```{r, plot3, echo = FALSE, eval = TRUE}
 ```
 
 ## Modelo ponderado `lm`
-
+La función `lm` permite incluir los `weights` en la estimación de los coeficientes. 
 ```{r, tab3, echo = TRUE, eval = FALSE}
 fit_Ponde <- lm(Income ~ Expenditure, 
                 data = encuesta, weights = wk)
@@ -238,9 +236,10 @@ stargazer(fit_Ponde, header = FALSE,
 ```
 
 ## Modelo ponderado svyglm
-
+Ahora, emplee la función `svyglm` de `survey`
 ```{r, tab4, echo = TRUE, eval = TRUE}
-fit_svy <- svyglm(Income ~ Expenditure, design = diseno)
+fit_svy <- svyglm(Income ~ Expenditure, 
+                  design = diseno)
 modNul <- svyglm(Income ~ 1, design = diseno)
 s1 <- summary(fit_svy)
 s0 <-summary(modNul)
@@ -267,7 +266,7 @@ $$
 ```{r, echo = TRUE, eval = TRUE}
 s1$dispersion
 s0$dispersion
-(R2 = 1-78320/149477)
+(R2 = 1-119563/243719)
 n = sum(diseno_qwgt$variables$wk)
 (R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
 ```
@@ -329,7 +328,7 @@ modelsummary(list("Sin Pond" = fit_sinP,
 ```
 
 ## Metodología de los Q_Weighting de pfefferman
-
+Ahora, se definen los Q_Weighting de pfefferman: 
 ```{r}
 fit_wgt <- lm(wk ~ Expenditure, data = encuesta)
 wgt_hat <- predict(fit_wgt)
@@ -346,7 +345,7 @@ diseno_qwgt <- encuesta %>%
 ```
 
 ## Modelos empleando los Q_Weighting
-
+Estimando los coeficientes del modelo con los Q_Weighting de pfefferman
 ```{r}
 library(tidyr)
 fit_svy_qwgt <- svyglm(Income ~ Expenditure,
@@ -358,11 +357,12 @@ tidy(fit_svy_qwgt)
 ```
 
 ## Calculo del $R^2$
-
+Obtenido el $R^2$
+\scriptsize
 ```{r}
 s1$dispersion
 s0$dispersion
-(R2 = 1-78053/148800)
+(R2 = 1-119563/243719)
 n = sum(diseno_qwgt$variables$wk2)
 (R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
 
@@ -379,8 +379,8 @@ modelsummary(list("svyglm(wgt)" = fit_svy,
              gof_omit = 'BIC|Log')
 ```
 
-## Modelo escogido
-
+## Modelo propuesto
+Después de realizar la comparación entre las diferentes formas de estimar los coeficientes del modelo se opta  por la metodología consolidadas en  `svyglm`
 ```{r, mod1, echo=TRUE, eval=FALSE, results='asis'}
 diseno_qwgt %<>% mutate(Age2 = Age^2) 
 mod_svy <- svyglm(
@@ -389,21 +389,21 @@ mod_svy <- svyglm(
 s1 <- summary(mod_svy)
 s0 <- summary(modNul)
 stargazer(mod_svy, header = FALSE,single.row = T,
-           title = "Modelo", 
+           title = "Modelo propuesto", 
            style = "ajps",  omit.stat=c("bic", "ll"))
 ```
 
-## Resumen del Modelo escogido
+## Resumen del modelo propuesto
 
 ```{r,mod1, echo=FALSE,eval=TRUE,  results='asis'}
 ```
 
 ## Calculo del $R^2$
-
+Estimación del $R^2$ para el modelo propuesto 
 ```{r}
 s1$dispersion
 s0$dispersion
-(R2 = 1-76821/148800)
+(R2 = 1-121651/250708)
 n = sum(diseno_qwgt$variables$wk2)
 (R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
 
@@ -417,7 +417,9 @@ $$
 
 $$
 H=W^{1/2}X\left(X^{T}WX\right)^{-1}W^{1/2}
-$$ donde $$
+$$ donde 
+
+$$
 W=diag\left\{ \frac{w_{1}}{V\left(\hat{\mu}_{1}\right)\left[g'\left(\mu_{1}\right)\right]^{2}},\ldots,\frac{w_{n}}{V\left(\hat{\mu}_{1}\right)\left[g'\left(\mu_{n}\right)\right]^{2}}\right\} 
 $$
 
@@ -434,8 +436,8 @@ plot(mod_svy)
 
 ## Pruebas de normalidad
 
--   $H_0$: Los errores proviene de una distribución normal.
--   $H_1$: Los errores no proviene de una distribución normal.
+$H_0$: Los errores proviene de una distribución normal.
+$H_1$: Los errores no proviene de una distribución normal.
 
 Algunas librerías que podemos emplear son:
 
@@ -445,23 +447,29 @@ library(nortest)  #REALIZA 10 PRUEBAS
 library(moments)  #REALIZA 1 PRUEBA
 ```
 
-Extrayendo residuales standarizados
+## Librería `svydiags` para el diagnostico del modelo. 
+La librería `svydiags` esta pensada ayudar en el diagnostico de modelos de regresión lineal, siendo una extensión más para complementar el paquete `survey`. 
+
+Con las librería svydiags se extraen los residuales estandarizados así: 
 
 ```{r, echo = TRUE, eval=TRUE}
 library(svydiags)
 stdresids = as.numeric(svystdres(mod_svy)$stdresids)
-diseno_qwgt$variables %<>% mutate(stdresids = stdresids)
+diseno_qwgt$variables %<>% 
+  mutate(stdresids = stdresids)
 ```
 
 ## Histograma de los residuales
-
+El primer análisis de normalidad se hace por medio del histograma. 
 ```{r, hist1, echo = TRUE, eval = FALSE}
 ggplot(data = diseno_qwgt$variables,
        aes(x = stdresids)) +
-  geom_histogram(aes(y = ..density..), colour = "black", 
+  geom_histogram(aes(y = ..density..),
+                 colour = "black", 
                  fill = "blue", alpha = 0.3) +
   geom_density(size = 2, colour = "blue") +
-  geom_function(fun = dnorm, colour = "red", size = 2) +
+  geom_function(fun = dnorm, colour = "red",
+                size = 2) +
   theme_cepal()+labs(y = "")
 ```
 ## Histograma de los residuales
@@ -476,7 +484,7 @@ nortest::lillie.test(diseno_qwgt$variables$stdresids)
 ```
 
 ## Varianza constante
-
+Agregando las predicciones a la base de datos. 
 ```{r, echo=TRUE, eval=TRUE,size="tiny"}
 library(patchwork)
 diseno_qwgt$variables %<>% 
@@ -543,12 +551,14 @@ donde $df=$ grados de liberta basados en el diseño.
 Por otro lado, la literatura considera a las observaciones influyentes cuando sean mayores a 2 o 3
 
 ## Detección de observaciones influyentes (Distancia de cook)
-
+La función `svyCooksD` pertenece a la librería `svydiags`
 ```{r, dcook, eval=FALSE}
- d_cook = data.frame(cook = svyCooksD(mod_svy), 
-                    id = 1:length(svyCooksD(mod_svy)))
+ d_cook = data.frame(
+   cook = svyCooksD(mod_svy), 
+     id = 1:length(svyCooksD(mod_svy)))
 
-ggplot(d_cook, aes(y = cook, x = id)) + geom_point() + 
+ggplot(d_cook, aes(y = cook, x = id)) +
+  geom_point() + 
   theme_bw(20)
 ```
 
@@ -595,11 +605,13 @@ d_dfbetas %>% slice(1:10L)
 
 ```{r eval=TRUE, echo=TRUE}
 d_dfbetas$id <- 1:nrow(d_dfbetas)
-d_dfbetas <- reshape2::melt(d_dfbetas,  id.vars = "id")
+d_dfbetas <- reshape2::melt(d_dfbetas, 
+                            id.vars = "id")
 cutoff <- svydfbetas(mod_svy)$cutoff
 d_dfbetas %<>%
   mutate(
-    Criterio = ifelse(abs(value) > cutoff, "Si", "No"))
+    Criterio = ifelse(
+      abs(value) > cutoff, "Si", "No"))
 
 tex_label <- d_dfbetas %>% 
   filter(Criterio == "Si") %>%
@@ -640,7 +652,8 @@ vec_hat <- svyhat(mod_svy, doplot = FALSE)
 d_hat = data.frame(hat = vec_hat, 
                     id = 1:length(vec_hat))
 d_hat %<>% mutate(
-  C_cutoff = ifelse(hat > (3 * mean(hat)), "Si", "No"))
+  C_cutoff = ifelse(hat > (3 * mean(hat)),
+                    "Si", "No"))
 
 ggplot(d_hat, aes(y = hat, x = id)) +
   geom_point(aes(col = C_cutoff)) + 
@@ -712,7 +725,7 @@ $$
 mod_svy %>% broom::tidy()
 
 ```
-
+\footnotesize
 $$
 \hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})= 91.6319 +1.0893x_{1i} + 48.7667x_{2i} + 8.0933x_{3i} + 0.0115x_{4i}
 $$
@@ -772,7 +785,7 @@ pred %>% slice(1:6L)
 ```{r,pred01, echo=FALSE,eval=TRUE}
 ```
 
-## Scaterplot de la predicción
+## Scatterplot de la predicción
 
 ```{r, plot_pred, echo=TRUE,eval=FALSE}
 pd <- position_dodge(width = 0.2)
@@ -786,7 +799,7 @@ ggplot(pred %>% slice(1:100L),
   theme_bw()
 ```
 
-## Scaterplot de la predicción
+## Scatterplot de la predicción
 
 ```{r, plot_pred, echo=FALSE,eval=TRUE}
 ```
@@ -896,8 +909,8 @@ data_path %<>% mutate(
 
 ![](Imagenes/Otros/Lectura%20multiple%20base2.PNG)
 
-## Estimación de las personas debajo de la linea de pobreza en multiples encuestas
-
+## Estimación de los coeficiente del modelo en multiples encuestas
+\footnotesize
 ```{r, tab_mult1, eval=FALSE}
 library(tidyr)
 data_path[1:4,] %>% mutate(
@@ -909,7 +922,7 @@ data_path[1:4,] %>% mutate(
   dplyr::select(pais,model) %>% unnest(model) 
 ```
 
-## Estimación de las personas con ingresos de bajo de la linea de pobreza en multiples encuestas (Resultado)
+## Estimación de los coeficiente del modelo en multiples encuestas (Resultado)
 
 ```{r, tab_mult1, eval=TRUE, echo=FALSE}
 ```
