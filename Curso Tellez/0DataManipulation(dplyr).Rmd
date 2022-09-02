@@ -2,22 +2,28 @@
 title: "Análisis de encuestas de hogares con R"
 subtitle: "Módulo 0: Introducción a R y dplyr"
 date: "CEPAL - Unidad de Estadísticas Sociales"
-output:
-  ioslides_presentation:
-    incremental: yes
-    widescreen: yes
-    toc: yes
-  slidy_presentation:
-    incremental: yes
-  beamer_presentation:
-    colortheme: dove
-    fonttheme: default
-    incremental: yes
-    theme: Berkeley
-    toc: yes
-    slide_level: 2
+# output:
+#  ioslides_presentation:
+#    incremental: yes
+#    widescreen: yes
+#    toc: yes
+#  slidy_presentation:
+#    incremental: yes
+#  beamer_presentation:
+ #   colortheme: dove
+#    fonttheme: default
+ #   incremental: yes
+#    theme: Berkeley
+ #   toc: yes
+ #   slide_level: 2
     #highlight: pygments
-Email: andres.gutierrez@cepal.org
+# Email: andres.gutierrez@cepal.org
+
+output:
+   html_document:
+    toc: true
+    toc_float: true
+    pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -31,6 +37,12 @@ ggplot2::theme_set(theme_bw())
 
 
 # Manejando una base de encuestas de hogares con R {.build}
+
+## Fundamentos básicos de R y Rstudio
+
+R fue creado en 1992 en Nueva Zelanda por Ross Ihaka y Robert Gentleman. A manera introductoria, R es un software diseñado para realizar análisis estadístico tanto sencillos como complejos. Este software a ganado popularidad en el gremio estadístico y no estadístico puesto que su manejo es sencillo y además, es de libre uso (Puede descargarse en https://www.r-project.org). Es decir, no requiere de ninguna licencia para su utilización. Como lo menciona Santana Sepúlveda, S., & Mateos Farfán, E. (2014) R es un lenguaje de programación de libre distribución, bajo Licencia GNU, y se mantiene en un ambiente para el cómputo estadístico y gráfico. Este software está diseñado para utilizarse en distintos ambientes como, Windows, MacOS o Linux. El concepto de *ambiente* está enfocado en caracterizarlo como un sistema totalmente planificado y coherente, en lugar de una acumulación gradual de herramientas muy específicas y poco flexibles, como suele ser con otro software de análisis de datos. 
+
+AHora bien, como se mencionó antyeriormente, R es un lenguaje de programación por ende, su interfase es poco amigable para los que incian en este lenguaje. Por esto, se creo RStudio el cual es un Entorno de Desarrollo Integrado (IDE, por sus siglas en inglés), lo que significa que RStudio es un programa que permite manejar R y utilizarlo de manera más cómoda y agradable.
 
 ::: white
 Es posible utilizar **R** como herramienta de análisis de una base de datos que contenga información de una encuesta de hogares.

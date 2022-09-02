@@ -86,6 +86,8 @@ diseno <- encuesta %>% # Base de datos.
 
 ## Histograma ponderado para la variable ingreso
 A continuación observan la sintaxis para crear una histograma de la variable ingreso haciendo uso la función `svyhist` de la librería `survey`  
+
+
 ```{r, hist1, eval = FALSE}
 svyhist(
   ~ Income ,
@@ -105,9 +107,11 @@ svyhist(
 
 ## Comparación de histogramas
 
+
 ```{r, hist2, eval=FALSE}
 data("BigCity", package = "TeachingSampling")
 par(mfrow = c(1,3))
+
 svyhist(   ~ Income,
   diseno, main = "Ponderado",
   col = "green", breaks = 50
@@ -133,7 +137,7 @@ hist(  BigCity$Income,
 
 En ocasiones se desea realizar estimaciones por sub-grupos de la población, en este caso se extraer 4 sub-grupos de la encuesta.
 
-```{r}
+```{r, eval=TRUE}
 sub_Urbano <- diseno %>%  filter(Zone == "Urban")
 sub_Rural  <- diseno %>%  filter(Zone == "Rural")
 sub_Mujer  <- diseno %>%  filter(Sex == "Female")
@@ -142,6 +146,7 @@ sub_Hombre <- diseno %>%  filter(Sex == "Male")
 
 ## Histograma ponderado en sub-grupos
 La sintaxis incluye un filtro de las personas mayores a 18 años
+
 \scriptsize
 ```{r, hist3, eval=FALSE}
 par(mfrow = c(1,2))
@@ -224,6 +229,7 @@ confint(svytotal (~Expenditure, diseno, deff=T))
 ```
 
 ## Estimación de totales por sub-grupos
+
 En esta oportunidad se hace uso de la función `cascade`de la libraría `srvyr`, la cual permite agregar
 la suma de las categorías al final tabla. 
 La función `group_by` permite obtener resultados agrupados por los niveles de interés. 
@@ -240,6 +246,7 @@ diseno %>% group_by(Sex) %>%
 
 Un resultado más interesante para las variables ingreso y gasto es el promedio de la variable. 
 
+
 ```{r}
 svymean(~Income, diseno, deff=T) %>% 
   data.frame()
@@ -247,6 +254,7 @@ confint(svymean (~Income, diseno, deff=T))
 ```
 
 ## Estimación de la media e intervalo de confianza del gasto
+
 
 ```{r}
 svymean (~Expenditure, diseno, deff=T) %>% 
@@ -258,6 +266,7 @@ confint(svymean (~Expenditure, diseno, deff=T))
 ## Estimación de la media por sub-grupos
 
 La función `cascade` regresa el resultado promedio ignorando los niveles. 
+
 
 ```{r}
 diseno %>% group_by(Sex) %>%
@@ -287,6 +296,7 @@ diseno %>% group_by(Zone) %>%
 
 \scriptsize
 
+
 ```{r}
 diseno %>% group_by(Zone, Sex) %>%
   cascade(
@@ -303,6 +313,7 @@ diseno %>% group_by(Zone, Sex) %>%
 
 La estimación de la desviación estándar se obtiene con `survey_var` 
 
+
 ```{r}
 (tab_sd <- diseno %>% group_by(Zone) %>% 
    summarise(Sd = sqrt(
@@ -313,7 +324,9 @@ La estimación de la desviación estándar se obtiene con `survey_var`
   ) )))
 ```
 
+
 ## Estimación de la desviación estándar de los ingresos por sub-grupo
+
 
 ```{r}
 (tab_sd <- diseno %>% group_by(Zone, Sex) %>% 
@@ -327,9 +340,11 @@ La estimación de la desviación estándar se obtiene con `survey_var`
 
 ```
 
+
 ## Estimación de la mediana para gastos
 
 La estimación de la median se obtiene con `survey_median` 
+
 
 ```{r}
 diseno %>% summarise(Mediana = 
@@ -342,6 +357,8 @@ diseno %>% summarise(Mediana =
 
 ## Estimación de la mediana por sub-grupo
 
+
+
 ```{r}
 diseno %>% group_by(Zone) %>% 
   summarise(Mediana = 
@@ -353,6 +370,7 @@ diseno %>% group_by(Zone) %>%
 ```
 
 ## Estimación de la mediana por sub-grupo
+
 
 ```{r}
 diseno %>% group_by(Sex) %>% 
@@ -368,6 +386,7 @@ diseno %>% group_by(Sex) %>%
 
 La estimación de la median se obtiene con `survey_quantile`
 
+
 ```{r}
 diseno %>% 
   summarise(
@@ -382,6 +401,7 @@ diseno %>%
 
 ## Estimación del quantil 0.25 para el gasto por sub-grupo
 
+
 ```{r}
 diseno %>% group_by(Sex) %>% 
   summarise(
@@ -395,6 +415,7 @@ diseno %>% group_by(Sex) %>%
 ```
 
 ## Estimación del quantile 0.25 para el gasto por sub-grupo
+
 
 ```{r}
 diseno %>% group_by(Zone) %>% 
@@ -497,6 +518,7 @@ svygini( ~Expenditure, design = diseno_gini) %>%
 ```
 
 ## Estimación del curva de Lorenz.
+
 La **curva de Lorenz** es una representación gráfica de la desigualdad en la distribución de la renta, para obtener la representación gráfica de está usamos la función `svylorenz`.
 
 ```{r, out.width="70%", fig.align="center"}
@@ -510,6 +532,7 @@ Los analistas de los datos de las encuestas suelen estar interesados en hacer in
 
 ## Pruebas de diferencia medias de los ingresos entre hombres y mujeres
 La comparación de los ingresos medios entre hombre y mujeres de la muestra se realiza así: 
+
 ```{r, test1, eval=FALSE}
 svyttest(Income ~ Sex, diseno)
 ```
@@ -524,6 +547,7 @@ svyttest(Income ~ Sex, diseno)
 El resultando indica que no hay diferencia entre los ingreso medios. 
 
 ## Pruebas de diferencia medias de los ingresos entre hombres y mujeres en la zona urbana
+
 También es posible realizar el procedimiento en sub-grupos de interés.  
 
 ```{r, test2, eval=FALSE}
@@ -539,6 +563,7 @@ svyttest(Income ~ Sex, sub_Urbano)
 El resultando indica que no hay diferencia entre los ingreso medios.
 
 ## Pruebas de diferencia medias de los ingresos entre hombres y mujeres mayores a 18 años
+
 
 ```{r, test3, eval=FALSE}
 svyttest(Income ~ Sex, diseno %>% filter(Age > 18))
