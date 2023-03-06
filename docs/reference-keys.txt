@@ -53,4 +53,9 @@ modelos-lineales-generalizados-en-encuestas-de-hogares
 prueba-de-independencia-f
 estadístico-de-wald
 modelo-log-lineal-para-tablas-de-contingencia
+modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud
+acerca-de-las-muestras-aleatorias-y-su-análisis
+método-de-máxima-verosimilitud
+método-de-máxima-pseudo-verosimilitud
+modelo-multinomial
 referencias
