@@ -1,0 +1,683 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE,
+                      cache = TRUE)
+```
+
+# Análisis de variables categóricas en encuestas de hogares
+
+En ocasiones, no es sencillo distinguir entre las variables denominada cualitativos y cuantitativos puesto que, algunas variables de tipo cuantitativo pueden llegar a considerarse como categóricas si se divide el rango de valores de la variable en intervalos o categorías. Un ejemplo de esto es la variable edad, que en una encuesta de hogares se pregunta como variable cuantitativa y esta se puede dividir, por ejemplo, en Colombia, en las siguientes categorías: Adolescencia (12 - 18 años), Juventud (14 - 26 años), Adultez (27- 59 años), Persona Mayor (60 años o más), envejecimiento y vejez.  
+
+Por otro lado, una variable categórica también se puede convertir en una variable cuantitativa realizando, por ejemplo, un análisis de correspondencias. Esto ocurre en muchas situaciones cuando se requiere construir índices. Por ejemplo, índice de fuerza laboral. En el contexto de encuestas, las preguntas que contienen variables categóricas son uno de los tipos de preguntas más usuales. Estas preguntas suelen representarse en resultados de porcentajes. Por ejemplo, preguntas relacionadas con parentesco, sexo, si es jefe o jefa de hogar, si la vivienda contiene agua potable, etc.
+
+```{r, eval=T}
+library(tidyverse)
+
+encuesta <- readRDS("Data/encuesta.rds")
+head(encuesta)
+```
+
+**Definición del diseño y creación de variables categóricas**
+
+Se inicia este capítulo haciendo el ajuste del diseño muestral (como se mostró en capítulos anteriores) usando como ejemplo la misma base de datos del capítulo anterior. Luego, para efectos del ejemplo, se genera una variable categórica la cual indica si la persona encuestada está en estado de pobreza o no como sigue:
+
+
+```{r, eval=TRUE}
+library(survey)
+library(srvyr)
+options(survey.lonely.psu = "adjust")
+
+diseno <- encuesta %>% 
+          as_survey_design(
+                           strata = Stratum,  
+                           ids = PSU,         
+                           weights = wk,      
+                           nest = TRUE)
+
+```
+
+A continuación, se define una variable categórica que nace de variables propias de la encuesta,
+
+
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% mutate(
+                     pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+                     desempleo = ifelse(Employment == "Unemployed", 1, 0),
+                     edad_18 = case_when(Age < 18 ~ "< 18 anios", TRUE ~ ">= 18 anios")
+)
+```
+
+Como se pudo observar en el código anterior, se ha introducido la función `case_when` la cual es una extensión del a función `ifelse` que permite crear múltiples categorías a partir de una o varias condiciones. 
+
+Como se ha mostrado anteriormente, en ocasiones se desea realizar estimaciones por sub-grupos de la población, en este caso se extraer 4 sub-grupos de la encuesta y se definen a continuación:
+
+```{r, eval=TRUE}
+sub_Urbano <- diseno %>%  filter(Zone == "Urban")
+sub_Rural  <- diseno %>%  filter(Zone == "Rural")
+sub_Mujer  <- diseno %>%  filter(Sex == "Female")
+sub_Hombre <- diseno %>%  filter(Sex == "Male")
+```
+
+## Estimaciones de totales
+
+En esta sección se realizarán los procesos de estimación de variables categóricas. En primera instancia se presenta cómo se estima los tamaños de la población y subpoblaciones.
+
+
+```{r, eval=TRUE}
+tamano_zona <- diseno %>% group_by(Zone) %>% 
+               summarise( n = unweighted(n()), 
+                          Nd = survey_total(vartype = c("se","ci")))
+
+tamano_zona
+```
+
+En la tabla anterior, *n* denota el número de observaciones en la muestra por Zona y *Nd* denota la estimación del total de observaciones en la población. Adicionalmente, en el código anterior se introdujo la función `unweighted` la cual, calcula resúmenes no ponderados a partir de un conjunto de datos de encuestas.
+
+Para el ejemplo, el tamaño de muestra en la zona rural fue de 1297 personas y para la urbana fue de 1308. Con esta información se logró estimar una población de 72102 con una desviación estándar de 3062.204 en la zona rural y una población de 78164 con desviación estándar de 2847.221 en la zona urbana. Así mismo, con una confianza del 95% se construyeron unos intervalos de confianza para el tamaño poblacional en la zona rural de  (66038.5,	78165.4) y para la urbana de (72526.2,	83801.7).
+
+Ahora bien, empleando una sintaxis similar a la anterior es posible estimar el número de personas en condición de pobreza extrema, pobreza y no pobres como sigue:
+
+```{r, eval=TRUE}
+tamano_pobreza <- diseno %>% group_by(Poverty) %>% 
+                  summarise( Nd = survey_total(vartype = c("se","ci")) )
+tamano_pobreza
+
+```
+
+De la tabla anterior podemos concluir que, la cantidad estimada de personas en estado de no pobreza son 91398.3, en pobreza 37348.9 y pobreza extrema de 21518.7. os demás parámetros estimados se interpretan de la misma manera que para la estimación desagregada por zona. 
+
+En forma similar es posible estimar el número de personas debajo de la línea de pobreza. 
+
+```{r}
+tamano_pobreza <- diseno %>% 
+                  group_by(pobreza) %>% 
+                  summarise(
+                  Nd = survey_total(vartype = c("se","ci")))
+tamano_pobreza
+
+```
+
+Concluyendo para este ejemplo que, 58867.6 personas están por debajo de la línea de pobreza con una desviación estándar de 5731.3 y un intervalo de confianza (47518.9	70216.3).
+
+Otra variable de interés en encuestas de hogares es conocer el estado de ocupación de las personas. A continuación, se muestra el código computacional:
+
+```{r, eval=TRUE}
+tamano_ocupacion <- diseno %>% 
+                    group_by(Employment) %>% 
+                    summarise( Nd = survey_total(vartype = c("se","ci")))
+tamano_ocupacion
+
+
+```
+De los resultados de la estimación se puede concluir que, 4634.8 personas están desempleadas con un intervalo de confianza de (3128.6, 6140.9). 41465.2 personas están inactivas con un intervalo de confianza de (37182.6,	45747.8) y por último, 61877.0 personas empleadas con intervalos de confianza (36784.2, 47793.5).
+
+Utilizando la función `group_by` es posible obtener resultados por más de un nivel de agregación. A continuación, se muestra la estimación ocupación desagregada por niveles de pobreza:
+
+```{r tabs0, echo=TRUE, eval=TRUE}
+tamano_ocupacion_pobreza <- diseno %>% 
+                            group_by(Employment, Poverty) %>% 
+                            cascade( Nd = survey_total(vartype =                                     c("se","ci")), .fill = "Total") %>%
+                            data.frame()
+tamano_ocupacion_pobreza
+   
+
+```
+De lo cual se puede concluir, entre otros que, 44600.3 personas que trabajan no son pobres con un intervalo de confianza (39459.6, 49741.0) y 6421.8  inactivas están en pobreza extrema con un intervalo de confianza de (3806.6,	9037.0).
+
+## Estimación de proporciones
+
+Otro parámetro de interés en las encuestas de hogares, particularmente con variables categóricas es la estimación de las proporciones poblacionales. En esta sección se estudiará la estimación de proporciones y sus errores estándares. En términos de notación se define la estimación de proporciones de población como $p$ y proporciones de población como $\pi$. Es normal observar que en muchos paquetes estadísticos optan por generar estimaciones de proporciones y errores estándar en la escala de porcentaje. *R* Genera las estimaciones de proporciones en escala [0,1]. A continuación, se presenta el código computacional para estimar la proporción de personas por zona:
+
+```{r, eval=TRUE}
+prop_zona <- diseno %>% group_by(Zone) %>% 
+             summarise(
+             prop = survey_mean(vartype = c("se","ci"), 
+                    proportion = TRUE ))
+prop_zona
+```
+Como se pudo observar, se usó la función `survey_mean` para la estimación. Sin embargo, con el parámetro "proportion = TRUE", se le indica a `R` que lo que se desea estimar es una proporción. Para este ejemplo se puede observar que, el 47.9% de las personas viven en zona rural obteniendo un intervalo de confianza comprendido entre (45.2%,	50.7%) y el 52% de las personas viven en la zona urbana con un intervalo de confianza de (49.2%, 54.7%).
+
+La librería `survey` tiene implementado una función específica para estimar proporciones la cual es `survey_prop` que genera los mismos resultados mostrados anteriormente. Le queda al lector la decisión de usar la función con la que más cómodo se sienta. A continuación, se muestra un ejemplo del uso de la función `survey_prop`:
+
+
+```{r, eval=TRUE}
+
+prop_zona2 <- diseno %>% group_by(Zone) %>% 
+              summarise( prop = survey_prop(vartype = c("se","ci") ))
+prop_zona2
+
+```
+
+
+Si el interés ahora se centra en estimar  subpoblaciones por ejemplo, proporción de hombres y mujeres que viven en la zona urbana, el código computacional es:
+
+```{r, eval=TRUE}
+prop_sexoU <- sub_Urbano %>% group_by(Sex) %>% 
+              summarise(prop = survey_prop(vartype = c("se","ci")))
+prop_sexoU
+```
+
+Arrojando como resultado que, el 53.6% de las mujeres y 46.4%  de los hombres viven en la zona urbana y con intervalos de confianza (51%, 56.2%) y (43.7%, 48.9%) respectivamente. Los intervalos anteriores nos reflejan que, con una confianza del 95% la cantidad estimada de mujeres que viven en la zona urbana es de56% y de hombres es de 48%.
+
+Realizando el mismo ejercicio anterior, pero ahora en la zona rural se tiene:
+
+
+```{r, eval=TRUE}
+prop_sexoR <- sub_Rural %>% group_by(Sex) %>% 
+              summarise( n = unweighted(n()),
+                         prop = survey_prop(vartype = c("se","ci")))
+prop_sexoR
+
+```
+
+el 51.6% de las mujeres y el 48.4% de los hombres viven en la zona rural con intervalos de confianza de (49.9%, 53.2%) y (46,7%, 50%) respectivamente. Los intervalos de confianza anteriores nos reflejan que, inclusive, con una confianza del 95%, la cantidad estimada de mujeres en la zona rural es de 53% y de hombres es de 50%. 
+
+
+Ahora bien, si nos centramos solo en la población de hombres en la base de datos y se desea estimar la proporción de hombres por zona, el código computacional es el siguiente: 
+
+
+```{r, eval=TRUE}
+prop_ZonaH <- sub_Hombre %>% group_by(Zone) %>% 
+              summarise(prop = survey_prop(vartype = c("se","ci")))
+prop_ZonaH
+
+```
+
+En la anterior tabla se puede observar que el 49% de los hombres están en la zona rural y el 51% en la zona urbana. Si se observa el intervalo de confianza se puede concluir que, con una confianza del 95%, la población estimada de hombres que viven en la zona rural puede llegar a ser el 52% y en urbana un 54%.
+
+
+Si se realiza ahora el mismo ejercicio para la mujeres el código computacional es:
+
+```{r, eval=TRUE}
+prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
+              summarise(prop = survey_prop(vartype = c("se","ci")))
+prop_ZonaM
+
+```
+
+De la tabla anterior se puede inferir que, el 47% de las mujeres están en la zona rural y el 52% en la zona urbana. Observando también  intervalos de confianza al 95% de (44%, 49%) y (50%, 55%) para las zonas rural y urbana respectivamente. 
+
+Si se desea estimar por varios niveles de desagregación, con el uso de la función `group_by` es posible estimar un mayor número de niveles de agregación al combinar dos o más variables. Por ejemplo, si se desea estimar la proporción de hombres por zona y en estado de pobreza, se realiza de la siguiente manera:
+
+```{r, prop_ZonaH_Pobreza, eval=TRUE}
+
+prop_ZonaH_Pobreza <- sub_Hombre %>%
+                      group_by(Zone, Poverty) %>% 
+                      summarise(
+                      prop = survey_prop(vartype = c("se","ci")))%>%
+                      data.frame()
+prop_ZonaH_Pobreza
+```
+
+De la salida anterior se puede observar que, en la ruralidad, el 19% de los hombres están en pobreza extrema mientras que en la zona urbana el 11% también están en pobreza extrema. Por otro lado, el 54% de los hombres que viven en la zona rural no están en pobreza mientras que, en la zona urbana el 65% no está en esta condición.
+
+El mismo ejercicio anterior para la población de mujeres sería:
+
+
+```{r, eval=TRUE}
+prop_ZonaM_Pobreza <- sub_Mujer %>% 
+                      group_by(Zone, Poverty) %>% 
+                      summarise( prop = survey_prop(vartype = c("se","ci"))) %>%
+                      data.frame()
+prop_ZonaM_Pobreza
+
+```
+
+De la salida anterior se puede observar que, en la ruralidad, el 16% de las mujeres están en pobreza extrema mientras que en la zona urbana el 10% también están en pobreza extrema. Por otro lado, el 55% de las mujeres que viven en la zona rural no están en pobreza mientras que, en la zona urbana el 66% no está en esta condición.
+
+Si lo que se desea ahora es estimar la proporción de hombres empleados o no por zona, se realiza de la siguiente manera:
+
+```{r, eval=TRUE}
+prop_ZonaH_Ocupacion <- sub_Hombre %>%
+                        group_by(Zone, Employment) %>% 
+                        summarise(prop = survey_prop(vartype = c("se","ci")))%>%
+                        data.frame()
+prop_ZonaH_Ocupacion
+```
+
+De la salida anterior se puede observar que, el 5% de los hombres que viven en la ruralidad están desempleados mientras que el 4% de los que viven en la zona urbana están en esta misma condición. Ahora bien, el 52% de los hombres que viven en la ruralidad trabajan mientras que el 51% de los que viven en la zona rural también están empleados.
+
+Si se hace este mismo ejercicio para las mujeres se obtiene:
+
+```{r,prop_ZonaM_Ocupacio, eval=TRUE}
+
+prop_ZonaM_Ocupacion <- sub_Mujer %>% 
+                        group_by(Zone, Employment) %>% 
+                        summarise(prop = survey_prop(vartype = c("se","ci"))) %>%
+                        data.frame()
+prop_ZonaM_Ocupacion
+```
+
+Para las mujeres se puede observar que, el 1% de las mujeres que viven en la ruralidad están desempleados mientras que el 2% de las que viven en la zona urbana están en esta misma condición. Ahora bien, el 24% de las mujeres que viven en la ruralidad trabajan mientras que el 38% de las que viven en la zona rural también están empleados.
+
+Otro parámetro que es de interés es estimar en encuestas de hogares la cantidad de personas menores y mayores de edad en los hogares. A continuación, ejemplificamos la estimación de menores y mayores a 18 años cruzado por pobreza:
+
+```{r, tabs01, echo=TRUE, eval=TRUE}
+
+diseno %>% group_by(edad_18, pobreza) %>% 
+           summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+           data.frame()
+```
+De la anterior salida se puede observar que, el 50% de los menores de edad y el 33% de los mayores de edad están en estado de pobreza. Al observar los intervalos de confianza para los menores de edad en estado de pobreza se puede observar que, dicha estimación puede llegar, con una confianza del 95% a 57% mientras que a los mayores de edad puede llegar a 39%.
+
+Ahora, si se hace este mismo ejercicio, pero esta vez cruzando con la variable que indica empleo se obtiene:
+
+```{r, tabs2, echo=TRUE, eval = TRUE}
+
+diseno %>% group_by(edad_18, desempleo) %>% 
+           summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+           data.frame()
+```
+
+De la tabla anterior se puede observar que, el 0.3% de los menores de edad y el 4% de los mayores de edad están desempleados. Adicionalmente, con una confianza del 95% y basados en la muestra se puede observar que el desempleo en menores de edad puede llegar a 0.7% y para los mayores llega a un 5%.
+
+Por otro lado, si el objetivo ahora es estimar la cantidad de menores de edad en la zona rural se realiza de la siguiente manera:
+
+```{r}
+sub_Rural %>% group_by(edad_18) %>% 
+              summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+              data.frame()
+```
+
+De la anterior tabla se puede observar que, el 37% de las personas que viven en la zona rural de la base de ejemplo son menores de edad con un intervalo de confianza al 95% comprendido entre 31% y 43%.
+
+Como se mencionó al inicio del capítulo, es posible categorizar una variable de tipo cuantitativo como por ejemplo la edad y cruzarla con la variable que categoriza la empleabilidad. A continuación, se estima la edad de las mujeres por rango.
+
+
+```{r,tabtemp1,eval= TRUE}
+
+sub_Mujer %>% mutate(edad_rango = case_when(
+                     Age>= 18 & Age <=35  ~ "18 - 35", TRUE ~ "Otro")) %>%
+                     group_by(edad_rango, Employment) %>% 
+                     summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>% 
+                     data.frame()
+              
+```
+
+De la anterior tabla se puede observar, entre otros que, las mujeres con edades entre 18 y 35 años el 2% están desempleadas y el 45% están empleadas. Análisis similares se pueden hacer para los demás rangos de edades. 
+
+Este mismo ejercicio se puede realizar para los hombres y hacer los mismos análisis. A continuación, se muestra el código computacional:
+
+```{r, tab_01, echo=TRUE,eval= TRUE}
+
+sub_Hombre %>% mutate(edad_rango = case_when(
+                      Age>= 18 & Age <=35  ~ "18 - 35",TRUE ~ "Otro")) %>%
+                      group_by(edad_rango, Employment) %>% 
+                      summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>% 
+                      data.frame()
+```
+
+## Tablas cruzadas. 
+
+Una tabla de contingencia o tablas cruzadas es una herramienta muy utilizada en el análisis de encuestas de hogares puesto que, está conformada por al menos dos filas y dos columnas y representa información de variables categóricos en términos de conteos de frecuencia.  Estas tablas tienen el objetivo de representar de manera resumida, la relación entre diferentes variables categóricas. 
+
+una tabla de contingencia se asume como un arreglo bidimensional de $r=1,\ldots,R$ filas y $c=1,\ldots,C$ columnas. Cabe resaltar que, Las tablas cruzadas o de contingencia no se limitan a dos dimensiones, también se pueden incluir una tercera variable o más, es decir, $l=1,\ldots,L$ subtablas basadas en las categorías de una tercera variable.
+
+Para efectos de ilustración y facilitación de los ejemplos y conceptos teóricos, en esta sección de trabajarán, en su mayoría con tablas $2\times2$. Gráficamente, estas tablas se construyen con frecuencias no estimadas como se muestra a continuación:
+
+
+| Variable 2        | Variable 1                  | Marginal fila|
+|-------------------|-------------|---------------|--------------|
+|                   | 0           | 1             |              |
+| 0                 | $n_{00}$    |   $n_{01}$    | $n_{0+}$     |
+| 1                 |  $n_{10}$   |  $n_{11}$     | $n_{1+}$     |
+| Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
+
+
+A continuación, se muestra la tabla de doble entrada con las frecuencias estimadas o ponderadas:
+
+
+
+| Variable 2        | Variable 1                  | Marginal fila|
+|-------------------|-------------|---------------|--------------|
+|                   | 0           | 1             |              |
+| 0                 | $\hat{N}_{00}$|   $\hat{N}_{01}$| $\hat{N}_{0+}$|
+| 1                 |  $n_{10}$   |  $n_{11}$     | $n_{1+}$     |
+| Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
+
+
+donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por $\hat{N}_{01}={\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}$. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera $p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}$.
+
+*Estimación de proporciones para variables binarias*
+
+La estimación de una sola proporción, $\pi$, para una variable de respuesta binaria requiere solo una extensión directa del estimador de razón mostrado en secciones anteriores. Como lo menciona *Heeringa, S. G. (2017)* Al recodificar las categorías de respuesta originales en una sola variable indicadora $y_{i}$ con valores posibles de 1 y 0 (por ejemplo, sí = 1, no = 0), el estimador de la media de la razón estima la proporción o prevalencia, $\pi$, de "1" en la población está dada por:
+
+$$
+p =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
+ =  \frac{\hat{N}_{1}}{\hat{N}}
+$$
+
+Aplicando Linealización de Taylor (TSL) al estimador de razón de $\pi$ genera el siguiente estimador para la varianza:
+
+$$
+v\left(p\right) \dot{=} \frac{V\left(\hat{N}_{1}\right)+p^{2}V\left(\hat{N}\right)-2\,p\,cov\left(\hat{N}_{1},\hat{N}\right)}{\hat{N}^{2}}
+$$
+
+
+Como es bien sabido en la literatura especializada, cuando la proporción de interés estimada está cerca de 0 o 1, los límites del intervalo de confianza estándar basados en el diseño de muestreo pueden ser menores que 0 o superiores a 1. Lo cual no tendría interpretación por la naturaleza del parámetro. Es por lo anterior que, para solventar este problema se puede realizar cálculos alternativos de IC basados en el diseño de muestreo para las proporciones como lo proponen *Wilson modificado (Rust y Hsu, 2007; Dean y Pagano, 2015)*. El intervalo de confianza utilizando la transformación $Logit\left(p\right)$
+está dado por:
+
+$$
+IC\left[logit\left(p\right)\right]  =  \left\{ ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right\} 
+$$
+
+Por tanto, el intervalo de confianza para $p$ sería:
+
+$$
+IC\left(p\right)  =  \left\{ \frac{exp\left[ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right]}{1+exp\left[ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right]}\right\} 
+$$
+
+Ahora bien, si se el interés es estimar proporciones para variables multinomiales. El estimador es el siguiente:
+
+
+$$
+p_{k}  =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
+ =  \frac{\hat{N}_{k}}{\hat{N}}
+$$
+
+A continuación, siguiendo con la base de ejemplo, se estima la proporción de hombres y mujeres en pobreza y no pobreza junto con su error estándar e intervalos de confianza.
+
+```{r, tab2, eval=T}
+
+prop_sexo_zona <- diseno %>% 
+                  group_by(pobreza,Sex) %>%
+                  summarise(prop = survey_prop(vartype = c("se", "ci"))) %>% 
+                  data.frame()
+
+prop_sexo_zona
+```
+Como se puede observar, el 52.3% de las mujeres y el 47.6% son pobres. Generando intervalos de confianza al 95% de  (49.2%,	55.5%) para las mujeres y (44.5%,	50.7%) para los hombres.
+
+En la librería survey existe una alternativa para estimar tablas de contingencias y es utilizando la función `svyby` como se muestra a continuación:
+
+```{r, eval=TRUE}
+tab_Sex_Pobr <- svyby(formula = ~Sex, by =  ~pobreza, design = diseno, FUN = svymean)
+tab_Sex_Pobr
+```
+
+Como se pudo observar, los argumentos que requiere la función son definir la variable a la cual se desea estimar (formula), las categorías por la cual se desea estimar (by), el diseño muestral (desing) y el parámetro que se desea estimar (FUN). Para la estimación de los intervalos de confianza se utiliza la función *confint* como sigue:
+
+
+Para la estimación de los intervalos de confianza utilizar la función `confint`.
+```{r}
+confint(tab_Sex_Pobr) %>% as.data.frame()
+```
+Los cuales coinciden con los generados anteriormente usando la funicón *group_by*.
+
+Otro análisis de interés relacionado con tablas de doble entrada en encuestas de hogares es estimar el porcentaje de desempleados por sexo.
+
+```{r, tab_02, echo=TRUE,eval=T}
+
+tab_Sex_Ocupa <- svyby(formula = ~Sex,  by = ~Employment,
+                       design = diseno, FUN = svymean)
+tab_Sex_Ocupa
+```
+
+De la anterior salida se puede observar que, el 27.2% de las mujeres y el 72.7% de los hombres están desempleados con errores estándares para estas estimaciones de 5.3% para mujeres y hombres. cuyos intervalos de confianza se calculan a continuación:
+
+```{r}
+confint(tab_Sex_Ocupa) %>% as.data.frame()
+```
+
+
+Si ahora el objetivo es estimar la pobreza, pero por las distintas regiones que se tienen en la base de datos. Primero, dado que la variable *pobreza* es de tipo numérica, es necesario convertirla en factor y luego realizar la estimación con la función `svyby`.
+
+
+```{r, eval=TRUE}
+tab_region_pobreza <- svyby(formula = ~as.factor(pobreza),  by = ~Region, 
+                            design =  diseno, FUN = svymean)
+tab_region_pobreza
+```
+De lo anterior se puede concluir que, en la región Norte, el 35% de las personas están en estado de pobreza mientras que en el sur es el 34%. La pobreza más alta se tiene en la región oriente con un 45% de pobres. Los errores estándares de las estimaciones.
+
+
+
+*Prueba de independencia $\chi^{2}$*
+
+Esta prueba es una de las más utilizadas para determinar si no existe asociación o independencia entre dos variables de tipo cualitativa. En otras palabras, que dos variables sean independientes significa que una no depende de la otra, ni viceversa. 
+
+A modo de ejemplificar la técnica, para una tabla de $2\times2$, la prueba $\chi^{2}$ de personas se define como:
+
+$$
+\chi^{2}  =  n_{++}\sum_{r}\sum_{c}\frac{\left(p_{rc}-\hat{\pi}_{rc}\right)^{2}}{\hat{\pi}_{rc}}
+$$
+
+donde, $\hat{\pi}_{rc}=\frac{n_{r+}}{n_{++}}\,\frac{n_{+c}}{n_{++}}\,p_{r+}\,p_{+c}$.
+
+Para realizar la prueba de independencia $\chi^{2}$ en `R`, se utilizará la función *svychisq* del paquete *srvyr*. Esta función requiere que se definan las variables de interés (formula) y requiere que se le defina el diseño muestral (desing). Ahora, para ejemplificar el uso de esta función tomaremos la base de datos de ejemplo y se probará si la pobreza es independiente del sexo. A continuación, se presentan los códigos computacionales: 
+
+```{r}
+svychisq(formula = ~Sex + pobreza, design = diseno, statistic="F")
+```
+
+Dado que el p-valor es superior al nivel de significancia 5% se puede concluir que, con una confianza del 95% y basado en la muestra, la pobreza no depende del sexo de las personas.
+
+En este mismo sentido, si se desea saber si el desempleo está relacionado con el sexo, se realiza la prueba de hipótesis $\chi^{2}$ como sigue:
+
+```{r, eval=TRUE}
+svychisq(formula = ~Sex + Employment, 
+         design = diseno,  statistic="F")
+```
+
+Concluyendo que, con una confianza del 95% y basado en la muestra se rechaza la hipótesis nula, es decir, no se puede afirmar que las variables sexo y desempleo sean independiente. 
+
+Si en el análisis ahora se quiere verificar que la pobreza de las personas es independiente de las regiones establecidas en la base de datos, se realiza de la siguiente manera:
+
+```{r}
+svychisq(formula = ~Region + pobreza, 
+         design = diseno,  statistic="F")
+```
+
+Concluyendo que, con una confianza del 95% y basado en la muestra hay independencia entre la pobreza y la región. Lo anterior implica que, no existe relación lineal entre las personas en estado de pobreza por región.
+
+**Razón de odds**
+
+Como lo menciona *Monroy, L. G. D. (2018)* La traducción más aproximada del término odds es “la ventaja”, en términos de probabilidades es la posibilidad de que un evento ocurra con relación a que no ocurra, es decir, es un número que expresa cuánto más probable es que se produzca un evento frente a que no se produzca. También se puede utilizar para cuantificar la asociación entre los niveles de una variable y un factor categórico *(Heeringa, S. G. 2017)*.
+
+Suponga que se desea calcular la siguiente razón de odds. 
+
+$$
+ \frac{\frac{P(Sex = Female \mid pobreza = 0 )}{P(Sex = Female \mid pobreza = 1 )}}{
+ \frac{P(Sex = Male \mid pobreza = 1 )}{P(Sex = Male \mid pobreza = 0 )}
+ }
+$$
+
+El procedimiento para realizarlo en `R` sería, primero estimar las proporciones de la tabla cruzada entre las variables sexo y pobreza:
+
+```{r, echo = TRUE, eval = TRUE}
+tab_Sex_Pobr <- svymean(x = ~interaction (Sex, pobreza), design = diseno, 
+                        se=T, na.rm=T, ci=T, keep.vars=T)
+
+tab_Sex_Pobr %>%  as.data.frame()
+
+```
+
+Luego, se realiza el contraste dividiendo cada uno de los elementos de la expresión mostrada anteriormente:
+
+
+```{r, echo = TRUE, eval = TRUE}
+svycontrast(stat = tab_Sex_Pobr, 
+contrasts = quote((`interaction(Sex, pobreza)Female.0`/`interaction(Sex, pobreza)Female.1`) /(`interaction(Sex, pobreza)Male.0`/ `interaction(Sex, pobreza)Male.1`)))
+```
+
+Obtiendo que, se estima que el odds de las mujeres que no están en estado de pobreza es 1.02 comparandolo con el odds de los hombres. En otras palabras, se estima que las probabilidades de que las mujeres no estén en estado de pobreza sin tener en cuenta ninguna otra variable de la encuesta es cera de 2% mayor que las probabilidades de los hombres.
+
+**Diferencia de proporciones en tablas de contingencias**
+
+Como lo menciona *Heeringa, S. G. (2017)* las estimaciones de las proporciones de las filas en las tablas de doble entrada son, de hecho, estimaciones de subpoblaciones en las que la subpoblación se define por los niveles de la variable factorial. Ahora bien, si el interés se centra en estimar diferencias de las proporciones de las categorías entre dos niveles de una variable factorial, se pueden utilizando contrastes. 
+
+A manera de ejemplo, se requiere estimar ahora, el contraste de proporciones de mujeres en estado de pobreza versus los hombres en esta misma condición  ($\hat{p}_F - \hat{p}_M$). Para ellos, primero, estimemos la proporción de hombres y mujeres en estado de pobreza como se ha mostrado en capítulos anteriores:
+
+```{r}
+(tab_sex_pobreza <- svyby(formula = ~pobreza, by = ~Sex, 
+                          design = diseno , svymean, na.rm=T,
+                          covmat = TRUE, vartype = c("se", "ci")))
+```
+
+Ahora bien, para calcular la estimación de la diferencia de proporciones junto con sus errores estándares, se realizarán los siguientes pasos:
+
+-   *Paso 1:* Calcular la diferencia de estimaciones 
+```{r}
+0.3892 - 0.3946			 
+```
+
+
+Con la función `vcov` se obtiene la matriz de covarianzas:
+
+```{r}
+library(kableExtra)
+vcov(tab_sex_pobreza)%>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+
+-   *Paso 2:* El cálculo del error estándar es:   
+
+```{r}
+sqrt(0.0009983 + 0.0013416 - 2*0.0009183)
+```
+
+
+Ahora bien, aplicando la función `svycontrast` se puede obtener la estimación de la diferencia de proporciones anterior: 
+
+```{r}
+svycontrast(tab_sex_pobreza,
+            list(diff_Sex = c(1, -1))) %>%
+  data.frame()
+```
+
+De lo que se concluye que, la diferencia entre las proporciones de mujeres y hombres en estado de pobreza es -0.005 (-0.5%) con una desviación estándar de 0.022.
+
+Otro ejercicio de interés en un análisis de encuestas de hogares es verificar la diferencia del desempleo por sexo. Al igual que el ejemplo anterior, se inicia con la estimación del porcentaje de desempleados por sexo:
+
+```{r}
+tab_sex_desempleo <- svyby(formula = ~desempleo, by = ~Sex, 
+                           design  = diseno %>% filter(!is.na(desempleo)) , 
+                           FUN     = svymean, na.rm=T, covmat = TRUE,
+                           vartype = c("se", "ci"))
+tab_sex_desempleo
+```
+
+Para calcular la estimación de la diferencia de proporciones junto con sus errores estándares, se realizarán los siguientes pasos:
+
+-   *Paso 1*: Diferencia de las estimaciones 
+```{r}
+0.02169 - 0.06783 	
+```
+
+Estimación de la matriz de covarianza: 
+
+```{r}
+vcov(tab_sex_desempleo) %>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+
+-   *Paso 2*: Estimación del error estándar. 
+```{r}
+sqrt(0.00003114	 + 0.00014789 - 2*0.00002081)
+```
+
+Siguiendo el ejemplo anterior, utilizando la función `svycontrast` se tiene que:
+
+```{r}
+svycontrast(tab_sex_desempleo,
+            list(diff_Sex = c(-1, 1))) %>%
+  data.frame()
+```
+
+de lo que se concluye que, la estimación del contraste es 0.04 (4%) con un error estándar de 0.011.
+
+Otro ejercicio que se puede realizar en una encuesta de hogares es ahora estimar la proporción de desempleados por región. Para la realización de este ejercicio, se seguirán los pasos de los dos ejemplos anteriores:
+
+```{r}
+tab_region_desempleo <- svyby(formula =  ~desempleo, by = ~Region, 
+                              design  = diseno %>% filter(!is.na(desempleo)) , 
+                              FUN     = svymean, na.rm=T, covmat = TRUE,
+                              vartype = c("se", "ci"))
+tab_region_desempleo
+
+```
+
+Ahora, el interés es realizar los contrastes siguientes para desempleo: 
+
+$\hat{p}_{Norte} - \hat{p}_{Centro} = 0.01004$, 
+$\hat{p}_{Sur} - \hat{p}_{Centro} = 0.02691$ 	
+$\hat{p}_{Occidente} - \hat{p}_{Oriente} = 0.01046$	
+
+Escrita de forma matricial sería: 
+
+$$
+\left[\begin{array}{ccccc}
+1 & 0 & -1 & 0 & 0\\
+0 & 1 & -1 & 0 & 0\\
+0 & 0 & 0 & 1 & -1
+\end{array}\right]
+$$
+
+La matriz de varianzas y covarianzas es:
+
+```{r, tab_03, echo=TRUE, eval=FALSE}
+vcov(tab_region_desempleo)%>%
+  data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+
+Por tanto, la varianza estimada está dada por:
+
+```{r}
+sqrt(0.0002981 + 0.0002884 - 2*0)
+sqrt(0.0001968 + 0.0002884 - 2*0)
+sqrt(0.0001267 + 0.0004093 - 2*0)
+```
+
+
+Usando la función `svycontrast`, la estimación de los contrastes sería:
+
+```{r}
+svycontrast(tab_region_desempleo, list(
+                             Norte_sur = c(1, 0, -1, 0, 0),
+                             Sur_centro = c(0, 1, -1, 0, 0),
+                             Occidente_Oriente = c(0, 0, 0, 1, -1))) %>% data.frame()
+```
+
+Por último, repitiendo el contraste anterior y los pasos para resolverlo, pero ahora utilizando la variable pobreza se tiene:
+
+```{r}
+tab_region_pobreza <- svyby(formula = ~pobreza, by = ~Region, 
+                            design = diseno %>% filter(!is.na(desempleo)) , 
+                            FUN = svymean, na.rm=T, covmat = TRUE,
+                            vartype = c("se", "ci"))
+tab_region_pobreza
+```
+
+El interés se centra en realizar los contrastes siguientes para pobreza: 
+
+$\hat{p}_{Norte} - \hat{p}_{Centro}$, 
+$\hat{p}_{Sur}-\hat{p}_{Centro}$ 	
+$\hat{p}_{Occidente}-\hat{p}_{Oriente}$	
+
+Escrita de forma matricial es: 
+
+$$
+\left[\begin{array}{ccccc}
+1 & 0 & -1 & 0 & 0\\
+0 & 1 & -1 & 0 & 0\\
+0 & 0 & 0 & 1 & -1
+\end{array}\right]
+$$
+
+Y, utilizando la función `svycontrast` se obtiene:
+
+```{r}
+svycontrast(tab_region_pobreza, list(
+                Norte_sur = c(1, 0, -1, 0, 0),
+                Sur_centro = c(0, 1, -1, 0, 0),
+                Occidente_Oriente = c(0, 0, 0, 1, -1))) %>% data.frame()
+```
+
+
+
+
+
