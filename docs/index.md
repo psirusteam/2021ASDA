@@ -26,6 +26,8 @@ output:
   gitbook:
     df_print: kable
     css: "style.css"
+  html_document:
+    keep_md: false
 # Compilar así:
 # bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 # bookdown::render_book("index.Rmd", "bookdown::epub_book")
