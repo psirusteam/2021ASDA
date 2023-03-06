@@ -9,13 +9,13 @@ rmd_files: [
   "01-Intro.Rmd",
   "02-Conceptos.Rmd",
   "03-Basesdedatos.Rmd",
-  "04-Continuas.Rmd",
-  "05-Categóricas.Rmd",
-  "06-Regresión.Rmd",
-  "07-Gráficas.Rmd", 
-  "08-Generalizados.Rmd", 
-  "09-Generalizados2.Rmd",
-  "11-Imputación.Rmd",
+  # "04-Continuas.Rmd",
+  # "05-Categóricas.Rmd",
+  # "06-Regresión.Rmd",
+  # "07-Gráficas.Rmd", 
+  # "08-Generalizados.Rmd", 
+  # "09-Generalizados2.Rmd",
+  # "11-Imputación.Rmd",
 
   "99-Referencias.Rmd"
   ]
