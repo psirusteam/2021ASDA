@@ -8,11 +8,11 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Diseño y análisis de encuestas de hogares</a></li>
+        <li><a href="./">Análisis de encuestas con R</a></li>
       after: |
-        <li><a Diseño y análisis de encuestas de hogares</a></li>
+        <li><a Análisis de encuestas con R </a></li>
     download: [pdf, epub, mobi]
-    edit: https://github.com/psirusteam/HHS-Handbook/%s
+    edit: https://github.com/psirusteam/2021ASDA/%s
     sharing:
       github: yes
       facebook: no
