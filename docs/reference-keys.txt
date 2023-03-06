@@ -1,3 +1,4 @@
+tab:unnamed-chunk-4
 introducción
 conceptos-básicos-en-encuestas-de-hogares
 universo-de-estudio-y-población-objetivo
@@ -34,4 +35,12 @@ análisis-de-la-relación-entre-dos-variable-continuas
 prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares
 estimando-razones-en-encuestas-de-hogares
 estimando-contrastes-en-encuestas-de-hogares
+análisis-de-variables-categóricas-en-encuestas-de-hogares
+estimaciones-de-totales
+estimación-de-proporciones
+tablas-cruzadas.
+modelos-de-regresión-bajo-diseños-de-muestreo-complejos
+estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
+diagnóstico-del-modelo
+inferencia-sobre-los-parámetros-del-modelo
 referencias
