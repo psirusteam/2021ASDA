@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Cración de proyectos en R | Análisis de encuestas con R</title>
+  <title>4.5 Análisis de la relación entre dos variable continuas | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.5 Análisis de la relación entre dos variable continuas | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.5 Análisis de la relación entre dos variable continuas | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="algunas-librerías-de-interés.html"/>
-<link rel="next" href="lectura-de-las-bases-de-datos-y-manipulación.html"/>
+<link rel="prev" href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"/>
+<link rel="next" href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,44 +202,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cración-de-proyectos-en-r" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Cración de proyectos en <code>R</code><a href="cración-de-proyectos-en-r.html#cración-de-proyectos-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez se descargan e instalan las librerías o paquetes en <code>R</code> el paso siguientes es crear proyectos. Un proyecto de R se define como un archivo que contiene los archivos de origen y contenido asociados con el trabajo que se está realizando. Adicionalmente, contiene información que permite la compilación de cada archivo de R a utilizar, mantiene la información para integrarse con sistemas de control de código fuente y ayuda a organizar la aplicación en componentes lógicos.</p>
-<p>Ahora bien, por una cultura de buenas practicas de programación, se recomienda crear un proyecto en el cual se tenga disponible toda la información a trabajar. A continuación, se muestran los pasos para crear un proyecto dentro de <code>RStrudio</code>.</p>
-<ul>
-<li><p><strong>Paso 1:</strong> Abrir <code>RStudio</code>.</p></li>
-<li><p><strong>Paso 2:</strong> ir a file -&gt; New Project <img src="Imagenes/Cap%200/Proyecto1.png" width="450" alt="Paso 2: Crear el proyecto" /></p></li>
-<li><p><em>Paso 3:</em> Tipos de proyecto.</p></li>
-</ul>
-<p>Para este ejemplo se tomará <em>New Directory</em></p>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto2.png" width="450" alt="" />
-<p class="caption"><em>Tipos de proyectos</em></p>
-</div>
-<p>Algo a tener en cuenta en este paso es que en <em>New Directory</em> <code>RStudio</code> brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar. Ahora bien, si se cuenta con algunos código previamente desarrollados y se desea continuar con ese proyecto, se debe tomar la opción <em>Existing Directory</em> . Por último, Si se cuenta con cuenta en <em>Git</em> y se desea tener una copia de seguridad, se debe emplear la opción <em>Version Control</em>.</p>
-<ul>
-<li><em>Paso 4:</em> Seleccionar el tipo de proyecto.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto3.png" width="450" alt="" />
-<p class="caption"><em>Seleccionar el tipo de proyecto</em></p>
-</div>
-<ul>
-<li><em>Paso 5</em>: Diligenciar el nombre del proyecto y la carpeta de destino.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto4.png" width="450" alt="" />
-<p class="caption"><em>Nombre de proyecto</em></p>
-</div>
-<p>Al realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.</p>
+<div id="análisis-de-la-relación-entre-dos-variable-continuas" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Análisis de la relación entre dos variable continuas<a href="análisis-de-la-relación-entre-dos-variable-continuas.html#análisis-de-la-relación-entre-dos-variable-continuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En muchos análisis de variables relacionadas con encuestas de hogares no solo basta con analizar el comportamiento de variables de manera individual, por ejemplo, ingresos medios de hombres y mujeres en un país sino también, analizar la diferencia entre los ingresos de los hombres y las mujeres. Esto último con el fin de ir cerrando la brecha salarial que existe.</p>
+<p>En este capítulo se estudiará la prueba de hipótesis para diferencia de medias, se darán las herramientas computacionales para estimar razones y contrastes.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="algunas-librerías-de-interés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lectura-de-las-bases-de-datos-y-manipulación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +244,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/03-Basesdedatos.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/04-Continuas.Rmd",
 "text": "Edit"
 },
 "history": {

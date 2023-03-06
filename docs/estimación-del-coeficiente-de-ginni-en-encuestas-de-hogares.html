@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Cración de proyectos en R | Análisis de encuestas con R</title>
+  <title>4.4 Estimación del coeficiente de Ginni en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.4 Estimación del coeficiente de Ginni en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.4 Estimación del coeficiente de Ginni en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="algunas-librerías-de-interés.html"/>
-<link rel="next" href="lectura-de-las-bases-de-datos-y-manipulación.html"/>
+<link rel="prev" href="estimación-puntual.html"/>
+<link rel="next" href="análisis-de-la-relación-entre-dos-variable-continuas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,44 +202,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cración-de-proyectos-en-r" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Cración de proyectos en <code>R</code><a href="cración-de-proyectos-en-r.html#cración-de-proyectos-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez se descargan e instalan las librerías o paquetes en <code>R</code> el paso siguientes es crear proyectos. Un proyecto de R se define como un archivo que contiene los archivos de origen y contenido asociados con el trabajo que se está realizando. Adicionalmente, contiene información que permite la compilación de cada archivo de R a utilizar, mantiene la información para integrarse con sistemas de control de código fuente y ayuda a organizar la aplicación en componentes lógicos.</p>
-<p>Ahora bien, por una cultura de buenas practicas de programación, se recomienda crear un proyecto en el cual se tenga disponible toda la información a trabajar. A continuación, se muestran los pasos para crear un proyecto dentro de <code>RStrudio</code>.</p>
+<div id="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Estimación del coeficiente de Ginni en encuestas de hogares<a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para iniciar esta sección tengamos en cuenta la siguiente reflexión: <em>Definir lo justo siempre será difícil y es algo a lo que quizá sea poco realista aspirar a conseguir. Sin embargo si estamos un poco más conscientes de cómo la desigualdad afecta nuestra libertad y cómo se refleja en el bienestar y calidad de vida de las personas, podremos poner en contexto una discusión que tendremos cada vez más presente en el mundo y en el país.</em></p>
+<p>La desigualdad en todos los aspectos es un problema más comunes en todos los países del mundo. Particularmente, la desigualdad económica es un problema que atañe a muchas instituciones internacionales como, por ejemplo, Naciones Unidas quien tiene este problema detectado en los Objetivos de Desarrollo Sostenibles (ODS, por sus siglas). Dado lo anterior, es clave poder medir la desigualdad económica de los hogares en los países y para esto, el indicador más utilizado es el coeficiente de Gini (CG). El valor del índice de Gini se encuentra entre 0 y 1. Un valor del coeficiente de Gini de <span class="math inline">\(G = 0\)</span> indica perfecta igualdad en la distribución de la riqueza, con valores más grandes significa una desigualdad cada vez mayor en la distribución de la riqueza. Siguiendo la ecuación de estimación de <em>Binder y Kovacevic (1995)</em>, un estimador del coeficiente de Gini es:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat{G}\left(y\right) &amp; = &amp; \frac{2\times\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}^{*}\hat{F}_{h\alpha i}y_{h\alpha i}-1}{\bar{y}_{\omega}}
+\end{eqnarray*}\]</span></p>
+<p>Donde,</p>
 <ul>
-<li><p><strong>Paso 1:</strong> Abrir <code>RStudio</code>.</p></li>
-<li><p><strong>Paso 2:</strong> ir a file -&gt; New Project <img src="Imagenes/Cap%200/Proyecto1.png" width="450" alt="Paso 2: Crear el proyecto" /></p></li>
-<li><p><em>Paso 3:</em> Tipos de proyecto.</p></li>
+<li><p><span class="math inline">\(\omega_{h\alpha i}^{*}=\frac{\omega_{h\alpha i}}{\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}}\)</span>.</p></li>
+<li><p><span class="math inline">\(\hat{F}_{h\alpha i}=\)</span> La estimación de la CDF en el conglomerado <span class="math inline">\(\alpha\)</span> en el estrato <span class="math inline">\(h\)</span>.</p></li>
+<li><p><span class="math inline">\(\bar{y}_{\omega}=\)</span> La estimación del promedio.</p></li>
 </ul>
-<p>Para este ejemplo se tomará <em>New Directory</em></p>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto2.png" width="450" alt="" />
-<p class="caption"><em>Tipos de proyectos</em></p>
-</div>
-<p>Algo a tener en cuenta en este paso es que en <em>New Directory</em> <code>RStudio</code> brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar. Ahora bien, si se cuenta con algunos código previamente desarrollados y se desea continuar con ese proyecto, se debe tomar la opción <em>Existing Directory</em> . Por último, Si se cuenta con cuenta en <em>Git</em> y se desea tener una copia de seguridad, se debe emplear la opción <em>Version Control</em>.</p>
-<ul>
-<li><em>Paso 4:</em> Seleccionar el tipo de proyecto.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto3.png" width="450" alt="" />
-<p class="caption"><em>Seleccionar el tipo de proyecto</em></p>
-</div>
-<ul>
-<li><em>Paso 5</em>: Diligenciar el nombre del proyecto y la carpeta de destino.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto4.png" width="450" alt="" />
-<p class="caption"><em>Nombre de proyecto</em></p>
-</div>
-<p>Al realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.</p>
+<p>Para calcular el índice de Gini y su varianza estimada en una encuesta de hogares, <code>R</code> tiene cargados los procedimientos en la librería <code>convey</code>. A continuación, se muestra la sintaxis de cómo se realiza la estimación del índice de Gini para los hogares en la base de ejemplo de este capítulo.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb134-2"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb134-2" aria-hidden="true" tabindex="-1"></a> diseno_gini <span class="ot">&lt;-</span> <span class="fu">convey_prep</span>(diseno)</span>
+<span id="cb134-3"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb134-3" aria-hidden="true" tabindex="-1"></a><span class="fu">svygini</span>( <span class="sc">~</span>Income, <span class="at">design =</span> diseno_gini) <span class="sc">%&gt;%</span></span>
+<span id="cb134-4"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb134-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code></pre></div>
+<pre><code>##             gini    Income
+## Income 0.4132757 0.0186633</code></pre>
+<p>En primer lugar, se carga el diseño de muestreo con la función <code>convey_prep</code>. Luego, se estima el índice Gini con la función <code>svygini</code>. En los argumentos de esta última función se introducen la variable ingresos y el diseño muestral complejo.</p>
+<p>Por otro lado, si el interés ahora es estimar la <strong>curva de Lorenz</strong>. La cual, según <em>Kovacevic, M. S. et. al (1997)</em> para una distribución dada de ingresos, traza el porcentaje acumulado de la población (desplegado desde el más pobre hasta el más rico) frente a su participación en el ingreso total. El área entre la curva de Lorenz y la línea de 45 grados se conoce como el área de Lorenz. El índice de Gini es igual al doble del área de Lorenz. Una población con la curva de Lorenz más cerca de la línea de 45 grados tiene una distribución de ingresos más equitativa. Si todos los ingresos son iguales, la curva de Lorenz degenera a la línea de 45 grados.</p>
+<p>Para realizar la curva de Lorenz en <code>R</code> se utiliza la función <code>svylorenz</code>. A continuación, se muestran los códigos computacionales para realizar la curva de Lorenz para los ingresos:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb136-2"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">svylorenz</span>(<span class="at">formula =</span> <span class="sc">~</span>Income, </span>
+<span id="cb136-3"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb136-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">design =</span> diseno_gini, </span>
+<span id="cb136-4"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb136-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">quantiles =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">05</span>), </span>
+<span id="cb136-5"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html#cb136-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">alpha =</span> .<span class="dv">01</span> )</span></code></pre></div>
+<p><img src="04-Continuas_files/figure-html/unnamed-chunk-21-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<pre><code>## $quantiles
+##        0        0.05        0.1       0.15        0.2       0.25        0.3
+## Income 0 0.006819101 0.01759645 0.03165963 0.04922299 0.06943653 0.09258712
+##             0.35       0.4      0.45       0.5      0.55       0.6      0.65
+## Income 0.1181331 0.1469261 0.1791978 0.2158231 0.2565784 0.3027002 0.3537989
+##              0.7      0.75       0.8      0.85       0.9      0.95 1
+## Income 0.4096304 0.4706565 0.5398749 0.6174169 0.7042464 0.8151774 1
+## 
+## $CIs
+## , , Income
+## 
+##        0        0.05        0.1       0.15        0.2       0.25        0.3
+## (lower 0 0.006189268 0.01644571 0.02973329 0.04643347 0.06564963 0.08770299
+## upper) 0 0.007448933 0.01874718 0.03358597 0.05201251 0.07322343 0.09747124
+##             0.35       0.4      0.45       0.5      0.55       0.6      0.65
+## (lower 0.1120660 0.1396359 0.1705777 0.2056539 0.2447898 0.2898807 0.3397823
+## upper) 0.1242001 0.1542163 0.1878180 0.2259923 0.2683671 0.3155197 0.3678154
+##              0.7      0.75       0.8      0.85       0.9      0.95 1
+## (lower 0.3943025 0.4542246 0.5227820 0.5991455 0.6835287 0.7983336 1
+## upper) 0.4249582 0.4870884 0.5569677 0.6356883 0.7249642 0.8320213 1</code></pre>
+<p>Los argumentos que requiere la función son, inicialmente, los ingresos de los hogares y el diseño muestral complejo. Adicionalmente, se definen una secuencia de probabilidades que define la suma de los cuantiles a calcular (quantiles) y por último, un número que especifica el nivel de confianza para el gráfico (alpha).</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="algunas-librerías-de-interés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lectura-de-las-bases-de-datos-y-manipulación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimación-puntual.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-de-la-relación-entre-dos-variable-continuas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +290,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/03-Basesdedatos.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/04-Continuas.Rmd",
 "text": "Edit"
 },
 "history": {

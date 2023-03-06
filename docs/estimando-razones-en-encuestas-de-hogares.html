@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Cración de proyectos en R | Análisis de encuestas con R</title>
+  <title>4.7 Estimando razones en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.7 Estimando razones en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.7 Estimando razones en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="algunas-librerías-de-interés.html"/>
-<link rel="next" href="lectura-de-las-bases-de-datos-y-manipulación.html"/>
+<link rel="prev" href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"/>
+<link rel="next" href="estimando-contrastes-en-encuestas-de-hogares.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,44 +202,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cración-de-proyectos-en-r" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Cración de proyectos en <code>R</code><a href="cración-de-proyectos-en-r.html#cración-de-proyectos-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez se descargan e instalan las librerías o paquetes en <code>R</code> el paso siguientes es crear proyectos. Un proyecto de R se define como un archivo que contiene los archivos de origen y contenido asociados con el trabajo que se está realizando. Adicionalmente, contiene información que permite la compilación de cada archivo de R a utilizar, mantiene la información para integrarse con sistemas de control de código fuente y ayuda a organizar la aplicación en componentes lógicos.</p>
-<p>Ahora bien, por una cultura de buenas practicas de programación, se recomienda crear un proyecto en el cual se tenga disponible toda la información a trabajar. A continuación, se muestran los pasos para crear un proyecto dentro de <code>RStrudio</code>.</p>
-<ul>
-<li><p><strong>Paso 1:</strong> Abrir <code>RStudio</code>.</p></li>
-<li><p><strong>Paso 2:</strong> ir a file -&gt; New Project <img src="Imagenes/Cap%200/Proyecto1.png" width="450" alt="Paso 2: Crear el proyecto" /></p></li>
-<li><p><em>Paso 3:</em> Tipos de proyecto.</p></li>
-</ul>
-<p>Para este ejemplo se tomará <em>New Directory</em></p>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto2.png" width="450" alt="" />
-<p class="caption"><em>Tipos de proyectos</em></p>
-</div>
-<p>Algo a tener en cuenta en este paso es que en <em>New Directory</em> <code>RStudio</code> brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar. Ahora bien, si se cuenta con algunos código previamente desarrollados y se desea continuar con ese proyecto, se debe tomar la opción <em>Existing Directory</em> . Por último, Si se cuenta con cuenta en <em>Git</em> y se desea tener una copia de seguridad, se debe emplear la opción <em>Version Control</em>.</p>
-<ul>
-<li><em>Paso 4:</em> Seleccionar el tipo de proyecto.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto3.png" width="450" alt="" />
-<p class="caption"><em>Seleccionar el tipo de proyecto</em></p>
-</div>
-<ul>
-<li><em>Paso 5</em>: Diligenciar el nombre del proyecto y la carpeta de destino.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto4.png" width="450" alt="" />
-<p class="caption"><em>Nombre de proyecto</em></p>
-</div>
-<p>Al realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.</p>
+<div id="estimando-razones-en-encuestas-de-hogares" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Estimando razones en encuestas de hogares<a href="estimando-razones-en-encuestas-de-hogares.html#estimando-razones-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Un caso particular de una función no lineal de totales es la razón poblacional. Esta se define como el cociente de dos totales poblacionales de características de interés. En las encuestas de hogares, en ocasiones se requiere estimar este parámetro, por ejemplo, cantidad de hombres por cada mujer o la cantidad de mascotas por cada hogar en un país determinado. Puesto que la razón es un cociente de totales, tanto en numerador como el denominador son cantidades desconocidas y por tanto requieren estimarse <em>(Bautista, 1998)</em>. Por definición la razón poblacional se define de la siguiente manera:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+R &amp; = &amp; \frac{Y}{X}
+\end{eqnarray*}\]</span></p>
+<p>El estimador puntual de una razón en muestreos complejos no es más que estimar los totales por separados como se define a continuación:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat{R} &amp; = &amp; \frac{\hat{Y}}{\hat{X}}\\
+&amp; = &amp; \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{nh\alpha}}\omega_{h\alpha i}y_{h\alpha i}}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{nh\alpha}}\omega_{h\alpha i}x_{h\alpha i}}
+\end{eqnarray*}\]</span></p>
+<p>Sin embargo, dado que estimador de la razón es un cociente entre dos estimadores, es decir, dos variables aleatorias, el cálculo de la estimación de la varianza no es sencillo de obtener. Para ellos, se debe aplicar linealización de Taylor como lo muestra <em>Gutiérrez (2016)</em>.</p>
+<p>De manera computacional, la función <code>survey_ratio</code> tiene implementado los procedimientos para estimar las razones y sus varianzas. Para un correcto cálculo de la estimación de la razón y su varianza estimada se le debe introducir a la función el numerados de la razón (numerator) y el denominador (denominator). Adicional a esto, se le debe indicar el nivel de confianza de los intervalos y qué estadística de resúmenes debe calcular (vartype). A continuación, se muestran los códigos computacionales para estimar la razón entre el gasto y el ingreso.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-1" aria-hidden="true" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb144-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb144-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb144-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb144-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb144-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb144-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb144-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   Razon Razon_se Razon_low Razon_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0.649   0.0232     0.603     0.695</code></pre>
+<p>Como se puede observar, la razón entre el gasto y el ingreso es, aproximando, 0.71. Lo que implica que por cada unidad 100 unidades monetarias que le ingrese al hogar, se gastan 71 unidades, consiguiendo un intervalo de confianza al 95% de 0.65 y 0.76.</p>
+<p>Si ahora el objetivo es estimar la razón entre mujeres y hombres en la base de ejemplo, se realiza de la siguiente manera:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-1" aria-hidden="true" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb146-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb146-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
+<span id="cb146-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb146-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb146-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb146-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   Razon Razon_se Razon_low Razon_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1.11   0.0351      1.04      1.18</code></pre>
+<p>Como la variable sexo en la base de datos es una variable categórica, se tuvo la necesidad de generar las variables dummys para su cálculo realizando, Sex == “Female” para el caso de las mujeres y Sex == “Male” para el caso de los hombres. Los resultados del ejercicio anterior muestran que en la base de datos hay más mujeres que hombres, generando una razón de 1.13. Esto significa que, por cada 100 hombres hay aproximadamente 113 mujeres con un intervalo que varía entre 1.04 y 1.21.</p>
+<p>Si se desea hacer la razón de mujeres y hombres pero en la zona rural, se haría de la siguiente manera:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-1" aria-hidden="true" tabindex="-1"></a>sub_Rural <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb148-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb148-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
+<span id="cb148-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb148-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb148-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb148-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   Razon Razon_se Razon_low Razon_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1.07   0.0352     0.997      1.14</code></pre>
+<p>Obteniendo nuevamente que hay más mujeres que hombres. Ahora bien, otro análisis de interés es estimar la razón de gastos pero solo en la población femenina. A continuación, se presentan los códigos computacionales.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-1" aria-hidden="true" tabindex="-1"></a>sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb150-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb150-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb150-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb150-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb150-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb150-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   Razon Razon_se Razon_low Razon_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0.658   0.0199     0.619     0.698</code></pre>
+<p>Dando como resultado que por cada 100 unidades monetarias que le ingresan a las mujeres se gastan 70 con un intervalo de confianza entre 0.65 y 0.76. Por último, análogamente para los hombres, la razón de gastos resulta muy similar que para las mujeres.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-1" aria-hidden="true" tabindex="-1"></a>sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb152-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb152-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb152-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb152-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb152-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb152-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-7" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   Razon Razon_se Razon_low Razon_upp
+##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 0.639   0.0288     0.582     0.696</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="algunas-librerías-de-interés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lectura-de-las-bases-de-datos-y-manipulación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimando-contrastes-en-encuestas-de-hogares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +314,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/03-Basesdedatos.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/04-Continuas.Rmd",
 "text": "Edit"
 },
 "history": {

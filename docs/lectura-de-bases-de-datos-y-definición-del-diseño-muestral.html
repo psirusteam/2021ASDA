@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Cración de proyectos en R | Análisis de encuestas con R</title>
+  <title>4.1 Lectura de bases de datos y definición del diseño muestral | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.1 Lectura de bases de datos y definición del diseño muestral | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.1 Lectura de bases de datos y definición del diseño muestral | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="algunas-librerías-de-interés.html"/>
-<link rel="next" href="lectura-de-las-bases-de-datos-y-manipulación.html"/>
+<link rel="prev" href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"/>
+<link rel="next" href="análisis-gráfico-histogramas-y-boxplot.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,44 +202,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cración-de-proyectos-en-r" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Cración de proyectos en <code>R</code><a href="cración-de-proyectos-en-r.html#cración-de-proyectos-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez se descargan e instalan las librerías o paquetes en <code>R</code> el paso siguientes es crear proyectos. Un proyecto de R se define como un archivo que contiene los archivos de origen y contenido asociados con el trabajo que se está realizando. Adicionalmente, contiene información que permite la compilación de cada archivo de R a utilizar, mantiene la información para integrarse con sistemas de control de código fuente y ayuda a organizar la aplicación en componentes lógicos.</p>
-<p>Ahora bien, por una cultura de buenas practicas de programación, se recomienda crear un proyecto en el cual se tenga disponible toda la información a trabajar. A continuación, se muestran los pasos para crear un proyecto dentro de <code>RStrudio</code>.</p>
-<ul>
-<li><p><strong>Paso 1:</strong> Abrir <code>RStudio</code>.</p></li>
-<li><p><strong>Paso 2:</strong> ir a file -&gt; New Project <img src="Imagenes/Cap%200/Proyecto1.png" width="450" alt="Paso 2: Crear el proyecto" /></p></li>
-<li><p><em>Paso 3:</em> Tipos de proyecto.</p></li>
-</ul>
-<p>Para este ejemplo se tomará <em>New Directory</em></p>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto2.png" width="450" alt="" />
-<p class="caption"><em>Tipos de proyectos</em></p>
-</div>
-<p>Algo a tener en cuenta en este paso es que en <em>New Directory</em> <code>RStudio</code> brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar. Ahora bien, si se cuenta con algunos código previamente desarrollados y se desea continuar con ese proyecto, se debe tomar la opción <em>Existing Directory</em> . Por último, Si se cuenta con cuenta en <em>Git</em> y se desea tener una copia de seguridad, se debe emplear la opción <em>Version Control</em>.</p>
-<ul>
-<li><em>Paso 4:</em> Seleccionar el tipo de proyecto.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto3.png" width="450" alt="" />
-<p class="caption"><em>Seleccionar el tipo de proyecto</em></p>
-</div>
-<ul>
-<li><em>Paso 5</em>: Diligenciar el nombre del proyecto y la carpeta de destino.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto4.png" width="450" alt="" />
-<p class="caption"><em>Nombre de proyecto</em></p>
-</div>
-<p>Al realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.</p>
+<div id="lectura-de-bases-de-datos-y-definición-del-diseño-muestral" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Lectura de bases de datos y definición del diseño muestral<a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#lectura-de-bases-de-datos-y-definición-del-diseño-muestral" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Las bases de datos (tablas de datos) pueden estar disponibles en una variedad de formatos (.<code>xlsx</code>, <code>.dat</code>, <code>.cvs</code>, <code>.sav</code>, <code>.txt</code>, etc.), sin embargo, por experiencia es recomendable realizar la lectura de cualesquiera de estos formatos y proceder inmediatamente a guardarlo en un archivo de extensión <strong>.rds</strong>, la cual es nativa de <code>R.</code> las extensiones <strong>rds</strong> permiten almacenar cualquier objeto o información en <code>R</code> como pueden ser marco de datos, vectores, matrices, lista, entre otros. Los archivos <strong>.rds</strong> se carcaterizan por su flexibilidad a la hora de almacenarlos, sin limitarse a su base de datos, y por su perfecta compatibilidad con R.</p>
+<p>Por otro lado, existe otro tipos de archivos propios de <code>R</code> como lo es <strong>.Rdata</strong>. Sin embargo existen diferencia entre ellos. Por ejemplo, mientras que los archivos <strong>.rds</strong> pueden contener cualquier número de objetos, los <strong>.Rdata</strong> se limitan a un solo objeto. Es por lo anterior que, se recomeinda trabajar con archivos <strong>.rds</strong>.</p>
+<p>Para ejemplifcar las sintaxis que se utilizarán en <code>R</code>, se tomará la misma base del capítulo anterior la cual contiene una muestra de 2427 registro y proviene de un muestreo complejo. A continuación, se muestra la sintaxis en <code>R</code> de cómo cargar un archivo con extensión <strong>.rsd</strong></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb87-2"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-3"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb87-3" aria-hidden="true" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
+<span id="cb87-4"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(encuesta)</span></code></pre></div>
+<pre><code>##        HHID   Stratum NIh nIh  dI PersonID     PSU  Zone    Sex Age MaritalST
+## 1 idHH00031 idStrt001   9   2 4.5  idPer01 PSU0003 Rural   Male  68   Married
+## 2 idHH00031 idStrt001   9   2 4.5  idPer02 PSU0003 Rural Female  56   Married
+## 3 idHH00031 idStrt001   9   2 4.5  idPer03 PSU0003 Rural Female  24   Married
+## 4 idHH00031 idStrt001   9   2 4.5  idPer04 PSU0003 Rural   Male  26   Married
+## 5 idHH00031 idStrt001   9   2 4.5  idPer05 PSU0003 Rural Female   3      &lt;NA&gt;
+## 6 idHH00041 idStrt001   9   2 4.5  idPer01 PSU0003 Rural Female  61   Widowed
+##   Income Expenditure Employment Poverty dki dk       wk Region    CatAge
+## 1 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte Más de 60
+## 2 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     46-60
+## 3 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     16-30
+## 4 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte     16-30
+## 5 409.87      346.34       &lt;NA&gt; NotPoor   8 36 33.63761  Norte       0-5
+## 6 823.75      392.24   Employed NotPoor   8 36 33.63761  Norte Más de 60</code></pre>
+<p>Una vez caraga la muestra de hogares en <code>R</code>, el siguiente paso es definir el diseño muestral del cual proviene dicha muestra. Para esto se utilizará el paquete <code>srvyr</code> el cual, como se definió anteriormente, surge como un complemento para <code>survey</code>. Estas librerías permiten definir objetos tipo <strong>survey.design</strong> a los que se aplican las funciones de estimación y análisis de encuestas cargadas en el paquete <code>srvyr</code> complementados con la programación de tubería ( %&gt;% ) del paquete <code>tidyverse</code>. A manera de ejemplificar los conceptos mencionados anteriormente, se definirá en <code>R</code> el diseño de muestreo del cual proviene la muestra contenida en el objeto <strong>encuesta</strong>:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">&quot;adjust&quot;</span>) </span>
+<span id="cb89-2"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb89-4"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-5" aria-hidden="true" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> </span>
+<span id="cb89-6"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb89-7"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,  </span>
+<span id="cb89-8"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ids =</span> PSU,        </span>
+<span id="cb89-9"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> wk,      </span>
+<span id="cb89-10"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html#cb89-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">nest =</span> T)</span></code></pre></div>
+<p>En el código anterior se puede observar que, en primera instancia se debe definir la base de datos en la cual se encuentra la muestra seleccionada. Seguido de eso, se debe definir el tipo de objeto en <code>R</code> con el cual se trabajará, para nuestro caso, será un objeto <em>survey_design</em> el cual se define usando la función <em>as_survey_design</em>. ahora bien, una vez definido el tipo de objeto se procede a definir los parámetros del diseño definido. Para este caso fue un diseño de muestreo estratificado y en varias etapas. Estos argumentos se definen dentro de la función <em>as_survey_design</em> como sigue. Para definir los estratos de utiliza el argumento <em>strata</em> y se define en qué columna están los estratos en mi base de datos. Ahora bien, para definir las UPM´s, en el argumento <em>ids</em> se definen la columna donde se encuntran los conglomerados seleccionados en la primera etapa. También, se definen los pesos de muestreo en el argumento <em>weights</em> y, por último, con el argumento <em>nest=T</em> se define que las UPM´s están dentro de los estratos.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="algunas-librerías-de-interés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lectura-de-las-bases-de-datos-y-manipulación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-gráfico-histogramas-y-boxplot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +275,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/03-Basesdedatos.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/04-Continuas.Rmd",
 "text": "Edit"
 },
 "history": {

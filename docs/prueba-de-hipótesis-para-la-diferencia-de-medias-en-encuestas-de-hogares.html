@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.3 Cración de proyectos en R | Análisis de encuestas con R</title>
+  <title>4.6 Prueba de hipótesis para la diferencia de medias en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.6 Prueba de hipótesis para la diferencia de medias en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.3 Cración de proyectos en R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.6 Prueba de hipótesis para la diferencia de medias en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="algunas-librerías-de-interés.html"/>
-<link rel="next" href="lectura-de-las-bases-de-datos-y-manipulación.html"/>
+<link rel="prev" href="análisis-de-la-relación-entre-dos-variable-continuas.html"/>
+<link rel="next" href="estimando-razones-en-encuestas-de-hogares.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,44 +202,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cración-de-proyectos-en-r" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Cración de proyectos en <code>R</code><a href="cración-de-proyectos-en-r.html#cración-de-proyectos-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez se descargan e instalan las librerías o paquetes en <code>R</code> el paso siguientes es crear proyectos. Un proyecto de R se define como un archivo que contiene los archivos de origen y contenido asociados con el trabajo que se está realizando. Adicionalmente, contiene información que permite la compilación de cada archivo de R a utilizar, mantiene la información para integrarse con sistemas de control de código fuente y ayuda a organizar la aplicación en componentes lógicos.</p>
-<p>Ahora bien, por una cultura de buenas practicas de programación, se recomienda crear un proyecto en el cual se tenga disponible toda la información a trabajar. A continuación, se muestran los pasos para crear un proyecto dentro de <code>RStrudio</code>.</p>
-<ul>
-<li><p><strong>Paso 1:</strong> Abrir <code>RStudio</code>.</p></li>
-<li><p><strong>Paso 2:</strong> ir a file -&gt; New Project <img src="Imagenes/Cap%200/Proyecto1.png" width="450" alt="Paso 2: Crear el proyecto" /></p></li>
-<li><p><em>Paso 3:</em> Tipos de proyecto.</p></li>
-</ul>
-<p>Para este ejemplo se tomará <em>New Directory</em></p>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto2.png" width="450" alt="" />
-<p class="caption"><em>Tipos de proyectos</em></p>
-</div>
-<p>Algo a tener en cuenta en este paso es que en <em>New Directory</em> <code>RStudio</code> brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar. Ahora bien, si se cuenta con algunos código previamente desarrollados y se desea continuar con ese proyecto, se debe tomar la opción <em>Existing Directory</em> . Por último, Si se cuenta con cuenta en <em>Git</em> y se desea tener una copia de seguridad, se debe emplear la opción <em>Version Control</em>.</p>
-<ul>
-<li><em>Paso 4:</em> Seleccionar el tipo de proyecto.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto3.png" width="450" alt="" />
-<p class="caption"><em>Seleccionar el tipo de proyecto</em></p>
-</div>
-<ul>
-<li><em>Paso 5</em>: Diligenciar el nombre del proyecto y la carpeta de destino.</li>
-</ul>
-<div class="figure">
-<img src="Imagenes/Cap%200/Proyecto4.png" width="450" alt="" />
-<p class="caption"><em>Nombre de proyecto</em></p>
-</div>
-<p>Al realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.</p>
+<div id="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Prueba de hipótesis para la diferencia de medias en encuestas de hogares<a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es llamado prueba de hipótesis a una técnica la cual consiste en hacer una afirmación acerca del valor que el parámetro de la población bajo estudio puede tomar. Esta afirmación puede estar basada en alguna creencia o experiencia pasada que será contrastada con la evidencia que se obtengan a través de la información contenida en la muestra. Como dicha afirmación puede ser o no cierta, dos hipótesis pueden ser planteadas (antagónicas) las cuales se conocen como <span class="math inline">\(H_{0}:\)</span> Hipótesis nula y <span class="math inline">\(H_{1}:\)</span> Hipótesis alterna. Si se sospecha que el parámetro <span class="math inline">\(\theta\)</span> es igual a cierto valor particular <span class="math inline">\(\theta_{0}\)</span>, los posibles juegos de hipótesis a contrastar son:</p>
+<p><span class="math display">\[
+\begin{cases}
+H_{0}: &amp; \theta=\theta_{0}\\
+H_{1}: &amp; \theta\neq\theta_{0}
+\end{cases}\,\,\,   \begin{cases}
+H_{0}: &amp; \theta=\theta_{0}\\
+H_{1}: &amp; \theta&gt;\theta_{0}
+\end{cases}\,\,\,   \begin{cases}
+H_{0}: &amp; \theta=\theta_{0}\\
+H_{1}: &amp; \theta&lt;\theta_{0}
+\end{cases}
+\]</span></p>
+<p>Se dirá que una de las dos hipótesis es cierta solo si la evidencia estadística, la cual es obtenida de la muestra, la apoya. El proceso por medio del cual se escoge una de las dos hipótesis es llamado Prueba de Hipótesis.</p>
+<p>En términos generales, algunos parámetros importantes en la estadística descriptivas se pueden escribir como una combinación lineal de medidas de interés. Los casos más usuales son diferencias de medias, sumas ponderadas de medias utilizadas para construir índices económicos, etc.</p>
+<p>Considere una función que es una combinación lineal de <span class="math inline">\(j\)</span> estadísticas descriptivas como se muestra a continuación:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+f\left(\theta_{1},\theta_{2},...,\theta_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}\theta_{j}
+\end{eqnarray*}\]</span></p>
+<p>Una estimación de esta función está dada por:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+f\left(\hat{\theta}_{1},\hat{\theta}_{2},...,\hat{\theta}_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}\hat{\theta}_{j}
+\end{eqnarray*}\]</span></p>
+<p>cuya varianza del estimador se calcula como sigue:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+var\left(\sum_{j=1}^{J}a_{j}\hat{\theta}_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}^{2}var\left(\hat{\theta}_{j}\right)+2\times\sum_{j=1}^{J-1}\sum_{k&gt;j}^{J}a_{j}a_{k}\,cov\left(\hat{\theta}_{j},\hat{\theta}_{k}\right)
+\end{eqnarray*}\]</span></p>
+<p>Como se pudo observar en la ecuación de la varianza del estimador, esta incorpora las varianzas de las estimaciones de los componentes individuales, así como las covarianzas de las estadísticas estimadas.</p>
+<p>En primer lugar, una combinación lineal de estadísticas descriptivas de interés en este capítulo es la diferencia de media cuyo parámetro es <span class="math inline">\({\bar{Y}_{1}-\bar{Y}_{2}}\)</span>, donde, <span class="math inline">\(\bar{Y}_{1}\)</span> es la media de la población 1, por ejemplo, ingresos medios en los hogares obtenido por los padres de familia y <span class="math inline">\(\bar{Y}_{2}\)</span> es la media de la población 2, que para seguir el ejemplo serían, los ingresos medios de las madres en un hogar.</p>
+<p>Considerando el parámetro de interés en esta sección, las hipótesis a estudiar serían las siguientes:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\begin{cases}
+H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
+H_{1}:\bar{Y}_{1}-\bar{Y}_{2}\neq0
+\end{cases} &amp; \begin{cases}
+H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
+H_{1}:\bar{Y}_{1}-\bar{Y}_{2}&gt;0
+\end{cases} &amp; \begin{cases}
+H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
+H_{1}:\bar{Y}_{1}-\bar{Y}_{2}&lt;0
+\end{cases}
+\end{eqnarray*}\]</span></p>
+<p>Para probar estas hipótesis se utiliza el siguiente estadístico de prueba que se distribuye t-student:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+t &amp; = &amp; \frac{\bar{Y}_{1}-\bar{Y}_{2}}{se\left(\bar{Y}_{1}-\bar{Y}_{2}\right)},
+\end{eqnarray*}\]</span></p>
+<p>donde,</p>
+<p><span class="math display">\[\begin{eqnarray*}
+se\left(\bar{Y}_{1}-\bar{Y}_{2}\right) &amp; = &amp; \sqrt{var\left(\bar{y}_{1}\right)+var\left(\bar{y}_{2}\right)-2cov\left(\bar{y}_{1},\bar{y}_{2}\right)}
+\end{eqnarray*}\]</span></p>
+<p>Si se desea construir un intervalo de confianza para la diferencia de media se realizaría de la siguiente manera:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+&amp; \left(\bar{Y}_{1}-\bar{Y}_{2}\right)\pm t_{gl,\,\alpha/2}\,se\left(\bar{Y}_{1}-\bar{Y}_{2}\right)
+\end{eqnarray*}\]</span></p>
+<p>Para poder llevar a cabo la prueba de hipótesis para la diferencia de media de los ingresos en un hogar por sexo, tomemos la base de datos que tenemos como ejemplo. La función que se encarga de realizar la prueba es <code>svyttest</code> y solo requiere como argumentos la variable ingreso (o variable de interés), la variable sexo (variable discriminadora), el diseño muestral y el nivel de confianza. A continuación, se muestran los códigos computacionales que se requieren:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno, <span class="at">level=</span><span class="fl">0.95</span>) </span></code></pre></div>
+<pre><code>## 
+##  Design-based t-test
+## 
+## data:  Income ~ Sex
+## t = 1.3625, df = 118, p-value = 0.1756
+## alternative hypothesis: true difference in mean is not equal to 0
+## 95 percent confidence interval:
+##  -12.82205  69.38503
+## sample estimates:
+## difference in mean 
+##           28.28149</code></pre>
+<p>En esta salida podemos observar que el p-valor de la prueba es 0.14. Si tomamos una significancia del 5% para la prueba se puede concluir que, con una confianza del 95% y basados en la muestra, no existe suficiente evidencia estadística para decir que los ingresos medios en los hogares son diferentes por sexo.</p>
+<p>Por otro lado, el intervalo de confianza al 95% para la diferencia de medias entre los ingresos de hombres y mujeres es <span class="math inline">\(\left(-77.35,\,11.41\right)\)</span>.</p>
+<p>Si ahora el objetivo es realizar la prueba de diferencia de medias para los ingresos entre hombres y mujeres pero solo en la zona urbana, los códigos computacionales son los siguientes:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> sub_Urbano, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
+<pre><code>## 
+##  Design-based t-test
+## 
+## data:  Income ~ Sex
+## t = 1.5667, df = 63, p-value = 0.1222
+## alternative hypothesis: true difference in mean is not equal to 0
+## 95 percent confidence interval:
+##  -12.31754 101.74023
+## sample estimates:
+## difference in mean 
+##           44.71134</code></pre>
+<p>En donde, al igual que el anterior, no se rechaza la hipótesis nula con una confianza del 95%.</p>
+<p>Por otro lado, la función <code>svyttest</code> permite usar filtro. Si se requiere probar la hipótesis de diferencia de medias de ingresos por sexo pero solo en aquellas personas del hogar mayores a 18 años, se utilizará dentro de la función <code>svyttest</code> la función <code>filter</code> como se muestra a continuación:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">18</span>), <span class="at">level =</span> <span class="fl">0.95</span> )</span></code></pre></div>
+<pre><code>## 
+##  Design-based t-test
+## 
+## data:  Income ~ Sex
+## t = 1.5263, df = 118, p-value = 0.1296
+## alternative hypothesis: true difference in mean is not equal to 0
+## 95 percent confidence interval:
+##  -10.72746  82.85253
+## sample estimates:
+## difference in mean 
+##           36.06253</code></pre>
+<p>y con una confianza del 95% y basado en la muestra tampoco se rechaza la hipótesis hula. Es decir, no existe evidencia estadística para concluir que los ingresos medios entre hombres y mujeres mayores de 18 años son diferentes.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="algunas-librerías-de-interés.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lectura-de-las-bases-de-datos-y-manipulación.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="análisis-de-la-relación-entre-dos-variable-continuas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimando-razones-en-encuestas-de-hogares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +339,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/03-Basesdedatos.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/04-Continuas.Rmd",
 "text": "Edit"
 },
 "history": {
