@@ -15,7 +15,7 @@ rmd_files: [
   "07-Gráficas.Rmd", 
   "08-Generalizados.Rmd", 
   "09-Generalizados2.Rmd",
-  # "11-Imputación.Rmd",
+  "11-Imputación.Rmd",
 
   "99-Referencias.Rmd"
   ]

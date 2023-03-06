@@ -58,4 +58,12 @@ acerca-de-las-muestras-aleatorias-y-su-análisis
 método-de-máxima-verosimilitud
 método-de-máxima-pseudo-verosimilitud
 modelo-multinomial
+imputación-múltiple-en-encuestas-de-hogares
+imputación-por-la-media-no-condicional.
+imputación-por-la-media-condicional
+imputación-por-hot-deck-y-cold-deck
+imputación-por-regresión
+imputación-por-el-vecino-más-cercano
+imputación-por-el-vecino-más-cercano-con-regresión
+introducción-a-la-imputación-múltiple.
 referencias
