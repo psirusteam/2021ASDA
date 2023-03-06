@@ -258,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{eqnarray*}\]</span></p>
 <p>El estimador insesgado de la varianza para este estimador es:</p>
 <p><span class="math display">\[\begin{eqnarray*}
-var\left(\hat{Y}_{\omega}\right) &amp; = &amp; \sum_{h=1}^{H}\frac{a_{h}}{\left(a_{h}-1\right)}\left[\sum_{\alpha=1}^{a_{h}}\left(\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}-\frac{\left({\displaystyle \sum_{\alpha=1}^{a_{h}}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}}{a_{h}}\right]
+var\left(\hat{Y}_{\omega}\right) &amp; = &amp; \sum_{h=1}^{H}\frac{a_{h}}{\left(a_{h}-1\right)}\left[\sum_{\alpha=1}^{a_{h}}\left(\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}-\frac{\left({ \sum_{\alpha=1}^{a_{h}}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}}{a_{h}}\right]
 \end{eqnarray*}\]</span></p>
 <p>Como se puede observar, calcular la estimación del total y su varianza estimada es complejo. Sin embargo, dichos cálculos se pueden hacer en <code>R</code> mediante la función <code>svytotal</code> y el intervalos de confianza se calcula con la función <code>confint</code>, ambos usando la librería <code>survey</code>. A continuación, se muestran los códigos:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="estimación-puntual.html#cb94-1" aria-hidden="true" tabindex="-1"></a>total_Ingresos<span class="ot">&lt;-</span> <span class="fu">svytotal</span>(<span class="sc">~</span>Income, diseno, <span class="at">deff=</span>T, )</span>
@@ -411,7 +411,7 @@ s\left(y\right){}_{\omega} &amp; = &amp; \frac{\sum_{h=1}^{H}\sum_{\alpha=1}^{a_
 <p>Por otro lado, la estimación de percentiles de ingresos en un país determinado puede definir el inicio de una política pública. por ejemplo, poner a tributar aquellas personas naturales que son el 10% más alto de la distribución de los ingresos o por el contrario, generar subsidios de transporte a aquellas familias que están en el 15% inferior de la distribución de los ingresos.</p>
 <p>La estimación de cuantiles <strong>(Loomis et al., 2005)</strong> se basa en los resultados relacionados con el estimador ponderado para totales, empleando una estimación de la función de distribución (CDF, por sus siglas en inglés) acumulada de la población. Específicamente, la CDF para una variable y en una población finita dada de tamaño <span class="math inline">\(N\)</span> se define de la siguiente manera:</p>
 <p><span class="math display">\[\begin{eqnarray*}
-F\left(x\right) &amp; = &amp; \frac{{\displaystyle \sum_{i=1}^{N}}I\left(y_{i}\leq x\right)}{N}
+F\left(x\right) &amp; = &amp; \frac{{ \sum_{i=1}^{N}}I\left(y_{i}\leq x\right)}{N}
 \end{eqnarray*}\]</span></p>
 <p>Donde, <span class="math inline">\(I\left(y_{i}\leq x\right)\)</span> es una variable indicadora la
 cual es igual a 1 si <span class="math inline">\(y_{i}\)</span> es menor o igual a un valor específico

@@ -323,11 +323,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por <span class="math inline">\(\hat{N}_{01}={\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}\)</span>. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera <span class="math inline">\(p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}\)</span>.</p>
+<p>donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por <span class="math inline">\(\hat{N}_{01}={ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}\)</span>. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera <span class="math inline">\(p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}\)</span>.</p>
 <p><em>Estimación de proporciones para variables binarias</em></p>
 <p>La estimación de una sola proporción, <span class="math inline">\(\pi\)</span>, para una variable de respuesta binaria requiere solo una extensión directa del estimador de razón mostrado en secciones anteriores. Como lo menciona <em>Heeringa, S. G. (2017)</em> Al recodificar las categorías de respuesta originales en una sola variable indicadora <span class="math inline">\(y_{i}\)</span> con valores posibles de 1 y 0 (por ejemplo, sí = 1, no = 0), el estimador de la media de la razón estima la proporción o prevalencia, <span class="math inline">\(\pi\)</span>, de “1” en la población está dada por:</p>
 <p><span class="math display">\[
-p =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
+p =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
 =  \frac{\hat{N}_{1}}{\hat{N}}
 \]</span></p>
 <p>Aplicando Linealización de Taylor (TSL) al estimador de razón de <span class="math inline">\(\pi\)</span> genera el siguiente estimador para la varianza:</p>
@@ -345,7 +345,7 @@ IC\left(p\right)  =  \left\{ \frac{exp\left[ln\left(\frac{p}{1-p}\right)\pm\frac
 \]</span></p>
 <p>Ahora bien, si se el interés es estimar proporciones para variables multinomiales. El estimador es el siguiente:</p>
 <p><span class="math display">\[
-p_{k}  =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
+p_{k}  =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
 =  \frac{\hat{N}_{k}}{\hat{N}}
 \]</span></p>
 <p>A continuación, siguiendo con la base de ejemplo, se estima la proporción de hombres y mujeres en pobreza y no pobreza junto con su error estándar e intervalos de confianza.</p>
