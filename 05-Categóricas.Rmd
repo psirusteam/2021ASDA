@@ -336,14 +336,14 @@ A continuación, se muestra la tabla de doble entrada con las frecuencias estima
 | Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
 
 
-donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por $\hat{N}_{01}={\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}$. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera $p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}$.
+donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por $\hat{N}_{01}={ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}$. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera $p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}$.
 
 *Estimación de proporciones para variables binarias*
 
 La estimación de una sola proporción, $\pi$, para una variable de respuesta binaria requiere solo una extensión directa del estimador de razón mostrado en secciones anteriores. Como lo menciona *Heeringa, S. G. (2017)* Al recodificar las categorías de respuesta originales en una sola variable indicadora $y_{i}$ con valores posibles de 1 y 0 (por ejemplo, sí = 1, no = 0), el estimador de la media de la razón estima la proporción o prevalencia, $\pi$, de "1" en la población está dada por:
 
 $$
-p =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
+p =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
  =  \frac{\hat{N}_{1}}{\hat{N}}
 $$
 
@@ -371,7 +371,7 @@ Ahora bien, si se el interés es estimar proporciones para variables multinomial
 
 
 $$
-p_{k}  =  \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
+p_{k}  =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
  =  \frac{\hat{N}_{k}}{\hat{N}}
 $$
 

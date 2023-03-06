@@ -765,7 +765,7 @@ $$
 Donde,
 
 $$
-\pi_{k}\left(\boldsymbol{\beta}\right)=\frac{exp\left(x'\boldsymbol{\beta_{k}}\right)}{1+{\displaystyle \sum_{k=2}^{K}exp\left(x'\boldsymbol{\beta_{k}}\right)}}
+\pi_{k}\left(\boldsymbol{\beta}\right)=\frac{exp\left(x'\boldsymbol{\beta_{k}}\right)}{1+{ \sum_{k=2}^{K}exp\left(x'\boldsymbol{\beta_{k}}\right)}}
 $$ 
 
 y 
