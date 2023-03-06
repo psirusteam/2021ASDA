@@ -43,4 +43,14 @@ modelos-de-regresión-bajo-diseños-de-muestreo-complejos
 estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
 diagnóstico-del-modelo
 inferencia-sobre-los-parámetros-del-modelo
+gráficas-en-r
+histogramas-para-graficar-variables-continuas.
+agregando-densidades-y-graficando-boxplot
+scaterplot
+diagrama-de-barras-para-variables-categoricas
+creando-mapas
+modelos-lineales-generalizados-en-encuestas-de-hogares
+prueba-de-independencia-f
+estadístico-de-wald
+modelo-log-lineal-para-tablas-de-contingencia
 referencias
