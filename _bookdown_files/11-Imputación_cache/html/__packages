@@ -13,3 +13,6 @@ jtools
 modelsummary
 patchwork
 ggplot2
+nnet
+kableExtra
+tidyr
