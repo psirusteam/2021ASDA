@@ -1,3 +1,4 @@
+tab:unnamed-chunk-4
 introducción
 conceptos-básicos-en-encuestas-de-hogares
 universo-de-estudio-y-población-objetivo
@@ -38,3 +39,17 @@ análisis-de-variables-categóricas-en-encuestas-de-hogares
 estimaciones-de-totales
 estimación-de-proporciones
 tablas-cruzadas.
+modelos-de-regresión-bajo-diseños-de-muestreo-complejos
+estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
+diagnóstico-del-modelo
+inferencia-sobre-los-parámetros-del-modelo
+gráficas-en-r
+histogramas-para-graficar-variables-continuas.
+agregando-densidades-y-graficando-boxplot
+scaterplot
+diagrama-de-barras-para-variables-categoricas
+creando-mapas
+modelos-lineales-generalizados-en-encuestas-de-hogares
+prueba-de-independencia-f
+estadístico-de-wald
+modelo-log-lineal-para-tablas-de-contingencia
