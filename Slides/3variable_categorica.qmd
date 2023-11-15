@@ -1,0 +1,825 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Módulo 2: Análisis de variables categóricas"
+author: |
+  | Andrés Gutiérrez.
+  | Stalyn Guerrero 
+institute: "CEPAL - Unidad de Estadísticas Sociales"
+format: 
+  beamer: 
+    colortheme: dove
+    fonttheme: default
+    incremental: false
+    aspectratio: 1610
+    #theme: Berkeley
+    toc: true
+    slide_level: 2
+    #highlight: pygments
+Email: andres.gutierrez@cepal.org
+lang: es
+header-includes:
+    - \usepackage{amsmath}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE,echo = TRUE,
+                      error = FALSE, cache.path = "00_Caches/03_var_categoria/")
+options(digits = 4)
+library(magrittr)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+select <- dplyr::select
+```
+
+
+# Introducción
+
+## Motivación 
+
+- En el mundo de la estadística y el análisis de datos, nos encontramos con una variedad de variables que pueden ser clasificadas en dos categorías principales: cualitativas y cuantitativas.
+
+- Las variables cualitativas, también conocidas como categóricas, representan características o cualidades que no se pueden medir con números, como el género, el estado civil o el tipo de vivienda.
+
+- Algunas variables cuantitativas se transforman en categóricas al dividir su rango en categorías, y viceversa, algunas variables categóricas se convierten en cuantitativas mediante análisis especializados.
+
+- En esta presentación, exploraremos esta distinción y cómo abordar variables cualitativas  en el contexto de encuestas y análisis de datos.
+
+
+# Definición del diseño y creación de variables categóricas
+
+## Lectura de la base
+
+Iniciemos con la lectura de la encuesta. 
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds")
+```
+El paso siguiente es realizar declaración del objeto tipo diseño. 
+
+```{r}
+options(survey.lonely.psu = "adjust")
+library(srvyr)
+diseno <- encuesta %>%    # Base de datos.
+  as_survey_design(
+    strata = Stratum,     # Id de los estratos.
+    ids = PSU,            # Id para las observaciones.
+    weights = wk,         # Factores de expansión.
+    nest = TRUE           # Valida el anidado dentro del estrato
+  )
+
+```
+
+## Creación de nuevas variables
+
+Durante los análisis de encuesta surge la necesidad de crear nuevas variables a partir de las existentes, aquí mostramos la definición de algunas de ellas.  
+
+
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo = ifelse(Employment == "Unemployed", 1, 0),
+  edad_18 = case_when(Age < 18 ~ "< 18 anios",
+                      TRUE ~ ">= 18 anios")
+)
+```
+
+> Se ha introducido la función `case_when` la cual es una extensión del a función `ifelse` que permite crear múltiples categorías a partir de una o varias condiciones.    
+
+## Dividiendo la muestra en Sub-grupos
+
+En ocasiones se desea realizar estimaciones por sub-grupos de la población, en este caso se extraer 4 sub-grupos de la encuesta.
+
+```{r}
+sub_Urbano <- diseno %>%  filter(Zone == "Urban")
+sub_Rural  <- diseno %>%  filter(Zone == "Rural")
+sub_Mujer  <- diseno %>%  filter(Sex == "Female")
+sub_Hombre <- diseno %>%  filter(Sex == "Male")
+```
+
+## Estimación del tamaño. 
+
+El primer parámetro estimado serán los tamaños de la población y subpoblaciones. 
+
+
+```{r}
+(tamano_zona <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     n = unweighted(n()), # Observaciones en la muestra.
+     Nd = survey_total(vartype = c("se","ci"))))
+
+```
+En la tabla *n* denota el número de observaciones en la muestra por Zona y *Nd* denota la estimación del total de observaciones en la población. 
+
+## Estimación de tamaño  
+
+Empleando una sintaxis similar es posible estimar el número de personas en condición de pobreza extrema, pobreza y no pobres.  
+```{r}
+(tamano_pobreza <- diseno %>% group_by(Poverty) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño 
+
+En forma similar es posible estimar el número de personas debajo de la linea de pobreza. 
+
+```{r}
+(tamano_pobreza <- diseno %>% 
+   group_by(pobreza) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+Otra variable de interés es conocer el estado de ocupación de la personas.  
+```{r}
+(tamano_ocupacion <- diseno %>% 
+   group_by(Employment) %>% 
+   summarise(
+       Nd = survey_total(vartype = c("se","ci"))))
+
+```
+
+## Estimación de tamaño  
+Utilizando la función `group_by` es posible obtener resultados por más de un nivel de agregación. 
+```{r tabs0, echo=TRUE, eval=FALSE}
+(tamano_ocupacion_pobreza <- diseno %>% 
+   group_by(Employment, Poverty) %>% 
+   cascade(
+       Nd = survey_total(vartype = c("se","ci")), 
+       .fill = "Total") %>% 
+   data.frame()
+   )
+
+```
+
+## Estimación de tamaño 
+\scriptsize
+```{r tabs0, echo=FALSE, eval=TRUE}
+```
+
+## Estimación de Proporciones Poblacionales
+
+En encuestas de hogares, a menudo es importante estimar la proporción de una característica particular en una población, como la proporción de personas que tienen un cierto nivel de educación, la proporción de hogares con acceso a servicios básicos, entre otros.
+
+La estimación de una proporción poblacional se puede hacer utilizando la siguiente ecuación:
+
+$$
+\hat{\pi} = p = \frac{\sum_{i=1}^{n}\omega_{i} y_i}{\sum_{i=1}^{n}\omega_{i}}
+$$
+
+Donde:
+
+- $\hat{\pi}$ es la estimación de la proporción poblacional.
+- $n$ es el tamaño de la muestra.
+- $\omega_{i}$ son los pesos de muestreo para cada unidad de la muestra.
+- $y_{i}$ es la variable binaria que indica si la unidad de muestreo tiene la característica de interés (1 si la tiene, 0 si no la tiene).
+
+
+
+## Estimación de proporción de urbano y rural 
+
+El procedimiento estándar para el calculo de proporciones es crear una _variable dummy_ y sobre está realizar las operaciones. Sin embargo, la librería `srvy` nos simplifica el calculo, mediante la sintaxis. 
+
+```{r}
+(prop_zona <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     prop = survey_mean(vartype = c("se","ci"), 
+                        proportion = TRUE )))
+```
+Note que, se utilizo la función `survey_mean` para la estimación. 
+
+## Estimación de proporción de urbano y rural 
+La función idónea para realizar la estimación de las proporciones es `survey_prop` y la sintaxis es como sigue: 
+
+```{r}
+(prop_zona2 <- diseno %>% group_by(Zone) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci") )))
+```
+
+## Proporción de hombres y mujeres en la zona urbana 
+Si el interés es obtener la estimación para una subpoblación, procedemos así: 
+```{r}
+(prop_sexoU <- sub_Urbano %>% group_by(Sex) %>% 
+   summarise(
+       prop = survey_prop(vartype = c("se","ci"))))
+```
+
+
+> **¿Cómo estimar el Proporción de hombres dado que están en zona rural?**
+
+## Proporción de hombres y mujeres en la zona  rural
+```{r}
+(prop_sexoR <- sub_Rural %>% group_by(Sex) %>% 
+   summarise(
+     n = unweighted(n()),
+     prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+> **¿Cómo estimar el Proporción de hombres en la zona rural dado que es hombre?** 
+
+
+## Proporción de hombres en la zona urbana y rural
+
+```{r}
+(prop_ZonaH <- sub_Hombre %>% group_by(Zone) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+> **¿Cómo estimar el Proporción de mujeres en la zona rural dado que es mujer?** 
+
+## Proporción de mujeres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM <- sub_Mujer %>% group_by(Zone) %>% 
+   summarise(
+    prop = survey_prop(vartype = c("se","ci"))))
+
+```
+
+## Proporción de hombres en la zona urbana y rural
+
+Con el uso de la función `group_by` es posible estimar un mayor numero de niveles de agregación al combinar dos o más variables. 
+
+```{r, prop_ZonaH_Pobreza, eval=FALSE}
+(prop_ZonaH_Pobreza <- sub_Hombre %>%
+   group_by(Zone, Poverty) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci")))%>%
+   data.frame())
+```
+
+## Proporción de hombres en la zona urbana y rural
+
+```{r, prop_ZonaH_Pobreza, eval=TRUE, echo=FALSE}
+```
+
+## Proporción de mujeres en la zona urbana y rural
+
+```{r}
+(prop_ZonaM_Pobreza <- sub_Mujer %>% 
+   group_by(Zone, Poverty) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci"))) %>%
+   data.frame())
+
+```
+
+## Proporción de hombres en la zona y empleado
+
+```{r}
+(prop_ZonaH_Ocupacion <- sub_Hombre %>%
+   group_by(Zone, Employment) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se","ci")))%>%
+   data.frame())
+
+```
+
+## Proporción de mujeres en la zona urbana y rural
+
+```{r,prop_ZonaM_Ocupacio, eval=FALSE}
+(prop_ZonaM_Ocupacion <- sub_Mujer %>% group_by(Zone, Employment) %>% 
+   summarise( prop = survey_prop(vartype = c("se","ci"))) %>%
+   data.frame())
+```
+
+```{r,prop_ZonaM_Ocupacio, eval=TRUE, echo=FALSE}
+```
+
+
+
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs01, echo=TRUE, eval=FALSE}
+diseno %>%  group_by(edad_18, pobreza) %>% 
+  summarise(Prop = survey_prop(vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+```{r, tabs01, echo=FALSE, eval=TRUE}
+```
+
+## Estimación de la proporción de personas menor a 18 años
+```{r, tabs2, echo=TRUE, eval=FALSE}
+diseno %>% group_by(edad_18, desempleo) %>% 
+  summarise( Prop = survey_prop(
+      vartype =  c("se", "ci"))) %>% data.frame()
+```
+
+```{r, tabs2, echo=FALSE, eval=TRUE}
+```
+
+## Estimación de la proporción de personas menor a 18 años en zona rural
+
+```{r}
+sub_Rural %>%
+  group_by(edad_18) %>% 
+  summarise(
+    Prop = survey_prop(
+      vartype =  c("se", "ci"))) %>%
+  data.frame()
+```
+
+## Estimación de la proporción de mujeres rango de edad
+
+```{r,tabtemp1,eval=FALSE}
+sub_Mujer %>% mutate(
+  edad_rango = case_when(
+  Age>= 18 & Age <=35  ~ "18 - 35", 
+  TRUE ~ "Otro")) %>% group_by(edad_rango, Employment) %>% 
+  summarise(Prop = survey_prop(
+      vartype =  c("se", "ci"))) %>%   data.frame()
+```
+
+```{r,tabtemp1, eval=TRUE,echo=FALSE}
+```
+
+
+## Estimación de la proporción de hombres rango de edad
+
+```{r, tab_01, echo=TRUE,eval=FALSE}
+sub_Hombre %>%  mutate(
+  edad_rango = case_when(
+  Age>= 18 & Age <=35  ~ "18 - 35", 
+  TRUE ~ "Otro")) %>% group_by(edad_rango, Employment) %>% 
+  summarise(Prop = survey_prop(
+      vartype =  c("se", "ci"))) %>%   data.frame()
+```
+
+
+```{r,tab_01, echo=FALSE,eval=TRUE}
+```
+
+# Tablas cruzadas. 
+
+
+## Tablas Cruzadas en el Análisis de Encuestas de Hogares
+
+- Las tablas cruzadas son una herramienta esencial.
+
+- Se utilizan para resumir información de variables categóricas.
+
+- Pueden tener dos o más filas y columnas.
+
+- En esta sección, nos enfocaremos principalmente en tablas $2\times 2$.
+    
+**Estructura de una Tabla de Contingencia:**
+
+- Se asume como un arreglo bidimensional de filas y columnas.
+
+- Marginales de fila y columna se calculan sumando las frecuencias.
+    
+## Ejemplo Gráfico de una Tabla $2\times 2$.
+
+Representa la relación entre dos variables categóricas.
+    
+| Variable 2        | Variable 1                  | Marginal fila|
+|-------------------|-------------|---------------|--------------|
+|                   | 0           | 1             |              |
+| 0                 | $n_{00}$    |   $n_{01}$    | $n_{0+}$     |
+| 1                 |  $n_{10}$   |  $n_{11}$     | $n_{1+}$     |
+| Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
+
+Las frecuencias en la tabla pueden ser estimadas o ponderadas. Por ejemplo, $\hat{N}_{01}$ se calcula como la suma ponderada.
+
+## Cálculo de Proporciones Estimadas
+
+Las proporciones se obtienen dividiendo las frecuencias ponderadas por el total. Por ejemplo:
+
+ $$p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}$$.
+
+Estas tablas cruzadas son fundamentales para explorar la relación entre diferentes variables categóricas en encuestas de hogares y extraer información valiosa para la toma de decisiones.
+
+
+## Estimación de Proporciones para Variables Binarias
+
+- La estimación de una sola proporción, $\pi$, para una variable binaria se relaciona con el estimador de razón.
+
+- Al recodificar las respuestas en 0 y 1, podemos estimar la proporción $\pi$.
+
+- El estimador de proporción es: 
+
+
+\begin{eqnarray*}
+p & = & \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}} = \frac{\hat{N}_{1}}{\hat{N}}
+\end{eqnarray*}
+
+
+## Estimación de la varianza $\hat{v}(p)$
+
+- La varianza del estimador se calcula con Linealización de Taylor:
+
+$$ \hat{v}(p) \approx \frac{V(\hat{N}_{1}) + p^2V(\hat{N}) - 2p\,cov(\hat{N}_{1},\hat{N})}{\hat{N}^{2}} $$
+
+- Para evitar límites no interpretables en el intervalo de confianza cuando $p$ está cerca de 0 o 1, podemos utilizar el método de *Wilson modificado*.
+
+- El intervalo de confianza se calcula a través de la transformación Logit:
+
+$$
+IC[logit(p)] = \left\{ ln\left(\frac{p}{1-p}\right) \pm \frac{t_{1-\alpha/2,gl}se(p)}{p(1-p)} \right\}
+$$
+
+## Estimación de la varianza $IC(p)$
+
+El intervalo de confianza para $p$ es:
+
+$$ 
+IC(p) = \left\{ \frac{exp\left[ln\left(\frac{p}{1-p}\right) \pm \frac{t_{1-\alpha/2,gl}se(p)}{p(1-p)} \right]}{1+exp\left[ln\left(\frac{p}{1-p}\right) \pm \frac{t_{1-\alpha/2,gl}se(p)}{p(1-p)} \right]} \right\}
+$$
+
+## Estimación de Proporciones para Variables Multinomiales
+
+- Cuando se trabaja con variables multinomiales, el estimador de proporción se adapta.
+
+- El estimador para la categoría $k$ es:
+
+\begin{eqnarray*}
+p_{k} & = & \frac{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{\displaystyle \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}} = \frac{\hat{N}_{k}}{\hat{N}}
+\end{eqnarray*}
+
+Estos métodos permiten estimar proporciones para variables binarias y multinomiales en el contexto de encuestas de hogares.
+
+
+## Tabla Zona Vs Sexo
+
+Haciendo uso de la función  `group_by` organizada en forma de `data.frame`. 
+```{r, tab2, eval=FALSE}
+(
+  prop_sexo_zona <- diseno %>% 
+    group_by(pobreza,Sex) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se", "ci"))) %>% 
+    data.frame()
+)
+
+```
+
+Esta forma de organizar la información es recomendable cuando el realizar el análisis sobre las estimaciones puntuales.
+
+## Tabla Zona Vs Sexo
+
+```{r, tab2, echo = FALSE, eval = TRUE}
+```
+
+## Tablas de doble entrada. 
+Una alternativa es utilizar la función `svyby` con la siguiente sintaxis. 
+
+```{r}
+tab_Sex_Pobr <- svyby(~Sex,  ~pobreza, diseno, svymean)
+tab_Sex_Pobr %>% select(-se.SexFemale, -se.SexMale)
+tab_Sex_Pobr %>% select(-SexFemale, -SexMale)
+```
+
+## Tablas de doble entrada. 
+Para la estimación de los intervalos de confianza utilizar la función `confint`.
+```{r}
+confint(tab_Sex_Pobr) %>% as.data.frame()
+```
+
+## Prueba de independencia $\chi^{2}$
+
+- La prueba de independencia $\chi^{2}$ se utiliza para determinar si dos variables cualitativas son independientes o si hay una asociación entre ellas.
+
+- La prueba se aplica comúnmente a tablas de contingencia, especialmente las $2\times2$.
+
+- La fórmula para el estadístico $\chi^{2}$ de Pearson es:
+
+$$ 
+\chi^{2} = n_{++}\sum_{r}\sum_{c}\frac{(p_{rc}-\hat{\pi}_{rc})^{2}}{\hat{\pi}_{rc}}
+$$
+
+- Donde $\hat{\pi}_{rc}$ se calcula como:
+
+$$
+\hat{\pi}_{rc} = \frac{n_{r+}}{n_{++}} \cdot \frac{n_{+c}}{n_{++}} \cdot p_{r+} \cdot p_{+c}
+$$
+
+
+## Prueba de independencia. 
+Para realizar la prueba de independencia $\chi^{2}$ puede ejecuta la siguiente linea de código. 
+
+```{r}
+svychisq(~Sex + pobreza, diseno, statistic="F")
+```
+
+Más adelante se profundiza en la metodología de esta prueba.
+
+
+## Tablas de doble entrada. 
+
+```{r, tab_02, echo=TRUE,eval=FALSE}
+(tab_Sex_Ocupa <- svyby(~Sex,  ~Employment,
+                       diseno, svymean))
+```
+
+```{r, tab_02, echo=FALSE,eval=TRUE}
+```
+
+## Tablas de doble entrada 
+```{r}
+confint(tab_Sex_Ocupa) %>% as.data.frame()
+```
+
+
+## Prueba de independencia. 
+
+La prueba de independencia $\chi^{2}$ se obtiene con la siguiente linea de código. 
+
+```{r}
+svychisq(~Sex + Employment, 
+         design = diseno,  statistic="F")
+```
+
+
+## Tablas de doble entrada. 
+Dado que la variable *pobreza* es de tipo numérica, es necesario convertirla en factor. 
+
+```{r}
+tab_region_pobreza <- 
+  svyby(~as.factor(pobreza),  ~Region, diseno, svymean)
+tab_region_pobreza %>% select(-"se.as.factor(pobreza)0",
+         -"se.as.factor(pobreza)1")
+
+```
+
+## Tablas de doble entrada.
+
+```{r}
+tab_region_pobreza %>% 
+ select("se.as.factor(pobreza)0",
+        "se.as.factor(pobreza)1")
+```
+
+
+## Prueba de independencia. 
+
+Una vez más la prueba de independencia es: 
+```{r}
+svychisq(~Region + pobreza, 
+         design = diseno,  statistic="F")
+```
+
+## Razón de odds
+
+
+- La razón de odds es una medida que expresa la probabilidad de que un evento ocurra en comparación con la probabilidad de que no ocurra.
+
+- Es una forma de cuantificar la asociación entre los niveles de una variable y un factor categórico.
+
+- La razón de odds se calcula como la proporción de la probabilidad de éxito (ocurrencia del evento) sobre la probabilidad de fracaso (no ocurrencia del evento).
+
+- La fórmula general para la razón de odds es:
+
+  $$Odds = \frac{P(\text{Éxito})}{P(\text{Fracaso})}$$
+
+- Se utiliza comúnmente en estadística y análisis de datos para evaluar la asociación entre variables y en modelos de regresión logística.
+
+
+
+
+## Razón de obbs
+
+
+```{r, echo = TRUE, eval = TRUE}
+(tab_Sex <- svyby(~pobreza,  ~Sex, diseno,
+                 svymean, vartype = c("se", "ci")))
+svycontrast(tab_Sex, quote(`Female`/`Male`)  )
+```
+
+## Razón de obbs
+
+```{r, echo = TRUE, eval = TRUE}
+tab_Sex_Pobr <- 
+   svymean(~interaction (Sex, pobreza), diseno, 
+             se=T, na.rm=T, ci=T, keep.vars=T) 
+  tab_Sex_Pobr %>%  as.data.frame()
+
+```
+
+## Razón de obbs
+Suponga que se desea cálcular la siguiente razón de obbs. 
+
+$$
+ \frac{\frac{P(Sex = Female \mid pobreza = 0 )}{P(Sex = Female \mid pobreza = 1 )}}{
+ \frac{P(Sex = Male \mid pobreza = 1 )}{P(Sex = Male \mid pobreza = 0 )}
+ }
+$$
+La forma de cálculo en sería: 
+
+```{r, echo = TRUE, eval = TRUE}
+svycontrast(tab_Sex_Pobr, 
+            quote((`interaction(Sex, pobreza)Female.0`/
+                     `interaction(Sex, pobreza)Female.1`)/
+                  (`interaction(Sex, pobreza)Male.0`/
+                     `interaction(Sex, pobreza)Male.1`) ))
+```
+
+## Diferencia de proporciones en tablas de contingencias
+
+Como lo menciona *Heeringa, S. G. (2017)* las estimaciones de las proporciones de las filas en las tablas de doble entrada son, de hecho, estimaciones de subpoblaciones en las que la subpoblación se define por los niveles de la variable factorial. Ahora bien, si el interés se centra en estimar diferencias de las proporciones de las categorías entre dos niveles de una variable factorial, se pueden utilizando contrastes. 
+
+## Contrastes 
+El interés ahora es realizar en contraste de proporciones, por ejemplo: $\hat{p}_F - \hat{p}_M$
+
+```{r}
+(tab_sex_pobreza <- svyby(~pobreza, ~Sex, 
+                          diseno , 
+                      svymean, na.rm=T,
+                      covmat = TRUE,
+                      vartype = c("se", "ci")))
+```
+
+-   *Paso 1:* Calcular la diferencia de estimaciones 
+```{r}
+0.3892 - 0.3946			 
+```
+
+## Contrastes de la diferencia de proporciones
+
+Con la función `vcov` obtiene la matriz de covarianzas
+
+```{r}
+library(kableExtra)
+vcov(tab_sex_pobreza)%>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+-   *Paso 2:* El cálculo del error estándar es:   
+
+```{r}
+sqrt(0.0009983 + 0.0013416 - 2*0.0009183)
+```
+
+
+## Contrastes de la diferencia de proporciones en R
+Para realizar la diferencia de proporciones se hace uso de la función `svycontrast`. 
+
+```{r}
+svycontrast(tab_sex_pobreza,
+            list(diff_Sex = c(1, -1))) %>%
+  data.frame()
+
+```
+
+
+## Contrastes de la diferencia de proporciones 
+Diferencia en desempleo por sexo. 
+```{r}
+(tab_sex_desempleo <- svyby(
+  ~desempleo, ~Sex, 
+    diseno %>% filter(!is.na(desempleo)) , 
+     svymean, na.rm=T, covmat = TRUE,
+     vartype = c("se", "ci")))
+```
+
+-   *Paso 1*: Diferencia de las estimaciones 
+```{r}
+0.02169 - 0.06783 	
+```
+
+## Contrastes de la diferencia de proporciones
+
+Estimación de la matriz de covarianza: 
+
+```{r}
+vcov(tab_sex_desempleo) %>% data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+
+-   *Paso 2*: Estimación del error estándar. 
+```{r}
+sqrt(0.00003114	 + 0.00014789 - 2*0.00002081)
+```
+
+## Contrastes de la diferencia de proporciones en R 
+Siguiendo el ejemplo anterior se tiene que: 
+```{r}
+svycontrast(tab_sex_desempleo,
+            list(diff_Sex = c(-1, 1))) %>%
+  data.frame()
+
+```
+
+## Contrastes 
+La tabla de desempleo por región se obtiene como:
+
+```{r}
+(tab_region_desempleo <- svyby(
+  ~desempleo, ~Region, 
+    diseno %>% filter(!is.na(desempleo)) , 
+    svymean, na.rm=T, covmat = TRUE,
+     vartype = c("se", "ci")))
+
+```
+
+## Creado una matriz de contrastes
+
+Ahora, el interés es realizar los contrastes siguientes para desempleo: 
+
+- $\hat{p}_{Norte} - \hat{p}_{Centro} = 0.01004$, 
+
+- $\hat{p}_{Sur} - \hat{p}_{Centro} = 0.02691$ 	
+
+- $\hat{p}_{Occidente} - \hat{p}_{Oriente} = 0.01046$	
+
+Escrita de forma matricial es: 
+
+$$
+\left[\begin{array}{ccccc}
+1 & 0 & -1 & 0 & 0\\
+0 & 1 & -1 & 0 & 0\\
+0 & 0 & 0 & 1 & -1
+\end{array}\right]
+$$
+
+
+## Contrastes múltiples
+```{r, tab_03, echo=TRUE, eval=FALSE}
+vcov(tab_region_desempleo)%>%
+  data.frame() %>% 
+  kable(digits = 10,
+        format.args = list(scientific = FALSE))
+```
+
+
+```{r, tab_03, echo=FALSE, eval=TRUE}
+```
+
+```{r}
+c(sqrt(0.0002981 + 0.0002884 - 2*0) ,sqrt(0.0001968 + 0.0002884 - 2*0),
+sqrt(0.0001267 + 0.0004093 - 2*0))
+```
+
+
+## Creado una matriz de contrastes en `R`
+
+```{r}
+svycontrast(tab_region_desempleo, list(
+           Norte_sur = c(1, 0, -1, 0, 0),
+          Sur_centro = c(0, 1, -1, 0, 0),
+   Occidente_Oriente = c(0, 0, 0, 1, -1)
+            )) %>% data.frame()
+```
+
+
+## Ejercicio.
+Repetir el contraste anterior para pobreza. 
+
+```{r}
+(tab_region_pobreza <- svyby(
+  ~pobreza, ~Region, 
+    diseno %>% filter(!is.na(desempleo)) , 
+     svymean, na.rm=T, covmat = TRUE,
+      vartype = c("se", "ci")))
+
+```
+
+## Creado una matriz de contrastes
+
+Ahora, el interés es realizar los contrastes siguientes para pobreza: 
+
+- $\hat{p}_{Norte} - \hat{p}_{Centro}$, 
+
+- $\hat{p}_{Sur}-\hat{p}_{Centro}$ 	
+
+- $\hat{p}_{Occidente}-\hat{p}_{Oriente}$	
+
+Escrita de forma matricial es: 
+
+$$
+\left[\begin{array}{ccccc}
+1 & 0 & -1 & 0 & 0\\
+0 & 1 & -1 & 0 & 0\\
+0 & 0 & 0 & 1 & -1
+\end{array}\right]
+$$
+
+## Creado una matriz de contrastes en `R`
+
+
+
+```{r}
+svycontrast(tab_region_pobreza, list(
+           Norte_sur = c(1, 0, -1, 0, 0),
+          Sur_centro = c(0, 1, -1, 0, 0),
+   Occidente_Oriente = c(0, 0, 0, 1, -1)
+            )) %>% data.frame()
+```
+
+
+
+## ¡Gracias!
+
+::: yellow
+*Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::

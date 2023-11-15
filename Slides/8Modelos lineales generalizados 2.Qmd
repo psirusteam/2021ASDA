@@ -1,0 +1,750 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Modulo 7: Modelos lineales generalizados (Variable categóricas)"
+author: |
+  | Andrés Gutiérrez.
+  | Stalyn Guerrero 
+institute: "CEPAL - Unidad de Estadísticas Sociales"
+format: 
+  beamer: 
+    colortheme: dove
+    fonttheme: default
+    incremental: false
+    aspectratio: 1610
+    #theme: Berkeley
+    toc: true
+    slide_level: 2
+    #highlight: pygments
+Email: andres.gutierrez@cepal.org
+lang: es
+editor_options:
+  markdown:
+    wrap: 90
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE,
+                      echo = TRUE,
+                      error = FALSE, cache.path = "00_Caches/08_MLG2/")
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(dotwhisker)
+# remotes::install_github("BS1125/CMAverse")
+library(CMAverse)
+#rm(list = ls())
+
+theme_cepal <- function(...) theme_light(10) + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="bottom", 
+        legend.justification = "left", 
+        legend.direction="horizontal",
+        plot.title = element_text(size = 20, hjust = 0.5),
+        ...) 
+```
+
+# Introducción 
+
+## Introducción 
+
+- Leslie Kish destaca que en inferencia estadística, no se pueden asumir variables aleatorias independientes e idénticamente distribuidas en la mayoría de los casos prácticos. Las muestras no se dan, deben ser seleccionadas, asignadas o capturadas, y el tamaño de la muestra no es un número fijo, sino una variable aleatoria.
+
+- En teoría de muestreo, las características de interés son parámetros, no realizaciones de variables aleatorias. Se requiere un experimento que defina todos los posibles resultados y una sigma-álgebra para hablar de una variable aleatoria.
+
+- Al estimar la tasa de desempleo, el estado "desempleado" no es una realización de una variable aleatoria, sino una caracterización del estado de la naturaleza de un individuo en el momento de la medición.
+
+## Introducción 
+
+- La inferencia estadística es aplicable solo en el muestreo aleatorio simple con reemplazo, donde se cumplen las propiedades de independencia e idéntica distribución. En la selección de muestras, existen dos escenarios generales: selección con reemplazo y selección sin reemplazo.
+
+- Selección sin reemplazo no permite construir muestras aleatorias independientes ni idénticamente distribuidas debido a la falta de independencia en el proceso de selección.
+
+- En muestreo con reemplazo, las variables aleatorias $X_i$ conforman una muestra aleatoria independiente e idénticamente distribuida, lo que es esencial para aplicar la teoría de inferencia estadística.
+
+## Introducción 
+
+- Para que las variables $X_i$ tengan la misma esperanza y varianza que la población, se requiere que la probabilidad de selección sea igual para todos los individuos en la población.
+
+- En muestreo aleatorio simple con reemplazo, las propiedades de estimadores clásicos, como la media muestral, coinciden con los resultados de inferencia clásica.
+
+- En encuestas con selección no aleatoria, es necesario incluir los pesos de muestreo en análisis estadísticos para obtener resultados confiables en técnicas como regresiones y varianzas del promedio.
+
+## Modelos de superpoblación. 
+- Se asume que la estimación de máxima verosimilitud es apropiada para muestras aleatorias simples en modelos de regresión y otros.
+
+- El modelo considera una función de densidad poblacional $f(y | \theta)$ con $\theta$ como el parámetro de interés.
+
+- Se presenta un ejemplo con 100 realizaciones de variables Bernoulli independientes con $\theta=0.3$.
+
+```
+1 1 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 
+0 1 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 1 0 0 0 1 1 0 0 0 1 1 0 
+0 1 0 0 0 1 0 0 1 1 1 0 0 0 0 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 1 0
+```
+
+- La población finita generada se basa en un modelo de superpoblación y contiene 28 éxitos.
+
+
+## Primer proceso inferencial: el modelo
+
+- La inferencia se basa en la distribución binomial con parámetro 0.3.
+
+- El estimador insesgado de mínima varianza es el promedio poblacional, utilizando todos los datos de la población.
+
+- Se realiza una simulación de Monte Carlo con 1000 repeticiones para corroborar la propiedad del estimador insesgado.
+
+- Se obtiene un valor estimado de $\theta$ (0.3) y se calcula el valor esperado (insesgado) de acuerdo a la simulación.
+
+## Primer proceso inferencial: el modelo
+
+```{r,eval=TRUE}
+N = 100
+theta = 0.3
+nsim1 = 1000
+Est0=rep(NA,nsim1)
+
+for(i in 1:nsim1){
+y=rbinom(N, 1, theta)
+Est0[i]=mean(y)
+}
+
+Esp0 = mean(Est0)
+
+cbind(theta, Esp0)  
+```
+
+## Segundo proceso inferencial: el muestreo
+
+- En el segundo proceso inferencial se considera que los valores de la medición son fijos pero desconocidos, y no siguen ningún modelo probabilístico.
+
+- Se divide la población en conglomerados (hogares en este ejemplo) y se toma una muestra de estos hogares.
+
+```
+(1 1 0) (1 0) (0 0 0 0 0 0 1) (1 0) (0 0 0 0 0 0 1) (0 0 
+1) (0 0 0 0 0 0 0 1) (0 0 1) (0 0 0 1) (0 0 0 0 1) (0 0 
+0 0 0 0 0 1) (1 0) (1 0) (0 0 1) (1 0) (0 0 1) (1 0) (0 1) 
+(0 0 0 1) (0 0 1) (1 1 0) (0 0 0 0 1) (0 1) (0 1) (0 0 0 0 
+0 0 0 0 0 1) (0 1) (0)
+```
+
+
+- Se realiza un censo en cada hogar seleccionado, y la selección de hogares se hace aleatoriamente, sin reemplazo y con probabilidades de inclusión proporcionales al tamaño del hogar.
+
+## Segundo proceso inferencial: el muestreo
+
+- Bajo el esquema anterior, el estimador insesgado para la proporción de desempleados es calculado como 
+$$\bar{y}_{\pi S} = \sum_{i\in S_{I}}\frac{t_{y_{i}}}{\pi_{Ii}} = \frac{\sum_{i\in S_{I}}\bar{y}_{i}}{n_{I}}$$.
+
+- También se presenta un estimador ingenuo que ignora el diseño de muestreo y se calcula como 
+$$\bar{y}_{S}=\frac{\sum_{i\in S_{I}}t_{y_{i}}}{\sum_{i\in S_{I}}N_{i}}$$.
+
+
+## Simulación 
+
+1. Configuran los parámetros iniciales, el tamaño de la población ($N$) y el valor verdadero del parámetro de interés ($\theta$), que es la proporción de éxitos en la población.
+
+```{r, eval=TRUE}
+library(TeachingSampling)
+N=100
+theta=0.3
+```
+
+2. Genera una población de $N$ elementos mediante la función `rbinom`, que simula variables aleatorias binomiales con parámetro $\theta$. 
+
+```{r, eval=TRUE}
+set.seed(1234)
+y=rbinom(N, 1, theta)
+```
+
+3. Calcular $\theta$ para la población. 
+
+```{r, eval=TRUE}
+theta_N=mean(y)
+```
+
+## Simulación 
+
+4. Definir una estructura de conglomerados 
+
+```{r, eval=TRUE}
+clus=c(0,which((y[-N]-y[-1])!=0)+1)
+NI=(length(clus)-1)
+Ind=matrix(0, nrow=N, ncol=NI)
+Tamaños=clus[-1]-clus[-(length(clus))]
+
+for(l in 1:(length(clus)-1)){
+a=(clus[l]+1):clus[l+1]
+Ind[a,l]=a
+}
+```
+
+
+5. Seleccionar una muestra de conglomerados 30% y realizar censo al interior
+
+```{r, eval=TRUE}
+nI=floor(NI*0.3)
+```
+6. Estimar $\theta$ haciendo uso de los estimadores anteriores. 
+
+## Simulación 
+7. Repetir el proceso 1000 veces y calcular la esperanza de los estimadores.
+
+```{r, eval=TRUE}
+nsim2 = 1000
+Est1 <- Est2 <- NA
+for(j in 1:nsim2) {
+  res <- S.piPS(nI, Tamaños)
+  sam <- res[, 1]
+  Ind.sam = Ind[, sam]
+  Tamaños.sam = Tamaños[sam]
+  #-------Espacio para las medias
+  medias = matrix(NA)
+  for (k in 1:ncol(Ind.sam)) {
+    medias[k] = mean(y[Ind.sam[, k]])
+  }
+  Est1[j] = mean(medias)
+  Est2[j] = sum(Tamaños.sam * medias) / sum(Tamaños)
+}
+```
+
+## Resultado de la simulación 
+
+- El primer estimador es insesgado (su esperanza equivale al parámetro de la población finita) dado que tiene encuenta el diseño muestral.
+
+- El segundo estimador es sesgado porque no tiene en cuenta el diseño de muestreo
+
+```{r, eval=TRUE}
+Esp1 = mean(Est1) ; Esp2 = mean(Est2)
+
+cbind(theta_N, Esp1, Esp2)
+```
+
+## Inferencia doble: los modelos y el muestreo
+
+**Inferencia Doble:**
+
+  Asuma que las variables de interés siguen un modelo probabilístico y se realiza un muestreo de una población finita. En este proceso, tanto el modelo como el diseño de muestreo y la medida de probabilidad que rige las superpoblaciones son factores fundamentales en la inferencia del parámetro de interés.
+
+**Máxima Pseudo-Verosimilitud (MPV):**
+
+  Dado que el diseño de muestreo es complejo, no es apropiado utilizar técnicas clásicas como la máxima verosimilitud. En cambio, se recurre a la MPV, que considera las ponderaciones del diseño de muestreo. Para el ejemplo de las proporciones, el estimador $\bar{y}_{\pi S}$ cumple la siguiente relación:
+
+
+\begin{eqnarray*}
+E_{\xi p}\left(\bar{y}_{\pi S}\right) & = & E_{\xi}E_{p}\left(\bar{y}_{\pi S}\mid Y\right)=E_{\xi}\left(\bar{y}_{U}\right)=\theta=0.3
+\end{eqnarray*}
+
+
+
+## Método de Pseudo máxima verosimilitud
+
+Sea $\boldsymbol{y}_i$ el vector de observaciones los cuales provienen de los vectores
+aleatorios $\boldsymbol{Y}_i$ para $i \in U$. Suponga también que
+$\boldsymbol{Y_1, \dots, Y_N}$ son IID con función de densidad $f(\boldsymbol{y},\theta)$.
+Si todos los elementos de la población finita $U$ fueran conocidos la función de
+log-verosimilitud estaría dada por: 
+
+$$
+l(\theta)=\sum_{i=1}^{n}\ln[w_{i}f(y_{i},\theta)]
+$$
+Calculando las derivadas parciales de $l(\theta)$ con respecto a $\theta$ e igualando a cero tenemos un sistema de ecuaciones como sigue:
+
+$$
+\dfrac{\partial l(\theta)}{\partial\theta}=\sum_{i=1}^{n}w_{i}u_{i}(\theta)=0
+$$
+
+donde $ui=\partial\ln[f(y_{i},\theta)]/\partial\theta$ es el vector de "score" de elementos $i,i\in n$ ponderado por $w_{i}$, ahora definiremos $T$ como:
+
+
+## Método de Pseudo máxima verosimilitud
+
+Si se cumplen las condiciones de regularidad (Ver Pag 281 de Cox and Hinkley 1974[^1]), es
+posible considerar a 
+$$\boldsymbol{T}=\sum_{i\in U}\boldsymbol{u}_{i}\left(\theta\right)$$
+como un vector de totales. La estimación $\boldsymbol{T}$ se puede hacer mediante
+
+$$\boldsymbol{\hat{T}}=\sum_{i\in S}w_i\boldsymbol{u}_{i}\left(\theta\right),$$ donde
+$w_i$ son los pesos previamente definidos.
+
+[^1]: Cox, D. R., & Hinkley, D. V. (1974). Theoretical Statistics Chapman and Hall,
+    London. See Also.
+
+## Método de Pseudo máxima verosimilitud (Definición)
+
+Un estimador de Máxima Pseudo Verosimilitud (MVP) $\hat{\theta}_{MPV}$ de $\theta_U$ será
+la solución de las ecuaciones de Pseudo-Verosimilitud dadas por
+$$\boldsymbol{\hat{T}}=\sum_{i\in S}w_i\boldsymbol{u}_{i}\left(\theta\right) = 0,$$
+
+Mediante la linealización de Taylor y considerando los resultados de *Binder(1983)*, podemos obtener una varianza asintóticamente insesgada de la siguiente forma:
+
+$$
+V_{p}\left(\hat{\theta}_{MPV}\right)\approx\left[J\left(\theta_{U}\right)\right]^{-1}V_{p}\left(\hat{T}\right)\left[J\left(\theta_{U}\right)\right]^{-1}
+$$
+
+Donde  
+$$
+J\left(\theta_{U}\right)=  \frac{\partial T\left(\theta\right)}{\partial\theta}\bigg|_{\theta=\theta_{U}}=  \sum_{i\in U}\frac{\partial\boldsymbol{u}_{i}\left(\theta\right)}{\partial\theta}\bigg|_{\theta=\theta_{U}}
+$$
+
+
+## Método de Pseudo máxima verosimilitud (Definición)
+
+El estimador de la varianza 
+
+$$
+\hat{V}_{p}\left(\hat{\theta}_{MPV}\right)=\left[\hat{J}\left(\hat{\theta}_{MPV}\right)\right]^{-1}\hat{V}_{p}\left(\hat{T}\right)\left[\hat{J}\left(\hat{\theta}_{MPV}\right)\right]^{-1}
+$$
+con
+
+$$
+\hat{J}\left(\hat{\theta}_{MPV}\right)=  \frac{\partial\hat{T}\left(\theta\right)}{\partial\theta}\bigg|_{\theta=\hat{\theta}_{MPV}}=  \sum_{i\in s}w_{i}\frac{\partial\boldsymbol{u}_{i}\left(\theta\right)}{\partial\theta}\bigg|_{\theta=\hat{\theta}_{MPV}}
+$$
+
+$\hat{V}_{p}\left(T\right)$ es la matriz de varianza estimada y
+$\hat{V}_{p}\left(\hat{T}\right)$ es un estimador consistente para la varianza.
+
+# Introducción al GLM
+
+## Introducción al GLM
+
+Un modelo lineal generalizado tiene tres componentes básicos:
+
+-   **Componente aleatoria**: Identifica la variable respuesta ($y_1, \dots, y_N$) y su
+    distribución de probabilidad.
+
+-   **Componente sistemática**: Especifica las variables explicativas (independientes o
+    predictoras) utilizadas en la función predictora lineal.
+
+    Las covariables $x_1, \dots, x_k$ producen un predictor lineal $\eta_i$ que resulta de
+    la combinación lineal $\eta_{i}=\sum_{j=1}^{k}x_{ij}\beta_{j}$ donde $x_{ij}$ es el
+    valor del j-ésimo predictor en el i-ésimo individuo, e $i = 1,\dots,N$.
+
+## Introducción al GLM
+
+-   **Función link**: Es una función del valor esperado de $Y$ , $E(Y )$, como una
+    combinación lineal de las variables predictoras.
+
+    Se denota el valor esperado $Y$ como $\mu = E(Y)$, entonces la función *link*
+    especifica una función $$g(\mu)=\sum_{j=1}^{k}x_{ij}\beta_{j}.$$ 
+    Así, la función $g(\cdot)$ realciona las componentes aleatoria y sistemática.
+    De este modo, para $i=1,\dots, N$ 
+    $$\mu_i = E(Y_i) $$
+    $$\eta_i = g(\mu_i) = \sum_{j}\beta_jx_{ij}$$
+    
+
+## Introducción al GLM
+
+  - Todos los modelos se pueden incluir dentro de la llamada familia exponencial de
+distribuciones $$f\left(y_{i}\mid\theta_{i}\right)=a\left(\theta_{i}\right)b\left(\theta_{i}\right)\exp\left[y_{i}Q\left(\theta_{i}\right)\right]$$ de modo que $Q\left(\theta\right)$ recibe el nombre de *parámetro natural*. Además, $a(\cdot)$ y $b(\cdot)$ son funciones conocidas. 
+
+  - Los modelos de regresión lineal típicos para respuestas continuas son un caso particular de los $GLM$.
+
+  
+## Lectura de la base y definición del diseño muestral
+
+Para ilustrar el uso de los GLM en encuestas de hogares, se estimará un modelo para el ingreso empleando un modelo Gamma. 
+
+```{r}
+library(survey)
+library(srvyr)
+encuesta <- readRDS("../Data/encuesta.rds")
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+
+```
+
+## Modelo Gamma 
+
+## Modelo Gamma para Variable Continua
+
+  - La función de enlace $g(\cdot)$ para el GLM con una variable dependiente distribuida por un modelo Gamma es el recíproco, $\frac{1}{\mu_{i}}$.
+  
+  - El valor esperado de $y_i$ observado ($E(y_i) = \mu_i$) se relaciona con las variables de entrada mediante la ecuación: $$\frac{1}{\mu_{i}} = B_0 + B_1x_1$$
+  
+  - De manera equivalente, se puede expresar como: $$\mu_{i} = \frac{1}{B_0 + B_1x_1}$$
+
+## Definir nueva variable 
+
+**Creando nuevas variables en la base de datos**.  
+
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% 
+  mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo = ifelse(Employment == "Unemployed", 1, 0))
+```
+
+**Estimador de momentos de la distribución gamma**
+
+```{r, echo=TRUE, eval=TRUE}
+library(ggplot2)
+
+x <- encuesta$Income
+n = length(x)
+shape1 = (n*mean(x)^2)/sum((x-mean(x))^2)
+rate1 = (n*mean(x))/sum((x-mean(x))^2)
+c(shape1 = shape1, rate1 = rate1)
+```
+
+## La densidad empírica para el ingreso. 
+
+```{r, plot_gamma1, echo=FALSE, eval=FALSE}
+library(ggplot2)
+
+ggplot(data = encuesta, aes(x = Income)) +
+  geom_histogram(aes(y = ..density..), bins = 30, color = "white", fill = "skyblue", alpha = 0.7) +
+  geom_density(color = "darkblue", size = 1.5) +
+  stat_function(fun = dgamma, args = list(shape = shape1, rate = rate1), col = "red", size = 1.5) +
+  theme_cepal() +
+  labs(
+    title = "Distribución de Ingresos",
+    x = "Ingresos",
+    y = "Densidad"
+  ) +
+  theme_cepal()
+```
+
+La linea roja se obtiene con la estimación de los parámetros, la linea azul oscura es la densidad empírica.
+
+![Modelo gamma para el ingreso](Imagenes/08_MLG2/01_Ingreso_gamma.png){width="400"}
+
+
+## qweigth para modelo gamma ingreso 
+
+Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigth como sigue:
+
+```{r,mod_gamma1, echo=TRUE,eval=TRUE}
+mod_qw <- lm(wk ~ Age + Sex + Region + Zone,
+             data = encuesta)
+
+encuesta$wk2 <-   encuesta$wk/predict(mod_qw)
+diseno <- encuesta %>%
+  as_survey_design( strata = Stratum,
+    ids = PSU, weights = wk2,
+    nest = T)
+```
+
+## Modelo gamma
+
+El modelo ajustado es el siguiente:
+
+```{r,mod_gamma1a, echo=TRUE,eval=TRUE}
+modelo <- svyglm(formula = Income ~ Age + Sex +
+                   Region + Zone,
+                   design = diseno, 
+                  family = Gamma(link = "inverse")) 
+broom::tidy(modelo)
+```
+
+
+
+## Modelo gamma
+Es útil la estimación de la dispersión que ofrece _svyglm_ de forma predeterminada dado que no tiene en cuenta la información especial sobre la dispersión que se puede calcular utilizando la distribución Gamma. **No todos los GLM tienen una forma mejorada y específica del modelo para estimar**.
+```{r}
+(alpha = MASS::gamma.dispersion(modelo))
+mod_s <- summary(modelo, dispersion = alpha)
+mod_s$dispersion
+
+```
+## Modelo Gamma
+
+Los coeficientes del modelo también se pueden obtener de la siguiente manera:
+
+```{r}
+mod_s$coefficients
+```
+
+
+
+## Predicción e intervalos de conficanza. 
+
+Una vez estimado los coeficientes, se estiman los intervalos de confianza para la predicción como sigue: 
+
+```{r, IC_1, eval=FALSE}
+pred <- predict(modelo, type = "response", se = T)
+
+pred_IC <- data.frame(confint(pred))
+
+colnames(pred_IC) <- c("Lim_Inf", "Lim_Sup")
+
+pred <- bind_cols(data.frame(pred), pred_IC)
+
+pred$Income <- encuesta$Income
+
+pred$Age <- encuesta$Age
+
+pred %>% slice(1:10L)
+```
+
+## Utilizando la función predict
+```{r, IC_1, eval=TRUE,echo=FALSE}
+```
+
+## Scaterplot de la predicción
+
+Intervalos de confiza para la predicción en cada punto.
+
+```{r, plot_pred, echo=TRUE,eval=FALSE}
+pd <- position_dodge(width = 0.2)
+ggplot(pred %>% slice(1:100L),
+       aes(x = Age , y = response)) +
+  geom_errorbar(aes(ymin = Lim_Inf,
+                    ymax = Lim_Sup),
+                width = .1,
+                linetype = 1) +
+  geom_point(size = 2, position = pd) +
+  theme_bw()
+```
+
+## Scaterplot de la predicción
+
+![Intervalo de confizan para la predicción](Imagenes/08_MLG2/02_IC_Ingreso_gamma.png){width="500"}
+
+
+# Modelos multinomial
+
+## Modelos multinomial
+
+  - Extensión natural del modelo de regresión logística binomial.
+  
+  - Utilizado para analizar variables con tres o más categorías distintas, especialmente apropiado para respuestas nominales en encuestas
+
+**Consideraciones para el Ajuste del Modelo Multinomial:**
+
+  1. La variable dependiente debe ser nominal.
+  
+  2. Se emplean una o más variables independientes, que pueden ser continuas, ordinales o nominales (incluyendo variables dicotómicas).
+  
+  3. Requiere independencia de las observaciones y categorías mutuamente excluyentes y exhaustivas en la variable dependiente.
+  
+## Modelo multinomial
+
+ 
+  4. Se evita la **multicolinealidad**, que surge de la alta correlación entre variables independientes.
+  
+  5. Se busca una relación lineal entre variables independientes continuas y la transformación logit de la variable dependiente.
+  
+  6. No deben existir valores atípicos, valores de apalancamiento elevados o puntos influyentes.
+  
+**Modelo multinomial**
+
+El modelo múltinomial esta dado como:
+$$
+Pr\left(Y_{ik}\right)=Pr\left(y_{i}=k\mid\boldsymbol{x}_{i}:\boldsymbol{\beta}_{1},\dots\boldsymbol{\beta}_{m}\right)=\frac{\exp\left(\beta_{0k}+\boldsymbol{\beta}_{k}\boldsymbol{x}_{i}\right)}{\sum_{j=1}^{m}\exp\left(\beta_{0j}+\boldsymbol{\beta}_{j}\boldsymbol{x}_{i}\right)}
+$$
+
+donde $\boldsymbol{\beta}_k$ es el vector de coeficiente de $\boldsymbol{X}$ para la k-ésima categoría de $Y$. 
+
+## Estimación de Parámetros con Máxima Verosimilitud
+
+Utilización de la máxima verosimilitud como técnica de estimación para el modelo logístico.
+
+**Función de Pseudoverosimilitud Multinomial (Heeringa):**
+
+  - La función de pseudoverosimilitud multinomial se maximiza para estimar los parámetros $\hat{\beta}$.
+  
+  - Expresada como 
+  
+\begin{eqnarray*}
+PL_{Mult}\left(\hat{\beta}\mid\boldsymbol{X}\right) & = & \prod_{i=1}^{n}\left\{ \prod_{i=1}^{k}\hat{\pi}_{k}\left(x_{i}\right)^{y_{i\left(k\right)}}\right\} ^{w_{i}}
+\end{eqnarray*}
+  
+## Estimación de Parámetros con Máxima Verosimilitud
+
+**Maximización mediante Newton-Raphson:**
+
+  - Aplicación del algoritmo de Newton-Raphson para resolver un conjunto de ecuaciones de estimación $\left(K-1\right)\times\left(p+1\right)$.
+  
+  - Supone un diseño de muestra complejo con estratos y conglomerados.
+
+
+
+**Ecuaciones de Estimación:**
+ 
+  - Expresadas como 
+  
+\begin{eqnarray*}
+S\left(\boldsymbol{\beta}\right)_{Mult} & = & \sum_{h}\sum_{\alpha}\sum_{i}\omega_{h\alpha i}\left(y_{h\alpha i}^{\left(k\right)}-\pi_{k}\left(\boldsymbol{\beta}\right)\right)x'_{h\alpha i}=0
+\end{eqnarray*}
+
+## Estimación de Parámetros con Máxima Verosimilitud
+
+**Probabilidades $\pi_{k}\left(\boldsymbol{\beta}\right)$:**
+
+  - $\pi_{k}\left(\boldsymbol{\beta}\right) = \frac{exp\left(x'\boldsymbol{\beta_{k}}\right)}{1+{\displaystyle \sum_{k=2}^{K}exp\left(x'\boldsymbol{\beta_{k}}\right)}}$
+  
+  - $\pi_{1\left(referencia\right)}\left(\boldsymbol{\beta}\right)=1-\sum_{k=2}^{K}\pi_{k}\left(\boldsymbol{\beta}\right)$
+
+
+
+**Matriz de Varianza-Covarianza:**
+
+  - Calculada mediante la aplicación de Binder de la linealización de la serie de Taylor a las estimaciones derivadas usando la estimación de pseudomáxima verosimilitud.
+  
+  - Expresada como 
+  
+$$\widehat{Var}\left(\hat{\boldsymbol{\beta}}\right) = \left(J^{-1}\right)var\left[S\left(\hat{\boldsymbol{\beta}}\right)\right]\left(J^{-1}\right)$$
+
+## Modelo multinomial
+
+Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares utilizando `R` se utilizan los siguientes códigos computacionales.
+
+```{r}
+diseno %>% filter(Age >= 15)%>% group_by(Employment) %>% 
+  summarise(Prop = survey_mean(vartype = c("se", "ci")))
+```
+
+## Modelo multinomial
+
+La estimación usando el modelo multinomial con la función `svy_vglm` del paquete `svyVGAM` como se muestra a continuación:
+
+```{r}
+library(svyVGAM)
+diseno_15 <- diseno %>% filter(Age >= 15)
+model_mul <- svy_vglm(
+    formula = Employment ~ Age + Sex + Region + Zone,
+                   design = diseno_15, 
+     crit = "coef",
+    family = multinomial(refLevel = "Unemployed")) 
+```
+
+La función `broom::tidy()`, que normalmente usamos para limpiar y estandarizar la salida del modelo, no puede ser empleada en este caso, sin embargo, en el link[^2] encuentra la función que utilizamos a continuación. 
+
+[^2]: https://tech.popdata.org/pma-data-hub/posts/2021-08-15-covid-analysis/ 
+
+```{r, echo=FALSE, eval=TRUE}
+tidy.svyVGAM <- function(
+  x, 
+  conf.int = FALSE, 
+  conf.level = 0.95,
+  exponentiate = FALSE, 
+  ...
+){
+  # Replace `summary(x)$coefficients` with `summary(x)$coeftable`
+  ret <- as_tibble(summary(x)$coeftable, rownames = "term")
+  
+  # All of this stays the same:
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
+  if (conf.int){
+    ci <- broom:::broom_confint_terms(x, level = conf.level, ...)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  if (exponentiate){ret <- broom:::exponentiate(ret)}
+  
+  # This part only works for the multinomial case, and only if your covariates
+  # have no ":" in their names - NOT FOR GENERAL USE
+  ret %>% 
+  tidyr::separate(term, into = c("term", "y.level"), sep = ":") %>% 
+    arrange(y.level) %>% 
+    relocate(y.level, .before = term)
+}
+```
+
+
+## Modelo multinomial
+
+```{r,modMult, echo=TRUE, eval=FALSE}
+tab_model <- tidy.svyVGAM(model_mul, 
+                               exponentiate = FALSE, 
+                               conf.int = FALSE) 
+tab_model
+```
+
+## Modelo multinomial
+```{r,modMult, echo=FALSE, eval=TRUE}
+```
+
+## Plot del IC para los coeficientes. 
+```{r, plot_Coef_mult, echo=TRUE,eval=FALSE}
+tab_model %>% 
+  mutate( 
+    model = if_else(
+      y.level == 1, 
+      "Inactive",
+      "Employed", 
+    ),
+    sig = gtools::stars.pval(p.value)
+  )  %>% 
+  dotwhisker::dwplot(
+    dodge_size = 0.3,
+    vline = geom_vline(xintercept = 1, colour = "grey60",
+                       linetype = 2)
+  ) + 
+  guides(color = guide_legend(reverse = TRUE)) + 
+  theme_bw() + theme(legend.position = "top")
+```
+
+## Plot del IC para los coeficientes. 
+![Intervalo de confianza](Imagenes/08_MLG2/03_IC_multinomial.png){width="400"}
+
+## modelo multinomial función alternativa. 
+La función `svy_vglm` realiza la estimación de los parámatros, sin embargo, presenta limitaciones 
+para hacer las predicciones con el modelo, por lo tanto, podemos usar como alternativa. 
+```{r, Coef_mult2, echo=TRUE,eval=FALSE}
+library(CMAverse)
+model_mul2 <- svymultinom(
+  formula = Employment ~ Age + Sex + Region + Zone,
+  weights = diseno_15$variables$wk2, 
+  data = diseno_15$variables
+) 
+saveRDS(model_mul2, "Imagenes/08_MLG2/04_modelo_multi.rds")
+```
+
+## Modelo multinomial función alternativa. 
+Parámetros estimados
+
+```{r, Coef_mult2a, echo=FALSE,eval=TRUE}
+model_mul2 <- readRDS("Imagenes/08_MLG2/04_modelo_multi.rds")
+summary(model_mul2)$summarydf
+```
+
+## Predicción del modelo
+El hacer uso de esta función podemos obtener de forma simple la predicción de las probabilidades
+
+```{r, pred_mult2, echo=TRUE, eval=FALSE}
+tab_pred <- predict(model_mul2, type = "probs") %>% 
+  data.frame()
+tab_pred %>% slice(1:10)
+```
+
+## Predicción del modelo 
+```{r, pred_mult2, echo=FALSE, eval=TRUE}
+```
+
+## Predicción del modelo 
+
+Las predicciones del modelo se realizan de la siguiente manera:
+
+```{r}
+diseno_15$variables  %<>% 
+  mutate(predicion = predict(model_mul2))
+
+diseno_15 %>% group_by(Employment) %>% 
+  summarise(Prop = survey_mean(vartype = c("se", "ci")))
+```
+## ¡Gracias!
+
+::: yellow
+*Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::
+

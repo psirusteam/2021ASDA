@@ -1,0 +1,648 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Modulo 6: Modelos lineales generalizados"
+author: |
+  | Andrés Gutiérrez.
+  | Stalyn Guerrero 
+institute: "CEPAL - Unidad de Estadísticas Sociales"
+format: 
+  beamer: 
+    colortheme: dove
+    fonttheme: default
+    incremental: false
+    aspectratio: 1610
+    #theme: Berkeley
+    toc: true
+    slide_level: 2
+    #highlight: pygments
+Email: andres.gutierrez@cepal.org
+lang: es
+editor_options:
+  markdown:
+    wrap: 90
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE,echo = TRUE,
+                      error = FALSE, cache.path = "00_Caches/07_MLG1/")
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(kableExtra)
+rm(list = ls())
+```
+
+#  Introducción
+
+## Introducción 
+
+- Los Modelos Lineales Generalizados (MLGs) son una aproximación unificada a la mayoría de los procedimientos utilizados en estadística aplicada.
+
+- Generalizan los modelos lineales clásicos que se basan en la suposición de una distribución normal para la variable respuesta.
+
+- Los MLGs son ampliamente utilizados en diversas disciplinas y presentan un marco teórico unificado para estimar parámetros.
+
+- La genialidad de Nelder & Wedderburn (1972) radica en demostrar que muchos métodos estadísticos aparentemente no relacionados se pueden abordar con un mismo marco teórico.
+
+## Introducción 
+
+- Los MLGs son especialmente útiles cuando la suposición de normalidad en la variable respuesta no es razonable, como en el caso de respuestas categóricas, proporciones o conteos.
+
+- Estos modelos son adecuados para datos con no normalidad y varianza no constante, lo que es común en encuestas de hogares.
+
+- Las variables en las encuestas de hogares a menudo son de tipo conteo, binarias, etc., lo que hace que el análisis mediante MLGs sea relevante y útil.
+
+## Lectura de las bases de datos y definición del diseño muestral. 
+
+```{r}
+library(srvyr)
+library(survey)
+encuesta <- readRDS("../Data/encuesta.rds")
+data("BigCity", package = "TeachingSampling")
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+
+```
+
+
+## Creación de nuevas variables.
+
+Las nuevas variables son definidas de la siguiente forma.
+
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno <- diseno %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo = ifelse(Employment == "Unemployed", 1, 0))
+```
+
+**Tablas de doble entrada para el tamaño**
+El cálculo de tablas de doble entrada las obtenemos con así:
+
+```{r}
+(tab_pobreza_sexo <- svyby(~factor(pobreza), ~Sex,
+      FUN = svytotal, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, ci=T, keep.var=TRUE))
+```
+
+## Tablas de doble entrada para el tamaño 
+Sin embargo para la estimación de tamaños más simples podemos emplear la función. 
+```{r}
+tab <- svytable(~pobreza + Sex, design = diseno)
+data.frame(tab)
+```
+
+## Tablas de doble entrada para el proporción 
+Al hacer uso de la función `svymean` es posible estimar al proporciones. 
+
+```{r}
+(tab_pobreza_sexo <- svyby(~factor(pobreza), ~Sex,
+      FUN = svymean, design = as.svrepdesign(diseno), 
+      se=F, na.rm=T, ci=T, keep.var=TRUE))
+```
+
+## Tablas de doble entrada para el proporción
+
+En forma alternativa es posible usar la función `prop.table` del paquete base. 
+```{r}
+prop.table(tab, margin = 2) %>% data.frame()
+```
+Estas diferentes formas de proceder son de mucha importancia al momento de hacer uso de pruebas de independencia en tablas cruzadas.
+
+# Prueba de independencia F 
+
+## Prueba de independencia F 
+
+La prueba de independencia F de Fisher permite analizar si dos variables dicotómicas están asociadas cuando la muestra a estudiar es demasiado pequeña y no se cumplen las condiciones para aplicar la prueba $\chi^{2}$. Para utilizar esta técnica, tengamos en cuenta que la probabilidad estimada se escribe como:
+
+$$
+\hat{\pi}_{rc}=\frac{n_{r+}}{n_{++}}\times\frac{n_{+c}}{n_{++}}
+$$
+
+## Prueba de independencia F 
+
+Teniendo en cuenta esta expresión, la estadística $\chi{2}$ de Pearson se define de la siguiente manera:
+
+$$
+\chi_{pearsom}^{2}=n_{++}\times\sum_{r}\sum_{c}\left(\frac{\left(p_{rc}-\hat{\pi}_{rc}\right)^{2}}{\hat{\pi}_{rc}}\right)
+$$
+
+y la estadística de razón de verosimilitud se define como:
+
+$$
+G^{2}=2\times n_{++}\times\sum_{r}\sum_{c}p_{cr}\times\ln\left(\frac{p_{rc}}{\hat{\pi}_{rc}}\right)
+$$
+donde, $r$ es el número de filas y $c$ representa el número de columnas, la prueba tiene $(R-1)\times (C-1)$ grados de libertad.
+
+## Correcciones del Estadístico Chi-Cuadrado en Encuestas
+
+- La corrección del estadístico chi-cuadrado de Pearson se utiliza en análisis de datos de encuestas para ajustar el efecto de diseño.
+
+- *Fay (1979, 1985)* y *Fellegi (1980)* fueron pioneros en proponer correcciones basadas en un efecto de diseño generalizado (GDEFF).
+
+- *Rao y Scott (1984)*, junto con *Thomas y Rao (1987)*, ampliaron la teoría de las correcciones del efecto de diseño generalizado.
+
+- El método de Rao-Scott es un estándar para el análisis de datos de encuestas categóricas en software como Stata y SAS.
+
+## Estadísticos de Prueba
+
+- Los estadísticos de prueba Rao-Scott Pearson y razón de verosimilitud chi-cuadrado se utilizan para analizar la asociación en datos de encuestas categóricas.
+
+- Estos estadísticos se calculan mediante correcciones basadas en efectos de diseño generalizados.
+
+- Las correcciones de Rao-Scott son analíticamente más complicadas que el enfoque de Fellegi, pero se consideran más precisas.
+
+- Son ampliamente utilizados en el análisis de datos de encuestas, especialmente en software estadístico como Stata, SAS y R.
+
+## Estadísticos de Prueba $\chi^2$ y $G^2$
+
+Los estadísticos de prueba Rao-Scott Pearson ajustados por diseño y razón de verosimilitud chi-cuadrado se calculan de la siguiente manera:
+
+$$
+\chi^2_{(R-S)} = \chi^2_{(Pearson)}\big/GDEFF
+$$
+
+y, para la estadística basada en la razón de verosimilitud se calcula como:
+
+$$
+G^2_{(R-S)}  =  G^2\big/GDEFF
+$$
+
+donde el efecto generalizado del diseño ($GDEFF$) de Rao–Scott, está dado por
+
+
+$$
+GDEFF=\frac{\sum_{r}\sum_{c}\left(1-p_{rc}\right)d^{2}\left(p_{rc}\right)-\sum_{r}\left(1-p_{r+}\right)d^{2}\left(p_{r+}\right)-\sum_{c}\left(1-p_{+c}\right)d^{2}\left(p_{+c}\right)}{\left(R-1\right)\left(C-1\right)}
+$$
+
+
+## Prueba de independencia F 
+La estadística F para independencia basada en la chi-cuadrado de Pearson se calcula como sigue:
+ 
+$$
+F_{R-S,Pearson}=\chi_{R-S}^{2}\big/\left[\left(R-1\right)\left(C-1\right)\right]\sim F_{\left(R-1\right)\left(C-1\right),\left(R-1\right)\left(C-1\right)df}
+$$
+
+y, la estadística F para independencia basada en la razón de verosimilitudes se calcula como sigue:
+
+$$
+F_{R-S,LRT}=G_{R-S}^{2}\big/\left(C-1\right)\sim F_{\left(C-1\right),df}
+$$
+
+donde $C$ es el número de columnas de la tabla cruzada 
+
+
+## Prueba de independencia ChiSq
+
+En `R`, el cálculo de las estadísticas chi-cuadrado y F se calculan usando la función `summary` como se muestra a continuación:
+
+```{r}
+ summary(tab, statistic = "Chisq")
+```
+
+Se puede concluir que el estado de pobreza y el sexo no están relacionados con una confianza del 95%.
+
+## Prueba de independencia F 
+```{r}
+summary(tab, statistic = "F")
+```
+
+# Estadístico de Wald 
+
+## Estadístico de Wald 
+
+Este estadístico se aplica cuando ya se ha elegido un modelo estadístico ( regresión lineal simple, regresión logística, entre otros).
+
+El estadístico de prueba de Wald $\chi^{2}$ para la hipótesis nula de independencia de filas y columnas en una tabla de doble entrada se define de la siguiente manera:
+
+
+$$
+Q_{wald}=\hat{\boldsymbol{Y}^{t}}\left(\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}\right)^{-1}\hat{\boldsymbol{Y}}
+$$
+donde, 
+
+$$
+\hat{\boldsymbol{Y}}=\left(\hat{N}-E\right)
+$$
+es un vector de $R\times C$ de  diferencias entre los recuentos de celdas observadas y esperadas, esto es, $\hat{N}_{rc}-E_{rc}$ 
+
+La matriz  $\boldsymbol{H}\hat{\boldsymbol{V}}\left(\hat{\boldsymbol{N}}\right)\boldsymbol{H}^{t}$, representa la matriz de varianza-covarianza estimada para el vector de diferencias.
+
+## Estadístico de Wald 
+
+La matriz $\boldsymbol{H}$  es la inversa de la matriz $\boldsymbol{J}$ dada por: 
+$$
+\boldsymbol{J}=-\left[\frac{\delta^{2}\ln PL\left(\boldsymbol{B}\right)}{\delta^{2}\boldsymbol{B}}\right] \mid \boldsymbol{B}=\hat{\boldsymbol{B}}
+$$
+
+$$
+\sum_{h}\sum_{a}\sum_{i}x_{hai}^{t}x_{hai}w_{hai}\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\left(1-\hat{\pi}_{hai}\left(\boldsymbol{B}\right)\right)
+$$
+
+Bajo la hipótesis nula de independencia, el estadístico de wald se distribuye chi cuadrado con $\left(R-1\right)\times\left(C-1\right)$ grados de libertad,
+
+$$
+Q_{wald}\sim\chi_{\left(R-1\right)\times\left(C-1\right)}^{2}
+$$
+
+## Estadístico de Wald 
+
+La transformación F del estadístico de Wald es:
+
+$$
+F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\right)\left(C-1\right)df}\sim F_{\left(R-1\right)\left(C-1\right),df-\left(R-1\right)\left(C-1\right)+1}
+$$
+
+
+## Prueba de independencia Wald 
+
+En `R`, para calcular el estadístico de Wald se hace similarmente al cálculo de los estadísticos anteriores usando la función `summary` como sigue:
+
+```{r}
+summary(tab, statistic = "Wald")
+
+```
+Se puede concluir que, con una confianza del 95% y basado en la muestra no hay relación entre el estado de pobreza y el sexo.
+
+## Prueba de independencia adjWald 
+
+El estadístco de Wald ajustado en `R` se se calcula similarmente al anterior y los resultados fueron similares:
+
+```{r}
+summary(tab, statistic = "adjWald")
+```
+
+# Modelo log lineal
+
+## Modelo log lineal para tablas de contingencia 
+
+El término modelo log-lineal, que básicamente describe el papel de la función de enlace que se utiliza en los modelos lineales generalizados. Iniciaremos esta sección con los modelos log-lineales en tablas de contingencia. El modelo estadístico es el siguiente:
+
+$$
+  \log(p_{ijk}) = \mu + \lambda_i^X + \lambda_j^Y + \lambda_k^Z + \lambda_{ij}^{XY}  ,   
+$$
+  
+  donde:
+  
+  - $p_{ijk}=$ la proporción esperada en la celda bajo el modelo. 
+
+  - $\mu = \log(p_{0})=\frac{1}{\#\ de\ celdas}$
+  
+## Modelo log lineal para tablas de contingencia 
+
+El modelo log-lineal en `R` se ajusta utilizando la función `svyloglin` como sigue: 
+  
+```{r}
+mod1 <- svyloglin(~pobreza+Sex + pobreza:Sex , diseno)
+(s1 <- summary(mod1))
+```
+Los resultados muestran que, con una confianza del 95% el estado de pobreza es independiente del sexo, como se ha mostrado con las pruebas anteriores. 
+
+  
+## Modelo log lineal para tablas de contingencia 
+
+En la salida anterior se pudo observar que la interacción es no significativa, entonces, ajustemos ahora el modelo sin interacción:
+
+```{r}
+  mod2 <- svyloglin(~pobreza+Sex, diseno)
+(s2 <- summary(mod2))
+```
+
+## Modelo log lineal para tablas de contingencia 
+
+Mediante un análisis de varianza es posible comparar los dos modelos. 
+  
+```{r}
+  anova(mod1, mod2)
+```
+
+De la anterior salida se puede concluir que, con una confianza del 95%, la interacción no es significativa en el modelo log-lineal ajustado.  
+  
+# Modelo de regresión logistica 
+
+## Modelo de regresión logistica 
+
+Un modelo de regresión logística es un modelo matemático que puede ser utilizado para describir la relación entre un conjunto de variables independientes y una variable dicotomica $Y$. El modelo logístico se describe a continuación:
+
+$$
+    g(\pi(x))=logit(\pi(x)) 
+$$
+
+De aquí,
+
+$$
+z = \ln\left(\frac{\pi(x)}{1-\pi(x)}\right) = B_0 + B_1x_1+\dots+B_px_p
+$$
+
+## Modelo de regresión logistica 
+
+La probabilidad estimada utilizando el modelo logístico es la siguiente:
+
+$$
+    \hat{\pi}\left(\boldsymbol{x}\right)=\frac{\exp\left(\boldsymbol{X\hat{B}}\right)}{1-\exp\left(\boldsymbol{X\hat{B}}\right)}=\frac{\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}{1-\exp\left(\hat{B}_{0}+\hat{B}_{1}x_{1}+\cdots+\hat{B}x_{p}\right)}
+$$
+
+    
+
+$$
+    \pi\left(x_{i}\right)=\frac{\exp\left(x_{i}\boldsymbol{B}\right)}{1-\exp\left(x_{i}\boldsymbol{B}\right)}
+$$
+
+## La varianza del modelo de regresión logistica 
+La varianza de los parámetros estimados se calcula como sigue:
+
+$$
+    var\left(\boldsymbol{\hat{B}}\right)=\boldsymbol{J}^{-1}var\left(S\left(\hat{\boldsymbol{B}}\right)\right)\boldsymbol{J}^{-1}
+$$
+
+con,
+
+$$
+    S\left(B\right)=\sum_{h}\sum_{a}\sum_{i}w_{hai}\boldsymbol{D}_{hai}^{t}\left[\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)\left(1-\pi_{hai}\left(\boldsymbol{B}\right)\right)\right]^{-1}\left(y_{hai}-\pi_{hai}\left(\boldsymbol{B}\right)\right)=0
+$$
+    
+$$
+D_{hai} = \frac{\delta\left(\pi_{hai}\left(\boldsymbol{B}\right)\right)}{\delta B_{j}}
+$$
+donde $j=0,\dots,p$
+    
+## Prueba de Wald para los parámetros del modelo
+
+El estadístico de Wald para la significancia de los parámetros del modelo se utiliza la razón de verosimilitud. En este caso se contrastan el modelo con todos los parámetros (modelo full) versus el modelo reducido, es decir, el modelo con menos parámetros (modelo reduced),  
+
+
+$$
+    G=-2\ln\left[\frac{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{reduced}}{L\left(\hat{\boldsymbol{\beta}}_{MLE}\right)_{full}}\right]
+$$
+   
+## Intervalo de confianza 
+
+Para construir los intervalos de confianza se debe aplicar el función exponencial a cada parámetro, 
+
+$$
+    \hat{\psi}=\exp\left(\hat{B}_{1}\right)
+$$
+
+por ende, el intervalo de confianza es: 
+
+  
+$$
+    CI\left(\psi\right)=\exp\left(\hat{B}_{j}\pm t_{df,1-\frac{\alpha}{2}}se\left(\hat{B}_{j}\right)\right)
+$$
+ 
+
+  
+## Modelo log lineal ajustado
+En `R`  se muestra el ajuste de un modelo logístico teniendo e cuenta el diseño muestral
+
+```{r}
+  mod_loglin <- svyglm(
+    pobreza ~ Sex + Zone + Region,
+    family=quasibinomial, design=diseno)
+  tidy(mod_loglin) 
+```
+
+La salida muestra que ninguna de las covariables son significativas con una confianza del 95%.   
+
+## Intervalo de confianza para el modelo
+
+Los intervalos de confianza en los cuales se pueden concluir que en todos los parámetros el cero se encuentra dentro del intrevalo:
+
+```{r}
+  bind_cols(
+    data.frame(exp_estimado = exp(coef(mod_loglin))),
+    as.data.frame(exp(confint(mod_loglin)))
+  )
+```
+  
+## Plot de la distribución de los betas
+
+```{r, eval=FALSE}
+plot_summs(mod_loglin, 
+             scale = TRUE, plot.distributions = TRUE)
+```
+![Intervalo de confianza para los coeficiente ](Imagenes/07_MLG1/01_Fig_IC_coef.png){width="400"}
+
+
+## Estadístico de Wald sobre los parámetros
+El estadístico de Wald para el cada una de las variables del modelo se calcula a continuación con la función `regTermTest` para las variables del modelo:
+  
+```{r}
+regTermTest(model = mod_loglin, ~Sex)
+regTermTest(model = mod_loglin, ~Zone)
+```
+  
+## Estadístico de Wald sobre los parámetros
+
+```{r}
+  regTermTest(model = mod_loglin, ~Region)
+```
+  
+  
+## Efecto del modelo. 
+
+  Para evaluar los efectos de la variable en el modelo:
+```{r, plot_effecto,  echo=TRUE, eval=FALSE}
+  effe_sex <- effect_plot(mod_loglin, pred = Sex,
+                          interval = TRUE)
+  effe_Zona <-effect_plot(mod_loglin, pred = Zone, 
+                          interval = TRUE)
+  effe_Region <- effect_plot(mod_loglin, pred = Region,
+                             interval = TRUE)
+  (effe_sex |effe_Zona)/effe_Region
+```
+  
+## Efecto del modelo.
+
+![Efectos del modelo ](Imagenes/07_MLG1/02_Fig_efecto_coef.png){width="500"}
+  
+  
+## Modelo log lineal ajustado con interacciones
+  
+```{r}
+mod_loglin_int <- svyglm(
+  pobreza ~ Sex + Zone + Region +
+    Sex:Zone + Sex:Region,
+  family = quasibinomial,
+  design = diseno
+)
+```
+
+
+  
+## Modelo log lineal ajustado con interacciones
+```{r, echo=FALSE}
+ tidy(mod_loglin_int) 
+```
+  
+## Plot de la distribución de los betas
+  
+```{r, echo=FALSE, eval=FALSE}
+  plot_summs(mod_loglin_int, mod_loglin,
+             scale = TRUE, 
+             plot.distributions = TRUE)
+```
+![Comparando los modelos ](Imagenes/07_MLG1/03_Fig_Interac_coef.png){width="500"}
+  
+## Modelo log lineal ajustado
+Observándose que con una confianza del 95% ninguno de los parámetros del modelo es significativo.
+```{r, echo=FALSE}
+  bind_cols(
+    data.frame(exp_estimado = exp(coef(mod_loglin_int))),
+    as.data.frame(exp(confint(mod_loglin_int)))
+  )
+```
+
+## Estadístico de Wald sobre los parámetros
+  Evaluando las variables en el modelo
+  
+```{r}
+regTermTest(model = mod_loglin_int, ~Sex)
+```
+
+```{r}
+regTermTest(model = mod_loglin_int, ~Zone)
+```
+
+
+## Estadístico de Wald sobre los parámetros
+  Evaluando las variable región en el modelo
+```{r}
+  regTermTest(model = mod_loglin_int, ~Region)
+```
+
+
+## Estadístico de Wald sobre los parámetros
+  Evaluando la interacción de los modelos.
+```{r}
+  regTermTest(model = mod_loglin_int, ~Sex:Zone)
+  regTermTest(model = mod_loglin_int, ~Sex:Region)
+```
+
+## Efecto del modelo. 
+
+  Evaluando los efectos en el modelo.
+```{r, plot_effecto2,  echo=TRUE, eval=FALSE}
+  effe_sex <- effect_plot(mod_loglin_int, 
+                          pred = Sex,
+                          interval = TRUE)
+  effe_Zona <-effect_plot(mod_loglin_int, 
+                          pred = Zone, 
+                          interval = TRUE)
+  effe_Region <- effect_plot(mod_loglin_int,
+                             pred = Region,
+                             interval = TRUE)
+  (effe_sex |effe_Zona)/effe_Region
+```
+
+
+## Efecto del modelo.
+
+![Efectos del modelo ](Imagenes/07_MLG1/04_Fig_efecto_coef.png){width="500"}
+
+  
+## Modelo log lineal ajustado con Q-Weighting
+  Realizando el modelo con los Q-Weighting
+```{r}
+  fit_wgt <- lm(wk ~  Sex + Zone + Region ,
+                data = encuesta)
+  wgt_hat <- predict(fit_wgt)
+  encuesta %<>% mutate(wk2 = wk/wgt_hat)
+  
+  diseno_qwgt <- encuesta %>%
+    as_survey_design(
+      strata = Stratum,
+      ids = PSU,
+      weights = wk2,
+      nest = T
+    )
+```
+
+  
+## Modelo log lineal ajustado con Q_Weighting
+  Defiendo la variable pobreza dentro de la base de datos.
+```{r,mod_qwt,echo=TRUE,eval=FALSE}
+  diseno_qwgt <- diseno_qwgt %>% mutate(
+    pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+  # Estimando el modelo.
+  mod_loglin_qwgt <- svyglm(pobreza ~ Sex + Zone + Region,
+                            family=quasibinomial,
+                            design=diseno_qwgt)
+  (tab_mod <- tidy(mod_loglin_qwgt) )
+```
+
+## Modelo log lineal ajustado con Q_Weighting
+```{r,mod_qwt,echo=FALSE,eval=TRUE}
+```
+  
+## Plot de la distribución de los betas
+  
+```{r,eval=FALSE}
+  plot_summs(mod_loglin, mod_loglin_qwgt, 
+             scale = TRUE, plot.distributions = TRUE)
+```
+
+![Comparando los modelos](Imagenes/07_MLG1/05_Fig_densidad_coef.png){width="400"}
+
+## Modelo log lineal ajustado
+```{r, echo=FALSE}
+  bind_cols(
+    data.frame(exp_estimado = exp(coef(mod_loglin_qwgt))),
+    as.data.frame(exp(confint(mod_loglin_qwgt)))
+  )
+```
+
+## Estadístico de Wald sobre los parámetros
+  
+```{r}
+  regTermTest(model = mod_loglin_qwgt, ~Sex)
+  regTermTest(model = mod_loglin_qwgt, ~Zone)
+```
+  
+## Estadístico de Wald sobre los parámetros
+```{r}
+  regTermTest(model = mod_loglin_qwgt, ~Region)
+```
+
+
+## Efecto del modelo. 
+```{r, plot_effecto3,  echo=TRUE, eval=FALSE}
+  effe_sex <- effect_plot(mod_loglin_qwgt, 
+                          pred = Sex,
+                          interval = TRUE)
+  effe_Zona <-effect_plot(mod_loglin_qwgt, 
+                          pred = Zone, 
+                          interval = TRUE)
+  effe_Region <- effect_plot(mod_loglin_qwgt, 
+                             pred = Region,
+                             interval = TRUE)
+  (effe_sex |effe_Zona)/effe_Region
+```
+
+## Efecto del modelo.
+![Efecto del modelo](Imagenes/07_MLG1/06_Fig_efecto_coef.png){width="500"}
+  
+  
+## ¡Gracias!
+  
+::: yellow
+  *Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::
+    
+    
+    
+   

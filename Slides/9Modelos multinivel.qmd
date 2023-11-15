@@ -1,0 +1,1152 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Modulo 8: Modelos multinivel"
+author: |
+  | Andrés Gutiérrez.
+  | Stalyn Guerrero 
+institute: "CEPAL - Unidad de Estadísticas Sociales"
+format: 
+  beamer: 
+    colortheme: dove
+    fonttheme: default
+    incremental: false
+    aspectratio: 1610
+    #theme: Berkeley
+    toc: true
+    slide_level: 2
+    #highlight: pygments
+Email: andres.gutierrez@cepal.org
+lang: es
+editor_options:
+  markdown:
+    wrap: 90
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  cache = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = TRUE,
+  error = FALSE,
+  cache.path = "00_Caches/09_Multinivel/"
+)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(ggplot2)
+#rm(list = ls())
+
+theme_cepal <- function(...)
+  theme_light(10) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "bottom",
+    legend.justification = "left",
+    legend.direction = "horizontal",
+    plot.title = element_text(size = 20, hjust = 0.5),
+    ...
+  ) 
+```
+
+# Introducción
+
+## Introducción a los Modelos Multinivel en Encuestas de Hogares
+
+Los modelos multinivel, también conocidos como modelos de efectos mixtos o modelos jerárquicos, son una herramienta estadística fundamental para analizar datos de encuestas de hogares con estructuras jerárquicas o multinivel. Estas encuestas recopilan datos a niveles individuales (edad, género, educación) y a nivel del hogar (ingreso, propiedad de vivienda, ubicación geográfica).
+
+## Principales Características de los Modelos Multinivel:
+
+1. **Análisis de Influencias:** Permiten entender cómo los factores a nivel del hogar e individual afectan las respuestas a las preguntas de la encuesta.
+   
+2. **Consideración de la Heterogeneidad:** Modelan efectos aleatorios y fijos, teniendo en cuenta la variación entre hogares y las relaciones promedio.
+
+3. **Precisión Estadística:** Ofrecen estimaciones más precisas al considerar la estructura jerárquica de los datos y la heterogeneidad en la población.
+
+## Referencias Bibliográficas Relevantes
+
+1. **Multilevel statistical models** Harvey Goldstein (2011): Clásico en el análisis multinivel, aborda modelos jerárquicos en encuestas de hogares, cubriendo regresión y varianza-covarianza.
+
+2. **Data analysis using regression and multilevel/hierarchical models** Andrew Gelman y Jennifer Hill (2006): Introducción accesible a modelos jerárquicos con ejemplos de encuestas de hogares.
+
+3. **Multilevel and longitudinal modeling using Stata**  Sophia Rabe-Hesketh y Anders Skrondal (2012): Guía práctica para el análisis multinivel y longitudinal con ejemplos de encuestas de hogares.
+
+## Referencias Bibliográficas Relevantes
+
+4. **A comparison of Bayesian and likelihood-based methods for fitting multilevel models"** - William J. Browne y David Draper (2006): Comparación de enfoques Bayesianos y basados en verosimilitud en modelos jerárquicos para encuestas de hogares.
+
+5. **A brief conceptual tutorial of multilevel analysis in social epidemiology** - Juan Merlo et al. (2006): Introducción a modelos jerárquicos en epidemiología social con ejemplos de encuestas de hogares.
+
+Estas referencias ofrecen una base sólida para comprender y aplicar modelos multinivel en el análisis de datos de encuestas de hogares.
+
+## Ejemplo de los modelos multinivel.
+
+Para efectos de ejemplificar los conceptos que se presentarán en este capítulo, definamos una muestra con 6 estratos como se muestra a continuación:
+
+```{r, plot_mult0, echo=TRUE, eval=FALSE}
+encuesta <- readRDS("../Data/encuesta.rds") 
+encuesta_plot <- encuesta %>%
+  dplyr::select(HHID, Stratum) %>% unique() %>%
+  group_by(Stratum)  %>% tally() %>%
+  arrange(desc(n)) %>% dplyr::select(-n) %>%
+  slice(1:6L) %>%
+  inner_join(encuesta) %>% filter(Expenditure < 700) %>%
+  dplyr::select(Income, Expenditure, Stratum,
+                Sex, Region, Zone)
+encuesta_plot  %>% slice(1:10L)
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult0, echo=FALSE, eval=TRUE}
+```
+
+## Introducción a los modelos multinivel.
+
+Se comenzará ajustando un modelo lineal cuya variable a modelar son los ingresos de los hogares y cuya variable explicativa son los gastos de los hogares sin considerar el efecto de los estratos del diseño muestral. A continuación, se muestra la gráfica:
+
+```{r, plot_mult1,echo=FALSE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure)) + 
+  geom_jitter() +
+  theme( legend.position="none",
+         plot.title = element_text(hjust = 0.5)) +
+  geom_smooth( formula = y ~ x,
+               method = "lm",  se = F) + 
+  ggtitle(
+latex2exp::TeX("$Ingreso_{i}\\sim\\hat{\\beta}_{0}+\\hat{\\beta}_{1}Gasto_{i}+\\epsilon_{i}$")) +
+  theme_cepal()
+```
+
+![Modelo regresión simple ](Imagenes/09_Multinivel/01_Multinivel.png){width="400"}
+
+## Introducción a los modelos multinivel.
+Ahora se ajusta un modelo de regresión en donde el intercepto cambia de acuerdo con cada estrato. 
+```{r}
+B1 <- coef(lm(Income ~ Expenditure, data = encuesta_plot))[2]
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(B0 = coef(lm(Income ~ 1))[1]) %>% 
+  mutate(B1 = B1))
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult2,echo=FALSE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = coef_Mod,
+              mapping=aes(slope=B1, 
+                          intercept=B0, 
+                          colour = Stratum)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0j}+\\hat{\\beta}_{1}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+![Modelo de regresión con intercepto variando por estrato ](Imagenes/09_Multinivel/02_Multinivel.png){width="400"}
+
+
+## Introducción a los modelos multinivel.
+
+Ahora se ajustará un modelo con pendiente aleatoria. Dicha pendiente se estimará para cada uno de los estratos definidos en el diseño muestral como se presenta a continuación:
+
+```{r}
+B0 <- coef(lm(Income ~ Expenditure,
+              data = encuesta_plot))[1]
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(
+    B1 = coef(lm(Income ~ -1 + Expenditure))[1]) %>% 
+  mutate(B0 = B0))
+```
+
+## Introducción a los modelos multinivel.
+```{r, plot_mult3,echo=FALSE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = coef_Mod,
+              mapping=aes(slope=B1, 
+                          intercept=B0, colour = Stratum)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0}+\\hat{\\beta}_{1j}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+![Modelo de regresión con pendiente variando por estrato ](Imagenes/09_Multinivel/03_Multinivel.png){width="400"}
+
+
+## Introducción a los modelos multinivel.
+
+
+\tiny
+```{r, plot_mult4,echo=FALSE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+    geom_smooth( formula = y ~ x, method = "lm", se = F) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  ggtitle(
+    latex2exp::TeX("$Ingreso_{ij}\\sim\\hat{\\beta}_{0j}+\\hat{\\beta}_{1j}Gasto_{ij}+\\epsilon_{ij}$"))+
+  theme_cepal()
+```
+
+Creando un gráfico con intercepto y pendientes aleatorias.
+
+![Modelo de regresión con intercepto y pendiente variando por estrato ](Imagenes/09_Multinivel/04_Multinivel.png){width="400"}
+
+Se puede observar que este modelo se ajusta mejor a los datos que el modelo anterior y que el modelo lineal clásico.
+
+# Modelos multinivel en muestras complejas 
+
+## Modelos multinivel en muestras complejas 
+
+Dos tipos de índices son relevantes en los análisis multinivel: 
+  
+  - Los coeficientes de regresión, generalmente denominados como los parámetros fijos del modelo. 
+  
+  - Las estimaciones de la varianza, generalmente denominadas parámetros aleatorios del modelo.
+  
+Cualquier análisis de regresión multinivel siempre debe comenzar con el cálculo de las estimaciones de varianza de Nivel 1 y Nivel 2 para la variable dependiente.
+
+## Modelos multinivel en muestras complejas 
+
+  - El primer paso recomendado en el análisis de regresión multinivel consiste en una descomposición de la varianza de la variable dependiente en los diferentes niveles. 
+
+**Ejemplo**
+La varianza del ingreso se descompondrá en dos componentes: 
+
+  - La varianza dentro dentro del estrato 
+  - la varianza entre los estratos.
+
+Estos dos componentes de varianza se pueden obtener una regresión multinivel.
+
+
+## Modelos multinivel en muestras complejas 
+
+Un modelo básico es: 
+
+$y_{ij}=\beta_{0j}+\epsilon_{ij}$ con $\beta_{0j}=\gamma_{00}+\tau_{0j}$
+
+donde
+
+  - $y_{ij}=$  Los ingresos de la persona $i$ en el estrato $j$. 
+  - $\beta_{0j}=$ El intercepto en el estrato $j$.
+  - $\epsilon_{ij}$ El residual de la persona $i$ en el estrato $j$.
+  - $\gamma_{00}=$  El intercepto en general.
+  - $\tau_{0j}=$ Efecto aleatorio para el intercepto.
+  
+donde, $\tau_{0j}\sim N\left(0,\sigma_{\tau}^{2}\right)$ y $\epsilon_{ij}\sim N\left(0,\sigma_{\epsilon}^{2}\right)$. 
+
+La correlación intra clásica  esta dada por: $$\rho=\frac{\sigma_{\tau}^{2}}{\sigma_{\tau}^{2}+\sigma_{\epsilon}^{2}}$$
+
+La ICC mide la similitud o correlación entre las observaciones dentro del mismo grupo o nivel en comparación con las observaciones de diferentes grupos.
+
+## Modelos multinivel en muestras complejas. 
+
+  - Aunque existe evidencia suficiente de que las ponderaciones de muestreo deben usarse en el modelado
+multinivel (MLM) para obtener estimaciones no sesgadas[^3], y también sobre cómo deben
+usarse estas ponderaciones en los análisis de un solo nivel, hay poca discusión en la literatura sobre qué y cómo usar pesos de muestreo en MLM. 
+
+  - Actualmente, diferentes autores recomiendan cuatro enfoques diferentes sobre cómo usar los pesos
+de muestreo en modelos jerárquicos. 
+
+
+[^3]: Cai, T. (2013). Investigation of ways to handle sampling weights for multilevel model analyses. Sociological Methodology, 43(1), 178-219.
+
+## Modelos multinivel en muestras complejas. 
+
+Diferentes autores recomiendan diferentes enfoques sobre cómo usar los pesos de muestreo en modelos jerárquicos. 
+
+- Pfefermann et al. (1998) y Asparouhov (2006) aconsejan utilizar un enfoque de pseudomáxima
+verosimilitud para calcular estimaciones dentro y entre los diferentes niveles utilizando la técnica de
+maximización de mínimos cuadrados generalizados ponderados por probabilidad (PWGLS) para obtener
+estimaciones no sesgadas.[^4][^5]
+
+
+- Rabe-Hesketh y Skrondal (2006) proporcionan técnicas de maximización de expectativas para maximizar la pseudoverosimilitud[^6] 
+
+
+[^4]: Pfeffermann, D., Skinner, C. J., Holmes, D. J., Goldstein, H., & Rasbash, J. (1998). Weighting for unequal selection probabilities in multilevel models. Journal of the Royal Statistical Society: series B (statistical methodology), 60(1), 23-40.
+[^5]: Asparouhov, T. (2006). General multi-level modeling with sampling weights. Communications in Statistics—Theory and Methods, 35(3), 439-460.
+
+[^6]: Asparouhov, T., & Muthen, B. (2006, August). Multilevel modeling of complex survey data. In Proceedings of the joint statistical meeting in Seattle (pp. 2718-2726).
+
+## Estimación de pseudo máxima verosimilitud
+La función de log-verosimilitud para la población esta dada por:
+
+$$
+L_{U}\left(\theta\right)=\sum_{i\in U}\log\left[f\left(\boldsymbol{y}_{i};\theta\right)\right]
+$$
+El estimador de máxima verosimilitud esta dada por: 
+
+$$
+\frac{\partial L_{U}\left(\theta\right)}{\partial\theta}=0
+$$
+La dificultad que encontramos aquí, es transferir los pesos muéstrales a los niveles inferiores, por ejemplo UPMs -> Stratum.
+
+## Estimación de pseudo máxima verosimilitud
+Pfeffermann et al. (1998) argumentaron que debido a la estructura de datos agrupados, ya no se asume que las observaciones sean independientes y que la probabilidad logarítmica se convierta en una suma entre los elementos de nivel uno y dos en lugar de una simple suma de las contribuciones de los elementos.
+
+**Modelo Nulo**
+
+Asuma que la información dentro del estrato esta definida por el intercepto.
+
+\begin{eqnarray*}
+Ingreso_{ij} &=&\beta_{0j}+\epsilon_{ij}\\
+\beta_{1j} &=& \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+\end{eqnarray*}
+
+
+## calculando de los Qweighted  
+
+Para tener estimaciones consistentes se calculan los pesos Qweighted siguiendo los pasos mostrados, tomando en este caso como covariables la edad del entrevistado, el sexo, la región y la zona donde reside. 
+
+```{r, echo=TRUE,eval=TRUE}
+mod_qw <- lm(wk ~ Age + Sex + Region + Zone,
+             data = encuesta)
+encuesta$wk2 <-   encuesta$wk/predict(mod_qw)
+```
+
+## calculando los senate-weight
+
+Adicionalmente, se calculan también los *senate-weight* para el ajuste de los modelos (Wk3, en el ajuste del modelo en `R`). 
+
+ 
+```{r, echo=TRUE,eval=TRUE}
+# Alternativa los Qweighted
+n = nrow(encuesta)
+encuesta <- encuesta %>% mutate(wk3 = n*wk/sum(wk))
+encuesta %>% summarise(fep = sum(wk),
+                       q_wei = sum(wk2),
+                       fep2 = sum(wk3) )
+```
+**Comparando los pesos.** 
+
+```{r, qw0, echo=TRUE,eval=FALSE}
+ggplot(encuesta, aes(x = wk2, y = wk3)) + geom_point() +
+  theme_bw() + labs(x = "q-weighted", y = "senate-weight")
+```
+
+
+## Comparando los pesos. 
+![Comparando  q-weighted Vs senate-weight ](Imagenes/09_Multinivel/05_Pesos.png){width="400"}
+
+
+## Modelo Nulo 
+
+Se realizarán los ajustes de los modelos utilizando los dos pesos mostrados anteriormente:
+
+```{r, echo=TRUE,eval=TRUE}
+library(lme4) 
+
+mod_null  <- lmer(Income  ~ (1  |  Stratum),
+                  data  =  encuesta,
+                  weights  =  wk2)
+
+mod_null2  <- lmer(Income  ~ (1  |  Stratum),
+                   data  =  encuesta,
+                   weights  =  wk3)
+```
+
+## Modelo Nulo 
+Comparando los modelos obtenidos. 
+
+
+```{r, mod_null, echo=TRUE,eval=FALSE}
+coef_mod_null <- bind_cols(coef(mod_null)$Stratum,
+                           coef(mod_null2)$Stratum)
+colnames(coef_mod_null) <- c("Intercept Mod 1",
+                             "Intercept Mod 2")
+coef_mod_null %>% slice(1:12)
+```
+
+
+## Modelo Nulo 
+```{r, mod_null, echo=FALSE,eval=TRUE}
+```
+
+## Modelo Nulo 
+```{r}
+mod_null
+```
+
+## Modelo Nulo 
+Correlación intraclases 
+```{r}
+performance::icc(mod_null)
+```
+
+## Modelo Nulo 
+Predicción dentro de los estrato es constante. 
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_null), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+Si la predicción es correcta se espera estar sobre la linea de 45°
+```{r, echo=FALSE, eval=FALSE, out.width="70%"}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+![Predicción con el modelo nulo y los  q-weighted ](Imagenes/09_Multinivel/06_Modelo_nulo_qw.png){width="400"}
+
+## Modelo con intercepto aleatoria 
+
+- Un modelo con pendiente aleatoria permite que la relación entre una variable independiente y una variable dependiente varíe según otra variable explicativa.
+
+- En un modelo con pendiente aleatoria, la pendiente puede cambiar según factores como el tiempo, la edad, el género o la ubicación geográfica.
+
+- A diferencia de los modelos lineales simples, los modelos con pendiente aleatoria permiten ajustar la relación entre variables a curvas con pendientes variables.
+
+- Explora cómo la relación entre variables se adapta a cambios en diferentes contextos, proporcionando una representación más realista de las complejidades en los datos.
+
+
+## Modelo con intercepto aleatoria 
+
+Consideremos el siguiente modelo
+
+$$
+Ingreso_{ij}=\beta_{0}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+donde $\beta_{1j}$ esta dado como
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+```{r, mod_Int_Aleatorio, echo=TRUE,eval=TRUE}
+mod_Int_Aleatorio <- lmer(
+  Income ~ Expenditure  + (1 | Stratum),
+  data = encuesta, weights  =  wk2)
+performance::icc(mod_Int_Aleatorio)
+```
+
+## Modelo con intercepto aleatoria 
+Para cada estrato se tiene las siguientes estimaciones de $\beta_{1j}$
+```{r}
+coef(mod_Int_Aleatorio)$Stratum %>% slice(1:8L)
+```
+
+##  Modelo con intercepto aleatoria
+Organizando los coeficientes para el gráfico. 
+
+```{r,plot_mod_Int_Aleatorio, echo=TRUE, eval=FALSE}
+Coef_Estimado <- inner_join(
+  coef(mod_Int_Aleatorio)$Stratum %>% 
+       add_rownames(var = "Stratum"),
+encuesta_plot %>% select(Stratum) %>% distinct())
+
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = Coef_Estimado,
+              mapping=aes(slope=Expenditure, 
+                          intercept=`(Intercept)`, 
+                          colour = Stratum))+
+  theme_cepal()
+```
+
+##  Modelo con intercepto aleatoria
+
+![Modelo de intercepto aleatorio ](Imagenes/09_Multinivel/07_Modelo_intercepto_aleatorio.png){width="400"}
+
+## Predicción del modelo 
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_Int_Aleatorio), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+La predicción esta más cerca a la linea de 45 grados. 
+
+```{r, echo=FALSE, eval=FALSE, out.width="70%"}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+![Scaterplot de $y$ vs $\hat{y}$ ](Imagenes/09_Multinivel/08_Prediccion1.png){width="400"}
+
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+- Los modelos con intercepto y pendiente aleatoria incorporan tanto efectos fijos como efectos aleatorios para modelar la relación entre una variable de respuesta y variables predictoras.
+
+- Los coeficientes de regresión (intercepto y pendiente) se consideran aleatorios en lugar de fijos.
+
+- La variación en estos coeficientes entre unidades de análisis (individuos, grupos, regiones) se modela como efectos aleatorios.
+
+- Útiles cuando los datos tienen una estructura jerárquica o de agrupamiento, con unidades de análisis agrupadas en diferentes niveles (estudiantes en escuelas, pacientes en hospitales).
+
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+- Captura la heterogeneidad en los coeficientes a través de diferentes niveles de agrupamiento.
+
+- Ofrece una herramienta efectiva para abordar estructuras de datos complejas donde la variabilidad puede estar influenciada por múltiples niveles de agrupamiento.
+
+- Proporciona una representación más realista al considerar la variabilidad inherente entre grupos en la relación entre variables predictoras y de respuesta.
+  
+## Modelo con intercepto y pendiente aleatoria
+
+La estructura del modelo es la siguiente: 
+
+$$
+Ingreso_{ij}=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+
+```{r, mod_Int_y_pen_Aleatorio, echo=TRUE,eval=TRUE}
+mod_Pen_Aleatorio <- lmer(
+  Income ~ Expenditure  + (1 + Expenditure| Stratum),
+  data = encuesta, weights  =  wk2)
+
+performance::icc(mod_Pen_Aleatorio)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r}
+coef(mod_Pen_Aleatorio)$Stratum %>% slice(1:14L)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r,plot_mod_Pen_Aleatorio, echo=TRUE, eval=FALSE}
+Coef_Estimado <- inner_join(
+  coef(mod_Pen_Aleatorio)$Stratum %>% 
+       add_rownames(var = "Stratum"),
+encuesta_plot %>% select(Stratum) %>% distinct())
+
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) + 
+  geom_jitter() + theme(legend.position="none",
+    plot.title = element_text(hjust = 0.5)) +
+  geom_abline(data = Coef_Estimado,
+              mapping=aes(slope=Expenditure, 
+                          intercept=`(Intercept)`, 
+                          colour = Stratum))+
+  theme_cepal()
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+![Modelo con intercepto y pendiente aleatoria  ](Imagenes/09_Multinivel/09_Pendiente_intercepto_aleatorio.png){width="400"}
+
+## Predicción del modelo 
+
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_Pen_Aleatorio), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:8L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE, eval=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+![Scaterplot de $y$ vs $\hat{y}$ ](Imagenes/09_Multinivel/10_Prediccion2.png){width="400"}
+
+
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+Para robustecer el modelo, se ajusta nuevamente, pero agregando la variable zona como se muestra a continuación:
+
+$$
+Ingreso_{ij}=\beta_{0j}+\beta_{1j}Gasto_{ij}+\beta_{2j}Zona_{ij} +\epsilon_{ij}
+$$
+
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \gamma_{02}\mu_{j}  + \tau_{0j}
+$$
+
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{1j}
+$$
+$$
+\beta_{2j} = \gamma_{20}+\gamma_{21}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{2j}
+$$
+
+donde $\mu_{j}$ es el gasto medio en el estrato $j$.
+
+## Modelo con intercepto y pendiente aleatoria 
+
+```{r, mod_Int_y_pen_Aleatorio2, echo=TRUE,eval=TRUE}
+media_estrato <- encuesta %>% group_by(Stratum) %>% 
+  summarise(mu = mean(Expenditure))
+encuesta <- inner_join(encuesta, 
+                       media_estrato, by = "Stratum")  
+
+mod_Pen_Aleatorio2 <- lmer(
+  Income ~ 1 + Expenditure + Zone + mu + 
+    (1 + Expenditure + Zone + mu | Stratum ),
+    data = encuesta, weights  =  wk2)
+performance::icc(mod_Pen_Aleatorio2)
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+
+```{r}
+(tab_pred <- data.frame(Pred = predict(mod_Pen_Aleatorio2), 
+           Income = encuesta$Income, 
+           Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:10L) # Son las pendientes aleatorias
+```
+
+## Scaterplot de $y$ vs $\hat{y}$
+
+```{r, echo=FALSE, eval=FALSE}
+ggplot(data = tab_pred, aes(x = Pred, y = Income, colour = Stratum)) + 
+  geom_point() + geom_abline(intercept = 0, slope = 1, colour = "red") +
+  theme_bw() + theme(legend.position = "none") 
+```
+
+![Scaterplot de $y$ vs $\hat{y}$ ](Imagenes/09_Multinivel/11_Prediccion3.png){width="400"}
+
+## Modelo con intercepto y pendiente aleatoria 
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado <- inner_join(
+  coef(mod_Pen_Aleatorio2)$Stratum %>%
+    add_rownames(var = "Stratum"),
+  encuesta_plot %>% select(Stratum, Zone) %>% distinct()
+))
+
+```
+
+## Modelo con intercepto y pendiente aleatoria
+
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado<- Coef_Estimado %>%  
+   inner_join(media_estrato, by = "Stratum"))
+```
+
+El modelo para el estrato _idStrt002_ viene dado por: 
+
+$$
+\hat{y}_{ij}=51.1+1.59Expenditure_{ij}+26.43Zone_{ij}+\left(-0.1161\right)\mu_{j}
+$$
+
+
+
+## Modelo con intercepto y pendiente aleatoria
+```{r, echo=TRUE, eval=TRUE}
+(Coef_Estimado %<>%  mutate(B0 = ifelse(
+Zone == "Urban", `(Intercept)` + mu.y * mu.x + ZoneUrban,
+              `(Intercept)` + mu.y * mu.x)) %>%
+  select(Stratum, Zone, B0, Expenditure))
+```
+
+## Modelo con intercepto y pendiente aleatoria
+```{r,plot_mod_Pen_Aleatorio212, echo=TRUE, eval=FALSE}
+ggplot(data = encuesta_plot,
+       aes(y = Income, x = Expenditure,
+           colour = Stratum)) +
+  geom_jitter() +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5)) +
+  facet_grid( ~ Zone) +
+  geom_abline(
+    data = Coef_Estimado,
+    mapping = aes(
+      slope = Expenditure,
+      intercept = B0,
+      colour = Stratum
+    )
+  ) +
+  theme_cepal()
+```
+
+## Modelo con intercepto y pendiente aleatoria
+
+![Modelo con intercepto y pendiente aleatoria ](Imagenes/09_Multinivel/12_Prediccion4.png){width="400"}
+
+# Modelos logísticos multinivel en muestras complejas
+
+## Introducción a los Modelos Logísticos Multinivel
+
+- Los modelos logísticos multinivel extienden los modelos logísticos simples, adaptándose a la estructura jerárquica de los datos recopilados de individuos agrupados en diferentes niveles.
+
+- En contextos jerárquicos (escuelas, ciudades, países), los modelos logísticos simples pueden no capturar adecuadamente la variación entre grupos y la estructura jerárquica de los datos.
+
+- Permite estimar la varianza en las respuestas entre diferentes grupos, identificando fuentes de variabilidad y comparando la variabilidad entre grupos.
+
+- Herramienta poderosa para analizar datos de respuestas binarias en entornos jerárquicos, proporcionando una comprensión más completa de la variación y estructura de los datos.
+
+## Introducción a los modelos logístico  multinivel.
+
+Sea la variable $y_{ij} = 1$ si el individuo $i$ en el estrato $j$ esta por encima de la linea de pobreza y $y_{ij} = 0$  en caso contrario, la variable $y_{ij}$ se puede modelar mediante el modelo
+logístico: 
+$$
+Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac{1}{1+\exp\left(\boldsymbol{-\beta}_{j}\boldsymbol{x}_{ij}\right)}
+$$ 
+ó
+
+$$
+\log\left(\frac{\pi_{ij}}{1-\pi_{ij}}\right)=\boldsymbol{\beta}_{j}\boldsymbol{x}_{ij}
+$$
+donde $\pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)$.
+
+## Ejemplos de modelo logit 
+```{r, plot_logit_mult0, echo=TRUE, eval=FALSE}
+encuesta_plot <- encuesta %>%
+  dplyr::select(Stratum,Expenditure) %>% unique() %>%
+  group_by(Stratum)  %>% 
+  summarise(sd = sd(Expenditure)) %>% 
+  arrange(desc(sd)) %>% dplyr::select(-sd) %>% 
+  slice(1:20L) %>%
+  inner_join(encuesta) %>%  
+  dplyr::select(Poverty, Expenditure, Stratum, 
+         Sex, Region, Zone) 
+encuesta_plot %>% slice(1:15L)
+```
+
+## Ejemplos de modelo logit 
+```{r, plot_logit_mult0, echo=FALSE, eval=TRUE}
+```
+
+
+## Ejemplos de modelo logit 
+```{r, echo=TRUE,eval=TRUE}
+encuesta <- encuesta %>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+encuesta_plot %<>% mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0))
+```
+
+
+```{r, modl_logit1, echo=TRUE,eval=FALSE}
+ggplot(data = encuesta, 
+       aes(y = pobreza, x = Expenditure)) + 
+  geom_point() + 
+  geom_smooth(
+    formula = y~x, method = "glm",
+    se=FALSE, 
+    method.args = list(family=binomial(link = "logit"))) +
+  theme_bw()
+```
+
+## Ejemplos de modelo logit 
+Para poder observar la distribución la distribución de la variable pobreza, se presenta el siguiente gráfico:
+
+![Modelo logit ](Imagenes/09_Multinivel/13_ModLog1.png){width="400"}
+
+## Ejemplos de modelo logit 
+
+Crear una función auxiliar para calcular la probabilidad. 
+
+```{r, echo=TRUE,eval=TRUE}
+auxLogit <- function(x,b0,b1){
+  1/(1+exp(-(b0+b1*x)))
+}
+```
+
+El ajuste del modelo logístico se realiza con la función `glm` y la función link "logit". Ejecutando el siguiente código tenemos la pendiente intercepto fijo
+
+
+```{r, echo=TRUE,eval=TRUE}
+B0 = coef(glm(pobreza~1,data = encuesta_plot,
+     family=binomial(link = "logit")))
+```
+
+## Ejemplos de modelo logit 
+
+A Continuación ajustamos el modelo sin intercepto por estrato. 
+
+```{r, echo=TRUE,eval=TRUE}
+(coef_Mod <- encuesta_plot %>% group_by(Stratum) %>% 
+  summarise(B1 = coef(glm(pobreza ~  -1 + Expenditure,
+              family=binomial(link = "logit")))) %>% 
+mutate(B0 = B0)) %>% slice(1:6L)
+```
+
+## Ejemplos de modelo logit 
+
+A continuación, se grafican los diferentes modelos logísticos ajustados para cada uno de los estratos observándose que, hay una variación importante entre los estratos:
+
+```{r,modl_logit2, echo=TRUE,eval=FALSE}
+# Creando las variables respuesta 
+pred_logit <- coef_Mod %>%  
+  mutate(Expenditure = list(seq(0,2000, length =100))) %>% 
+    tidyr::unnest_legacy()
+pred_logit %<>% mutate(Prob = auxLogit(Expenditure,B0,B1)) 
+  
+ggplot(data = pred_logit, 
+       aes(y = Prob, x = Expenditure, colour = Stratum)) + 
+  geom_line() +
+   theme_bw() +
+  theme(legend.position = "none")
+```
+
+## Ejemplos de modelo logit 
+
+![Modelo logit](Imagenes/09_Multinivel/14_ModLog2.png){width="400"}
+
+
+## Modelo logit nulo
+
+Un modelo logístico básico o nulo se escribe de la siguiente manera:
+
+\begin{eqnarray*}
+logit( \pi_{ij})&=&\beta_{0j}+\epsilon_{ij}\\
+\beta_{0j}&=&\gamma_{00}+\tau_{0j}
+\end{eqnarray*}
+
+
+  - $\pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)$. 
+  - $\beta_{0j}=$ El intercepto en el estrato $j$.
+  - $\epsilon_{ij}$ El residual de la persona $i$ en el estrato $j$.
+  - $\gamma_{00}=$  El intercepto en general.
+  - $\tau_{0j}=$ Efecto aleatorio para el intercepto.
+  
+donde, $\tau_{0j}\sim N\left(0,\sigma_{\tau}^{2}\right)$ y $\epsilon_{ij}\sim N\left(0,\sigma_{\epsilon}^{2}\right)$. La correlación intra clásica  esta dada por: $$\rho=\frac{\sigma_{\tau}^{2}}{\sigma_{\tau}^{2}+\sigma_{\epsilon}^{2}}$$
+
+
+## Modelo Nulo 
+
+```{r, mod_null2, echo=TRUE,eval=FALSE}
+library(lme4) 
+mod_logist_null  <- glmer( pobreza  ~ ( 1  |  Stratum ),
+                   data  =  encuesta, 
+             weights  =  wk2,
+             family = binomial(link = "logit") )
+
+
+coef( mod_logist_null )$Stratum %>% slice(1:12)
+```
+
+
+## Modelo Nulo 
+```{r, mod_null2, echo=FALSE,eval=TRUE}
+```
+
+## Modelo Nulo 
+```{r}
+mod_logist_null
+```
+
+## Modelo nulo 
+
+```{r}
+performance::icc(mod_logist_null)
+(tab_pred <- data.frame(
+  Pred = predict(mod_logist_null, type = "response"), 
+  pobreza = encuesta$pobreza, 
+  Stratum = encuesta$Stratum)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Estimación de la propoción para $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+weighted.mean(encuesta$pobreza, encuesta$wk2)
+weighted.mean(tab_pred$Pred, encuesta$wk2)
+```
+
+
+## Modelo con intercepto aleatoria 
+
+EL modelo se define de la siguiente manera:
+
+\begin{eqnarray*}
+logit(\pi_{ij})&=&\beta_{0}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}\\
+\beta_{1j} &=& \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+\end{eqnarray*}
+
+Siguiendo las ideas de la sección anterior, el ajuste del modelo en `R` se realiza de la siguiente manera:
+
+```{r, mod_Int_Aleatorio02, echo=TRUE,eval=TRUE}
+mod_logit_Int_Aleatorio <- glmer(
+  pobreza ~ Expenditure  + (1 | Stratum),
+  data = encuesta, family = binomial(link = "logit"),
+  weights  =  wk2)
+
+performance::icc(mod_logit_Int_Aleatorio)
+```
+
+## Modelo con intercepto aleatoria 
+```{r}
+coef(mod_logit_Int_Aleatorio)$Stratum %>% slice(1:10L)
+```
+
+##  Modelo con intercepto aleatoria
+
+Gráficamente, los modelos ajustados se muestran a continuación:
+
+\footnotesize
+```{r,plot_mod_Int_Aleatorio02, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred <- mutate(dat_pred,
+       Proba = predict(mod_logit_Int_Aleatorio, 
+                       newdata = dat_pred , type = "response"))
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+
+```
+
+##  Modelo con intercepto aleatoria
+
+![Modelo logit  intercepto aleatoria ](Imagenes/09_Multinivel/15_ModLog_pendiente_aleatoria.png){width="400"}
+
+## Predicción del modelo 
+
+Las predicciones del modelo se presentan a continuación:
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Int_Aleatorio,
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum, 
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:6L) # Son las pendientes aleatorias
+```
+
+## Estimación de la propoción para $y$ y $\hat{y}$
+
+Para verificar la calidad del modelo se realizan las estimaciones de las predicciones y de las variables observadas, teniendo estimaciones similares:
+
+```{r, echo=TRUE}
+tab_pred %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+
+## Logístico Multinivel con Coeficientes Aleatorios.
+
+- Tanto el intercepto como la pendiente son variables aleatorias que varían entre los diferentes grupos de observación.
+
+- La función logística se ajusta para cada grupo, permitiendo que los coeficientes del modelo varíen según el grupo de observación.
+
+- Permite capturar la heterogeneidad en la relación entre variables predictoras y la respuesta en diferentes grupos, adaptándose a la variabilidad entre observaciones.
+
+## Logístico Multinivel con Coeficientes Aleatorios.
+
+  - La incorporación de coeficientes aleatorios mejora la precisión de las estimaciones y la capacidad del modelo para adaptarse a la variación entre grupos.
+
+  - Permite la inclusión de variables a nivel individual y de grupo, proporcionando una visión completa de la estructura jerárquica de los datos.
+
+
+  - La función logística se ajusta con coeficientes aleatorios para capturar las diferencias en la relación entre variables predictoras y respuesta en grupos específicos.
+
+## Logístico Multinivel con Coeficientes Aleatorios.
+
+  El modelo se define de la siguiente manera:
+
+$$
+logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
+$$
+Con 
+$$
+\beta_{0j} = \gamma_{00}+\gamma_{01}Stratum_{j} + \tau_{0j}
+$$
+ y 
+$$
+\beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
+$$
+
+## Logístico Multinivel con Coeficientes Aleatorios.
+
+En R, el ajuste se hace de la siguiente manera:
+
+```{r, mod_Int_y_pen_Aleatorio02, echo=TRUE,eval=TRUE}
+mod_logit_Pen_Aleatorio <- glmer(
+  pobreza ~ Expenditure  + (1 + Expenditure| Stratum),
+  data = encuesta, weights  =  wk2, 
+  binomial(link = "logit"))
+performance::icc(mod_logit_Pen_Aleatorio)
+```
+
+
+
+## Modelo con intercepto y pendiente aleatoria 
+\footnotesize
+```{r,plot_mod_Pen_Aleatorio02, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred <- mutate(dat_pred,
+       Proba = predict(mod_logit_Pen_Aleatorio, 
+                       newdata = dat_pred , type = "response"))
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+
+![Modelo logit  predicción ](Imagenes/09_Multinivel/16_ModLog_pred.png){width="400"}
+
+## Predicción del modelo 
+Las predicciones se muestran a continuación:
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Pen_Aleatorio,
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum, 
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:6L) 
+```
+
+## Estimación de la propoción para $y$ y $\hat{y}$
+
+```{r, echo=TRUE}
+tab_pred %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+
+
+## Modelo con intercepto y pendiente aleatoria 
+
+Se ajusta un modelo agregando ahora la variable zona. La idea es entonces medir el porcentaje de pobreza discriminando por zona. El modelo es el siguiente:
+
+$$
+logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\beta_{2j}Zona_{ij} +\epsilon_{ij}
+$$
+
+donde
+
+
+\begin{eqnarray*}
+\beta_{0j} &=&\gamma_{00}+\gamma_{01}Stratum_{j} + \gamma_{02}\mu_{j}  + \tau_{0j}\\
+\beta_{1j} &=& \gamma_{10}+\gamma_{11}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{1j}\\
+\beta_{2j} &=& \gamma_{20}+\gamma_{21}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{2j}
+\end{eqnarray*}
+
+
+donde $\mu_{j}$ es el gasto medio en el estrato $j$.
+
+## Modelo con intercepto y pendiente aleatoria 
+El ajuste del modelo es el siguiente:
+
+```{r, mod_Int_y_pen_Aleatorio002, echo=TRUE,eval=TRUE}
+mod_logit_Pen_Aleatorio2 <- glmer(
+  pobreza ~ 1 + Expenditure + Zone + mu +
+    (1 + Expenditure + Zone + mu | Stratum ),
+    data = encuesta, weights  =  wk2, 
+  binomial(link = "logit"))
+performance::icc(mod_logit_Pen_Aleatorio2)
+```
+
+## Gráfica del modelo obtenido
+
+Se grafican los modelos ajustados anteriormente:
+
+```{r,plot_mod_Pen_Aleatorio002, echo=TRUE, eval=FALSE}
+dat_pred <- encuesta %>% group_by(Stratum, Zone, mu) %>% 
+  summarise(
+    Expenditure = list(seq(min(Expenditure), 
+                           max(Expenditure), len = 100))) %>% 
+  tidyr::unnest_legacy()
+
+dat_pred$Proba = predict(mod_logit_Pen_Aleatorio2, 
+                       newdata = dat_pred , type = "response")
+
+ggplot(data = dat_pred,
+       aes(y = Proba, x = Expenditure,
+           colour = Stratum)) +
+   geom_line()+   theme_bw() +facet_grid(.~Zone)+
+  geom_point(data = encuesta, aes(y = pobreza, x = Expenditure))+
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))  
+```
+
+## Modelo con intercepto y pendiente aleatoria 
+
+![Modelo logit  predicción ](Imagenes/09_Multinivel/17_ModLog2_pred.png){width="400"}
+
+## Predicción del modelo 
+Las predicciones del porcentaje de pobreza por zona se calculan a continuación:
+
+```{r}
+(tab_pred <- data.frame(
+  Pred = predict(mod_logit_Pen_Aleatorio2, 
+                 type = "response"), 
+           pobreza = encuesta$pobreza, 
+           Stratum = encuesta$Stratum,
+           Zone = encuesta$Zone,
+           wk2 = encuesta$wk2)) %>% distinct() %>% 
+  slice(1:5L) 
+```
+
+## Estimación de la propoción para $y$ y $\hat{y}$
+
+Se verifica la calidad de las predicciones, obteniendo, como en los modelos anteriores, unas predicciones de buena calidad haciendo las comparaciones con las estimaciones de la variable observada para cada una de las zonas.
+
+```{r, echo=TRUE}
+tab_pred %>% group_by(Zone) %>% 
+  summarise(Pred = weighted.mean(Pred, wk2), 
+            pobreza = weighted.mean(pobreza,wk2))
+
+```
+
+## ¡Gracias!
+
+::: yellow
+*Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::
+
+
