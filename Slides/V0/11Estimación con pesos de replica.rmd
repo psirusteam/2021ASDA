@@ -1,0 +1,490 @@
+---
+title: "Análisis de encuestas de hogares con R"
+subtitle: "Modulo 11: Estimación con pesos de replica"
+date: "CEPAL - Unidad de Estadísticas Sociales"
+output:
+  beamer_presentation:
+    colortheme: dove
+    fonttheme: default
+    incremental: yes
+    theme: Berkeley
+    toc: yes
+    slide_level: 2
+    #highlight: pygments
+  ioslides_presentation:
+    incremental: yes
+    widescreen: yes
+    toc: yes
+  slidy_presentation:
+    incremental: yes
+Email: andres.gutierrez@cepal.org
+editor_options:
+  markdown:
+    wrap: 90
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(broom)
+library(jtools)
+library(modelsummary)
+library(patchwork)
+library(ggplot2)
+#rm(list = ls())
+```
+
+## Definición las replica.
+
+Para mejorar la estimación es posible utilizar técnicas de remuestreo, tal es el caso de
+JKn y bootstrap que ya están incluidas den el paquete de *survey*, para poder ejecutarlas
+es relativamente simple.
+
+```{r}
+encuesta <- readRDS("../Data/encuesta.rds") 
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+```
+
+## Tipos de replicas.
+
+Las funciones que permite incorporar los pesos de replica son `as_survey_rep` y
+`as.svrepdesign`, las opciones disponibles en este paquete son:
+
+-   JK1, JKn Jackknife Repeated Replication (JRR) (Rust, 1985; Wolter, 2007)
+
+-   BRR: Balanced Repeated Replication
+
+-   bootstrap, **subbootstrap**, mrbbootstrap
+
+-   Fay
+
+## Definiendo el objeto diseño con replicas **Jackknife** , **BRR** y **Fay**
+
+
+```{r}
+set.seed(123)
+diseno_JKn <- 
+  as_survey_rep(diseno,
+                type = "JKn"
+                )
+set.seed(123)
+diseno_BRR <- 
+  as_survey_rep(diseno,
+                type = "BRR")
+diseno_Fay <- 
+  as_survey_rep(diseno,
+                type="Fay", rho=0.3)
+
+```
+
+## Definiendo el objeto diseño con replicas **bootstrap** 
+
+
+```{r}
+set.seed(123)
+diseno_bootstrap <- 
+  as_survey_rep(diseno,
+                type = "bootstrap",
+                replicates = 100 )
+set.seed(123)
+diseno_subbootstrap <- 
+  as_survey_rep(diseno,
+                type = "subbootstrap",
+                replicates = 100)
+set.seed(123)
+diseno_mrbbootstrap <-
+  as_survey_rep(diseno,
+                type = "mrbbootstrap",
+                replicates = 100)
+```
+
+## La matriz de replica. 
+
+Las definiciones anteriores crean una nueva entrada en el objeto diseño el cual contiene la matriz de replicas (`repweights`). Las columnas de la matriz son el número de replicas, que puede variar según el método, las filas son el número de registros en la encuesta; y el valor de la celda estable por cuanto se debe multiplicar el factor de expansión para realizar la estimación del parámetro. Los valores de la celda pueden ser enteros para indicar ausencia (0) o presencia (1) o repetir el registro (>1), como sucede con  BRR, Jackknife y bootstrap. En el caso de Fay, esto no ocurre dado que se trata de fracciones de muestreo que están asociado con el parámetro de $\rho$. 
+
+## Comparando estimaciones de la varianza. 
+La sintaxis muestra que sin importar la metodología de replica el procedimiento es igual. 
+\small
+```{r, pesoR0 , echo=TRUE, eval=FALSE}
+library(purrr)
+library(magrittr)
+list(
+  sin_rep = diseno,
+  JKn = diseno_JKn,
+  BRR = diseno_BRR,
+  Fay = diseno_Fay,
+  bootstrap = diseno_bootstrap,
+  subbootstrap = diseno_subbootstrap,
+  mrbbootstrap = diseno_mrbbootstrap
+) %>%
+  map( 
+    ~ .x %>% summarise(
+      "Nacional" = survey_mean(Income,deff = TRUE))) %>%
+  bind_rows(.id = "Diseno")
+```
+
+## Comparando estimaciones de la varianza.
+La tabla muestra el ingreso medio nacional. 
+```{r, pesoR0 , echo=FALSE, eval=TRUE}
+```
+
+## Comparando estimaciones de la varianza. 
+La tabla muestra el ingreso mediano nacional. 
+
+```{r, echo=FALSE, eval=TRUE}
+list(sin_rep = diseno,
+     JKn = diseno_JKn,
+     BRR = diseno_BRR,
+     Fay = diseno_Fay,
+     bootstrap = diseno_bootstrap,
+     subbootstrap= diseno_subbootstrap,
+     mrbbootstrap = diseno_mrbbootstrap) %>% 
+  map(~.x %>%
+        summarise(
+          "Nacional" = survey_median(Income))) %>% 
+  bind_rows(.id = "Diseno")
+```
+
+## Comparando estimaciones de la varianza. 
+La tabla muestra el quantile 25 del ingreso. 
+
+```{r, echo=FALSE, eval=TRUE}
+list(sin_rep = diseno,
+     JKn = diseno_JKn,
+     BRR = diseno_BRR,
+     Fay = diseno_Fay,
+     bootstrap = diseno_bootstrap,
+     subbootstrap= diseno_subbootstrap,
+     mrbbootstrap = diseno_mrbbootstrap) %>% 
+  map(~.x %>%
+        summarise(
+          "Nacional" = survey_quantile(Income, quantiles = 0.25,  deff = TRUE))) %>% 
+  bind_rows(.id = "Diseno")
+```
+Con los resultados mostrados previamente y con la intención de observar diferentes resultados nos decantamos por el **diseno_subbootstrap** para replicar algunos de los análisis realizados en secciones anteriores. 
+
+# Análisis de variables continuas
+
+## Estimación de la media del gasto
+
+Un resultado más interesante para la variable gasto es el promedio de la variable. 
+
+\small
+```{r}
+svymean (~Expenditure, 
+         diseno_subbootstrap, deff=T) %>% 
+  data.frame()
+```
+
+ 
+```{r}
+svymean (~Expenditure, 
+         diseno, deff=T) %>% data.frame()
+```
+
+## Estimación de la media por sub-grupos
+
+```{r, boot1, eval=FALSE,echo=TRUE}
+diseno_subbootstrap %>% group_by(Zone, Sex) %>%
+  summarise(
+    Media = survey_mean(
+      Expenditure, level = 0.95,
+       vartype =  c("se"), deff = TRUE)) %>% 
+  as.data.frame()
+
+```
+
+## Estimación de la media por sub-grupos
+Resultado con replicas 
+```{r, boot1, eval=TRUE,echo=FALSE}
+```
+Resultados sin replicas 
+```{r, echo=FALSE}
+diseno %>% group_by(Zone, Sex) %>%
+  summarise(
+    Media = survey_mean(
+      Expenditure, level = 0.95,
+       vartype =  c("se"), deff = TRUE)) %>% 
+  as.data.frame()
+
+```
+
+
+## Estimación de la razón entre hombres y mujeres
+
+La estimación de una razón se obtiene con la función `survey_ratio`.  
+```{r,boot2, eval=FALSE,echo=TRUE}
+diseno_subbootstrap %>% summarise(
+    Razon =  survey_ratio(
+      numerator = (Sex == "Female"),# creando dummy.
+      denominator = (Sex == "Male"),# creando dummy.
+      level = 0.95,
+    vartype =  c("se", "ci")
+    ))
+```
+
+## Estimación de la razón entre hombres y mujeres
+Resultado con replicas 
+```{r, boot2, eval=TRUE,echo=FALSE}
+```
+Resultados sin replicas 
+
+```{r, echo=FALSE}
+diseno %>% summarise(
+    Razon =  survey_ratio(
+      numerator = (Sex == "Female"),# creando dummy.
+      denominator = (Sex == "Male"),# creando dummy.
+      level = 0.95,
+    vartype =  c("se", "ci")
+    ))
+```
+Los resultados muestran que la estimación puntual no cambia, pero vemos una mejora permanente en la estimación de la varianza. 
+# Análisis de variables categóricas
+
+
+## Creación de nuevas variables
+Durante los análisis de encuesta surge la necesidad de crear nuevas variables a partir de las existentes, aquí mostramos la definición de algunas de ellas.  
+
+```{r, tabs1, echo=TRUE, eval=TRUE}
+diseno_subbootstrap <- diseno_subbootstrap %>% 
+  mutate(
+  pobreza = ifelse(Poverty != "NotPoor", 1, 0),
+  desempleo =
+    ifelse(Employment == "Unemployed", 1, 0))
+```
+
+## Estimación de proporción de urbano y rural 
+La función idónea para realizar la estimación de las proporciones es `survey_prop` y la sintaxis es como sigue: 
+
+```{r}
+(prop_zona2 <- diseno_subbootstrap %>% 
+   group_by(Zone) %>% 
+   summarise(
+     prop = survey_prop(vartype = c("se"),
+                        deff = TRUE )))
+```
+
+
+## Proporción de mujeres en la zona urbana y rural
+
+```{r,prop_ZonaM_Ocupacio, eval=FALSE}
+(prop_ZonaM_Ocupacion <- diseno_subbootstrap %>% 
+   filter(Sex == "Female") %>% 
+   group_by(Zone, Employment) %>% 
+   summarise(
+     prop = survey_prop(
+       vartype = c("se"),deff = TRUE)) %>%
+   data.frame())
+```
+
+## Proporción de mujeres en la zona urbana y rural
+
+```{r,prop_ZonaM_Ocupacio, eval=TRUE, echo=FALSE}
+```
+
+
+## Tabla cruzada de Zona Vs Sexo
+Haciendo uso de la función  `group_by` organizada en forma de `data.frame`. 
+```{r, tab2, eval=FALSE}
+(
+  prop_sexo_zona <- diseno_subbootstrap %>% 
+    group_by(pobreza,Sex) %>%
+    summarise(
+      prop = survey_prop(vartype = c("se"),
+                         deff = TRUE)) %>% 
+    data.frame()
+)
+
+```
+
+## Tabla cruzada de Zona Vs Sexo
+
+```{r, tab2, echo = FALSE, eval = TRUE}
+```
+
+## Tablas de doble entrada. 
+Una alternativa es utilizar la función `svyby` con la siguiente sintaxis. 
+\scriptsize
+```{r}
+(tab_Sex_Pobr <- svyby(~Sex, 
+                       ~pobreza,
+                       diseno_subbootstrap, 
+                       svymean,deff = TRUE))
+
+```
+
+# Modelamiento de variables
+
+## Modelo lineal de regresión.
+Ahora, emplee la función `svyglm` de `survey`
+```{r, tab4, echo = TRUE, eval = TRUE}
+fit_svy <- svyglm(Income ~ Expenditure, 
+                  design = diseno_subbootstrap)
+modNul <- svyglm(Income ~ 1,
+                 design = diseno_subbootstrap)
+s1 <- summary(fit_svy)
+s0 <-summary(modNul)
+```
+
+## Resumen del Modelo
+
+```{r, tab4a, results='asis', echo = FALSE, eval = TRUE}
+stargazer(fit_svy, header = FALSE,
+          title = "Modelo encuesta ponderada, svyglm", 
+          style = "ajps", omit.stat = "ll")
+```
+
+## Calculo del $R^2$
+
+```{r, echo = TRUE, eval = TRUE}
+(R2 = 1-s1$dispersion/s0$dispersion)
+n = sum(diseno_subbootstrap$variables$wk)
+(R2Adj = 1-((1-R2)*(n-1)/(n-1-1)))
+```
+
+## Modelo de regresión logistica 
+\scriptsize
+```{r}
+  mod_loglin <- svyglm(
+    pobreza ~ Sex + Zone + Region,
+    family=quasibinomial, design=diseno_subbootstrap)
+  tidy(mod_loglin) 
+```
+
+## Modelo log lineal ajustado
+Intervalos de confianza para los coeficientes del modelo.
+\scriptsize
+```{r}
+  bind_cols(
+    data.frame(exp_estimado = exp(coef(mod_loglin))),
+    as.data.frame(exp(confint(mod_loglin)))
+  )
+```
+
+
+## Modelo gamma ingreso 
+
+```{r,mod_gamma1, echo=TRUE,eval=FALSE}
+modelo_gamma <- svyglm(formula = Income ~ Age + Sex +
+                   Region + Zone,
+                   design = diseno_subbootstrap, 
+                  family = Gamma(link = "inverse")) 
+broom::tidy(modelo_gamma)
+```
+
+
+## Modelo gamma 
+Estimación de los parámetro del modelo. 
+```{r,mod_gamma1, echo=FALSE,eval=TRUE}
+```
+
+
+## Modelo multinomial
+```{r}
+diseno_subbootstrap %>% filter(Age >= 15)%>%
+  group_by(Employment) %>% 
+  summarise(Prop = survey_mean(vartype = c("se")))
+```
+
+## Modelo multinomial
+```{r}
+library(svyVGAM)
+diseno_15 <- diseno_subbootstrap %>% 
+  filter(Age >= 15)
+model_mul <- svy_vglm(
+    formula = Employment ~ Age + Sex +
+      Region + Zone, design = diseno_15, 
+     crit = "coef",
+    family = multinomial(refLevel = "Unemployed")) 
+```
+
+
+```{r, echo=FALSE, eval=TRUE}
+tidy.svyVGAM <- function(
+  x, 
+  conf.int = FALSE, 
+  conf.level = 0.95,
+  exponentiate = FALSE, 
+  ...
+){
+  # Replace `summary(x)$coefficients` with `summary(x)$coeftable`
+  ret <- as_tibble(summary(x)$coeftable, rownames = "term")
+  
+  # All of this stays the same:
+  colnames(ret) <- c("term", "estimate", "std.error", "statistic", "p.value")
+  coefs <- tibble::enframe(stats::coef(x), name = "term", value = "estimate")
+  ret <- left_join(coefs, ret, by = c("term", "estimate"))
+  if (conf.int){
+    ci <- broom:::broom_confint_terms(x, level = conf.level, ...)
+    ret <- dplyr::left_join(ret, ci, by = "term")
+  }
+  if (exponentiate){ret <- broom:::exponentiate(ret)}
+  
+  # This part only works for the multinomial case, and only if your covariates
+  # have no ":" in their names - NOT FOR GENERAL USE
+  ret %>% 
+  tidyr::separate(term, into = c("term", "y.level"), sep = ":") %>% 
+    arrange(y.level) %>% 
+    relocate(y.level, .before = term)
+}
+```
+
+
+## Modelo multinomial
+```{r,modMult, echo=TRUE, eval=FALSE}
+tab_model <- tidy.svyVGAM(
+  x = model_mul, 
+  exponentiate = FALSE, 
+  conf.int = FALSE) %>% data.frame()
+tab_model
+```
+
+## Modelo multinomial
+\scriptsize
+```{r,modMult, echo=FALSE, eval=TRUE}
+```
+
+## Plot del IC para los coeficientes. 
+\scriptsize
+```{r, plot_Coef_mult, echo=TRUE,eval=FALSE}
+tab_model %>% 
+  mutate(
+    model = if_else(
+      y.level == 1, 
+      "Inactive",
+      "Employed", 
+    ),
+    sig = gtools::stars.pval(p.value)
+  )  %>% 
+  dotwhisker::dwplot(
+    dodge_size = 0.3,
+    vline = geom_vline(xintercept = 1, colour = "grey60",
+                       linetype = 2)) + 
+  guides(color = guide_legend(reverse = TRUE)) + 
+  theme_bw() + theme(legend.position = "top")
+```
+
+## Plot del IC para los coeficientes. 
+```{r, plot_Coef_mult, echo=FALSE,eval=TRUE}
+```
+
+
+
+## ¡Gracias!
+
+::: yellow
+*Email*: [andres.gutierrez\@cepal.org](mailto:andres.gutierrez@cepal.org){.email}
+:::
