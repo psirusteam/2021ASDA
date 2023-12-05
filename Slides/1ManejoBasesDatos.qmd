@@ -28,6 +28,64 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,cache = TRUE
 ggplot2::theme_set(theme_bw())
 ```
 
+# Conceptos básicos en encuestas de hogares
+
+## Motivación
+
+> Desde que se popularizaron las encuestas de hogares en 1940, se ha hecho evidente algunas tendencias que están ligadas a los avances tecnológicos en las agencias estadísticas y en la sociedad y se han acelerado con la introducción del computador.
+
+Gambino & Silva (2009)
+
+## Encuestas de Hogares y los ODS
+
+::: white
+Las encuestas de hogares son uno de los instrumentos más importantes para hacer seguimiento a los indicadores de los ODS en el marco de la agenda 2030.
+:::
+
+## Universo de estudio
+
+-   El término encuesta se encuentra directamente relacionado con una población finita compuesta de individuos a los cuales es necesario entrevistar.
+-   Este conjunto de unidades de interés recibe el nombre de *población objetivo* o *universo* y sobre ellas se obtiene la información de interés para el estudio.
+-   Por ejemplo, *la Encuesta Nacional de Empleo y Desempleo* de Ecuador define su población objetivo como todas las personas mayores de 10 años residentes en viviendas particulares en Ecuador.
+
+## Unidades de análisis
+
+-   Corresponden a los diferentes niveles de desagregación establecidos para consolidar el diseño probabilístico y sobre los que se presentan los resultados de interés.
+-   En México, la *Encuesta Nacional de Ingresos y Gastos de los Hogares* define como unidades de análisis el ámbito al que pertenece la vivienda, urbano alto, complemento urbano y rural.
+-   La *Gran Encuesta Integrada de Hogres* de Colombia tiene cobertura nacional y sus unidades de análisis están definidas por 13 grandes ciudades junto con sus áreas metropolitanas.
+
+## Unidades de muestreo
+
+-   El diseño de una encuesta de hogares en América Latina plantea la necesidad de seleccionar en varias etapas ciertas *unidades de muestreo* que sirven como medio para seleccionar finalmente a los hogares que participarán de la muestra.
+
+-   La *Pesquisa Nacional por Amostra de Domicilios* en Brasil se realiza por medio de una muestra de viviendas en tres etapas.
+
+## Unidades de muestreo en PNAD
+
+1.  Las unidades primarias de muestreo (UPM) son los municipios,
+2.  Las unidades secundarias de muestreo (USM) son los sectores censales, que conforman una malla territorial conformada en el último Censo Demográfico.
+3.  Las últimas unidades en ser seleccionadas son las viviendas.
+
+## Marcos de muestreo
+
+-   Para realizar el proceso de selección sistemática de los hogares es necesario contar con un marco de muestreo que sirva de *link* entre los hogares y las unidades de muestreo y que permita tener acceso a la población de interés.
+-   El marco de muestreo debe permitir identificar y ubicar a todos los hogares que conforman la población objetivo.
+-   Los marcos de muestreo más utilizados en este tipo de encuestas son de áreas geográficas que vinculan directamente a los hogares o personas.
+
+## Ejemplo de Costa Rica
+
+-   La *Encuesta Nacional de Hogares* de utiliza un marco muestral construido a partir de los censos nacionales de población y vivienda de 2011.
+-   Corresponde a un marco de áreas en donde sus unidades son superficies geográficas asociadas con las viviendas.
+-   Permite la definición de UPM con 150 viviendas en las zonas urbanas y 100 viviendas en las zonas rurales.
+-   El marco está conformado por 10461 UPM (64.5% urbanas y 35.5% rurales).
+
+## Objetivos de la PNAD
+
+-   La *Pesquisa Nacional por Amostra de Domicílios Contínua* es implementada cada trimestre por el *Instituto Brasileiro de Geografia e Estatística*.
+-   Su objetivo es producir información básica para el estudio de la evolución económica de Brasil y la publicación continua de indicadores demográficos.
+-   Los constructos de ingreso, gastos y empleo son evaluados de forma continua.
+-   Además evalúa temas de vivienda, migración de los individuos del hogar, trabajo infantil, fecundidad, salud y seguridad alimentaria, uso de las tecnologías de información, transferencias de renta, uso del tiempo, entre otros.
+
 
 # Manejando una base de encuestas de hogares con R {.build}
 
@@ -584,6 +642,253 @@ data2 %>% filter(paren_ee == "Jefe") %>%
 ```
 
 NO TIENE INTERPRETACIÓN POBLACIONAL
+
+# La muestra
+
+
+## Bibliografía y referencias
+
+- Kish, L. (1965) *Survey Sampling*. John Wiley and Sons. 
+- Cochran, W. G. (1977) *Sampling Techniques*. John Wiley and Sons. 
+- Särndal, et. al. (2003) *Model-assisted Survey Sampling*. Springer.
+- Gutiérrez, H. A. (2016)  *Estrategias de muestreo: diseño de encuestas y estimación de parámetros*. Ediciones de la U.
+- Gutiérrez, H. A. (2017)  `TeachingSampling`. *R package*.
+
+
+## Muestreo en dos etapas estratificado
+
+- La teoría discutida en las secciones anteriores es aplicable cuando las unidades primarias de muestreo  son seleccionadas dentro de un estrato. 
+- No hay nuevos principios de estimación o diseño involucrado en el desarrollo de esta estrategia de muestreo.
+
+## Muestreo en dos etapas estratificado
+
+- Se supone que el muestreo en cada estrato respeta el principio de la independencia. 
+- Las estimaciones del total, así como el cálculo y estimación de la varianza son simplemente resultado de añadir o sumar para cada estrato la respectiva cantidad.
+
+## Muestreo en dos etapas estratificado
+
+- Dentro de cada estrato $U_h$ $h=1,\ldots, H$ existen $N_{Ih}$ unidades primarias de muestreo, de las cuales se selecciona una muestra $s_{Ih}$ de $n_{Ih}$ unidades mediante un diseño de muestreo aleatorio simple. 
+- Suponga, además que el sub-muestreo dentro de cada unidad primaria seleccionada es también aleatorio simple. 
+- Para cada unidad primaria de muestreo seleccionada $i\in s_{Ih}$ de tamaño $N_i$ se selecciona una muestra $s_i$ de elementos de tamaño $n_i$.
+
+## Muestreo en dos etapas estratificado
+
+Para utilizar los prinicpios de estimación del último conglomerado en este diseño particular se definen las siguientes cantidades:
+
+1. $d_{I_i} = \dfrac{N_{Ih}}{n_{Ih}}$, que es el factor de expansión de la $i$-ésima UPM en el estrato $h$.
+2. $d_{k|i} = \dfrac{N_{i}}{n_{i}}$, que es el factor de expansión del $k$-ésimo hogar para la $i$-ésima UPM.
+3. $d_k = d_{I_i} \times d_{k|i} = \dfrac{N_{Ih}}{n_{Ih}} \times \dfrac{N_{i}}{n_{i}}$, que es el factor de expansión final del $k$-ésimo elemento para toda la población $U$.
+
+## Práctica en `R`
+```{r}
+data('BigCity')
+
+ FrameI <- BigCity %>% group_by(PSU) %>%
+ summarise(Stratum = unique(Stratum),
+           Persons = n(),
+           Income = sum(Income),
+           Expenditure = sum(Expenditure))
+             
+attach(FrameI)
+```
+
+## Práctica en `R`
+
+```{r, eval=FALSE}
+head(FrameI, 10)
+```
+
+```{r, echo=FALSE}
+head(FrameI, 10)
+```
+
+## Práctica en `R`
+```{r}
+sizes = FrameI %>% group_by(Stratum) %>%
+        summarise(NIh = n(),
+        nIh = 2,
+        dI = NIh/nIh)
+        
+NIh <- sizes$NIh
+nIh <- sizes$nIh
+```
+
+## Práctica en `R`
+
+
+```{r}
+head(sizes, 10)
+```
+
+## Práctica en `R`
+
+
+```{r}
+set.seed(1234)
+samI <- S.STSI(Stratum, NIh, nIh)
+UI <- levels(as.factor(FrameI$PSU))
+sampleI <- UI[samI]
+
+FrameII <- left_join(sizes, 
+            BigCity[which(BigCity$PSU %in% sampleI), ])
+attach(FrameII)
+```
+
+## Práctica en `R`
+
+
+```{r}
+head(FrameII, 10) %>% select(Stratum:Zone)
+```
+
+## Práctica en `R`
+```{r}
+HHdb <- FrameII %>% 
+        group_by(PSU) %>%
+        summarise(Ni = length(unique(HHID)))
+        
+Ni <- as.numeric(HHdb$Ni)
+ni <- ceiling(Ni * 0.1)
+sum(ni)
+```
+
+## Práctica en `R`
+
+\footnotesize
+```{r}
+sam = S.SI(Ni[1], ni[1])
+
+clusterII = FrameII[which(FrameII$PSU == sampleI[1]),]
+
+sam.HH <- data.frame(HHID = unique(clusterII$HHID)[sam])
+
+clusterHH <- left_join(sam.HH, clusterII, by = "HHID")
+
+clusterHH$dki <- Ni[1] / ni[1]
+
+clusterHH$dk <- clusterHH$dI * clusterHH$dki
+
+sam_data = clusterHH
+```
+
+## Práctica en `R`
+
+
+```{r}
+head(sam_data, 10) %>% select(Stratum:Zone)
+```
+
+## Práctica en `R`
+
+
+```{r}
+set.seed(1234)
+for (i in 2:length(Ni)) {
+  sam = S.SI(Ni[i], ni[i])
+  clusterII = FrameII[which(FrameII$PSU == sampleI[i]), ]
+  
+  sam.HH <- data.frame(HHID = unique(clusterII$HHID)[sam])
+  clusterHH <- left_join(sam.HH, clusterII, by = "HHID")
+  
+  clusterHH$dki <- Ni[i] / ni[i]
+  clusterHH$dk <- clusterHH$dI * clusterHH$dki
+  
+  data1 = clusterHH
+  sam_data = rbind(sam_data, data1)
+}
+encuesta <- sam_data
+```
+
+## Práctica en `R`
+```{r}
+dim(encuesta)
+sum(encuesta$dk)
+nrow(BigCity)
+attach(encuesta)
+
+```
+
+## Práctica en `R`
+Definir diseño muestral con la librería `srvyr`
+```{r}
+library(srvyr)
+
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = dk,
+    nest = T
+  )
+
+sum(weights(diseno))
+```
+
+
+## Práctica en `R`
+Calibrando los pesos muestrales, para ello empleamos la función `calibrate` de la librería `survey`
+\scriptsize
+```{r}
+library(survey)
+totales <- colSums(
+  model.matrix(~ -1 + Zone:Sex, BigCity)) # Obtener totales Pob. 
+diseno_cal <- calibrate(
+  diseno, ~-1 + Zone:Sex, totales, calfun = "linear")  
+
+sum(weights(diseno))
+sum(weights(diseno_cal))
+nrow(BigCity)
+encuesta$wk <- weights(diseno_cal)
+```
+
+
+## Práctica en `R`
+\scriptsize
+```{r, fig.align='center',  out.width="75%"}
+par(mfrow = c(1,2))
+hist(encuesta$dk) ; hist(encuesta$wk)
+```
+
+## Práctica en `R`
+
+```{r, fig.align='center',  out.width="80%"}
+plot(encuesta$dk,encuesta$wk)
+```
+
+
+## Práctica en `R`
+
+```{r, fig.align='center',  out.width="80%"}
+boxplot(encuesta$wk ~ encuesta$Stratum)
+```
+
+## Práctica en `R`
+\scriptsize
+```{r, eval=FALSE}
+Region <- as.numeric(
+  gsub(pattern = "\\D",
+      replacement =  "", x = encuesta$Stratum))
+encuesta$Region <- 
+  cut(Region, breaks = 5,
+      labels = c("Norte","Sur","Centro","Occidente","Oriente"))
+encuesta %<>% mutate(
+  CatAge = case_when(
+    Age <= 5 ~ "0-5",
+    Age <= 15 ~ "6-15",
+    Age <= 30 ~ "16-30",
+    Age <= 45 ~ "31-45",
+    Age <= 60 ~ "46-60",
+    TRUE ~ "Más de 60"
+  ),
+  CatAge = factor(
+    CatAge,
+    levels = c("0-5", "6-15", "16-30", "31-45", "46-60", "Más de 60"),
+    ordered = TRUE
+  )
+)
+saveRDS(object = encuesta, file = "../Data/encuesta.rds")
+```
+
 
 ## ¡Gracias!
 

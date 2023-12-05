@@ -371,7 +371,7 @@ diseno <- encuesta %>%
 
 ```
 
-## Modelo Gamma 
+# Modelo Gamma 
 
 ## Modelo Gamma para Variable Continua
 
