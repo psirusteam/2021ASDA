@@ -1763,7 +1763,7 @@ mutate(A = NULL, B = NULL, vp = as.numeric(vp)) %>%
 ```
 
 ## Estimación de la varianza con valores plausibles (vp)
-Por último, utilizando las ecuaciones de Rubin se obtiene la varianza estimada:
+Por último, utilizando las ecuaciones de Rubin se obtiene la varianza estimada: 
 
 ```{r, echo=TRUE}
 resultado = estimacion_prop_vp %>% 
