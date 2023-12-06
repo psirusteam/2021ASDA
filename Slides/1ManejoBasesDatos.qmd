@@ -24,7 +24,7 @@ library(printr)
 library(ggplot2)
 
 #knitr::opts_chunk$set(eval = FALSE)
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,cache = TRUE,cache.path = "00_Caches/00_dplyr/")
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,cache = TRUE,cache.path = "00_Caches/01_Muestra/")
 ggplot2::theme_set(theme_bw())
 ```
 
@@ -87,7 +87,7 @@ Las encuestas de hogares son uno de los instrumentos más importantes para hacer
 -   Además evalúa temas de vivienda, migración de los individuos del hogar, trabajo infantil, fecundidad, salud y seguridad alimentaria, uso de las tecnologías de información, transferencias de renta, uso del tiempo, entre otros.
 
 
-# Manejando una base de encuestas de hogares con R {.build}
+# Manejando una base de datos con R {.build}
 
 ## `R` como herramienta de análisis
 
@@ -96,9 +96,46 @@ Las encuestas de hogares son uno de los instrumentos más importantes para hacer
 Es posible utilizar **R** como herramienta de análisis de una base de datos que contenga información de una encuesta de hogares.
 :::
 
+## Cración de proyectos en `R`
+
+Para inicial un procesamiento en `R`, por experiencia y por una cultura de buenas practicas de programación se recomienda crear un proyecto en el cual tengamos disponibles toda nuestra información. A continuación se muestra el paso a paso para crear un proyecto dentro de `RStrudio`
+
+-   **Paso 1:** Abrir `RStudio`.
+-   **Paso 2:** ir a file -\> New Project
+
+![*Crear el proyecto*](Imagenes/01_ManejoBase/Proyecto1.png){width="250"}
+
+## *Paso 3:* Tipos de proyecto.
+
+En nuestro caso tomaremos *New Directory* 
+
+![*Tipos de proyectos*](Imagenes/01_ManejoBase/Proyecto2.png){width="350"}
+
+## *Paso 3:* Definir el tipo de proyecto.
+
+-   *New Directory*: Aquí `RStudio` nos brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar.
+
+-   *Existing Directory*: Si contamos con algunos código desarrollados previamente, esta sería la opción a elegir.
+
+-   *Version Control*: Si contamos con cuenta en *Git* y deseamos tener una copia de seguridad podemos emplear esta opción.
+
+## *Paso 4:*
+
+Seleccionar el tipo de proyecto.
+
+![*Seleccionar el tipo de proyecto*](Imagenes/01_ManejoBase/Proyecto3.png){width="350"}
+
+## *Paso 5*
+
+Diligenciar el nombre del proyecto y la carpeta de destino.
+
+![*Nombre de proyecto*](Imagenes/01_ManejoBase/Proyecto4.png){width="300"} 
+
+El realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.
+
 ## Algunas librerías de interés
 
-Para analizar la PNAD, en `R` utilizaremos las siguientes librerías:
+Para analizar una base de datos, en `R` utilizaremos las siguientes librerías:
 
 -   `dplyr`, para manejar eficientemente las bases de datos.
 -   `readstata13` para leer las bases de datos de `STATA`.
@@ -110,7 +147,7 @@ Para analizar la PNAD, en `R` utilizaremos las siguientes librerías:
 
 ## Instalando las librerias
 
-Antes de poder utilizar las diferentes funciones que cada librería trae, es necesario descargarlas de internet. El comando `install.packages` permite realizar esta tarea. Note que algunas librerías pueden depender de otras, así que para poder utilizarlas es necesario instalar también las dependencias.
+Antes de poder utilizar las diferentes funciones que cada librería trae, es necesario descargarlas de Internet. El comando `install.packages` permite realizar esta tarea. Note que algunas librerías pueden depender de otras, así que para poder utilizarlas es necesario instalar también las dependencias.
 
 ```{r, eval=FALSE}
 install.packages("dplyr")
@@ -118,6 +155,8 @@ install.packages("readstata13")
 install.packages("ggplot2")
 install.packages("TeachingSampling")
 install.packages("samplesize4surveys")
+install.packages("survey")
+install.packages("srvyr")
 ```
 
 ## Cargando las librerias
@@ -136,51 +175,14 @@ library(TeachingSampling)
 library(samplesize4surveys)
 ```
 
-## Cración de proyectos en `R`
-
-Para inicial un procesamiento en `R`, por experiencia y por una cultura de buenas practicas de programación se recomienda crear un proyecto en el cual tengamos disponibles toda nuestra información. A continuación se muestra el paso a paso para crear un proyecto dentro de `RStrudio`
-
--   **Paso 1:** Abrir `RStudio`.
--   **Paso 2:** ir a file -\> New Project
-![*Paso 2: Crear el proyecto*](Imagenes/Cap 0/Proyecto1.png){width="250"}
-
-## *Paso 3:* Tipos de proyecto.
-
-En nuestro caso tomaremos *New Directory* 
-
-![*Tipos de proyectos*](Imagenes/Cap 0/Proyecto2.png){width="350"}
-
-## *Paso 3:* Definir el tipo de proyecto.
-
--   *New Directory*: Aquí `RStudio` nos brinda una variedad de opciones dependiendo las características del procesamiento que desea realizar.
-
--   *Existing Directory*: Si contamos con algunos código desarrollados previamente, esta sería la opción a elegir.
-
--   *Version Control*: Si contamos con cuenta en *Git* y deseamos tener una copia de seguridad podemos emplear esta opción.
-
-## *Paso 4:*
-
-Seleccionar el tipo de proyecto.
-
-![*Seleccionar el tipo de proyecto*](Imagenes/Cap 0/Proyecto3.png){width="350"}
-
-## *Paso 5*
-
-Diligenciar el nombre del proyecto y la carpeta de destino.
-
-![*Nombre de proyecto*](Imagenes/Cap 0/Proyecto4.png){width="300"} 
-
-El realizar esto pasos permite que todas rutinas creadas dentro del proyecto estén ancladas a la carpeta del proyecto.
 
 ## Leyendo la base de datos
 
-La función `read.dta13` permite leer la base de datos desde `STATA 13` (es un proceso eficiente de menos de 3 segundos). Luego, convertimos esta base a formato `.RDS` que es un formato más eficiente y genérico de `R`.
+Para mostrar el uso de algunas funciones básicas en el análisis de datos emplearemos la base de datos `BigCity` disponible en la librería  `TeachingSampling` 
 
 ```{r, warning=FALSE, echo=TRUE, message=FALSE, eval=FALSE}
-
-data1 <- read.dta13("Z:/BC/BRA_2015N.dta")
-saveRDS(data1, "../data/BRA_2015N.rds") 
-data2 <- readRDS("../data/BRA_2015N.rds")
+data("BigCity", package = "TeachingSampling")
+saveRDS(BigCity, "Imagenes/01_ManejoBase/BigCity.rds") 
 ```
 
 ## Leyendo la base de datos
@@ -188,7 +190,7 @@ data2 <- readRDS("../data/BRA_2015N.rds")
 Para cargar la base de datos en R es necesario utilizar la función `readRDS`.
 
 ```{r}
-data2 <- readRDS("../data/BRA_2015N.rds")
+data2 <- readRDS("Imagenes/01_ManejoBase/BigCity.rds")
 ```
 
 ## Registros y variables
@@ -211,7 +213,7 @@ View(data2)
 
 ## La base de datos
 
-![*Visor de bases de datos de RStudio*](Imagenes/Cap 0/1.png){width="400"} 
+![*Visor de bases de datos de RStudio*](Imagenes/01_ManejoBase/1_view.png){width="400"} 
 
 ## Reconociendo las variables
 
@@ -220,7 +222,7 @@ La función `names` identifica las variables de la base de datos.
 ```{r, eval=FALSE}
 names(data2)
 ```
-\tiny
+
 ```{r, eval=TRUE, echo=FALSE}
 names(data2)
 ```
@@ -232,40 +234,47 @@ La función `str` muestra de manera compacta la estructura de un objeto y sus co
 ```{r, eval=FALSE}
 str(data2)
 ```
-\tiny
+
 ```{r, echo=FALSE}
 str(data2)
 ```
 
-## Añadiendo el nombre a los estados
+## Definir las regiones 
 
-En algunas ocasiones es necesario re-codificar los niveles de los factores. El siguiente código permite generar los nombres de los estados en Brasil.
+La base de datos no cuenta con regiones geográficas definidas las vamos a construir agrupando algunos estratos, para ello usamos el siguiente código:  
+
+```{r}
+Region <- as.numeric(
+  gsub(pattern = "\\D",
+      replacement =  "", x = data2$Stratum))
+data2$Region <- 
+  cut(Region, breaks = 5,
+      labels = c("Norte","Sur","Centro","Occidente","Oriente"))
+```
+
+
+## Añadiendo el códigos a las regiones
+
+En algunas ocasiones es necesario re-codificar los niveles de los factores. El siguiente código permite generar los nombres de las regiones.
 
 
 ```{r}
-data2$estados <- factor(data2$uf, 
- levels = c(11:17, 21:29, 31:33, 35, 41:43, 50:53), 
- labels = c("Rondonia", "Acre", "Amazonas", "Roraima",  "Para",
-            "Amapa", "Tocantins", "Maranhao",  "Piaui", "Ceara",
-            "RioGrandeNorte", "Paraiba",  "Pernambuco", "Alagoas",
-            "Sergipe", "Bahia", "MinasGerais", "EspirituSanto", 
-            "RioJaneiro", "SaoPaulo", "Parana", "SantaCatarina", 
-            "RioGrandeSur", "MatoGrossoSur", "MatoGrosso", "Goias", 
-            "DistritoFederal"))
+data2$IDRegion <- factor(data2$Region, 
+ levels = c("Norte","Sur","Centro","Occidente","Oriente"), 
+ labels = c("01", "02","03","04","05"))
 ```
 
-## Añadiendo el nombre a los estados
+## Añadiendo el nombre corto a las regiones
 
 Para efectos de visualización en tablas y gráficos a veces conviene codificar los nombres de las variables.
 
+
 ```{r}
-data2$deptos <- factor(data2$uf, 
- levels = c(11:17, 21:29, 31:33, 35, 41:43, 50:53), 
- labels = c("RO", "AC", "AM", "RR", "PA", 
- "AP", "TO", "MA", "PI", "CE", "RN", "PB", 
- "PE", "AL", "SE", "BA", "MG", "ES", "RJ", "SP",
- "PR", "SC", "RS", "MS", "MT", "GO", "DF"))
+data2$Nom_corto <- factor(data2$Region, 
+ levels = c("Norte","Sur","Centro","Occidente","Oriente"), 
+ labels = c("N", "S","C","O","E"))
 ```
+
 
 ## El operador `pipe`
 
@@ -273,13 +282,14 @@ data2$deptos <- factor(data2$uf,
 
 El operador más importante es `%>%` que le indica a `R` que el objeto que está a su izquierda debe ser un argumento del código a su derecha.
 
-## Número de encuestas en Brasil
+## Número de registros
 
-El operador `%>%` indica que el objeto a su izquierda (la base de datos de la PNAD) debe ser un argumento para la función que está a su derecha (el número de filas).
+El operador `%>%` indica que el objeto a su izquierda (la base de datos BigCity) debe ser un argumento para la función que está a su derecha (el número de filas).
 
 ```{r}
 data2 %>% count()
 ```
+
 
 ## Verbos que debemos aprender
 
@@ -303,7 +313,7 @@ data2[,1:5] %>% slice(1:8)
 data2[,1:5] %>% slice(1:8)
 ```
 \normalsize
-El número de encuestas (personas) en la base de datos
+El número de registros (personas) en la base de datos
 
 ```{r}
 data2 %>% count()
@@ -313,29 +323,29 @@ data2 %>% count()
 
 -   Las encuestas de hogares muchas veces recopilan información a nivel de viviendas, hogares y personas.
 -   Las bases de datos de datos que están disponibles en `BADEHOG` están a nivel de persona.
--   Se puede filtrar por hogar muy fácilmente porque sólo hay un jefe de hogar por hogar.
+- Las encuestas se pueden analizar para un región de interés
 
-## **filter** para hogar
+## **filter** para region
 
-El siguiente código filtra la base de datos por la condición de parentesco.
+El siguiente código filtra la base de datos por la condición de región
 
 ```{r}
-datahogar1 <- data2 %>% filter(parentco == 1)
-datahogar2 <- data2 %>% filter(paren_ee == "Jefe") 
+dataregion1 <- data2 %>% filter(IDRegion == "01")
+dataregion2 <- data2 %>% filter(Region == "Norte") 
 
 # View(datahogar1)
 # View(datahogar2)
 ```
 
-## **filter** para área
+## **filter** para Zona
 
-El siguiente código filtra la base de datos por la ubicación de la persona en el área rural y urbana.
+El siguiente código filtra la base de datos por la ubicación de la persona en el Zona rural y urbana.
 
 ```{r}
 dataurbano <- data2 %>% 
-  filter(area_ee == "Area urbana")
+  filter(Zone == "Urban")
 datarural <- data2 %>% 
-  filter(area_ee == "Area rural") 
+  filter(Zone == "Rural") 
 
 # View(dataurbano)
 # View(datarural)
@@ -347,9 +357,9 @@ El siguiente código filtra la base de datos por personas de ingresos mensuales 
 
 ```{r}
 dataingreso1 <- data2 %>% 
-  filter(ingcorte %in% c(50, 100))
+  filter(Income %in% c(50, 100))
 dataingreso2 <- data2 %>% 
-  filter(ingcorte %in% c(1000, 2000))
+  filter(Income %in% c(1000, 2000))
 
 # View(dataingreso1)
 # View(dataingreso2)
@@ -360,10 +370,10 @@ dataingreso2 <- data2 %>%
 El siguiente código reduce la base de datos original utilizando la función `select`.
 
 ```{r}
-datared <- data2 %>% select(`id_hogar`, `_upm`,
-                            `_feh`, `_estrato`)
-datablue <- data2 %>% select(id_pers, edad, 
-                             sexo, ingcorte)
+datared <- data2 %>% select(`HHID`, `PSU`,
+                            `Region`, `Stratum`)
+datablue <- data2 %>% select(PersonID, Age, 
+                             Sex, Income)
 
 # View(datared)
 # View(datablue)
@@ -374,7 +384,7 @@ datablue <- data2 %>% select(id_pers, edad,
 El siguiente código reduce la base de datos original utilizando la función `select`.
 
 ```{r, eval=FALSE}
-datagrey <- data2 %>% select(-id_hogar, -id_pers)
+datagrey <- data2 %>% select(-MaritalST, -IDRegion)
 datagrey %>% View()
 ```
 
@@ -383,7 +393,7 @@ datagrey %>% View()
 El siguiente código ordena la base de datos original utilizando la función `arrange`.
 
 ```{r}
-datadog <- datablue %>% arrange(ingcorte)
+datadog <- datablue %>% arrange(Income)
 datadog %>% head()
 ```
 
@@ -392,7 +402,7 @@ datadog %>% head()
 Es posible utilizar la función `arrange` para hacer ordenamientos más complicados.
 
 ```{r}
-datablue %>% arrange(sexo, edad) %>% head()
+datablue %>% arrange(Sex, Age) %>% head()
 ```
 
 ## **arrange** sobre más variables
@@ -400,7 +410,7 @@ datablue %>% arrange(sexo, edad) %>% head()
 Es posible utilizar la función `arrange` junto con la opción `desc()` para que el ordenamiento sea descendente.
 
 ```{r}
-datablue %>% arrange(desc(edad)) %>% head()
+datablue %>% arrange(desc(Age)) %>% head()
 ```
 
 ## **mutate** para crear nuevas variables
@@ -409,7 +419,7 @@ Esta función crea nuevas variables en la base de datos que pueden ser guardadas
 
 ```{r}
 datablue2 <- datablue %>% 
-  mutate(ingreso2 = 2 * ingcorte)
+  mutate(Income2 = 2 * Income)
 datablue2 %>% head()
 ```
 
@@ -419,229 +429,84 @@ La función `mutate` reconoce sistemáticamente las variables que van siendo cre
 
 ```{r}
 datacat <- datablue %>% 
-  mutate(ingreso2 = 2 * ingcorte,
-         ingreso4 = 2 * ingreso2)
+  mutate(Income2 = 2 * Income,
+         Income4 = 2 * Income2)
 datacat %>% head()
 ```
 
-## Número de encuestas por estado
+## Definir categorias para una variable
 
-El siguiente código permite generar el número de encuestas efectivas en cada uno de los estados de Brasil. El comando `group_by` agrupa los datos por estados, el comando `summarise` hace los cálculos requeridos y el comando `arrange` ordena los resultados
+A veces, resulta fundamental categorizar variables como la edad para agilizar el análisis. En este escenario, optaremos por emplear la función `case_when`, la cual posibilita la evaluación de distintas condiciones para una variable particular.
+
+```{r}
+data2 <- data2 %>% mutate(
+  CatAge = case_when(
+    Age <= 5 ~ "0-5",
+    Age <= 15 ~ "6-15",
+    Age <= 30 ~ "16-30",
+    Age <= 45 ~ "31-45",
+    Age <= 60 ~ "46-60",
+    TRUE ~ "Más de 60"
+  ),
+  CatAge = factor(
+    CatAge,
+    levels = c("0-5", "6-15", "16-30", "31-45", "46-60", "Más de 60"),
+    ordered = TRUE
+  )
+)
+```
+
+
+## Número de registros por región
+
+El siguiente código permite generar el número de registros en cada una de las regiones de BigCity. El comando `group_by` agrupa los datos por región, el comando `summarise` hace los cálculos requeridos y el comando `arrange` ordena los resultados
 
 ```{r eval=FALSE}
 data2 %>% 
-  group_by(estados) %>% 
-  summarise(n = n()) %>% arrange(desc(n)) %>% slice(1:10)
+  group_by(Region) %>% 
+  summarise(n = n()) %>% arrange(desc(n))
 ```
 
-## Número de encuestas por estado
+## Número de registros por región
 
 El resultado de la anterior consulta es el siguiente:
 
 ```{r echo=FALSE}
 data2 %>% 
-  group_by(estados) %>% 
-  summarise(n = n()) %>% arrange(desc(n)) %>% slice(1:10)
-```
-
-## Número de encuestas por sexo
-
-El siguiente código permite generar el número efectivo de encuestas discriminado por el sexo del respondiente.
-
-```{r}
-data2 %>% 
-  group_by(sexo) %>% 
+  group_by(Region) %>% 
   summarise(n = n()) %>% arrange(desc(n)) 
 ```
 
-## Número de encuestas por área geográfica
+## Número de registros por sexo
 
-El siguiente código reporta el número efectivo de encuestas en el área urbana y rural.
-
-```{r}
-data2 %>% 
-  group_by(area_ee) %>% 
-  summarise(n = n()) %>% arrange(desc(n)) 
-```
-
-## Número de encuestas por parentesco
-
-El siguiente código reporta el número efectivo de encuestas clasificado por jefe de hogar, hijos, conyugues, etc.
+El siguiente código permite generar el Número de registros discriminado por el sexo.
 
 ```{r}
 data2 %>% 
-  group_by(paren_ee) %>% 
+  group_by(Sex) %>% 
   summarise(n = n()) %>% arrange(desc(n)) 
 ```
 
-# Descriptivos y reflexión
+## Número de registros por área geográfica
 
-## Funciones estadísticas básicas
-
--   Media: `mean()`
--   Mediana: `median()`
--   Varianza: `var()`
--   Desviación estándar: `sd()`
--   Percentiles: `quantile()`
--   Algunas medidas descriptivas: `summary()`
--   Covarianza: `cov( , )`
--   Correlación: `cor( , )`
-
-## Reflexionemos {.build}
-
--   ¿Qué es una encuesta?
--   ¿Qué es una muestra?
--   ¿Qué es una muestra representativa?
--   ¿Está bien sacar conclusiones sobre una muestra?
--   ¿Podemos tomar la muestra y hacer inferencia directamente desde la muestra?
-
-## Reflexionemos {.build}
-
--   Si calculamos el promedio de los ingresos en una encuesta, ¿qué significa esa cifra?
--   Si calculamos el total de los ingresos en una encuesta, ¿qué significa esa cifra?
--   ¿Qué necesitamos para que la inferencia sea precisa y exacta?
--   ¿Qué es el principio de representatividad?
--   ¿Qué es el factor de expansión?
-
-## Para reflexionar...
-
--   Una encuesta de hogares requiere análisis de todas las variables que se quisieron medir, este proceso debe ser llevado a cabo por separado para asegurar la calidad y consistencia de los datos recolectados.
--   Sin embargo, *no* vamos a adentrarnos en el análisis de las variables en la muestra, porque los datos muestrales no son de interés para el investigador.
--   A nosotros nos interesa lo que suceda a nivel poblacional y este análisis se debe abordar desde la teoría del muestreo.
-
-## **¡PELIGRO!**
-
-> Los siguientes resultados no tienen interpretación poblacional y se realizan con el único propósito de ilustrar el manejo de las bases de datos de las encuestas.
-
-## Medias y totales
-
-La función `summarise` permite conocer el total de los ingresos en la base de datos y la media de los ingresos sobre los respondientes.
+El siguiente código reporta el Número de registros en el área urbana y rural.
 
 ```{r}
-data2 %>% summarise(total.ing = sum(ingcorte),
-                    media.ing = mean(ingcorte))
+data2 %>% 
+  group_by(Zone) %>% 
+  summarise(n = n()) %>% arrange(desc(n)) 
 ```
 
-NO TIENE INTERPRETACIÓN POBLACIONAL
+## Número de registros estado de ocupación
 
-## Medianas y percentiles
-
-La función `summarise` permite conocer algunas medidas de localización de los ingresos en la base de datos.
+El siguiente código reporta el Número de registros clasificado Ocupado, desocupado e inactivo
 
 ```{r}
-data2 %>% summarise(mediana = median(ingcorte),
-                    decil1 = quantile(ingcorte, 0.1),
-                    decil9 = quantile(ingcorte, 0.9),
-                    rangodecil = decil9 - decil1)
+data2 %>% 
+  group_by(Employment) %>% 
+  summarise(n = n()) %>% arrange(desc(n)) 
 ```
 
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Varianza y desviación estándar
-
-La función `summarise` permite conocer el comportamiento variacional de los ingresos sobre los respondientes.
-
-```{r}
-data2 %>% summarise(varianza = var(ingcorte),
-                    desv = sd(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Rangos
-
-La función `summarise` permite conocer el comportamiento variacional de los ingresos sobre los respondientes.
-
-```{r}
-data2 %>% summarise(mini = min(ingcorte),
-                    maxi = max(ingcorte),
-                    rango = maxi - mini,
-                    rangoiq = IQR(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-# Resúmenes agrupados
-
-## Media de los ingresos por área
-
-```{r}
-data2 %>% group_by(area_ee) %>%
-  summarise(n = n(),
-            media = mean(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Media de los ingresos por sexo
-
-```{r}
-data2 %>% group_by(sexo) %>%
-  summarise(n = n(),
-            media = mean(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Media de los ingresos por sexo
-```{r}
-data2 %>% group_by(sexoj) %>%
-  summarise(n = n(),
-            media = mean(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Descriptivos de los ingresos por sexo en hogares
-
-```{r}
-data2 %>% filter(paren_ee == "Jefe") %>%
-  group_by(sexoj) %>%
-  summarise(n = n(),
-            media = mean(ingcorte),
-            desv = sd(ingcorte),
-            rangoiq = IQR(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Descriptivos de los ingresos por condición de ocupación
-
-```{r}
-data2 %>% group_by(condact) %>%
-  summarise(n = n(),
-            media = mean(ingcorte),
-            desv = sd(ingcorte),
-            rangoiq = IQR(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Descriptivos de los ingresos por condición de ocupación en hogares
-
-```{r}
-data2 %>% filter(paren_ee == "Jefe") %>% 
-  group_by(condact) %>%
-  summarise(n = n(),
-            media = mean(ingcorte),
-            desv = sd(ingcorte),
-            rangoiq = IQR(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
-
-## Descriptivos de los ingresos en hogares por pobreza
-\scriptsize
-```{r}
-data2 %>% filter(paren_ee == "Jefe") %>% 
-  group_by(pobreza) %>%
-  summarise(n = n(),
-            media = mean(ingcorte),
-            desv = sd(ingcorte),
-            rangoiq = IQR(ingcorte))
-```
-
-NO TIENE INTERPRETACIÓN POBLACIONAL
 
 # La muestra
 
@@ -754,7 +619,7 @@ sum(ni)
 
 ## Práctica en `R`
 
-\footnotesize
+
 ```{r}
 sam = S.SI(Ni[1], ni[1])
 
@@ -863,29 +728,8 @@ boxplot(encuesta$wk ~ encuesta$Stratum)
 ```
 
 ## Práctica en `R`
-\scriptsize
+
 ```{r, eval=FALSE}
-Region <- as.numeric(
-  gsub(pattern = "\\D",
-      replacement =  "", x = encuesta$Stratum))
-encuesta$Region <- 
-  cut(Region, breaks = 5,
-      labels = c("Norte","Sur","Centro","Occidente","Oriente"))
-encuesta %<>% mutate(
-  CatAge = case_when(
-    Age <= 5 ~ "0-5",
-    Age <= 15 ~ "6-15",
-    Age <= 30 ~ "16-30",
-    Age <= 45 ~ "31-45",
-    Age <= 60 ~ "46-60",
-    TRUE ~ "Más de 60"
-  ),
-  CatAge = factor(
-    CatAge,
-    levels = c("0-5", "6-15", "16-30", "31-45", "46-60", "Más de 60"),
-    ordered = TRUE
-  )
-)
 saveRDS(object = encuesta, file = "../Data/encuesta.rds")
 ```
 
