@@ -345,36 +345,76 @@ sub_Hombre %>% mutate(edad_rango = case_when(
                       data.frame()
 ```
 
-## Tablas cruzadas. 
+## Tablas cruzadas
 
-Una tabla de contingencia o tablas cruzadas es una herramienta muy utilizada en el análisis de encuestas de hogares puesto que, está conformada por al menos dos filas y dos columnas y representa información de variables categóricos en términos de conteos de frecuencia.  Estas tablas tienen el objetivo de representar de manera resumida, la relación entre diferentes variables categóricas. 
+En los levantamientos de encuestas de hogares, es habitual recopilar información sobre variables categóricas, que permiten clasificar a la población en grupos mutuamente excluyentes. Ejemplos comunes son el estado laboral (*ocupado*, *desempleado*, *inactivo*), el nivel educativo alcanzado (*primaria*, *secundaria*, *terciaria*) o el acceso a determinados servicios (*sí*, *no*). Explorar si dos de estas variables están asociadas constituye un elemento central del análisis, pues ofrece información valiosa en distintos ámbitos:
 
-una tabla de contingencia se asume como un arreglo bidimensional de $r=1,\ldots,R$ filas y $c=1,\ldots,C$ columnas. Cabe resaltar que, Las tablas cruzadas o de contingencia no se limitan a dos dimensiones, también se pueden incluir una tercera variable o más, es decir, $l=1,\ldots,L$ subtablas basadas en las categorías de una tercera variable.
+* En política pública, al relacionar educación y empleo para diseñar estrategias laborales.
+* En evaluación de programas, al detectar variaciones en el acceso a salud según el nivel de ingresos.
+* En investigación social, al estudiar vínculos entre factores demográficos y servicios para comprender dinámicas y tendencias sociales.
 
-Para efectos de ilustración y facilitación de los ejemplos y conceptos teóricos, en esta sección de trabajarán, en su mayoría con tablas $2\times2$. Gráficamente, estas tablas se construyen con frecuencias no estimadas como se muestra a continuación:
+### Definición y notación
 
+El estudio de la asociación entre dos variables categóricas implica verificar si la distribución de una depende de la otra. Para ello se comparan las frecuencias de todas las combinaciones posibles de categorías. Por ejemplo, puede contabilizarse cuántos individuos corresponden simultáneamente a cada nivel educativo y estado laboral. Estas frecuencias pueden transformarse en proporciones, que muestran la participación relativa de cada combinación en la población.
+
+La herramienta más común para organizar esta información es la tabla de contingencia, también conocida como tabla cruzada. En su forma más simple, corresponde a una matriz de doble entrada en la que las filas representan las categorías de una variable y las columnas las de otra. Cada celda contiene la frecuencia o proporción de casos que presentan simultáneamente la combinación $(r,c)$.
+
+Formalmente, sean $x$ y $y$ dos variables categóricas con $R$ y $C$ categorías, respectivamente. Bajo un modelo de superpoblación, la distribución conjunta puede expresarse como:
+
+$$
+P_{rc} = Pr(X=r, Y=c), \quad r=1,\dots,R;\, c=1,\dots,C
+\tag{9-24}
+$$
+
+con la restricción $\sum\_{r=1}^{R}\sum\_{c=1}^{C} P\_{rc}=1$.
+
+Si se dispusiera de un censo, el número de unidades en cada celda $(r,c)$ se calcularía como:
+
+$$
+N_{rc} = \sum_{h=1}^{H} \sum_{i \in U_{1h}} \sum_{k \in U_{hi}} I(x_{hik}=r, y_{hik}=c) 
+\tag{9-25}
+$$
+
+y las proporciones poblacionales se definirían como $p\_{rc} = N\_{rc}/N\_{(++)}$, donde $N\_{(++)}$ es el tamaño total de la población. En la práctica, al trabajar con encuestas, estas proporciones se estiman mediante los estimadores ponderados explicados en secciones previas.
+
+### Tablas de doble entrada
+
+Una tabla de contingencia puede representarse en forma general como:
 
 | Variable 2        | Variable 1                  | Marginal fila|
 |-------------------|-------------|---------------|--------------|
 |                   | 0           | 1             |              |
-| 0                 | $n_{00}$    |   $n_{01}$    | $n_{0+}$     |
-| 1                 |  $n_{10}$   |  $n_{11}$     | $n_{1+}$     |
-| Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
+| 0                 | $n\_{00}$    |   $n\_{01}$    | $n\_{0+}$     |
+| 1                 | $n\_{10}$    |   $n\_{11}$    | $n\_{1+}$     |
+| Marginal columna  | $n\_{+0}$    |   $n\_{+1}$    | $n\_{++}$     |
 
-
-A continuación, se muestra la tabla de doble entrada con las frecuencias estimadas o ponderadas:
-
-
+Cuando se aplican los pesos muestrales, se obtienen las frecuencias ponderadas:
 
 | Variable 2        | Variable 1                  | Marginal fila|
 |-------------------|-------------|---------------|--------------|
 |                   | 0           | 1             |              |
-| 0                 | $\hat{N}_{00}$|   $\hat{N}_{01}$| $\hat{N}_{0+}$|
-| 1                 |  $n_{10}$   |  $n_{11}$     | $n_{1+}$     |
-| Marginal columna  |  $n_{+0}$   |    $n_{+1}$   |  $n_{++}$    |
+| 0                 | $\hat{N}*{00}$| $\hat{N}*{01}$| $\hat{N}*{0+}$|
+| 1                 | $\hat{N}*{10}$| $\hat{N}*{11}$| $\hat{N}*{1+}$|
+| Marginal columna  | $\hat{N}*{+0}$| $\hat{N}*{+1}$| $\hat{N}\_{++}$|
 
+donde, por ejemplo, la frecuencia ponderada en la celda $(0,1)$ está dada por:
 
-donde, por ejemplo, la frecuencia ponderada o estimada en la celda (0, 1) está dada por $\hat{N}_{01}={ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}$. Las proporciones estimadas a partir de estas frecuencias muestrales ponderadas, se obtienen de la siguiente manera $p_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}$.
+$$
+\hat{N}_{01} = \sum_{h=1}^{H} \sum_{\alpha=1}^{a_{h}} \sum_{i \in (0,1)}^{n_{h\alpha}} \omega_{h\alpha i}
+$$
+
+y las proporciones estimadas se calculan como:
+
+$$
+\hat{p}_{rc}=\frac{\hat{N}_{rc}}{\hat{N}_{++}}.
+$$
+
+### Extensiones y aplicaciones
+
+Aunque comúnmente se presentan como tablas bidimensionales ($R \times C$), las tablas de contingencia pueden extenderse a más dimensiones, incorporando una tercera variable o más ($L$ subtablas), lo que permite explorar relaciones más complejas.
+
+Gracias a su simplicidad y potencia descriptiva, las tablas cruzadas son ampliamente utilizadas en la investigación aplicada y en el diseño de políticas públicas, pues permiten identificar patrones y asociaciones que no serían evidentes a simple vista. Su interpretación también puede reforzarse mediante representaciones gráficas, como los diagramas de barras apiladas, que facilitan la visualización de tendencias y diferencias (véase la Sección 9.8 para un análisis más detallado).
+
 
 *Estimación de proporciones para variables binarias*
 

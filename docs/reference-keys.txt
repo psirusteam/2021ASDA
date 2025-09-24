@@ -53,7 +53,10 @@ análisis-de-variables-categóricas-en-encuestas-de-hogares
 tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares
 estimación-de-proporciones
 estimación-de-proporciones-en-r
-tablas-cruzadas.
+tablas-cruzadas
+definición-y-notación
+tablas-de-doble-entrada
+extensiones-y-aplicaciones
 modelos-de-regresión-bajo-diseños-de-muestreo-complejos
 estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
 diagnóstico-del-modelo
