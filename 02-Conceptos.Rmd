@@ -6,7 +6,16 @@ knitr::opts_chunk$set(warning = FALSE,
 
 # Conceptos básicos en encuestas de hogares
 
-En este capítulo se presentan los conceptos básicos necesarios para la definición y análisis de una encuesta de hogares y son tomadas de *Sarndal, Swensson & Wretman (1992)* & Gutiérrez (2016). Alguno de los conceptos que se encontrarán están relacionados con la población objetivo, universo de estudio, marco muestral, etc. 
+El análisis riguroso de encuestas de hogares parte de una comprensión clara de sus fundamentos conceptuales y metodológicos. Como señalan *Sarndal, Swensson & Wretman (1992)* y *Gutiérrez (2016)*, el punto de partida es la definición de la población objetivo, el universo de estudio y el marco muestral, que sirven de base para el diseño de la encuesta y la selección de la muestra. Estos elementos son esenciales para garantizar la validez de las inferencias y la representatividad de los resultados.
+
+En este contexto, un aspecto crucial es la consideración del diseño muestral. Para obtener conclusiones válidas sobre la población, es necesario adoptar un enfoque de inferencia basada en el diseño, el cual reconoce que la muestra no surge de una selección aleatoria simple, sino de un plan probabilístico bien definido. En dicho plan, cada unidad de la población tiene una probabilidad conocida y distinta de cero de ser incluida en la muestra, lo que constituye la garantía fundamental de que los resultados puedan generalizarse a la población de referencia.
+
+Bajo este enfoque, las estimaciones son insesgadas (o prácticamente insesgadas) en relación con el esquema de muestreo, sin depender de supuestos sobre la distribución de la variable de interés. Esto otorga a la inferencia basada en el diseño un carácter robusto y ampliamente aceptado en el análisis de encuestas de hogares.
+
+Un elemento central de este proceso son los pesos de muestreo, que indican cuántas unidades de la población está representando cada unidad seleccionada. Dichos pesos permiten ajustar las estimaciones a las particularidades del diseño, de modo que los resultados reflejen con fidelidad la estructura poblacional. Además, un diseño bien documentado facilita el análisis estadístico, respalda la interpretación rigurosa de los datos y posibilita obtener conclusiones significativas sobre fenómenos complejos.
+
+En contraste, ignorar el diseño muestral y aplicar métodos de análisis que asumen una muestra aleatoria simple puede llevar a estimaciones sesgadas, errores de inferencia y conclusiones equivocadas. Por ello, el análisis de encuestas de hogares no puede desligarse de su diseño de selección: este no es un detalle técnico accesorio, sino el núcleo mismo que sustenta la validez de la información producida.
+
 
 
 ## Universo de estudio y población objetivo
@@ -32,45 +41,202 @@ Para realizar el proceso de selección sistemática de los hogares es necesario 
 A modo de ejemplo, la *Encuesta Nacional de Hogares* de Costa Rica utiliza un marco muestral construido a partir de los censos nacionales de población y vivienda de 2011. Dicho marco corresponde a uno de áreas en donde sus unidades son superficies geográficas asociadas con las viviendas. Este marco permite la definición de UPM con 150 viviendas en las zonas urbanas y 100 viviendas en las zonas rurales. Este marco está conformado por 10461 UPM (64.5% urbanas y 35.5% rurales).
 
 
-## Selección de una muestra
-
 ## Motivación
 
-> Desde que se popularizaron las encuestas de hogares en 1940, se ha hecho evidente algunas tendencias que están ligadas a los avances tecnológicos en las agencias estadísticas y en la sociedad y se han acelerado con la introducción del computador.
+> Desde que se popularizaron las encuestas de hogares en 1940, se han hecho evidentes algunas tendencias vinculadas a los avances tecnológicos tanto en las agencias estadísticas como en la sociedad, las cuales se han acelerado con la introducción del computador.
+> *Gambino & Silva (2009)*
 
-Gambino & Silva (2009)
+El muestreo surge como respuesta a la necesidad de obtener información estadística precisa sobre una población objetivo, sin recurrir a un censo completo. Como señala *Gutiérrez (2016)*, el muestreo consiste en investigaciones parciales sobre la población que permiten inferir resultados al conjunto total. En las últimas décadas, esta metodología se ha consolidado en distintos campos —especialmente en el sector gubernamental, con la producción de estadísticas oficiales que facilitan el seguimiento de políticas públicas y de los Objetivos de Desarrollo Sostenible—, pero también en el ámbito académico, privado y de comunicaciones.
+
+En el marco de este libro, el foco se centra en el análisis de encuestas de hogares. Para que el lector disponga de ejemplos prácticos, en este capítulo se empleará la base de datos **BigCity**, que contiene información socioeconómica de 150 266 personas de una ciudad en un año específico. Entre sus variables destacan:
+
+* *HHID:* Identificador del hogar.
+* *PersonID:* Identificador de la persona dentro del hogar.
+* *Stratum:* Estrato geográfico (119 en total).
+* *PSU:* Unidades primarias de muestreo (1664 en total).
+* *Zone:* Zona urbana o rural.
+* *Sex:* Sexo del entrevistado.
+* *Income:* Ingreso mensual per cápita.
+* *Expenditure:* Gasto mensual per cápita.
+* *Employment:* Situación laboral.
+* *Poverty:* Condición de pobreza según ingresos.
+
+### La importancia de considerar el diseño muestral
+
+Al analizar datos de encuestas de hogares, ignorar el diseño de muestreo compromete la representatividad, la precisión y la credibilidad de los resultados, lo que puede conducir a decisiones erróneas. Korn y Graubard (1995) muestran cómo las estimaciones ponderadas y no ponderadas pueden diferir sustancialmente, lo que resalta la necesidad de aplicar siempre métodos consistentes con el diseño.
+
+Como se mencionó, las encuestas de hogares se caracterizan por:
+
+* Diseños de muestreo complejos (estratificación, conglomeración y probabilidades desiguales de selección), que buscan mejorar la eficiencia y la precisión.
+* Pesos de muestreo para cada unidad, que permiten representar adecuadamente a la población.
+
+#### Ejemplo ilustrativo
+
+Supóngase un país con dos regiones: la Región A (100 habitantes, ingreso promedio de $10 000) y la Región B (900 habitantes, ingreso promedio de $2 000). El ingreso promedio verdadero es:
+
+$$
+\theta = \frac{(100 \times 10,000) + (900 \times 2,000)}{100 + 900} = 2,800
+$$
+
+Si se encuestan 50 personas en cada región y se ignora el diseño de muestreo, asignando el mismo peso a todas las observaciones, se obtiene:
+
+$$
+\hat{\theta} = \frac{(50 \times 10,000) + (50 \times 2,000)}{100} = 6,000
+$$
+
+El sesgo es evidente: se sobreestima el ingreso nacional, pues la Región A (10 % de la población) influye tanto como la Región B (90 %).
+
+En cambio, si se aplican **pesos proporcionales al tamaño poblacional** (2 para la Región A y 18 para la Región B), la estimación corregida es:
+
+$$
+\hat{\theta} = \frac{(2 \times 50 \times 10,000) + (18 \times 50 \times 2,000)}{(2 \times 50) + (18 \times 50)} = 2,800
+$$
+
+Lo que reproduce el valor verdadero y elimina el sesgo.
+
+#### Conglomeración y precisión
+
+Otra característica crítica es la **conglomeración**. La mayoría de encuestas selecciona unidades primarias de muestreo (UPM) como sectores censales o áreas de enumeración, y dentro de ellas, submuestras de hogares. Este diseño reduce costos, pero afecta la precisión: si los hogares dentro de un conglomerado son muy similares, la información adicional que aporta cada uno disminuye.
+
+Por ejemplo, si una encuesta selecciona 100 conglomerados y dentro de cada uno 10 hogares, se obtiene una muestra de 1 000 hogares. Si todos los hogares de un mismo conglomerado comparten la misma característica (p. ej., acceso a electricidad), la muestra ofrece la misma precisión que una muestra aleatoria simple de solo 100 hogares. Analizar ingenuamente los 1 000 hogares como si fueran independientes conduce a subestimar gravemente los errores estándar.
+
+#### Recomendaciones prácticas
+
+Para un análisis adecuado es indispensable que las bases de datos de encuestas incluyan:
+
+* Identificadores de **estratos** y **UPM**.
+* Pesos de muestreo a nivel de hogar o persona.
+
+Cuando no se dispone de esta información, se recomienda que al menos se proporcionen **pesos replicados**, junto con instrucciones claras para calcular estimaciones y errores estándar.
 
 
-El muestreo es un procedimiento que responde a la necesidad de información estadística precisa sobre una población objetivo de estudio; Como lo menciona *Gutiérrez (2016)* el muestreo trata con investigaciones parciales sobre la población que apuntan a inferir a la población completa. Es así como en las últimas décadas ha tenido bastante desarrollo en diferentes campos principalmente en el sector gubernamental con la publicación de las estadísticas oficiales que permiten realizar un seguimiento a las metas del gobierno, en el sector académico, en el sector privado y de comunicaciones. 
+## Parámetros y Estimadores
 
-Como se ha venido mencionando anteriormente, este libro está enfocado en el análisis de las encuestas de hogares. En ese sentido y para que el lector tenga una gama más amplia de ejemplos, en este capítulo se utilizará, para los ejemplos computacionales, la base de datos **BigCity**. Esta base es un conjunto de datos que contiene algunas variables socioeconómicas de $150266$ personas de una ciudad en un año en particular. Alguna de las variables de esta base de datos son:
+Al analizar datos de encuestas, el primer paso es definir el parámetro de interés, un valor numérico fijo que describe una característica de toda la población ($U$). Ejemplos comunes incluyen el total y la media de la población. Dado que no es práctico observar a toda la población, se utilizan encuestas por muestreo para inferir estos parámetros a partir de una muestra ($s$).
 
--  *HHID:* Corresponde al identificador del hogar.
+El enfoque de inferencia y estimación basado en el diseño se basa en la estructura de probabilidad del plan de muestreo. Las propiedades estadísticas de los estimadores, como la precisión y el sesgo, se evalúan en relación con la distribución de aleatorización que el diseño de muestreo genera.
 
--  *PersonID:* Corresponde al identificador de la persona dentro del hogar.
+En el muestreo probabilístico, cada unidad de la población tiene una probabilidad de inclusión conocida. Estas probabilidades son la base para el cálculo de los pesos básicos de muestreo, que a su vez se utilizan para estimar los parámetros poblacionales a través de sumas ponderadas de los datos de la encuesta. Cuando se aplican correctamente, las estimaciones son insesgadas, lo que significa que en promedio coinciden con el valor real de la población si la encuesta se repitiera bajo las mismas condiciones.
 
--  *Stratum:* Corresponde al estrato geográfico del hogar. Son 119 estratos.
 
--   *PSU:* Corresponde a las unidades primarias de muestreo. La base de datos cuenta con $1664$ PSU.
+### Ajustes Adicionales de los Pesos
 
--   *Zone:* Corresponde a las áreas urbanas o rurales a lo largo de la ciudad.
+A pesar de lo anterior, los pesos básicos de muestreo suelen necesitar ajustes adicionales para mejorar la precisión y robustez de las estimaciones. Los ajustes más comunes son:
 
--   *Sex:* Corresponde al sexo del entrevistado.
+* Ajuste por no respuesta: Los pesos de las unidades que sí respondieron se incrementan para representar también a las unidades seleccionadas que no participaron, lo cual ayuda a reducir el sesgo y a aumentar la fiabilidad de los resultados.
+* Calibración: Los pesos se modifican para asegurar que las sumas ponderadas de variables de control (como edad o sexo, obtenidas de censos o proyecciones demográficas) se alineen con los valores poblacionales conocidos. Esto es una herramienta útil para identificar problemas de cobertura o no respuesta y reforzar la validez de las estimaciones.
 
--   *Income:* Corresponde a los ingresos mensual per cápita.
 
--   *Expenditure:* Corresponde a los gastos mensual per cápita.
+### Importancia de los Ajustes
 
--   *Employment:* Situación laboral de la persona entrevistada.
+La calibración, en particular, es crucial porque permite comparar las estimaciones iniciales con los valores de referencia antes del ajuste. Esta comparación es una herramienta valiosa para detectar posibles problemas de cobertura o de no respuesta, lo que refuerza la validez de los resultados finales.
 
--   *Poverty:* Esta variable indica si la persona es pobre o no. Depende de los ingresos.
+## Estimación de totales
+
+La estimación de totales en encuestas constituye un paso central en el análisis estadístico aplicado a poblaciones finitas. Gran parte de los indicadores de interés para la formulación de políticas públicas, como el número de personas en situación de pobreza, el total de ocupados o el gasto agregado de los hogares, se derivan de un total poblacional. Por esta razón, comprender cómo se definen y estiman los totales resulta fundamental para garantizar la calidad y pertinencia de la información producida.
+
+En términos formales, si $y_k$ denota el valor de una variable de interés para la unidad $k \in U$, el total poblacional se define como
+
+$$
+Y = \sum_{U} y_k,
+$$
+
+y su media poblacional como
+
+$$
+\bar{Y} = \frac{Y}{N}.
+$$
+
+Dado que en la práctica solo se observa una muestra $s \subset U$, es necesario recurrir a estimadores que incorporen el diseño de muestreo. El estimador de Horvitz–Thompson (HT) es el más utilizado bajo el enfoque de diseño y se expresa como
+
+$$
+\hat{Y}_{HT} = \sum_{s} d_k y_k, \qquad \bar{y}_{HT} = \frac{\hat{Y}_{HT}}{\hat{N}_{HT}}, \quad \hat{N}_{HT} = \sum_{s} d_k,
+$$
+
+donde $d_k = 1/\pi_k$ son los pesos básicos de diseño y $\pi_k = \Pr(k \in s)$ son las probabilidades de inclusión de primer orden.
+
+En la práctica, los pesos de diseño suelen modificarse para reflejar procesos adicionales como el ajuste por no respuesta o la calibración a totales poblacionales conocidos, obteniendo así los pesos ajustados $w_k$. El reemplazo de $d_k$ por $w_k$ permite mejorar la precisión y reducir sesgos en las estimaciones, especialmente cuando existen fuentes auxiliares de información confiables.
+
+No obstante, toda estimación a partir de una muestra conlleva incertidumbre. Incluso cuando el estimador es insesgado, los resultados variarán de una muestra a otra debido al azar del diseño. Esta variabilidad se cuantifica mediante la **varianza de muestreo**, el **error estándar ($se$)** o el **coeficiente de variación ($cv$)**. Estos indicadores son herramientas indispensables para evaluar la confiabilidad de los totales estimados y, por tanto, para interpretar de manera adecuada la información estadística.
+
+Bajo el enfoque de diseño, la varianza insesgada del estimador de Horvitz–Thompson puede expresarse como:
+
+$$
+\hat{V}_p(\hat{Y}_{HT}) = \sum_{k \in s} \sum_{l \in s} \bigl( d_k d_l - d_{kl} \bigr) y_k y_l,
+$$
+
+donde $d_{kl} = 1/\pi_{kl}$ y $\pi_{kl} = \Pr(k,l \in s)$ representan las probabilidades conjuntas de inclusión. Esta expresión requiere que el diseño de muestreo cumpla $\pi_{kl} > 0$ para todo par de unidades $k,l \in U$.
+
+En síntesis, la estimación de totales es la piedra angular sobre la cual se construyen indicadores más complejos. Su estudio permite entender tanto la lógica de los ponderadores como la necesidad de medir y comunicar la precisión de las estimaciones, lo que constituye un elemento esencial en la producción de estadísticas de calidad.
+
+
+### Ejemplo ilustrativo
+
+Para comprender de manera más tangible la importancia de considerar el diseño muestral en la estimación de totales y sus varianzas, analicemos un ejemplo sencillo.
+
+
+
+Supóngase una población de tamaño $N=6$ y una muestra aleatoria simple de tamaño $n=3$, seleccionada sin reemplazo, en la que se observan los valores $(y\_1=10, y\_2=14, y\_3=18)$. Bajo este diseño, la varianza estimada del estimador de Horvitz–Thompson se calcula como
+
+$$
+\hat{V}_{SRS}(\hat{Y}_{HT}) = \frac{N^2}{n}\left(1-\frac{n}{N}\right)S_{(y_s)}^2 \tag{9-5}
+$$
+
+donde $S\_{(y\_s)}^2$ corresponde a la varianza muestral de los valores observados. Sustituyendo en la expresión, se obtiene
+
+$$
+\hat{V}_p(\hat{Y}_{HT}) = \frac{36}{3}\left(1-\frac{3}{6}\right)16 = 96.
+$$
+
+En contraste, si se ignora el diseño de muestreo, un analista inexperto podría calcular erróneamente la varianza mediante la fórmula simplificada:
+
+$$
+\frac{N^2}{n}S_{(y_s)}^2 = 192,
+$$
+
+lo que conduciría a una **sobreestimación de la varianza** por no considerar las características del diseño de selección.
+
+
+La estimación del total poblacional es $\hat{Y}\_{HT}=84$. El error estándar correcto, calculado según el diseño de muestreo, es
+
+$$
+\sqrt{\hat{V}_p(\hat{Y}_{HT})} = \sqrt{96} \approx 9.80.
+$$
+
+En cambio, si la varianza se estimara usando un método ingenuo que ignore el diseño de muestreo, el intervalo de confianza resultante sería más amplio y desalineado, lo que podría conducir a inferencias erróneas. Este ejemplo evidencia claramente la relevancia de incorporar el diseño de muestreo al estimar varianzas, errores estándar e intervalos de confianza.
+
+
+Si bien la fórmula general para la estimación de la varianza $\hat{V}*p$ es aplicable a distintos diseños de muestreo, en la práctica rara vez se utiliza porque las probabilidades de inclusión de segundo orden $\pi*{kl}$ y los pesos pareados $d\_{kl}$ suelen ser desconocidos para los usuarios secundarios. Incluso los propios productores de datos evitan calcular estos valores, pues existen métodos más simples y eficientes para la estimación de varianzas, como el método linealizado, la replicación y el bootstrap, que permiten cuantificar la incertidumbre sin necesidad de contar con información tan detallada.
+
+
+## Efecto del diseño (DEFF)
+
+De acuerdo con Kish (1965, p. 258), el efecto del diseño (DEFF) se define como la relación entre la varianza de un estimador calculado bajo un diseño de muestreo complejo y la varianza del mismo estimador cuando se emplea un muestreo aleatorio simple (MAS) con igual tamaño de muestra. Su estimación se formula como:
+$$\widehat{\text{DEFF}} = \frac{\widehat{V}_{p}(\hat{\theta})}{\widehat{V}_{\text{SRS}}(\hat{\theta})}$$
+donde 
+$\widehat{V}*{p}(\hat{\theta})$ corresponde a la varianza estimada de $\hat{\theta}$ bajo el diseño complejo $p(s)$, mientras que $\widehat{V}*{\text{SRS}}(\hat{\theta})$ 
+representa la varianza estimada del mismo estimador bajo un MAS de igual tamaño. Este indicador permite cuantificar cuánto aumenta la varianza debido a la conglomeración y otras características propias de los diseños complejos en comparación con un muestreo simple. Según Naciones Unidas (2008, p. 49), el DEFF puede entenderse de tres maneras: como el factor de incremento de la varianza frente al MAS, como una medida de la pérdida relativa de precisión o como una indicación del aumento en el tamaño de la muestra que sería necesario en un diseño complejo para alcanzar el mismo nivel de varianza que en un MAS.
+
+Según Park et al. (2003), el efecto del diseño de una encuesta puede desglosarse en tres factores multiplicativos:
+
+* **Ponderación desigual:** La presencia de pesos muestrales no uniformes suele incrementar ligeramente la varianza; por ello, el uso de pesos iguales resulta ventajoso y explica por qué los diseños auto-ponderados son preferidos en encuestas de hogares.
+* **Estratificación:** Cuando se aplica correctamente, puede disminuir la varianza, aunque en la práctica su efecto reductor suele ser moderado.
+* **Muestreo en varias etapas:** Generalmente incrementa la varianza, ya que las unidades dentro de un mismo conglomerado tienden a ser más homogéneas entre sí que en comparación con las de otros conglomerados.
+
+Al analizar encuestas, el DEFF se convierte en un indicador fundamental para medir la calidad de las estimaciones y orientar el diseño de estudios futuros. Un valor elevado evidencia que el diseño complejo introduce ineficiencias que incrementan la varianza y reducen la precisión de los resultados. Por el contrario, un valor cercano a uno indica que el diseño tiene un efecto mínimo sobre la varianza. Esta información permite a los investigadores identificar si es necesario ajustar la ponderación, optimizar la estratificación o modificar el tamaño del submuestreo para aumentar la eficiencia en levantamientos posteriores.
+
+
+La interpretación de un DEFF alto debe hacerse con precaución, ya que no siempre implica que el diseño muestral sea inadecuado. Es fundamental considerar el contexto de la encuesta: un valor superior a tres podría parecer alarmante, pero a menudo se debe a limitaciones prácticas como restricciones presupuestales, dificultades logísticas o la necesidad de garantizar la participación de los entrevistados. En ciertos levantamientos de hogares, puede ser indispensable seleccionar solo una fracción de los individuos elegibles en cada hogar. Además, problemas de cobertura o tasas de no respuesta pueden aumentar la variabilidad de los pesos muestrales y, en consecuencia, elevar los valores del DEFF.
+
+
+
 
 
 ## Muestreo aleatorio simple en dos etapas estratificado
 
 Con la finalidad de mantener un equilibrio entre los costos económicos y las propiedades estadísticas de la estrategia de muestreo se puede aprovechar la homogeneidad dentro de los conglomerados y, así, no tener que realizar censos dentro de cada Unidad Primaria de Muestreo (UPM) sino, proceder a seleccionar una sub-muestra dentro del conglomerado seleccionado.
 
-Los diseños de muestreo en las encuestas de hogares se caracterizan por ser **diseños complejos** los cuales involucran, entre otras, más de una etapa en la selección de las unidades de observación, estratos y estimadores complejos. En su mayoría, las unidades primarias de muestreo  son seleccionadas dentro de los estrato. Ahora bien, según la teoría de muestreo *(Cochran, W. G., 1977)* se asume que el muestreo en cada estrato respeta el principio de la independencia. Esto es, las estimaciones del total, así como el cálculo y estimación de la varianza son el resultado de añadir o sumar para cada estrato la respectiva cantidad. Dentro de cada estrato $U_h$ con $h=1,\ldots, H$ existen $N_{Ih}$ unidades primarias de muestreo, de las cuales se selecciona una muestra $s_{Ih}$ de tamaño $n_{Ih}$ mediante un diseño de muestreo aleatorio simple. Suponga, además que el sub-muestreo dentro de cada unidad primaria seleccionada es también aleatorio simple. En este sentido, para cada unidad primaria de muestreo seleccionada $i\in s_{Ih}$ de tamaño $N_i$ se selecciona una muestra $s_i$ de elementos de tamaño $n_i$.
+Los diseños de muestreo en las encuestas de hogares se caracterizan por ser diseños complejos los cuales involucran, entre otras, más de una etapa en la selección de las unidades de observación, estratos y estimadores complejos. En su mayoría, las unidades primarias de muestreo  son seleccionadas dentro de los estrato. Ahora bien, según la teoría de muestreo *(Cochran, W. G., 1977)* se asume que el muestreo en cada estrato respeta el principio de la independencia. Esto es, las estimaciones del total, así como el cálculo y estimación de la varianza son el resultado de añadir o sumar para cada estrato la respectiva cantidad. Dentro de cada estrato $U_h$ con $h=1,\ldots, H$ existen $N_{Ih}$ unidades primarias de muestreo, de las cuales se selecciona una muestra $s_{Ih}$ de tamaño $n_{Ih}$ mediante un diseño de muestreo aleatorio simple. Suponga, además que el sub-muestreo dentro de cada unidad primaria seleccionada es también aleatorio simple. En este sentido, para cada unidad primaria de muestreo seleccionada $i\in s_{Ih}$ de tamaño $N_i$ se selecciona una muestra $s_i$ de elementos de tamaño $n_i$.
 
 Como es ampliamente conocido, el proceso de estimación de un parámetro particular, por ejemplo, la media de los ingresos consiste en multiplicar la observación obtenida en la muestra por su respectivo factor de expansión y dividirlo sobre la suma de los factores de expansión de acuerdo con el nivel de desagregación que se quiera estimar. Sin embargo, cuando el diseño es complejo como es el caso de las encuestas de hogares, la estimación de la varianza se torna un poco difícil de realizar utilizando ecuaciones cerradas. Para estos casos y como lo recomienda la literatura especializada *(Hansen, M. H., & Steinberg, J., 1956))*, se procede a utilizar la técnica del último conglomerado. Esta técnica consiste en aproximar la varianza sólo teniendo en cuenta la varianza de los
 estimadores en la primera etapa. Para esto se debe suponer que el diseño de muestreo fue realizado con reemplazo. 
@@ -171,7 +337,7 @@ Una vez se tiene la base de datos con la muestra de UMP's. se selecciona aquella
 head(FrameII, 10) %>% select(Stratum:Zone)
 ```
 
-Luego de tener la información muestral de la primera etapa en la base **FrameII** se procede a calcular los tamaños de muestra dentro de cada UPM's. En este caso, a modo de ejemplo, se tomará el 10% del tamaño de la UPM y se utilizará la función `ceiling` la cual aproxima al siguiente entero.
+Luego de tener la información muestral de la primera etapa en la base FrameII se procede a calcular los tamaños de muestra dentro de cada UPM's. En este caso, a modo de ejemplo, se tomará el 10% del tamaño de la UPM y se utilizará la función `ceiling` la cual aproxima al siguiente entero.
 
 
 ```{r, eval=TRUE}

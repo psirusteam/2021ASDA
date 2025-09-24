@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.9 Calibrando con R | Análisis de encuestas con R</title>
+  <title>2.11 Calibrando con R | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.9 Calibrando con R | Análisis de encuestas con R" />
+  <meta property="og:title" content="2.11 Calibrando con R | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.9 Calibrando con R | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="2.11 Calibrando con R | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="02-Conceptos.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="02-Conceptos.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.1" data-path="02-Conceptos.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="02-Conceptos.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
 <li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
 <li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
+<li class="chapter" data-level="2.5" data-path="02-Conceptos.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="02-Conceptos.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="02-Conceptos.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="02-Conceptos.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="02-Conceptos.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.1" data-path="02-Conceptos.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="02-Conceptos.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="02-Conceptos.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="02-Conceptos.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
 <li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
 <li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
 <li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
 <li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.9" data-path="02-Conceptos.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
 <li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
 <li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="3.12" data-path="02-Conceptos.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="4.1" data-path="02-Conceptos.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="4.3.1" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="02-Conceptos.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="5" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="5.1" data-path="02-Conceptos.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
+</ul></li>
 <li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="6" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>6</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="calibrando-con-r" class="section level2 hasAnchor" number="2.9">
-<h2><span class="header-section-number">2.9</span> Calibrando con <code>R</code><a href="calibrando-con-r.html#calibrando-con-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="calibrando-con-r" class="section level2 hasAnchor" number="2.11">
+<h2><span class="header-section-number">2.11</span> Calibrando con <code>R</code><a href="calibrando-con-r.html#calibrando-con-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La calibración es un ajuste que se realiza a los pesos de muestreo con el propósito de que las estimaciones de algunas variables de control reproduzcan de forma perfecta los totales poblacionales de estas variables <em>(Sarndal, 2003)</em>. Esta propiedad de consistencia es deseable en un sistema de ponderadores. En este sentido, cuando los estudios por muestreo están afectados por la ausencia de respuesta, como en muchos casos pasa en las encuestas de hogares, es deseable tener las siguientes propiedades en la estructura inferencial que sustenta el muestreo:</p>
 <ul>
 <li>Sesgo pequeño o nulo.</li>
@@ -270,47 +250,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Particularmente, en encuestas de hogares, existen conteos de personas disponibles a nivel de desagregaciones de interés. Por ejemplo, número de personas por edad, raza y género que se permite utilizar como información auxiliar para calibrar las estimaciones.</p>
 <p>La necesidad de calibrar en las encuestas de hogares es porque no todos los grupos de personas se cubren apropiadamente desde el diseño de muestreo. Además, las estimaciones del número de personas en estos subgrupos son menores a las proyecciones que se tienen desde los censos. Por último, al ajustar los pesos para que sumen exactamente la cifra de los conteos censales, se reduce el sesgo de subcobertura.</p>
 <p>Para ejemplificar el estimador de calibración en <code>R</code> usando la base de datos de ejemplo se utilizarán la función <code>calibrate</code> del paquete <code>survey</code>. En primer lugar, para poder calibrar se requiere construir la información poblacional a la cual se desea calibrar. En este ejemplo se calibrará a nivel de zona y sexo. Por tanto, los totales se obtienen como sigue:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="calibrando-con-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
-<span id="cb17-2"><a href="calibrando-con-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>totales <span class="ot">&lt;-</span> <span class="fu">colSums</span>(</span>
-<span id="cb17-3"><a href="calibrando-con-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Zone<span class="sc">:</span>Sex, BigCity)) </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="calibrando-con-r.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb17-2"><a href="calibrando-con-r.html#cb17-2" tabindex="-1"></a>totales <span class="ot">&lt;-</span> <span class="fu">colSums</span>(</span>
+<span id="cb17-3"><a href="calibrando-con-r.html#cb17-3" tabindex="-1"></a>  <span class="fu">model.matrix</span>(<span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Zone<span class="sc">:</span>Sex, BigCity)) </span></code></pre></div>
 <p>En la salida anterior se puede observar que, por ejemplo, en la zona rural hay 37238 mujeres mientras que en la urbana hay 41952. De igual manera se puede leer para el caso de los hombres.</p>
 <p>Una vez obtenido estos totales, se procede a utilizar la función <code>calibrate</code> para calibrar los pesos de muestreo como sigue:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="calibrando-con-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a>diseno_cal <span class="ot">&lt;-</span> <span class="fu">calibrate</span>(</span>
-<span id="cb18-2"><a href="calibrando-con-r.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  diseno, <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Zone<span class="sc">:</span>Sex, totales, <span class="at">calfun =</span> <span class="st">&quot;linear&quot;</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="calibrando-con-r.html#cb18-1" tabindex="-1"></a>diseno_cal <span class="ot">&lt;-</span> <span class="fu">calibrate</span>(</span>
+<span id="cb18-2"><a href="calibrando-con-r.html#cb18-2" tabindex="-1"></a>  diseno, <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Zone<span class="sc">:</span>Sex, totales, <span class="at">calfun =</span> <span class="st">&quot;linear&quot;</span>)  </span></code></pre></div>
 <p>Luego de que se hayan calibrado los pesos se puede observar que, al sumar los pesos calibrados estos reproducen el total poblacional de la base de ejemplo.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="calibrando-con-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">weights</span>(diseno_cal))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="calibrando-con-r.html#cb19-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">weights</span>(diseno_cal))</span></code></pre></div>
 <pre><code>## [1] 150266</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="calibrando-con-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>wk <span class="ot">&lt;-</span> <span class="fu">weights</span>(diseno_cal)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="calibrando-con-r.html#cb21-1" tabindex="-1"></a>encuesta<span class="sc">$</span>wk <span class="ot">&lt;-</span> <span class="fu">weights</span>(diseno_cal)</span></code></pre></div>
 <p>Dado que uno de los principios de los pesos calibrados es que dichos pesos no sean muy diferentes a los pesos originales que provienen del diseño de muestreo, se puede observar a continuación, la distribución de los pesos, sin calibrar y calibrados respectivamente.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="calibrando-con-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb22-2"><a href="calibrando-con-r.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(encuesta<span class="sc">$</span>dk)</span>
-<span id="cb22-3"><a href="calibrando-con-r.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(encuesta<span class="sc">$</span>wk)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="calibrando-con-r.html#cb22-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb22-2"><a href="calibrando-con-r.html#cb22-2" tabindex="-1"></a><span class="fu">hist</span>(encuesta<span class="sc">$</span>dk)</span>
+<span id="cb22-3"><a href="calibrando-con-r.html#cb22-3" tabindex="-1"></a><span class="fu">hist</span>(encuesta<span class="sc">$</span>wk)</span></code></pre></div>
 <p><img src="02-Conceptos_files/figure-html/unnamed-chunk-20-1.svg" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="calibrando-con-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(encuesta<span class="sc">$</span>dk,encuesta<span class="sc">$</span>wk)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="calibrando-con-r.html#cb23-1" tabindex="-1"></a><span class="fu">plot</span>(encuesta<span class="sc">$</span>dk,encuesta<span class="sc">$</span>wk)</span></code></pre></div>
 <p><img src="02-Conceptos_files/figure-html/unnamed-chunk-21-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="calibrando-con-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a>Region <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(</span>
-<span id="cb24-2"><a href="calibrando-con-r.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">D&quot;</span>,</span>
-<span id="cb24-3"><a href="calibrando-con-r.html#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">replacement =</span>  <span class="st">&quot;&quot;</span>, <span class="at">x =</span> encuesta<span class="sc">$</span>Stratum))</span>
-<span id="cb24-4"><a href="calibrando-con-r.html#cb24-4" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>Region <span class="ot">&lt;-</span> </span>
-<span id="cb24-5"><a href="calibrando-con-r.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cut</span>(Region, <span class="at">breaks =</span> <span class="dv">5</span>,</span>
-<span id="cb24-6"><a href="calibrando-con-r.html#cb24-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Norte&quot;</span>,<span class="st">&quot;Sur&quot;</span>,<span class="st">&quot;Centro&quot;</span>,<span class="st">&quot;Occidente&quot;</span>,<span class="st">&quot;Oriente&quot;</span>))</span>
-<span id="cb24-7"><a href="calibrando-con-r.html#cb24-7" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb24-8"><a href="calibrando-con-r.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">CatAge =</span> <span class="fu">case_when</span>(</span>
-<span id="cb24-9"><a href="calibrando-con-r.html#cb24-9" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;0-5&quot;</span>,</span>
-<span id="cb24-10"><a href="calibrando-con-r.html#cb24-10" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;6-15&quot;</span>,</span>
-<span id="cb24-11"><a href="calibrando-con-r.html#cb24-11" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;16-30&quot;</span>,</span>
-<span id="cb24-12"><a href="calibrando-con-r.html#cb24-12" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">&quot;31-45&quot;</span>,</span>
-<span id="cb24-13"><a href="calibrando-con-r.html#cb24-13" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">&quot;46-60&quot;</span>,</span>
-<span id="cb24-14"><a href="calibrando-con-r.html#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Más de 60&quot;</span></span>
-<span id="cb24-15"><a href="calibrando-con-r.html#cb24-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb24-16"><a href="calibrando-con-r.html#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">CatAge =</span> <span class="fu">factor</span>(</span>
-<span id="cb24-17"><a href="calibrando-con-r.html#cb24-17" aria-hidden="true" tabindex="-1"></a>    CatAge,</span>
-<span id="cb24-18"><a href="calibrando-con-r.html#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0-5&quot;</span>, <span class="st">&quot;6-15&quot;</span>, <span class="st">&quot;16-30&quot;</span>, <span class="st">&quot;31-45&quot;</span>,</span>
-<span id="cb24-19"><a href="calibrando-con-r.html#cb24-19" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;46-60&quot;</span>, <span class="st">&quot;Más de 60&quot;</span>),</span>
-<span id="cb24-20"><a href="calibrando-con-r.html#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb24-21"><a href="calibrando-con-r.html#cb24-21" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-22"><a href="calibrando-con-r.html#cb24-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-23"><a href="calibrando-con-r.html#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> encuesta, <span class="at">file =</span> <span class="st">&quot;../Curso Tellez/Data/encuesta.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="calibrando-con-r.html#cb24-1" tabindex="-1"></a>Region <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb24-2"><a href="calibrando-con-r.html#cb24-2" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">D&quot;</span>,</span>
+<span id="cb24-3"><a href="calibrando-con-r.html#cb24-3" tabindex="-1"></a>      <span class="at">replacement =</span>  <span class="st">&quot;&quot;</span>, <span class="at">x =</span> encuesta<span class="sc">$</span>Stratum))</span>
+<span id="cb24-4"><a href="calibrando-con-r.html#cb24-4" tabindex="-1"></a>encuesta<span class="sc">$</span>Region <span class="ot">&lt;-</span> </span>
+<span id="cb24-5"><a href="calibrando-con-r.html#cb24-5" tabindex="-1"></a>  <span class="fu">cut</span>(Region, <span class="at">breaks =</span> <span class="dv">5</span>,</span>
+<span id="cb24-6"><a href="calibrando-con-r.html#cb24-6" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Norte&quot;</span>,<span class="st">&quot;Sur&quot;</span>,<span class="st">&quot;Centro&quot;</span>,<span class="st">&quot;Occidente&quot;</span>,<span class="st">&quot;Oriente&quot;</span>))</span>
+<span id="cb24-7"><a href="calibrando-con-r.html#cb24-7" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb24-8"><a href="calibrando-con-r.html#cb24-8" tabindex="-1"></a>  <span class="at">CatAge =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-9"><a href="calibrando-con-r.html#cb24-9" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;0-5&quot;</span>,</span>
+<span id="cb24-10"><a href="calibrando-con-r.html#cb24-10" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;6-15&quot;</span>,</span>
+<span id="cb24-11"><a href="calibrando-con-r.html#cb24-11" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;16-30&quot;</span>,</span>
+<span id="cb24-12"><a href="calibrando-con-r.html#cb24-12" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">&quot;31-45&quot;</span>,</span>
+<span id="cb24-13"><a href="calibrando-con-r.html#cb24-13" tabindex="-1"></a>    Age <span class="sc">&lt;=</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">&quot;46-60&quot;</span>,</span>
+<span id="cb24-14"><a href="calibrando-con-r.html#cb24-14" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Más de 60&quot;</span></span>
+<span id="cb24-15"><a href="calibrando-con-r.html#cb24-15" tabindex="-1"></a>  ),</span>
+<span id="cb24-16"><a href="calibrando-con-r.html#cb24-16" tabindex="-1"></a>  <span class="at">CatAge =</span> <span class="fu">factor</span>(</span>
+<span id="cb24-17"><a href="calibrando-con-r.html#cb24-17" tabindex="-1"></a>    CatAge,</span>
+<span id="cb24-18"><a href="calibrando-con-r.html#cb24-18" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0-5&quot;</span>, <span class="st">&quot;6-15&quot;</span>, <span class="st">&quot;16-30&quot;</span>, <span class="st">&quot;31-45&quot;</span>,</span>
+<span id="cb24-19"><a href="calibrando-con-r.html#cb24-19" tabindex="-1"></a>               <span class="st">&quot;46-60&quot;</span>, <span class="st">&quot;Más de 60&quot;</span>),</span>
+<span id="cb24-20"><a href="calibrando-con-r.html#cb24-20" tabindex="-1"></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb24-21"><a href="calibrando-con-r.html#cb24-21" tabindex="-1"></a>  )</span>
+<span id="cb24-22"><a href="calibrando-con-r.html#cb24-22" tabindex="-1"></a>)</span>
+<span id="cb24-23"><a href="calibrando-con-r.html#cb24-23" tabindex="-1"></a><span class="fu">saveRDS</span>(<span class="at">object =</span> encuesta, <span class="at">file =</span> <span class="st">&quot;../Curso Tellez/Data/encuesta.rds&quot;</span>)</span></code></pre></div>
 
 </div>
 <!-- </div> -->
@@ -334,43 +314,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/02-Conceptos.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/02-Conceptos.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>

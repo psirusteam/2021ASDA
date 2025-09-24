@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R</title>
+  <title>10.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R" />
+  <meta property="og:title" content="10.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="10.3 Imputación por Hot-deck y Cold-deck | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="11-Imputación.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="1.1" data-path="11-Imputación.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.2" data-path="11-Imputación.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="1.3" data-path="11-Imputación.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="1.6" data-path="11-Imputación.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="1.6.1" data-path="11-Imputación.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="1.8" data-path="11-Imputación.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.1" data-path="11-Imputación.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="11-Imputación.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="2.3" data-path="11-Imputación.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="2.4" data-path="11-Imputación.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="2.9" data-path="11-Imputación.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="2.12" data-path="11-Imputación.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="3.1" data-path="11-Imputación.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="3.2" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="3.3" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+<li class="chapter" data-level="3.3.1" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="3.3.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="3.3.3" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="3.4" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.5" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="3.6" data-path="11-Imputación.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
+<li class="chapter" data-level="4.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<li class="chapter" data-level="5" data-path="11-Imputación.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.1" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="5.2" data-path="11-Imputación.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="5.3" data-path="11-Imputación.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="6" data-path="11-Imputación.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="11-Imputación.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="8" data-path="11-Imputación.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="8.1" data-path="11-Imputación.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="11-Imputación.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="11-Imputación.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="11-Imputación.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="10" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="11-Imputación.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="imputación-por-hot-deck-y-cold-deck" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Imputación por Hot-deck y Cold-deck<a href="imputación-por-hot-deck-y-cold-deck.html#imputación-por-hot-deck-y-cold-deck" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="imputación-por-hot-deck-y-cold-deck" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Imputación por Hot-deck y Cold-deck<a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La imputación <em>Hot deck</em> consiste en reemplazar los valores faltantes de una o más variables para un no encuestado (llamado receptor) con valores observados de un encuestado (el donante) que es similar al no encuestado con respecto a las características observadas en ambos casos.</p>
 <p>La técnica se basa en la idea de que las observaciones similares pueden tener valores similares para las variables de interés. En el enfoque por hot-deck, se selecciona una observación donante que sea similar a la observación receptora en términos de características relevantes (por ejemplo, edad, género, ubicación geográfica, etc.), y se utiliza su valor observado para imputar el valor faltante en la observación receptora.</p>
 <p>El término “hot-deck” se refiere a una tarjeta perforada que se utilizaba en los primeros sistemas informáticos para almacenar y recuperar datos. En el enfoque por hot-deck, las observaciones se organizan en una “pila” o “mazo” de tarjetas, y las observaciones similares se seleccionan de esta pila para imputar los valores faltantes.</p>
@@ -263,14 +269,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El método de imputación cold-deck se utiliza a menudo cuando la muestra de estudio es pequeña o no hay suficientes observaciones similares para aplicar el método de imputación por hot-deck. Sin embargo, el método de imputación cold-deck tiene algunas limitaciones, como la posibilidad de que los datos externos no sean representativos de la muestra de estudio y la posibilidad de introducir errores en los datos imputados si la fuente de datos externa no es fiable o no es adecuada para la variable de interés.</p>
 <p><em>Imputación por hot-deck</em></p>
 <p>Iniciamos los ejemplos en esta sección con el método hot-deck. A continuación, se presenta un código computacional que ejemplifica, para los datos que estamos usando en el capítulo, el uso del método hot-deck.</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-1" aria-hidden="true" tabindex="-1"></a>donante <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
-<span id="cb583-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-2" aria-hidden="true" tabindex="-1"></a>receptor <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
-<span id="cb583-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-3" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
-<span id="cb583-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb583-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(ii <span class="cf">in</span> receptor){</span>
-<span id="cb583-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-6" aria-hidden="true" tabindex="-1"></a>don_ii <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> donante, <span class="at">size =</span> <span class="dv">1</span>)</span>
-<span id="cb583-7"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-7" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp[ii] <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin[don_ii]}</span>
-<span id="cb583-8"><a href="imputación-por-hot-deck-y-cold-deck.html#cb583-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-1" tabindex="-1"></a>donante <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
+<span id="cb584-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-2" tabindex="-1"></a>receptor <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
+<span id="cb584-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-3" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
+<span id="cb584-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-4" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb584-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-5" tabindex="-1"></a><span class="cf">for</span>(ii <span class="cf">in</span> receptor){</span>
+<span id="cb584-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-6" tabindex="-1"></a>don_ii <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> donante, <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb584-7"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-7" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp[ii] <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin[don_ii]}</span>
+<span id="cb584-8"><a href="imputación-por-hot-deck-y-cold-deck.html#cb584-8" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>El código mostrado anteriormente se describe a continuación:</p>
 <ul>
@@ -281,11 +287,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Se utiliza un bucle <em>for</em> para iterar a través de cada observación receptora. Dentro del bucle, se utiliza la función <em>sample</em> para seleccionar una observación donante aleatoria de entre las observaciones que no tienen valores faltantes en la variable “Income_missin”.</p></li>
 </ul>
 <p>Una vez realizada la imputación, se calcula la media y la desviación de los datos completos e imputados:</p>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb585-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb585-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb585-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb585-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb585-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb585-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb585-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb585-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb585-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb586-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb586-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb586-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb586-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -305,14 +311,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Como en los métodos de imputación anterior, calculemos el sesgo relativo de la imputación el cual fue de 2.3%:</p>
-<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb586-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">604.2494-618.2937</span>)<span class="sc">/</span><span class="fl">604.2494</span></span></code></pre></div>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb587-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">604.2494-618.2937</span>)<span class="sc">/</span><span class="fl">604.2494</span></span></code></pre></div>
 <pre><code>## [1] -2.324256</code></pre>
 <p>Ahora bien, haciendo el mismo ejercicio, pero esta vez desagregada por zona tenemos:</p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb588-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb588-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb588-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb588-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb588-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb588-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb588-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb588-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb588-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb589-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb589-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb589-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb589-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -341,16 +347,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>El sesgo relativo de la estimación en la zona rural es de 7.4% y en al zona urbana es de 0.7%.</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb589-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">469.1217-503.7127</span>)<span class="sc">/</span><span class="fl">469.1217</span></span></code></pre></div>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb590-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">469.1217-503.7127</span>)<span class="sc">/</span><span class="fl">469.1217</span></span></code></pre></div>
 <pre><code>## [1] -7.373566</code></pre>
-<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb591-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">730.8793-725.6691</span>)<span class="sc">/</span><span class="fl">730.8793</span></span></code></pre></div>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb592-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">730.8793-725.6691</span>)<span class="sc">/</span><span class="fl">730.8793</span></span></code></pre></div>
 <pre><code>## [1] 0.7128674</code></pre>
 <p>El mismo ejercicio se puede realizar por sexo:</p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb593-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb593-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb593-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb593-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb593-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb593-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb593-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb593-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb593-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb594-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb594-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb594-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb594-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -379,34 +385,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Como en los ejercicios anteriores, a continuación, se muestra la gráfica de la distribución de los datos tanto los completos como los imputados observándose que la distribución de los datos imputados es muy similar a la de los datos no imputados:</p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-1" aria-hidden="true" tabindex="-1"></a>dat_plot6 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
-<span id="cb594-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-2" aria-hidden="true" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
-<span id="cb594-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
-<span id="cb594-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb594-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot6, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb594-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb594-7"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb594-8"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb594-9"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb594-10"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb594-11"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb594-12"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
-<span id="cb594-13"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb594-14"><a href="imputación-por-hot-deck-y-cold-deck.html#cb594-14" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-1" tabindex="-1"></a>dat_plot6 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
+<span id="cb595-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
+<span id="cb595-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-3" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
+<span id="cb595-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-4" tabindex="-1"></a></span>
+<span id="cb595-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot6, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb595-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-6" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb595-7"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-7" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb595-8"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb595-9"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb595-10"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb595-11"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb595-12"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-12" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
+<span id="cb595-13"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-13" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb595-14"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-14" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/hot_deck_1-1.svg" width="672" /></p>
 <p>El mismo ejercicio anterior se realiza por zona y sexo obteniendo resultados similares a los abtenidos en el gráfico anterior:</p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot6, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
-<span id="cb595-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
-<span id="cb595-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb595-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb595-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb595-5" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot6, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
+<span id="cb596-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
+<span id="cb596-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb596-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb596-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-5" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-32-1.svg" width="672" /></p>
 <p>A continuación, se implementa el método de imputación pero para la variable empleado. Los códigos computacionales son similares a los empleados con la variable ingresos:</p>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-1" aria-hidden="true" tabindex="-1"></a>donante <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
-<span id="cb596-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-2" aria-hidden="true" tabindex="-1"></a>receptor <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
-<span id="cb596-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-3" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
-<span id="cb596-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-4" aria-hidden="true" tabindex="-1"></a>(prop <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(</span>
-<span id="cb596-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb596-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(<span class="fu">na.omit</span>(encuesta<span class="sc">$</span>Employment_missin))))</span></code></pre></div>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-1" tabindex="-1"></a>donante <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
+<span id="cb597-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-2" tabindex="-1"></a>receptor <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_missin))</span>
+<span id="cb597-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-3" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
+<span id="cb597-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-4" tabindex="-1"></a>(prop <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(</span>
+<span id="cb597-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-5" tabindex="-1"></a>  <span class="fu">table</span>(<span class="fu">na.omit</span>(encuesta<span class="sc">$</span>Employment_missin))))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -423,12 +429,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb597-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-2" aria-hidden="true" tabindex="-1"></a>imp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> <span class="fu">length</span>(receptor),</span>
-<span id="cb597-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Unemployed&quot;</span>, <span class="st">&quot;Inactive&quot;</span>,<span class="st">&quot;Employed&quot;</span>),</span>
-<span id="cb597-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> prop, <span class="at">replace =</span> <span class="cn">TRUE</span>     )</span>
-<span id="cb597-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-5" aria-hidden="true" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp[receptor] <span class="ot">&lt;-</span> imp </span>
-<span id="cb597-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb597-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Employment_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb598-2"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-2" tabindex="-1"></a>imp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> <span class="fu">length</span>(receptor),</span>
+<span id="cb598-3"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Unemployed&quot;</span>, <span class="st">&quot;Inactive&quot;</span>,<span class="st">&quot;Employed&quot;</span>),</span>
+<span id="cb598-4"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-4" tabindex="-1"></a>       <span class="at">prob =</span> prop, <span class="at">replace =</span> <span class="cn">TRUE</span>     )</span>
+<span id="cb598-5"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-5" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp[receptor] <span class="ot">&lt;-</span> imp </span>
+<span id="cb598-6"><a href="imputación-por-hot-deck-y-cold-deck.html#cb598-6" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Employment_imp))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Se le deja al lector realizar los ejercicios de comprobación gráfica, como se mostró a lo largo de esta sección.</p>
 </div>
@@ -452,43 +458,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/11-Imputación.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/11-Imputación.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 11 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R</title>
+  <title>Capítulo 10 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 11 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R" />
+  <meta property="og:title" content="Capítulo 10 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 11 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="Capítulo 10 Imputación múltiple en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="11-Imputación.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="1.1" data-path="11-Imputación.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.2" data-path="11-Imputación.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="1.3" data-path="11-Imputación.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="1.6" data-path="11-Imputación.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="1.6.1" data-path="11-Imputación.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="1.8" data-path="11-Imputación.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.1" data-path="11-Imputación.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="11-Imputación.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="2.3" data-path="11-Imputación.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="2.4" data-path="11-Imputación.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="2.9" data-path="11-Imputación.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="2.12" data-path="11-Imputación.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="3.1" data-path="11-Imputación.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="3.2" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="3.3" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+<li class="chapter" data-level="3.3.1" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="3.3.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="3.3.3" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="3.4" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.5" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="3.6" data-path="11-Imputación.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
+<li class="chapter" data-level="4.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<li class="chapter" data-level="5" data-path="11-Imputación.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.1" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="5.2" data-path="11-Imputación.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="5.3" data-path="11-Imputación.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="6" data-path="11-Imputación.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="11-Imputación.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="8" data-path="11-Imputación.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="8.1" data-path="11-Imputación.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="11-Imputación.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="11-Imputación.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="11-Imputación.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="10" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="11-Imputación.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="11-Imputación.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="imputación-múltiple-en-encuestas-de-hogares" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Capítulo 11</span> Imputación múltiple en encuestas de hogares<a href="imputación-múltiple-en-encuestas-de-hogares.html#imputación-múltiple-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="imputación-múltiple-en-encuestas-de-hogares" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Capítulo 10</span> Imputación múltiple en encuestas de hogares<a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La no respuesta en encuestas de hogares es un fenómenos que desde siempre ha sucedido, más ahora después de la pandemia del Covid -19. Esto sucede por muchas razones, por ejemplo, la longitud de los cuestionarios en las encuestas, el no conocer algunas características particulares del hogar, la renuencia por entregar información sensible, entre otras. Si la no respuesta en algún indicador del estudio es muy alto, puede poner en riesgo la calidad de las estimaciones que se obtienen utilizando los estimadores clásicos.</p>
 <p>Debido a este problema, se ha avanzado en la literatura especializada metodologías que permiten atacar este problema, el cual es una realidad en todas las encuestas de hogares en los distintos países. 427</p>
 <p>En este sentido, alguno de los avances en la teoría de los métodos en el contexto de muestras comlejas son: imputación múltiple (MI; Van Buuren, 2012; Carpenter y Kenward, 2013; Berglund y Heeringa, 2014; Stata Corp, 2015; Raghunathan, 2016). También se encuentra en la literatura métodos como el de imputación fraccional (FI; Kim y Fuller, 2004; Kim y Shao, 2014), el Bootstrap Bayesiano de Población Finita (Zhou et al., 2016a,b), y métodos de máxima verosimilitud como los de Chambers et al., (2012).</p>
@@ -268,25 +274,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Imagenes/Cap%208/fig1.png" width="250" />
 <img src="Imagenes/Cap%208/fig2.png" width="250" /></p>
 <p>Como se ha venido trabajando en los capítulos anteriores, primero carguemos la base de datos con la muestra seleccionada y con el fin de poder ejemplificar el tratamiento de datos faltantes, se incluiran manualmente “valores perdidos”. En este sentido, la lectura de la base se hará a continuación:</p>
-<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb541-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-1" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>) </span></code></pre></div>
 <p>Se filtran encuestados mayores a 15 años y se calcula la proporción de la población desempleada, inactiva y empleada antes de generar los valores faltantes. Pero antes de eso, se cargan todas las librerías que se utilizarán en este capítulo:</p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">error =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb542-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-2" aria-hidden="true" tabindex="-1"></a><span class="co">#options(digits = 4)</span></span>
-<span id="cb542-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytex.verbose =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb542-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (survey)</span>
-<span id="cb542-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb542-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
-<span id="cb542-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb542-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
-<span id="cb542-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb542-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb542-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
-<span id="cb542-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
-<span id="cb542-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb542-14"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb542-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">error =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb543-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-2" tabindex="-1"></a><span class="co">#options(digits = 4)</span></span>
+<span id="cb543-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytex.verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb543-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-4" tabindex="-1"></a><span class="fu">library</span> (survey)</span>
+<span id="cb543-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-5" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb543-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-6" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb543-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-7" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb543-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-8" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
+<span id="cb543-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-9" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb543-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-10" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb543-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-11" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb543-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-12" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb543-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-13" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb543-14"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-14" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>Cálculo de las proprociones de personas desempleadas, inactivas y empleados:</p>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-1" aria-hidden="true" tabindex="-1"></a>encuesta<span class="ot">&lt;-</span> encuesta <span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
-<span id="cb543-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb543-2" aria-hidden="true" tabindex="-1"></a>(tab_antes <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment)))</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb544-1" tabindex="-1"></a>encuesta<span class="ot">&lt;-</span> encuesta <span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
+<span id="cb544-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb544-2" tabindex="-1"></a>(tab_antes <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -304,63 +310,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>También se calcula el promedio de ingresos en al muestra:</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb544-1" aria-hidden="true" tabindex="-1"></a>(med_antes <span class="ot">&lt;-</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb545-1" tabindex="-1"></a>(med_antes <span class="ot">&lt;-</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## [1] 604.2494</code></pre>
 <p>Luego de los conteos anteriores, se genera un 20% de valores faltantes siguiendo un esquema MCAR como sigue:</p>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb546-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb546-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb546-2" aria-hidden="true" tabindex="-1"></a>encuesta_MCAR <span class="ot">&lt;-</span>  <span class="fu">sample_frac</span>(encuesta, <span class="fl">0.8</span> )</span>
-<span id="cb546-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb546-3" aria-hidden="true" tabindex="-1"></a>dat_plot <span class="ot">&lt;-</span>       <span class="fu">bind_rows</span>(</span>
-<span id="cb546-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb546-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MCAR =</span> encuesta_MCAR, </span>
-<span id="cb546-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb546-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb547-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-2" tabindex="-1"></a>encuesta_MCAR <span class="ot">&lt;-</span>  <span class="fu">sample_frac</span>(encuesta, <span class="fl">0.8</span> )</span>
+<span id="cb547-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-3" tabindex="-1"></a>dat_plot <span class="ot">&lt;-</span>       <span class="fu">bind_rows</span>(</span>
+<span id="cb547-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-4" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MCAR =</span> encuesta_MCAR, </span>
+<span id="cb547-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-5" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
 <p>Ahora bien, para poder ver el efecto de la inclusión de datos faltantes de manera gráfica por zona y sexo para la variable ingreso, se realizan las siguientes gráficas:</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x=</span>Zone, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
-<span id="cb547-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Caso) <span class="sc">+</span> <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb547-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb547-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb547-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb547-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x=</span>Sex, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
-<span id="cb547-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Caso) <span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb547-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb547-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb547-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb547-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb547-11" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">|</span>p2</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x=</span>Zone, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
+<span id="cb548-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Caso) <span class="sc">+</span> <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb548-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-3" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb548-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-4" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb548-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-5" tabindex="-1"></a></span>
+<span id="cb548-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-6" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x=</span>Sex, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
+<span id="cb548-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Caso) <span class="sc">+</span><span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb548-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-8" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb548-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-9" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb548-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-10" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb548-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-11" tabindex="-1"></a>p1<span class="sc">|</span>p2</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-6-1.svg" width="672" /></p>
 <p>Como se puede observar en las gráficas anteriores, la distribución de los ingresos por Zona y Sexo se mantiene similar con o sin presencia de la no respuesta. Esto se debe a que la no respuesta que se incluyó no depende de la variable de estudio.</p>
 <p>Ahora bien, analizando la variable de interés se tiene que tampoco hay cambios distribucionales notables entre las distribuciones con y sin datos faltantes por sexo, como se puede observar a continuación:</p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb548-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb548-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb548-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb548-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb548-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb548-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb548-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span> </span>
-<span id="cb548-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> </span>
-<span id="cb548-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb548-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb548-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb548-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb548-13" aria-hidden="true" tabindex="-1"></a>(p1<span class="sc">/</span>p2)</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb549-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb549-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb549-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb549-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-5" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb549-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-6" tabindex="-1"></a></span>
+<span id="cb549-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-7" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb549-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-8" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span> </span>
+<span id="cb549-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> </span>
+<span id="cb549-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-10" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb549-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-11" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb549-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb549-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-13" tabindex="-1"></a>(p1<span class="sc">/</span>p2)</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-7-1.svg" width="672" /></p>
 <p>Si graficamos ahora la varibale gastos, se tienen los mismos resultados que para ingresos.</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb549-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb549-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb549-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb549-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb549-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb549-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb549-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span> </span>
-<span id="cb549-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> </span>
-<span id="cb549-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb549-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb549-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb549-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb549-13" aria-hidden="true" tabindex="-1"></a>(p1<span class="sc">/</span>p2)</span></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb550-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb550-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb550-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb550-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-5" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb550-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-6" tabindex="-1"></a></span>
+<span id="cb550-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-7" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot, <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb550-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-8" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span> </span>
+<span id="cb550-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> </span>
+<span id="cb550-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-10" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb550-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-11" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb550-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb550-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-13" tabindex="-1"></a>(p1<span class="sc">/</span>p2)</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-8-1.svg" width="672" /></p>
 <p>Por otro lado, simulemos ahora una pérdida de información MAR como sigue:</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb550-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb550-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-3" aria-hidden="true" tabindex="-1"></a>temp_estrato <span class="ot">&lt;-</span> <span class="fu">paste0</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Sex) </span>
-<span id="cb550-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb550-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(temp_estrato)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb551-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb551-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-3" tabindex="-1"></a>temp_estrato <span class="ot">&lt;-</span> <span class="fu">paste0</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Sex) </span>
+<span id="cb551-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-4" tabindex="-1"></a><span class="fu">table</span>(temp_estrato)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -379,13 +385,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-1" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">S.STSI</span>(<span class="at">S =</span> temp_estrato, </span>
-<span id="cb551-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">Nh =</span> <span class="fu">c</span>(<span class="dv">481</span>,<span class="dv">428</span>,<span class="dv">531</span>,<span class="dv">439</span>),</span>
-<span id="cb551-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">nh =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">380</span>, <span class="dv">20</span>,<span class="dv">280</span>))</span>
-<span id="cb551-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-4" aria-hidden="true" tabindex="-1"></a>encuesta_MAR <span class="ot">&lt;-</span> encuesta[<span class="sc">-</span>sel,]</span>
-<span id="cb551-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-5" aria-hidden="true" tabindex="-1"></a>dat_plot2 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb551-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MAR =</span> encuesta_MAR,</span>
-<span id="cb551-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb551-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-1" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">S.STSI</span>(<span class="at">S =</span> temp_estrato, </span>
+<span id="cb552-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-2" tabindex="-1"></a>              <span class="at">Nh =</span> <span class="fu">c</span>(<span class="dv">481</span>,<span class="dv">428</span>,<span class="dv">531</span>,<span class="dv">439</span>),</span>
+<span id="cb552-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-3" tabindex="-1"></a>              <span class="at">nh =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">380</span>, <span class="dv">20</span>,<span class="dv">280</span>))</span>
+<span id="cb552-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-4" tabindex="-1"></a>encuesta_MAR <span class="ot">&lt;-</span> encuesta[<span class="sc">-</span>sel,]</span>
+<span id="cb552-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-5" tabindex="-1"></a>dat_plot2 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb552-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-6" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MAR =</span> encuesta_MAR,</span>
+<span id="cb552-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-7" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
 <p>El código anterior utiliza la librería <em>TeachingSampling</em> para realizar un muestreo aleatorio estratificado. Primero, se establece la semilla aleatoria en 1234 para asegurarse de que los resultados sean reproducibles. A continuación, se crea una variable llamada <em>temp_estrato</em> que combina dos variables de la encuesta “Zone” y “Sex” utilizando la función “paste0” para crear grupos de estratos. La función <em>table</em> se usa para mostrar la frecuencia de cada estrato.</p>
 <p>Luego, se realiza el muestreo estratificado utilizando la función <em>S.STSI</em> que toma los siguientes argumentos:</p>
 <ul>
@@ -396,106 +402,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El resultado del muestreo estratificado es un vector de índices de fila que corresponden a las observaciones seleccionadas para la muestra. Luego, se crea un nuevo conjunto de datos llamado “encuesta_MAR” que excluye las observaciones seleccionadas en la muestra.</p>
 <p>Finalmente, se usa la función <em>bind_rows</em> del paquete <em>dplyr</em> para unir los dos conjuntos de datos, “encuesta” y “encuesta_MAR”, en un solo conjunto de datos llamado “dat_plot2”, con una nueva variable “Caso” que indica el caso de cada observación en el conjunto de datos.</p>
 <p>Observemos gráficamente el efecto de la perdida de dinformación en una encuesta en un esquema MAR:</p>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Expenditure)) <span class="sc">+</span> </span>
-<span id="cb552-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb552-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb552-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb552-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb552-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb552-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb552-7" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Expenditure)) <span class="sc">+</span> </span>
+<span id="cb553-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb553-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb553-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb553-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb553-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-6" tabindex="-1"></a></span>
+<span id="cb553-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-7" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-10-1.svg" width="672" /></p>
 <p>En el gráfico anterior se logra observar un cambio en la distribución de los datos en las distintas desagregaciones cuando en la encuesta no se tiene pérdida de información y cuando sí se tiene con un esquema MAR. Naturalmente, esto afectaría en las estimaciones finales que se hagan de los parámetros estudiados.</p>
 <p>Con mayor claridad, se puede ver el cambio distribucional en la siguiente gráfica:</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb553-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb553-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb553-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb553-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb553-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb553-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb553-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span></span>
-<span id="cb553-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb553-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb553-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb553-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb553-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb553-13" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb554-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-2" tabindex="-1"></a> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb554-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb554-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb554-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-5" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb554-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-6" tabindex="-1"></a></span>
+<span id="cb554-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-7" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb554-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-8" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span></span>
+<span id="cb554-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-9" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb554-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb554-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb554-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-12" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb554-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-13" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/MAR2-1.svg" width="672" /></p>
 <p>Este comportamiento es natural que suceda en un esquema MAR de datos faltantes puesto que, como se mencionó anteriormente, cuando se dice que los datos faltantes están “missing at random” (MAR), significa que la probabilidad de que los datos estén ausentes está relacionada con los valores observados en otras variables del conjunto de datos. En otras palabras, la probabilidad de que un valor esté ausente no está relacionada con el valor real del dato en sí mismo, sino que depende de la distribución de los datos en otras variables.</p>
 <p>La ventaja que tienen los mecanismo de missing MAR es que se puede estimar el valor real de los datos faltantes utilizando la información de otras variables disponibles en el conjunto de datos. Esto puede mejorar la calidad de los resultados de los análisis y evitar la necesidad de descartar observaciones con datos faltantes.</p>
 <p>Otra gráfica en donde se evidencia el cambio de distribución de los gastos entre hombres y mujeres.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, </span>
-<span id="cb554-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb554-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb554-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb554-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb554-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb554-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb554-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, </span>
-<span id="cb554-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb554-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span></span>
-<span id="cb554-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb554-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb554-14"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb554-15"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb554-16"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb554-17"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb554-17" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, </span>
+<span id="cb555-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-2" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb555-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-3" tabindex="-1"></a> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb555-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb555-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb555-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-6" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb555-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-7" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb555-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-8" tabindex="-1"></a></span>
+<span id="cb555-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-9" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot2, </span>
+<span id="cb555-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-10" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb555-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-11" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>Sex) <span class="sc">+</span></span>
+<span id="cb555-12"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-12" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb555-13"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb555-14"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-14" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb555-15"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-15" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb555-16"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-16" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb555-17"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-17" tabindex="-1"></a>p1<span class="sc">/</span>p2</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/MAR3-1.svg" width="672" /></p>
 <p>Ahora bien, para seguir con la ejemplificación de los esquemas de datos faltantes, generemos ahora un esquema de pérdida de información en una encuesta NMAR (siglas en inglés de “Not Missing at Random”). Como se mencionó al inicio de este capítulo, en este tipo de esquema, la probabilidad de que un dato falte está relacionada con el propio valor de ese dato, es decir, la probabilidad de que falte un dato no es aleatoria y depende de alguna característica o variable del propio dato.</p>
 <p>En otras palabras, en un esquema aleatorio NMAR, la probabilidad de que falte un dato no es independiente del valor de ese dato, sino que está influenciada por algún factor que puede estar relacionado con el fenómeno que se está estudiando. Esto puede llevar a que los datos faltantes introduzcan un sesgo en los resultados del análisis estadístico, lo que hace que el manejo adecuado de los datos faltantes en este tipo de esquemas sea particularmente importante en la investigación.</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-1" aria-hidden="true" tabindex="-1"></a>encuesta_MNAR <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> </span>
-<span id="cb555-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>((Income)) <span class="sc">%&gt;%</span> </span>
-<span id="cb555-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>1300L)</span>
-<span id="cb555-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb555-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-5" aria-hidden="true" tabindex="-1"></a>dat_plot3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb555-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MNAR =</span> encuesta_MNAR,</span>
-<span id="cb555-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb555-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-1" tabindex="-1"></a>encuesta_MNAR <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> </span>
+<span id="cb556-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-2" tabindex="-1"></a>  <span class="fu">arrange</span>((Income)) <span class="sc">%&gt;%</span> </span>
+<span id="cb556-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-3" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1300</span><span class="dt">L</span>)</span>
+<span id="cb556-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-4" tabindex="-1"></a></span>
+<span id="cb556-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-5" tabindex="-1"></a>dat_plot3 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb556-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-6" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">encuesta_MNAR =</span> encuesta_MNAR,</span>
+<span id="cb556-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-7" tabindex="-1"></a>       <span class="at">encuesta =</span> encuesta), <span class="at">.id =</span> <span class="st">&quot;Caso&quot;</span>  )</span></code></pre></div>
 <p>El código anterior tiene como objetivo crear un nuevo conjunto de datos llamado <em>encuesta_MNAR</em> que contiene las primeras 1300 observaciones del conjunto de datos original <em>encuesta</em>, ordenadas por la variable <em>Income</em>. Luego, el código une el conjunto de datos original <em>encuesta</em> con el conjunto de datos <em>encuesta_MNAR</em> usando la función <em>bind_rows()</em>, y crea una nueva variable llamada “Caso” que indica la fuente de los datos.</p>
 <p>Ahora bien, para ver el efecto que tiene en una encuesta el tener datos faltante con esquema NMAR, se ilustran los siguientes gráficos:</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb556-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb556-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb556-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb556-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb556-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb556-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb556-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta_MNAR<span class="sc">$</span>Income), </span>
-<span id="cb556-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb556-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb556-10" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb557-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-2" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb557-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-3" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb557-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-5" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb557-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-6" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb557-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb557-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-8" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta_MNAR<span class="sc">$</span>Income), </span>
+<span id="cb557-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-9" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb557-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-10" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/MNAR1-1.svg" width="672" /></p>
 <p>Como se puede observar en la gráfica anterior, la distribución de los ingresos cambia notablemente cuando se tienen datos faltantes con esquema NMAR, lo mismo sucede con la variable gastos, como se puede observar en la siguiente gráfica:</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, </span>
-<span id="cb557-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb557-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb557-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb557-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb557-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
-<span id="cb557-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb557-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb557-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta_MNAR<span class="sc">$</span>Expenditure), </span>
-<span id="cb557-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb557-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb557-11" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, </span>
+<span id="cb558-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-2" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb558-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-3" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb558-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-4" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb558-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb558-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-6" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Expenditure), </span>
+<span id="cb558-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-7" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb558-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb558-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta_MNAR<span class="sc">$</span>Expenditure), </span>
+<span id="cb558-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb558-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-11" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/MNAR2-1.svg" width="672" /></p>
 <p>Para ver más al detalle el impacto que tiene la no respuesta con un esquema NMAR, a continuación se muestra una gráfica del ingreso discriminada por sexo y por zona. También se nota un cambio en la distribución de los ingresos significativos.</p>
-<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
-<span id="cb558-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
-<span id="cb558-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb558-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb558-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb558-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb558-6" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot3, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
+<span id="cb559-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
+<span id="cb559-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb559-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb559-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-5" tabindex="-1"></a></span>
+<span id="cb559-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-6" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/MNAR3-1.svg" width="672" /></p>
 <p>Para efectos de ejemplificar la solución del problema a los datos faltantes en una encuesta de hogares, generemos la siguiente base de datos:</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">full_join</span>(</span>
-<span id="cb559-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-2" aria-hidden="true" tabindex="-1"></a>  encuesta,</span>
-<span id="cb559-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  encuesta_MCAR <span class="sc">%&gt;%</span> </span>
-<span id="cb559-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(HHID, PersonID, Income, Employment) <span class="sc">%&gt;%</span></span>
-<span id="cb559-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb559-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">Income_missin =</span> Income,</span>
-<span id="cb559-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">Employment_missin =</span> Employment,</span>
-<span id="cb559-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">Employment =</span> <span class="cn">NULL</span>,</span>
-<span id="cb559-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">Income =</span> <span class="cn">NULL</span></span>
-<span id="cb559-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb559-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb559-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-1" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">full_join</span>(</span>
+<span id="cb560-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-2" tabindex="-1"></a>  encuesta,</span>
+<span id="cb560-3"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-3" tabindex="-1"></a>  encuesta_MCAR <span class="sc">%&gt;%</span> </span>
+<span id="cb560-4"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-4" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(HHID, PersonID, Income, Employment) <span class="sc">%&gt;%</span></span>
+<span id="cb560-5"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-5" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb560-6"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-6" tabindex="-1"></a>      <span class="at">Income_missin =</span> Income,</span>
+<span id="cb560-7"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-7" tabindex="-1"></a>      <span class="at">Employment_missin =</span> Employment,</span>
+<span id="cb560-8"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-8" tabindex="-1"></a>      <span class="at">Employment =</span> <span class="cn">NULL</span>,</span>
+<span id="cb560-9"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-9" tabindex="-1"></a>      <span class="at">Income =</span> <span class="cn">NULL</span></span>
+<span id="cb560-10"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-10" tabindex="-1"></a>    )</span>
+<span id="cb560-11"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-11" tabindex="-1"></a>)</span></code></pre></div>
 <p>El código anterior utiliza la función <em>full_join()</em> de la librería <em>dplyr</em> de ´R´ para combinar dos conjuntos de datos: encuesta y encuesta_MCAR. La combinación se realiza mediante la unión completa (o full join), que devuelve todas las filas de ambas tablas, uniendo las filas con valores coincidentes y rellenando con valores faltantes para las columnas que no tienen una coincidencia en ambas tablas.</p>
 <p>La segunda Base de datos, encuesta_MCAR, se transforma previamente con las siguientes operaciones:</p>
 <ul>
@@ -504,8 +510,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Los valores de estas columnas son idénticos a los de las columnas Income y Employment, respectivamente. Las columnas Income y Employment se eliminan del conjunto de datos utilizando la función <em>mutate()</em> y asignando el valor NULL a ambas columnas. Finalmente, el resultado de la unión completa se asigna a la variable encuesta.</p>
 <p>Ahora bien, para tener como referencia el porcentaje de datos faltantes, se ejecuta el siguiente comando:</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb560-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb560-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Income =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Income_missin) <span class="sc">/</span> <span class="fu">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb561-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb561-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb561-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Income =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Income_missin) <span class="sc">/</span> <span class="fu">n</span>()))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -524,8 +530,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb561-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb561-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb561-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Income =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Income_missin) <span class="sc">/</span> <span class="fu">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb562-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb562-2"><a href="imputación-múltiple-en-encuestas-de-hogares.html#cb562-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Income =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(Income_missin) <span class="sc">/</span> <span class="fu">n</span>()))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -565,43 +571,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/11-Imputación.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/11-Imputación.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>

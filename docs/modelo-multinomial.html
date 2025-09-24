@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.4 Modelo multinomial | Análisis de encuestas con R</title>
+  <title>8.4 Modelo multinomial | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.4 Modelo multinomial | Análisis de encuestas con R" />
+  <meta property="og:title" content="8.4 Modelo multinomial | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.4 Modelo multinomial | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="8.4 Modelo multinomial | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="1.1" data-path="09-Generalizados2.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.2" data-path="09-Generalizados2.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="1.3" data-path="09-Generalizados2.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="1.6" data-path="09-Generalizados2.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="1.6.1" data-path="09-Generalizados2.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="1.8" data-path="09-Generalizados2.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.1" data-path="09-Generalizados2.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="09-Generalizados2.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="2.3" data-path="09-Generalizados2.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="2.4" data-path="09-Generalizados2.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="2.9" data-path="09-Generalizados2.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="2.12" data-path="09-Generalizados2.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="3.1" data-path="09-Generalizados2.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="3.2" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+<li class="chapter" data-level="3.3.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="3.3.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="3.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="3.6" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
+<li class="chapter" data-level="4.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<li class="chapter" data-level="5" data-path="09-Generalizados2.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="5.2" data-path="09-Generalizados2.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="5.3" data-path="09-Generalizados2.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="6" data-path="09-Generalizados2.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="09-Generalizados2.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="8" data-path="09-Generalizados2.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="8.1" data-path="09-Generalizados2.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="10" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modelo-multinomial" class="section level2 hasAnchor" number="9.4">
-<h2><span class="header-section-number">9.4</span> Modelo multinomial<a href="modelo-multinomial.html#modelo-multinomial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelo-multinomial" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Modelo multinomial<a href="modelo-multinomial.html#modelo-multinomial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En capítulos anteriores de este libro se desarrolló la manera de cómo hacer el análisis de variables aleatorias provenientes de encuestas complejas de tipo binario. Sin embargo, en encuestas complejas también existen variables de tipo multinomial, es decir, que tengan más de dos niveles de respuesta. Para el análisis de este tipo de variables se utiliza el modelo multinomial, el cual se desarrollará en esta sección.</p>
 <p>El modelo de regresión logit multinomial es la extensión natural del modelo de regresión logística binomial simple para analizar variables con respuestas que tienen tres o más categorías distintas. Esta técnica es más apropiada para variables de encuesta con categorías de respuesta nominales.</p>
 <p>Para el ajuste de un modelo multinomial se debe tener en cuenta que:</p>
@@ -293,197 +299,108 @@ S\left(\boldsymbol{\beta}\right)_{Mult}  =  \sum_{h}\sum_{\alpha}\sum_{i}\omega_
 \hat{Var}\left(\hat{\boldsymbol{\beta}}\right)  =  \left(J^{-1}\right)var\left[S\left(\hat{\boldsymbol{\beta}}\right)\right]\left(J^{-1}\right)
 \]</span>
 Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares utilizando <code>R</code> se utilizan los siguientes códigos computacionales. Inicialemente, para efectos de comparación, estimemos el porcentaje de personas por desempleo:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="modelo-multinomial.html#cb469-1" aria-hidden="true" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb469-2"><a href="modelo-multinomial.html#cb469-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="modelo-multinomial.html#cb469-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb469-2"><a href="modelo-multinomial.html#cb469-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Employment
-</th>
-<th style="text-align:right;">
-Prop
-</th>
-<th style="text-align:right;">
-Prop_se
-</th>
-<th style="text-align:right;">
-Prop_low
-</th>
-<th style="text-align:right;">
-Prop_upp
-</th>
+<tr class="header">
+<th align="left">Employment</th>
+<th align="right">Prop</th>
+<th align="right">Prop_se</th>
+<th align="right">Prop_low</th>
+<th align="right">Prop_upp</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Unemployed
-</td>
-<td style="text-align:right;">
-0.0322524
-</td>
-<td style="text-align:right;">
-0.0057006
-</td>
-<td style="text-align:right;">
-0.0209647
-</td>
-<td style="text-align:right;">
-0.0435401
-</td>
+<tr class="odd">
+<td align="left">Unemployed</td>
+<td align="right">0.0322524</td>
+<td align="right">0.0057006</td>
+<td align="right">0.0209647</td>
+<td align="right">0.0435401</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive
-</td>
-<td style="text-align:right;">
-0.2734145
-</td>
-<td style="text-align:right;">
-0.0106850
-</td>
-<td style="text-align:right;">
-0.2522572
-</td>
-<td style="text-align:right;">
-0.2945718
-</td>
+<tr class="even">
+<td align="left">Inactive</td>
+<td align="right">0.2734145</td>
+<td align="right">0.0106850</td>
+<td align="right">0.2522572</td>
+<td align="right">0.2945718</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed
-</td>
-<td style="text-align:right;">
-0.4141869
-</td>
-<td style="text-align:right;">
-0.0138767
-</td>
-<td style="text-align:right;">
-0.3867096
-</td>
-<td style="text-align:right;">
-0.4416642
-</td>
+<tr class="odd">
+<td align="left">Employed</td>
+<td align="right">0.4141869</td>
+<td align="right">0.0138767</td>
+<td align="right">0.3867096</td>
+<td align="right">0.4416642</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-0.2801462
-</td>
-<td style="text-align:right;">
-0.0139885
-</td>
-<td style="text-align:right;">
-0.2524476
-</td>
-<td style="text-align:right;">
-0.3078449
-</td>
+<tr class="even">
+<td align="left">NA</td>
+<td align="right">0.2801462</td>
+<td align="right">0.0139885</td>
+<td align="right">0.2524476</td>
+<td align="right">0.3078449</td>
 </tr>
 </tbody>
 </table>
 <p>Ahora bien, se filtran aquellas personas mayores a 15 años y se vuelve a estimar:</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="modelo-multinomial.html#cb470-1" aria-hidden="true" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)<span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb470-2"><a href="modelo-multinomial.html#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="modelo-multinomial.html#cb470-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)<span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb470-2"><a href="modelo-multinomial.html#cb470-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Employment
-</th>
-<th style="text-align:right;">
-Prop
-</th>
-<th style="text-align:right;">
-Prop_se
-</th>
-<th style="text-align:right;">
-Prop_low
-</th>
-<th style="text-align:right;">
-Prop_upp
-</th>
+<tr class="header">
+<th align="left">Employment</th>
+<th align="right">Prop</th>
+<th align="right">Prop_se</th>
+<th align="right">Prop_low</th>
+<th align="right">Prop_upp</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Unemployed
-</td>
-<td style="text-align:right;">
-0.0448040
-</td>
-<td style="text-align:right;">
-0.0077955
-</td>
-<td style="text-align:right;">
-0.0293683
-</td>
-<td style="text-align:right;">
-0.0602398
-</td>
+<tr class="odd">
+<td align="left">Unemployed</td>
+<td align="right">0.0448040</td>
+<td align="right">0.0077955</td>
+<td align="right">0.0293683</td>
+<td align="right">0.0602398</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive
-</td>
-<td style="text-align:right;">
-0.3798195
-</td>
-<td style="text-align:right;">
-0.0150308
-</td>
-<td style="text-align:right;">
-0.3500571
-</td>
-<td style="text-align:right;">
-0.4095820
-</td>
+<tr class="even">
+<td align="left">Inactive</td>
+<td align="right">0.3798195</td>
+<td align="right">0.0150308</td>
+<td align="right">0.3500571</td>
+<td align="right">0.4095820</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed
-</td>
-<td style="text-align:right;">
-0.5753764
-</td>
-<td style="text-align:right;">
-0.0130688
-</td>
-<td style="text-align:right;">
-0.5494988
-</td>
-<td style="text-align:right;">
-0.6012540
-</td>
+<tr class="odd">
+<td align="left">Employed</td>
+<td align="right">0.5753764</td>
+<td align="right">0.0130688</td>
+<td align="right">0.5494988</td>
+<td align="right">0.6012540</td>
 </tr>
 </tbody>
 </table>
 <p>Con lo anterior, se observa un aumento en el porcentaje de personas empleadas en los hogares.</p>
 <p>Ahora bien, se realiza la estimación usando el modelo multinomial con la función <code>svy_vglm</code> del paquete <code>svyVGAM</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="modelo-multinomial.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(svyVGAM)</span>
-<span id="cb471-2"><a href="modelo-multinomial.html#cb471-2" aria-hidden="true" tabindex="-1"></a>diseno_15 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
-<span id="cb471-3"><a href="modelo-multinomial.html#cb471-3" aria-hidden="true" tabindex="-1"></a>model_mul <span class="ot">&lt;-</span> <span class="fu">svy_vglm</span>(</span>
-<span id="cb471-4"><a href="modelo-multinomial.html#cb471-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb471-5"><a href="modelo-multinomial.html#cb471-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">design =</span> diseno_15, </span>
-<span id="cb471-6"><a href="modelo-multinomial.html#cb471-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">crit =</span> <span class="st">&quot;coef&quot;</span>,</span>
-<span id="cb471-7"><a href="modelo-multinomial.html#cb471-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">multinomial</span>(<span class="at">refLevel =</span> <span class="st">&quot;Unemployed&quot;</span>))</span>
-<span id="cb471-8"><a href="modelo-multinomial.html#cb471-8" aria-hidden="true" tabindex="-1"></a>model_mul</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="modelo-multinomial.html#cb471-1" tabindex="-1"></a><span class="fu">library</span>(svyVGAM)</span>
+<span id="cb471-2"><a href="modelo-multinomial.html#cb471-2" tabindex="-1"></a>diseno_15 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
+<span id="cb471-3"><a href="modelo-multinomial.html#cb471-3" tabindex="-1"></a>model_mul <span class="ot">&lt;-</span> <span class="fu">svy_vglm</span>(</span>
+<span id="cb471-4"><a href="modelo-multinomial.html#cb471-4" tabindex="-1"></a>    <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb471-5"><a href="modelo-multinomial.html#cb471-5" tabindex="-1"></a>                   <span class="at">design =</span> diseno_15, </span>
+<span id="cb471-6"><a href="modelo-multinomial.html#cb471-6" tabindex="-1"></a>     <span class="at">crit =</span> <span class="st">&quot;coef&quot;</span>,</span>
+<span id="cb471-7"><a href="modelo-multinomial.html#cb471-7" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">multinomial</span>(<span class="at">refLevel =</span> <span class="st">&quot;Unemployed&quot;</span>))</span>
+<span id="cb471-8"><a href="modelo-multinomial.html#cb471-8" tabindex="-1"></a>model_mul</span></code></pre></div>
 <pre><code>## Stratified 1 - level Cluster Sampling design (with replacement)
 ## With (238) clusters.
 ## Called via srvyr
 ## Sampling variables:
-##  - ids: PSU
-##  - strata: Stratum
-##  - weights: wk2
-## Data variables: HHID (chr), Stratum (chr), NIh (int), nIh (dbl), dI (dbl),
-##   PersonID (chr), PSU (chr), Zone (chr), Sex (chr), Age (int), MaritalST (fct),
-##   Income (dbl), Expenditure (dbl), Employment (fct), Poverty (fct), dki (dbl),
-##   dk (dbl), wk (dbl), Region (fct), CatAge (ord), wk2 (dbl)
+##   - ids: PSU 
+##   - strata: Stratum 
+##   - weights: wk2 
+## Data variables: 
+##   - HHID (chr), Stratum (chr), NIh (int), nIh (dbl), dI (dbl), PersonID (chr),
+##     PSU (chr), Zone (chr), Sex (chr), Age (int), MaritalST (fct), Income (dbl),
+##     Expenditure (dbl), Employment (fct), Poverty (fct), dki (dbl), dk (dbl), wk
+##     (dbl), Region (fct), CatAge (ord), wk2 (dbl)
 ## 
 ## Call:
 ## vglm(formula = formula, family = family, data = surveydata, weights = .survey.prob.weights, 
@@ -506,618 +423,320 @@ Employed
 ## 
 ## This is a multinomial logit model with 3 levels</code></pre>
 <p>Algo a tener en cuenta es que la función <code>broom::tidy()</code>, que normalmente usamos para limpiar y estandarizar la salida del modelo, no puede ser empleada en este caso, sin embargo, en el link<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> encuentra la función que utilizamos a continuación.</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="modelo-multinomial.html#cb473-1" aria-hidden="true" tabindex="-1"></a>tidy.svyVGAM <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb473-2"><a href="modelo-multinomial.html#cb473-2" aria-hidden="true" tabindex="-1"></a>  x, </span>
-<span id="cb473-3"><a href="modelo-multinomial.html#cb473-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb473-4"><a href="modelo-multinomial.html#cb473-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb473-5"><a href="modelo-multinomial.html#cb473-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb473-6"><a href="modelo-multinomial.html#cb473-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb473-7"><a href="modelo-multinomial.html#cb473-7" aria-hidden="true" tabindex="-1"></a>){</span>
-<span id="cb473-8"><a href="modelo-multinomial.html#cb473-8" aria-hidden="true" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">summary</span>(x)<span class="sc">$</span>coeftable, <span class="at">rownames =</span> <span class="st">&quot;term&quot;</span>)</span>
-<span id="cb473-9"><a href="modelo-multinomial.html#cb473-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb473-10"><a href="modelo-multinomial.html#cb473-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb473-11"><a href="modelo-multinomial.html#cb473-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(ret) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;std.error&quot;</span>, <span class="st">&quot;statistic&quot;</span>, <span class="st">&quot;p.value&quot;</span>)</span>
-<span id="cb473-12"><a href="modelo-multinomial.html#cb473-12" aria-hidden="true" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">enframe</span>(stats<span class="sc">::</span><span class="fu">coef</span>(x), <span class="at">name =</span> <span class="st">&quot;term&quot;</span>, <span class="at">value =</span> <span class="st">&quot;estimate&quot;</span>)</span>
-<span id="cb473-13"><a href="modelo-multinomial.html#cb473-13" aria-hidden="true" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coefs, ret, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>))</span>
-<span id="cb473-14"><a href="modelo-multinomial.html#cb473-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (conf.int){</span>
-<span id="cb473-15"><a href="modelo-multinomial.html#cb473-15" aria-hidden="true" tabindex="-1"></a>    ci <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">broom_confint_terms</span>(x, <span class="at">level =</span> conf.level, ...)</span>
-<span id="cb473-16"><a href="modelo-multinomial.html#cb473-16" aria-hidden="true" tabindex="-1"></a>    ret <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(ret, ci, <span class="at">by =</span> <span class="st">&quot;term&quot;</span>)</span>
-<span id="cb473-17"><a href="modelo-multinomial.html#cb473-17" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb473-18"><a href="modelo-multinomial.html#cb473-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (exponentiate){ret <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">exponentiate</span>(ret)}</span>
-<span id="cb473-19"><a href="modelo-multinomial.html#cb473-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb473-20"><a href="modelo-multinomial.html#cb473-20" aria-hidden="true" tabindex="-1"></a>  ret <span class="sc">%&gt;%</span> </span>
-<span id="cb473-21"><a href="modelo-multinomial.html#cb473-21" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(term, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;y.level&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;:&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb473-22"><a href="modelo-multinomial.html#cb473-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(y.level) <span class="sc">%&gt;%</span> </span>
-<span id="cb473-23"><a href="modelo-multinomial.html#cb473-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">relocate</span>(y.level, <span class="at">.before =</span> term)</span>
-<span id="cb473-24"><a href="modelo-multinomial.html#cb473-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="modelo-multinomial.html#cb473-1" tabindex="-1"></a>tidy.svyVGAM <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb473-2"><a href="modelo-multinomial.html#cb473-2" tabindex="-1"></a>  x, </span>
+<span id="cb473-3"><a href="modelo-multinomial.html#cb473-3" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb473-4"><a href="modelo-multinomial.html#cb473-4" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb473-5"><a href="modelo-multinomial.html#cb473-5" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb473-6"><a href="modelo-multinomial.html#cb473-6" tabindex="-1"></a>  ...</span>
+<span id="cb473-7"><a href="modelo-multinomial.html#cb473-7" tabindex="-1"></a>){</span>
+<span id="cb473-8"><a href="modelo-multinomial.html#cb473-8" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">summary</span>(x)<span class="sc">$</span>coeftable, <span class="at">rownames =</span> <span class="st">&quot;term&quot;</span>)</span>
+<span id="cb473-9"><a href="modelo-multinomial.html#cb473-9" tabindex="-1"></a>  </span>
+<span id="cb473-10"><a href="modelo-multinomial.html#cb473-10" tabindex="-1"></a>  </span>
+<span id="cb473-11"><a href="modelo-multinomial.html#cb473-11" tabindex="-1"></a>  <span class="fu">colnames</span>(ret) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;std.error&quot;</span>, <span class="st">&quot;statistic&quot;</span>, <span class="st">&quot;p.value&quot;</span>)</span>
+<span id="cb473-12"><a href="modelo-multinomial.html#cb473-12" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">enframe</span>(stats<span class="sc">::</span><span class="fu">coef</span>(x), <span class="at">name =</span> <span class="st">&quot;term&quot;</span>, <span class="at">value =</span> <span class="st">&quot;estimate&quot;</span>)</span>
+<span id="cb473-13"><a href="modelo-multinomial.html#cb473-13" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coefs, ret, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>))</span>
+<span id="cb473-14"><a href="modelo-multinomial.html#cb473-14" tabindex="-1"></a>  <span class="cf">if</span> (conf.int){</span>
+<span id="cb473-15"><a href="modelo-multinomial.html#cb473-15" tabindex="-1"></a>    ci <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">broom_confint_terms</span>(x, <span class="at">level =</span> conf.level, ...)</span>
+<span id="cb473-16"><a href="modelo-multinomial.html#cb473-16" tabindex="-1"></a>    ret <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(ret, ci, <span class="at">by =</span> <span class="st">&quot;term&quot;</span>)</span>
+<span id="cb473-17"><a href="modelo-multinomial.html#cb473-17" tabindex="-1"></a>  }</span>
+<span id="cb473-18"><a href="modelo-multinomial.html#cb473-18" tabindex="-1"></a>  <span class="cf">if</span> (exponentiate){ret <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">exponentiate</span>(ret)}</span>
+<span id="cb473-19"><a href="modelo-multinomial.html#cb473-19" tabindex="-1"></a>  </span>
+<span id="cb473-20"><a href="modelo-multinomial.html#cb473-20" tabindex="-1"></a>  ret <span class="sc">%&gt;%</span> </span>
+<span id="cb473-21"><a href="modelo-multinomial.html#cb473-21" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(term, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;y.level&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;:&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb473-22"><a href="modelo-multinomial.html#cb473-22" tabindex="-1"></a>    <span class="fu">arrange</span>(y.level) <span class="sc">%&gt;%</span> </span>
+<span id="cb473-23"><a href="modelo-multinomial.html#cb473-23" tabindex="-1"></a>    <span class="fu">relocate</span>(y.level, <span class="at">.before =</span> term)</span>
+<span id="cb473-24"><a href="modelo-multinomial.html#cb473-24" tabindex="-1"></a>}</span></code></pre></div>
 <p>Utilizando el código anterior, obtenemos las estimaciones del modelo multinomial:</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="modelo-multinomial.html#cb474-1" aria-hidden="true" tabindex="-1"></a>tab_model <span class="ot">&lt;-</span> <span class="fu">tidy.svyVGAM</span>(model_mul, </span>
-<span id="cb474-2"><a href="modelo-multinomial.html#cb474-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb474-3"><a href="modelo-multinomial.html#cb474-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">conf.int =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb474-4"><a href="modelo-multinomial.html#cb474-4" aria-hidden="true" tabindex="-1"></a>tab_model</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="modelo-multinomial.html#cb474-1" tabindex="-1"></a>tab_model <span class="ot">&lt;-</span> <span class="fu">tidy.svyVGAM</span>(model_mul, </span>
+<span id="cb474-2"><a href="modelo-multinomial.html#cb474-2" tabindex="-1"></a>                               <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb474-3"><a href="modelo-multinomial.html#cb474-3" tabindex="-1"></a>                               <span class="at">conf.int =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb474-4"><a href="modelo-multinomial.html#cb474-4" tabindex="-1"></a>tab_model</span></code></pre></div>
 <p>A continuación, se grafica los intervalos de confianza para los coeficientes del modelo utilizando el formato definido para la CEPAL:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="modelo-multinomial.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
-<span id="cb475-2"><a href="modelo-multinomial.html#cb475-2" aria-hidden="true" tabindex="-1"></a>tab_model <span class="sc">%&gt;%</span> </span>
-<span id="cb475-3"><a href="modelo-multinomial.html#cb475-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">if_else</span>(</span>
-<span id="cb475-4"><a href="modelo-multinomial.html#cb475-4" aria-hidden="true" tabindex="-1"></a>      y.level <span class="sc">==</span> <span class="dv">1</span>, </span>
-<span id="cb475-5"><a href="modelo-multinomial.html#cb475-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Inactive&quot;</span>,</span>
-<span id="cb475-6"><a href="modelo-multinomial.html#cb475-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Employed&quot;</span>, ),</span>
-<span id="cb475-7"><a href="modelo-multinomial.html#cb475-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sig =</span> gtools<span class="sc">::</span><span class="fu">stars.pval</span>(p.value)</span>
-<span id="cb475-8"><a href="modelo-multinomial.html#cb475-8" aria-hidden="true" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> </span>
-<span id="cb475-9"><a href="modelo-multinomial.html#cb475-9" aria-hidden="true" tabindex="-1"></a>  dotwhisker<span class="sc">::</span><span class="fu">dwplot</span>(</span>
-<span id="cb475-10"><a href="modelo-multinomial.html#cb475-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">dodge_size =</span> <span class="fl">0.3</span>,</span>
-<span id="cb475-11"><a href="modelo-multinomial.html#cb475-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">vline =</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>,</span>
-<span id="cb475-12"><a href="modelo-multinomial.html#cb475-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">linetype =</span> <span class="dv">2</span>)</span>
-<span id="cb475-13"><a href="modelo-multinomial.html#cb475-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb475-14"><a href="modelo-multinomial.html#cb475-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span> </span>
-<span id="cb475-15"><a href="modelo-multinomial.html#cb475-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="modelo-multinomial.html#cb475-1" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
+<span id="cb475-2"><a href="modelo-multinomial.html#cb475-2" tabindex="-1"></a>tab_model <span class="sc">%&gt;%</span> </span>
+<span id="cb475-3"><a href="modelo-multinomial.html#cb475-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">if_else</span>(</span>
+<span id="cb475-4"><a href="modelo-multinomial.html#cb475-4" tabindex="-1"></a>      y.level <span class="sc">==</span> <span class="dv">1</span>, </span>
+<span id="cb475-5"><a href="modelo-multinomial.html#cb475-5" tabindex="-1"></a>      <span class="st">&quot;Inactive&quot;</span>,</span>
+<span id="cb475-6"><a href="modelo-multinomial.html#cb475-6" tabindex="-1"></a>      <span class="st">&quot;Employed&quot;</span>, ),</span>
+<span id="cb475-7"><a href="modelo-multinomial.html#cb475-7" tabindex="-1"></a>    <span class="at">sig =</span> gtools<span class="sc">::</span><span class="fu">stars.pval</span>(p.value)</span>
+<span id="cb475-8"><a href="modelo-multinomial.html#cb475-8" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> </span>
+<span id="cb475-9"><a href="modelo-multinomial.html#cb475-9" tabindex="-1"></a>  dotwhisker<span class="sc">::</span><span class="fu">dwplot</span>(</span>
+<span id="cb475-10"><a href="modelo-multinomial.html#cb475-10" tabindex="-1"></a>    <span class="at">dodge_size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb475-11"><a href="modelo-multinomial.html#cb475-11" tabindex="-1"></a>    <span class="at">vline =</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>,</span>
+<span id="cb475-12"><a href="modelo-multinomial.html#cb475-12" tabindex="-1"></a>                       <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb475-13"><a href="modelo-multinomial.html#cb475-13" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb475-14"><a href="modelo-multinomial.html#cb475-14" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span> </span>
+<span id="cb475-15"><a href="modelo-multinomial.html#cb475-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p>Una forma aternativa de ajustar los modelos de regresión multinomial es usando la función <code>svy_vglm</code>. Sin embargo, presenta limitaciones para hacer las predicciones con el modelo, por lo tanto, se puede usar como alternativa la función <code>svymultinom</code>. Cabe aclarar que esta función no está en el repositorio de R y hay que instalarla desde un repositorio de github. A continuación, se muestra cómo se realiza la instalación y posteriormente el uso de la función:</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="modelo-multinomial.html#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;BS1125/CMAverse&quot;)</span></span>
-<span id="cb476-2"><a href="modelo-multinomial.html#cb476-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CMAverse)</span>
-<span id="cb476-3"><a href="modelo-multinomial.html#cb476-3" aria-hidden="true" tabindex="-1"></a>model_mul2 <span class="ot">&lt;-</span> <span class="fu">svymultinom</span>(</span>
-<span id="cb476-4"><a href="modelo-multinomial.html#cb476-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb476-5"><a href="modelo-multinomial.html#cb476-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> diseno_15<span class="sc">$</span>variables<span class="sc">$</span>wk2, </span>
-<span id="cb476-6"><a href="modelo-multinomial.html#cb476-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> diseno_15<span class="sc">$</span>variables</span>
-<span id="cb476-7"><a href="modelo-multinomial.html#cb476-7" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb476-8"><a href="modelo-multinomial.html#cb476-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_mul2)<span class="sc">$</span>summarydf</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="modelo-multinomial.html#cb476-1" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;BS1125/CMAverse&quot;)</span></span>
+<span id="cb476-2"><a href="modelo-multinomial.html#cb476-2" tabindex="-1"></a><span class="fu">library</span>(CMAverse)</span>
+<span id="cb476-3"><a href="modelo-multinomial.html#cb476-3" tabindex="-1"></a>model_mul2 <span class="ot">&lt;-</span> <span class="fu">svymultinom</span>(</span>
+<span id="cb476-4"><a href="modelo-multinomial.html#cb476-4" tabindex="-1"></a>  <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb476-5"><a href="modelo-multinomial.html#cb476-5" tabindex="-1"></a>  <span class="at">weights =</span> diseno_15<span class="sc">$</span>variables<span class="sc">$</span>wk2, </span>
+<span id="cb476-6"><a href="modelo-multinomial.html#cb476-6" tabindex="-1"></a>  <span class="at">data =</span> diseno_15<span class="sc">$</span>variables</span>
+<span id="cb476-7"><a href="modelo-multinomial.html#cb476-7" tabindex="-1"></a>) </span>
+<span id="cb476-8"><a href="modelo-multinomial.html#cb476-8" tabindex="-1"></a><span class="fu">summary</span>(model_mul2)<span class="sc">$</span>summarydf</span></code></pre></div>
 <table>
+<colgroup>
+<col width="32%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="24%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Estimate
-</th>
-<th style="text-align:right;">
-Std. Error
-</th>
-<th style="text-align:right;">
-t value
-</th>
-<th style="text-align:right;">
-Pr(&gt;|t|)
-</th>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Inactive:(Intercept)
-</td>
-<td style="text-align:right;">
-2.2900932
-</td>
-<td style="text-align:right;">
-0.5586694
-</td>
-<td style="text-align:right;">
-4.0991924
-</td>
-<td style="text-align:right;">
-0.0000432
-</td>
+<tr class="odd">
+<td align="left">Inactive:(Intercept)</td>
+<td align="right">2.2900932</td>
+<td align="right">0.5586694</td>
+<td align="right">4.0991924</td>
+<td align="right">0.0000432</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:Age
-</td>
-<td style="text-align:right;">
-0.0247522
-</td>
-<td style="text-align:right;">
-0.0100125
-</td>
-<td style="text-align:right;">
-2.4721273
-</td>
-<td style="text-align:right;">
-0.0135199
-</td>
+<tr class="even">
+<td align="left">Inactive:Age</td>
+<td align="right">0.0247522</td>
+<td align="right">0.0100125</td>
+<td align="right">2.4721273</td>
+<td align="right">0.0135199</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:SexMale
-</td>
-<td style="text-align:right;">
--2.2194689
-</td>
-<td style="text-align:right;">
-0.3162459
-</td>
-<td style="text-align:right;">
--7.0181738
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
+<tr class="odd">
+<td align="left">Inactive:SexMale</td>
+<td align="right">-2.2194689</td>
+<td align="right">0.3162459</td>
+<td align="right">-7.0181738</td>
+<td align="right">0.0000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:RegionSur
-</td>
-<td style="text-align:right;">
--0.4361437
-</td>
-<td style="text-align:right;">
-0.4258014
-</td>
-<td style="text-align:right;">
--1.0242890
-</td>
-<td style="text-align:right;">
-0.3058318
-</td>
+<tr class="even">
+<td align="left">Inactive:RegionSur</td>
+<td align="right">-0.4361437</td>
+<td align="right">0.4258014</td>
+<td align="right">-1.0242890</td>
+<td align="right">0.3058318</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:RegionCentro
-</td>
-<td style="text-align:right;">
-0.3715204
-</td>
-<td style="text-align:right;">
-0.4910265
-</td>
-<td style="text-align:right;">
-0.7566198
-</td>
-<td style="text-align:right;">
-0.4493733
-</td>
+<tr class="odd">
+<td align="left">Inactive:RegionCentro</td>
+<td align="right">0.3715204</td>
+<td align="right">0.4910265</td>
+<td align="right">0.7566198</td>
+<td align="right">0.4493733</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:RegionOccidente
-</td>
-<td style="text-align:right;">
-0.2537092
-</td>
-<td style="text-align:right;">
-0.4552794
-</td>
-<td style="text-align:right;">
-0.5572605
-</td>
-<td style="text-align:right;">
-0.5774164
-</td>
+<tr class="even">
+<td align="left">Inactive:RegionOccidente</td>
+<td align="right">0.2537092</td>
+<td align="right">0.4552794</td>
+<td align="right">0.5572605</td>
+<td align="right">0.5774164</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:RegionOriente
-</td>
-<td style="text-align:right;">
-0.6175485
-</td>
-<td style="text-align:right;">
-0.5157976
-</td>
-<td style="text-align:right;">
-1.1972692
-</td>
-<td style="text-align:right;">
-0.2313540
-</td>
+<tr class="odd">
+<td align="left">Inactive:RegionOriente</td>
+<td align="right">0.6175485</td>
+<td align="right">0.5157976</td>
+<td align="right">1.1972692</td>
+<td align="right">0.2313540</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive:ZoneUrban
-</td>
-<td style="text-align:right;">
--0.2346034
-</td>
-<td style="text-align:right;">
-0.2906882
-</td>
-<td style="text-align:right;">
--0.8070620
-</td>
-<td style="text-align:right;">
-0.4197338
-</td>
+<tr class="even">
+<td align="left">Inactive:ZoneUrban</td>
+<td align="right">-0.2346034</td>
+<td align="right">0.2906882</td>
+<td align="right">-0.8070620</td>
+<td align="right">0.4197338</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:(Intercept)
-</td>
-<td style="text-align:right;">
-2.0928541
-</td>
-<td style="text-align:right;">
-0.5427128
-</td>
-<td style="text-align:right;">
-3.8562827
-</td>
-<td style="text-align:right;">
-0.0001190
-</td>
+<tr class="odd">
+<td align="left">Employed:(Intercept)</td>
+<td align="right">2.0928541</td>
+<td align="right">0.5427128</td>
+<td align="right">3.8562827</td>
+<td align="right">0.0001190</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:Age
-</td>
-<td style="text-align:right;">
-0.0207428
-</td>
-<td style="text-align:right;">
-0.0096497
-</td>
-<td style="text-align:right;">
-2.1495766
-</td>
-<td style="text-align:right;">
-0.0317171
-</td>
+<tr class="even">
+<td align="left">Employed:Age</td>
+<td align="right">0.0207428</td>
+<td align="right">0.0096497</td>
+<td align="right">2.1495766</td>
+<td align="right">0.0317171</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:SexMale
-</td>
-<td style="text-align:right;">
--0.5563127
-</td>
-<td style="text-align:right;">
-0.3053398
-</td>
-<td style="text-align:right;">
--1.8219460
-</td>
-<td style="text-align:right;">
-0.0686234
-</td>
+<tr class="odd">
+<td align="left">Employed:SexMale</td>
+<td align="right">-0.5563127</td>
+<td align="right">0.3053398</td>
+<td align="right">-1.8219460</td>
+<td align="right">0.0686234</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:RegionSur
-</td>
-<td style="text-align:right;">
--0.2789895
-</td>
-<td style="text-align:right;">
-0.4106178
-</td>
-<td style="text-align:right;">
--0.6794386
-</td>
-<td style="text-align:right;">
-0.4969444
-</td>
+<tr class="even">
+<td align="left">Employed:RegionSur</td>
+<td align="right">-0.2789895</td>
+<td align="right">0.4106178</td>
+<td align="right">-0.6794386</td>
+<td align="right">0.4969444</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:RegionCentro
-</td>
-<td style="text-align:right;">
-0.2559417
-</td>
-<td style="text-align:right;">
-0.4678575
-</td>
-<td style="text-align:right;">
-0.5470505
-</td>
-<td style="text-align:right;">
-0.5844096
-</td>
+<tr class="odd">
+<td align="left">Employed:RegionCentro</td>
+<td align="right">0.2559417</td>
+<td align="right">0.4678575</td>
+<td align="right">0.5470505</td>
+<td align="right">0.5844096</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:RegionOccidente
-</td>
-<td style="text-align:right;">
-0.0929049
-</td>
-<td style="text-align:right;">
-0.4438767
-</td>
-<td style="text-align:right;">
-0.2093035
-</td>
-<td style="text-align:right;">
-0.8342342
-</td>
+<tr class="even">
+<td align="left">Employed:RegionOccidente</td>
+<td align="right">0.0929049</td>
+<td align="right">0.4438767</td>
+<td align="right">0.2093035</td>
+<td align="right">0.8342342</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:RegionOriente
-</td>
-<td style="text-align:right;">
-0.4704651
-</td>
-<td style="text-align:right;">
-0.5050940
-</td>
-<td style="text-align:right;">
-0.9314407
-</td>
-<td style="text-align:right;">
-0.3517463
-</td>
+<tr class="odd">
+<td align="left">Employed:RegionOriente</td>
+<td align="right">0.4704651</td>
+<td align="right">0.5050940</td>
+<td align="right">0.9314407</td>
+<td align="right">0.3517463</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed:ZoneUrban
-</td>
-<td style="text-align:right;">
-0.0567466
-</td>
-<td style="text-align:right;">
-0.2791795
-</td>
-<td style="text-align:right;">
-0.2032619
-</td>
-<td style="text-align:right;">
-0.8389525
-</td>
+<tr class="even">
+<td align="left">Employed:ZoneUrban</td>
+<td align="right">0.0567466</td>
+<td align="right">0.2791795</td>
+<td align="right">0.2032619</td>
+<td align="right">0.8389525</td>
 </tr>
 </tbody>
 </table>
 <p>El hacer uso de esta función permite obtener de manera simple la predicción de las probabilidades como se muestra a continuación:</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="modelo-multinomial.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb477-2"><a href="modelo-multinomial.html#cb477-2" aria-hidden="true" tabindex="-1"></a>tab_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_mul2, <span class="at">type =</span> <span class="st">&quot;probs&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb477-3"><a href="modelo-multinomial.html#cb477-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb477-4"><a href="modelo-multinomial.html#cb477-4" aria-hidden="true" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="modelo-multinomial.html#cb477-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb477-2"><a href="modelo-multinomial.html#cb477-2" tabindex="-1"></a>tab_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_mul2, <span class="at">type =</span> <span class="st">&quot;probs&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb477-3"><a href="modelo-multinomial.html#cb477-3" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb477-4"><a href="modelo-multinomial.html#cb477-4" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:right;">
-Unemployed
-</th>
-<th style="text-align:right;">
-Inactive
-</th>
-<th style="text-align:right;">
-Employed
-</th>
+<tr class="header">
+<th align="right">Unemployed</th>
+<th align="right">Inactive</th>
+<th align="right">Employed</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-0.0387205
-</td>
-<td style="text-align:right;">
-0.2236639
-</td>
-<td style="text-align:right;">
-0.7376156
-</td>
+<tr class="odd">
+<td align="right">0.0387205</td>
+<td align="right">0.2236639</td>
+<td align="right">0.7376156</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0150598
-</td>
-<td style="text-align:right;">
-0.5948109
-</td>
-<td style="text-align:right;">
-0.3901293
-</td>
+<tr class="even">
+<td align="right">0.0150598</td>
+<td align="right">0.5948109</td>
+<td align="right">0.3901293</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0310297
-</td>
-<td style="text-align:right;">
-0.5550689
-</td>
-<td style="text-align:right;">
-0.4139014
-</td>
+<tr class="odd">
+<td align="right">0.0310297</td>
+<td align="right">0.5550689</td>
+<td align="right">0.4139014</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0907946
-</td>
-<td style="text-align:right;">
-0.1854493
-</td>
-<td style="text-align:right;">
-0.7237561
-</td>
+<tr class="even">
+<td align="right">0.0907946</td>
+<td align="right">0.1854493</td>
+<td align="right">0.7237561</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0134342
-</td>
-<td style="text-align:right;">
-0.6005134
-</td>
-<td style="text-align:right;">
-0.3860523
-</td>
+<tr class="odd">
+<td align="right">0.0134342</td>
+<td align="right">0.6005134</td>
+<td align="right">0.3860523</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0317299
-</td>
-<td style="text-align:right;">
-0.5537176
-</td>
-<td style="text-align:right;">
-0.4145525
-</td>
+<tr class="even">
+<td align="right">0.0317299</td>
+<td align="right">0.5537176</td>
+<td align="right">0.4145525</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0466669
-</td>
-<td style="text-align:right;">
-0.2157326
-</td>
-<td style="text-align:right;">
-0.7376005
-</td>
+<tr class="odd">
+<td align="right">0.0466669</td>
+<td align="right">0.2157326</td>
+<td align="right">0.7376005</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0172653
-</td>
-<td style="text-align:right;">
-0.5878100
-</td>
-<td style="text-align:right;">
-0.3949247
-</td>
+<tr class="even">
+<td align="right">0.0172653</td>
+<td align="right">0.5878100</td>
+<td align="right">0.3949247</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0790766
-</td>
-<td style="text-align:right;">
-0.1920709
-</td>
-<td style="text-align:right;">
-0.7288525
-</td>
+<tr class="odd">
+<td align="right">0.0790766</td>
+<td align="right">0.1920709</td>
+<td align="right">0.7288525</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0294856
-</td>
-<td style="text-align:right;">
-0.2349694
-</td>
-<td style="text-align:right;">
-0.7355450
-</td>
+<tr class="even">
+<td align="right">0.0294856</td>
+<td align="right">0.2349694</td>
+<td align="right">0.7355450</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0095218
-</td>
-<td style="text-align:right;">
-0.6169869
-</td>
-<td style="text-align:right;">
-0.3734913
-</td>
+<tr class="odd">
+<td align="right">0.0095218</td>
+<td align="right">0.6169869</td>
+<td align="right">0.3734913</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0621464
-</td>
-<td style="text-align:right;">
-0.2031545
-</td>
-<td style="text-align:right;">
-0.7346991
-</td>
+<tr class="even">
+<td align="right">0.0621464</td>
+<td align="right">0.2031545</td>
+<td align="right">0.7346991</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0687482
-</td>
-<td style="text-align:right;">
-0.1985744
-</td>
-<td style="text-align:right;">
-0.7326773
-</td>
+<tr class="odd">
+<td align="right">0.0687482</td>
+<td align="right">0.1985744</td>
+<td align="right">0.7326773</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0839204
-</td>
-<td style="text-align:right;">
-0.1892482
-</td>
-<td style="text-align:right;">
-0.7268314
-</td>
+<tr class="even">
+<td align="right">0.0839204</td>
+<td align="right">0.1892482</td>
+<td align="right">0.7268314</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-0.0730133
-</td>
-<td style="text-align:right;">
-0.1958009
-</td>
-<td style="text-align:right;">
-0.7311858
-</td>
+<tr class="odd">
+<td align="right">0.0730133</td>
+<td align="right">0.1958009</td>
+<td align="right">0.7311858</td>
 </tr>
 </tbody>
 </table>
 <p>Las predicciones del modelo se realizan de la siguiente manera:</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="modelo-multinomial.html#cb478-1" aria-hidden="true" tabindex="-1"></a>diseno_15<span class="sc">$</span>variables  <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb478-2"><a href="modelo-multinomial.html#cb478-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicion =</span> <span class="fu">predict</span>(model_mul2))</span>
-<span id="cb478-3"><a href="modelo-multinomial.html#cb478-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb478-4"><a href="modelo-multinomial.html#cb478-4" aria-hidden="true" tabindex="-1"></a>diseno_15 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb478-5"><a href="modelo-multinomial.html#cb478-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="modelo-multinomial.html#cb478-1" tabindex="-1"></a>diseno_15<span class="sc">$</span>variables  <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb478-2"><a href="modelo-multinomial.html#cb478-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicion =</span> <span class="fu">predict</span>(model_mul2))</span>
+<span id="cb478-3"><a href="modelo-multinomial.html#cb478-3" tabindex="-1"></a></span>
+<span id="cb478-4"><a href="modelo-multinomial.html#cb478-4" tabindex="-1"></a>diseno_15 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb478-5"><a href="modelo-multinomial.html#cb478-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:left;">
-Employment
-</th>
-<th style="text-align:right;">
-Prop
-</th>
-<th style="text-align:right;">
-Prop_se
-</th>
-<th style="text-align:right;">
-Prop_low
-</th>
-<th style="text-align:right;">
-Prop_upp
-</th>
+<tr class="header">
+<th align="left">Employment</th>
+<th align="right">Prop</th>
+<th align="right">Prop_se</th>
+<th align="right">Prop_low</th>
+<th align="right">Prop_upp</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Unemployed
-</td>
-<td style="text-align:right;">
-0.0448040
-</td>
-<td style="text-align:right;">
-0.0077955
-</td>
-<td style="text-align:right;">
-0.0293683
-</td>
-<td style="text-align:right;">
-0.0602398
-</td>
+<tr class="odd">
+<td align="left">Unemployed</td>
+<td align="right">0.0448040</td>
+<td align="right">0.0077955</td>
+<td align="right">0.0293683</td>
+<td align="right">0.0602398</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inactive
-</td>
-<td style="text-align:right;">
-0.3798195
-</td>
-<td style="text-align:right;">
-0.0150308
-</td>
-<td style="text-align:right;">
-0.3500571
-</td>
-<td style="text-align:right;">
-0.4095820
-</td>
+<tr class="even">
+<td align="left">Inactive</td>
+<td align="right">0.3798195</td>
+<td align="right">0.0150308</td>
+<td align="right">0.3500571</td>
+<td align="right">0.4095820</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Employed
-</td>
-<td style="text-align:right;">
-0.5753764
-</td>
-<td style="text-align:right;">
-0.0130688
-</td>
-<td style="text-align:right;">
-0.5494988
-</td>
-<td style="text-align:right;">
-0.6012540
-</td>
+<tr class="odd">
+<td align="left">Employed</td>
+<td align="right">0.5753764</td>
+<td align="right">0.0130688</td>
+<td align="right">0.5494988</td>
+<td align="right">0.6012540</td>
 </tr>
 </tbody>
 </table>
@@ -1151,43 +770,43 @@ Employed
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/09-Generalizados2.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/09-Generalizados2.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>

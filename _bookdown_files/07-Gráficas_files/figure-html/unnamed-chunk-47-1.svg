@@ -57,34 +57,34 @@
 <path d='M 219.33 143.51 L 223.43 145.36 L 222.68 151.08 L 223.17 156.53 L 224.73 160.18 L 228.83 162.57 L 234.48 162.84 L 240.68 163.92 L 244.78 166.80 L 247.86 167.34 L 250.17 167.84 L 257.88 170.22 L 260.69 171.53 L 263.77 172.61 L 265.06 173.65 L 263.54 174.68 L 258.15 181.17 L 252.76 187.65 L 250.71 192.06 L 249.68 200.62 L 248.39 205.30 L 242.46 213.86 L 237.87 217.23 L 236.31 218.76 L 237.12 222.41 L 239.17 231.55 L 236.58 240.60 L 237.05 246.23 L 237.60 252.84 L 235.33 257.80 L 230.43 263.74 L 227.35 267.11 L 224.28 274.63 L 221.96 277.74 L 219.15 281.38 L 216.30 281.34 L 215.27 283.68 L 209.13 289.88 L 208.64 295.10 L 204.50 298.97 L 200.67 300.28 L 194.20 303.53 L 192.96 304.15 L 186.54 295.51 L 176.23 287.14 L 167.23 279.09 L 156.45 274.09 L 147.98 271.16 L 136.39 267.25 L 128.46 266.66 L 123.29 266.66 L 117.90 264.82 L 114.55 262.70 L 115.66 260.28 L 118.70 253.65 L 118.92 242.44 L 115.58 231.01 L 114.82 222.41 L 114.78 210.70 L 114.78 199.00 L 116.34 187.33 L 121.46 183.19 L 130.95 181.93 L 137.64 181.16 L 142.01 179.86 L 155.65 172.65 L 168.70 167.25 L 175.17 167.29 L 182.61 166.53 L 190.81 159.77 L 195.94 157.21 L 202.62 154.91 L 207.26 150.49 L 211.89 147.39 L 215.72 144.55 L 219.33 143.51 Z' style='fill-rule: evenodd; fill: #8DD3C7; stroke-width: 0.75; stroke: #666666;' />
 <path d='M 237.05 246.23 L 241.17 245.76 L 247.21 247.29 L 252.75 251.36 L 258.79 253.90 L 264.84 251.36 L 272.90 244.23 L 279.44 246.27 L 282.46 248.81 L 288.01 247.79 L 293.55 245.25 L 297.07 245.25 L 300.09 249.32 L 296.56 258.48 L 288.51 267.12 L 287.50 276.28 L 287.50 282.38 L 287.50 286.34 L 286.72 286.33 L 281.07 289.70 L 277.72 296.41 L 274.38 300.33 L 269.79 304.47 L 268.50 309.91 L 266.94 314.59 L 263.86 315.09 L 261.55 315.36 L 257.71 315.58 L 255.93 317.65 L 254.11 322.60 L 254.11 325.17 L 248.98 330.61 L 245.37 331.11 L 239.75 331.38 L 237.16 334.36 L 232.20 330.69 L 227.79 329.20 L 222.20 326.23 L 217.79 321.18 L 212.20 317.62 L 206.32 315.24 L 202.79 309.90 L 197.79 305.74 L 194.20 303.53 L 200.67 300.28 L 204.50 298.97 L 208.64 295.10 L 209.13 289.88 L 215.27 283.68 L 216.30 281.34 L 219.15 281.38 L 221.96 277.74 L 224.28 274.63 L 227.35 267.11 L 230.43 263.74 L 235.33 257.80 L 237.60 252.84 L 237.05 246.23 Z' style='fill-rule: evenodd; fill: #BEBADA; stroke-width: 0.75; stroke: #666666;' />
 <rect x='10.08' y='19.21' width='483.83' height='321.59' style='stroke-width: 0.75; stroke-linecap: square;' />
-<rect x='425.91' y='26.90' width='60.31' height='71.28' style='stroke-width: 0.75; stroke: none;' />
+<rect x='425.90' y='26.90' width='60.32' height='71.28' style='stroke-width: 0.75; stroke: none;' />
 </g>
 <defs>
-  <clipPath id='cpNDI1LjkxfDUwNC4wMHwyNi45MHw0Mi43NA=='>
-    <rect x='425.91' y='26.90' width='78.09' height='15.84' />
+  <clipPath id='cpNDI1LjkwfDUwNC4wMHwyNi45MHw0Mi43NA=='>
+    <rect x='425.90' y='26.90' width='78.10' height='15.84' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpNDI1LjkxfDUwNC4wMHwyNi45MHw0Mi43NA==)'>
-<text x='427.49' y='38.77' style='font-size: 11.00px; font-family: "Arial";' textLength='34.86px' lengthAdjust='spacingAndGlyphs'>Region</text>
+<g clip-path='url(#cpNDI1LjkwfDUwNC4wMHwyNi45MHw0Mi43NA==)'>
+<text x='427.48' y='38.76' style='font-size: 11.00px; font-family: "Arial";' textLength='34.86px' lengthAdjust='spacingAndGlyphs'>Region</text>
 </g>
 <g clip-path='url(#cpMTAuMDh8NDkzLjkyfDE5LjIxfDM0MC43OQ==)'>
 </g>
 <defs>
-  <clipPath id='cpNDI1LjkxfDUwNC4wMHw0Mi43NHw5OC4xOA=='>
-    <rect x='425.91' y='42.74' width='78.09' height='55.44' />
+  <clipPath id='cpNDI1LjkwfDUwNC4wMHw0Mi43NHw5OC4xOA=='>
+    <rect x='425.90' y='42.74' width='78.10' height='55.44' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpNDI1LjkxfDUwNC4wMHw0Mi43NHw5OC4xOA==)'>
-<rect x='428.43' y='45.26' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #8DD3C7;' />
-<rect x='428.43' y='55.34' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #FFFFB3;' />
-<rect x='428.43' y='65.42' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #BEBADA;' />
-<rect x='428.43' y='75.50' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #FB8072;' />
-<rect x='428.43' y='85.58' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #80B1D3;' />
-<text x='441.03' y='53.31' style='font-size: 8.40px; font-family: "Arial";' textLength='25.19px' lengthAdjust='spacingAndGlyphs'>Centro</text>
-<text x='441.03' y='63.39' style='font-size: 8.40px; font-family: "Arial";' textLength='20.52px' lengthAdjust='spacingAndGlyphs'>Norte</text>
-<text x='441.03' y='73.47' style='font-size: 8.40px; font-family: "Arial";' textLength='37.78px' lengthAdjust='spacingAndGlyphs'>Occidente</text>
-<text x='441.03' y='83.55' style='font-size: 8.40px; font-family: "Arial";' textLength='27.51px' lengthAdjust='spacingAndGlyphs'>Oriente</text>
-<text x='441.03' y='93.63' style='font-size: 8.40px; font-family: "Arial";' textLength='13.05px' lengthAdjust='spacingAndGlyphs'>Sur</text>
+<g clip-path='url(#cpNDI1LjkwfDUwNC4wMHw0Mi43NHw5OC4xOA==)'>
+<rect x='428.42' y='45.26' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #8DD3C7;' />
+<rect x='428.42' y='55.34' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #FFFFB3;' />
+<rect x='428.42' y='65.42' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #BEBADA;' />
+<rect x='428.42' y='75.50' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #FB8072;' />
+<rect x='428.42' y='85.58' width='10.08' height='10.08' style='stroke-width: 0.75; stroke: #666666; fill: #80B1D3;' />
+<text x='441.02' y='53.31' style='font-size: 8.40px; font-family: "Arial";' textLength='25.18px' lengthAdjust='spacingAndGlyphs'>Centro</text>
+<text x='441.02' y='63.39' style='font-size: 8.40px; font-family: "Arial";' textLength='20.51px' lengthAdjust='spacingAndGlyphs'>Norte</text>
+<text x='441.02' y='73.47' style='font-size: 8.40px; font-family: "Arial";' textLength='37.78px' lengthAdjust='spacingAndGlyphs'>Occidente</text>
+<text x='441.02' y='83.55' style='font-size: 8.40px; font-family: "Arial";' textLength='27.51px' lengthAdjust='spacingAndGlyphs'>Oriente</text>
+<text x='441.02' y='93.63' style='font-size: 8.40px; font-family: "Arial";' textLength='13.05px' lengthAdjust='spacingAndGlyphs'>Sur</text>
 </g>
 <g clip-path='url(#cpMTAuMDh8NDkzLjkyfDE5LjIxfDM0MC43OQ==)'>
 </g>

@@ -14,12 +14,11 @@ Como se ha venido mencionando anteriormente, dentro del software *R* se disponen
 
 ## Lectura de bases de datos y definición del diseño muestral
 
-Las bases de datos (tablas de datos) pueden estar disponibles en una variedad de formatos (.`xlsx`, `.dat`, `.cvs`, `.sav`, `.txt`, etc.), sin embargo, por experiencia es recomendable realizar la lectura de cualesquiera de estos formatos y proceder inmediatamente a guardarlo en un archivo de extensión **.rds**, la cual es nativa de `R.` las extensiones **rds** permiten almacenar cualquier objeto o información en `R` como pueden ser marco de datos, vectores, matrices, lista, entre otros. Los archivos **.rds** se carcaterizan por su flexibilidad a la hora de almacenarlos, sin limitarse a su base de datos, y por su perfecta compatibilidad con R.
+Las bases de datos (tablas de datos) pueden estar disponibles en una variedad de formatos (.xlsx, .dat, .csv, .sav, .txt, etc.). Sin embargo, por experiencia es recomendable leer cualquiera de estos formatos y proceder inmediatamente a guardarlos en un archivo de extensión `.rds`, que es nativa de R. Los archivos `.rds` permiten almacenar cualquier objeto o información en R, como marcos de datos, vectores, matrices, listas, entre otros. Se caracterizan por su flexibilidad y compatibilidad completa con R, lo que facilita su reutilización en análisis posteriores.
 
-Por otro lado, existe otro tipos de archivos propios de `R` como lo es **.Rdata**. Sin embargo existen diferencia entre ellos. Por ejemplo, mientras que los archivos **.rds** pueden contener cualquier número de objetos, los **.Rdata** se limitan a un solo objeto. Es por lo anterior que, se recomeinda trabajar con archivos **.rds**.
+Por otro lado, existen otros tipos de archivos propios de R, como `.Rdata`. La diferencia principal es que los archivos `.rds` contienen un solo objeto, mientras que `.Rdata` puede almacenar múltiples objetos. Por ello, se recomienda trabajar preferentemente con archivos `.rds`.
 
-Para ejemplifcar las sintaxis que se utilizarán en `R`, se tomará la misma base del capítulo anterior la cual contiene una muestra de 2427 registro y proviene de un muestreo complejo. A continuación, se muestra la sintaxis en `R` de cómo cargar un archivo con extensión **.rsd**
-
+Para ejemplificar la sintaxis que se utilizará en R, se tomará la misma base del capítulo anterior, que contiene una muestra de 2,427 registros y proviene de un muestreo complejo. A continuación, se muestra cómo cargar un archivo con extensión `.rds`:
 
 ```{r, eval=T}
 library(tidyverse)
@@ -28,7 +27,19 @@ encuesta <- readRDS("Data/encuesta.rds")
 head(encuesta)
 ```
 
-Una vez caraga la muestra de hogares en `R`, el siguiente paso es definir el diseño muestral del cual proviene dicha muestra. Para esto se utilizará el paquete `srvyr` el cual, como se definió anteriormente, surge como un complemento para `survey`. Estas librerías permiten definir objetos  tipo **survey.design** a los que se aplican las funciones de estimación y análisis de encuestas cargadas en el paquete `srvyr` complementados con la programación de tubería ( %>% ) del paquete `tidyverse`. A manera de ejemplificar los conceptos mencionados anteriormente, se definirá en `R` el diseño de muestreo del cual proviene la muestra contenida en el objeto **encuesta**:
+
+Según Naciones Unidas (2005, sec. 7.8), es fundamental que la estructura de los diseños de muestreo complejos se tenga en cuenta en el proceso de inferencia al estimar estadísticas oficiales basadas en encuestas de hogares. Ignorar este aspecto puede generar estimaciones sesgadas y errores de muestreo subestimados. En este contexto, los programas estadísticos ofrecen funcionalidades clave para el manejo de datos provenientes de este tipo de diseños (Heeringa, West y Berglund, 2017, Apéndice A).
+
+De manera general, herramientas estadísticas como **R, Stata, SAS y SPSS** cuentan con módulos y bibliotecas que optimizan la estimación de varianzas en muestras complejas, incorporando métodos de replicación para varianzas basadas en el diseño. Mientras que R es de acceso libre, los otros programas requieren licencias de pago. Estas plataformas permiten calcular estadísticas descriptivas (medias, totales, proporciones, percentiles, razones) y ajustar modelos de regresión considerando la estructura del diseño de la encuesta. Los programas especializados generan automáticamente el efecto del diseño, facilitando la interpretación de la variabilidad de las estimaciones.
+
+El uso de estos paquetes implica que el usuario suministre información clave del diseño muestral, como factores de expansión, estratificación e identificadores de conglomerados. A continuación, se ofrece un resumen general, aunque no exhaustivo, de las funciones y posibilidades que brindan los principales programas estadísticos para el análisis de encuestas complejas.
+
+
+
+Una vez cargada la muestra de hogares en `R`, el siguiente paso es definir el diseño muestral del cual proviene dicha muestra. Para ello se utilizará el paquete `srvyr`, que como se mencionó anteriormente, surge como un complemento de `survey`. Estas librerías permiten definir objetos tipo **survey.design**, a los que se aplican las funciones de estimación y análisis de encuestas, y que pueden ser combinadas con la programación de tubería (`%>%`) del paquete `tidyverse`.
+
+A manera de ejemplificar los conceptos mencionados, a continuación se define en `R` el diseño de muestreo del cual proviene la muestra contenida en el objeto **encuesta**:
+
 
 ```{r}
 options(survey.lonely.psu = "adjust") 
@@ -141,30 +152,218 @@ svyboxplot(
 
 Los argumentos usados en la función *svyboxplot* para generar el gráfico son muy similares a los usados en la función *svyhist*. Algo a recalcar el los argumentos de esta función es que el símbolo "Income ~ 1" hace referencia a que todas las personas pertenecen a un solo grupo que puede ser urbano o rural dependiendo del caso y por eso se requiere indicarle a `R` esa restricción, lo cual se hace con el símbolo "~1".
 
-## Estimación puntual
 
-Después de realizar el análisis gráfico de las tendencias de las variables continuas de la encuesta, es necesario obtener las estimaciones puntuales de los parámetros que se midieron. Dichas estimaciones se obtienen de forma general o desagregado por niveles de acuerdo con las necesidades de la investigación. Entiéndase como estimaciones puntuales en el contexto de las encuestas de hogares a la estimación de totales, pormedios, razones, etc.  Como lo menciona **Heeringa, et al (2017)** la estimación del total o promedio de una población y su varianza muestral ha jugado un papel muy importante en el desarrollo de la teoría del muestreo probabilístico, particularmente en las encuestas de hogares dado que, permiten dar un valor muy acertado de lo que puede estar pasando en los hogares estudiados y con ello tomar decisiones de política publica de manera informada.
+## Estimación de totales, medias y razones
+
+Al trabajar con encuestas de hogares, el análisis de datos numéricos implica con frecuencia calcular estadísticas descriptivas como medias, totales y razones, ya que estas permiten sintetizar las principales características de la población y sirven de base para la toma de decisiones. Dichas estimaciones pueden calcularse para la población en su conjunto o para subgrupos específicos, según los objetivos de la investigación. Tal como destacan Heeringa, West y Berglund (2017), el cálculo de totales y medias poblacionales, junto con sus varianzas, ha sido esencial para el desarrollo de la teoría del muestreo probabilístico y la interpretación adecuada de los resultados de encuestas de hogares.
+
+
+### Estimación puntual
+
+Una vez exploradas las tendencias de las variables continuas mediante análisis gráfico, el siguiente paso consiste en obtener las estimaciones puntuales de los parámetros medidos. Estas estimaciones pueden calcularse de forma general o desagregada por niveles de análisis, dependiendo de las necesidades de la investigación. En el contexto de encuestas de hogares, las estimaciones puntuales comprenden el cálculo de totales, promedios, razones y otras medidas agregadas.
+
+Heeringa et al. (2017) señalan que la estimación del total o promedio de una población y su varianza muestral es fundamental en la teoría del muestreo probabilístico, ya que permite obtener valores precisos sobre la situación de los hogares estudiados, facilitando la toma de decisiones informadas en políticas públicas.
+
 
 ### Estimación de totales e intervalos de confianza
 
-Una vez definido el diseño muestral, lo cual se hizo en la sección anterior), se procede a realizar los procesos de estimación de los parámetros de interés. Para efectos de este texto se iniciará con la estimación del total de los ingresos de los hogares. 
+Una vez definido el diseño muestral (como se hizo en la sección anterior), se procede a realizar los procesos de estimación de los parámetros de interés. Para efectos de este texto, se iniciará con la estimación del total de los ingresos de los hogares.
 
-En su mayoría, los paquetes estadístico actuales no utilizan técnicas avanzadas para estimar los totales de la población, por ejemplo, usar estimadores generales de regresión (GREG) o métodos de calibración. Sin embargo, **Valiente et al. (2000)** realizó una librería implementada en *S-plus* que premite realizar estos procedimientos de estimación, que se pueden escribir de manera sencilla en códigos en R **(Valliant et al., 2013)**.
+En su mayoría, los paquetes estadísticos actuales no implementan técnicas avanzadas como estimadores generales de regresión (GREG) o métodos de calibración. Sin embargo, Valliant et al. (2000) desarrollaron una librería en *S-plus* que permite realizar estos procedimientos de estimación, los cuales también pueden implementarse en R (Valliant et al., 2013).
 
-Para la estimación de totales con diseños muestrales complejos que incluya estratificación $\left(h=1,2,...,H\right)$y muestreo por conglomerados (cuyos conglomerados están dentro del estrato $h$) indexados por $\alpha=1,2,...,a_{h}$, el estimador para el total se puede escribir como:
+Para la estimación de totales con diseños muestrales complejos que incluyen estratificación ($h=1,2,...,H$) y muestreo por conglomerados (cuyos conglomerados están dentro del estrato $h$, indexados por $\alpha=1,2,...,a\_h$), el estimador del total se puede expresar como:
 
-\begin{eqnarray*}
-\hat{Y}_{\omega} & = & \sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}y_{h\alpha i}.
-\end{eqnarray*}
+$$
+\hat{Y}_{\omega} = \sum_{h=1}^{H}\sum_{\alpha=1}^{a_h}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i} y_{h\alpha i}
+$$
 
-El estimador insesgado de la varianza para este estimador es:
+El estimador insesgado de la varianza para este total es:
 
-\begin{eqnarray*}
-var\left(\hat{Y}_{\omega}\right) & = & \sum_{h=1}^{H}\frac{a_{h}}{\left(a_{h}-1\right)}\left[\sum_{\alpha=1}^{a_{h}}\left(\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}-\frac{\left({ \sum_{\alpha=1}^{a_{h}}}\omega_{h\alpha i}y_{h\alpha i}\right)^{2}}{a_{h}}\right]
-\end{eqnarray*}
+$$
+\text{var}\left(\hat{Y}_{\omega}\right) = \sum_{h=1}^{H} \frac{a_h}{a_h - 1} \left[ \sum_{\alpha=1}^{a_h} \left( \sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i} y_{h\alpha i} \right)^2 - \frac{\left( \sum_{\alpha=1}^{a_h} \omega_{h\alpha i} y_{h\alpha i} \right)^2}{a_h} \right]
+$$
 
 
-Como se puede observar, calcular la estimación del total y su varianza estimada es complejo. Sin embargo,  dichos cálculos se pueden hacer en `R` mediante la función `svytotal` y el intervalos de confianza se calcula con la función `confint`, ambos usando la librería `survey`. A continuación, se muestran los códigos:
+
+La determinación de los totales poblacionales constituye uno de los pilares del análisis de encuestas. Tanto las medias como las proporciones y las razones derivan de los totales. Un total se define como la suma de una variable específica (por ejemplo, ingreso o gasto) a nivel de toda la población. Para estimar el ingreso total de todos los hogares de un país, se combinan los datos de la muestra aplicando los pesos muestrales que reflejan el diseño y aseguran representatividad.
+
+En el caso de variables numéricas simples, las estimaciones básicas son los totales y medias, mientras que las razones permiten establecer comparaciones entre dos variables numéricas. Estos cálculos pueden realizarse para toda la población o de manera desagregada por dominios de estudio, dependiendo de las preguntas de investigación.
+
+
+Para encuestas con estratificación ($h=1,2,...,H$) y submuestreo en las UPM (ubicadas dentro de cada estrato $h$, identificadas por $i$), el total poblacional se estima mediante:
+
+$$
+\hat{Y} = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} \, y_{hik}
+$$
+
+Cuando se cuenta con respuesta completa, la varianza de $\hat{Y}$ puede calcularse usando el estimador de Ultimate Cluster.
+
+El intervalo de confianza de nivel $1-\alpha$ para el total poblacional $Y$ se calcula como:
+
+$$
+\hat{Y} \pm t_{1-\alpha/2, df} \times \sqrt{\hat{V}_{UC}(\hat{Y})}
+$$
+
+A medida que los grados de libertad aumentan, la distribución $t$ de Student tiende a la normal, lo que explica por qué muchas Oficinas Nacionales de Estadística (ONE) utilizan esta aproximación para reportar intervalos de confianza. No obstante, es importante considerar que esta aproximación puede ser menos fiable cuando el tamaño de la muestra es reducido, aunque suele ofrecer buenos resultados en encuestas de hogares extensas.
+
+
+
+
+Como se puede observar, calcular la estimación del total y su varianza estimada es complejo.
+
+#### Enfoques para la estimación de la varianza
+
+Tal como se mencionó anteriormente, al trabajar con encuestas de hogares es fundamental proporcionar no solo estimaciones puntuales, sino también cuantificar la incertidumbre asociada a dichas estimaciones. Comprender y estimar esta incertidumbre constituye una parte crítica del análisis de los datos provenientes de encuestas de hogares. Mediante la aplicación de métodos apropiados, los usuarios pueden medir la precisión de sus estimaciones.
+
+Existen diversos métodos para estimar dicha precisión y, con el apoyo de software moderno, estos enfoques pueden implementarse de manera eficiente para respaldar análisis rigurosos y significativos. Entre los principales métodos se encuentran:
+
+* **Ecuaciones de estimación:** ofrecen un marco flexible para estimar totales, medias, razones y otros parámetros, así como sus varianzas correspondientes, integrando una idea unificadora de la teoría de muestreo (Binder, 1983).
+
+* **Linealización de Taylor:** consiste en aproximar estadísticas no lineales complejas mediante expresiones lineales y posteriormente estimar la varianza de esta cantidad aproximada.
+
+* **Método del Clúster Último:** utilizado con frecuencia en encuestas que emplean muestreo estratificado en múltiples etapas; se basa en calcular la varianza a partir de las diferencias entre las estimaciones obtenidas a nivel de las unidades primarias de muestreo (PSU). Suele combinarse con la Linealización de Taylor para estimar la varianza de estadísticas no lineales, como medias o razones.
+
+* **Bootstrap y otros métodos de replicación:** se fundamentan en tomar repetidas submuestras del conjunto de datos observado, calcular estimaciones para cada réplica y luego utilizar la variabilidad entre estas estimaciones replicadas para inferir la varianza del estimador principal.
+
+
+
+#### Ecuaciones de estimación y linealización de Taylor {-}
+
+Como se mencionó en el apartado anterior, uno de los enfoques más utilizados para cuantificar la incertidumbre en encuestas de hogares se basa en la formulación de **ecuaciones de estimación** y en la aplicación de la **linealización de Taylor**. Estos métodos proporcionan un marco general que permite definir los parámetros de interés, obtener sus estimadores muestrales y, a partir de ellos, aproximar sus varianzas.
+
+
+Muchos parámetros poblacionales pueden expresarse como soluciones de ecuaciones de estimación que involucran totales poblacionales. Aunque los detalles técnicos pueden ser complejos, la idea fundamental es que los mismos principios utilizados para estimar totales pueden aplicarse también para la estimación de varianzas. Este marco general hace que el método sea sencillo y versátil, permitiendo una implementación eficiente en software especializado.
+
+
+Una ecuación de estimación poblacional genérica se expresa como:
+
+$$
+\sum_{k\in U} z_k(\theta)=0,
+$$
+
+donde $z_k(\cdot)$ es una función de estimación evaluada para la unidad $k$ y $\theta$ representa el parámetro poblacional de interés. Estas ecuaciones proporcionan un marco general para definir y calcular diversos parámetros de la población, como totales, medias y razones.
+
+* **Para el total poblacional:**
+  $z_k(\theta)=y_k-\theta/N$. La ecuación de estimación es $\sum_{k\in U}(y_k-\theta/N)=0$, cuya solución es $\theta=\sum_{k\in U} y_k = Y$.
+
+* **Para la media poblacional:**
+  $z_k(\theta)=y_k-\theta$. La ecuación es $\sum_{k\in U}(y_k-\theta)=0$, cuya solución es $\theta=\left(\sum_{k\in U} y_k\right)/N = \overline{Y}$.
+
+* **Para razones de totales:**
+  $z_k(\theta)=y_k-\theta x_k$. La ecuación $\sum_{k\in U}(y_k-\theta x_k)=0$ conduce a la razón poblacional $\theta=\dfrac{\sum_{k\in U} y_k}{\sum_{k\in U} x_k} = R$.
+
+
+La idea de definir parámetros poblacionales como soluciones de ecuaciones de estimación a nivel de población conduce naturalmente a un método general para obtener los **estimadores muestrales**. En este caso, se utilizan ecuaciones de la forma:
+
+$$
+\sum_{k\in s} d_k\, z_k(\theta)=0,
+$$
+
+donde $d_k$ son los pesos de diseño y $z_k(\theta)$ la función de estimación evaluada para cada unidad de la muestra. Bajo un muestreo probabilístico y asumiendo respuesta completa, la suma muestral $\sum_{k\in s} d_k\, z_k(\theta)$ es insesgada respecto a su análoga poblacional, lo que garantiza que las soluciones de estas ecuaciones sean estimadores consistentes de los parámetros poblacionales.
+
+
+La **linealización de Taylor** constituye un complemento natural a este marco, ya que permite aproximar la varianza de estimadores no lineales. El procedimiento consiste en aplicar una expansión de Taylor de primer orden alrededor del parámetro estimado, con el fin de reemplazar el estimador no lineal por una expresión lineal. De esta manera, se facilita el cálculo de varianzas en situaciones donde no existen fórmulas exactas o su derivación resulta demasiado compleja.
+
+
+Un estimador consistente de la varianza, derivado mediante linealización de Taylor para soluciones de ecuaciones de estimación muestrales, puede expresarse como:
+
+$$
+\hat{V}_{TL}(\hat{\theta}) = [\hat{J}(\hat{\theta})]^{-1} \, \hat{V}_p \Bigg[\sum_{k\in s} d_k\, z_k(\hat{\theta})\Bigg] \, [\hat{J}(\hat{\theta})]^{-1} \tag{9-6}
+$$
+
+donde $\hat{J}(\hat{\theta}) = \sum_{k\in s} d_k \left[ \frac{\partial z_k(\theta)}{\partial \theta} \right]_{\theta=\hat{\theta}}$.
+
+Este resultado muestra cómo la linealización de Taylor convierte la estimación de varianzas de parámetros complejos en un problema de estimación de totales, lo que explica su amplia adopción en software especializado para el análisis de encuestas.
+
+
+#### Ultimate Cluster {-}
+
+
+El método del Ultimate Cluster constituye un enfoque directo y robusto para estimar la varianza de totales en encuestas que emplean diseños de muestreo por conglomerados estratificados en múltiples etapas. Propuesto por Hansen, Hurwitz y Madow (1953), este método simplifica la complejidad de los diseños multinivel al centrarse únicamente en la variación entre las Unidades Primarias de Muestreo (PSU). Se asume que, dentro de cada estrato de muestreo, las PSU fueron seleccionadas de manera independiente con reemplazo (posiblemente con probabilidades desiguales), aunque en la práctica la selección suele realizarse sin reemplazo.
+
+
+El método se basa en la variación entre las estadísticas calculadas a nivel de PSU. Cuando se aplica correctamente, refleja implícitamente cualquier submuestreo realizado dentro de las PSU, permitiendo estimaciones de varianza más simples pero confiables. Es especialmente útil en diseños complejos que incluyen estratificación y probabilidades desiguales de selección tanto de PSU como de unidades de niveles inferiores (hogares e individuos).
+
+Los requisitos para aplicar este método son:
+
+* Disponibilidad de estimaciones insesgadas de totales para las variables de interés en cada PSU muestreada.
+* Al menos dos PSU muestreadas por estrato, si la muestra se estratifica en la primera etapa.
+* Información completa sobre PSU, estratos y pesos en el conjunto de datos de la encuesta.
+
+
+Considere un diseño de muestreo en múltiples etapas donde se seleccionan $n_h$ PSU en el estrato $h$, $h=1,\dots,H$. Sea
+
+$$
+\hat{Y}_{hi} = \sum_{k\in s_{hi}} d_{hik} y_{hik}
+$$
+
+una estimación del total poblacional $Y_{hi}$ de la PSU $i$ en el estrato $h$. Un estimador insesgado del total poblacional $Y = \sum_{h=1}^H \sum_{i \in U_{1h}} Y_{hi}$ se expresa como
+
+$$
+\hat{Y}_{UC} = \sum_{h=1}^H \hat{Y}_h, \quad \text{donde} \quad \hat{Y}_h = \frac{1}{n_h} \sum_{i\in s_{1h}} \hat{Y}_{hi}.
+$$
+
+El estimador Ultimate Cluster de la varianza correspondiente se calcula mediante:
+
+$$
+\hat{V}_{UC}(\hat{Y}) = \sum_{h=1}^H \frac{n_h}{n_h-1} \sum_{i \in s_{1h}} (\hat{Y}_{hi} - \hat{Y}_h)^2 \tag{9-7}
+$$
+
+Para más detalles, véase Hansen, Hurwitz y Madow (1953, vol. I, p. 257) o Wolter (2007).
+
+
+Aunque originalmente se diseñó para calcular varianzas de estimadores de totales, el método puede combinarse con linealización de Taylor o ecuaciones de estimación para derivar varianzas de otros parámetros poblacionales formulables como soluciones de ecuaciones de estimación. Esta flexibilidad hace que el método sea aplicable a diversos contextos de análisis de encuestas de hogares.
+
+
+Un supuesto clave es que, dentro de cada estrato, las PSU se eligen de forma independiente y con reemplazo. En la práctica, la mayoría de las encuestas selecciona PSU sin reemplazo, generando diseños más eficientes. Así, las varianzas calculadas bajo la hipótesis de independencia constituyen aproximaciones de las verdaderas varianzas de muestreo. Cuando la fracción muestral es pequeña (por ejemplo, <5 %), estas aproximaciones suelen ser suficientemente precisas para su uso por oficinas nacionales de estadística o analistas secundarios.
+
+
+El método Ultimate Cluster destaca por su simplicidad y robustez, lo que lo hace muy atractivo en la práctica. Aunque los métodos más sofisticados que consideran todas las etapas del diseño pueden ofrecer estimaciones de varianza ligeramente más precisas, su aplicación requiere información más detallada y mayor complejidad computacional. Por el contrario, el método Ultimate Cluster proporciona una aproximación confiable y eficiente, especialmente útil al estimar totales o medias en encuestas de hogares. Para un análisis detallado sobre la precisión de esta aproximación y posibles alternativas, véase Särndal, Swensson y Wretman (1992, p. 153).
+
+
+#### Bootstrap {-}
+
+En muchos casos, los microdatos de encuestas públicas omiten información esencial del diseño, como identificadores de estratos o de unidades primarias de muestreo (UPM), para proteger la confidencialidad de los encuestados. Esta omisión limita la capacidad de los usuarios para calcular varianzas válidas. En tales situaciones, se recomienda que las oficinas nacionales de estadística (NSO) proporcionen pesos de replicación, lo que permite a los analistas estimar errores estándar de manera correcta. Sin estos datos, los usuarios secundarios no pueden reproducir los errores estándar publicados ni considerar adecuadamente el diseño complejo de la encuesta.
+
+
+Los métodos de replicación estiman la varianza generando subconjuntos de la muestra original, calculando estimaciones para cada uno y utilizando la variabilidad observada entre estas estimaciones para aproximar la varianza del estimador principal. Son particularmente útiles cuando no se dispone de información sobre estratos o UPM, situación en la que no se puede aplicar el método de Ultimate Cluster.
+
+
+El Bootstrap es una herramienta de replicación robusta y versátil. Originalmente introducido por Efron (1979) para datos que no provenían de encuestas, su adaptación más usada para encuestas de hogares es el Bootstrap de Reescalamiento Rao-Wu-Yue (Rao, Wu y Yue, 1992). Este método se ajusta de manera óptima a diseños de muestreo estratificados y multietápicos, y es ampliamente empleado para la estimación de varianzas en encuestas complejas.
+
+
+El procedimiento consiste en generar muchas réplicas de la muestra original, simulando extracciones repetidas de la población. Cada réplica se construye mediante la creación de columnas adicionales de pesos de replicación en la base de datos, siguiendo este proceso:
+
+* Para cada estrato, se seleccionan aleatoriamente las UPM con reemplazo; algunas pueden repetirse y otras no aparecer. Cada UPM elegida se incorpora con todas sus observaciones. Si el tamaño de la muestra de primera etapa en el estrato $h$ es mayor que dos ($n_h > 2$), el número de UPM seleccionadas por réplica es $n_h - 1$.
+* Este proceso se repite muchas veces, habitualmente cientos, generando un gran número de réplicas. La cantidad de veces que una UPM $i$ del estrato $h$ aparece en la réplica $r$ se denota $n_{hi}^{(r)}$, variando entre 0 y $n_h - 1$.
+* A partir de cada réplica se calculan nuevos pesos bootstrap para todas las unidades, reflejando cuántas veces fue seleccionada su UPM. El peso de la unidad $k$ en la réplica $r$ se calcula como:
+
+$$
+w_{hik}^{(r)} = w_{hik} \times \frac{n_h}{n_h - 1} \times n_{hi}^{(r)}
+$$
+
+Si los pesos originales incluyen ajustes por no respuesta o calibración, estos deben aplicarse también a cada conjunto de pesos bootstrap.
+
+
+Cuando la NSO proporciona únicamente pesos de replicación Bootstrap, los analistas pueden estimar errores estándar correctamente, aun sin identificadores de estratos o UPM. Para cada réplica $r$, se calcula el parámetro de interés $\hat{\theta}^{(r)}$ usando los pesos bootstrap $w_{hik}^{(r)}$. La varianza del estimador original se aproxima mediante la variabilidad entre todas las réplicas:
+
+$$
+\hat{V}_B(\hat{\theta}) = \frac{1}{R} \sum_{r=1}^{R} \left(\hat{\theta}^{(r)} - \tilde{\theta}\right)^2, \quad
+\tilde{\theta} = \frac{1}{R} \sum_{r=1}^{R} \hat{\theta}^{(r)}
+$$
+
+Este enfoque asegura que la dispersión entre réplicas capture fielmente la incertidumbre del parámetro.
+
+
+El Bootstrap ofrece múltiples ventajas. A pesar de requerir un mayor procesamiento computacional, es eficaz para diseños de encuesta complejos y permite estimar parámetros difíciles de calcular con métodos tradicionales, como medianas u otras estadísticas no lineales. Es especialmente útil para analistas que trabajan con bases de datos sin identificadores de estratos y UPM, pero con pesos de replicación.
+
+
+
+La simplicidad del método facilita su aplicación incluso sin software estadístico especializado. Sin embargo, la mayoría de los paquetes estadísticos modernos ya incluyen procedimientos para aplicar Bootstrap y calcular varianzas, ampliando su disponibilidad y robustez. No obstante, su uso no es recomendable en encuestas repetidas con muestras superpuestas ni en situaciones con fracciones de muestreo grandes y tamaños de muestra pequeños (Bruch, 2011).
+
+
+En este ejemplo se muestra cómo estimar totales y sus intervalos de confianza para diferentes variables de interés en R, utilizando dos funciones de la librería survey: la función svytotal para calcular los totales y la función confint para obtener los intervalos de confianza. A continuación, se presentan los códigos correspondientes:
+
 
 ```{r, eval = TRUE}
 total_Ingresos<- svytotal(~Income, diseno, deff=T, )

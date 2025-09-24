@@ -6,9 +6,17 @@ knitr::opts_chunk$set(warning = FALSE,
 
 # Análisis de variables categóricas en encuestas de hogares
 
-En ocasiones, no es sencillo distinguir entre las variables denominada cualitativos y cuantitativos puesto que, algunas variables de tipo cuantitativo pueden llegar a considerarse como categóricas si se divide el rango de valores de la variable en intervalos o categorías. Un ejemplo de esto es la variable edad, que en una encuesta de hogares se pregunta como variable cuantitativa y esta se puede dividir, por ejemplo, en Colombia, en las siguientes categorías: Adolescencia (12 - 18 años), Juventud (14 - 26 años), Adultez (27- 59 años), Persona Mayor (60 años o más), envejecimiento y vejez.  
+Al analizar datos de encuestas de hogares, uno de los productos más habituales son los parámetros descriptivos, cuyo propósito es sintetizar las principales características de la población. Estas estimaciones permiten ofrecer una representación clara y comprensible de la realidad poblacional a partir de la información obtenida en una muestra representativa.
 
-Por otro lado, una variable categórica también se puede convertir en una variable cuantitativa realizando, por ejemplo, un análisis de correspondencias. Esto ocurre en muchas situaciones cuando se requiere construir índices. Por ejemplo, índice de fuerza laboral. En el contexto de encuestas, las preguntas que contienen variables categóricas son uno de los tipos de preguntas más usuales. Estas preguntas suelen representarse en resultados de porcentajes. Por ejemplo, preguntas relacionadas con parentesco, sexo, si es jefe o jefa de hogar, si la vivienda contiene agua potable, etc.
+En ocasiones, no es sencillo distinguir entre las variables denominadas cualitativas y cuantitativas, puesto que algunas variables de tipo cuantitativo pueden considerarse categóricas si se divide el rango de valores en intervalos o categorías. Un ejemplo clásico es la variable edad, que en una encuesta de hogares se registra como cuantitativa, pero puede agruparse en categorías. Por ejemplo, en Colombia, las categorías podrían ser: Adolescencia (12–18 años), Juventud (14–26 años), Adultez (27–59 años) y Persona Mayor (60 años o más), incorporando también conceptos de envejecimiento y vejez.
+
+De manera inversa, una variable categórica también puede transformarse en cuantitativa mediante análisis específicos, como un análisis de correspondencias. Esto es frecuente cuando se construyen índices compuestos, como el índice de fuerza laboral. En el contexto de encuestas, las preguntas que contienen variables categóricas son muy comunes y sus resultados suelen presentarse en porcentajes, por ejemplo: parentesco, sexo, jefe o jefa del hogar, acceso a agua potable, entre otros.
+
+Entre los resultados más comunes de este tipo de análisis se encuentran frecuencias, proporciones, medias y totales. Las medias proporcionan información sobre el valor promedio de una variable, mientras que los totales reflejan su acumulado en toda la población. Las frecuencias cuentan cuántos hogares o individuos pertenecen a una categoría determinada —por ejemplo, el número de personas en situación de pobreza—, y las proporciones expresan la participación relativa de quienes presentan una característica específica, como el porcentaje de población pobre.
+
+Actualmente, el análisis descriptivo va más allá de los parámetros básicos, incorporando métricas más complejas. Se estiman cuantiles de variables numéricas, como la mediana del ingreso de los hogares, para describir la distribución de los datos con mayor detalle. Además, se aplican indicadores especializados para evaluar fenómenos concretos, como los índices FGT para la medición de pobreza, los indicadores de desigualdad (Gini, Theil, Atkinson) y de polarización (Wolfson, DER), entre otros (Jacob, Damico y Pessoa, 2024).
+
+
 
 ```{r, eval=T}
 library(tidyverse)
@@ -58,10 +66,30 @@ sub_Mujer  <- diseno %>%  filter(Sex == "Female")
 sub_Hombre <- diseno %>%  filter(Sex == "Male")
 ```
 
-## Estimaciones de totales
+## Tamaño de población y subpoblaciones en encuestas de hogares
 
-En esta sección se realizarán los procesos de estimación de variables categóricas. En primera instancia se presenta cómo se estima los tamaños de la población y subpoblaciones.
+En el análisis de encuestas de hogares, resulta esencial determinar el tamaño de las subpoblaciones, es decir, identificar cuántas personas u hogares pertenecen a categorías específicas y qué proporción representan dentro del total poblacional. Este tipo de estimaciones permite caracterizar el perfil demográfico y socioeconómico de la población, información clave para orientar la asignación de recursos, el diseño de políticas públicas y la formulación de programas sociales.
 
+Así, es de gran utilidad conocer cuántas personas se encuentran por debajo de la línea de pobreza, cuántas no tienen empleo o cuántas han alcanzado determinado nivel educativo. Analizar cómo se distribuyen los individuos entre distintas categorías ofrece información indispensable para reducir brechas y avanzar hacia un desarrollo inclusivo.
+
+La estimación del tamaño de una población o subpoblación se realiza a partir de variables categóricas, que segmentan a la población en grupos mutuamente excluyentes. Estas categorías pueden corresponder, por ejemplo, a quintiles de ingreso, estados de ocupación o niveles educativos alcanzados. El tamaño poblacional hace referencia al número total de individuos u hogares que, en la base de datos de la encuesta, pertenecen a una categoría determinada. Para obtener estas estimaciones, se combinan las respuestas de los encuestados con los pesos muestrales, que indican cuántas personas u hogares representa cada unidad de la muestra dentro de la población total.
+
+El estimador del tamaño de la población se define como:
+
+$$\hat{N} = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}$$
+
+donde $s_{hi}$ corresponde a la muestra de hogares o individuos en la UPM $i$ del estrato $h$; $s_{1h}$ representa la muestra de UPM seleccionadas en el estrato $h$; y $w_{hik}$ es el peso o factor de expansión de la unidad $k$ en la UPM $i$ del estrato $h$.
+
+La estimación del tamaño de una subpoblación sigue el mismo principio que el cálculo del tamaño poblacional total, pero se enfoca en un subconjunto definido por una característica específica. Para determinar cuántas personas pertenecen a una categoría particular, se identifica dicho grupo en la base de datos y se suman sus pesos muestrales. Esto permite cuantificar grupos de interés específicos y conocer su tamaño dentro de la población:
+
+$$\hat{N}_d = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} I(y_{hik}=d)$$
+
+donde $I(y_{hik}=d)$ es una variable binaria que toma el valor de 1 si la unidad $k$ de la UPM $i$ en el estrato $h$ pertenece a la categoría $d$ de la variable discreta $y$, y 0 en caso contrario. Si $d$ fue utilizada en la calibración de los pesos, el valor de $\hat{N}_d$ coincidirá con el control externo aplicado.
+
+
+### Estimaciones de totales en `R` {-}
+
+En esta sección se presentan los procedimientos para estimar tamaños de población y subpoblaciones usando R, con el diseño muestral definido previamente. Por ejemplo, para estimar el tamaño de la población por zona:
 
 ```{r, eval=TRUE}
 tamano_zona <- diseno %>% group_by(Zone) %>% 
@@ -71,33 +99,23 @@ tamano_zona <- diseno %>% group_by(Zone) %>%
 tamano_zona
 ```
 
-En la tabla anterior, *n* denota el número de observaciones en la muestra por Zona y *Nd* denota la estimación del total de observaciones en la población. Adicionalmente, en el código anterior se introdujo la función `unweighted` la cual, calcula resúmenes no ponderados a partir de un conjunto de datos de encuestas.
+En la tabla resultante, *n* indica el número de observaciones en la muestra por zona y *Nd* representa la estimación del total de observaciones en la población. La función `unweighted()` calcula resúmenes no ponderados a partir de los datos muestrales.
 
-Para el ejemplo, el tamaño de muestra en la zona rural fue de 1297 personas y para la urbana fue de 1308. Con esta información se logró estimar una población de 72102 con una desviación estándar de 3062.204 en la zona rural y una población de 78164 con desviación estándar de 2847.221 en la zona urbana. Así mismo, con una confianza del 95% se construyeron unos intervalos de confianza para el tamaño poblacional en la zona rural de  (66038.5,	78165.4) y para la urbana de (72526.2,	83801.7).
+Por ejemplo, el tamaño de muestra en la zona rural fue de 1297 personas y en la urbana de 1308. Esto permitió estimar una población de 72,102 (desviación estándar 3,062) en la zona rural y 78,164 (desviación estándar 2,847) en la zona urbana. Con un nivel de confianza del 95%, los intervalos de confianza fueron:
 
-Ahora bien, empleando una sintaxis similar a la anterior es posible estimar el número de personas en condición de pobreza extrema, pobreza y no pobres como sigue:
+* Zona rural: (66,038.5, 78,165.4)
+* Zona urbana: (72,526.2, 83,801.7)
+
+De manera similar, es posible estimar el número de personas en condición de pobreza extrema, pobreza y no pobres:
 
 ```{r, eval=TRUE}
 tamano_pobreza <- diseno %>% group_by(Poverty) %>% 
-                  summarise( Nd = survey_total(vartype = c("se","ci")) )
+                  summarise(Nd = survey_total(vartype = c("se","ci")))
 tamano_pobreza
-
 ```
 
-De la tabla anterior podemos concluir que, la cantidad estimada de personas en estado de no pobreza son 91398.3, en pobreza 37348.9 y pobreza extrema de 21518.7. os demás parámetros estimados se interpretan de la misma manera que para la estimación desagregada por zona. 
+Estos cálculos permiten obtener estimaciones precisas y sus intervalos de confianza para cada subpoblación, facilitando el análisis socioeconómico y la toma de decisiones basadas en evidencia.
 
-En forma similar es posible estimar el número de personas debajo de la línea de pobreza. 
-
-```{r}
-tamano_pobreza <- diseno %>% 
-                  group_by(pobreza) %>% 
-                  summarise(
-                  Nd = survey_total(vartype = c("se","ci")))
-tamano_pobreza
-
-```
-
-Concluyendo para este ejemplo que, 58867.6 personas están por debajo de la línea de pobreza con una desviación estándar de 5731.3 y un intervalo de confianza (47518.9	70216.3).
 
 Otra variable de interés en encuestas de hogares es conocer el estado de ocupación de las personas. A continuación, se muestra el código computacional:
 
@@ -126,27 +144,47 @@ De lo cual se puede concluir, entre otros que, 44600.3 personas que trabajan no 
 
 ## Estimación de proporciones
 
-Otro parámetro de interés en las encuestas de hogares, particularmente con variables categóricas es la estimación de las proporciones poblacionales. En esta sección se estudiará la estimación de proporciones y sus errores estándares. En términos de notación se define la estimación de proporciones de población como $p$ y proporciones de población como $\pi$. Es normal observar que en muchos paquetes estadísticos optan por generar estimaciones de proporciones y errores estándar en la escala de porcentaje. *R* Genera las estimaciones de proporciones en escala [0,1]. A continuación, se presenta el código computacional para estimar la proporción de personas por zona:
+En las encuestas de hogares, **las proporciones** permiten expresar el peso relativo que tienen determinados grupos dentro de la población. Por ejemplo, conocer el porcentaje de hogares que se encuentran por debajo de la línea de pobreza es esencial para evaluar desigualdades socioeconómicas. Para obtener este indicador, se calcula el promedio ponderado de una variable dicotómica, lo que asegura que la estimación represente adecuadamente la distribución poblacional.
+
+De acuerdo con Heeringa, West y Berglund (2017), al transformar las categorías de respuesta originales en variables indicadoras $y$ con valores de 1 y 0 (por ejemplo, 1 = Sí y 0 = No), la proporción estimada se obtiene mediante:
+
+$$\hat{p}_d = \frac{\hat{N}_d}{\hat{N}} = \frac{\displaystyle\sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} I(y_{hik}=d)} {\displaystyle\sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}}$$
+
+Dado que se trata de un estimador no lineal, su varianza puede aproximarse mediante la **técnica de linealización de Taylor**, utilizando como función de estimación $z_{hik}=I(y_{hik}=d)-\hat{p}_d$. Actualmente, la mayoría de los programas estadísticos generan estas proporciones junto con sus errores estándar, generalmente presentados en forma de porcentajes.
+
+En situaciones donde las proporciones se aproximan a 0 o 1, puede ser necesario aumentar el tamaño de la muestra para garantizar resultados sólidos. También es recomendable aplicar métodos que aseguren que los intervalos de confianza permanezcan dentro del rango \[0,1], ya que los intervalos convencionales basados en la normal pueden desbordar estos límites y perder su utilidad interpretativa. Una alternativa es la **transformación logit** de la proporción estimada:
+
+$$CI(\hat{p}_d; 1-\alpha) = \frac{\exp \left[\ln\left(\frac{\hat{p}_d}{1-\hat{p}_d}\right) \pm \frac{me(\hat{p}_d)}{\hat{p}_d(1-\hat{p}_d)}\right]}{1 + \exp \left[\ln\left(\frac{\hat{p}_d}{1-\hat{p}_d}\right) \pm \frac{me(\hat{p}_d)}{\hat{p}_d(1-\hat{p}_d)}\right]}$$
+
+donde $me(\hat{p}_d) = t_{1-\alpha/2, df} \times se(\hat{p}_d)$, siendo $t_{1-\alpha/2, df}$ el cuantil de la distribución t de Student con $df = n - H$ grados de libertad, dejando un área $\alpha/2$ a su derecha. Este procedimiento asegura resultados interpretables incluso para proporciones extremas (0 o 1).
+
+
+### Estimación de proporciones en `R`
+
+Otro parámetro de interés en las encuestas de hogares, particularmente con variables categóricas, es la estimación de **proporciones poblacionales** y sus errores estándar. En términos de notación, la estimación de proporciones de población se define como $p$ y las proporciones muestrales como $\pi$. Es común que muchos paquetes estadísticos generen estas estimaciones en **escala de porcentaje**, mientras que `R` las produce en la escala [0,1].
+
+A continuación, se muestra cómo estimar la proporción de personas por **zona** usando `srvyr` y el diseño muestral previamente definido:
 
 ```{r, eval=TRUE}
 prop_zona <- diseno %>% group_by(Zone) %>% 
              summarise(
-             prop = survey_mean(vartype = c("se","ci"), 
-                    proportion = TRUE ))
+               prop = survey_mean(vartype = c("se","ci"), 
+                                  proportion = TRUE))
 prop_zona
 ```
-Como se pudo observar, se usó la función `survey_mean` para la estimación. Sin embargo, con el parámetro "proportion = TRUE", se le indica a `R` que lo que se desea estimar es una proporción. Para este ejemplo se puede observar que, el 47.9% de las personas viven en zona rural obteniendo un intervalo de confianza comprendido entre (45.2%,	50.7%) y el 52% de las personas viven en la zona urbana con un intervalo de confianza de (49.2%, 54.7%).
 
-La librería `survey` tiene implementado una función específica para estimar proporciones la cual es `survey_prop` que genera los mismos resultados mostrados anteriormente. Le queda al lector la decisión de usar la función con la que más cómodo se sienta. A continuación, se muestra un ejemplo del uso de la función `survey_prop`:
+En este ejemplo, la función `survey_mean` calcula la proporción y, con el parámetro `proportion = TRUE`, se indica que se desea estimar una **proporción poblacional**. Los resultados muestran que aproximadamente el 47.9% de las personas viven en zona rural (IC 95%: 45.2% - 50.7%) y el 52% en zona urbana (IC 95%: 49.2% - 54.7%).
 
+La librería `survey` también cuenta con la función `survey_prop`, diseñada específicamente para estimar proporciones, generando resultados equivalentes:
 
 ```{r, eval=TRUE}
-
 prop_zona2 <- diseno %>% group_by(Zone) %>% 
-              summarise( prop = survey_prop(vartype = c("se","ci") ))
+               summarise(prop = survey_prop(vartype = c("se","ci")))
 prop_zona2
-
 ```
+
+El lector puede elegir la función que le resulte más cómoda, ya que ambas permiten obtener estimaciones precisas y sus intervalos de confianza, facilitando la interpretación de los resultados para variables categóricas.
+
 
 
 Si el interés ahora se centra en estimar  subpoblaciones por ejemplo, proporción de hombres y mujeres que viven en la zona urbana, el código computacional es:

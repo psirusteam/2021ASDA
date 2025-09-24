@@ -28,7 +28,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHwxNjguMDB8MC4wMHwzNjAuMDA=)'>
-<text x='93.50' y='22.90' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='49.62px' lengthAdjust='spacingAndGlyphs'>Ponderado</text>
+<text x='93.50' y='22.88' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='49.62px' lengthAdjust='spacingAndGlyphs'>Ponderado</text>
 <text x='93.50' y='347.64' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>Income</text>
 <text transform='translate(8.55,175.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='26.37px' lengthAdjust='spacingAndGlyphs'>Density</text>
 </g>
@@ -116,7 +116,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMTY4LjAwfDMzNi4wMHwwLjAwfDM2MC4wMA==)'>
-<text x='261.50' y='22.90' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='58.58px' lengthAdjust='spacingAndGlyphs'>Sin ponderar</text>
+<text x='261.50' y='22.88' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='58.58px' lengthAdjust='spacingAndGlyphs'>Sin ponderar</text>
 <text x='261.50' y='347.64' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='62.43px' lengthAdjust='spacingAndGlyphs'>encuesta$Income</text>
 <text transform='translate(176.55,175.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='26.37px' lengthAdjust='spacingAndGlyphs'>Density</text>
 </g>
@@ -199,7 +199,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMzM2LjAwfDUwNC4wMHwwLjAwfDM2MC4wMA==)'>
-<text x='429.50' y='22.90' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='53.31px' lengthAdjust='spacingAndGlyphs'>Poblacional</text>
+<text x='429.50' y='22.88' text-anchor='middle' style='font-size: 9.50px; font-weight: bold; font-family: "Arial";' textLength='53.31px' lengthAdjust='spacingAndGlyphs'>Poblacional</text>
 <text x='429.50' y='347.64' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='55.38px' lengthAdjust='spacingAndGlyphs'>BigCity$Income</text>
 <text transform='translate(344.55,175.25) rotate(-90)' text-anchor='middle' style='font-size: 7.92px; font-family: "Arial";' textLength='26.37px' lengthAdjust='spacingAndGlyphs'>Density</text>
 </g>

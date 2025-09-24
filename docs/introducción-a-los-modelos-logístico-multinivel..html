@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R</title>
+  <title>9.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R" />
+  <meta property="og:title" content="9.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="9.3 Introducción a los modelos logístico multinivel. | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="10-Multinivel.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="1.1" data-path="10-Multinivel.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.2" data-path="10-Multinivel.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="1.3" data-path="10-Multinivel.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="1.6" data-path="10-Multinivel.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="1.6.1" data-path="10-Multinivel.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="1.8" data-path="10-Multinivel.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.1" data-path="10-Multinivel.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="10-Multinivel.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="2.3" data-path="10-Multinivel.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="2.4" data-path="10-Multinivel.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="2.9" data-path="10-Multinivel.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="2.12" data-path="10-Multinivel.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="10-Multinivel.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="3.1" data-path="10-Multinivel.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="3.2" data-path="10-Multinivel.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="3.3" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+<li class="chapter" data-level="3.3.1" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="3.3.2" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="3.3.3" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="3.4" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.5" data-path="10-Multinivel.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="3.6" data-path="10-Multinivel.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="10-Multinivel.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
+<li class="chapter" data-level="4.2" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<li class="chapter" data-level="5" data-path="10-Multinivel.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.1" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="5.2" data-path="10-Multinivel.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="5.3" data-path="10-Multinivel.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="6" data-path="10-Multinivel.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="10-Multinivel.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="8" data-path="10-Multinivel.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="8.1" data-path="10-Multinivel.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="10-Multinivel.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="10-Multinivel.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="10-Multinivel.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="10-Multinivel.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="10" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="10-Multinivel.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="10-Multinivel.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introducción-a-los-modelos-logístico-multinivel." class="section level2 hasAnchor" number="10.3">
-<h2><span class="header-section-number">10.3</span> Introducción a los modelos logístico multinivel.<a href="introducción-a-los-modelos-logístico-multinivel..html#introducción-a-los-modelos-logístico-multinivel." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introducción-a-los-modelos-logístico-multinivel." class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Introducción a los modelos logístico multinivel.<a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los modelos logísticos multinivel son una extensión de los modelos logísticos simples, que se utilizan para predecir la probabilidad de un resultado binario en función de una o varias variables explicativas. Sin embargo, en muchas situaciones, los datos se recogen de individuos que están agrupados en diferentes niveles o unidades de análisis, como escuelas, ciudades o países. En estos casos, los modelos logísticos simples pueden no ser suficientes para capturar la estructura jerárquica de los datos y la variación en las respuestas entre los diferentes grupos.</p>
 <p>Los modelos logísticos multinivel resuelven este problema al permitir que los coeficientes del modelo varíen a través de los diferentes niveles de análisis. En otras palabras, se permite que la relación entre las variables predictoras y la respuesta varíe en función del grupo al que pertenece cada individuo.</p>
 <p>Además, los modelos logísticos multinivel permiten incluir tanto variables a nivel individual como variables a nivel de grupo, lo que aumenta la precisión de las estimaciones y la capacidad de explicar la variabilidad en las respuestas. También permiten estimar la varianza en las respuestas entre los diferentes grupos, lo que es útil para identificar las fuentes de variabilidad y para comparar la variabilidad entre grupos.</p>
@@ -270,16 +276,16 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 \pi_{ij}=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)
 \]</span>.</p>
 <p>A modo de ejemplo, se ajustará un modelo logístico para la variable pobreza. Inicialmente, se crea la variable dicotómica en la base como se muestra a continuación:</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-1" aria-hidden="true" tabindex="-1"></a>encuesta_plot <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb514-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum,Expenditure) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb514-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Stratum)  <span class="sc">%&gt;%</span> </span>
-<span id="cb514-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(Expenditure)) <span class="sc">%&gt;%</span> </span>
-<span id="cb514-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sd)) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>sd) <span class="sc">%&gt;%</span> </span>
-<span id="cb514-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>20L) <span class="sc">%&gt;%</span></span>
-<span id="cb514-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(encuesta) <span class="sc">%&gt;%</span>  </span>
-<span id="cb514-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Poverty, Expenditure, Stratum, </span>
-<span id="cb514-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-9" aria-hidden="true" tabindex="-1"></a>         Sex, Region, Zone) </span>
-<span id="cb514-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-10" aria-hidden="true" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>15L)</span></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-1" tabindex="-1"></a>encuesta_plot <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb514-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum,Expenditure) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb514-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-3" tabindex="-1"></a>  <span class="fu">group_by</span>(Stratum)  <span class="sc">%&gt;%</span> </span>
+<span id="cb514-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(Expenditure)) <span class="sc">%&gt;%</span> </span>
+<span id="cb514-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sd)) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>sd) <span class="sc">%&gt;%</span> </span>
+<span id="cb514-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-6" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span><span class="dt">L</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb514-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-7" tabindex="-1"></a>  <span class="fu">inner_join</span>(encuesta) <span class="sc">%&gt;%</span>  </span>
+<span id="cb514-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Poverty, Expenditure, Stratum, </span>
+<span id="cb514-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-9" tabindex="-1"></a>         Sex, Region, Zone) </span>
+<span id="cb514-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb514-10" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -294,7 +300,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 <tbody>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">3367.53</td>
+<td align="right">3367.5</td>
 <td align="left">idStrt039</td>
 <td align="left">Male</td>
 <td align="left">Sur</td>
@@ -302,7 +308,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">3367.53</td>
+<td align="right">3367.5</td>
 <td align="left">idStrt039</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -310,7 +316,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">3367.53</td>
+<td align="right">3367.5</td>
 <td align="left">idStrt039</td>
 <td align="left">Male</td>
 <td align="left">Sur</td>
@@ -318,7 +324,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">312.13</td>
+<td align="right">312.1</td>
 <td align="left">idStrt039</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -326,7 +332,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">312.13</td>
+<td align="right">312.1</td>
 <td align="left">idStrt039</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -334,7 +340,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">312.13</td>
+<td align="right">312.1</td>
 <td align="left">idStrt039</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -342,7 +348,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">312.13</td>
+<td align="right">312.1</td>
 <td align="left">idStrt039</td>
 <td align="left">Male</td>
 <td align="left">Sur</td>
@@ -350,7 +356,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">226.50</td>
+<td align="right">226.5</td>
 <td align="left">idStrt039</td>
 <td align="left">Male</td>
 <td align="left">Sur</td>
@@ -358,7 +364,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">226.50</td>
+<td align="right">226.5</td>
 <td align="left">idStrt039</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -366,7 +372,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">616.32</td>
+<td align="right">616.3</td>
 <td align="left">idStrt047</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -374,7 +380,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">616.32</td>
+<td align="right">616.3</td>
 <td align="left">idStrt047</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -382,7 +388,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">616.32</td>
+<td align="right">616.3</td>
 <td align="left">idStrt047</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -390,7 +396,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">1385.65</td>
+<td align="right">1385.7</td>
 <td align="left">idStrt047</td>
 <td align="left">Male</td>
 <td align="left">Sur</td>
@@ -398,7 +404,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="even">
 <td align="left">NotPoor</td>
-<td align="right">1385.65</td>
+<td align="right">1385.7</td>
 <td align="left">idStrt047</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -406,7 +412,7 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tr>
 <tr class="odd">
 <td align="left">NotPoor</td>
-<td align="right">1385.65</td>
+<td align="right">1385.7</td>
 <td align="left">idStrt047</td>
 <td align="left">Female</td>
 <td align="left">Sur</td>
@@ -415,25 +421,25 @@ Pr\left(y_{ij}\right)=Pr\left(y_{ij}=1\mid x_{i}:\boldsymbol{\beta}\right)=\frac
 </tbody>
 </table>
 <p>Para poder observar la distribución la distribución de la variable pobreza, se presenta el siguiente gráfico:</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-1" aria-hidden="true" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>( <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb515-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-2" aria-hidden="true" tabindex="-1"></a>encuesta_plot <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb515-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb515-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure)) <span class="sc">+</span> </span>
-<span id="cb515-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>, </span>
-<span id="cb515-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-1" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>( <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb515-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-2" tabindex="-1"></a>encuesta_plot <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb515-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-3" tabindex="-1"></a></span>
+<span id="cb515-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-4" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure)) <span class="sc">+</span> </span>
+<span id="cb515-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-5" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>, </span>
+<span id="cb515-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb515-6" tabindex="-1"></a>    <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/modl_logit1-1.svg" width="672" />
 El ajuste del modelo logístico se realiza con la función <code>glm</code> y la función link “logit”. Una vez se ajusta el modelo, se extraen los coeficientes del modelo y así poder calcular las probabilidades, como sigue a continuación:</p>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-1" aria-hidden="true" tabindex="-1"></a>auxLogit <span class="ot">&lt;-</span> <span class="cf">function</span>(x,b0,b1){</span>
-<span id="cb516-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>(b0<span class="sc">+</span>b1<span class="sc">*</span>x)))</span>
-<span id="cb516-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb516-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-5" aria-hidden="true" tabindex="-1"></a>B0 <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">glm</span>(pobreza<span class="sc">~</span><span class="dv">1</span>,<span class="at">data =</span> encuesta_plot,</span>
-<span id="cb516-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)))</span>
-<span id="cb516-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-8" aria-hidden="true" tabindex="-1"></a>(coef_Mod <span class="ot">&lt;-</span> encuesta_plot <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
-<span id="cb516-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">B1 =</span> <span class="fu">coef</span>(<span class="fu">glm</span>(pobreza <span class="sc">~</span>  <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Expenditure,</span>
-<span id="cb516-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)))) <span class="sc">%&gt;%</span> </span>
-<span id="cb516-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">B0 =</span> B0)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>6L)</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-1" tabindex="-1"></a>auxLogit <span class="ot">&lt;-</span> <span class="cf">function</span>(x,b0,b1){</span>
+<span id="cb516-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>(b0<span class="sc">+</span>b1<span class="sc">*</span>x)))</span>
+<span id="cb516-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-3" tabindex="-1"></a>}</span>
+<span id="cb516-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-4" tabindex="-1"></a></span>
+<span id="cb516-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-5" tabindex="-1"></a>B0 <span class="ot">=</span> <span class="fu">coef</span>(<span class="fu">glm</span>(pobreza<span class="sc">~</span><span class="dv">1</span>,<span class="at">data =</span> encuesta_plot,</span>
+<span id="cb516-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-6" tabindex="-1"></a>     <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)))</span>
+<span id="cb516-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-7" tabindex="-1"></a></span>
+<span id="cb516-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-8" tabindex="-1"></a>(coef_Mod <span class="ot">&lt;-</span> encuesta_plot <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
+<span id="cb516-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">B1 =</span> <span class="fu">coef</span>(<span class="fu">glm</span>(pobreza <span class="sc">~</span>  <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Expenditure,</span>
+<span id="cb516-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-10" tabindex="-1"></a>              <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)))) <span class="sc">%&gt;%</span> </span>
+<span id="cb516-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb516-11" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">B0 =</span> B0)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -445,44 +451,44 @@ El ajuste del modelo logístico se realiza con la función <code>glm</code> y la
 <tbody>
 <tr class="odd">
 <td align="left">idStrt007</td>
-<td align="right">-0.0189122</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0189</td>
+<td align="right">-0.8782</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt020</td>
-<td align="right">-0.0009882</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0010</td>
+<td align="right">-0.8782</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt022</td>
-<td align="right">-0.0057026</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0057</td>
+<td align="right">-0.8782</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt024</td>
-<td align="right">-0.0020174</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0020</td>
+<td align="right">-0.8782</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt036</td>
-<td align="right">-0.0008913</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0009</td>
+<td align="right">-0.8782</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt039</td>
-<td align="right">-0.0976218</td>
-<td align="right">-0.8781751</td>
+<td align="right">-0.0976</td>
+<td align="right">-0.8782</td>
 </tr>
 </tbody>
 </table>
 <p>A continuación, se grafican los diferentes modelos logísticos ajustados para cada uno de los estratos observándose que, hay una variación importante entre los estratos:</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-1" aria-hidden="true" tabindex="-1"></a>pred_logit <span class="ot">&lt;-</span> coef_Mod <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2000</span>, <span class="at">length =</span><span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb517-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-2" aria-hidden="true" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
-<span id="cb517-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb517-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-4" aria-hidden="true" tabindex="-1"></a>pred_logit <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">Prob =</span> <span class="fu">auxLogit</span>(Expenditure,B0,B1)) </span>
-<span id="cb517-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb517-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pred_logit, <span class="fu">aes</span>(<span class="at">y =</span> Prob, <span class="at">x =</span> Expenditure, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb517-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-1" tabindex="-1"></a>pred_logit <span class="ot">&lt;-</span> coef_Mod <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2000</span>, <span class="at">length =</span><span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb517-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-2" tabindex="-1"></a>    tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
+<span id="cb517-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-3" tabindex="-1"></a></span>
+<span id="cb517-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-4" tabindex="-1"></a>pred_logit <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">Prob =</span> <span class="fu">auxLogit</span>(Expenditure,B0,B1)) </span>
+<span id="cb517-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-5" tabindex="-1"></a>  </span>
+<span id="cb517-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> pred_logit, <span class="fu">aes</span>(<span class="at">y =</span> Prob, <span class="at">x =</span> Expenditure, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb517-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb517-7" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/modl_logit2-1.svg" width="672" /></p>
 <p>Un modelo logístico básico o nulo se escribe de la siguiente manera:</p>
 <p><span class="math display">\[
@@ -506,14 +512,14 @@ Donde los componentes son los siguientes:</p>
 \rho=\frac{\sigma_{\tau}^{2}}{\sigma_{\tau}^{2}+\sigma_{\epsilon}^{2}}
 \]</span>
 En <code>R</code> el modelo nulo se ajusta de la siguiente manera:</p>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb518-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-2" aria-hidden="true" tabindex="-1"></a>mod_logist_null  <span class="ot">&lt;-</span> <span class="fu">glmer</span>( pobreza  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ),</span>
-<span id="cb518-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data  =</span>  encuesta, </span>
-<span id="cb518-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">weights  =</span>  wk2,</span>
-<span id="cb518-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>) )</span>
-<span id="cb518-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb518-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb518-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>( mod_logist_null )<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-1" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb518-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-2" tabindex="-1"></a>mod_logist_null  <span class="ot">&lt;-</span> <span class="fu">glmer</span>( pobreza  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ),</span>
+<span id="cb518-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-3" tabindex="-1"></a>                   <span class="at">data  =</span>  encuesta, </span>
+<span id="cb518-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-4" tabindex="-1"></a>             <span class="at">weights  =</span>  wk2,</span>
+<span id="cb518-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-5" tabindex="-1"></a>             <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>) )</span>
+<span id="cb518-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-6" tabindex="-1"></a></span>
+<span id="cb518-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-7" tabindex="-1"></a></span>
+<span id="cb518-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb518-8" tabindex="-1"></a><span class="fu">coef</span>( mod_logist_null )<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -524,74 +530,74 @@ En <code>R</code> el modelo nulo se ajusta de la siguiente manera:</p>
 <tbody>
 <tr class="odd">
 <td align="left">idStrt001</td>
-<td align="right">-0.8333883</td>
+<td align="right">-0.8334</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt002</td>
-<td align="right">-0.0133038</td>
+<td align="right">-0.0133</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt003</td>
-<td align="right">-2.6022877</td>
+<td align="right">-2.6023</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt004</td>
-<td align="right">-2.7770188</td>
+<td align="right">-2.7770</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt005</td>
-<td align="right">-1.0267951</td>
+<td align="right">-1.0268</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt006</td>
-<td align="right">1.0100380</td>
+<td align="right">1.0100</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt007</td>
-<td align="right">-1.0133900</td>
+<td align="right">-1.0134</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt008</td>
-<td align="right">0.2035036</td>
+<td align="right">0.2035</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt009</td>
-<td align="right">2.1965550</td>
+<td align="right">2.1966</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt010</td>
-<td align="right">-0.5948075</td>
+<td align="right">-0.5948</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt011</td>
-<td align="right">-1.2985509</td>
+<td align="right">-1.2986</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt012</td>
-<td align="right">0.2824748</td>
+<td align="right">0.2825</td>
 </tr>
 </tbody>
 </table>
 <p>Las estadísticas resumen del modelo se presentan a continuación:</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjstats)</span>
-<span id="cb519-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb519-2" aria-hidden="true" tabindex="-1"></a>mod_logist_null</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb519-1" tabindex="-1"></a><span class="fu">library</span>(sjstats)</span>
+<span id="cb519-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb519-2" tabindex="-1"></a>mod_logist_null</span></code></pre></div>
 <pre><code>## Generalized linear mixed model fit by maximum likelihood (Laplace
 ##   Approximation) [glmerMod]
 ##  Family: binomial  ( logit )
 ## Formula: pobreza ~ (1 | Stratum)
 ##    Data: encuesta
 ## Weights: wk2
-##       AIC       BIC    logLik  deviance  df.resid 
-##  2966.056  2977.786 -1481.028  2962.056      2603 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##      2966      2978     -1481      2962      2603 
 ## Random effects:
 ##  Groups  Name        Std.Dev.
-##  Stratum (Intercept) 1.285   
+##  Stratum (Intercept) 1.29    
 ## Number of obs: 2605, groups:  Stratum, 119
 ## Fixed Effects:
 ## (Intercept)  
-##     -0.8015</code></pre>
+##      -0.802</code></pre>
 <p>A continuación, se presenta la correlación intraclase, las predicciones del modelo y las variables observadas:</p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb521-1" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logist_null)</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb521-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logist_null)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -602,16 +608,16 @@ En <code>R</code> el modelo nulo se ajusta de la siguiente manera:</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.3341999</td>
-<td align="right">0.3341999</td>
+<td align="right">0.3342</td>
+<td align="right">0.3342</td>
 <td align="left">FALSE</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-1" aria-hidden="true" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_logist_null, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
-<span id="cb522-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
-<span id="cb522-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb522-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>6L) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_logist_null, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
+<span id="cb522-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-2" tabindex="-1"></a>  <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
+<span id="cb522-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-3" tabindex="-1"></a>  <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb522-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb522-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -624,47 +630,47 @@ En <code>R</code> el modelo nulo se ajusta de la siguiente manera:</p>
 <tbody>
 <tr class="odd">
 <td align="left">1</td>
-<td align="right">0.3029291</td>
+<td align="right">0.3029</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 </tr>
 <tr class="even">
 <td align="left">10</td>
-<td align="right">0.3029291</td>
+<td align="right">0.3029</td>
 <td align="right">1</td>
 <td align="left">idStrt001</td>
 </tr>
 <tr class="odd">
 <td align="left">28</td>
-<td align="right">0.4966741</td>
+<td align="right">0.4967</td>
 <td align="right">1</td>
 <td align="left">idStrt002</td>
 </tr>
 <tr class="even">
 <td align="left">36</td>
-<td align="right">0.4966741</td>
+<td align="right">0.4967</td>
 <td align="right">0</td>
 <td align="left">idStrt002</td>
 </tr>
 <tr class="odd">
 <td align="left">61</td>
-<td align="right">0.0689913</td>
+<td align="right">0.0690</td>
 <td align="right">0</td>
 <td align="left">idStrt003</td>
 </tr>
 <tr class="even">
 <td align="left">84</td>
-<td align="right">0.0585787</td>
+<td align="right">0.0586</td>
 <td align="right">0</td>
 <td align="left">idStrt004</td>
 </tr>
 </tbody>
 </table>
 <p>Para efecto de verificar qué tan buena fueron las predicciones del modelo, se estiman el porcentaje de pobreza de la variable observada y de las predicciones de modelo utilizando la función <code>weighted.mean</code>. Se logra observar que son muy similares las estimaciones:</p>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb523-1" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted.mean</span>(encuesta<span class="sc">$</span>pobreza, encuesta<span class="sc">$</span>wk2)</span></code></pre></div>
-<pre><code>## [1] 0.3858509</code></pre>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted.mean</span>(tab_pred<span class="sc">$</span>Pred, encuesta<span class="sc">$</span>wk2)</span></code></pre></div>
-<pre><code>## [1] 0.3850068</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb523-1" tabindex="-1"></a><span class="fu">weighted.mean</span>(encuesta<span class="sc">$</span>pobreza, encuesta<span class="sc">$</span>wk2)</span></code></pre></div>
+<pre><code>## [1] 0.3859</code></pre>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb525-1" tabindex="-1"></a><span class="fu">weighted.mean</span>(tab_pred<span class="sc">$</span>Pred, encuesta<span class="sc">$</span>wk2)</span></code></pre></div>
+<pre><code>## [1] 0.385</code></pre>
 <p><em>Modelo con intercepto aleatoria</em></p>
 <p>EL modelo se define de la siguiente manera:</p>
 <p><span class="math display">\[
@@ -675,10 +681,10 @@ Donde,</p>
 \beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
 \]</span>
 Siguiendo las ideas de la sección anterior, el ajuste del modelo en <code>R</code> se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-1" aria-hidden="true" tabindex="-1"></a>mod_logit_Int_Aleatorio <span class="ot">&lt;-</span> <span class="fu">glmer</span>(pobreza <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Stratum),</span>
-<span id="cb527-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),<span class="at">weights  =</span>  wk2)</span>
-<span id="cb527-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb527-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-4" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Int_Aleatorio)</span></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-1" tabindex="-1"></a>mod_logit_Int_Aleatorio <span class="ot">&lt;-</span> <span class="fu">glmer</span>(pobreza <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Stratum),</span>
+<span id="cb527-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>),<span class="at">weights  =</span>  wk2)</span>
+<span id="cb527-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-3" tabindex="-1"></a></span>
+<span id="cb527-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb527-4" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Int_Aleatorio)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -689,14 +695,14 @@ Siguiendo las ideas de la sección anterior, el ajuste del modelo en <code>R</co
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.3151349</td>
-<td align="right">0.1867082</td>
+<td align="right">0.3151</td>
+<td align="right">0.1867</td>
 <td align="left">FALSE</td>
 </tr>
 </tbody>
 </table>
 <p>Los coeficientes estimados son:</p>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb528-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_logit_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>10L)</span></code></pre></div>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb528-1" tabindex="-1"></a><span class="fu">coef</span>(mod_logit_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -708,79 +714,79 @@ Siguiendo las ideas de la sección anterior, el ajuste del modelo en <code>R</co
 <tbody>
 <tr class="odd">
 <td align="left">idStrt001</td>
-<td align="right">0.9888770</td>
-<td align="right">-0.0065962</td>
+<td align="right">0.9889</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt002</td>
-<td align="right">1.8836801</td>
-<td align="right">-0.0065962</td>
+<td align="right">1.8837</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt003</td>
-<td align="right">-0.7462533</td>
-<td align="right">-0.0065962</td>
+<td align="right">-0.7463</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt004</td>
-<td align="right">-0.1484101</td>
-<td align="right">-0.0065962</td>
+<td align="right">-0.1484</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt005</td>
-<td align="right">1.7154836</td>
-<td align="right">-0.0065962</td>
+<td align="right">1.7155</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt006</td>
-<td align="right">3.2456075</td>
-<td align="right">-0.0065962</td>
+<td align="right">3.2456</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt007</td>
-<td align="right">0.5600832</td>
-<td align="right">-0.0065962</td>
+<td align="right">0.5601</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt008</td>
-<td align="right">1.6847527</td>
-<td align="right">-0.0065962</td>
+<td align="right">1.6848</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt009</td>
-<td align="right">3.9332398</td>
-<td align="right">-0.0065962</td>
+<td align="right">3.9332</td>
+<td align="right">-0.0066</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt010</td>
-<td align="right">1.1206950</td>
-<td align="right">-0.0065962</td>
+<td align="right">1.1207</td>
+<td align="right">-0.0066</td>
 </tr>
 </tbody>
 </table>
 <p>Gráficamente, los modelos ajustados se muestran a continuación:</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-1" aria-hidden="true" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
-<span id="cb529-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), </span>
-<span id="cb529-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-3" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
-<span id="cb529-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb529-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-5" aria-hidden="true" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dat_pred,<span class="at">Proba =</span> <span class="fu">predict</span>(mod_logit_Int_Aleatorio, </span>
-<span id="cb529-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>))</span>
-<span id="cb529-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb529-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
-<span id="cb529-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
-<span id="cb529-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
-<span id="cb529-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb529-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
-<span id="cb529-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb529-14"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-1" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
+<span id="cb529-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), </span>
+<span id="cb529-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-3" tabindex="-1"></a>                           <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
+<span id="cb529-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-4" tabindex="-1"></a></span>
+<span id="cb529-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-5" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dat_pred,<span class="at">Proba =</span> <span class="fu">predict</span>(mod_logit_Int_Aleatorio, </span>
+<span id="cb529-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-6" tabindex="-1"></a>                       <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>))</span>
+<span id="cb529-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-7" tabindex="-1"></a></span>
+<span id="cb529-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-8" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
+<span id="cb529-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-9" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
+<span id="cb529-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-10" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
+<span id="cb529-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-11" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb529-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
+<span id="cb529-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb529-14"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb529-14" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/plot_mod_Int_Aleatorio02-1.svg" width="672" /></p>
 <p>Las predicciones del modelo se presentan a continuación:</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-1" aria-hidden="true" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Int_Aleatorio,</span>
-<span id="cb530-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
-<span id="cb530-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
-<span id="cb530-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum, </span>
-<span id="cb530-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb530-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>6L)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Int_Aleatorio,</span>
+<span id="cb530-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-2" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
+<span id="cb530-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-3" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
+<span id="cb530-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-4" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum, </span>
+<span id="cb530-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-5" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb530-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb530-6" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -792,47 +798,47 @@ Siguiendo las ideas de la sección anterior, el ajuste del modelo en <code>R</co
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.2148957</td>
+<td align="right">0.2149</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7769795</td>
+<td align="right">0.7770</td>
 </tr>
 <tr class="even">
-<td align="right">0.2148957</td>
+<td align="right">0.2149</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7501360</td>
+<td align="right">0.7501</td>
 </tr>
 <tr class="odd">
-<td align="right">0.2148957</td>
+<td align="right">0.2149</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7463022</td>
+<td align="right">0.7463</td>
 </tr>
 <tr class="even">
-<td align="right">0.2148957</td>
+<td align="right">0.2149</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7717254</td>
+<td align="right">0.7717</td>
 </tr>
 <tr class="odd">
-<td align="right">0.2148957</td>
+<td align="right">0.2149</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7438076</td>
+<td align="right">0.7438</td>
 </tr>
 <tr class="even">
-<td align="right">0.1682010</td>
+<td align="right">0.1682</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7507385</td>
+<td align="right">0.7507</td>
 </tr>
 </tbody>
 </table>
 <p>Como se indicó anteriormente, para verificar la calidad del modelo se realizan las estimaciones de las predicciones y de las variables observadas, teniendo estimaciones similares:</p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-1" aria-hidden="true" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb531-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
-<span id="cb531-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-1" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb531-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
+<span id="cb531-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb531-3" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -842,8 +848,8 @@ Siguiendo las ideas de la sección anterior, el ajuste del modelo en <code>R</co
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.3855031</td>
-<td align="right">0.3858509</td>
+<td align="right">0.3855</td>
+<td align="right">0.3859</td>
 </tr>
 </tbody>
 </table>
@@ -863,10 +869,10 @@ logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 \beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
 \]</span></p>
 <p>En <code>R</code>, el ajuste se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-1" aria-hidden="true" tabindex="-1"></a>mod_logit_Pen_Aleatorio <span class="ot">&lt;-</span> <span class="fu">glmer</span>(pobreza <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> Expenditure<span class="sc">|</span> Stratum),</span>
-<span id="cb532-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2, <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb532-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb532-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-4" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Pen_Aleatorio)</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-1" tabindex="-1"></a>mod_logit_Pen_Aleatorio <span class="ot">&lt;-</span> <span class="fu">glmer</span>(pobreza <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> Expenditure<span class="sc">|</span> Stratum),</span>
+<span id="cb532-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2, <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb532-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-3" tabindex="-1"></a></span>
+<span id="cb532-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb532-4" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Pen_Aleatorio)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -877,14 +883,14 @@ logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.8858594</td>
-<td align="right">0.6533971</td>
+<td align="right">0.8859</td>
+<td align="right">0.6534</td>
 <td align="left">FALSE</td>
 </tr>
 </tbody>
 </table>
 <p>Los coeficientes del modelo son:</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb533-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_logit_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>10L)</span></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb533-1" tabindex="-1"></a><span class="fu">coef</span>(mod_logit_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -896,79 +902,79 @@ logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 <tbody>
 <tr class="odd">
 <td align="left">idStrt001</td>
-<td align="right">5.244003</td>
-<td align="right">-0.0271496</td>
+<td align="right">5.244</td>
+<td align="right">-0.0271</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt002</td>
-<td align="right">11.058446</td>
-<td align="right">-0.0394091</td>
+<td align="right">11.059</td>
+<td align="right">-0.0394</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt003</td>
-<td align="right">-1.614168</td>
-<td align="right">-0.0059837</td>
+<td align="right">-1.614</td>
+<td align="right">-0.0060</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt004</td>
-<td align="right">1.654808</td>
-<td align="right">-0.0152715</td>
+<td align="right">1.655</td>
+<td align="right">-0.0153</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt005</td>
-<td align="right">9.055225</td>
-<td align="right">-0.0289090</td>
+<td align="right">9.055</td>
+<td align="right">-0.0289</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt006</td>
-<td align="right">-1.354381</td>
-<td align="right">0.0100316</td>
+<td align="right">-1.354</td>
+<td align="right">0.0100</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt007</td>
-<td align="right">1.034633</td>
-<td align="right">-0.0135859</td>
+<td align="right">1.035</td>
+<td align="right">-0.0136</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt008</td>
-<td align="right">1.472601</td>
-<td align="right">-0.0055526</td>
+<td align="right">1.473</td>
+<td align="right">-0.0056</td>
 </tr>
 <tr class="odd">
 <td align="left">idStrt009</td>
-<td align="right">4.049805</td>
-<td align="right">-0.0048253</td>
+<td align="right">4.050</td>
+<td align="right">-0.0048</td>
 </tr>
 <tr class="even">
 <td align="left">idStrt010</td>
-<td align="right">4.310186</td>
-<td align="right">-0.0214105</td>
+<td align="right">4.310</td>
+<td align="right">-0.0214</td>
 </tr>
 </tbody>
 </table>
 <p>Gráficamente el ajuste de los modelo se muestra a continuación:</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-1" aria-hidden="true" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
-<span id="cb534-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb534-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
-<span id="cb534-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb534-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-5" aria-hidden="true" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dat_pred,<span class="at">Proba =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio, <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>))</span>
-<span id="cb534-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb534-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
-<span id="cb534-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
-<span id="cb534-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
-<span id="cb534-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb534-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
-<span id="cb534-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb534-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-1" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
+<span id="cb534-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb534-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-3" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
+<span id="cb534-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-4" tabindex="-1"></a></span>
+<span id="cb534-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-5" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> <span class="fu">mutate</span>(dat_pred,<span class="at">Proba =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio, <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>))</span>
+<span id="cb534-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-6" tabindex="-1"></a></span>
+<span id="cb534-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-7" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
+<span id="cb534-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-8" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
+<span id="cb534-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-9" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
+<span id="cb534-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-10" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb534-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
+<span id="cb534-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb534-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb534-13" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/plot_mod_Pen_Aleatorio02-1.svg" width="672" /></p>
 <p>Las predicciones se muestran a continuación:</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-1" aria-hidden="true" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb535-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio,</span>
-<span id="cb535-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
-<span id="cb535-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
-<span id="cb535-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum, </span>
-<span id="cb535-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb535-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>6L) </span></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb535-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-2" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio,</span>
+<span id="cb535-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-3" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
+<span id="cb535-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-4" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
+<span id="cb535-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-5" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum, </span>
+<span id="cb535-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-6" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb535-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb535-7" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -980,47 +986,47 @@ logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.0153830</td>
+<td align="right">0.0154</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7769795</td>
+<td align="right">0.7770</td>
 </tr>
 <tr class="even">
-<td align="right">0.0153830</td>
+<td align="right">0.0154</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7501360</td>
+<td align="right">0.7501</td>
 </tr>
 <tr class="odd">
-<td align="right">0.0153830</td>
+<td align="right">0.0154</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7463022</td>
+<td align="right">0.7463</td>
 </tr>
 <tr class="even">
-<td align="right">0.0153830</td>
+<td align="right">0.0154</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7717254</td>
+<td align="right">0.7717</td>
 </tr>
 <tr class="odd">
-<td align="right">0.0153830</td>
+<td align="right">0.0154</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7438076</td>
+<td align="right">0.7438</td>
 </tr>
 <tr class="even">
-<td align="right">0.0044732</td>
+<td align="right">0.0045</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
-<td align="right">0.7507385</td>
+<td align="right">0.7507</td>
 </tr>
 </tbody>
 </table>
 <p>La calidad de la predicción del modelo es muy buena como se muestra a continuación:</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-1" aria-hidden="true" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> </span>
-<span id="cb536-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
-<span id="cb536-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-1" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> </span>
+<span id="cb536-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
+<span id="cb536-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb536-3" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1030,8 +1036,8 @@ logit(\pi_{ij})=\beta_{0j}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.3845282</td>
-<td align="right">0.3858509</td>
+<td align="right">0.3845</td>
+<td align="right">0.3859</td>
 </tr>
 </tbody>
 </table>
@@ -1053,55 +1059,40 @@ y,</p>
 \]</span></p>
 <p>donde <span class="math inline">\(\mu_{j}\)</span> es el gasto medio en el estrato <span class="math inline">\(j\)</span>.</p>
 <p>El ajuste del modelo es el siguiente:</p>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-1" aria-hidden="true" tabindex="-1"></a>mod_logit_Pen_Aleatorio2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
-<span id="cb537-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-2" aria-hidden="true" tabindex="-1"></a>  pobreza <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">+</span></span>
-<span id="cb537-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">|</span> Stratum ),</span>
-<span id="cb537-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2, </span>
-<span id="cb537-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb537-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-6" aria-hidden="true" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Pen_Aleatorio2)</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="right">ICC_adjusted</th>
-<th align="right">ICC_unadjusted</th>
-<th align="left">optional</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.9479436</td>
-<td align="right">0.5534188</td>
-<td align="left">FALSE</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-1" tabindex="-1"></a>mod_logit_Pen_Aleatorio2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb537-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-2" tabindex="-1"></a>  pobreza <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">+</span></span>
+<span id="cb537-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-3" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">|</span> Stratum ),</span>
+<span id="cb537-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-4" tabindex="-1"></a>    <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2, </span>
+<span id="cb537-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-5" tabindex="-1"></a>  <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb537-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb537-6" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_logit_Pen_Aleatorio2)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
 <p>Se grafican los modelos ajustados anteriormente:</p>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-1" aria-hidden="true" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum, Zone, mu) <span class="sc">%&gt;%</span> </span>
-<span id="cb538-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb538-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), </span>
-<span id="cb538-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-4" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb538-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-5" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
-<span id="cb538-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb538-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-7" aria-hidden="true" tabindex="-1"></a>dat_pred<span class="sc">$</span>Proba <span class="ot">=</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio2, </span>
-<span id="cb538-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb538-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb538-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
-<span id="cb538-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
-<span id="cb538-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
-<span id="cb538-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-13" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span><span class="fu">facet_grid</span>(.<span class="sc">~</span>Zone)<span class="sc">+</span></span>
-<span id="cb538-14"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
-<span id="cb538-15"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb538-16"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb538-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-1" tabindex="-1"></a>dat_pred <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum, Zone, mu) <span class="sc">%&gt;%</span> </span>
+<span id="cb539-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-2" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb539-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-3" tabindex="-1"></a>    <span class="at">Expenditure =</span> <span class="fu">list</span>(<span class="fu">seq</span>(<span class="fu">min</span>(Expenditure), </span>
+<span id="cb539-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-4" tabindex="-1"></a>                           <span class="fu">max</span>(Expenditure), <span class="at">len =</span> <span class="dv">100</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb539-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-5" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">unnest_legacy</span>()</span>
+<span id="cb539-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-6" tabindex="-1"></a></span>
+<span id="cb539-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-7" tabindex="-1"></a>dat_pred<span class="sc">$</span>Proba <span class="ot">=</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio2, </span>
+<span id="cb539-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-8" tabindex="-1"></a>                       <span class="at">newdata =</span> dat_pred , <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb539-9"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-9" tabindex="-1"></a></span>
+<span id="cb539-10"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-10" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat_pred,</span>
+<span id="cb539-11"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-11" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Proba, <span class="at">x =</span> Expenditure,</span>
+<span id="cb539-12"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-12" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
+<span id="cb539-13"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-13" tabindex="-1"></a>   <span class="fu">geom_line</span>()<span class="sc">+</span>   <span class="fu">theme_bw</span>() <span class="sc">+</span><span class="fu">facet_grid</span>(.<span class="sc">~</span>Zone)<span class="sc">+</span></span>
+<span id="cb539-14"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-14" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> encuesta, <span class="fu">aes</span>(<span class="at">y =</span> pobreza, <span class="at">x =</span> Expenditure))<span class="sc">+</span></span>
+<span id="cb539-15"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-15" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb539-16"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-16" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/plot_mod_Pen_Aleatorio002-1.svg" width="672" />
 Se logra observar que, hay una variación importante en el ajuste de los modelos para cada zona. Ahora bien, las predicciones del porcentaje de pobreza por zona se calculan a continuación:</p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-1" aria-hidden="true" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb539-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio2, </span>
-<span id="cb539-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
-<span id="cb539-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
-<span id="cb539-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum,</span>
-<span id="cb539-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">Zone =</span> encuesta<span class="sc">$</span>Zone,</span>
-<span id="cb539-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb539-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb539-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>6L) </span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb540-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-2" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_logit_Pen_Aleatorio2, </span>
+<span id="cb540-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-3" tabindex="-1"></a>                 <span class="at">type =</span> <span class="st">&quot;response&quot;</span>), </span>
+<span id="cb540-4"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-4" tabindex="-1"></a>           <span class="at">pobreza =</span> encuesta<span class="sc">$</span>pobreza, </span>
+<span id="cb540-5"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-5" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum,</span>
+<span id="cb540-6"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-6" tabindex="-1"></a>           <span class="at">Zone =</span> encuesta<span class="sc">$</span>Zone,</span>
+<span id="cb540-7"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-7" tabindex="-1"></a>           <span class="at">wk2 =</span> encuesta<span class="sc">$</span>wk2)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb540-8"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-8" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1114,53 +1105,53 @@ Se logra observar que, hay una variación importante en el ajuste de los modelos
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.0046039</td>
+<td align="right">0.0123</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7769795</td>
+<td align="right">0.7770</td>
 </tr>
 <tr class="even">
-<td align="right">0.0046039</td>
+<td align="right">0.0123</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7501360</td>
+<td align="right">0.7501</td>
 </tr>
 <tr class="odd">
-<td align="right">0.0046039</td>
+<td align="right">0.0123</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7463022</td>
+<td align="right">0.7463</td>
 </tr>
 <tr class="even">
-<td align="right">0.0046039</td>
+<td align="right">0.0123</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7717254</td>
+<td align="right">0.7717</td>
 </tr>
 <tr class="odd">
-<td align="right">0.0046039</td>
+<td align="right">0.0123</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7438076</td>
+<td align="right">0.7438</td>
 </tr>
 <tr class="even">
-<td align="right">0.0009514</td>
+<td align="right">0.0035</td>
 <td align="right">0</td>
 <td align="left">idStrt001</td>
 <td align="left">Rural</td>
-<td align="right">0.7507385</td>
+<td align="right">0.7507</td>
 </tr>
 </tbody>
 </table>
 <p>Por último, se verifica la calidad de las predicciones, obteniendo, como en los modelos anteriores, unas predicciones de buena calidad haciendo las comparaciones con las estimaciones de la variable observada para cada una de las zonas.</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-1" aria-hidden="true" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb540-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
-<span id="cb540-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb540-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb541-1" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb541-2"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb541-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pred =</span> <span class="fu">weighted.mean</span>(Pred, wk2), </span>
+<span id="cb541-3"><a href="introducción-a-los-modelos-logístico-multinivel..html#cb541-3" tabindex="-1"></a>            <span class="at">pobreza =</span> <span class="fu">weighted.mean</span>(pobreza,wk2))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1172,13 +1163,13 @@ Se logra observar que, hay una variación importante en el ajuste de los modelos
 <tbody>
 <tr class="odd">
 <td align="left">Rural</td>
-<td align="right">0.4385635</td>
-<td align="right">0.4298409</td>
+<td align="right">0.4283</td>
+<td align="right">0.4298</td>
 </tr>
 <tr class="even">
 <td align="left">Urban</td>
-<td align="right">0.3375923</td>
-<td align="right">0.3437244</td>
+<td align="right">0.3408</td>
+<td align="right">0.3437</td>
 </tr>
 </tbody>
 </table>
@@ -1205,43 +1196,43 @@ Se logra observar que, hay una variación importante en el ajuste de los modelos
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/10-Multinivel.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/10-Multinivel.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>

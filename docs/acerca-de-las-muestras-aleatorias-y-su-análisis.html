@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R</title>
+  <title>8.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R" />
+  <meta property="og:title" content="8.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="8.1 Acerca de las muestras aleatorias y su análisis | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2025-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,100 +141,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
-<li class="chapter" data-level="2" data-path="conceptos-básicos-en-encuestas-de-hogares.html"><a href="conceptos-básicos-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<li class="chapter" data-level="1" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="universo-de-estudio-y-población-objetivo.html"><a href="universo-de-estudio-y-población-objetivo.html"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="2.2" data-path="unidades-de-análisis.html"><a href="unidades-de-análisis.html"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="2.5" data-path="selección-de-una-muestra.html"><a href="selección-de-una-muestra.html"><i class="fa fa-check"></i><b>2.5</b> Selección de una muestra</a></li>
-<li class="chapter" data-level="2.6" data-path="motivación.html"><a href="motivación.html"><i class="fa fa-check"></i><b>2.6</b> Motivación</a></li>
-<li class="chapter" data-level="2.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="2.8" data-path="práctica-en-r.html"><a href="práctica-en-r.html"><i class="fa fa-check"></i><b>2.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="2.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="1.1" data-path="09-Generalizados2.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.2" data-path="09-Generalizados2.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="1.3" data-path="09-Generalizados2.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="1.6" data-path="09-Generalizados2.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="fundamentos-básicos-de-r-y-rstudio.html"><a href="fundamentos-básicos-de-r-y-rstudio.html"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="3.2" data-path="algunas-librerías-de-interés.html"><a href="algunas-librerías-de-interés.html"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="3.3" data-path="cración-de-proyectos-en-r.html"><a href="cración-de-proyectos-en-r.html"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="3.4" data-path="lectura-de-las-bases-de-datos-y-manipulación.html"><a href="lectura-de-las-bases-de-datos-y-manipulación.html"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="3.9" data-path="observación-importante.html"><a href="observación-importante.html"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="3.12" data-path="varianza-desviación-estándar-y-rangos.html"><a href="varianza-desviación-estándar-y-rangos.html"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="1.6.1" data-path="09-Generalizados2.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><a href="análisis-de-las-variables-continuas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="1.8" data-path="09-Generalizados2.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><a href="lectura-de-bases-de-datos-y-definición-del-diseño-muestral.html"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-gráfico-histogramas-y-boxplot.html"><a href="análisis-gráfico-histogramas-y-boxplot.html"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="4.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html"><i class="fa fa-check"></i><b>4.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.1" data-path="09-Generalizados2.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="09-Generalizados2.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="2.3" data-path="09-Generalizados2.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="2.4" data-path="09-Generalizados2.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="2.9" data-path="09-Generalizados2.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="2.12" data-path="09-Generalizados2.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="4.3.2" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="4.3.3" data-path="estimación-puntual.html"><a href="estimación-puntual.html#estimación-de-medidas-de-dispersión-y-localización"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de medidas de dispersión y localización</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="análisis-de-la-relación-entre-dos-variable-continuas.html"><a href="análisis-de-la-relación-entre-dos-variable-continuas.html"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="3.1" data-path="09-Generalizados2.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="3.2" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>5.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="5.2" data-path="estimación-de-proporciones.html"><a href="estimación-de-proporciones.html"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+<li class="chapter" data-level="3.3.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="3.3.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="3.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><a href="modelos-de-regresión-bajo-diseños-de-muestreo-complejos.html"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="3.6" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="6.2" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="6.3" data-path="inferencia-sobre-los-parámetros-del-modelo.html"><a href="inferencia-sobre-los-parámetros-del-modelo.html"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
+<li class="chapter" data-level="4.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
+<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="gráficas-en-r.html"><a href="gráficas-en-r.html"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<li class="chapter" data-level="5" data-path="09-Generalizados2.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="5.2" data-path="09-Generalizados2.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="5.3" data-path="09-Generalizados2.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="6" data-path="09-Generalizados2.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="8.2" data-path="estadístico-de-wald.html"><a href="estadístico-de-wald.html"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><a href="modelos-lineales-generalizados-introducción-a-la-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="9.2" data-path="método-de-máxima-verosimilitud.html"><a href="método-de-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="método-de-máxima-pseudo-verosimilitud.html"><a href="método-de-máxima-pseudo-verosimilitud.html"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="09-Generalizados2.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="8" data-path="09-Generalizados2.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="10.2" data-path="estimación-de-pseudo-máxima-verosimilitud.html"><a href="estimación-de-pseudo-máxima-verosimilitud.html"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="10.3" data-path="introducción-a-los-modelos-logístico-multinivel..html"><a href="introducción-a-los-modelos-logístico-multinivel..html"><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="8.1" data-path="09-Generalizados2.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="imputación-múltiple-en-encuestas-de-hogares.html"><a href="imputación-múltiple-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="imputación-por-la-media-no-condicional..html"><a href="imputación-por-la-media-no-condicional..html"><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="11.2" data-path="imputación-por-la-media-condicional.html"><a href="imputación-por-la-media-condicional.html"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="11.3" data-path="imputación-por-hot-deck-y-cold-deck.html"><a href="imputación-por-hot-deck-y-cold-deck.html"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="11.4" data-path="imputación-por-regresión.html"><a href="imputación-por-regresión.html"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="11.5" data-path="imputación-por-el-vecino-más-cercano.html"><a href="imputación-por-el-vecino-más-cercano.html"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="11.6" data-path="imputación-por-el-vecino-más-cercano-con-regresión.html"><a href="imputación-por-el-vecino-más-cercano-con-regresión.html"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="11.7" data-path="introducción-a-la-imputación-múltiple..html"><a href="introducción-a-la-imputación-múltiple..html"><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="chapter" data-level="10" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -251,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="acerca-de-las-muestras-aleatorias-y-su-análisis" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Acerca de las muestras aleatorias y su análisis<a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#acerca-de-las-muestras-aleatorias-y-su-análisis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="acerca-de-las-muestras-aleatorias-y-su-análisis" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Acerca de las muestras aleatorias y su análisis<a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Hablemos primero de la selección sin reemplazo, en donde una muestra seleccionada está conformada por algunos elementos de la población que no se repiten. Para seleccionar una muestra sin reemplazo de tamaño <span class="math inline">\(n=3\)</span>, de una población de tamaño <span class="math inline">\(N=5\)</span>, el proceso de selección puede ser de la siguiente manera. Se escoge una unidad de las cinco posibles, luego se selecciona una unidad de las cuatro restantes, y por último, una unidad de las tres restantes. Esto hace que el proceso de selección de la muestra no se lleve a cabo de forma independiente. Por ejemplo, si el muestreo es aleatorio simple, la probabilidad de selección de la primera unidad es 1/5, la probabilidad de selección de la segunda unidad es 1/4 y así sucesivamente. Por otro lado, cuando el muestreo es con reemplazo, la selección se realiza de forma independiente puesto que se trata de realizar el mismo ensayo (seleccionar una unidad de cinco posibles) tres veces, sin importar que las unidades tengan diferentes probabilidades de selección.</p>
 <p>Por otra parte, es bien sabido que la teoría de muestreo establece que el valor de la característica de interés, <span class="math inline">\(y_k\)</span>, es eso, un valor; por tanto, no es aleatorio. Luego, es incorrecto decir que <span class="math inline">\(y_k\)</span> es una variable aleatoria asociada con alguna distribución de probabilidad. Recuerde que en el muestreo lo único aleatorio en la inferencia es la muestra. Ahora, no significa que no podamos construir variables aleatorias en muestreo. Por ejemplo, construyamos la siguiente variable aleatoria <span class="math inline">\(X_i\)</span> (<span class="math inline">\(i=1,2,3\)</span>) definida como el valor de la característica de interés en el individuo <span class="math inline">\(k\)</span>-ésimo, seleccionado en la <span class="math inline">\(i\)</span>-ésima extracción. En este caso, existen tres variables aleatorias, puesto que la muestra es de tamaño tres.</p>
 <p>Si consideramos un muestreo aleatorio sin reemplazo, la primera variable aleatoria <span class="math inline">\(X_1\)</span>, podrá tomar cualquiera de los siguiente cinco valores: <span class="math inline">\(y_1, y_2, y_3, y_4, y_5\)</span>. La segunda variable aleatoria <span class="math inline">\(X_2\)</span>, solo podrá tomar cuatro valores, puesto que <span class="math inline">\(X_1\)</span> ya fue realizada, y la tercera variable aleatoria <span class="math inline">\(X_3\)</span> solo podrá tomar tres valores, puesto que <span class="math inline">\(X_1\)</span> y <span class="math inline">\(X_2\)</span> ya fueron realizadas. Esto hace que <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span> y <span class="math inline">\(X_3\)</span> no constituya una sucesión de variables aleatorias independientes (puesto que la selección sin reemplazo no es un proceso independiente) ni idénticamente distribuidas (puesto que ni siquiera su espacio muestral es el mismo: <span class="math inline">\(X_1\)</span> puede tomar cinco valores, <span class="math inline">\(X_2\)</span> solo cuatro y <span class="math inline">\(X_3\)</span> solo tres). Lo cual quiere decir que a partir de un muestreo sin reemplazo (ni siquiera el tan mencionado muestreo aleatorio simple) no es posible construir una muestra aleatoria, como las que aparecen en los libros de teoría estadística.</p>
@@ -281,38 +287,30 @@ Var_p(X_i)
 <p><em>Primer proceso inferencial: el modelo</em></p>
 <p>En este apartado, es notable que la medida de probabilidad que rige la inferencia hasta el momento sea la inducida por la distribución binomial con parámetro 0.3. De esta manera, el estimador insesgado de mínima varianza (todas estas propiedades obtenidas con base en la distribución binomial) está dado por el promedio poblacional. Nótese que la inferencia utiliza todos los datos de la población. Ahora, para reproducirlo computacionalmente, basta con simular muchas poblaciones de 100 variables aleatorias independientes distribuidas Bernoulli con parámetro desconocido <span class="math inline">\(\theta\)</span>=0.3.</p>
 <p>Como es bien sabido, bajo la perspectiva de los modelos poblacionales y la inferencia estadística clásica, el estimador <span class="math inline">\(\bar{y}_U = \frac{\sum_U y_k}{N}\)</span> es insesgado. Para corroborarlo, es posible introducir la siguiente simulación de Monte Carlo.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb454-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb454-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-3" aria-hidden="true" tabindex="-1"></a>nsim1 <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb454-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-4" aria-hidden="true" tabindex="-1"></a>Est0<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
-<span id="cb454-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
-<span id="cb454-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-7" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb454-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-8" aria-hidden="true" tabindex="-1"></a>Est0[i]<span class="ot">=</span><span class="fu">mean</span>(y)</span>
-<span id="cb454-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb454-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-11" aria-hidden="true" tabindex="-1"></a>Esp0 <span class="ot">=</span> <span class="fu">mean</span>(Est0)</span>
-<span id="cb454-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb454-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(theta, Esp0)  </span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-1" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb454-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-2" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb454-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-3" tabindex="-1"></a>nsim1 <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb454-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-4" tabindex="-1"></a>Est0<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
+<span id="cb454-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-5" tabindex="-1"></a></span>
+<span id="cb454-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
+<span id="cb454-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-7" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb454-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-8" tabindex="-1"></a>Est0[i]<span class="ot">=</span><span class="fu">mean</span>(y)</span>
+<span id="cb454-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-9" tabindex="-1"></a>}</span>
+<span id="cb454-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-10" tabindex="-1"></a></span>
+<span id="cb454-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-11" tabindex="-1"></a>Esp0 <span class="ot">=</span> <span class="fu">mean</span>(Est0)</span>
+<span id="cb454-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-12" tabindex="-1"></a></span>
+<span id="cb454-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-13" tabindex="-1"></a><span class="fu">cbind</span>(theta, Esp0)  </span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:right;">
-theta
-</th>
-<th style="text-align:right;">
-Esp0
-</th>
+<tr class="header">
+<th align="right">theta</th>
+<th align="right">Esp0</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:right;">
-0.29989
-</td>
+<tr class="odd">
+<td align="right">0.3</td>
+<td align="right">0.30116</td>
 </tr>
 </tbody>
 </table>
@@ -337,75 +335,63 @@ en el proceso de inferencia e ignora el diseño de muestreo es el siguiente:</p>
 \bar{y}_{S}=\frac{\sum_{i\in S_{I}}t_{y_{i}}}{\sum_{i\in S_{I}}N_{i}}
 \]</span></p>
 <p>En términos generales el siguiente esquema trata de reproducir gráficamente este proceso de inferencia, en donde un gran número de muestras podrían haber sido extraídas siguiendo el diseño de muestreo. Con la siguiente simulación de Monte Carlo se comprueba fácilmente que es insesgado, mientras que es sesgado:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb455-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-2" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb455-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-3" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
-<span id="cb455-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-4" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb455-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-5" aria-hidden="true" tabindex="-1"></a>theta_N<span class="ot">=</span><span class="fu">mean</span>(y)</span>
-<span id="cb455-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-6" aria-hidden="true" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
-<span id="cb455-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-7" aria-hidden="true" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
-<span id="cb455-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-9" aria-hidden="true" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
-<span id="cb455-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-11" aria-hidden="true" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb455-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-12" aria-hidden="true" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb455-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-13" aria-hidden="true" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
-<span id="cb455-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-14" aria-hidden="true" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
-<span id="cb455-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
-<span id="cb455-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-17" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
-<span id="cb455-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-18" aria-hidden="true" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
-<span id="cb455-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb455-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Tamaños</span></span>
-<span id="cb455-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-23" aria-hidden="true" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
-<span id="cb455-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-24" aria-hidden="true" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
-<span id="cb455-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
-<span id="cb455-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-27" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
-<span id="cb455-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-28" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
-<span id="cb455-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-29" aria-hidden="true" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
-<span id="cb455-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-30" aria-hidden="true" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
-<span id="cb455-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-31" aria-hidden="true" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
-<span id="cb455-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-32" aria-hidden="true" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="cn">NA</span>)</span>
-<span id="cb455-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
-<span id="cb455-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-34" aria-hidden="true" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
-<span id="cb455-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-35" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb455-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-36" aria-hidden="true" tabindex="-1"></a><span class="co">#-------</span></span>
-<span id="cb455-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-37" aria-hidden="true" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
-<span id="cb455-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-38" aria-hidden="true" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
-<span id="cb455-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb455-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-41" aria-hidden="true" tabindex="-1"></a>Esp1<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
-<span id="cb455-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-42" aria-hidden="true" tabindex="-1"></a>Esp2<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
-<span id="cb455-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb455-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-44" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(theta_N, Esp1, Esp2)</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb455-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-2" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb455-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-3" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
+<span id="cb455-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-4" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb455-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-5" tabindex="-1"></a>theta_N<span class="ot">=</span><span class="fu">mean</span>(y)</span>
+<span id="cb455-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-6" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb455-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-7" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
+<span id="cb455-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-8" tabindex="-1"></a></span>
+<span id="cb455-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-9" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
+<span id="cb455-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-10" tabindex="-1"></a></span>
+<span id="cb455-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb455-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb455-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
+<span id="cb455-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
+<span id="cb455-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-15" tabindex="-1"></a></span>
+<span id="cb455-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb455-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb455-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
+<span id="cb455-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-19" tabindex="-1"></a>}</span>
+<span id="cb455-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-20" tabindex="-1"></a></span>
+<span id="cb455-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-21" tabindex="-1"></a><span class="co">#Tamaños</span></span>
+<span id="cb455-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-22" tabindex="-1"></a></span>
+<span id="cb455-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-23" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb455-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-24" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
+<span id="cb455-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-25" tabindex="-1"></a></span>
+<span id="cb455-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-26" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
+<span id="cb455-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-27" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
+<span id="cb455-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-28" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
+<span id="cb455-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-29" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
+<span id="cb455-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-30" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
+<span id="cb455-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-31" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
+<span id="cb455-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-32" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="cn">NA</span>)</span>
+<span id="cb455-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-33" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
+<span id="cb455-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-34" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
+<span id="cb455-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-35" tabindex="-1"></a>}</span>
+<span id="cb455-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-36" tabindex="-1"></a><span class="co">#-------</span></span>
+<span id="cb455-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-37" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
+<span id="cb455-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-38" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
+<span id="cb455-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-39" tabindex="-1"></a>}</span>
+<span id="cb455-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-40" tabindex="-1"></a></span>
+<span id="cb455-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-41" tabindex="-1"></a>Esp1<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
+<span id="cb455-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-42" tabindex="-1"></a>Esp2<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
+<span id="cb455-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-43" tabindex="-1"></a></span>
+<span id="cb455-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-44" tabindex="-1"></a><span class="fu">cbind</span>(theta_N, Esp1, Esp2)</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:right;">
-theta_N
-</th>
-<th style="text-align:right;">
-Esp1
-</th>
-<th style="text-align:right;">
-Esp2
-</th>
+<tr class="header">
+<th align="right">theta_N</th>
+<th align="right">Esp1</th>
+<th align="right">Esp2</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-0.26
-</td>
-<td style="text-align:right;">
-0.2788737
-</td>
-<td style="text-align:right;">
-0.1037071
-</td>
+<tr class="odd">
+<td align="right">0.35</td>
+<td align="right">0.3551405</td>
+<td align="right">0.1380303</td>
 </tr>
 </tbody>
 </table>
@@ -417,78 +403,68 @@ Esp2
 E_{\xi p}(\bar{y}_{\pi S})=E_{\xi}E_{p}(\bar{y}_{\pi S}|Y)=E_{\xi}(\bar{y}_{U})=\theta=0.3
 \]</span>
 Con la siguiente simulación de Monte Carlo se comprueba fácilmente que <span class="math inline">\(\bar{y}_{\pi S}\)</span> es insesgado, mientras que es <span class="math inline">\(\bar{y}_{S}\)</span> sesgado:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb456-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-3" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-4" aria-hidden="true" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
-<span id="cb456-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-5" aria-hidden="true" tabindex="-1"></a>nsim1<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-6" aria-hidden="true" tabindex="-1"></a>Esp1<span class="ot">=</span>Esp2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
-<span id="cb456-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
-<span id="cb456-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-9" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb456-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-10" aria-hidden="true" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
-<span id="cb456-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-11" aria-hidden="true" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb456-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-12" aria-hidden="true" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb456-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-13" aria-hidden="true" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
-<span id="cb456-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-14" aria-hidden="true" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
-<span id="cb456-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
-<span id="cb456-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-17" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
-<span id="cb456-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-18" aria-hidden="true" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
-<span id="cb456-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb456-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-21" aria-hidden="true" tabindex="-1"></a>Ind</span>
-<span id="cb456-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-22" aria-hidden="true" tabindex="-1"></a>Tamaños</span>
-<span id="cb456-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-24" aria-hidden="true" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-25" aria-hidden="true" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
-<span id="cb456-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-26" aria-hidden="true" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
-<span id="cb456-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
-<span id="cb456-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-29" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
-<span id="cb456-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-30" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
-<span id="cb456-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-31" aria-hidden="true" tabindex="-1"></a>sam</span>
-<span id="cb456-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-32" aria-hidden="true" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
-<span id="cb456-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-33" aria-hidden="true" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
-<span id="cb456-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-34" aria-hidden="true" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
-<span id="cb456-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-35" aria-hidden="true" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>)</span>
-<span id="cb456-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
-<span id="cb456-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-37" aria-hidden="true" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
-<span id="cb456-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-38" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb456-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-40" aria-hidden="true" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
-<span id="cb456-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-41" aria-hidden="true" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
-<span id="cb456-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-42" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb456-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-44" aria-hidden="true" tabindex="-1"></a>Esp1[i]<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
-<span id="cb456-45"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-45" aria-hidden="true" tabindex="-1"></a>Esp2[i]<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
-<span id="cb456-46"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-47"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-47" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb456-48"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb456-49"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-49" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(theta, <span class="fu">mean</span>(Esp1), <span class="fu">mean</span>(Esp2))</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb456-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-2" tabindex="-1"></a></span>
+<span id="cb456-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-3" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb456-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-4" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
+<span id="cb456-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-5" tabindex="-1"></a>nsim1<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb456-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-6" tabindex="-1"></a>Esp1<span class="ot">=</span>Esp2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
+<span id="cb456-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-7" tabindex="-1"></a></span>
+<span id="cb456-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-8" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
+<span id="cb456-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-9" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb456-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-10" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
+<span id="cb456-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb456-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb456-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
+<span id="cb456-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
+<span id="cb456-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-15" tabindex="-1"></a></span>
+<span id="cb456-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb456-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb456-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
+<span id="cb456-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-19" tabindex="-1"></a>}</span>
+<span id="cb456-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-20" tabindex="-1"></a></span>
+<span id="cb456-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-21" tabindex="-1"></a>Ind</span>
+<span id="cb456-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-22" tabindex="-1"></a>Tamaños</span>
+<span id="cb456-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-23" tabindex="-1"></a></span>
+<span id="cb456-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-24" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb456-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-25" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
+<span id="cb456-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-26" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
+<span id="cb456-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-27" tabindex="-1"></a></span>
+<span id="cb456-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-28" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
+<span id="cb456-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-29" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
+<span id="cb456-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-30" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
+<span id="cb456-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-31" tabindex="-1"></a>sam</span>
+<span id="cb456-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-32" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
+<span id="cb456-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-33" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
+<span id="cb456-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-34" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
+<span id="cb456-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-35" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>)</span>
+<span id="cb456-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-36" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
+<span id="cb456-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-37" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
+<span id="cb456-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-38" tabindex="-1"></a>}</span>
+<span id="cb456-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-39" tabindex="-1"></a></span>
+<span id="cb456-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-40" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
+<span id="cb456-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-41" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
+<span id="cb456-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-42" tabindex="-1"></a>}</span>
+<span id="cb456-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-43" tabindex="-1"></a></span>
+<span id="cb456-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-44" tabindex="-1"></a>Esp1[i]<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
+<span id="cb456-45"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-45" tabindex="-1"></a>Esp2[i]<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
+<span id="cb456-46"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-46" tabindex="-1"></a></span>
+<span id="cb456-47"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-47" tabindex="-1"></a>}</span>
+<span id="cb456-48"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-48" tabindex="-1"></a></span>
+<span id="cb456-49"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-49" tabindex="-1"></a><span class="fu">cbind</span>(theta, <span class="fu">mean</span>(Esp1), <span class="fu">mean</span>(Esp2))</span></code></pre></div>
 <table>
 <thead>
-<tr>
-<th style="text-align:right;">
-theta
-</th>
-<th style="text-align:right;">
-</th>
-<th style="text-align:right;">
-</th>
+<tr class="header">
+<th align="right">theta</th>
+<th align="right"></th>
+<th align="right"></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:right;">
-0.3131752
-</td>
-<td style="text-align:right;">
-0.1172207
-</td>
+<tr class="odd">
+<td align="right">0.3</td>
+<td align="right">0.3144898</td>
+<td align="right">0.1184895</td>
 </tr>
 </tbody>
 </table>
@@ -515,43 +491,43 @@ theta
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/psirusteam/2021ASDA/09-Generalizados2.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"tconfig": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/09-Generalizados2.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
 });
 });
 </script>
