@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html"/>
+<link rel="prev" href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html"/>
 <link rel="next" href="análisis-de-la-relación-entre-dos-variable-continuas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="04-Continuas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="04-Continuas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -311,22 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El paquete <code>survey</code> cuenta con la función <code>svyvar</code> que permite obtener matrices de covarianzas ponderadas, a partir de las cuales se puede calcular la correlación. Otra opción más directa es usar <code>svycor</code> de paquetes complementarios como <code>svycor</code> o implementar el cálculo manualmente.</p>
 <p>Ejemplo con ingreso y gasto de los hogares:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-1" tabindex="-1"></a><span class="co"># Covarianza ponderada</span></span>
-<span id="cb138-2"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-2" tabindex="-1"></a>svy_cov <span class="ot">&lt;-</span> <span class="fu">svyvar</span>(<span class="sc">~</span>Income <span class="sc">+</span> Expenditure, <span class="at">design =</span> diseno)</span>
-<span id="cb138-3"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-3" tabindex="-1"></a></span>
-<span id="cb138-4"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-4" tabindex="-1"></a><span class="co"># Convertir a matriz de correlación</span></span>
-<span id="cb138-5"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-5" tabindex="-1"></a>svy_cor <span class="ot">&lt;-</span> <span class="fu">cov2cor</span>(<span class="fu">as.matrix</span>(svy_cov))</span>
-<span id="cb138-6"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-6" tabindex="-1"></a>svy_cor</span></code></pre></div>
-<pre><code>##                Income Expenditure
-## Income      1.0000000   0.7137375
-## Expenditure 0.7137375   1.0000000
-## attr(,&quot;var&quot;)
-##                 Income    Income Expenditure Expenditure
-## Income      2224796539 793251202   793251202   292546318
-## Income       793251202 351683047   351683047   204521236
-## Expenditure  793251202 351683047   351683047   204521236
-## Expenditure  292546318 204521236   204521236   241590402
-## attr(,&quot;statistic&quot;)
-## [1] &quot;variance&quot;</code></pre>
+<span id="cb138-2"><a href="análisis-de-correlación-en-encuestas-de-hogares.html#cb138-2" tabindex="-1"></a>svy_cov <span class="ot">&lt;-</span> <span class="fu">svyvar</span>(<span class="sc">~</span>Income <span class="sc">+</span> Expenditure, <span class="at">design =</span> diseno)</span></code></pre></div>
 <p>El resultado entrega la matriz de correlaciones entre las variables analizadas bajo el diseño complejo.</p>
 </div>
 </div>
@@ -335,7 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="análisis-de-la-relación-entre-dos-variable-continuas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

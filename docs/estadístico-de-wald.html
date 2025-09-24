@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="08-Generalizados.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -307,7 +307,7 @@ Q_{wald}\sim\chi_{\left(R-1\right)\times\left(C-1\right)}^{2}
 F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\right)\left(C-1\right)df}\sim F_{\left(R-1\right)\left(C-1\right),df-\left(R-1\right)\left(C-1\right)+1}
 \]</span></p>
 <p>En <code>R</code>, para calcular el estadístico de Wald se hace similarmente al cálculo de los estadísticos anteriores usando la función <code>summary</code> como sigue:</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="estadístico-de-wald.html#cb413-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;Wald&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="estadístico-de-wald.html#cb412-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;Wald&quot;</span>)</span></code></pre></div>
 <pre><code>##        Sex
 ## pobreza Female  Male
 ##       0  48366 43032
@@ -319,7 +319,7 @@ F_{wald}=Q_{wald}\times\frac{df-\left(R-1\right)\left(C-1\right)+1}{\left(R-1\ri
 ## F = 0.056, ndf = 1, ddf = 119, p-value = 0.8</code></pre>
 <p>Se puede concluir que, con una confianza del 95% y basado en la muestra no hay relación entre el estado de pobreza y el sexo.</p>
 <p>En este mismo sentido, el estadístco de Wald ajustado en <code>R</code> se se calcula similarmente al anterior y los resultados fueron similares:</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="estadístico-de-wald.html#cb415-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;adjWald&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="estadístico-de-wald.html#cb414-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;adjWald&quot;</span>)</span></code></pre></div>
 <pre><code>##        Sex
 ## pobreza Female  Male
 ##       0  48366 43032

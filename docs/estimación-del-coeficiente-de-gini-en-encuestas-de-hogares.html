@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.9 Estimando contrastes en encuestas de hogares | Análisis de encuestas con R</title>
+  <title>4.4 Estimación del coeficiente de Gini en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.9 Estimando contrastes en encuestas de hogares | Análisis de encuestas con R" />
+  <meta property="og:title" content="4.4 Estimación del coeficiente de Gini en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.9 Estimando contrastes en encuestas de hogares | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="4.4 Estimación del coeficiente de Gini en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estimando-razones-en-encuestas-de-hogares.html"/>
-<link rel="next" href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html"/>
+<link rel="prev" href="estimación-de-totales-medias-y-razones.html"/>
+<link rel="next" href="análisis-de-correlación-en-encuestas-de-hogares.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -284,209 +284,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="estimando-contrastes-en-encuestas-de-hogares" class="section level2 hasAnchor" number="4.9">
-<h2><span class="header-section-number">4.9</span> Estimando contrastes en encuestas de hogares<a href="estimando-contrastes-en-encuestas-de-hogares.html#estimando-contrastes-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En muchas ocasiones, en encuestas de hogares se requiere comparar más de dos poblaciones al mismo tiempo, por ejemplo, comparar los ingresos medios de los hogares en 3 regiones o municipalidades en la postpandemia con el fin de verificar y sectorizar aquellas municipalidades o regiones donde más impacto en el desempleo y falta de ingresos tuvo el Covid-19 en los hogares. En casos como estos la diferencia de media que estudiamos en capítulos anteriores se queda corta dado que permite solo comprar parejas de poblaciones y por ende que, hacer contraste resulta una muy buena alternativa para abordar este tipo de problemas.</p>
-<p>Recurriendo en las definiciones que se han trabajado en este capítulo, un contraste es una combinación lineal de parámetros de la forma:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-f\left(\theta_{1},\theta_{2},...,\theta_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}\theta_{j}
-\end{eqnarray*}\]</span></p>
-<p>Una estimación de esta función está dada por:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-f\left(\hat{\theta}_{1},\hat{\theta}_{2},...,\hat{\theta}_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}\hat{\theta}_{j}
-\end{eqnarray*}\]</span></p>
-<p>cuya varianza del estimador se calcula como sigue:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-var\left(\sum_{j=1}^{J}a_{j}\hat{\theta}_{j}\right) &amp; = &amp; \sum_{j=1}^{J}a_{j}^{2}var\left(\hat{\theta}_{j}\right)+2\times\sum_{j=1}^{J-1}\sum_{k&gt;j}^{J}a_{j}a_{k}\,cov\left(\hat{\theta}_{j},\hat{\theta}_{k}\right)
-\end{eqnarray*}\]</span></p>
-<p>Los procedimientos metodológicos para implementar los contrastes en diseños de muestreo complejos están desarrolladas en la función <code>svycontrast</code>. A continuación, se muestra el uso de dicha función para el cálculo de contraste en la base de datos de ejemplo, comparando el promedio de ingresos por región.</p>
-<p>Como primer ejemplo, se realizará la comparación de dos poblaciones, las regiones Norte y Sur (<span class="math inline">\(\bar{Y}_{Norte} - \bar{Y}_{Sur}\)</span>) y luego sí se compararán todas las regiones.</p>
-<p>Puesto que esto es un contraste en donde hay 5 regiones y solo se construirá el contraste para la región Norte y la Sur, el contraste queda definido de la siguiente manera:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-&amp; 1\times\hat{\bar{Y}}_{Norte}+\left(-1\right)\times\hat{\bar{Y}}_{Sur}+0\times\hat{\bar{Y}}_{Centro}+0\times\hat{\bar{Y}}_{Occidente}+0\times\hat{\bar{Y}}_{Oriente}
-\end{eqnarray*}\]</span></p>
-<p>que de forma matricial queda de la siguiente manera:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-&amp; \left[1,\,-1,\,0,\,0,\,0\right]\times\left[\begin{array}{c}
-\hat{\bar{Y}}_{Norte}\\
-\hat{\bar{Y}}_{Sur}\\
-\hat{\bar{Y}}_{Centro}\\
-\hat{\bar{Y}}_{Occidente}\\
-\hat{\bar{Y}}_{Oriente}
-\end{array}\right]
-\end{eqnarray*}\]</span></p>
-<p>Como se puede observar, en este caso el vector de contraste es <span class="math inline">\(\left[1,\,-1,\,0,\,0,\,0\right]\)</span>.</p>
-<p>Ahora bien, para realizar el procesos de la construcción del estimador del contraste y su varianza estimada paso a paso se inicia con calcular las medias estimadas por región con la función <code>svyby</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-1" tabindex="-1"></a>prom_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="at">formula =</span> <span class="sc">~</span>Income, </span>
-<span id="cb155-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-2" tabindex="-1"></a>                      <span class="at">by =</span> <span class="sc">~</span>Region, </span>
-<span id="cb155-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-3" tabindex="-1"></a>                      <span class="at">design =</span> diseno, </span>
-<span id="cb155-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-4" tabindex="-1"></a>                      <span class="at">FUN =</span> svymean, </span>
-<span id="cb155-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-5" tabindex="-1"></a>                      <span class="at">na.rm=</span>T, </span>
-<span id="cb155-6"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-6" tabindex="-1"></a>                      <span class="at">covmat =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb155-7"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-7" tabindex="-1"></a>                      <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))</span>
-<span id="cb155-8"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb155-8" tabindex="-1"></a>prom_region</span></code></pre></div>
-<pre><code>##              Region   Income       se     ci_l     ci_u
-## Norte         Norte 552.3637 55.35987 443.8603 660.8670
-## Sur             Sur 625.7740 62.40574 503.4610 748.0870
-## Centro       Centro 650.7820 61.46886 530.3053 771.2588
-## Occidente Occidente 517.0071 46.22077 426.4161 607.5982
-## Oriente     Oriente 541.7543 71.66487 401.2938 682.2149</code></pre>
-<p>La función <code>svyby</code> permite aplicar una función, en este caso la media (svymean) por región (by) utilizando el diseño muestral empleado (design). Las demás componentes de la función ya se han utilizado previamente. Como resultado de aplicar esta función se obtienen las medias estimadas de los ingresos por región. Se tomarán solo los ingresos medios estimados de las regiones Norte y Sur y calcularemos su diferencia:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb157-1" tabindex="-1"></a><span class="co"># Paso 1: diferencia de estimaciones (Norte - Sur) </span></span>
-<span id="cb157-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb157-2" tabindex="-1"></a><span class="fl">552.4</span> <span class="sc">-</span> <span class="fl">625.8</span></span></code></pre></div>
-<pre><code>## [1] -73.4</code></pre>
-<p>El paso siguiente es calcular la matriz de varianzas y covarianzas y de allí extraer las varianzas y covarianzas de las regiones Norte y Sur:</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb159-1" tabindex="-1"></a><span class="co"># Paso 2: Matriz de varianzas y covarianzas</span></span>
-<span id="cb159-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb159-2" tabindex="-1"></a><span class="fu">vcov</span>(prom_region)</span></code></pre></div>
-<pre><code>##              Norte      Sur  Centro Occidente  Oriente
-## Norte     3064.715    0.000    0.00     0.000    0.000
-## Sur          0.000 3894.476    0.00     0.000    0.000
-## Centro       0.000    0.000 3778.42     0.000    0.000
-## Occidente    0.000    0.000    0.00  2136.359    0.000
-## Oriente      0.000    0.000    0.00     0.000 5135.854</code></pre>
-<p>Para calcular el error estándar de la diferencia (contraste) se usará las propiedades de la varianza como es
-<span class="math inline">\(se\left(\hat{\bar{y}}_{Norte}-\hat{\bar{y}}_{Sur}\right)=\sqrt{var\left(\hat{\bar{y}}_{Norte}\right)+var\left(\hat{\bar{y}}_{Sur}\right)-2\,cov\left(\hat{\bar{y}}_{Norte},\hat{\bar{y}}_{Sur}\right)}\)</span> tenemos:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb161-1" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">3065</span> <span class="sc">+</span> <span class="dv">3894</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## [1] 83.42062</code></pre>
-<p>Finalmente, la función <code>svycontrast</code> nos devuelve el contraste estimado y su error estándar. Los argumentos de esta función son los promedios de los ingresos estimados (stat) y las constantes de contraste (contrasts).</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb163-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> prom_region, </span>
-<span id="cb163-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb163-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">diff_NS =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb163-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb163-3" tabindex="-1"></a>            <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##          contrast  diff_NS
-## diff_NS -73.41034 83.42176</code></pre>
-<p>Obteniendo como resultado que los ingresos medios estimados para la región Sur es 73.4 unidades monetarias mayor que los ingresos en la región Norte con un error estándar de 83.42 unidades.</p>
-<p>Ahora bien, si el objetivo es estimar los siguientes contrastes:</p>
+<div id="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Estimación del coeficiente de Gini en encuestas de hogares<a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para iniciar esta sección tengamos en cuenta la siguiente reflexión: <em>Definir lo justo siempre será difícil y es algo a lo que quizá sea poco realista aspirar a conseguir. Sin embargo, si estamos un poco más conscientes de cómo la desigualdad afecta nuestra libertad y cómo se refleja en el bienestar y calidad de vida de las personas, podremos poner en contexto una discusión que tendremos cada vez más presente en el mundo y en el país.</em></p>
+<p>La desigualdad es un problema común en todos los países del mundo. En el ámbito económico, representa uno de los desafíos más relevantes para gobiernos y organismos internacionales. De hecho, Naciones Unidas lo reconoce explícitamente dentro de los Objetivos de Desarrollo Sostenible (ODS).</p>
+<p>Entre las métricas más utilizadas para medir la desigualdad económica se encuentra el coeficiente de Gini (CG), el cual compara la distribución de ingresos observada con una distribución perfectamente equitativa. Su valor oscila entre 0 (igualdad perfecta) y 1 (máxima desigualdad). Así, un valor de <span class="math inline">\(G = 0\)</span> implica que todos los hogares tienen el mismo nivel de ingresos, mientras que valores más altos reflejan concentraciones crecientes de ingresos en una fracción menor de la población. Este indicador es clave para:</p>
 <ul>
-<li><span class="math inline">\(\bar{Y}_{Norte} - \bar{Y}_{Centro}\)</span>,</li>
-<li><span class="math inline">\(\bar{Y}_{Sur}-\bar{Y}_{Centro}\)</span><br />
-</li>
-<li><span class="math inline">\(\bar{Y}_{Occidente}-\bar{Y}_{Oriente}\)</span></li>
+<li>Evaluar los cambios en la distribución del ingreso a lo largo del tiempo.</li>
+<li>Comparar los niveles de desigualdad entre regiones o países.</li>
+<li>Contextualizar políticas públicas y sociales orientadas a la equidad.</li>
 </ul>
-<p>Que escritas de forma matricial se tiene:</p>
+<p>En encuestas de hogares, el cálculo del coeficiente de Gini debe incorporar los pesos muestrales ajustados al diseño de la encuesta, que con frecuencia se normalizan para simplificar el procesamiento.</p>
+<p>De acuerdo con Binder y Kovacevic (1995), el estimador del coeficiente de Gini puede expresarse como:</p>
 <p><span class="math display">\[
-\left[\begin{array}{ccccc}
-1 &amp; 0 &amp; -1 &amp; 0 &amp; 0\\
-0 &amp; 1 &amp; -1 &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; 0 &amp; 1 &amp; -1
-\end{array}\right]
+\hat{G} = \frac{2\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}^{*}\hat{F}_{h\alpha i}y_{h\alpha i}-1}{\bar{y}_{\omega}}
 \]</span></p>
-<p>Ahora, aplicando la función <code>svycontrast</code> en R se obtiene:</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb165-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> prom_region, </span>
-<span id="cb165-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb165-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(</span>
-<span id="cb165-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb165-3" tabindex="-1"></a>                             <span class="at">Norte_sur =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb165-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb165-4" tabindex="-1"></a>                             <span class="at">Sur_centro =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb165-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb165-5" tabindex="-1"></a>                             <span class="at">Occidente_Oriente =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">%&gt;%</span>                               <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##                    contrast       SE
-## Norte_sur         -98.41834 82.72324
-## Sur_centro        -25.00800 87.59507
-## Occidente_Oriente -24.74720 85.27727</code></pre>
-<p>De lo cual se puede concluir que, las regiones con los ingresos medios de los hogares más similares son la región sur y la región centro.</p>
-<p>También es posible construir contraste en variables que estén correlacionadas. Por ejemplo, Ingreso y Sexo. Como se hizo en el ejemplo anterior, se inicia con el promedio estimado por sexo.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-1" tabindex="-1"></a>prom_sexo <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="at">formula =</span> <span class="sc">~</span>Income, </span>
-<span id="cb167-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-2" tabindex="-1"></a>                   <span class="at">by =</span> <span class="sc">~</span>Sex, </span>
-<span id="cb167-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-3" tabindex="-1"></a>                   <span class="at">design =</span> diseno,</span>
-<span id="cb167-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-4" tabindex="-1"></a>                   <span class="at">FUN =</span> svymean, </span>
-<span id="cb167-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-5" tabindex="-1"></a>                   <span class="at">na.rm=</span>T,</span>
-<span id="cb167-6"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-6" tabindex="-1"></a>                   <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb167-7"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-7" tabindex="-1"></a>                   <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))</span>
-<span id="cb167-8"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb167-8" tabindex="-1"></a>prom_sexo</span></code></pre></div>
-<pre><code>##           Sex   Income       se     ci_l     ci_u
-## Female Female 557.5681 25.82995 506.9423 608.1939
-## Male     Male 585.8496 34.58759 518.0592 653.6400</code></pre>
-<p>El contraste a estimar es:</p>
-<p><span class="math display">\[ \bar{Y}_{F} - \bar{Y}_{M}\]</span>
-Por tanto, usando la función <code>svycontrast</code> se obtiene el contraste estimado:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb169-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> prom_sexo,</span>
-<span id="cb169-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb169-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">diff_Sexo =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb169-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb169-3" tabindex="-1"></a>            <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##            contrast diff_Sexo
-## diff_Sexo -28.28149  20.75651</code></pre>
-<p>Obteniendo como resultado que, en promedio, los hombres obtienen 28.3 unidades monetarias más que las mujeres con una desviación de 20.76.</p>
-<p>Otra posibilidad es poder obtener resultados agregados, por ejemplo:</p>
-<p><span class="math inline">\(\hat{\bar{y}}_{Norte}+\hat{\bar{y}}_{Sur} +\hat{\bar{y}}_{Centro}\)</span></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb171-1" tabindex="-1"></a>sum_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>( <span class="sc">~</span> Income,  <span class="sc">~</span> Region,</span>
-<span id="cb171-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb171-2" tabindex="-1"></a>                     diseno, svytotal, <span class="at">na.rm =</span> T,</span>
-<span id="cb171-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb171-3" tabindex="-1"></a>                     <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb171-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb171-4" tabindex="-1"></a>                     <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))</span>
-<span id="cb171-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb171-5" tabindex="-1"></a>sum_region</span></code></pre></div>
-<pre><code>##              Region   Income      se     ci_l     ci_u
-## Norte         Norte 14277323 1507575 11322530 17232115
-## Sur             Sur 16068151 1877989 12387359 19748942
-## Centro       Centro 16483319 2383556 11811634 21155003
-## Occidente Occidente 16853540 1823807 13278944 20428135
-## Oriente     Oriente 22111335 2833460 16557856 27664814</code></pre>
-<p>La matriz de contraste queda como:
-<span class="math display">\[
-\left[\begin{array}{cccccc}
-1 &amp; 1 &amp; 1 &amp; 0 &amp; 0
-\end{array}\right]
-\]</span>
-el procedimiento en R es:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb173-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> sum_region,</span>
-<span id="cb173-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb173-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(</span>
-<span id="cb173-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb173-3" tabindex="-1"></a>                             <span class="at">Agregado_NCS =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>))) <span class="sc">%&gt;%</span>                        <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##              contrast Agregado_NCS
-## Agregado_NCS 46828792      3388357</code></pre>
-<p>Por otro lado, si se desean obtener los promedios por categorías. Por ejemplo:</p>
-<p><span class="math display">\[
-\hat{\bar{y}}_{Edad} = \frac{1}{k}\sum_{k=1}^K\hat{\bar{y}}_{k}
-\]</span>
-donde <span class="math inline">\(K\)</span> es el número de categorías de la variable. En R se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-1" tabindex="-1"></a>prom_edad <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="at">formula =</span> <span class="sc">~</span>Income, </span>
-<span id="cb175-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-2" tabindex="-1"></a>                   <span class="at">by =</span> <span class="sc">~</span>CatAge,</span>
-<span id="cb175-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-3" tabindex="-1"></a>                   <span class="at">design =</span>  diseno, </span>
-<span id="cb175-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-4" tabindex="-1"></a>                   <span class="at">FUN =</span> svymean, </span>
-<span id="cb175-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-5" tabindex="-1"></a>                   <span class="at">na.rm=</span>T,</span>
-<span id="cb175-6"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-6" tabindex="-1"></a>                   <span class="at">covmat =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb175-7"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb175-7" tabindex="-1"></a>prom_edad</span></code></pre></div>
-<pre><code>##              CatAge   Income       se
-## 0-5             0-5 463.7715 28.86795
-## 6-15           6-15 511.6179 34.88031
-## 16-30         16-30 607.2917 37.41561
-## 31-45         31-45 573.4167 26.94744
-## 46-60         46-60 763.0610 58.97170
-## Más de 60 Más de 60 466.6133 31.20795</code></pre>
-<p>Cuya matriz de contraste estaría dada por:
-<span class="math display">\[
-\left[\begin{array}{cccccc}
-\frac{1}{6} &amp; \frac{1}{6} &amp; \frac{1}{6} &amp; \frac{1}{6} &amp; \frac{1}{6} &amp; \frac{1}{6}
-\end{array}\right]
-\]</span></p>
-<p>El procedimiento en R es:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb177-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> prom_edad, </span>
-<span id="cb177-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb177-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(</span>
-<span id="cb177-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb177-3" tabindex="-1"></a>                             <span class="at">agregado_edad =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>)))             <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##               contrast agregado_edad
-## agregado_edad 564.2954      25.40408</code></pre>
-<p>Puesto que los contrastes, como ya se mencionó, es una función lineal de parámetros, se puede también realizar contraste con parámetros tipo razón. Por ejemplo, la relación de gastos contra ingresos por sexo. A continuación, se muestran los códigos computacionales:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-1" tabindex="-1"></a>razon_sexo <span class="ot">&lt;-</span> <span class="fu">svyby</span>( <span class="at">formula =</span> <span class="sc">~</span>Income, </span>
-<span id="cb179-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-2" tabindex="-1"></a>                     <span class="at">by =</span> <span class="sc">~</span>Sex,</span>
-<span id="cb179-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-3" tabindex="-1"></a>                     <span class="at">denominator =</span> <span class="sc">~</span>Expenditure,</span>
-<span id="cb179-4"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-4" tabindex="-1"></a>                     <span class="at">design =</span> diseno, </span>
-<span id="cb179-5"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-5" tabindex="-1"></a>                     <span class="at">FUN =</span> svyratio, </span>
-<span id="cb179-6"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-6" tabindex="-1"></a>                     <span class="at">na.rm=</span>T, <span class="at">covmat =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb179-7"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-7" tabindex="-1"></a>                     <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))</span>
-<span id="cb179-8"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb179-8" tabindex="-1"></a>razon_sexo</span></code></pre></div>
-<pre><code>##           Sex Income/Expenditure se.Income/Expenditure     ci_l     ci_u
-## Female Female           1.519060            0.04582607 1.429243 1.608878
-## Male     Male           1.564762            0.07044239 1.426698 1.702827</code></pre>
-<p>Cuya estimación de contraste sería:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb181-1" tabindex="-1"></a><span class="fu">svycontrast</span>(<span class="at">stat =</span> razon_sexo, </span>
-<span id="cb181-2"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb181-2" tabindex="-1"></a>            <span class="at">contrasts =</span> <span class="fu">list</span>(</span>
-<span id="cb181-3"><a href="estimando-contrastes-en-encuestas-de-hogares.html#cb181-3" tabindex="-1"></a>                             <span class="at">diff_sexo =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>))) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span></code></pre></div>
-<pre><code>##              contrast  diff_sexo
-## diff_sexo -0.04570214 0.04163431</code></pre>
-<p>de lo que se puede concluir que la diferencia de las proporciones es 0.045 en favor de los hombres.</p>
-
+<p>donde:</p>
+<ul>
+<li><span class="math inline">\(\omega_{h\alpha i}^{*}=\dfrac{\omega_{h\alpha i}}{\sum\_{h=1}^{H}\sum\_{\alpha=1}^{a_{h}}\sum\_{i=1}^{n\_{h\alpha}}\omega_{h\alpha i}}\)</span> es el peso normalizado.</li>
+<li><span class="math inline">\(\hat{F}\_{h\alpha i}\)</span> representa la función de distribución acumulada (CDF) estimada en el conglomerado <span class="math inline">\(\alpha\)</span> del estrato <span class="math inline">\(h\)</span>.</li>
+<li><span class="math inline">\(\bar{y}\_{\omega}\)</span> corresponde a la media ponderada de los ingresos.</li>
+</ul>
+<p>Autores como Osier (2009) y Langel y Tillé (2013) profundizan en aspectos técnicos adicionales relacionados con la estimación de la varianza de este estimador en el contexto de encuestas complejas.</p>
+<p>Para calcular el índice de Gini y su varianza estimada en una encuesta de hogares, <code>R</code> tiene cargados los procedimientos en la librería <code>convey</code>. A continuación, se muestra la sintaxis de cómo se realiza la estimación del índice de Gini para los hogares en la base de ejemplo de este capítulo.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb134-1" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb134-2"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb134-2" tabindex="-1"></a> diseno_gini <span class="ot">&lt;-</span> <span class="fu">convey_prep</span>(diseno)</span>
+<span id="cb134-3"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb134-3" tabindex="-1"></a><span class="fu">svygini</span>( <span class="sc">~</span>Income, <span class="at">design =</span> diseno_gini) <span class="sc">%&gt;%</span></span>
+<span id="cb134-4"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb134-4" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span></code></pre></div>
+<pre><code>##             gini    Income
+## Income 0.4132757 0.0186633</code></pre>
+<p>En primer lugar, se carga el diseño de muestreo con la función <code>convey_prep</code>. Luego, se estima el índice Gini con la función <code>svygini</code>. En los argumentos de esta última función se introducen la variable ingresos y el diseño muestral complejo.</p>
+<p>Por otro lado, si el interés ahora es estimar la <strong>curva de Lorenz</strong>. La cual, según <em>Kovacevic, M. S. et. al (1997)</em> para una distribución dada de ingresos, traza el porcentaje acumulado de la población (desplegado desde el más pobre hasta el más rico) frente a su participación en el ingreso total. El área entre la curva de Lorenz y la línea de 45 grados se conoce como el área de Lorenz. El índice de Gini es igual al doble del área de Lorenz. Una población con la curva de Lorenz más cerca de la línea de 45 grados tiene una distribución de ingresos más equitativa. Si todos los ingresos son iguales, la curva de Lorenz degenera a la línea de 45 grados.</p>
+<p>Para realizar la curva de Lorenz en <code>R</code> se utiliza la función <code>svylorenz</code>. A continuación, se muestran los códigos computacionales para realizar la curva de Lorenz para los ingresos:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb136-1" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb136-2"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb136-2" tabindex="-1"></a><span class="fu">svylorenz</span>(<span class="at">formula =</span> <span class="sc">~</span>Income, </span>
+<span id="cb136-3"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb136-3" tabindex="-1"></a>          <span class="at">design =</span> diseno_gini, </span>
+<span id="cb136-4"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb136-4" tabindex="-1"></a>          <span class="at">quantiles =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,.<span class="dv">05</span>), </span>
+<span id="cb136-5"><a href="estimación-del-coeficiente-de-gini-en-encuestas-de-hogares.html#cb136-5" tabindex="-1"></a>          <span class="at">alpha =</span> .<span class="dv">01</span> )</span></code></pre></div>
+<p><img src="04-Continuas_files/figure-html/unnamed-chunk-21-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<pre><code>##            lorenz     SE
+## L(0)    0.0000000 0.0000
+## L(0.05) 0.0068191 0.0008
+## L(0.1)  0.0175964 0.0013
+## L(0.15) 0.0316596 0.0033
+## L(0.2)  0.0492230 0.0041
+## L(0.25) 0.0694365 0.0056
+## L(0.3)  0.0925871 0.0064
+## L(0.35) 0.1181331 0.0071
+## L(0.4)  0.1469261 0.0082
+## L(0.45) 0.1791978 0.0095
+## L(0.5)  0.2158231 0.0106
+## L(0.55) 0.2565784 0.0123
+## L(0.6)  0.3027002 0.0137
+## L(0.65) 0.3537989 0.0149
+## L(0.7)  0.4096304 0.0159
+## L(0.75) 0.4706565 0.0167
+## L(0.8)  0.5398749 0.0177
+## L(0.85) 0.6174169 0.0183
+## L(0.9)  0.7042464 0.0176
+## L(0.95) 0.8151774 0.0152
+## L(1)    1.0000000 0.0000</code></pre>
+<p>Los argumentos que requiere la función son, inicialmente, los ingresos de los hogares y el diseño muestral complejo. Adicionalmente, se definen una secuencia de probabilidades que define la suma de los cuantiles a calcular (quantiles) y por último, un número que especifica el nivel de confianza para el gráfico (alpha).</p>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="estimando-razones-en-encuestas-de-hogares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="análisis-de-variables-categóricas-en-encuestas-de-hogares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimación-de-totales-medias-y-razones.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-de-correlación-en-encuestas-de-hogares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

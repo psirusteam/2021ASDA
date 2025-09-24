@@ -642,24 +642,35 @@ diseno %>% group_by(Zone) %>%
 ```
 
 
-## Estimación del coeficiente de Ginni en encuestas de hogares
+## Estimación del coeficiente de Gini en encuestas de hogares
 
-Para iniciar esta sección tengamos en cuenta la siguiente reflexión: *Definir lo justo siempre será difícil y es algo a lo que quizá sea poco realista aspirar a conseguir. Sin embargo si estamos un poco más conscientes de cómo la desigualdad afecta nuestra libertad y cómo se refleja en el bienestar y calidad de vida de las personas, podremos poner en contexto una discusión que tendremos cada vez más presente en el mundo y en el país.*
+Para iniciar esta sección tengamos en cuenta la siguiente reflexión: *Definir lo justo siempre será difícil y es algo a lo que quizá sea poco realista aspirar a conseguir. Sin embargo, si estamos un poco más conscientes de cómo la desigualdad afecta nuestra libertad y cómo se refleja en el bienestar y calidad de vida de las personas, podremos poner en contexto una discusión que tendremos cada vez más presente en el mundo y en el país.*
 
-La desigualdad en todos los aspectos es un problema más comunes en todos los países del mundo. Particularmente, la desigualdad económica es un problema que atañe a muchas instituciones internacionales como, por ejemplo, Naciones Unidas quien tiene este problema detectado en los Objetivos de Desarrollo Sostenibles (ODS, por sus siglas). Dado lo anterior, es clave poder medir la desigualdad económica de los hogares en los países y para esto, el indicador más utilizado es el coeficiente de Gini (CG). El valor del índice de Gini se encuentra entre 0 y 1. Un valor del coeficiente de Gini de $G = 0$ indica perfecta igualdad en la distribución de la riqueza, con valores más grandes significa una desigualdad cada vez mayor en la distribución de la riqueza. Siguiendo la ecuación de estimación de *Binder y Kovacevic (1995)*, un estimador del coeficiente de Gini es:
+La desigualdad es un problema común en todos los países del mundo. En el ámbito económico, representa uno de los desafíos más relevantes para gobiernos y organismos internacionales. De hecho, Naciones Unidas lo reconoce explícitamente dentro de los Objetivos de Desarrollo Sostenible (ODS).
 
-\begin{eqnarray*}
-\hat{G}\left(y\right) & = & \frac{2\times\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}^{*}\hat{F}_{h\alpha i}y_{h\alpha i}-1}{\bar{y}_{\omega}}
-\end{eqnarray*}
+Entre las métricas más utilizadas para medir la desigualdad económica se encuentra el coeficiente de Gini (CG), el cual compara la distribución de ingresos observada con una distribución perfectamente equitativa. Su valor oscila entre 0 (igualdad perfecta) y 1 (máxima desigualdad). Así, un valor de $G = 0$ implica que todos los hogares tienen el mismo nivel de ingresos, mientras que valores más altos reflejan concentraciones crecientes de ingresos en una fracción menor de la población. Este indicador es clave para:
 
-Donde,
+* Evaluar los cambios en la distribución del ingreso a lo largo del tiempo.
+* Comparar los niveles de desigualdad entre regiones o países.
+* Contextualizar políticas públicas y sociales orientadas a la equidad.
+
+En encuestas de hogares, el cálculo del coeficiente de Gini debe incorporar los pesos muestrales ajustados al diseño de la encuesta, que con frecuencia se normalizan para simplificar el procesamiento.
+
+De acuerdo con Binder y Kovacevic (1995), el estimador del coeficiente de Gini puede expresarse como:
+
+$$
+\hat{G} = \frac{2\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}^{*}\hat{F}_{h\alpha i}y_{h\alpha i}-1}{\bar{y}_{\omega}}
+$$
+
+donde:
+
+* $\omega_{h\alpha i}^{*}=\dfrac{\omega_{h\alpha i}}{\sum\_{h=1}^{H}\sum\_{\alpha=1}^{a_{h}}\sum\_{i=1}^{n\_{h\alpha}}\omega_{h\alpha i}}$ es el peso normalizado.
+* $\hat{F}\_{h\alpha i}$ representa la función de distribución acumulada (CDF) estimada en el conglomerado $\alpha$ del estrato $h$.
+* $\bar{y}\_{\omega}$ corresponde a la media ponderada de los ingresos.
+
+Autores como Osier (2009) y Langel y Tillé (2013) profundizan en aspectos técnicos adicionales relacionados con la estimación de la varianza de este estimador en el contexto de encuestas complejas.
 
 
--    $\omega_{h\alpha i}^{*}=\frac{\omega_{h\alpha i}}{\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}}$.
-
--    $\hat{F}_{h\alpha i}=$ La estimación de la CDF en el conglomerado $\alpha$ en el estrato $h$.
-
--    $\bar{y}_{\omega}=$ La estimación del promedio.
 
 Para calcular el índice de Gini y su varianza estimada en una encuesta de hogares, `R` tiene cargados los procedimientos en la librería `convey`.  A continuación, se muestra la sintaxis de cómo se realiza la estimación del índice de Gini para los hogares en la base de ejemplo de este capítulo. 
 
@@ -720,10 +731,6 @@ Ejemplo con ingreso y gasto de los hogares:
 ```{r}
 # Covarianza ponderada
 svy_cov <- svyvar(~Income + Expenditure, design = diseno)
-
-# Convertir a matriz de correlación
-svy_cor <- cov2cor(as.matrix(svy_cov))
-svy_cor
 ```
 
 El resultado entrega la matriz de correlaciones entre las variables analizadas bajo el diseño complejo.  

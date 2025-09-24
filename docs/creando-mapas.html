@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="07-Gráficas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -290,34 +290,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Para graficar mapas es necesario contar con información geoespacial, datos que contienen las coordenadas o delimitaciones geográficas de determinado país o región. Sitios web como <a href="http://www.diva-gis.org/gdata" class="uri">http://www.diva-gis.org/gdata</a> ofrecen de manera gratuita bases de datos o <code>shapes</code> que contienen los vectores asociados a las geografías correspondientes.</p>
 <p>Dichos conjuntos de datos poseen observaciones sobre la longitud y latitud lo cuál permite graficar en <code>R</code> un conjunto de puntos cuya unión en el gráfico formarán las formas los polígonos que dan forma a las áreas geográficas. Entre las distintas librería para realizar mapas en <code>R</code> están <code>tmap</code> y <code>ggplot2</code>. A continuación, se ilustra cómo se generan mapas, inicalmente con la librería <code>tmap</code>:</p>
 <p>Inicialmente, para realizar el mapa hay que contar con el archivo de <em>shepefile</em> el cual se carga de la siguiente manera::</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="creando-mapas.html#cb392-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb392-2"><a href="creando-mapas.html#cb392-2" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb392-3"><a href="creando-mapas.html#cb392-3" tabindex="-1"></a>shapeBigCity <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;Data/shapeBigCity/BigCity.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="creando-mapas.html#cb391-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb391-2"><a href="creando-mapas.html#cb391-2" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb391-3"><a href="creando-mapas.html#cb391-3" tabindex="-1"></a>shapeBigCity <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;Data/shapeBigCity/BigCity.shp&quot;</span>)</span></code></pre></div>
 <p>Una vez cargado el shape, el mapa se genera usando las funciones tm_shape y lo que se desea graficar en el mapa se incluye con la función tm_polygons. Para este ejemplo, solo grafiquemos las regiones en el mapa:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="creando-mapas.html#cb393-1" tabindex="-1"></a><span class="fu">tm_shape</span>(shapeBigCity) <span class="sc">+</span> </span>
-<span id="cb393-2"><a href="creando-mapas.html#cb393-2" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;Region&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="creando-mapas.html#cb392-1" tabindex="-1"></a><span class="fu">tm_shape</span>(shapeBigCity) <span class="sc">+</span> </span>
+<span id="cb392-2"><a href="creando-mapas.html#cb392-2" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;Region&quot;</span>) </span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-47-1.svg" width="672" />
 Si ahora el objetivo es graficar en las regiones el procentaje de probreza para hombres, inicialmente se debe agregar esa información a la base de datos con la que se graficará el mapa como sigue:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="creando-mapas.html#cb394-1" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb394-2"><a href="creando-mapas.html#cb394-2" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span>      <span class="co"># shapefile</span></span>
-<span id="cb394-3"><a href="creando-mapas.html#cb394-3" tabindex="-1"></a>    <span class="fu">left_join</span>(          <span class="co"># Agregando una variable</span></span>
-<span id="cb394-4"><a href="creando-mapas.html#cb394-4" tabindex="-1"></a>      prop_RegionH_Pobreza <span class="sc">%&gt;%</span></span>
-<span id="cb394-5"><a href="creando-mapas.html#cb394-5" tabindex="-1"></a>        <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>), <span class="co"># Filtrando el nivel de interés. </span></span>
-<span id="cb394-6"><a href="creando-mapas.html#cb394-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="creando-mapas.html#cb393-1" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb393-2"><a href="creando-mapas.html#cb393-2" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span>      <span class="co"># shapefile</span></span>
+<span id="cb393-3"><a href="creando-mapas.html#cb393-3" tabindex="-1"></a>    <span class="fu">left_join</span>(          <span class="co"># Agregando una variable</span></span>
+<span id="cb393-4"><a href="creando-mapas.html#cb393-4" tabindex="-1"></a>      prop_RegionH_Pobreza <span class="sc">%&gt;%</span></span>
+<span id="cb393-5"><a href="creando-mapas.html#cb393-5" tabindex="-1"></a>        <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>), <span class="co"># Filtrando el nivel de interés. </span></span>
+<span id="cb393-6"><a href="creando-mapas.html#cb393-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span></code></pre></div>
 <p>Una vez generado la base de datos, se procede a crear el mapa. En este ejemplo, agregarán unos puntos de corte en el mapas que son definidos en el argumento brks como se muestra a continuación:</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="creando-mapas.html#cb395-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">2</span>, .<span class="dv">4</span>, .<span class="dv">6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)</span>
-<span id="cb395-2"><a href="creando-mapas.html#cb395-2" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb395-3"><a href="creando-mapas.html#cb395-3" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;prop&quot;</span>,              </span>
-<span id="cb395-4"><a href="creando-mapas.html#cb395-4" tabindex="-1"></a>  <span class="at">breaks =</span> brks,        </span>
-<span id="cb395-5"><a href="creando-mapas.html#cb395-5" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;pobreza&quot;</span>,   </span>
-<span id="cb395-6"><a href="creando-mapas.html#cb395-6" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="creando-mapas.html#cb394-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">2</span>, .<span class="dv">4</span>, .<span class="dv">6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)</span>
+<span id="cb394-2"><a href="creando-mapas.html#cb394-2" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb394-3"><a href="creando-mapas.html#cb394-3" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;prop&quot;</span>,              </span>
+<span id="cb394-4"><a href="creando-mapas.html#cb394-4" tabindex="-1"></a>  <span class="at">breaks =</span> brks,        </span>
+<span id="cb394-5"><a href="creando-mapas.html#cb394-5" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;pobreza&quot;</span>,   </span>
+<span id="cb394-6"><a href="creando-mapas.html#cb394-6" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) </span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-48-1.svg" width="672" /></p>
 <p>A modo de otro ejemplo, se desea graficar ahora los coeficientes de variación de las estimaciones de los ingresos medios obtenidas por el diseño a nivel de región:</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="creando-mapas.html#cb396-1" tabindex="-1"></a>prom_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="sc">~</span>Income, <span class="sc">~</span>Region, diseno,</span>
-<span id="cb396-2"><a href="creando-mapas.html#cb396-2" tabindex="-1"></a>  svymean,</span>
-<span id="cb396-3"><a href="creando-mapas.html#cb396-3" tabindex="-1"></a>  <span class="at">na.rm =</span> T, <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb396-4"><a href="creando-mapas.html#cb396-4" tabindex="-1"></a>  <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;cv&quot;</span>))</span>
-<span id="cb396-5"><a href="creando-mapas.html#cb396-5" tabindex="-1"></a>prom_region</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="creando-mapas.html#cb395-1" tabindex="-1"></a>prom_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="sc">~</span>Income, <span class="sc">~</span>Region, diseno,</span>
+<span id="cb395-2"><a href="creando-mapas.html#cb395-2" tabindex="-1"></a>  svymean,</span>
+<span id="cb395-3"><a href="creando-mapas.html#cb395-3" tabindex="-1"></a>  <span class="at">na.rm =</span> T, <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb395-4"><a href="creando-mapas.html#cb395-4" tabindex="-1"></a>  <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;cv&quot;</span>))</span>
+<span id="cb395-5"><a href="creando-mapas.html#cb395-5" tabindex="-1"></a>prom_region</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -360,73 +360,73 @@ Si ahora el objetivo es graficar en las regiones el procentaje de probreza para 
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="creando-mapas.html#cb397-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>)</span>
-<span id="cb397-2"><a href="creando-mapas.html#cb397-2" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb397-3"><a href="creando-mapas.html#cb397-3" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb397-4"><a href="creando-mapas.html#cb397-4" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb397-5"><a href="creando-mapas.html#cb397-5" tabindex="-1"></a>      prom_region,</span>
-<span id="cb397-6"><a href="creando-mapas.html#cb397-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
-<span id="cb397-7"><a href="creando-mapas.html#cb397-7" tabindex="-1"></a></span>
-<span id="cb397-8"><a href="creando-mapas.html#cb397-8" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb397-9"><a href="creando-mapas.html#cb397-9" tabindex="-1"></a>  <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb397-10"><a href="creando-mapas.html#cb397-10" tabindex="-1"></a>  <span class="at">breaks =</span> brks,</span>
-<span id="cb397-11"><a href="creando-mapas.html#cb397-11" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb397-12"><a href="creando-mapas.html#cb397-12" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#000000&quot;</span>),</span>
-<span id="cb397-13"><a href="creando-mapas.html#cb397-13" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="creando-mapas.html#cb396-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>)</span>
+<span id="cb396-2"><a href="creando-mapas.html#cb396-2" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb396-3"><a href="creando-mapas.html#cb396-3" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb396-4"><a href="creando-mapas.html#cb396-4" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb396-5"><a href="creando-mapas.html#cb396-5" tabindex="-1"></a>      prom_region,</span>
+<span id="cb396-6"><a href="creando-mapas.html#cb396-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
+<span id="cb396-7"><a href="creando-mapas.html#cb396-7" tabindex="-1"></a></span>
+<span id="cb396-8"><a href="creando-mapas.html#cb396-8" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb396-9"><a href="creando-mapas.html#cb396-9" tabindex="-1"></a>  <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb396-10"><a href="creando-mapas.html#cb396-10" tabindex="-1"></a>  <span class="at">breaks =</span> brks,</span>
+<span id="cb396-11"><a href="creando-mapas.html#cb396-11" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb396-12"><a href="creando-mapas.html#cb396-12" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#000000&quot;</span>),</span>
+<span id="cb396-13"><a href="creando-mapas.html#cb396-13" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/hist26-1.svg" width="672" />
 Ahora, realizar el mismo ejercicio anterior pero por zona y sexo:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="creando-mapas.html#cb398-1" tabindex="-1"></a>prom_region_Sex <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span></span>
-<span id="cb398-2"><a href="creando-mapas.html#cb398-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Region, Zone, Sex, pobreza) <span class="sc">%&gt;%</span></span>
-<span id="cb398-3"><a href="creando-mapas.html#cb398-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;cv&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb398-4"><a href="creando-mapas.html#cb398-4" tabindex="-1"></a>  <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>, Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>, Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb398-5"><a href="creando-mapas.html#cb398-5" tabindex="-1"></a></span>
-<span id="cb398-6"><a href="creando-mapas.html#cb398-6" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb398-7"><a href="creando-mapas.html#cb398-7" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb398-8"><a href="creando-mapas.html#cb398-8" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb398-9"><a href="creando-mapas.html#cb398-9" tabindex="-1"></a>      prom_region_Sex,</span>
-<span id="cb398-10"><a href="creando-mapas.html#cb398-10" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
-<span id="cb398-11"><a href="creando-mapas.html#cb398-11" tabindex="-1"></a></span>
-<span id="cb398-12"><a href="creando-mapas.html#cb398-12" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb398-13"><a href="creando-mapas.html#cb398-13" tabindex="-1"></a>  <span class="st">&quot;prop&quot;</span>,</span>
-<span id="cb398-14"><a href="creando-mapas.html#cb398-14" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Pobreza&quot;</span>,</span>
-<span id="cb398-15"><a href="creando-mapas.html#cb398-15" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="creando-mapas.html#cb397-1" tabindex="-1"></a>prom_region_Sex <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span></span>
+<span id="cb397-2"><a href="creando-mapas.html#cb397-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Region, Zone, Sex, pobreza) <span class="sc">%&gt;%</span></span>
+<span id="cb397-3"><a href="creando-mapas.html#cb397-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;cv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb397-4"><a href="creando-mapas.html#cb397-4" tabindex="-1"></a>  <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>, Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>, Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb397-5"><a href="creando-mapas.html#cb397-5" tabindex="-1"></a></span>
+<span id="cb397-6"><a href="creando-mapas.html#cb397-6" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb397-7"><a href="creando-mapas.html#cb397-7" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb397-8"><a href="creando-mapas.html#cb397-8" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb397-9"><a href="creando-mapas.html#cb397-9" tabindex="-1"></a>      prom_region_Sex,</span>
+<span id="cb397-10"><a href="creando-mapas.html#cb397-10" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
+<span id="cb397-11"><a href="creando-mapas.html#cb397-11" tabindex="-1"></a></span>
+<span id="cb397-12"><a href="creando-mapas.html#cb397-12" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb397-13"><a href="creando-mapas.html#cb397-13" tabindex="-1"></a>  <span class="st">&quot;prop&quot;</span>,</span>
+<span id="cb397-14"><a href="creando-mapas.html#cb397-14" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Pobreza&quot;</span>,</span>
+<span id="cb397-15"><a href="creando-mapas.html#cb397-15" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-49-1.svg" width="672" /></p>
 <p>Como se comentó en la introducción de esta sección, los gráficos también se pueden hacer usando la librería ggplot2. Esta librería se apoya en las librerías biscale y cowplot. El procedimiento en R para hacer los mapas es muy similar al mostrado con la librería tmap y se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="creando-mapas.html#cb399-1" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
-<span id="cb399-2"><a href="creando-mapas.html#cb399-2" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb399-3"><a href="creando-mapas.html#cb399-3" tabindex="-1"></a>temp_shape <span class="ot">&lt;-</span> shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb399-4"><a href="creando-mapas.html#cb399-4" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb399-5"><a href="creando-mapas.html#cb399-5" tabindex="-1"></a>    prom_region_Sex,</span>
-<span id="cb399-6"><a href="creando-mapas.html#cb399-6" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>)</span>
-<span id="cb399-7"><a href="creando-mapas.html#cb399-7" tabindex="-1"></a></span>
-<span id="cb399-8"><a href="creando-mapas.html#cb399-8" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb399-9"><a href="creando-mapas.html#cb399-9" tabindex="-1"></a>datos.RM.bi <span class="ot">&lt;-</span> <span class="fu">bi_class</span>(temp_shape,</span>
-<span id="cb399-10"><a href="creando-mapas.html#cb399-10" tabindex="-1"></a>  <span class="at">y =</span> prop, <span class="at">x =</span> prop_cv, <span class="at">dim =</span> k,</span>
-<span id="cb399-11"><a href="creando-mapas.html#cb399-11" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">&quot;fisher&quot;</span>)</span>
-<span id="cb399-12"><a href="creando-mapas.html#cb399-12" tabindex="-1"></a></span>
-<span id="cb399-13"><a href="creando-mapas.html#cb399-13" tabindex="-1"></a>map.RM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb399-14"><a href="creando-mapas.html#cb399-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb399-15"><a href="creando-mapas.html#cb399-15" tabindex="-1"></a>    <span class="at">data =</span> datos.RM.bi,</span>
-<span id="cb399-16"><a href="creando-mapas.html#cb399-16" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> bi_class, <span class="at">geometry =</span> geometry),</span>
-<span id="cb399-17"><a href="creando-mapas.html#cb399-17" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb399-18"><a href="creando-mapas.html#cb399-18" tabindex="-1"></a>  <span class="fu">bi_scale_fill</span>(<span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k) <span class="sc">+</span></span>
-<span id="cb399-19"><a href="creando-mapas.html#cb399-19" tabindex="-1"></a>  <span class="fu">bi_theme</span>() <span class="sc">+</span></span>
-<span id="cb399-20"><a href="creando-mapas.html#cb399-20" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb399-21"><a href="creando-mapas.html#cb399-21" tabindex="-1"></a>map.RM</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="creando-mapas.html#cb398-1" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
+<span id="cb398-2"><a href="creando-mapas.html#cb398-2" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb398-3"><a href="creando-mapas.html#cb398-3" tabindex="-1"></a>temp_shape <span class="ot">&lt;-</span> shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb398-4"><a href="creando-mapas.html#cb398-4" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb398-5"><a href="creando-mapas.html#cb398-5" tabindex="-1"></a>    prom_region_Sex,</span>
+<span id="cb398-6"><a href="creando-mapas.html#cb398-6" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>)</span>
+<span id="cb398-7"><a href="creando-mapas.html#cb398-7" tabindex="-1"></a></span>
+<span id="cb398-8"><a href="creando-mapas.html#cb398-8" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb398-9"><a href="creando-mapas.html#cb398-9" tabindex="-1"></a>datos.RM.bi <span class="ot">&lt;-</span> <span class="fu">bi_class</span>(temp_shape,</span>
+<span id="cb398-10"><a href="creando-mapas.html#cb398-10" tabindex="-1"></a>  <span class="at">y =</span> prop, <span class="at">x =</span> prop_cv, <span class="at">dim =</span> k,</span>
+<span id="cb398-11"><a href="creando-mapas.html#cb398-11" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">&quot;fisher&quot;</span>)</span>
+<span id="cb398-12"><a href="creando-mapas.html#cb398-12" tabindex="-1"></a></span>
+<span id="cb398-13"><a href="creando-mapas.html#cb398-13" tabindex="-1"></a>map.RM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb398-14"><a href="creando-mapas.html#cb398-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb398-15"><a href="creando-mapas.html#cb398-15" tabindex="-1"></a>    <span class="at">data =</span> datos.RM.bi,</span>
+<span id="cb398-16"><a href="creando-mapas.html#cb398-16" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> bi_class, <span class="at">geometry =</span> geometry),</span>
+<span id="cb398-17"><a href="creando-mapas.html#cb398-17" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb398-18"><a href="creando-mapas.html#cb398-18" tabindex="-1"></a>  <span class="fu">bi_scale_fill</span>(<span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k) <span class="sc">+</span></span>
+<span id="cb398-19"><a href="creando-mapas.html#cb398-19" tabindex="-1"></a>  <span class="fu">bi_theme</span>() <span class="sc">+</span></span>
+<span id="cb398-20"><a href="creando-mapas.html#cb398-20" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb398-21"><a href="creando-mapas.html#cb398-21" tabindex="-1"></a>map.RM</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-50-1.svg" width="672" /></p>
 <p>Ahora, para crear la leyenda del mapa se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="creando-mapas.html#cb400-1" tabindex="-1"></a>legend1 <span class="ot">&lt;-</span> <span class="fu">bi_legend</span>(</span>
-<span id="cb400-2"><a href="creando-mapas.html#cb400-2" tabindex="-1"></a>  <span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k,</span>
-<span id="cb400-3"><a href="creando-mapas.html#cb400-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Coeficiente de variaci&lt;U+00F3&gt;n&quot;</span>,</span>
-<span id="cb400-4"><a href="creando-mapas.html#cb400-4" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Pobreza&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>)</span>
-<span id="cb400-5"><a href="creando-mapas.html#cb400-5" tabindex="-1"></a></span>
-<span id="cb400-6"><a href="creando-mapas.html#cb400-6" tabindex="-1"></a>mapa1 <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
-<span id="cb400-7"><a href="creando-mapas.html#cb400-7" tabindex="-1"></a>  <span class="fu">draw_plot</span>(map.RM, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">scale =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb400-8"><a href="creando-mapas.html#cb400-8" tabindex="-1"></a>  <span class="fu">draw_plot</span>(legend1, <span class="fl">0.75</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="at">scale =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb400-9"><a href="creando-mapas.html#cb400-9" tabindex="-1"></a>  <span class="fu">draw_text</span>(<span class="st">&quot;Estimaciones directas de la pobreza en la mujer rural&quot;</span>,</span>
-<span id="cb400-10"><a href="creando-mapas.html#cb400-10" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">13</span>, <span class="at">size =</span> <span class="dv">18</span>)</span>
-<span id="cb400-11"><a href="creando-mapas.html#cb400-11" tabindex="-1"></a></span>
-<span id="cb400-12"><a href="creando-mapas.html#cb400-12" tabindex="-1"></a>mapa1</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="creando-mapas.html#cb399-1" tabindex="-1"></a>legend1 <span class="ot">&lt;-</span> <span class="fu">bi_legend</span>(</span>
+<span id="cb399-2"><a href="creando-mapas.html#cb399-2" tabindex="-1"></a>  <span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k,</span>
+<span id="cb399-3"><a href="creando-mapas.html#cb399-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Coeficiente de variaci&lt;U+00F3&gt;n&quot;</span>,</span>
+<span id="cb399-4"><a href="creando-mapas.html#cb399-4" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Pobreza&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>)</span>
+<span id="cb399-5"><a href="creando-mapas.html#cb399-5" tabindex="-1"></a></span>
+<span id="cb399-6"><a href="creando-mapas.html#cb399-6" tabindex="-1"></a>mapa1 <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
+<span id="cb399-7"><a href="creando-mapas.html#cb399-7" tabindex="-1"></a>  <span class="fu">draw_plot</span>(map.RM, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">scale =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb399-8"><a href="creando-mapas.html#cb399-8" tabindex="-1"></a>  <span class="fu">draw_plot</span>(legend1, <span class="fl">0.75</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="at">scale =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb399-9"><a href="creando-mapas.html#cb399-9" tabindex="-1"></a>  <span class="fu">draw_text</span>(<span class="st">&quot;Estimaciones directas de la pobreza en la mujer rural&quot;</span>,</span>
+<span id="cb399-10"><a href="creando-mapas.html#cb399-10" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">13</span>, <span class="at">size =</span> <span class="dv">18</span>)</span>
+<span id="cb399-11"><a href="creando-mapas.html#cb399-11" tabindex="-1"></a></span>
+<span id="cb399-12"><a href="creando-mapas.html#cb399-12" tabindex="-1"></a>mapa1</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/hist31-1.svg" width="672" /></p>
 
 </div>

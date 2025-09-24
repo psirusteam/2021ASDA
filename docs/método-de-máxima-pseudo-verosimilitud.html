@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="09-Generalizados2.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -407,22 +407,22 @@ T=\dfrac{\partial l(Y;X\beta)}{\partial\beta}=-\dfrac{1}{2\sigma^{2}}(-2X&#39;WY
 Con este <span class="math inline">\(\beta\)</span> podemos estimar un modelo partiendo de una muestra probabilística compleja.</p>
 <p>A continuación, se ejemplifican los códigos computacionales para los modelos lineales generalizado. Inicialmente, se carga la base de datos como sigue:</p>
 <p>Cargue de las bases de datos,</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-1" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
-<span id="cb457-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-2" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb457-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-3" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
-<span id="cb457-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BigCity&quot;</span>, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb458-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-2" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb458-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-3" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb458-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-4" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb458-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-5" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb458-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-6" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb458-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-1" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb456-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-2" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb456-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-3" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
+<span id="cb456-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BigCity&quot;</span>, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb457-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-2" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb457-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-3" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb457-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-4" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb457-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-5" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb457-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-6" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb457-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-7" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Luego, se define la variable pobreza con los datos de la base como sigue:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> </span>
-<span id="cb459-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb459-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-3" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb459-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-4" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> </span>
+<span id="cb458-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb458-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-3" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb458-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-4" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
 <p>A continuación, se carga el tema de la CEPAL con el que se realizarán las gráficas:</p>
 <p>Para la ejemplificación de la metodología de este capítulo, se definirá primero el modelo Gamma.</p>
 <p><em>Modelo gamma para variable continua</em></p>
@@ -435,21 +435,21 @@ o, similarmente:</p>
 \mu_{i} = \frac{1}{B_0 + B_1x_1}
 \]</span>
 Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigth como sigue:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb460-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
-<span id="cb460-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-3" tabindex="-1"></a></span>
-<span id="cb460-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-4" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
-<span id="cb460-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-5" tabindex="-1"></a></span>
-<span id="cb460-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-6" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb460-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-7" tabindex="-1"></a>  <span class="fu">as_survey_design</span>( <span class="at">strata =</span> Stratum,</span>
-<span id="cb460-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-8" tabindex="-1"></a>    <span class="at">ids =</span> PSU, <span class="at">weights =</span> wk2,</span>
-<span id="cb460-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-9" tabindex="-1"></a>    <span class="at">nest =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb459-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
+<span id="cb459-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-3" tabindex="-1"></a></span>
+<span id="cb459-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-4" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
+<span id="cb459-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-5" tabindex="-1"></a></span>
+<span id="cb459-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-6" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb459-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-7" tabindex="-1"></a>  <span class="fu">as_survey_design</span>( <span class="at">strata =</span> Stratum,</span>
+<span id="cb459-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-8" tabindex="-1"></a>    <span class="at">ids =</span> PSU, <span class="at">weights =</span> wk2,</span>
+<span id="cb459-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-9" tabindex="-1"></a>    <span class="at">nest =</span> T)</span></code></pre></div>
 <p>El modelo ajustado es el siguiente:</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> Income <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span></span>
-<span id="cb461-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-2" tabindex="-1"></a>                   Region <span class="sc">+</span> Zone,</span>
-<span id="cb461-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-3" tabindex="-1"></a>                   <span class="at">design =</span> diseno, </span>
-<span id="cb461-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-4" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>)) </span>
-<span id="cb461-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-5" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> Income <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span></span>
+<span id="cb460-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-2" tabindex="-1"></a>                   Region <span class="sc">+</span> Zone,</span>
+<span id="cb460-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-3" tabindex="-1"></a>                   <span class="at">design =</span> diseno, </span>
+<span id="cb460-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-4" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>)) </span>
+<span id="cb460-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-5" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(modelo)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -521,16 +521,16 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </table>
 <p>De la tabla anterior, el intercepto, la variable edad y la zona rural resultaron significativo tomando una confianza del 95%.</p>
 <p>Por otro lado, es útil la estimación de la dispersión que ofrece <em>svyglm</em> de forma predeterminada dado que no tiene en cuenta la información especial sobre la dispersión que se puede calcular utilizando la distribución Gamma. <strong>No todos los GLM tienen una forma mejorada y específica del modelo para estimar</strong>.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-1" tabindex="-1"></a>alpha <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">gamma.dispersion</span>(modelo)</span>
-<span id="cb462-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-2" tabindex="-1"></a>alpha</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-1" tabindex="-1"></a>alpha <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">gamma.dispersion</span>(modelo)</span>
+<span id="cb461-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-2" tabindex="-1"></a>alpha</span></code></pre></div>
 <pre><code>## [1] 0.4830962</code></pre>
 <p>Luego, el parámetro de dispersión es:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb464-1" tabindex="-1"></a>mod_s <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo, <span class="at">dispersion =</span> alpha)</span>
-<span id="cb464-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb464-2" tabindex="-1"></a>mod_s<span class="sc">$</span>dispersion</span></code></pre></div>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb463-1" tabindex="-1"></a>mod_s <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo, <span class="at">dispersion =</span> alpha)</span>
+<span id="cb463-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb463-2" tabindex="-1"></a>mod_s<span class="sc">$</span>dispersion</span></code></pre></div>
 <pre><code>##      variance     SE
 ## [1,]  0.59097 0.0876</code></pre>
 <p>Los coeficientes del modelo también se pueden obtener de la siguiente manera:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-1" tabindex="-1"></a>mod_s<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-1" tabindex="-1"></a>mod_s<span class="sc">$</span>coefficients</span></code></pre></div>
 <table>
 <colgroup>
 <col width="23%" />
@@ -608,14 +608,14 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </tbody>
 </table>
 <p>Una vez estimado los coeficientes, se estiman los intervalos de confianza para la predicción como sigue:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T))</span>
-<span id="cb467-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-2" tabindex="-1"></a></span>
-<span id="cb467-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-3" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T)))</span>
-<span id="cb467-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-4" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
-<span id="cb467-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-5" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
-<span id="cb467-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-6" tabindex="-1"></a>pred<span class="sc">$</span>Income <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income</span>
-<span id="cb467-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-7" tabindex="-1"></a>pred<span class="sc">$</span>Age <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Age</span>
-<span id="cb467-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-8" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T))</span>
+<span id="cb466-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-2" tabindex="-1"></a></span>
+<span id="cb466-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-3" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T)))</span>
+<span id="cb466-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-4" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
+<span id="cb466-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-5" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
+<span id="cb466-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-6" tabindex="-1"></a>pred<span class="sc">$</span>Income <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income</span>
+<span id="cb466-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-7" tabindex="-1"></a>pred<span class="sc">$</span>Age <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Age</span>
+<span id="cb466-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-8" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -679,15 +679,15 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </tbody>
 </table>
 <p>A continuación, como se ha mostrado anteriormente, se realiza un Scaterplot de la predicción:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-1" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
-<span id="cb468-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-2" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
-<span id="cb468-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Age , <span class="at">y =</span> response)) <span class="sc">+</span></span>
-<span id="cb468-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-4" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
-<span id="cb468-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-5" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
-<span id="cb468-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-6" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb468-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-7" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb468-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb468-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-1" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
+<span id="cb467-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-2" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
+<span id="cb467-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Age , <span class="at">y =</span> response)) <span class="sc">+</span></span>
+<span id="cb467-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-4" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
+<span id="cb467-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-5" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
+<span id="cb467-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-6" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb467-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-7" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb467-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb467-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="09-Generalizados2_files/figure-html/unnamed-chunk-14-1.svg" width="672" /></p>
 </div>
             </section>

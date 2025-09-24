@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="07-Gráficas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -289,56 +289,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El objetivo de esta capítulo es mostrarle al lector cómo hacer gráficos generales en <code>R</code>. En todo análisis de encuestas, el componente gráfico es fundamental para revisar tendencias en algunas variables de interés. También son muy necesarias las gráficas cuando se el objetivo es chequear algunos supuestos en el ajustes de modelo, por ejemplo, varianza constante en los errores, normalidad, etc.</p>
 <p>Uno de los paquetes más usados para graficar en <code>R</code> es ggplot2 el cual es un paquete potente y flexible, implementado por Hadley Wickham, para producir gráficos elegantes. El gg en ggplot2 significa Grammar of Graphics, el cual es un concepto gráfico que describe gráficos usando gramática.</p>
 <p>Como es de costumbre, se inicia este capítulo cargando las librerías y bases de datos:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="gráficas-en-r.html#cb337-1" tabindex="-1"></a><span class="co"># knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)</span></span>
-<span id="cb337-2"><a href="gráficas-en-r.html#cb337-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb337-3"><a href="gráficas-en-r.html#cb337-3" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
-<span id="cb337-4"><a href="gráficas-en-r.html#cb337-4" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb337-5"><a href="gráficas-en-r.html#cb337-5" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
-<span id="cb337-6"><a href="gráficas-en-r.html#cb337-6" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb337-7"><a href="gráficas-en-r.html#cb337-7" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
-<span id="cb337-8"><a href="gráficas-en-r.html#cb337-8" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb337-9"><a href="gráficas-en-r.html#cb337-9" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="gráficas-en-r.html#cb336-1" tabindex="-1"></a><span class="co"># knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)</span></span>
+<span id="cb336-2"><a href="gráficas-en-r.html#cb336-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb336-3"><a href="gráficas-en-r.html#cb336-3" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb336-4"><a href="gráficas-en-r.html#cb336-4" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb336-5"><a href="gráficas-en-r.html#cb336-5" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb336-6"><a href="gráficas-en-r.html#cb336-6" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb336-7"><a href="gráficas-en-r.html#cb336-7" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
+<span id="cb336-8"><a href="gráficas-en-r.html#cb336-8" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb336-9"><a href="gráficas-en-r.html#cb336-9" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
 <p>El cargue de la base de datos se hace a continuación,</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="gráficas-en-r.html#cb338-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
-<span id="cb338-2"><a href="gráficas-en-r.html#cb338-2" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="gráficas-en-r.html#cb337-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
+<span id="cb337-2"><a href="gráficas-en-r.html#cb337-2" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span></code></pre></div>
 <p>A continuación, se define el diseño de muestreo:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="gráficas-en-r.html#cb339-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb339-2"><a href="gráficas-en-r.html#cb339-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb339-3"><a href="gráficas-en-r.html#cb339-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb339-4"><a href="gráficas-en-r.html#cb339-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb339-5"><a href="gráficas-en-r.html#cb339-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb339-6"><a href="gráficas-en-r.html#cb339-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb339-7"><a href="gráficas-en-r.html#cb339-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb339-8"><a href="gráficas-en-r.html#cb339-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="gráficas-en-r.html#cb338-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb338-2"><a href="gráficas-en-r.html#cb338-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb338-3"><a href="gráficas-en-r.html#cb338-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb338-4"><a href="gráficas-en-r.html#cb338-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb338-5"><a href="gráficas-en-r.html#cb338-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb338-6"><a href="gráficas-en-r.html#cb338-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb338-7"><a href="gráficas-en-r.html#cb338-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb338-8"><a href="gráficas-en-r.html#cb338-8" tabindex="-1"></a>  )</span></code></pre></div>
 <p>A partir de las variables de la encuesta, para efectos de los ejemplos, se definen las siguientes variables:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="gráficas-en-r.html#cb340-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb340-2"><a href="gráficas-en-r.html#cb340-2" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb340-3"><a href="gráficas-en-r.html#cb340-3" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb340-4"><a href="gráficas-en-r.html#cb340-4" tabindex="-1"></a>  <span class="at">edad_18 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb340-5"><a href="gráficas-en-r.html#cb340-5" tabindex="-1"></a>    Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;&lt; 18 años&quot;</span>,</span>
-<span id="cb340-6"><a href="gráficas-en-r.html#cb340-6" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;&gt;= 18 años&quot;</span></span>
-<span id="cb340-7"><a href="gráficas-en-r.html#cb340-7" tabindex="-1"></a>  )</span>
-<span id="cb340-8"><a href="gráficas-en-r.html#cb340-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="gráficas-en-r.html#cb339-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb339-2"><a href="gráficas-en-r.html#cb339-2" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb339-3"><a href="gráficas-en-r.html#cb339-3" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb339-4"><a href="gráficas-en-r.html#cb339-4" tabindex="-1"></a>  <span class="at">edad_18 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb339-5"><a href="gráficas-en-r.html#cb339-5" tabindex="-1"></a>    Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;&lt; 18 años&quot;</span>,</span>
+<span id="cb339-6"><a href="gráficas-en-r.html#cb339-6" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;&gt;= 18 años&quot;</span></span>
+<span id="cb339-7"><a href="gráficas-en-r.html#cb339-7" tabindex="-1"></a>  )</span>
+<span id="cb339-8"><a href="gráficas-en-r.html#cb339-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Como se mostró en capítulos anteriores, se divide la muestra en sub grupos para ejemplificar los conceptos que se mostrarán en este capítulo:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="gráficas-en-r.html#cb341-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
-<span id="cb341-2"><a href="gráficas-en-r.html#cb341-2" tabindex="-1"></a>sub_Rural <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
-<span id="cb341-3"><a href="gráficas-en-r.html#cb341-3" tabindex="-1"></a>sub_Mujer <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb341-4"><a href="gráficas-en-r.html#cb341-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="gráficas-en-r.html#cb340-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
+<span id="cb340-2"><a href="gráficas-en-r.html#cb340-2" tabindex="-1"></a>sub_Rural <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
+<span id="cb340-3"><a href="gráficas-en-r.html#cb340-3" tabindex="-1"></a>sub_Mujer <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb340-4"><a href="gráficas-en-r.html#cb340-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
 <p>Para crear las gráficas en este texto se utilizará por defecto el tema que la CEPAL tiene asignado por defecto. El tema se define a continuación:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="gráficas-en-r.html#cb342-1" tabindex="-1"></a>theme_cepal <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb342-2"><a href="gráficas-en-r.html#cb342-2" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb342-3"><a href="gráficas-en-r.html#cb342-3" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb342-4"><a href="gráficas-en-r.html#cb342-4" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb342-5"><a href="gráficas-en-r.html#cb342-5" tabindex="-1"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb342-6"><a href="gráficas-en-r.html#cb342-6" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb342-7"><a href="gráficas-en-r.html#cb342-7" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb342-8"><a href="gráficas-en-r.html#cb342-8" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb342-9"><a href="gráficas-en-r.html#cb342-9" tabindex="-1"></a>      <span class="at">legend.justification =</span> <span class="st">&quot;left&quot;</span>,</span>
-<span id="cb342-10"><a href="gráficas-en-r.html#cb342-10" tabindex="-1"></a>      <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
-<span id="cb342-11"><a href="gráficas-en-r.html#cb342-11" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb342-12"><a href="gráficas-en-r.html#cb342-12" tabindex="-1"></a>      ...</span>
-<span id="cb342-13"><a href="gráficas-en-r.html#cb342-13" tabindex="-1"></a>    )</span>
-<span id="cb342-14"><a href="gráficas-en-r.html#cb342-14" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="gráficas-en-r.html#cb341-1" tabindex="-1"></a>theme_cepal <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb341-2"><a href="gráficas-en-r.html#cb341-2" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb341-3"><a href="gráficas-en-r.html#cb341-3" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb341-4"><a href="gráficas-en-r.html#cb341-4" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb341-5"><a href="gráficas-en-r.html#cb341-5" tabindex="-1"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb341-6"><a href="gráficas-en-r.html#cb341-6" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb341-7"><a href="gráficas-en-r.html#cb341-7" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb341-8"><a href="gráficas-en-r.html#cb341-8" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb341-9"><a href="gráficas-en-r.html#cb341-9" tabindex="-1"></a>      <span class="at">legend.justification =</span> <span class="st">&quot;left&quot;</span>,</span>
+<span id="cb341-10"><a href="gráficas-en-r.html#cb341-10" tabindex="-1"></a>      <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb341-11"><a href="gráficas-en-r.html#cb341-11" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb341-12"><a href="gráficas-en-r.html#cb341-12" tabindex="-1"></a>      ...</span>
+<span id="cb341-13"><a href="gráficas-en-r.html#cb341-13" tabindex="-1"></a>    )</span>
+<span id="cb341-14"><a href="gráficas-en-r.html#cb341-14" tabindex="-1"></a>}</span></code></pre></div>
 </div>
             </section>
 

@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="04-Continuas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="04-Continuas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -311,13 +311,13 @@ z_{hik} = y_{hik} - \hat{R}x_{hik},
 <li>Las estadísticas de resumen deseadas (<code>vartype</code>).</li>
 </ul>
 <p>A continuación, se ilustra cómo estimar la razón entre el gasto y el ingreso de los hogares:</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb146-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
-<span id="cb146-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
-<span id="cb146-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
-<span id="cb146-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb146-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
-<span id="cb146-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb146-7" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb145-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb145-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb145-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb145-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb145-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb145-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb145-7" tabindex="-1"></a>    ))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Razon Razon_se Razon_low Razon_upp
 ##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -330,50 +330,50 @@ z_{hik} = y_{hik} - \hat{R}x_{hik},
 <p>De esta forma, las razones constituyen una herramienta central para transformar los resultados de encuestas en indicadores significativos que facilitan el análisis de realidades socioeconómicas y poblacionales.</p>
 <p>Como se puede observar, la razón entre el gasto y el ingreso es, aproximando, 0.71. Lo que implica que por cada unidad 100 unidades monetarias que le ingrese al hogar, se gastan 71 unidades, consiguiendo un intervalo de confianza al 95% de 0.65 y 0.76.</p>
 <p>Si ahora el objetivo es estimar la razón entre mujeres y hombres en la base de ejemplo, se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb148-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
-<span id="cb148-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-3" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
-<span id="cb148-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-4" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
-<span id="cb148-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb148-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
-<span id="cb148-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb148-7" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb147-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb147-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-3" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
+<span id="cb147-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-4" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb147-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb147-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb147-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb147-7" tabindex="-1"></a>    ))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Razon Razon_se Razon_low Razon_upp
 ##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ## 1  1.11   0.0351      1.04      1.18</code></pre>
 <p>Como la variable sexo en la base de datos es una variable categórica, se tuvo la necesidad de generar las variables dummys para su cálculo realizando, Sex == “Female” para el caso de las mujeres y Sex == “Male” para el caso de los hombres. Los resultados del ejercicio anterior muestran que en la base de datos hay más mujeres que hombres, generando una razón de 1.13. Esto significa que, por cada 100 hombres hay aproximadamente 113 mujeres con un intervalo que varía entre 1.04 y 1.21.</p>
 <p>Si se desea hacer la razón de mujeres y hombres pero en la zona rural, se haría de la siguiente manera:</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-1" tabindex="-1"></a>sub_Rural <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb150-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
-<span id="cb150-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-3" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
-<span id="cb150-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-4" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
-<span id="cb150-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb150-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
-<span id="cb150-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb150-7" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-1" tabindex="-1"></a>sub_Rural <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb149-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb149-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-3" tabindex="-1"></a>      <span class="at">numerator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>),</span>
+<span id="cb149-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-4" tabindex="-1"></a>      <span class="at">denominator =</span> (Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb149-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb149-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb149-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb149-7" tabindex="-1"></a>    ))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Razon Razon_se Razon_low Razon_upp
 ##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ## 1  1.07   0.0352     0.997      1.14</code></pre>
 <p>Obteniendo nuevamente que hay más mujeres que hombres. Ahora bien, otro análisis de interés es estimar la razón de gastos pero solo en la población femenina. A continuación, se presentan los códigos computacionales.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-1" tabindex="-1"></a>sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb152-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
-<span id="cb152-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
-<span id="cb152-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
-<span id="cb152-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb152-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
-<span id="cb152-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb152-7" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-1" tabindex="-1"></a>sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb151-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb151-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb151-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb151-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb151-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb151-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb151-7" tabindex="-1"></a>    ))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Razon Razon_se Razon_low Razon_upp
 ##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 0.658   0.0199     0.619     0.698</code></pre>
 <p>Dando como resultado que por cada 100 unidades monetarias que le ingresan a las mujeres se gastan 70 con un intervalo de confianza entre 0.65 y 0.76. Por último, análogamente para los hombres, la razón de gastos resulta muy similar que para las mujeres.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-1" tabindex="-1"></a>sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb154-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
-<span id="cb154-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
-<span id="cb154-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
-<span id="cb154-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb154-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
-<span id="cb154-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb154-7" tabindex="-1"></a>    ))</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-1" tabindex="-1"></a>sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb153-2"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-2" tabindex="-1"></a>    <span class="at">Razon =</span>  <span class="fu">survey_ratio</span>(</span>
+<span id="cb153-3"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-3" tabindex="-1"></a>      <span class="at">numerator =</span> Expenditure,</span>
+<span id="cb153-4"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-4" tabindex="-1"></a>      <span class="at">denominator =</span> Income,</span>
+<span id="cb153-5"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-5" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb153-6"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-6" tabindex="-1"></a>    <span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)</span>
+<span id="cb153-7"><a href="estimando-razones-en-encuestas-de-hogares.html#cb153-7" tabindex="-1"></a>    ))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   Razon Razon_se Razon_low Razon_upp
 ##   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;

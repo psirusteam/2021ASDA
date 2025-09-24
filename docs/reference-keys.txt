@@ -40,7 +40,7 @@ estimación-de-totales-e-intervalos-de-confianza
 enfoques-para-la-estimación-de-la-varianza
 estimación-de-la-media-e-intervalo-de-confianza
 estimación-de-medidas-de-dispersión-y-localización
-estimación-del-coeficiente-de-ginni-en-encuestas-de-hogares
+estimación-del-coeficiente-de-gini-en-encuestas-de-hogares
 análisis-de-correlación-en-encuestas-de-hogares
 ajuste-al-diseño-muestral
 expresión-formal

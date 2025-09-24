@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="09-Generalizados2.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -314,19 +314,19 @@ Var_p(X_i)
 <p><em>Primer proceso inferencial: el modelo</em></p>
 <p>En este apartado, es notable que la medida de probabilidad que rige la inferencia hasta el momento sea la inducida por la distribución binomial con parámetro 0.3. De esta manera, el estimador insesgado de mínima varianza (todas estas propiedades obtenidas con base en la distribución binomial) está dado por el promedio poblacional. Nótese que la inferencia utiliza todos los datos de la población. Ahora, para reproducirlo computacionalmente, basta con simular muchas poblaciones de 100 variables aleatorias independientes distribuidas Bernoulli con parámetro desconocido <span class="math inline">\(\theta\)</span>=0.3.</p>
 <p>Como es bien sabido, bajo la perspectiva de los modelos poblacionales y la inferencia estadística clásica, el estimador <span class="math inline">\(\bar{y}_U = \frac{\sum_U y_k}{N}\)</span> es insesgado. Para corroborarlo, es posible introducir la siguiente simulación de Monte Carlo.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-1" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb454-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-2" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb454-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-3" tabindex="-1"></a>nsim1 <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb454-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-4" tabindex="-1"></a>Est0<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
-<span id="cb454-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-5" tabindex="-1"></a></span>
-<span id="cb454-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
-<span id="cb454-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-7" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb454-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-8" tabindex="-1"></a>Est0[i]<span class="ot">=</span><span class="fu">mean</span>(y)</span>
-<span id="cb454-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-9" tabindex="-1"></a>}</span>
-<span id="cb454-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-10" tabindex="-1"></a></span>
-<span id="cb454-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-11" tabindex="-1"></a>Esp0 <span class="ot">=</span> <span class="fu">mean</span>(Est0)</span>
-<span id="cb454-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-12" tabindex="-1"></a></span>
-<span id="cb454-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-13" tabindex="-1"></a><span class="fu">cbind</span>(theta, Esp0)  </span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-1" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb453-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-2" tabindex="-1"></a>theta <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb453-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-3" tabindex="-1"></a>nsim1 <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb453-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-4" tabindex="-1"></a>Est0<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
+<span id="cb453-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-5" tabindex="-1"></a></span>
+<span id="cb453-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-6" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
+<span id="cb453-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-7" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb453-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-8" tabindex="-1"></a>Est0[i]<span class="ot">=</span><span class="fu">mean</span>(y)</span>
+<span id="cb453-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-9" tabindex="-1"></a>}</span>
+<span id="cb453-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-10" tabindex="-1"></a></span>
+<span id="cb453-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-11" tabindex="-1"></a>Esp0 <span class="ot">=</span> <span class="fu">mean</span>(Est0)</span>
+<span id="cb453-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-12" tabindex="-1"></a></span>
+<span id="cb453-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb453-13" tabindex="-1"></a><span class="fu">cbind</span>(theta, Esp0)  </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -362,50 +362,50 @@ en el proceso de inferencia e ignora el diseño de muestreo es el siguiente:</p>
 \bar{y}_{S}=\frac{\sum_{i\in S_{I}}t_{y_{i}}}{\sum_{i\in S_{I}}N_{i}}
 \]</span></p>
 <p>En términos generales el siguiente esquema trata de reproducir gráficamente este proceso de inferencia, en donde un gran número de muestras podrían haber sido extraídas siguiendo el diseño de muestreo. Con la siguiente simulación de Monte Carlo se comprueba fácilmente que es insesgado, mientras que es sesgado:</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb455-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-2" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb455-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-3" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
-<span id="cb455-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-4" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb455-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-5" tabindex="-1"></a>theta_N<span class="ot">=</span><span class="fu">mean</span>(y)</span>
-<span id="cb455-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-6" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
-<span id="cb455-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-7" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
-<span id="cb455-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-8" tabindex="-1"></a></span>
-<span id="cb455-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-9" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
-<span id="cb455-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-10" tabindex="-1"></a></span>
-<span id="cb455-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb455-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb455-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
-<span id="cb455-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
-<span id="cb455-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-15" tabindex="-1"></a></span>
-<span id="cb455-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
-<span id="cb455-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
-<span id="cb455-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
-<span id="cb455-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-19" tabindex="-1"></a>}</span>
-<span id="cb455-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-20" tabindex="-1"></a></span>
-<span id="cb455-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-21" tabindex="-1"></a><span class="co">#Tamaños</span></span>
-<span id="cb455-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-22" tabindex="-1"></a></span>
-<span id="cb455-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-23" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
-<span id="cb455-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-24" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
-<span id="cb455-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-25" tabindex="-1"></a></span>
-<span id="cb455-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-26" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
-<span id="cb455-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-27" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
-<span id="cb455-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-28" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
-<span id="cb455-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-29" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
-<span id="cb455-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-30" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
-<span id="cb455-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-31" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
-<span id="cb455-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-32" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="cn">NA</span>)</span>
-<span id="cb455-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-33" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
-<span id="cb455-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-34" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
-<span id="cb455-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-35" tabindex="-1"></a>}</span>
-<span id="cb455-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-36" tabindex="-1"></a><span class="co">#-------</span></span>
-<span id="cb455-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-37" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
-<span id="cb455-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-38" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
-<span id="cb455-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-39" tabindex="-1"></a>}</span>
-<span id="cb455-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-40" tabindex="-1"></a></span>
-<span id="cb455-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-41" tabindex="-1"></a>Esp1<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
-<span id="cb455-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-42" tabindex="-1"></a>Esp2<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
-<span id="cb455-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-43" tabindex="-1"></a></span>
-<span id="cb455-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-44" tabindex="-1"></a><span class="fu">cbind</span>(theta_N, Esp1, Esp2)</span></code></pre></div>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb454-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-2" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb454-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-3" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
+<span id="cb454-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-4" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb454-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-5" tabindex="-1"></a>theta_N<span class="ot">=</span><span class="fu">mean</span>(y)</span>
+<span id="cb454-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-6" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb454-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-7" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
+<span id="cb454-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-8" tabindex="-1"></a></span>
+<span id="cb454-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-9" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
+<span id="cb454-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-10" tabindex="-1"></a></span>
+<span id="cb454-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb454-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb454-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
+<span id="cb454-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
+<span id="cb454-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-15" tabindex="-1"></a></span>
+<span id="cb454-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb454-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb454-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
+<span id="cb454-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-19" tabindex="-1"></a>}</span>
+<span id="cb454-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-20" tabindex="-1"></a></span>
+<span id="cb454-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-21" tabindex="-1"></a><span class="co">#Tamaños</span></span>
+<span id="cb454-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-22" tabindex="-1"></a></span>
+<span id="cb454-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-23" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb454-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-24" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
+<span id="cb454-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-25" tabindex="-1"></a></span>
+<span id="cb454-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-26" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
+<span id="cb454-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-27" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
+<span id="cb454-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-28" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
+<span id="cb454-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-29" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
+<span id="cb454-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-30" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
+<span id="cb454-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-31" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
+<span id="cb454-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-32" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="cn">NA</span>)</span>
+<span id="cb454-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-33" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
+<span id="cb454-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-34" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
+<span id="cb454-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-35" tabindex="-1"></a>}</span>
+<span id="cb454-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-36" tabindex="-1"></a><span class="co">#-------</span></span>
+<span id="cb454-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-37" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
+<span id="cb454-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-38" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
+<span id="cb454-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-39" tabindex="-1"></a>}</span>
+<span id="cb454-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-40" tabindex="-1"></a></span>
+<span id="cb454-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-41" tabindex="-1"></a>Esp1<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
+<span id="cb454-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-42" tabindex="-1"></a>Esp2<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
+<span id="cb454-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-43" tabindex="-1"></a></span>
+<span id="cb454-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb454-44" tabindex="-1"></a><span class="fu">cbind</span>(theta_N, Esp1, Esp2)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -430,55 +430,55 @@ en el proceso de inferencia e ignora el diseño de muestreo es el siguiente:</p>
 E_{\xi p}(\bar{y}_{\pi S})=E_{\xi}E_{p}(\bar{y}_{\pi S}|Y)=E_{\xi}(\bar{y}_{U})=\theta=0.3
 \]</span>
 Con la siguiente simulación de Monte Carlo se comprueba fácilmente que <span class="math inline">\(\bar{y}_{\pi S}\)</span> es insesgado, mientras que es <span class="math inline">\(\bar{y}_{S}\)</span> sesgado:</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb456-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-2" tabindex="-1"></a></span>
-<span id="cb456-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-3" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-4" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
-<span id="cb456-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-5" tabindex="-1"></a>nsim1<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-6" tabindex="-1"></a>Esp1<span class="ot">=</span>Esp2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
-<span id="cb456-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-7" tabindex="-1"></a></span>
-<span id="cb456-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-8" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
-<span id="cb456-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-9" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
-<span id="cb456-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-10" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
-<span id="cb456-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb456-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb456-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
-<span id="cb456-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
-<span id="cb456-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-15" tabindex="-1"></a></span>
-<span id="cb456-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
-<span id="cb456-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
-<span id="cb456-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
-<span id="cb456-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-19" tabindex="-1"></a>}</span>
-<span id="cb456-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-20" tabindex="-1"></a></span>
-<span id="cb456-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-21" tabindex="-1"></a>Ind</span>
-<span id="cb456-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-22" tabindex="-1"></a>Tamaños</span>
-<span id="cb456-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-23" tabindex="-1"></a></span>
-<span id="cb456-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-24" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb456-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-25" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
-<span id="cb456-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-26" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
-<span id="cb456-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-27" tabindex="-1"></a></span>
-<span id="cb456-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-28" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
-<span id="cb456-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-29" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
-<span id="cb456-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-30" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
-<span id="cb456-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-31" tabindex="-1"></a>sam</span>
-<span id="cb456-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-32" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
-<span id="cb456-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-33" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
-<span id="cb456-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-34" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
-<span id="cb456-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-35" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>)</span>
-<span id="cb456-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-36" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
-<span id="cb456-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-37" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
-<span id="cb456-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-38" tabindex="-1"></a>}</span>
-<span id="cb456-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-39" tabindex="-1"></a></span>
-<span id="cb456-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-40" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
-<span id="cb456-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-41" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
-<span id="cb456-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-42" tabindex="-1"></a>}</span>
-<span id="cb456-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-43" tabindex="-1"></a></span>
-<span id="cb456-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-44" tabindex="-1"></a>Esp1[i]<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
-<span id="cb456-45"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-45" tabindex="-1"></a>Esp2[i]<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
-<span id="cb456-46"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-46" tabindex="-1"></a></span>
-<span id="cb456-47"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-47" tabindex="-1"></a>}</span>
-<span id="cb456-48"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-48" tabindex="-1"></a></span>
-<span id="cb456-49"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb456-49" tabindex="-1"></a><span class="fu">cbind</span>(theta, <span class="fu">mean</span>(Esp1), <span class="fu">mean</span>(Esp2))</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-1" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb455-2"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-2" tabindex="-1"></a></span>
+<span id="cb455-3"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-3" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb455-4"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-4" tabindex="-1"></a>theta<span class="ot">=</span><span class="fl">0.3</span></span>
+<span id="cb455-5"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-5" tabindex="-1"></a>nsim1<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb455-6"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-6" tabindex="-1"></a>Esp1<span class="ot">=</span>Esp2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim1)</span>
+<span id="cb455-7"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-7" tabindex="-1"></a></span>
+<span id="cb455-8"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-8" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim1){</span>
+<span id="cb455-9"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-9" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">rbinom</span>(N, <span class="dv">1</span>, theta)</span>
+<span id="cb455-10"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-10" tabindex="-1"></a><span class="co">#-----Creación de los clusters---------</span></span>
+<span id="cb455-11"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-11" tabindex="-1"></a>clus<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">which</span>((y[<span class="sc">-</span>N]<span class="sc">-</span>y[<span class="sc">-</span><span class="dv">1</span>])<span class="sc">!=</span><span class="dv">0</span>)<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb455-12"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-12" tabindex="-1"></a>NI<span class="ot">=</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb455-13"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-13" tabindex="-1"></a>Ind<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span>N, <span class="at">ncol=</span>NI)</span>
+<span id="cb455-14"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-14" tabindex="-1"></a>Tamaños<span class="ot">=</span>clus[<span class="sc">-</span><span class="dv">1</span>]<span class="sc">-</span>clus[<span class="sc">-</span>(<span class="fu">length</span>(clus))]</span>
+<span id="cb455-15"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-15" tabindex="-1"></a></span>
+<span id="cb455-16"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-16" tabindex="-1"></a><span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(clus)<span class="sc">-</span><span class="dv">1</span>)){</span>
+<span id="cb455-17"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-17" tabindex="-1"></a>a<span class="ot">=</span>(clus[l]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>clus[l<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb455-18"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-18" tabindex="-1"></a>Ind[a,l]<span class="ot">=</span>a</span>
+<span id="cb455-19"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-19" tabindex="-1"></a>}</span>
+<span id="cb455-20"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-20" tabindex="-1"></a></span>
+<span id="cb455-21"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-21" tabindex="-1"></a>Ind</span>
+<span id="cb455-22"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-22" tabindex="-1"></a>Tamaños</span>
+<span id="cb455-23"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-23" tabindex="-1"></a></span>
+<span id="cb455-24"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-24" tabindex="-1"></a>nsim2<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb455-25"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-25" tabindex="-1"></a>nI<span class="ot">=</span><span class="fu">floor</span>(NI<span class="sc">*</span><span class="fl">0.3</span>)</span>
+<span id="cb455-26"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-26" tabindex="-1"></a>Est1<span class="ot">=</span>Est2<span class="ot">=</span><span class="fu">rep</span>(<span class="cn">NA</span>,nsim2)</span>
+<span id="cb455-27"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-27" tabindex="-1"></a></span>
+<span id="cb455-28"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-28" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim2){</span>
+<span id="cb455-29"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-29" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">S.piPS</span>(nI,Tamaños)</span>
+<span id="cb455-30"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-30" tabindex="-1"></a>sam <span class="ot">&lt;-</span> res[,<span class="dv">1</span>] </span>
+<span id="cb455-31"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-31" tabindex="-1"></a>sam</span>
+<span id="cb455-32"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-32" tabindex="-1"></a>Ind.sam<span class="ot">=</span>Ind[,sam]</span>
+<span id="cb455-33"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-33" tabindex="-1"></a>Tamaños.sam<span class="ot">=</span>Tamaños[sam]</span>
+<span id="cb455-34"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-34" tabindex="-1"></a><span class="co">#-------Espacio para las medias</span></span>
+<span id="cb455-35"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-35" tabindex="-1"></a>medias<span class="ot">=</span><span class="fu">matrix</span>(<span class="dv">0</span>)</span>
+<span id="cb455-36"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-36" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(Ind.sam)){</span>
+<span id="cb455-37"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-37" tabindex="-1"></a>medias[k]<span class="ot">=</span><span class="fu">mean</span>(y[Ind.sam[,k]])</span>
+<span id="cb455-38"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-38" tabindex="-1"></a>}</span>
+<span id="cb455-39"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-39" tabindex="-1"></a></span>
+<span id="cb455-40"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-40" tabindex="-1"></a>Est1[j]<span class="ot">=</span><span class="fu">mean</span>(medias)</span>
+<span id="cb455-41"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-41" tabindex="-1"></a>Est2[j]<span class="ot">=</span><span class="fu">sum</span>(Tamaños.sam<span class="sc">*</span>medias)<span class="sc">/</span><span class="fu">sum</span>(Tamaños)</span>
+<span id="cb455-42"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-42" tabindex="-1"></a>}</span>
+<span id="cb455-43"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-43" tabindex="-1"></a></span>
+<span id="cb455-44"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-44" tabindex="-1"></a>Esp1[i]<span class="ot">=</span><span class="fu">mean</span>(Est1)</span>
+<span id="cb455-45"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-45" tabindex="-1"></a>Esp2[i]<span class="ot">=</span><span class="fu">mean</span>(Est2)</span>
+<span id="cb455-46"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-46" tabindex="-1"></a></span>
+<span id="cb455-47"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-47" tabindex="-1"></a>}</span>
+<span id="cb455-48"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-48" tabindex="-1"></a></span>
+<span id="cb455-49"><a href="acerca-de-las-muestras-aleatorias-y-su-análisis.html#cb455-49" tabindex="-1"></a><span class="fu">cbind</span>(theta, <span class="fu">mean</span>(Esp1), <span class="fu">mean</span>(Esp2))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

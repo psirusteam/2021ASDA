@@ -192,7 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
 <li class="chapter" data-level="4.3.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.4" data-path="04-Continuas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
 <li class="chapter" data-level="4.5" data-path="04-Continuas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="04-Continuas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
@@ -341,7 +341,7 @@ se\left(\bar{Y}_{1}-\bar{Y}_{2}\right) &amp; = &amp; \sqrt{var\left(\bar{y}_{1}\
 &amp; \left(\bar{Y}_{1}-\bar{Y}_{2}\right)\pm t_{gl,\,\alpha/2}\,se\left(\bar{Y}_{1}-\bar{Y}_{2}\right)
 \end{eqnarray*}\]</span></p>
 <p>Para poder llevar a cabo la prueba de hipótesis para la diferencia de media de los ingresos en un hogar por sexo, tomemos la base de datos que tenemos como ejemplo. La función que se encarga de realizar la prueba es <code>svyttest</code> y solo requiere como argumentos la variable ingreso (o variable de interés), la variable sexo (variable discriminadora), el diseño muestral y el nivel de confianza. A continuación, se muestran los códigos computacionales que se requieren:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb140-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno, <span class="at">level=</span><span class="fl">0.95</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb139-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno, <span class="at">level=</span><span class="fl">0.95</span>) </span></code></pre></div>
 <pre><code>## 
 ##  Design-based t-test
 ## 
@@ -356,7 +356,7 @@ se\left(\bar{Y}_{1}-\bar{Y}_{2}\right) &amp; = &amp; \sqrt{var\left(\bar{y}_{1}\
 <p>En esta salida podemos observar que el p-valor de la prueba es 0.14. Si tomamos una significancia del 5% para la prueba se puede concluir que, con una confianza del 95% y basados en la muestra, no existe suficiente evidencia estadística para decir que los ingresos medios en los hogares son diferentes por sexo.</p>
 <p>Por otro lado, el intervalo de confianza al 95% para la diferencia de medias entre los ingresos de hombres y mujeres es <span class="math inline">\(\left(-77.35,\,11.41\right)\)</span>.</p>
 <p>Si ahora el objetivo es realizar la prueba de diferencia de medias para los ingresos entre hombres y mujeres pero solo en la zona urbana, los códigos computacionales son los siguientes:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb142-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> sub_Urbano, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb141-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> sub_Urbano, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
 <pre><code>## 
 ##  Design-based t-test
 ## 
@@ -370,7 +370,7 @@ se\left(\bar{Y}_{1}-\bar{Y}_{2}\right) &amp; = &amp; \sqrt{var\left(\bar{y}_{1}\
 ##           44.71134</code></pre>
 <p>En donde, al igual que el anterior, no se rechaza la hipótesis nula con una confianza del 95%.</p>
 <p>Por otro lado, la función <code>svyttest</code> permite usar filtro. Si se requiere probar la hipótesis de diferencia de medias de ingresos por sexo pero solo en aquellas personas del hogar mayores a 18 años, se utilizará dentro de la función <code>svyttest</code> la función <code>filter</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb144-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">18</span>), <span class="at">level =</span> <span class="fl">0.95</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares.html#cb143-1" tabindex="-1"></a><span class="fu">svyttest</span>(Income <span class="sc">~</span> Sex, <span class="at">design =</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;</span> <span class="dv">18</span>), <span class="at">level =</span> <span class="fl">0.95</span> )</span></code></pre></div>
 <pre><code>## 
 ##  Design-based t-test
 ## 
