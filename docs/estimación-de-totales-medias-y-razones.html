@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 \hat{Y} = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} \, y_{hik}
 \]</span></p>
-<p>Cuando se cuenta con respuesta completa, la varianza de <span class="math inline">\(\hat{Y}\)</span> puede calcularse usando el estimador de Ultimate Cluster descrito previamente en la Sección 9.2.</p>
+<p>Cuando se cuenta con respuesta completa, la varianza de <span class="math inline">\(\hat{Y}\)</span> puede calcularse usando el estimador de Ultimate Cluster.</p>
 <p>El intervalo de confianza de nivel <span class="math inline">\(1-\alpha\)</span> para el total poblacional <span class="math inline">\(Y\)</span> se calcula como:</p>
 <p><span class="math display">\[
 \hat{Y} \pm t_{1-\alpha/2, df} \times \sqrt{\hat{V}_{UC}(\hat{Y})}
@@ -300,7 +300,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La <strong>linealización de Taylor</strong> constituye un complemento natural a este marco, ya que permite aproximar la varianza de estimadores no lineales. El procedimiento consiste en aplicar una expansión de Taylor de primer orden alrededor del parámetro estimado, con el fin de reemplazar el estimador no lineal por una expresión lineal. De esta manera, se facilita el cálculo de varianzas en situaciones donde no existen fórmulas exactas o su derivación resulta demasiado compleja.</p>
 <p>Un estimador consistente de la varianza, derivado mediante linealización de Taylor para soluciones de ecuaciones de estimación muestrales, puede expresarse como:</p>
 <p><span class="math display">\[
-\hat{V}_{TL}(\hat{\theta}) = [\hat{J}(\hat{\theta})]^{-1} \, \hat{V}_p \Bigg[\sum_{k\in s} d_k\, z_k(\hat{\theta})\Bigg] \, [\hat{J}(\hat{\theta})]^{-1} \tag{9-6}
+\hat{V}_{TL}(\hat{\theta}) = [\hat{J}(\hat{\theta})]^{-1} \, \hat{V}_p \Bigg[\sum_{k\in s} d_k\, z_k(\hat{\theta})\Bigg] \, [\hat{J}(\hat{\theta})]^{-1}
 \]</span></p>
 <p>donde <span class="math inline">\(\hat{J}(\hat{\theta}) = \sum_{k\in s} d_k \left[ \frac{\partial z_k(\theta)}{\partial \theta} \right]_{\theta=\hat{\theta}}\)</span>.</p>
 <p>Este resultado muestra cómo la linealización de Taylor convierte la estimación de varianzas de parámetros complejos en un problema de estimación de totales, lo que explica su amplia adopción en software especializado para el análisis de encuestas.</p>
@@ -325,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>El estimador Ultimate Cluster de la varianza correspondiente se calcula mediante:</p>
 <p><span class="math display">\[
-\hat{V}_{UC}(\hat{Y}) = \sum_{h=1}^H \frac{n_h}{n_h-1} \sum_{i \in s_{1h}} (\hat{Y}_{hi} - \hat{Y}_h)^2 \tag{9-7}
+\hat{V}_{UC}(\hat{Y}) = \sum_{h=1}^H \frac{n_h}{n_h-1} \sum_{i \in s_{1h}} (\hat{Y}_{hi} - \hat{Y}_h)^2
 \]</span></p>
 <p>Para más detalles, véase Hansen, Hurwitz y Madow (1953, vol. I, p. 257) o Wolter (2007).</p>
 <p>Aunque originalmente se diseñó para calcular varianzas de estimadores de totales, el método puede combinarse con linealización de Taylor o ecuaciones de estimación para derivar varianzas de otros parámetros poblacionales formulables como soluciones de ecuaciones de estimación. Esta flexibilidad hace que el método sea aplicable a diversos contextos de análisis de encuestas de hogares.</p>
