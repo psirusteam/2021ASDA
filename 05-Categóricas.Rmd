@@ -384,18 +384,18 @@ Una tabla de contingencia puede representarse en forma general como:
 | Variable 2        | Variable 1                  | Marginal fila|
 |-------------------|-------------|---------------|--------------|
 |                   | 0           | 1             |              |
-| 0                 | $n\_{00}$    |   $n\_{01}$    | $n\_{0+}$     |
-| 1                 | $n\_{10}$    |   $n\_{11}$    | $n\_{1+}$     |
-| Marginal columna  | $n\_{+0}$    |   $n\_{+1}$    | $n\_{++}$     |
+| 0                 | $n_{00}$    |   $n_{01}$    | $n_{0+}$     |
+| 1                 | $n_{10}$    |   $n_{11}$    | $n_{1+}$     |
+| Marginal columna  | $n_{+0}$    |   $n_{+1}$    | $n_{++}$     |
 
 Cuando se aplican los pesos muestrales, se obtienen las frecuencias ponderadas:
 
 | Variable 2        | Variable 1                  | Marginal fila|
 |-------------------|-------------|---------------|--------------|
 |                   | 0           | 1             |              |
-| 0                 | $\hat{N}*{00}$| $\hat{N}*{01}$| $\hat{N}*{0+}$|
-| 1                 | $\hat{N}*{10}$| $\hat{N}*{11}$| $\hat{N}*{1+}$|
-| Marginal columna  | $\hat{N}*{+0}$| $\hat{N}*{+1}$| $\hat{N}\_{++}$|
+| 0                 | $\hat{N}_{00}$| $\hat{N}_{01}$| $\hat{N}_{0+}$|
+| 1                 | $\hat{N}_{10}$| $\hat{N}_{11}$| $\hat{N}_{1+}$|
+| Marginal columna  | $\hat{N}_{+0}$| $\hat{N}_{+1}$| $\hat{N}_{++}$|
 
 donde, por ejemplo, la frecuencia ponderada en la celda $(0,1)$ está dada por:
 
@@ -416,44 +416,73 @@ Aunque comúnmente se presentan como tablas bidimensionales ($R \times C$), las 
 Gracias a su simplicidad y potencia descriptiva, las tablas cruzadas son ampliamente utilizadas en la investigación aplicada y en el diseño de políticas públicas, pues permiten identificar patrones y asociaciones que no serían evidentes a simple vista. Su interpretación también puede reforzarse mediante representaciones gráficas, como los diagramas de barras apiladas, que facilitan la visualización de tendencias y diferencias (véase la Sección 9.8 para un análisis más detallado).
 
 
-*Estimación de proporciones para variables binarias*
+## Estimación de proporciones y tablas cruzadas
 
-La estimación de una sola proporción, $\pi$, para una variable de respuesta binaria requiere solo una extensión directa del estimador de razón mostrado en secciones anteriores. Como lo menciona *Heeringa, S. G. (2017)* Al recodificar las categorías de respuesta originales en una sola variable indicadora $y_{i}$ con valores posibles de 1 y 0 (por ejemplo, sí = 1, no = 0), el estimador de la media de la razón estima la proporción o prevalencia, $\pi$, de "1" en la población está dada por:
+En el análisis de encuestas de hogares, una de las tareas más comunes consiste en estimar proporciones poblacionales a partir de variables categóricas. Estas estimaciones permiten cuantificar la prevalencia de una característica en la población, por ejemplo, el porcentaje de hogares con acceso a internet o la proporción de individuos ocupados.
 
-$$
-p =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=1\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i\in\left(0,1\right)}^{n_{h\alpha}}}\omega_{h\alpha i}}
- =  \frac{\hat{N}_{1}}{\hat{N}}
-$$
+### Proporciones para variables binarias
 
-Aplicando Linealización de Taylor (TSL) al estimador de razón de $\pi$ genera el siguiente estimador para la varianza:
+La estimación de una sola proporción, $\pi$, para una variable de respuesta binaria requiere únicamente una extensión directa del estimador de razón. Al recodificar las categorías de respuesta originales en una variable indicadora $y\_{i}$ con valores $1$ (presencia) y $0$ (ausencia), el estimador de la media de la razón estima la proporción o prevalencia $\pi$ en la población de la siguiente manera (*Heeringa, S. G., 2017*):
 
 $$
-v\left(p\right) \dot{=} \frac{V\left(\hat{N}_{1}\right)+p^{2}V\left(\hat{N}\right)-2\,p\,cov\left(\hat{N}_{1},\hat{N}\right)}{\hat{N}^{2}}
+\hat{p} = \frac{\sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}I(y_{i}=1)}{\sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}}
+= \frac{\hat{N}_{1}}{\hat{N}}.
 $$
 
-
-Como es bien sabido en la literatura especializada, cuando la proporción de interés estimada está cerca de 0 o 1, los límites del intervalo de confianza estándar basados en el diseño de muestreo pueden ser menores que 0 o superiores a 1. Lo cual no tendría interpretación por la naturaleza del parámetro. Es por lo anterior que, para solventar este problema se puede realizar cálculos alternativos de IC basados en el diseño de muestreo para las proporciones como lo proponen *Wilson modificado (Rust y Hsu, 2007; Dean y Pagano, 2015)*. El intervalo de confianza utilizando la transformación $Logit\left(p\right)$
-está dado por:
+La varianza de este estimador puede aproximarse mediante la linealización de Taylor:
 
 $$
-IC\left[logit\left(p\right)\right]  =  \left\{ ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right\} 
+v(\hat{p}) \dot{=} \frac{V(\hat{N}_{1})+\hat{p}^{2}V(\hat{N})-2\hat{p}\,cov(\hat{N}_{1},\hat{N})}{\hat{N}^{2}}.
 $$
 
-Por tanto, el intervalo de confianza para $p$ sería:
+Cuando la proporción estimada se aproxima a 0 o 1, los intervalos de confianza estándar pueden producir límites fuera del rango $\[0,1]$. Para solventar este problema, se proponen intervalos de confianza basados en transformaciones, como el *Wilson modificado* o el uso del *logit* de $\hat{p}$:
 
 $$
-IC\left(p\right)  =  \left\{ \frac{exp\left[ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right]}{1+exp\left[ln\left(\frac{p}{1-p}\right)\pm\frac{t_{1-\alpha/2,\,gl}se\left(p\right)}{p\left(1-p\right)}\right]}\right\} 
+IC[\text{logit}(\hat{p})] = \left\{ \ln\left(\frac{\hat{p}}{1-\hat{p}}\right) \pm \frac{t_{1-\alpha/2,gl}\,se(\hat{p})}{\hat{p}(1-\hat{p})}\right\},
 $$
 
-Ahora bien, si se el interés es estimar proporciones para variables multinomiales. El estimador es el siguiente:
+cuyo resultado puede transformarse de nuevo a la escala original de proporciones.
 
+### Proporciones para variables multinomiales
+
+En encuestas, es común que las variables categóricas tengan más de dos categorías (multinomiales). En este caso, la estimación de la proporción para cada categoría $k$ sigue un esquema análogo:
 
 $$
-p_{k}  =  \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}I\left(y_{i}=k\right)}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}}}\omega_{h\alpha i}}
- =  \frac{\hat{N}_{k}}{\hat{N}}
+\hat{p}_{k} = \frac{\sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}I(y_{i}=k)}{\sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}}
+= \frac{\hat{N}_{k}}{\hat{N}}.
 $$
+
+### Tablas cruzadas o de contingencia
+
+Cuando se analizan dos variables categóricas de manera conjunta, el objetivo es estudiar si existe asociación entre ellas. Para ello, se construyen tablas cruzadas (o tablas de contingencia), que organizan los datos en una matriz de $R \times C$, donde $R$ son las categorías de la variable $x$ y $C$ las de la variable $y$.
+
+A diferencia de un simple conteo de casos, en encuestas se utilizan **frecuencias ponderadas** que reflejan la población total representada. Cada celda $(r,c)$ contiene la frecuencia estimada:
+
+$$
+\hat{N}_{rc} = \sum_{h=1}^{H}\sum_{i \in s_{1h}}\sum_{k \in s_{hi}} w_{hik}\,I(x_{hik}=r; y_{hik}=c).
+$$
+
+Los totales marginales se obtienen como:
+
+$$
+\hat{N}_{(r+)} = \sum_{c} \hat{N}_{rc}, \quad \hat{N}_{(+c)} = \sum_{r} \hat{N}_{rc}, \quad \hat{N}_{(++)} = \sum_{r}\sum_{c} \hat{N}_{rc}.
+$$
+
+De estas frecuencias ponderadas se derivan **proporciones conjuntas y marginales**, que permiten analizar la distribución relativa de cada cruce:
+
+$$
+\hat{p}_{rc} = \frac{\hat{N}_{rc}}{\hat{N}_{++}}, \qquad 
+\hat{p}_{r+} = \frac{\hat{N}_{r+}}{\hat{N}_{++}}, \qquad 
+\hat{p}_{+c} = \frac{\hat{N}_{+c}}{\hat{N}_{++}}.
+$$
+
+Este enfoque ofrece una visión más completa de la relación entre categorías, ya que combina la estimación de proporciones simples con el análisis conjunto de distribuciones. Por ejemplo, se puede explorar cómo se distribuye el nivel educativo (filas) según la condición laboral (columnas), identificando patrones de desigualdad o brechas estructurales.
+
+
+
 
 A continuación, siguiendo con la base de ejemplo, se estima la proporción de hombres y mujeres en pobreza y no pobreza junto con su error estándar e intervalos de confianza.
+
 
 ```{r, tab2, eval=T}
 
@@ -510,43 +539,68 @@ De lo anterior se puede concluir que, en la región Norte, el 35% de las persona
 
 
 
-*Prueba de independencia $\chi^{2}$*
+### Prueba de independencia $\chi^{2}$
 
-Esta prueba es una de las más utilizadas para determinar si no existe asociación o independencia entre dos variables de tipo cualitativa. En otras palabras, que dos variables sean independientes significa que una no depende de la otra, ni viceversa. 
+Una **prueba de hipótesis** es un procedimiento estadístico que permite evaluar la validez de una afirmación sobre una población, comparando la evidencia empírica de una muestra con lo que se esperaría si dicha afirmación fuera cierta. En el caso de las **pruebas de independencia**, se plantea como hipótesis nula ($H_{0}$) que dos variables categóricas son independientes, es decir, que la distribución de una no depende de las categorías de la otra. Matemáticamente, esta hipótesis puede expresarse como:
 
-A modo de ejemplificar la técnica, para una tabla de $2\times2$, la prueba $\chi^{2}$ de personas se define como:
+$$
+H_0: P_{rc}^0 = P_{r+} \times P_{+c}, \quad \text{para todo } r = 1,\ldots,R \text{ y } c = 1,\ldots,C
+$$
+
+donde $P_{rc}^0$ representa la proporción esperada en la celda $(r,c)$ bajo independencia, y $P_{r+}$ y $P_{+c}$ las proporciones marginales de las filas y columnas, respectivamente.
+
+En consecuencia, la prueba consiste en contrastar las proporciones estimadas $\hat{p}*{rc}$ con las esperadas $P*{rc}^0$. Cuando las diferencias son pequeñas, los datos respaldan la hipótesis nula; en cambio, discrepancias significativas conducen al rechazo de $H_0$.
+
+
+
+#### Prueba $\chi^{2}$ clásica
+
+Para una tabla de $2 \times 2$, la estadística de Pearson se define como:
 
 $$
 \chi^{2}  =  n_{++}\sum_{r}\sum_{c}\frac{\left(p_{rc}-\hat{\pi}_{rc}\right)^{2}}{\hat{\pi}_{rc}}
 $$
 
-donde, $\hat{\pi}_{rc}=\frac{n_{r+}}{n_{++}}\,\frac{n_{+c}}{n_{++}}\,p_{r+}\,p_{+c}$.
+donde $\hat{\pi}*{rc}=\frac{n*{r+}}{n_{++}} \cdot \frac{n_{+c}}{n_{++}}$ corresponde a las proporciones esperadas bajo independencia.
 
-Para realizar la prueba de independencia $\chi^{2}$ en `R`, se utilizará la función *svychisq* del paquete *srvyr*. Esta función requiere que se definan las variables de interés (formula) y requiere que se le defina el diseño muestral (desing). Ahora, para ejemplificar el uso de esta función tomaremos la base de datos de ejemplo y se probará si la pobreza es independiente del sexo. A continuación, se presentan los códigos computacionales: 
+En términos prácticos, las **tablas de contingencia ponderadas** constituyen el insumo de la prueba, ya que cada celda $\hat{N}_{rc}$ estima el número de personas en la población en esa combinación de categorías. A partir de ellas se calculan frecuencias relativas y se evalúa la independencia de las variables.
 
-```{r}
+
+#### Ajustes para encuestas: prueba de Rao-Scott
+
+En encuestas de hogares, el análisis es más complejo porque el diseño muestral (estratificación, conglomerados y ponderación) altera la varianza de los estimadores. Por ello, la prueba $\chi^{2}$ debe ajustarse para reflejar estas particularidades.
+
+El **ajuste de Rao-Scott** (Rao y Scott, 1984; Thomas y Rao, 1987) corrige la prueba clásica mediante el **efecto de diseño generalizado (GDEFF)**, lo que produce un estadístico robusto:
+
+$$
+X_{RS}^2 = \frac{n_{++}}{GDEFF} \sum_r \sum_c \frac{(\hat{p}_{rc} - \hat{P}_{rc}^0)^2}{\hat{P}_{rc}^0}
+$$
+
+Bajo $H_0$, $X_{RS}^2$ sigue aproximadamente una distribución $\chi^2$ con $(R-1)(C-1)$ grados de libertad. En casos de **muestras pequeñas**, es común aplicar ajustes basados en la distribución F, que mejoran la precisión de los resultados. Actualmente, las pruebas de Rao-Scott constituyen el estándar en el análisis de datos categóricos en encuestas complejas (Heeringa, West y Berglund, 2017).
+
+
+
+#### Ejemplo en R
+
+El paquete **`survey`** en R implementa estas pruebas a través de la función `svychisq()`, que aplica automáticamente las correcciones de Rao-Scott. A modo de ejemplo, para evaluar si la pobreza es independiente del sexo, se ejecuta:
+
+```{r, eval=TRUE}
 svychisq(formula = ~Sex + pobreza, design = diseno, statistic="F")
 ```
 
-Dado que el p-valor es superior al nivel de significancia 5% se puede concluir que, con una confianza del 95% y basado en la muestra, la pobreza no depende del sexo de las personas.
+* Si el **p-valor** es superior al 5%, no se rechaza $H_0$, concluyendo que no existe evidencia de asociación entre pobreza y sexo.
+* Si el **p-valor** es inferior al 5%, se rechaza $H_0$, lo que sugiere dependencia entre las variables.
 
-En este mismo sentido, si se desea saber si el desempleo está relacionado con el sexo, se realiza la prueba de hipótesis $\chi^{2}$ como sigue:
+De manera similar, se pueden evaluar otras relaciones, como desempleo y sexo o pobreza y región:
 
 ```{r, eval=TRUE}
-svychisq(formula = ~Sex + Employment, 
-         design = diseno,  statistic="F")
+svychisq(formula = ~Sex + Employment, design = diseno, statistic = "F")
+svychisq(formula = ~Region + pobreza, design = diseno, statistic = "F")
 ```
 
-Concluyendo que, con una confianza del 95% y basado en la muestra se rechaza la hipótesis nula, es decir, no se puede afirmar que las variables sexo y desempleo sean independiente. 
 
-Si en el análisis ahora se quiere verificar que la pobreza de las personas es independiente de las regiones establecidas en la base de datos, se realiza de la siguiente manera:
+Para realizar la prueba de independencia $\chi^{2}$ en `R`, se utilizará la función *svychisq* del paquete *srvyr*. Esta función requiere que se definan las variables de interés (formula) y requiere que se le defina el diseño muestral (desing). Ahora, para ejemplificar el uso de esta función tomaremos la base de datos de ejemplo y se probará si la pobreza es independiente del sexo. 
 
-```{r}
-svychisq(formula = ~Region + pobreza, 
-         design = diseno,  statistic="F")
-```
-
-Concluyendo que, con una confianza del 95% y basado en la muestra hay independencia entre la pobreza y la región. Lo anterior implica que, no existe relación lineal entre las personas en estado de pobreza por región.
 
 **Razón de odds**
 

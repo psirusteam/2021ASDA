@@ -57,6 +57,14 @@ tablas-cruzadas
 definición-y-notación
 tablas-de-doble-entrada
 extensiones-y-aplicaciones
+estimación-de-proporciones-y-tablas-cruzadas
+proporciones-para-variables-binarias
+proporciones-para-variables-multinomiales
+tablas-cruzadas-o-de-contingencia
+prueba-de-independencia-chi2
+prueba-chi2-clásica
+ajustes-para-encuestas-prueba-de-rao-scott
+ejemplo-en-r
 modelos-de-regresión-bajo-diseños-de-muestreo-complejos
 estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
 diagnóstico-del-modelo
