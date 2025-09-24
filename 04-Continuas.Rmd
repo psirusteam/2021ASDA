@@ -687,6 +687,48 @@ svylorenz(formula = ~Income,
 
 Los argumentos que requiere la función son, inicialmente, los ingresos de los hogares y el diseño muestral complejo. Adicionalmente, se definen una secuencia de probabilidades que define la suma de los cuantiles a calcular (quantiles) y por último, un número que especifica el nivel de confianza para el gráfico (alpha).
 
+## Análisis de correlación en encuestas de hogares  
+
+En el estudio de encuestas de hogares, además de describir variables de forma individual, resulta fundamental analizar cómo se relacionan entre sí. Una de las herramientas más utilizadas es el coeficiente de correlación de Pearson, que mide la fuerza y la dirección de la relación lineal entre dos variables numéricas. Sus valores oscilan entre –1 y 1:  
+
+- Un valor positivo indica que ambas variables tienden a aumentar al mismo tiempo.  
+- Un valor negativo señala que cuando una variable crece, la otra tiende a disminuir.  
+- Valores próximos a cero sugieren una relación lineal débil o inexistente.  
+
+Por ejemplo, puede ser de interés analizar si el ingreso de los hogares está asociado con su nivel de gasto, y en qué magnitud.  
+
+### Ajuste al diseño muestral  
+
+En encuestas complejas, la correlación no puede calcularse como en una muestra simple. Es necesario incorporar los pesos muestrales para que la estimación sea representativa de la población. Este ajuste tiene en cuenta la estratificación, la conglomeración y las probabilidades de selección desiguales.  
+
+El cálculo ponderado implica evaluar la covarianza entre las dos variables y dividirla entre el producto de sus desviaciones estándar ponderadas, eliminando así la influencia de las unidades de medida.  
+
+### Expresión formal  
+
+El coeficiente de correlación de Pearson ajustado por pesos se expresa como:  
+
+$$\hat{\rho}_{xy} = \frac{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})(x_{hik} - \widehat{\bar{X}})} {\sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})^2} \sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (x_{hik} - \widehat{\bar{X}})^2}}$$  
+
+Cuando las variables son categóricas u ordinales, se deben emplear otras medidas de asociación (como el coeficiente de contingencia o de correlación policórica).  
+
+### Implementación en R  
+
+El paquete `survey` cuenta con la función `svyvar` que permite obtener matrices de covarianzas ponderadas, a partir de las cuales se puede calcular la correlación. Otra opción más directa es usar `svycor` de paquetes complementarios como `svycor` o implementar el cálculo manualmente.  
+
+Ejemplo con ingreso y gasto de los hogares:  
+
+```{r}
+# Covarianza ponderada
+svy_cov <- svyvar(~Income + Expenditure, design = diseno)
+
+# Convertir a matriz de correlación
+svy_cor <- cov2cor(as.matrix(svy_cov))
+svy_cor
+```
+
+El resultado entrega la matriz de correlaciones entre las variables analizadas bajo el diseño complejo.  
+
+
 ## Análisis de la relación entre dos variable continuas
 
 En muchos análisis de variables relacionadas con encuestas de hogares no solo basta con analizar el comportamiento de variables de manera individual, por ejemplo, ingresos medios de hombres y mujeres en un país sino también, analizar la diferencia entre los ingresos de los hombres y las mujeres. Esto último con el fin de ir cerrando la brecha salarial que existe. 

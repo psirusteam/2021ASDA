@@ -193,14 +193,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="11-Imputación.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="11-Imputación.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
+<li class="chapter" data-level="4.5" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="11-Imputación.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="11-Imputación.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="11-Imputación.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="11-Imputación.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.7</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
 <li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="11-Imputación.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
@@ -294,22 +300,22 @@ más cercano al receptor según la magnitud de distancia previamente definida.</
 identificado previamente.</li>
 </ul>
 <p>Para ejemplificar esta metología, se va a imputar la variable ingresos y empleado utilizando como variable de apoyo los gastos del individuo. Se utilizará como distancia la euclidiana.</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="imputación-por-el-vecino-más-cercano.html#cb620-1" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
-<span id="cb620-2"><a href="imputación-por-el-vecino-más-cercano.html#cb620-2" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
-<span id="cb620-3"><a href="imputación-por-el-vecino-más-cercano.html#cb620-3" tabindex="-1"></a>encuesta_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="sc">!</span><span class="fu">is.na</span>(Income_missin))</span>
-<span id="cb620-4"><a href="imputación-por-el-vecino-más-cercano.html#cb620-4" tabindex="-1"></a>encuesta_no_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="fu">is.na</span>(Income_missin))</span>
-<span id="cb620-5"><a href="imputación-por-el-vecino-más-cercano.html#cb620-5" tabindex="-1"></a></span>
-<span id="cb620-6"><a href="imputación-por-el-vecino-más-cercano.html#cb620-6" tabindex="-1"></a><span class="cf">for</span>(ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(encuesta_no_obs)){</span>
-<span id="cb620-7"><a href="imputación-por-el-vecino-más-cercano.html#cb620-7" tabindex="-1"></a></span>
-<span id="cb620-8"><a href="imputación-por-el-vecino-más-cercano.html#cb620-8" tabindex="-1"></a>Expen_ii <span class="ot">&lt;-</span> encuesta_no_obs<span class="sc">$</span>Expenditure[[ii]]</span>
-<span id="cb620-9"><a href="imputación-por-el-vecino-más-cercano.html#cb620-9" tabindex="-1"></a>don_ii <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">abs</span>(Expen_ii <span class="sc">-</span> encuesta_obs<span class="sc">$</span>Expenditure))</span>
-<span id="cb620-10"><a href="imputación-por-el-vecino-más-cercano.html#cb620-10" tabindex="-1"></a>encuesta_no_obs<span class="sc">$</span>Income_imp[[ii]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Income_missin[[don_ii]]</span>
-<span id="cb620-11"><a href="imputación-por-el-vecino-más-cercano.html#cb620-11" tabindex="-1"></a>encuesta_no_obs<span class="sc">$</span>Employment_imp[[ii]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Employment_missin[[don_ii]]</span>
-<span id="cb620-12"><a href="imputación-por-el-vecino-más-cercano.html#cb620-12" tabindex="-1"></a>}</span>
-<span id="cb620-13"><a href="imputación-por-el-vecino-más-cercano.html#cb620-13" tabindex="-1"></a></span>
-<span id="cb620-14"><a href="imputación-por-el-vecino-más-cercano.html#cb620-14" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(encuesta_obs,encuesta_no_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="imputación-por-el-vecino-más-cercano.html#cb622-1" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
+<span id="cb622-2"><a href="imputación-por-el-vecino-más-cercano.html#cb622-2" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
+<span id="cb622-3"><a href="imputación-por-el-vecino-más-cercano.html#cb622-3" tabindex="-1"></a>encuesta_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="sc">!</span><span class="fu">is.na</span>(Income_missin))</span>
+<span id="cb622-4"><a href="imputación-por-el-vecino-más-cercano.html#cb622-4" tabindex="-1"></a>encuesta_no_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="fu">is.na</span>(Income_missin))</span>
+<span id="cb622-5"><a href="imputación-por-el-vecino-más-cercano.html#cb622-5" tabindex="-1"></a></span>
+<span id="cb622-6"><a href="imputación-por-el-vecino-más-cercano.html#cb622-6" tabindex="-1"></a><span class="cf">for</span>(ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(encuesta_no_obs)){</span>
+<span id="cb622-7"><a href="imputación-por-el-vecino-más-cercano.html#cb622-7" tabindex="-1"></a></span>
+<span id="cb622-8"><a href="imputación-por-el-vecino-más-cercano.html#cb622-8" tabindex="-1"></a>Expen_ii <span class="ot">&lt;-</span> encuesta_no_obs<span class="sc">$</span>Expenditure[[ii]]</span>
+<span id="cb622-9"><a href="imputación-por-el-vecino-más-cercano.html#cb622-9" tabindex="-1"></a>don_ii <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">abs</span>(Expen_ii <span class="sc">-</span> encuesta_obs<span class="sc">$</span>Expenditure))</span>
+<span id="cb622-10"><a href="imputación-por-el-vecino-más-cercano.html#cb622-10" tabindex="-1"></a>encuesta_no_obs<span class="sc">$</span>Income_imp[[ii]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Income_missin[[don_ii]]</span>
+<span id="cb622-11"><a href="imputación-por-el-vecino-más-cercano.html#cb622-11" tabindex="-1"></a>encuesta_no_obs<span class="sc">$</span>Employment_imp[[ii]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Employment_missin[[don_ii]]</span>
+<span id="cb622-12"><a href="imputación-por-el-vecino-más-cercano.html#cb622-12" tabindex="-1"></a>}</span>
+<span id="cb622-13"><a href="imputación-por-el-vecino-más-cercano.html#cb622-13" tabindex="-1"></a></span>
+<span id="cb622-14"><a href="imputación-por-el-vecino-más-cercano.html#cb622-14" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(encuesta_obs,encuesta_no_obs)</span></code></pre></div>
 <p>Como se hizo la revisión anterior, se calculan los porcentajes de datos faltantes y se revisa nuevamente la distribución de la imputación en las categorías de la variable empleado.</p>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="imputación-por-el-vecino-más-cercano.html#cb621-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="imputación-por-el-vecino-más-cercano.html#cb623-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -328,7 +334,7 @@ identificado previamente.</li>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="imputación-por-el-vecino-más-cercano.html#cb622-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment_imp, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="imputación-por-el-vecino-más-cercano.html#cb624-1" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(encuesta<span class="sc">$</span>Employment_imp, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -348,9 +354,9 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Haciendo el mismo ejercicio por zona se tiene:</p>
-<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="imputación-por-el-vecino-más-cercano.html#cb623-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
-<span id="cb623-2"><a href="imputación-por-el-vecino-más-cercano.html#cb623-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
-<span id="cb623-3"><a href="imputación-por-el-vecino-más-cercano.html#cb623-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="imputación-por-el-vecino-más-cercano.html#cb625-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb625-2"><a href="imputación-por-el-vecino-más-cercano.html#cb625-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
+<span id="cb625-3"><a href="imputación-por-el-vecino-más-cercano.html#cb625-3" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -397,9 +403,9 @@ identificado previamente.</li>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="imputación-por-el-vecino-más-cercano.html#cb624-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
-<span id="cb624-2"><a href="imputación-por-el-vecino-más-cercano.html#cb624-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Employment_imp,<span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
-<span id="cb624-3"><a href="imputación-por-el-vecino-más-cercano.html#cb624-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="imputación-por-el-vecino-más-cercano.html#cb626-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb626-2"><a href="imputación-por-el-vecino-más-cercano.html#cb626-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Zone, encuesta<span class="sc">$</span>Employment_imp,<span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
+<span id="cb626-3"><a href="imputación-por-el-vecino-más-cercano.html#cb626-3" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -447,9 +453,9 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Al igual que en el caso anterior, la distribución marginal por zona no se altera. Ahora por sexo la distribución es la siguiente:</p>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="imputación-por-el-vecino-más-cercano.html#cb625-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
-<span id="cb625-2"><a href="imputación-por-el-vecino-más-cercano.html#cb625-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Sex, encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
-<span id="cb625-3"><a href="imputación-por-el-vecino-más-cercano.html#cb625-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="imputación-por-el-vecino-más-cercano.html#cb627-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb627-2"><a href="imputación-por-el-vecino-más-cercano.html#cb627-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Sex, encuesta<span class="sc">$</span>Employment_missin, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
+<span id="cb627-3"><a href="imputación-por-el-vecino-más-cercano.html#cb627-3" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -496,9 +502,9 @@ identificado previamente.</li>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="imputación-por-el-vecino-más-cercano.html#cb626-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
-<span id="cb626-2"><a href="imputación-por-el-vecino-más-cercano.html#cb626-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Sex, encuesta<span class="sc">$</span>Employment_imp,<span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
-<span id="cb626-3"><a href="imputación-por-el-vecino-más-cercano.html#cb626-3" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="imputación-por-el-vecino-más-cercano.html#cb628-1" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb628-2"><a href="imputación-por-el-vecino-más-cercano.html#cb628-2" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>(encuesta<span class="sc">$</span>Sex, encuesta<span class="sc">$</span>Employment_imp,<span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">addmargins</span>()</span>
+<span id="cb628-3"><a href="imputación-por-el-vecino-más-cercano.html#cb628-3" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -546,11 +552,11 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Ahora, haciendo el cálculo del promedio de los ingresos para los datos completos y estimados se tienen los siguientes resultados:</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="imputación-por-el-vecino-más-cercano.html#cb627-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb627-2"><a href="imputación-por-el-vecino-más-cercano.html#cb627-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb627-3"><a href="imputación-por-el-vecino-más-cercano.html#cb627-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb627-4"><a href="imputación-por-el-vecino-más-cercano.html#cb627-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb627-5"><a href="imputación-por-el-vecino-más-cercano.html#cb627-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="imputación-por-el-vecino-más-cercano.html#cb629-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb629-2"><a href="imputación-por-el-vecino-más-cercano.html#cb629-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb629-3"><a href="imputación-por-el-vecino-más-cercano.html#cb629-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb629-4"><a href="imputación-por-el-vecino-más-cercano.html#cb629-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb629-5"><a href="imputación-por-el-vecino-más-cercano.html#cb629-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -570,11 +576,11 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Se observa que hay una diferencia de 6 unidades monetarias entre el promedio real y el estimado. Realizando este mismo ejercicio por zona tenemos:</p>
-<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb628-1"><a href="imputación-por-el-vecino-más-cercano.html#cb628-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb628-2"><a href="imputación-por-el-vecino-más-cercano.html#cb628-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb628-3"><a href="imputación-por-el-vecino-más-cercano.html#cb628-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb628-4"><a href="imputación-por-el-vecino-más-cercano.html#cb628-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb628-5"><a href="imputación-por-el-vecino-más-cercano.html#cb628-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="imputación-por-el-vecino-más-cercano.html#cb630-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb630-2"><a href="imputación-por-el-vecino-más-cercano.html#cb630-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb630-3"><a href="imputación-por-el-vecino-más-cercano.html#cb630-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb630-4"><a href="imputación-por-el-vecino-más-cercano.html#cb630-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb630-5"><a href="imputación-por-el-vecino-más-cercano.html#cb630-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -603,11 +609,11 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Obteniéndose diferencias de 7 unidades monetarias en el ingreso para la zona rural y de 4 para la urbana. Este mismo ejercicio se realiza por sexo teniendo los siguientes resultados:</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="imputación-por-el-vecino-más-cercano.html#cb629-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb629-2"><a href="imputación-por-el-vecino-más-cercano.html#cb629-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb629-3"><a href="imputación-por-el-vecino-más-cercano.html#cb629-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb629-4"><a href="imputación-por-el-vecino-más-cercano.html#cb629-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb629-5"><a href="imputación-por-el-vecino-más-cercano.html#cb629-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="imputación-por-el-vecino-más-cercano.html#cb631-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb631-2"><a href="imputación-por-el-vecino-más-cercano.html#cb631-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb631-3"><a href="imputación-por-el-vecino-más-cercano.html#cb631-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb631-4"><a href="imputación-por-el-vecino-más-cercano.html#cb631-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb631-5"><a href="imputación-por-el-vecino-más-cercano.html#cb631-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -636,27 +642,27 @@ identificado previamente.</li>
 </tbody>
 </table>
 <p>Obteniéndose diferencias pequeñas entre el ingreso real y el estimado en ambos sexos.</p>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb630-1"><a href="imputación-por-el-vecino-más-cercano.html#cb630-1" tabindex="-1"></a>dat_plot8 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
-<span id="cb630-2"><a href="imputación-por-el-vecino-más-cercano.html#cb630-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
-<span id="cb630-3"><a href="imputación-por-el-vecino-más-cercano.html#cb630-3" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
-<span id="cb630-4"><a href="imputación-por-el-vecino-más-cercano.html#cb630-4" tabindex="-1"></a></span>
-<span id="cb630-5"><a href="imputación-por-el-vecino-más-cercano.html#cb630-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot8, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb630-6"><a href="imputación-por-el-vecino-más-cercano.html#cb630-6" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb630-7"><a href="imputación-por-el-vecino-más-cercano.html#cb630-7" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb630-8"><a href="imputación-por-el-vecino-más-cercano.html#cb630-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb630-9"><a href="imputación-por-el-vecino-más-cercano.html#cb630-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb630-10"><a href="imputación-por-el-vecino-más-cercano.html#cb630-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb630-11"><a href="imputación-por-el-vecino-más-cercano.html#cb630-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb630-12"><a href="imputación-por-el-vecino-más-cercano.html#cb630-12" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
-<span id="cb630-13"><a href="imputación-por-el-vecino-más-cercano.html#cb630-13" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb630-14"><a href="imputación-por-el-vecino-más-cercano.html#cb630-14" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="imputación-por-el-vecino-más-cercano.html#cb632-1" tabindex="-1"></a>dat_plot8 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
+<span id="cb632-2"><a href="imputación-por-el-vecino-más-cercano.html#cb632-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
+<span id="cb632-3"><a href="imputación-por-el-vecino-más-cercano.html#cb632-3" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
+<span id="cb632-4"><a href="imputación-por-el-vecino-más-cercano.html#cb632-4" tabindex="-1"></a></span>
+<span id="cb632-5"><a href="imputación-por-el-vecino-más-cercano.html#cb632-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot8, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb632-6"><a href="imputación-por-el-vecino-más-cercano.html#cb632-6" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb632-7"><a href="imputación-por-el-vecino-más-cercano.html#cb632-7" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb632-8"><a href="imputación-por-el-vecino-más-cercano.html#cb632-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb632-9"><a href="imputación-por-el-vecino-más-cercano.html#cb632-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb632-10"><a href="imputación-por-el-vecino-más-cercano.html#cb632-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb632-11"><a href="imputación-por-el-vecino-más-cercano.html#cb632-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb632-12"><a href="imputación-por-el-vecino-más-cercano.html#cb632-12" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
+<span id="cb632-13"><a href="imputación-por-el-vecino-más-cercano.html#cb632-13" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb632-14"><a href="imputación-por-el-vecino-más-cercano.html#cb632-14" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/Vecino_1-1.svg" width="672" /></p>
 <p>Se puede observar que la distribución de los datos imputados son muy próximos que los datos reales. Haciendo este mismo ejercicio pero por zona y sexo se obtienen resultados similares a los anteriores:</p>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="imputación-por-el-vecino-más-cercano.html#cb631-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot8, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
-<span id="cb631-2"><a href="imputación-por-el-vecino-más-cercano.html#cb631-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
-<span id="cb631-3"><a href="imputación-por-el-vecino-más-cercano.html#cb631-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb631-4"><a href="imputación-por-el-vecino-más-cercano.html#cb631-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb631-5"><a href="imputación-por-el-vecino-más-cercano.html#cb631-5" tabindex="-1"></a>p1</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="imputación-por-el-vecino-más-cercano.html#cb633-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot8, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
+<span id="cb633-2"><a href="imputación-por-el-vecino-más-cercano.html#cb633-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
+<span id="cb633-3"><a href="imputación-por-el-vecino-más-cercano.html#cb633-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb633-4"><a href="imputación-por-el-vecino-más-cercano.html#cb633-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb633-5"><a href="imputación-por-el-vecino-más-cercano.html#cb633-5" tabindex="-1"></a>p1</span></code></pre></div>
 <p><img src="11-Imputaci%C3%B3n_files/figure-html/Vecino_2-1.svg" width="672" /></p>
 </div>
             </section>

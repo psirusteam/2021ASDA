@@ -193,14 +193,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="06-Regresión.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
+<li class="chapter" data-level="4.5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="06-Regresión.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="06-Regresión.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="06-Regresión.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="06-Regresión.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.7</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
 <li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
@@ -292,7 +298,7 @@ t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
 \]</span></p>
 <p>Donde, los grados de libertad para el intervalo (<span class="math inline">\(df\)</span>) en una encuesta de hogares (muestras complejas) está dado por el número de conglomerados finales de la primera etapa menos el número de estratos de la etapa primaria <span class="math inline">\(\left(df=\sum_{h}a_{h}-H\right)\)</span>.</p>
 <p>Para la aplicación de las temáticas vistas, es decir, realizar la prueba de hipótesis y los intervalos de confianza para los parámetros utilizaremos el modelo que se ha venido trabajando y aplicaremos las funciones <code>summary.svyglm</code> para las pruebas t y <code>confint.svyglm</code> para los intervalos de confianza como sigue:</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb321-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">summary.svyglm</span>(mod_svy)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb323-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">summary.svyglm</span>(mod_svy)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## svyglm(formula = Income ~ Expenditure + Zone + Sex + Age2, design = diseno_qwgt)
@@ -313,7 +319,7 @@ t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
 ## (Dispersion parameter for gaussian family taken to be 118297)
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb323-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">confint.svyglm</span>(mod_svy)</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">confint.svyglm</span>(mod_svy)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -419,7 +425,7 @@ var\left(\hat{E}\left(y_{i}\mid x_{obs,i}\right)\right)
 \hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=62.2+1.2x_{1i}+63.5x_{2i}+21.7x_{3i}+0.01x_{4i}
 \]</span>
 Para calcular la varianza de la estimación, primero se deben obtener las varianzas de la estimación de los parámetros:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb324-1" tabindex="-1"></a><span class="fu">vcov</span>(mod_svy)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-1" tabindex="-1"></a><span class="fu">vcov</span>(mod_svy)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -475,57 +481,57 @@ Para calcular la varianza de la estimación, primero se deben obtener las varian
 </tbody>
 </table>
 <p>Ahora bien, se procede a realizar los cálculos como lo indica la expresión mostrada anteriormente:</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-1" tabindex="-1"></a>xobs <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(mod_svy) <span class="sc">%&gt;%</span></span>
-<span id="cb325-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-2" tabindex="-1"></a>        <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb325-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-3" tabindex="-1"></a></span>
-<span id="cb325-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-4" tabindex="-1"></a>cov_beta <span class="ot">&lt;-</span> <span class="fu">vcov</span>(mod_svy) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb325-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-5" tabindex="-1"></a></span>
-<span id="cb325-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-6" tabindex="-1"></a><span class="fu">as.numeric</span>(xobs <span class="sc">%*%</span> cov_beta <span class="sc">%*%</span> <span class="fu">t</span>(xobs))</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-1" tabindex="-1"></a>xobs <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(mod_svy) <span class="sc">%&gt;%</span></span>
+<span id="cb327-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-2" tabindex="-1"></a>        <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
+<span id="cb327-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-3" tabindex="-1"></a></span>
+<span id="cb327-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-4" tabindex="-1"></a>cov_beta <span class="ot">&lt;-</span> <span class="fu">vcov</span>(mod_svy) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
+<span id="cb327-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-5" tabindex="-1"></a></span>
+<span id="cb327-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-6" tabindex="-1"></a><span class="fu">as.numeric</span>(xobs <span class="sc">%*%</span> cov_beta <span class="sc">%*%</span> <span class="fu">t</span>(xobs))</span></code></pre></div>
 <pre><code>## [1] 1921</code></pre>
 <p>Si el objetivo ahora es calcular el intervalo de confianza para la predicción se utiliza la siguiente ecuación:</p>
 <p><span class="math display">\[
 \boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)}
 \]</span></p>
 <p>Para realizar los cálculos en R, se utiliza la función <code>confint</code> y <code>predict</code> como sigue:</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>))</span>
-<span id="cb327-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-2" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>)))</span>
-<span id="cb327-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-3" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
-<span id="cb327-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb327-4" tabindex="-1"></a>pred_IC</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>))</span>
+<span id="cb329-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-2" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>)))</span>
+<span id="cb329-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-3" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
+<span id="cb329-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-4" tabindex="-1"></a>pred_IC</span></code></pre></div>
 <p>Ahora, de manera gráfica las predicciones e intervalos se vería de la siguiente manera:</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
-<span id="cb328-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-2" tabindex="-1"></a>pred<span class="sc">$</span>Expenditure <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Expenditure</span>
-<span id="cb328-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-3" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span>
-<span id="cb328-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-4" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
-<span id="cb328-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-5" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
-<span id="cb328-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-6" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Expenditure , <span class="at">y =</span> link)) <span class="sc">+</span></span>
-<span id="cb328-7"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-7" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
-<span id="cb328-8"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-8" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
-<span id="cb328-9"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-9" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb328-10"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-10" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb328-11"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb328-12"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
+<span id="cb330-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-2" tabindex="-1"></a>pred<span class="sc">$</span>Expenditure <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Expenditure</span>
+<span id="cb330-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-3" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span>
+<span id="cb330-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-4" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
+<span id="cb330-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-5" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
+<span id="cb330-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-6" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Expenditure , <span class="at">y =</span> link)) <span class="sc">+</span></span>
+<span id="cb330-7"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-7" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
+<span id="cb330-8"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-8" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
+<span id="cb330-9"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-9" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb330-10"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-10" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb330-11"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb330-12"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p>Por último, si el interés es hacer una predicción fuera del rango de valores que fue capturado en la muestra. Para esto, supongamos que se desea predecir:</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-1" tabindex="-1"></a>datos_nuevos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Expenditure =</span> <span class="dv">1600</span>, </span>
-<span id="cb329-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-2" tabindex="-1"></a>                           <span class="at">Age2 =</span> <span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>, <span class="at">Sex =</span> <span class="st">&quot;Male&quot;</span>, </span>
-<span id="cb329-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-3" tabindex="-1"></a>                           <span class="at">Zone =</span> <span class="st">&quot;Urban&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb331-1" tabindex="-1"></a>datos_nuevos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Expenditure =</span> <span class="dv">1600</span>, </span>
+<span id="cb331-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb331-2" tabindex="-1"></a>                           <span class="at">Age2 =</span> <span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>, <span class="at">Sex =</span> <span class="st">&quot;Male&quot;</span>, </span>
+<span id="cb331-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb331-3" tabindex="-1"></a>                           <span class="at">Zone =</span> <span class="st">&quot;Urban&quot;</span>)</span></code></pre></div>
 <p>La varianza para la predicción se hace siguiendo la siguiente ecuación:</p>
 <p><span class="math display">\[
 var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i} + \hat{\sigma}^2_{yx}
 \]</span></p>
 <p>Por tanto, se construye la matriz de observaciones y se calcula la varianza como sigue:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-1" tabindex="-1"></a>x_noObs <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1600</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>),<span class="at">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb330-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-2" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(x_noObs<span class="sc">%*%</span>cov_beta<span class="sc">%*%</span><span class="fu">t</span>(x_noObs)))</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb332-1" tabindex="-1"></a>x_noObs <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1600</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>),<span class="at">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb332-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb332-2" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(x_noObs<span class="sc">%*%</span>cov_beta<span class="sc">%*%</span><span class="fu">t</span>(x_noObs)))</span></code></pre></div>
 <pre><code>## [1] 244.6</code></pre>
 <p>Por último, el intervalo de confianza sigue la siguiente ecuación:</p>
 <p><span class="math display">\[
 \boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)+\hat{\sigma}_{yx}^{2}}
 \]</span>
 En <code>R</code> se hace la predicción de la siguiente manera:</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb332-1" tabindex="-1"></a><span class="fu">predict</span>(mod_svy, <span class="at">newdata =</span> datos_nuevos, <span class="at">type =</span>  <span class="st">&quot;link&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb334-1" tabindex="-1"></a><span class="fu">predict</span>(mod_svy, <span class="at">newdata =</span> datos_nuevos, <span class="at">type =</span>  <span class="st">&quot;link&quot;</span>)</span></code></pre></div>
 <pre><code>##   link  SE
 ## 1 2122 245</code></pre>
 <p>y el intervalo:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb334-1" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy,<span class="at">newdata =</span> datos_nuevos))</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb336-1" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy,<span class="at">newdata =</span> datos_nuevos))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

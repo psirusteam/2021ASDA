@@ -193,14 +193,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
+<li class="chapter" data-level="4.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="09-Generalizados2.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="09-Generalizados2.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="09-Generalizados2.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.7</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
 <li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
@@ -320,8 +326,8 @@ S\left(\boldsymbol{\beta}\right)_{Mult}  =  \sum_{h}\sum_{\alpha}\sum_{i}\omega_
 \hat{Var}\left(\hat{\boldsymbol{\beta}}\right)  =  \left(J^{-1}\right)var\left[S\left(\hat{\boldsymbol{\beta}}\right)\right]\left(J^{-1}\right)
 \]</span>
 Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares utilizando <code>R</code> se utilizan los siguientes códigos computacionales. Inicialemente, para efectos de comparación, estimemos el porcentaje de personas por desempleo:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="modelo-multinomial.html#cb467-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb467-2"><a href="modelo-multinomial.html#cb467-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="modelo-multinomial.html#cb469-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb469-2"><a href="modelo-multinomial.html#cb469-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -364,8 +370,8 @@ Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares ut
 </tbody>
 </table>
 <p>Ahora bien, se filtran aquellas personas mayores a 15 años y se vuelve a estimar:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="modelo-multinomial.html#cb468-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)<span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb468-2"><a href="modelo-multinomial.html#cb468-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="modelo-multinomial.html#cb470-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)<span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb470-2"><a href="modelo-multinomial.html#cb470-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -402,14 +408,14 @@ Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares ut
 </table>
 <p>Con lo anterior, se observa un aumento en el porcentaje de personas empleadas en los hogares.</p>
 <p>Ahora bien, se realiza la estimación usando el modelo multinomial con la función <code>svy_vglm</code> del paquete <code>svyVGAM</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="modelo-multinomial.html#cb469-1" tabindex="-1"></a><span class="fu">library</span>(svyVGAM)</span>
-<span id="cb469-2"><a href="modelo-multinomial.html#cb469-2" tabindex="-1"></a>diseno_15 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
-<span id="cb469-3"><a href="modelo-multinomial.html#cb469-3" tabindex="-1"></a>model_mul <span class="ot">&lt;-</span> <span class="fu">svy_vglm</span>(</span>
-<span id="cb469-4"><a href="modelo-multinomial.html#cb469-4" tabindex="-1"></a>    <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb469-5"><a href="modelo-multinomial.html#cb469-5" tabindex="-1"></a>                   <span class="at">design =</span> diseno_15, </span>
-<span id="cb469-6"><a href="modelo-multinomial.html#cb469-6" tabindex="-1"></a>     <span class="at">crit =</span> <span class="st">&quot;coef&quot;</span>,</span>
-<span id="cb469-7"><a href="modelo-multinomial.html#cb469-7" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">multinomial</span>(<span class="at">refLevel =</span> <span class="st">&quot;Unemployed&quot;</span>))</span>
-<span id="cb469-8"><a href="modelo-multinomial.html#cb469-8" tabindex="-1"></a>model_mul</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="modelo-multinomial.html#cb471-1" tabindex="-1"></a><span class="fu">library</span>(svyVGAM)</span>
+<span id="cb471-2"><a href="modelo-multinomial.html#cb471-2" tabindex="-1"></a>diseno_15 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">15</span>)</span>
+<span id="cb471-3"><a href="modelo-multinomial.html#cb471-3" tabindex="-1"></a>model_mul <span class="ot">&lt;-</span> <span class="fu">svy_vglm</span>(</span>
+<span id="cb471-4"><a href="modelo-multinomial.html#cb471-4" tabindex="-1"></a>    <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb471-5"><a href="modelo-multinomial.html#cb471-5" tabindex="-1"></a>                   <span class="at">design =</span> diseno_15, </span>
+<span id="cb471-6"><a href="modelo-multinomial.html#cb471-6" tabindex="-1"></a>     <span class="at">crit =</span> <span class="st">&quot;coef&quot;</span>,</span>
+<span id="cb471-7"><a href="modelo-multinomial.html#cb471-7" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">multinomial</span>(<span class="at">refLevel =</span> <span class="st">&quot;Unemployed&quot;</span>))</span>
+<span id="cb471-8"><a href="modelo-multinomial.html#cb471-8" tabindex="-1"></a>model_mul</span></code></pre></div>
 <pre><code>## Stratified 1 - level Cluster Sampling design (with replacement)
 ## With (238) clusters.
 ## Called via srvyr
@@ -444,60 +450,60 @@ Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares ut
 ## 
 ## This is a multinomial logit model with 3 levels</code></pre>
 <p>Algo a tener en cuenta es que la función <code>broom::tidy()</code>, que normalmente usamos para limpiar y estandarizar la salida del modelo, no puede ser empleada en este caso, sin embargo, en el link<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> encuentra la función que utilizamos a continuación.</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="modelo-multinomial.html#cb471-1" tabindex="-1"></a>tidy.svyVGAM <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb471-2"><a href="modelo-multinomial.html#cb471-2" tabindex="-1"></a>  x, </span>
-<span id="cb471-3"><a href="modelo-multinomial.html#cb471-3" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb471-4"><a href="modelo-multinomial.html#cb471-4" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb471-5"><a href="modelo-multinomial.html#cb471-5" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb471-6"><a href="modelo-multinomial.html#cb471-6" tabindex="-1"></a>  ...</span>
-<span id="cb471-7"><a href="modelo-multinomial.html#cb471-7" tabindex="-1"></a>){</span>
-<span id="cb471-8"><a href="modelo-multinomial.html#cb471-8" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">summary</span>(x)<span class="sc">$</span>coeftable, <span class="at">rownames =</span> <span class="st">&quot;term&quot;</span>)</span>
-<span id="cb471-9"><a href="modelo-multinomial.html#cb471-9" tabindex="-1"></a>  </span>
-<span id="cb471-10"><a href="modelo-multinomial.html#cb471-10" tabindex="-1"></a>  </span>
-<span id="cb471-11"><a href="modelo-multinomial.html#cb471-11" tabindex="-1"></a>  <span class="fu">colnames</span>(ret) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;std.error&quot;</span>, <span class="st">&quot;statistic&quot;</span>, <span class="st">&quot;p.value&quot;</span>)</span>
-<span id="cb471-12"><a href="modelo-multinomial.html#cb471-12" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">enframe</span>(stats<span class="sc">::</span><span class="fu">coef</span>(x), <span class="at">name =</span> <span class="st">&quot;term&quot;</span>, <span class="at">value =</span> <span class="st">&quot;estimate&quot;</span>)</span>
-<span id="cb471-13"><a href="modelo-multinomial.html#cb471-13" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coefs, ret, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>))</span>
-<span id="cb471-14"><a href="modelo-multinomial.html#cb471-14" tabindex="-1"></a>  <span class="cf">if</span> (conf.int){</span>
-<span id="cb471-15"><a href="modelo-multinomial.html#cb471-15" tabindex="-1"></a>    ci <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">broom_confint_terms</span>(x, <span class="at">level =</span> conf.level, ...)</span>
-<span id="cb471-16"><a href="modelo-multinomial.html#cb471-16" tabindex="-1"></a>    ret <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(ret, ci, <span class="at">by =</span> <span class="st">&quot;term&quot;</span>)</span>
-<span id="cb471-17"><a href="modelo-multinomial.html#cb471-17" tabindex="-1"></a>  }</span>
-<span id="cb471-18"><a href="modelo-multinomial.html#cb471-18" tabindex="-1"></a>  <span class="cf">if</span> (exponentiate){ret <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">exponentiate</span>(ret)}</span>
-<span id="cb471-19"><a href="modelo-multinomial.html#cb471-19" tabindex="-1"></a>  </span>
-<span id="cb471-20"><a href="modelo-multinomial.html#cb471-20" tabindex="-1"></a>  ret <span class="sc">%&gt;%</span> </span>
-<span id="cb471-21"><a href="modelo-multinomial.html#cb471-21" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(term, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;y.level&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;:&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb471-22"><a href="modelo-multinomial.html#cb471-22" tabindex="-1"></a>    <span class="fu">arrange</span>(y.level) <span class="sc">%&gt;%</span> </span>
-<span id="cb471-23"><a href="modelo-multinomial.html#cb471-23" tabindex="-1"></a>    <span class="fu">relocate</span>(y.level, <span class="at">.before =</span> term)</span>
-<span id="cb471-24"><a href="modelo-multinomial.html#cb471-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="modelo-multinomial.html#cb473-1" tabindex="-1"></a>tidy.svyVGAM <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb473-2"><a href="modelo-multinomial.html#cb473-2" tabindex="-1"></a>  x, </span>
+<span id="cb473-3"><a href="modelo-multinomial.html#cb473-3" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb473-4"><a href="modelo-multinomial.html#cb473-4" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb473-5"><a href="modelo-multinomial.html#cb473-5" tabindex="-1"></a>  <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb473-6"><a href="modelo-multinomial.html#cb473-6" tabindex="-1"></a>  ...</span>
+<span id="cb473-7"><a href="modelo-multinomial.html#cb473-7" tabindex="-1"></a>){</span>
+<span id="cb473-8"><a href="modelo-multinomial.html#cb473-8" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">summary</span>(x)<span class="sc">$</span>coeftable, <span class="at">rownames =</span> <span class="st">&quot;term&quot;</span>)</span>
+<span id="cb473-9"><a href="modelo-multinomial.html#cb473-9" tabindex="-1"></a>  </span>
+<span id="cb473-10"><a href="modelo-multinomial.html#cb473-10" tabindex="-1"></a>  </span>
+<span id="cb473-11"><a href="modelo-multinomial.html#cb473-11" tabindex="-1"></a>  <span class="fu">colnames</span>(ret) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;std.error&quot;</span>, <span class="st">&quot;statistic&quot;</span>, <span class="st">&quot;p.value&quot;</span>)</span>
+<span id="cb473-12"><a href="modelo-multinomial.html#cb473-12" tabindex="-1"></a>  coefs <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">enframe</span>(stats<span class="sc">::</span><span class="fu">coef</span>(x), <span class="at">name =</span> <span class="st">&quot;term&quot;</span>, <span class="at">value =</span> <span class="st">&quot;estimate&quot;</span>)</span>
+<span id="cb473-13"><a href="modelo-multinomial.html#cb473-13" tabindex="-1"></a>  ret <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coefs, ret, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;estimate&quot;</span>))</span>
+<span id="cb473-14"><a href="modelo-multinomial.html#cb473-14" tabindex="-1"></a>  <span class="cf">if</span> (conf.int){</span>
+<span id="cb473-15"><a href="modelo-multinomial.html#cb473-15" tabindex="-1"></a>    ci <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">broom_confint_terms</span>(x, <span class="at">level =</span> conf.level, ...)</span>
+<span id="cb473-16"><a href="modelo-multinomial.html#cb473-16" tabindex="-1"></a>    ret <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(ret, ci, <span class="at">by =</span> <span class="st">&quot;term&quot;</span>)</span>
+<span id="cb473-17"><a href="modelo-multinomial.html#cb473-17" tabindex="-1"></a>  }</span>
+<span id="cb473-18"><a href="modelo-multinomial.html#cb473-18" tabindex="-1"></a>  <span class="cf">if</span> (exponentiate){ret <span class="ot">&lt;-</span> broom<span class="sc">:::</span><span class="fu">exponentiate</span>(ret)}</span>
+<span id="cb473-19"><a href="modelo-multinomial.html#cb473-19" tabindex="-1"></a>  </span>
+<span id="cb473-20"><a href="modelo-multinomial.html#cb473-20" tabindex="-1"></a>  ret <span class="sc">%&gt;%</span> </span>
+<span id="cb473-21"><a href="modelo-multinomial.html#cb473-21" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(term, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;term&quot;</span>, <span class="st">&quot;y.level&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;:&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb473-22"><a href="modelo-multinomial.html#cb473-22" tabindex="-1"></a>    <span class="fu">arrange</span>(y.level) <span class="sc">%&gt;%</span> </span>
+<span id="cb473-23"><a href="modelo-multinomial.html#cb473-23" tabindex="-1"></a>    <span class="fu">relocate</span>(y.level, <span class="at">.before =</span> term)</span>
+<span id="cb473-24"><a href="modelo-multinomial.html#cb473-24" tabindex="-1"></a>}</span></code></pre></div>
 <p>Utilizando el código anterior, obtenemos las estimaciones del modelo multinomial:</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="modelo-multinomial.html#cb472-1" tabindex="-1"></a>tab_model <span class="ot">&lt;-</span> <span class="fu">tidy.svyVGAM</span>(model_mul, </span>
-<span id="cb472-2"><a href="modelo-multinomial.html#cb472-2" tabindex="-1"></a>                               <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb472-3"><a href="modelo-multinomial.html#cb472-3" tabindex="-1"></a>                               <span class="at">conf.int =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb472-4"><a href="modelo-multinomial.html#cb472-4" tabindex="-1"></a>tab_model</span></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="modelo-multinomial.html#cb474-1" tabindex="-1"></a>tab_model <span class="ot">&lt;-</span> <span class="fu">tidy.svyVGAM</span>(model_mul, </span>
+<span id="cb474-2"><a href="modelo-multinomial.html#cb474-2" tabindex="-1"></a>                               <span class="at">exponentiate =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb474-3"><a href="modelo-multinomial.html#cb474-3" tabindex="-1"></a>                               <span class="at">conf.int =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb474-4"><a href="modelo-multinomial.html#cb474-4" tabindex="-1"></a>tab_model</span></code></pre></div>
 <p>A continuación, se grafica los intervalos de confianza para los coeficientes del modelo utilizando el formato definido para la CEPAL:</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="modelo-multinomial.html#cb473-1" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
-<span id="cb473-2"><a href="modelo-multinomial.html#cb473-2" tabindex="-1"></a>tab_model <span class="sc">%&gt;%</span> </span>
-<span id="cb473-3"><a href="modelo-multinomial.html#cb473-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">if_else</span>(</span>
-<span id="cb473-4"><a href="modelo-multinomial.html#cb473-4" tabindex="-1"></a>      y.level <span class="sc">==</span> <span class="dv">1</span>, </span>
-<span id="cb473-5"><a href="modelo-multinomial.html#cb473-5" tabindex="-1"></a>      <span class="st">&quot;Inactive&quot;</span>,</span>
-<span id="cb473-6"><a href="modelo-multinomial.html#cb473-6" tabindex="-1"></a>      <span class="st">&quot;Employed&quot;</span>, ),</span>
-<span id="cb473-7"><a href="modelo-multinomial.html#cb473-7" tabindex="-1"></a>    <span class="at">sig =</span> gtools<span class="sc">::</span><span class="fu">stars.pval</span>(p.value)</span>
-<span id="cb473-8"><a href="modelo-multinomial.html#cb473-8" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> </span>
-<span id="cb473-9"><a href="modelo-multinomial.html#cb473-9" tabindex="-1"></a>  dotwhisker<span class="sc">::</span><span class="fu">dwplot</span>(</span>
-<span id="cb473-10"><a href="modelo-multinomial.html#cb473-10" tabindex="-1"></a>    <span class="at">dodge_size =</span> <span class="fl">0.3</span>,</span>
-<span id="cb473-11"><a href="modelo-multinomial.html#cb473-11" tabindex="-1"></a>    <span class="at">vline =</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>,</span>
-<span id="cb473-12"><a href="modelo-multinomial.html#cb473-12" tabindex="-1"></a>                       <span class="at">linetype =</span> <span class="dv">2</span>)</span>
-<span id="cb473-13"><a href="modelo-multinomial.html#cb473-13" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb473-14"><a href="modelo-multinomial.html#cb473-14" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span> </span>
-<span id="cb473-15"><a href="modelo-multinomial.html#cb473-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="modelo-multinomial.html#cb475-1" tabindex="-1"></a><span class="fu">library</span>(dotwhisker)</span>
+<span id="cb475-2"><a href="modelo-multinomial.html#cb475-2" tabindex="-1"></a>tab_model <span class="sc">%&gt;%</span> </span>
+<span id="cb475-3"><a href="modelo-multinomial.html#cb475-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">if_else</span>(</span>
+<span id="cb475-4"><a href="modelo-multinomial.html#cb475-4" tabindex="-1"></a>      y.level <span class="sc">==</span> <span class="dv">1</span>, </span>
+<span id="cb475-5"><a href="modelo-multinomial.html#cb475-5" tabindex="-1"></a>      <span class="st">&quot;Inactive&quot;</span>,</span>
+<span id="cb475-6"><a href="modelo-multinomial.html#cb475-6" tabindex="-1"></a>      <span class="st">&quot;Employed&quot;</span>, ),</span>
+<span id="cb475-7"><a href="modelo-multinomial.html#cb475-7" tabindex="-1"></a>    <span class="at">sig =</span> gtools<span class="sc">::</span><span class="fu">stars.pval</span>(p.value)</span>
+<span id="cb475-8"><a href="modelo-multinomial.html#cb475-8" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> </span>
+<span id="cb475-9"><a href="modelo-multinomial.html#cb475-9" tabindex="-1"></a>  dotwhisker<span class="sc">::</span><span class="fu">dwplot</span>(</span>
+<span id="cb475-10"><a href="modelo-multinomial.html#cb475-10" tabindex="-1"></a>    <span class="at">dodge_size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb475-11"><a href="modelo-multinomial.html#cb475-11" tabindex="-1"></a>    <span class="at">vline =</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>,</span>
+<span id="cb475-12"><a href="modelo-multinomial.html#cb475-12" tabindex="-1"></a>                       <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb475-13"><a href="modelo-multinomial.html#cb475-13" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb475-14"><a href="modelo-multinomial.html#cb475-14" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span> </span>
+<span id="cb475-15"><a href="modelo-multinomial.html#cb475-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p>Una forma aternativa de ajustar los modelos de regresión multinomial es usando la función <code>svy_vglm</code>. Sin embargo, presenta limitaciones para hacer las predicciones con el modelo, por lo tanto, se puede usar como alternativa la función <code>svymultinom</code>. Cabe aclarar que esta función no está en el repositorio de R y hay que instalarla desde un repositorio de github. A continuación, se muestra cómo se realiza la instalación y posteriormente el uso de la función:</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="modelo-multinomial.html#cb474-1" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;BS1125/CMAverse&quot;)</span></span>
-<span id="cb474-2"><a href="modelo-multinomial.html#cb474-2" tabindex="-1"></a><span class="fu">library</span>(CMAverse)</span>
-<span id="cb474-3"><a href="modelo-multinomial.html#cb474-3" tabindex="-1"></a>model_mul2 <span class="ot">&lt;-</span> <span class="fu">svymultinom</span>(</span>
-<span id="cb474-4"><a href="modelo-multinomial.html#cb474-4" tabindex="-1"></a>  <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb474-5"><a href="modelo-multinomial.html#cb474-5" tabindex="-1"></a>  <span class="at">weights =</span> diseno_15<span class="sc">$</span>variables<span class="sc">$</span>wk2, </span>
-<span id="cb474-6"><a href="modelo-multinomial.html#cb474-6" tabindex="-1"></a>  <span class="at">data =</span> diseno_15<span class="sc">$</span>variables</span>
-<span id="cb474-7"><a href="modelo-multinomial.html#cb474-7" tabindex="-1"></a>) </span>
-<span id="cb474-8"><a href="modelo-multinomial.html#cb474-8" tabindex="-1"></a><span class="fu">summary</span>(model_mul2)<span class="sc">$</span>summarydf</span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="modelo-multinomial.html#cb476-1" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;BS1125/CMAverse&quot;)</span></span>
+<span id="cb476-2"><a href="modelo-multinomial.html#cb476-2" tabindex="-1"></a><span class="fu">library</span>(CMAverse)</span>
+<span id="cb476-3"><a href="modelo-multinomial.html#cb476-3" tabindex="-1"></a>model_mul2 <span class="ot">&lt;-</span> <span class="fu">svymultinom</span>(</span>
+<span id="cb476-4"><a href="modelo-multinomial.html#cb476-4" tabindex="-1"></a>  <span class="at">formula =</span> Employment <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb476-5"><a href="modelo-multinomial.html#cb476-5" tabindex="-1"></a>  <span class="at">weights =</span> diseno_15<span class="sc">$</span>variables<span class="sc">$</span>wk2, </span>
+<span id="cb476-6"><a href="modelo-multinomial.html#cb476-6" tabindex="-1"></a>  <span class="at">data =</span> diseno_15<span class="sc">$</span>variables</span>
+<span id="cb476-7"><a href="modelo-multinomial.html#cb476-7" tabindex="-1"></a>) </span>
+<span id="cb476-8"><a href="modelo-multinomial.html#cb476-8" tabindex="-1"></a><span class="fu">summary</span>(model_mul2)<span class="sc">$</span>summarydf</span></code></pre></div>
 <table>
 <colgroup>
 <col width="32%" />
@@ -631,10 +637,10 @@ Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares ut
 </tbody>
 </table>
 <p>El hacer uso de esta función permite obtener de manera simple la predicción de las probabilidades como se muestra a continuación:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="modelo-multinomial.html#cb475-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb475-2"><a href="modelo-multinomial.html#cb475-2" tabindex="-1"></a>tab_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_mul2, <span class="at">type =</span> <span class="st">&quot;probs&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb475-3"><a href="modelo-multinomial.html#cb475-3" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb475-4"><a href="modelo-multinomial.html#cb475-4" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="modelo-multinomial.html#cb477-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb477-2"><a href="modelo-multinomial.html#cb477-2" tabindex="-1"></a>tab_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_mul2, <span class="at">type =</span> <span class="st">&quot;probs&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb477-3"><a href="modelo-multinomial.html#cb477-3" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb477-4"><a href="modelo-multinomial.html#cb477-4" tabindex="-1"></a>tab_pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -722,11 +728,11 @@ Para ejemplificar el uso de los modelos multinomiales en encuestas de hogares ut
 </tbody>
 </table>
 <p>Las predicciones del modelo se realizan de la siguiente manera:</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="modelo-multinomial.html#cb476-1" tabindex="-1"></a>diseno_15<span class="sc">$</span>variables  <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb476-2"><a href="modelo-multinomial.html#cb476-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicion =</span> <span class="fu">predict</span>(model_mul2))</span>
-<span id="cb476-3"><a href="modelo-multinomial.html#cb476-3" tabindex="-1"></a></span>
-<span id="cb476-4"><a href="modelo-multinomial.html#cb476-4" tabindex="-1"></a>diseno_15 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb476-5"><a href="modelo-multinomial.html#cb476-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="modelo-multinomial.html#cb478-1" tabindex="-1"></a>diseno_15<span class="sc">$</span>variables  <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb478-2"><a href="modelo-multinomial.html#cb478-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicion =</span> <span class="fu">predict</span>(model_mul2))</span>
+<span id="cb478-3"><a href="modelo-multinomial.html#cb478-3" tabindex="-1"></a></span>
+<span id="cb478-4"><a href="modelo-multinomial.html#cb478-4" tabindex="-1"></a>diseno_15 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb478-5"><a href="modelo-multinomial.html#cb478-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

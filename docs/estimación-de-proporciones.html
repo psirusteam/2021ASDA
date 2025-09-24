@@ -193,14 +193,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="05-Categóricas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="05-Categóricas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.5" data-path="05-Categóricas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="4.6" data-path="05-Categóricas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
+<li class="chapter" data-level="4.5" data-path="05-Categóricas.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="05-Categóricas.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="05-Categóricas.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="05-Categóricas.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="05-Categóricas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="05-Categóricas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.7</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
 <li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="05-Categóricas.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
@@ -291,11 +297,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.2.1</span> Estimación de proporciones en <code>R</code><a href="#estimaci%C3%B3n-de-proporciones-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Otro parámetro de interés en las encuestas de hogares, particularmente con variables categóricas, es la estimación de <strong>proporciones poblacionales</strong> y sus errores estándar. En términos de notación, la estimación de proporciones de población se define como <span class="math inline">\(p\)</span> y las proporciones muestrales como <span class="math inline">\(\pi\)</span>. Es común que muchos paquetes estadísticos generen estas estimaciones en <strong>escala de porcentaje</strong>, mientras que <code>R</code> las produce en la escala [0,1].</p>
 <p>A continuación, se muestra cómo estimar la proporción de personas por <strong>zona</strong> usando <code>srvyr</code> y el diseño muestral previamente definido:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="estimación-de-proporciones.html#cb195-1" tabindex="-1"></a>prop_zona <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb195-2"><a href="estimación-de-proporciones.html#cb195-2" tabindex="-1"></a>             <span class="fu">summarise</span>(</span>
-<span id="cb195-3"><a href="estimación-de-proporciones.html#cb195-3" tabindex="-1"></a>               <span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>), </span>
-<span id="cb195-4"><a href="estimación-de-proporciones.html#cb195-4" tabindex="-1"></a>                                  <span class="at">proportion =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb195-5"><a href="estimación-de-proporciones.html#cb195-5" tabindex="-1"></a>prop_zona</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="estimación-de-proporciones.html#cb197-1" tabindex="-1"></a>prop_zona <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb197-2"><a href="estimación-de-proporciones.html#cb197-2" tabindex="-1"></a>             <span class="fu">summarise</span>(</span>
+<span id="cb197-3"><a href="estimación-de-proporciones.html#cb197-3" tabindex="-1"></a>               <span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>), </span>
+<span id="cb197-4"><a href="estimación-de-proporciones.html#cb197-4" tabindex="-1"></a>                                  <span class="at">proportion =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb197-5"><a href="estimación-de-proporciones.html#cb197-5" tabindex="-1"></a>prop_zona</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Zone   prop prop_se prop_low prop_upp
 ##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -303,9 +309,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Urban 0.520  0.0140    0.492    0.548</code></pre>
 <p>En este ejemplo, la función <code>survey_mean</code> calcula la proporción y, con el parámetro <code>proportion = TRUE</code>, se indica que se desea estimar una <strong>proporción poblacional</strong>. Los resultados muestran que aproximadamente el 47.9% de las personas viven en zona rural (IC 95%: 45.2% - 50.7%) y el 52% en zona urbana (IC 95%: 49.2% - 54.7%).</p>
 <p>La librería <code>survey</code> también cuenta con la función <code>survey_prop</code>, diseñada específicamente para estimar proporciones, generando resultados equivalentes:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="estimación-de-proporciones.html#cb197-1" tabindex="-1"></a>prop_zona2 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb197-2"><a href="estimación-de-proporciones.html#cb197-2" tabindex="-1"></a>               <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
-<span id="cb197-3"><a href="estimación-de-proporciones.html#cb197-3" tabindex="-1"></a>prop_zona2</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="estimación-de-proporciones.html#cb199-1" tabindex="-1"></a>prop_zona2 <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb199-2"><a href="estimación-de-proporciones.html#cb199-2" tabindex="-1"></a>               <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
+<span id="cb199-3"><a href="estimación-de-proporciones.html#cb199-3" tabindex="-1"></a>prop_zona2</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Zone   prop prop_se prop_low prop_upp
 ##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -313,9 +319,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Urban 0.520  0.0140    0.492    0.548</code></pre>
 <p>El lector puede elegir la función que le resulte más cómoda, ya que ambas permiten obtener estimaciones precisas y sus intervalos de confianza, facilitando la interpretación de los resultados para variables categóricas.</p>
 <p>Si el interés ahora se centra en estimar subpoblaciones por ejemplo, proporción de hombres y mujeres que viven en la zona urbana, el código computacional es:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="estimación-de-proporciones.html#cb199-1" tabindex="-1"></a>prop_sexoU <span class="ot">&lt;-</span> sub_Urbano <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb199-2"><a href="estimación-de-proporciones.html#cb199-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
-<span id="cb199-3"><a href="estimación-de-proporciones.html#cb199-3" tabindex="-1"></a>prop_sexoU</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="estimación-de-proporciones.html#cb201-1" tabindex="-1"></a>prop_sexoU <span class="ot">&lt;-</span> sub_Urbano <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb201-2"><a href="estimación-de-proporciones.html#cb201-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
+<span id="cb201-3"><a href="estimación-de-proporciones.html#cb201-3" tabindex="-1"></a>prop_sexoU</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sex     prop prop_se prop_low prop_upp
 ##   &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -323,10 +329,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Male   0.463  0.0130    0.437    0.489</code></pre>
 <p>Arrojando como resultado que, el 53.6% de las mujeres y 46.4% de los hombres viven en la zona urbana y con intervalos de confianza (51%, 56.2%) y (43.7%, 48.9%) respectivamente. Los intervalos anteriores nos reflejan que, con una confianza del 95% la cantidad estimada de mujeres que viven en la zona urbana es de56% y de hombres es de 48%.</p>
 <p>Realizando el mismo ejercicio anterior, pero ahora en la zona rural se tiene:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="estimación-de-proporciones.html#cb201-1" tabindex="-1"></a>prop_sexoR <span class="ot">&lt;-</span> sub_Rural <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb201-2"><a href="estimación-de-proporciones.html#cb201-2" tabindex="-1"></a>              <span class="fu">summarise</span>( <span class="at">n =</span> <span class="fu">unweighted</span>(<span class="fu">n</span>()),</span>
-<span id="cb201-3"><a href="estimación-de-proporciones.html#cb201-3" tabindex="-1"></a>                         <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
-<span id="cb201-4"><a href="estimación-de-proporciones.html#cb201-4" tabindex="-1"></a>prop_sexoR</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="estimación-de-proporciones.html#cb203-1" tabindex="-1"></a>prop_sexoR <span class="ot">&lt;-</span> sub_Rural <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb203-2"><a href="estimación-de-proporciones.html#cb203-2" tabindex="-1"></a>              <span class="fu">summarise</span>( <span class="at">n =</span> <span class="fu">unweighted</span>(<span class="fu">n</span>()),</span>
+<span id="cb203-3"><a href="estimación-de-proporciones.html#cb203-3" tabindex="-1"></a>                         <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
+<span id="cb203-4"><a href="estimación-de-proporciones.html#cb203-4" tabindex="-1"></a>prop_sexoR</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 6
 ##   Sex        n  prop prop_se prop_low prop_upp
 ##   &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -334,9 +340,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Male     618 0.484 0.00824    0.467    0.500</code></pre>
 <p>el 51.6% de las mujeres y el 48.4% de los hombres viven en la zona rural con intervalos de confianza de (49.9%, 53.2%) y (46,7%, 50%) respectivamente. Los intervalos de confianza anteriores nos reflejan que, inclusive, con una confianza del 95%, la cantidad estimada de mujeres en la zona rural es de 53% y de hombres es de 50%.</p>
 <p>Ahora bien, si nos centramos solo en la población de hombres en la base de datos y se desea estimar la proporción de hombres por zona, el código computacional es el siguiente:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="estimación-de-proporciones.html#cb203-1" tabindex="-1"></a>prop_ZonaH <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb203-2"><a href="estimación-de-proporciones.html#cb203-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
-<span id="cb203-3"><a href="estimación-de-proporciones.html#cb203-3" tabindex="-1"></a>prop_ZonaH</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="estimación-de-proporciones.html#cb205-1" tabindex="-1"></a>prop_ZonaH <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb205-2"><a href="estimación-de-proporciones.html#cb205-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
+<span id="cb205-3"><a href="estimación-de-proporciones.html#cb205-3" tabindex="-1"></a>prop_ZonaH</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Zone   prop prop_se prop_low prop_upp
 ##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -344,9 +350,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Urban 0.509  0.0178    0.474    0.545</code></pre>
 <p>En la anterior tabla se puede observar que el 49% de los hombres están en la zona rural y el 51% en la zona urbana. Si se observa el intervalo de confianza se puede concluir que, con una confianza del 95%, la población estimada de hombres que viven en la zona rural puede llegar a ser el 52% y en urbana un 54%.</p>
 <p>Si se realiza ahora el mismo ejercicio para la mujeres el código computacional es:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="estimación-de-proporciones.html#cb205-1" tabindex="-1"></a>prop_ZonaM <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
-<span id="cb205-2"><a href="estimación-de-proporciones.html#cb205-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
-<span id="cb205-3"><a href="estimación-de-proporciones.html#cb205-3" tabindex="-1"></a>prop_ZonaM</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="estimación-de-proporciones.html#cb207-1" tabindex="-1"></a>prop_ZonaM <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span> </span>
+<span id="cb207-2"><a href="estimación-de-proporciones.html#cb207-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))</span>
+<span id="cb207-3"><a href="estimación-de-proporciones.html#cb207-3" tabindex="-1"></a>prop_ZonaM</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Zone   prop prop_se prop_low prop_upp
 ##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -354,12 +360,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Urban 0.530  0.0140    0.502    0.557</code></pre>
 <p>De la tabla anterior se puede inferir que, el 47% de las mujeres están en la zona rural y el 52% en la zona urbana. Observando también intervalos de confianza al 95% de (44%, 49%) y (50%, 55%) para las zonas rural y urbana respectivamente.</p>
 <p>Si se desea estimar por varios niveles de desagregación, con el uso de la función <code>group_by</code> es posible estimar un mayor número de niveles de agregación al combinar dos o más variables. Por ejemplo, si se desea estimar la proporción de hombres por zona y en estado de pobreza, se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="estimación-de-proporciones.html#cb207-1" tabindex="-1"></a>prop_ZonaH_Pobreza <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span></span>
-<span id="cb207-2"><a href="estimación-de-proporciones.html#cb207-2" tabindex="-1"></a>                      <span class="fu">group_by</span>(Zone, Poverty) <span class="sc">%&gt;%</span> </span>
-<span id="cb207-3"><a href="estimación-de-proporciones.html#cb207-3" tabindex="-1"></a>                      <span class="fu">summarise</span>(</span>
-<span id="cb207-4"><a href="estimación-de-proporciones.html#cb207-4" tabindex="-1"></a>                      <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))<span class="sc">%&gt;%</span></span>
-<span id="cb207-5"><a href="estimación-de-proporciones.html#cb207-5" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span>
-<span id="cb207-6"><a href="estimación-de-proporciones.html#cb207-6" tabindex="-1"></a>prop_ZonaH_Pobreza</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="estimación-de-proporciones.html#cb209-1" tabindex="-1"></a>prop_ZonaH_Pobreza <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span></span>
+<span id="cb209-2"><a href="estimación-de-proporciones.html#cb209-2" tabindex="-1"></a>                      <span class="fu">group_by</span>(Zone, Poverty) <span class="sc">%&gt;%</span> </span>
+<span id="cb209-3"><a href="estimación-de-proporciones.html#cb209-3" tabindex="-1"></a>                      <span class="fu">summarise</span>(</span>
+<span id="cb209-4"><a href="estimación-de-proporciones.html#cb209-4" tabindex="-1"></a>                      <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))<span class="sc">%&gt;%</span></span>
+<span id="cb209-5"><a href="estimación-de-proporciones.html#cb209-5" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span>
+<span id="cb209-6"><a href="estimación-de-proporciones.html#cb209-6" tabindex="-1"></a>prop_ZonaH_Pobreza</span></code></pre></div>
 <pre><code>##    Zone  Poverty      prop    prop_se   prop_low  prop_upp
 ## 1 Rural  NotPoor 0.5488453 0.06264753 0.42434340 0.6675180
 ## 2 Rural  Extreme 0.1975254 0.06745258 0.09582905 0.3637294
@@ -369,11 +375,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Urban Relative 0.2272181 0.02604053 0.17979436 0.2828371</code></pre>
 <p>De la salida anterior se puede observar que, en la ruralidad, el 19% de los hombres están en pobreza extrema mientras que en la zona urbana el 11% también están en pobreza extrema. Por otro lado, el 54% de los hombres que viven en la zona rural no están en pobreza mientras que, en la zona urbana el 65% no está en esta condición.</p>
 <p>El mismo ejercicio anterior para la población de mujeres sería:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="estimación-de-proporciones.html#cb209-1" tabindex="-1"></a>prop_ZonaM_Pobreza <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> </span>
-<span id="cb209-2"><a href="estimación-de-proporciones.html#cb209-2" tabindex="-1"></a>                      <span class="fu">group_by</span>(Zone, Poverty) <span class="sc">%&gt;%</span> </span>
-<span id="cb209-3"><a href="estimación-de-proporciones.html#cb209-3" tabindex="-1"></a>                      <span class="fu">summarise</span>( <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb209-4"><a href="estimación-de-proporciones.html#cb209-4" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span>
-<span id="cb209-5"><a href="estimación-de-proporciones.html#cb209-5" tabindex="-1"></a>prop_ZonaM_Pobreza</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="estimación-de-proporciones.html#cb211-1" tabindex="-1"></a>prop_ZonaM_Pobreza <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> </span>
+<span id="cb211-2"><a href="estimación-de-proporciones.html#cb211-2" tabindex="-1"></a>                      <span class="fu">group_by</span>(Zone, Poverty) <span class="sc">%&gt;%</span> </span>
+<span id="cb211-3"><a href="estimación-de-proporciones.html#cb211-3" tabindex="-1"></a>                      <span class="fu">summarise</span>( <span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb211-4"><a href="estimación-de-proporciones.html#cb211-4" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span>
+<span id="cb211-5"><a href="estimación-de-proporciones.html#cb211-5" tabindex="-1"></a>prop_ZonaM_Pobreza</span></code></pre></div>
 <pre><code>##    Zone  Poverty      prop    prop_se   prop_low  prop_upp
 ## 1 Rural  NotPoor 0.5539176 0.05568825 0.44281376 0.6598834
 ## 2 Rural  Extreme 0.1599702 0.05574533 0.07728197 0.3021593
@@ -383,11 +389,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6 Urban Relative 0.2294075 0.02655874 0.18106582 0.2861459</code></pre>
 <p>De la salida anterior se puede observar que, en la ruralidad, el 16% de las mujeres están en pobreza extrema mientras que en la zona urbana el 10% también están en pobreza extrema. Por otro lado, el 55% de las mujeres que viven en la zona rural no están en pobreza mientras que, en la zona urbana el 66% no está en esta condición.</p>
 <p>Si lo que se desea ahora es estimar la proporción de hombres empleados o no por zona, se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="estimación-de-proporciones.html#cb211-1" tabindex="-1"></a>prop_ZonaH_Ocupacion <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span></span>
-<span id="cb211-2"><a href="estimación-de-proporciones.html#cb211-2" tabindex="-1"></a>                        <span class="fu">group_by</span>(Zone, Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb211-3"><a href="estimación-de-proporciones.html#cb211-3" tabindex="-1"></a>                        <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))<span class="sc">%&gt;%</span></span>
-<span id="cb211-4"><a href="estimación-de-proporciones.html#cb211-4" tabindex="-1"></a>                        <span class="fu">data.frame</span>()</span>
-<span id="cb211-5"><a href="estimación-de-proporciones.html#cb211-5" tabindex="-1"></a>prop_ZonaH_Ocupacion</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="estimación-de-proporciones.html#cb213-1" tabindex="-1"></a>prop_ZonaH_Ocupacion <span class="ot">&lt;-</span> sub_Hombre <span class="sc">%&gt;%</span></span>
+<span id="cb213-2"><a href="estimación-de-proporciones.html#cb213-2" tabindex="-1"></a>                        <span class="fu">group_by</span>(Zone, Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb213-3"><a href="estimación-de-proporciones.html#cb213-3" tabindex="-1"></a>                        <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>)))<span class="sc">%&gt;%</span></span>
+<span id="cb213-4"><a href="estimación-de-proporciones.html#cb213-4" tabindex="-1"></a>                        <span class="fu">data.frame</span>()</span>
+<span id="cb213-5"><a href="estimación-de-proporciones.html#cb213-5" tabindex="-1"></a>prop_ZonaH_Ocupacion</span></code></pre></div>
 <pre><code>##    Zone Employment       prop     prop_se   prop_low   prop_upp
 ## 1 Rural Unemployed 0.05125186 0.015733138 0.02767737 0.09298588
 ## 2 Rural   Inactive 0.10351629 0.020267044 0.06970747 0.15106011
@@ -399,11 +405,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 Urban       &lt;NA&gt; 0.27956945 0.022085422 0.23799131 0.32531045</code></pre>
 <p>De la salida anterior se puede observar que, el 5% de los hombres que viven en la ruralidad están desempleados mientras que el 4% de los que viven en la zona urbana están en esta misma condición. Ahora bien, el 52% de los hombres que viven en la ruralidad trabajan mientras que el 51% de los que viven en la zona rural también están empleados.</p>
 <p>Si se hace este mismo ejercicio para las mujeres se obtiene:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="estimación-de-proporciones.html#cb213-1" tabindex="-1"></a>prop_ZonaM_Ocupacion <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> </span>
-<span id="cb213-2"><a href="estimación-de-proporciones.html#cb213-2" tabindex="-1"></a>                        <span class="fu">group_by</span>(Zone, Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb213-3"><a href="estimación-de-proporciones.html#cb213-3" tabindex="-1"></a>                        <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb213-4"><a href="estimación-de-proporciones.html#cb213-4" tabindex="-1"></a>                        <span class="fu">data.frame</span>()</span>
-<span id="cb213-5"><a href="estimación-de-proporciones.html#cb213-5" tabindex="-1"></a>prop_ZonaM_Ocupacion</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="estimación-de-proporciones.html#cb215-1" tabindex="-1"></a>prop_ZonaM_Ocupacion <span class="ot">&lt;-</span> sub_Mujer <span class="sc">%&gt;%</span> </span>
+<span id="cb215-2"><a href="estimación-de-proporciones.html#cb215-2" tabindex="-1"></a>                        <span class="fu">group_by</span>(Zone, Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb215-3"><a href="estimación-de-proporciones.html#cb215-3" tabindex="-1"></a>                        <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>,<span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb215-4"><a href="estimación-de-proporciones.html#cb215-4" tabindex="-1"></a>                        <span class="fu">data.frame</span>()</span>
+<span id="cb215-5"><a href="estimación-de-proporciones.html#cb215-5" tabindex="-1"></a>prop_ZonaM_Ocupacion</span></code></pre></div>
 <pre><code>##    Zone Employment       prop     prop_se    prop_low   prop_upp
 ## 1 Rural Unemployed 0.01017065 0.005540256 0.003443802 0.02964628
 ## 2 Rural   Inactive 0.44719272 0.035247218 0.378871481 0.51756811
@@ -415,9 +421,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 Urban       &lt;NA&gt; 0.22988711 0.013850398 0.203613820 0.25845036</code></pre>
 <p>Para las mujeres se puede observar que, el 1% de las mujeres que viven en la ruralidad están desempleados mientras que el 2% de las que viven en la zona urbana están en esta misma condición. Ahora bien, el 24% de las mujeres que viven en la ruralidad trabajan mientras que el 38% de las que viven en la zona rural también están empleados.</p>
 <p>Otro parámetro que es de interés es estimar en encuestas de hogares la cantidad de personas menores y mayores de edad en los hogares. A continuación, ejemplificamos la estimación de menores y mayores a 18 años cruzado por pobreza:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="estimación-de-proporciones.html#cb215-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18, pobreza) <span class="sc">%&gt;%</span> </span>
-<span id="cb215-2"><a href="estimación-de-proporciones.html#cb215-2" tabindex="-1"></a>           <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb215-3"><a href="estimación-de-proporciones.html#cb215-3" tabindex="-1"></a>           <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="estimación-de-proporciones.html#cb217-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18, pobreza) <span class="sc">%&gt;%</span> </span>
+<span id="cb217-2"><a href="estimación-de-proporciones.html#cb217-2" tabindex="-1"></a>           <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb217-3"><a href="estimación-de-proporciones.html#cb217-3" tabindex="-1"></a>           <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>##       edad_18 pobreza      Prop    Prop_se  Prop_low  Prop_upp
 ## 1  &lt; 18 anios       0 0.4984504 0.03729355 0.4251710 0.5717964
 ## 2  &lt; 18 anios       1 0.5015496 0.03729355 0.4282036 0.5748290
@@ -425,9 +431,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 &gt;= 18 anios       1 0.3353860 0.02978353 0.2791868 0.3966725</code></pre>
 <p>De la anterior salida se puede observar que, el 50% de los menores de edad y el 33% de los mayores de edad están en estado de pobreza. Al observar los intervalos de confianza para los menores de edad en estado de pobreza se puede observar que, dicha estimación puede llegar, con una confianza del 95% a 57% mientras que a los mayores de edad puede llegar a 39%.</p>
 <p>Ahora, si se hace este mismo ejercicio, pero esta vez cruzando con la variable que indica empleo se obtiene:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="estimación-de-proporciones.html#cb217-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18, desempleo) <span class="sc">%&gt;%</span> </span>
-<span id="cb217-2"><a href="estimación-de-proporciones.html#cb217-2" tabindex="-1"></a>           <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb217-3"><a href="estimación-de-proporciones.html#cb217-3" tabindex="-1"></a>           <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="estimación-de-proporciones.html#cb219-1" tabindex="-1"></a>diseno <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18, desempleo) <span class="sc">%&gt;%</span> </span>
+<span id="cb219-2"><a href="estimación-de-proporciones.html#cb219-2" tabindex="-1"></a>           <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb219-3"><a href="estimación-de-proporciones.html#cb219-3" tabindex="-1"></a>           <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>##       edad_18 desempleo        Prop     Prop_se    Prop_low   Prop_upp
 ## 1  &lt; 18 anios         0 0.166704172 0.014856561 0.139321648 0.19822898
 ## 2  &lt; 18 anios         1 0.003729693 0.001969183 0.001309174 0.01057808
@@ -436,19 +442,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 &gt;= 18 anios         1 0.044765128 0.007552778 0.031976144 0.06233972</code></pre>
 <p>De la tabla anterior se puede observar que, el 0.3% de los menores de edad y el 4% de los mayores de edad están desempleados. Adicionalmente, con una confianza del 95% y basados en la muestra se puede observar que el desempleo en menores de edad puede llegar a 0.7% y para los mayores llega a un 5%.</p>
 <p>Por otro lado, si el objetivo ahora es estimar la cantidad de menores de edad en la zona rural se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="estimación-de-proporciones.html#cb219-1" tabindex="-1"></a>sub_Rural <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18) <span class="sc">%&gt;%</span> </span>
-<span id="cb219-2"><a href="estimación-de-proporciones.html#cb219-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb219-3"><a href="estimación-de-proporciones.html#cb219-3" tabindex="-1"></a>              <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="estimación-de-proporciones.html#cb221-1" tabindex="-1"></a>sub_Rural <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(edad_18) <span class="sc">%&gt;%</span> </span>
+<span id="cb221-2"><a href="estimación-de-proporciones.html#cb221-2" tabindex="-1"></a>              <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb221-3"><a href="estimación-de-proporciones.html#cb221-3" tabindex="-1"></a>              <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>##       edad_18      Prop    Prop_se  Prop_low  Prop_upp
 ## 1  &lt; 18 anios 0.3711613 0.03021982 0.3128746 0.4334566
 ## 2 &gt;= 18 anios 0.6288387 0.03021982 0.5665434 0.6871254</code></pre>
 <p>De la anterior tabla se puede observar que, el 37% de las personas que viven en la zona rural de la base de ejemplo son menores de edad con un intervalo de confianza al 95% comprendido entre 31% y 43%.</p>
 <p>Como se mencionó al inicio del capítulo, es posible categorizar una variable de tipo cuantitativo como por ejemplo la edad y cruzarla con la variable que categoriza la empleabilidad. A continuación, se estima la edad de las mujeres por rango.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="estimación-de-proporciones.html#cb221-1" tabindex="-1"></a>sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">edad_rango =</span> <span class="fu">case_when</span>(</span>
-<span id="cb221-2"><a href="estimación-de-proporciones.html#cb221-2" tabindex="-1"></a>                     Age<span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Age <span class="sc">&lt;=</span><span class="dv">35</span>  <span class="sc">~</span> <span class="st">&quot;18 - 35&quot;</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Otro&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb221-3"><a href="estimación-de-proporciones.html#cb221-3" tabindex="-1"></a>                     <span class="fu">group_by</span>(edad_rango, Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb221-4"><a href="estimación-de-proporciones.html#cb221-4" tabindex="-1"></a>                     <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb221-5"><a href="estimación-de-proporciones.html#cb221-5" tabindex="-1"></a>                     <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="estimación-de-proporciones.html#cb223-1" tabindex="-1"></a>sub_Mujer <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">edad_rango =</span> <span class="fu">case_when</span>(</span>
+<span id="cb223-2"><a href="estimación-de-proporciones.html#cb223-2" tabindex="-1"></a>                     Age<span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Age <span class="sc">&lt;=</span><span class="dv">35</span>  <span class="sc">~</span> <span class="st">&quot;18 - 35&quot;</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Otro&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb223-3"><a href="estimación-de-proporciones.html#cb223-3" tabindex="-1"></a>                     <span class="fu">group_by</span>(edad_rango, Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb223-4"><a href="estimación-de-proporciones.html#cb223-4" tabindex="-1"></a>                     <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb223-5"><a href="estimación-de-proporciones.html#cb223-5" tabindex="-1"></a>                     <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>##   edad_rango Employment       Prop     Prop_se    Prop_low   Prop_upp
 ## 1    18 - 35 Unemployed 0.02893412 0.009142347 0.015403014 0.05370358
 ## 2    18 - 35   Inactive 0.51653851 0.037905184 0.441673039 0.59066889
@@ -459,11 +465,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 7       Otro       &lt;NA&gt; 0.38229944 0.022313379 0.339191706 0.42734277</code></pre>
 <p>De la anterior tabla se puede observar, entre otros que, las mujeres con edades entre 18 y 35 años el 2% están desempleadas y el 45% están empleadas. Análisis similares se pueden hacer para los demás rangos de edades.</p>
 <p>Este mismo ejercicio se puede realizar para los hombres y hacer los mismos análisis. A continuación, se muestra el código computacional:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="estimación-de-proporciones.html#cb223-1" tabindex="-1"></a>sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">edad_rango =</span> <span class="fu">case_when</span>(</span>
-<span id="cb223-2"><a href="estimación-de-proporciones.html#cb223-2" tabindex="-1"></a>                      Age<span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Age <span class="sc">&lt;=</span><span class="dv">35</span>  <span class="sc">~</span> <span class="st">&quot;18 - 35&quot;</span>,<span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Otro&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb223-3"><a href="estimación-de-proporciones.html#cb223-3" tabindex="-1"></a>                      <span class="fu">group_by</span>(edad_rango, Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb223-4"><a href="estimación-de-proporciones.html#cb223-4" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb223-5"><a href="estimación-de-proporciones.html#cb223-5" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="estimación-de-proporciones.html#cb225-1" tabindex="-1"></a>sub_Hombre <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">edad_rango =</span> <span class="fu">case_when</span>(</span>
+<span id="cb225-2"><a href="estimación-de-proporciones.html#cb225-2" tabindex="-1"></a>                      Age<span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Age <span class="sc">&lt;=</span><span class="dv">35</span>  <span class="sc">~</span> <span class="st">&quot;18 - 35&quot;</span>,<span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Otro&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb225-3"><a href="estimación-de-proporciones.html#cb225-3" tabindex="-1"></a>                      <span class="fu">group_by</span>(edad_rango, Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-4"><a href="estimación-de-proporciones.html#cb225-4" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">Prop =</span> <span class="fu">survey_prop</span>(<span class="at">vartype =</span>  <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb225-5"><a href="estimación-de-proporciones.html#cb225-5" tabindex="-1"></a>                      <span class="fu">data.frame</span>()</span></code></pre></div>
 <pre><code>##   edad_rango Employment       Prop     Prop_se   Prop_low   Prop_upp
 ## 1    18 - 35 Unemployed 0.09637042 0.018215667 0.06584071 0.13895080
 ## 2    18 - 35   Inactive 0.08939940 0.016438321 0.06175556 0.12773290
