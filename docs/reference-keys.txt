@@ -46,7 +46,11 @@ ajuste-al-diseño-muestral
 expresión-formal
 implementación-en-r
 análisis-de-la-relación-entre-dos-variable-continuas
-prueba-de-hipótesis-para-la-diferencia-de-medias-en-encuestas-de-hogares
+pruebas-para-la-comparación-de-grupos
+planteamiento-general-de-hipótesis
+diferencia-de-medias-poblacionales
+estadístico-de-prueba-e-intervalo-de-confianza
+ejemplo-aplicado-en-r
 estimando-razones-en-encuestas-de-hogares
 estimando-contrastes-en-encuestas-de-hogares
 análisis-de-variables-categóricas-en-encuestas-de-hogares

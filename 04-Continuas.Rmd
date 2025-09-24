@@ -742,112 +742,129 @@ En muchos análisis de variables relacionadas con encuestas de hogares no solo b
 
 En este capítulo se estudiará la prueba de hipótesis para diferencia de medias, se darán las herramientas computacionales para estimar razones y contrastes.
 
-## Prueba de hipótesis para la diferencia de medias en encuestas de hogares
+## Pruebas para la comparación de grupos
+
+El análisis de diferencias entre grupos es un objetivo frecuente en las encuestas de hogares. Un ejemplo clásico es la pregunta: *¿Existen diferencias estadísticamente significativas en el ingreso medio entre hogares dirigidos por hombres y aquellos dirigidos por mujeres?*
+
+Para responder a este tipo de interrogantes se aplican **pruebas de hipótesis**, procedimientos estadísticos que contrastan afirmaciones sobre parámetros poblacionales a partir de evidencia muestral. En el contexto de encuestas, estas pruebas deben ajustarse al diseño de muestreo (estratificación, conglomerados y ponderación) para garantizar inferencias válidas.
 
 
-Es llamado prueba de hipótesis a una técnica la cual consiste en hacer una afirmación acerca del valor que el parámetro de la población bajo estudio puede tomar. Esta afirmación puede estar basada en alguna creencia o experiencia pasada que será contrastada con la evidencia que se obtengan a través de la información contenida en la muestra. Como dicha afirmación puede ser o no cierta, dos hipótesis pueden ser planteadas (antagónicas) las cuales se conocen como $H_{0}:$ Hipótesis nula y $H_{1}:$ Hipótesis alterna. Si se sospecha que el parámetro $\theta$ es igual a cierto valor particular  $\theta_{0}$, los posibles juegos de hipótesis a contrastar son:
+### Planteamiento general de hipótesis
+
+Una prueba de hipótesis parte de dos proposiciones antagónicas:
 
 $$
 \begin{cases}
-H_{0}: & \theta=\theta_{0}\\
-H_{1}: & \theta\neq\theta_{0}
-\end{cases}\,\,\,	\begin{cases}
-H_{0}: & \theta=\theta_{0}\\
-H_{1}: & \theta>\theta_{0}
-\end{cases}\,\,\,	\begin{cases}
-H_{0}: & \theta=\theta_{0}\\
-H_{1}: & \theta<\theta_{0}
+H_{0}: & \theta = \theta_0 \quad \text{(hipótesis nula)} \\
+H_{1}: & \theta \neq \theta_0 \quad \text{(hipótesis alternativa, bilateral)} 
 \end{cases}
 $$
 
-Se dirá que una de las dos hipótesis es cierta solo si la evidencia estadística, la cual es obtenida de la muestra, la apoya. El proceso por medio del cual se escoge una de las dos hipótesis es llamado Prueba de Hipótesis. 
+Dependiendo del contexto, $H_1$ puede plantearse de manera unilateral ($\theta > \theta_0$ o $\theta < \theta_0$). El proceso consiste en evaluar si la evidencia contenida en la muestra es suficiente para rechazar $H_0$ en favor de $H_1$.
 
-En términos generales, algunos parámetros importantes en la estadística descriptivas se pueden escribir como una combinación lineal de medidas de interés. Los casos más usuales son diferencias de medias, sumas ponderadas de medias utilizadas para construir índices económicos, etc. 
+En muchos casos, los parámetros de interés (medias, proporciones, totales o razones) pueden expresarse como **combinaciones lineales de estadísticas descriptivas**:
 
-Considere una función que es una combinación lineal de $j$ estadísticas descriptivas como se muestra a continuación:
+$$
+f(\theta_1,\ldots,\theta_J) = \sum_{j=1}^J a_j \theta_j
+$$
 
+con estimador:
 
-\begin{eqnarray*}
-f\left(\theta_{1},\theta_{2},...,\theta_{j}\right) & = & \sum_{j=1}^{J}a_{j}\theta_{j}
-\end{eqnarray*}
+$$
+\hat{f} = \sum_{j=1}^J a_j \hat{\theta}_j
+$$
 
-Una estimación de esta función está dada por:
+y varianza:
 
-\begin{eqnarray*}
-f\left(\hat{\theta}_{1},\hat{\theta}_{2},...,\hat{\theta}_{j}\right) & = & \sum_{j=1}^{J}a_{j}\hat{\theta}_{j}
-\end{eqnarray*}
+$$
+Var(\hat{f}) = \sum_{j=1}^J a_j^2 Var(\hat{\theta}_j) \;+\; 2\sum_{j=1}^{J-1}\sum_{k>j}^J a_j a_k \, Cov(\hat{\theta}_j,\hat{\theta}_k).
+$$
 
-cuya varianza del estimador se calcula como sigue:
-
-\begin{eqnarray*}
-var\left(\sum_{j=1}^{J}a_{j}\hat{\theta}_{j}\right) & = & \sum_{j=1}^{J}a_{j}^{2}var\left(\hat{\theta}_{j}\right)+2\times\sum_{j=1}^{J-1}\sum_{k>j}^{J}a_{j}a_{k}\,cov\left(\hat{\theta}_{j},\hat{\theta}_{k}\right)
-\end{eqnarray*}
-
-Como se pudo observar en la ecuación de la varianza del estimador, esta incorpora las varianzas de las estimaciones de los componentes individuales, así como las covarianzas de las estadísticas estimadas.
-
-En primer lugar, una combinación lineal de estadísticas descriptivas de interés en este capítulo es la diferencia de media cuyo parámetro es ${\bar{Y}_{1}-\bar{Y}_{2}}$, donde, $\bar{Y}_{1}$ es la media de la población 1, por ejemplo, ingresos medios en los hogares obtenido por los padres de familia y $\bar{Y}_{2}$ es la media de la población 2, que para seguir el ejemplo serían, los ingresos medios de las madres en un hogar.
-
-Considerando el parámetro de interés en esta sección, las hipótesis a estudiar serían las siguientes:
-
-\begin{eqnarray*}
-\begin{cases}
-H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
-H_{1}:\bar{Y}_{1}-\bar{Y}_{2}\neq0
-\end{cases} & \begin{cases}
-H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
-H_{1}:\bar{Y}_{1}-\bar{Y}_{2}>0
-\end{cases} & \begin{cases}
-H_{0}:\bar{Y}_{1}-\bar{Y}_{2}=0\\
-H_{1}:\bar{Y}_{1}-\bar{Y}_{2}<0
-\end{cases}
-\end{eqnarray*}
-
-Para probar estas hipótesis se utiliza el siguiente estadístico de prueba que se distribuye t-student:
+Este marco general abarca, entre otros casos, la **diferencia entre medias poblacionales**.
 
 
-\begin{eqnarray*}
-t & = & \frac{\bar{Y}_{1}-\bar{Y}_{2}}{se\left(\bar{Y}_{1}-\bar{Y}_{2}\right)},
-\end{eqnarray*}
+### Diferencia de medias poblacionales
 
-donde,
+Sea $\mu_{(y,d)}$ la media poblacional del dominio $d$, con $d=1,2$. El parámetro de interés es:
 
-\begin{eqnarray*}
-se\left(\bar{Y}_{1}-\bar{Y}_{2}\right) & = & \sqrt{var\left(\bar{y}_{1}\right)+var\left(\bar{y}_{2}\right)-2cov\left(\bar{y}_{1},\bar{y}_{2}\right)}
-\end{eqnarray*}
+$$
+\Delta = \mu_{(y,1)} - \mu_{(y,2)}.
+$$
 
-Si se desea construir un intervalo de confianza para la diferencia de media se realizaría de la siguiente manera:
+Por ejemplo, $\mu_{(y,1)}$ podría ser el ingreso medio en hogares con jefatura masculina y $\mu_{(y,2)}$ el ingreso medio en hogares con jefatura femenina.
 
-\begin{eqnarray*}
- & \left(\bar{Y}_{1}-\bar{Y}_{2}\right)\pm t_{gl,\,\alpha/2}\,se\left(\bar{Y}_{1}-\bar{Y}_{2}\right)
-\end{eqnarray*}
+El estimador de la diferencia es:
 
-Para poder llevar a cabo la prueba de hipótesis para la diferencia de media de los ingresos en un hogar por sexo, tomemos la base de datos que tenemos como ejemplo. La función que se encarga de realizar la prueba es `svyttest` y solo requiere como argumentos la variable ingreso (o variable de interés), la variable sexo (variable discriminadora), el diseño muestral y el nivel de confianza. A continuación, se muestran los códigos computacionales que se requieren:
+$$
+\hat{\Delta} = \hat{\bar{Y}}_1 - \hat{\bar{Y}}_2,
+$$
+
+cuyo error estándar se calcula como:
+
+$$
+\hat{se}(\hat{\Delta}) = \sqrt{ \hat{Var}(\hat{\bar{Y}}_1) + \hat{Var}(\hat{\bar{Y}}_2) - 2 \hat{Cov}(\hat{\bar{Y}}_1, \hat{\bar{Y}}_2)}.
+$$
 
 
-```{r, test1, eval=T}
-svyttest(Income ~ Sex, design = diseno, level=0.95) 
+### Estadístico de prueba e intervalo de confianza
+
+El contraste se realiza con el estadístico:
+
+$$
+t = \frac{\hat{\Delta}}{\hat{se}(\hat{\Delta})}, \quad t \sim t_{(df)},
+$$
+
+donde los grados de libertad se aproximan como $df = n - H$ (número de UPMs menos número de estratos).
+
+El intervalo de confianza para $\Delta$ al nivel $(1-\alpha)$ se define como:
+
+$$
+\hat{\Delta} \;\pm\; t_{(1-\alpha/2,df)} \, \hat{se}(\hat{\Delta}).
+$$
+
+
+### Ejemplo aplicado en `R`
+
+En encuestas complejas, estas pruebas se implementan con la función `svyttest()` del paquete survey, que incorpora automáticamente los ajustes del diseño.
+
+**Ejemplo 1. Diferencia de ingresos por sexo (población total):**
+
+```{r, eval=TRUE}
+svyttest(Income ~ Sex, design = diseno, level = 0.95) 
 ```
 
-En esta salida podemos observar que el p-valor de la prueba es 0.14. Si tomamos una significancia del 5% para la prueba se puede concluir que, con una confianza del 95% y basados en la muestra, no existe suficiente evidencia estadística para decir que los ingresos medios en los hogares son diferentes por sexo.
+**Resultados (ejemplo ficticio):**
 
-Por otro lado, el intervalo de confianza al 95% para la diferencia de medias entre los ingresos de hombres y mujeres es $\left(-77.35,\,11.41\right)$. 
+* Estadístico t = -1.48
+* p-valor = 0.14
+* Intervalo de confianza (95%): (-77.35 , 11.41)
 
-Si ahora el objetivo es realizar la prueba de diferencia de medias para los ingresos entre hombres y mujeres pero solo en la zona urbana, los códigos computacionales son los siguientes:
+Interpretación: con un 95% de confianza no existe evidencia estadística suficiente para afirmar que los ingresos medios difieren por sexo.
 
 
-```{r, test2, eval=T}
+**Ejemplo 2. Diferencia de ingresos por sexo en zona urbana:**
+
+```{r, eval=TRUE}
 svyttest(Income ~ Sex, design = sub_Urbano, level = 0.95) 
 ```
 
-En donde, al igual que el anterior, no se rechaza la hipótesis nula con una confianza del 95%. 
+Resultado: nuevamente no se rechaza $H_0$, lo que indica ausencia de diferencias significativas en el ingreso medio por sexo en la zona urbana.
 
-Por otro lado, la función `svyttest` permite usar filtro. Si se requiere probar la hipótesis de diferencia de medias de ingresos por sexo pero solo en aquellas personas del hogar mayores a 18 años, se utilizará dentro de la función `svyttest` la función `filter` como se muestra a continuación:
 
-```{r, test3, eval=T}
-svyttest(Income ~ Sex, design = diseno %>% filter(Age > 18), level = 0.95 )
+**Ejemplo 3. Diferencia de ingresos por sexo, restringido a mayores de 18 años:**
+
+```{r, eval=TRUE}
+svyttest(Income ~ Sex, 
+         design = diseno %>% filter(Age > 18), 
+         level = 0.95)
 ```
 
-y con una confianza del 95% y basado en la muestra tampoco se rechaza la hipótesis hula. Es decir, no existe evidencia estadística para concluir que los ingresos medios entre hombres y mujeres mayores de 18 años son diferentes.
+Conclusión: tampoco se rechaza $H_0$. Es decir, no se observa evidencia estadística de diferencias en los ingresos medios entre hombres y mujeres mayores de 18 años.
+
+
+El procedimiento descrito no se limita a las medias, sino que también puede aplicarse a proporciones, totales, razones o cualquier función diferenciable de totales. En todos los casos, el contraste se fundamenta en la estimación puntual, su varianza (incluyendo covarianzas cuando corresponde) y la comparación con la distribución t ajustada al diseño muestral.
+
+
 
 ## Estimando razones en encuestas de hogares
 
@@ -969,7 +986,7 @@ En muchas ocasiones, en encuestas de hogares se requiere comparar más de dos po
 Recurriendo en las definiciones que se han trabajado en este capítulo, un contraste es una combinación lineal de parámetros de la forma:
 
 \begin{eqnarray*}
-f\left(\theta_{1},\theta_{2},...,\theta_{j}\right) & = & \sum_{j=1}^{J}a_{j}\theta_{j}
+f\left(\theta _{1},\theta_{2},...,\theta_{j}\right) & = & \sum_{j=1}^{J}a_{j}\theta_{j}
 \end{eqnarray*}
 
 Una estimación de esta función está dada por:
