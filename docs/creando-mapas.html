@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.5 Creando mapas | Análisis de encuestas con R</title>
+  <title>7.5 Creando mapas | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.5 Creando mapas | Análisis de encuestas con R" />
+  <meta property="og:title" content="7.5 Creando mapas | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.5 Creando mapas | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="7.5 Creando mapas | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-22" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,102 +141,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<li class="chapter" data-level="1" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="07-Gráficas.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="07-Gráficas.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
-<li class="chapter" data-level="1.2" data-path="07-Gráficas.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="1.3" data-path="07-Gráficas.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="1.6" data-path="07-Gráficas.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
+<li class="chapter" data-level="2.1" data-path="07-Gráficas.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="07-Gráficas.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="07-Gráficas.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="07-Gráficas.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
+<li class="chapter" data-level="2.5.1" data-path="07-Gráficas.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="1.8" data-path="07-Gráficas.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="2.6" data-path="07-Gráficas.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="07-Gráficas.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="2.2" data-path="07-Gráficas.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="2.3" data-path="07-Gráficas.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="2.4" data-path="07-Gráficas.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="2.9" data-path="07-Gráficas.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="2.12" data-path="07-Gráficas.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="2.7" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="07-Gráficas.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="3.2" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="07-Gráficas.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="07-Gráficas.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="3.3.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="3.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="3.1" data-path="07-Gráficas.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="07-Gráficas.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="07-Gráficas.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="07-Gráficas.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="07-Gráficas.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="07-Gráficas.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="3.6" data-path="07-Gráficas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="4.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="07-Gráficas.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="4.1" data-path="07-Gráficas.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.2" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.3" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.3.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="07-Gráficas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="7.2" data-path="07-Gráficas.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="07-Gráficas.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="5.1" data-path="07-Gráficas.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="07-Gráficas.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="8.2" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="8.3" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="5.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="9.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="5.2.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="10.2" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="10.3" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="10.4" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="10.5" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="10.6" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="10.7" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="6.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="6.2" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="6.3" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="8.2" data-path="07-Gráficas.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="07-Gráficas.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="07-Gráficas.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="9.2" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="10.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="10.3" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="11.2" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="11.3" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="11.4" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="11.5" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="11.6" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="11.7" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -257,40 +278,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="creando-mapas" class="section level2 hasAnchor" number="6.5">
-<h2><span class="header-section-number">6.5</span> Creando mapas<a href="creando-mapas.html#creando-mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="creando-mapas" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Creando mapas<a href="creando-mapas.html#creando-mapas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Los mapas son una herramienta gráfica poderosa para la visualización de datos. Particularmente, para indicadores sociales-demográficos estos son una gran referencia visual para desagregaciones a nivel País, región, departamento, provincia, distrito, municipio, comuna, etc. <code>R</code> posee un sin fin de métodos de programación para representar dichos mapas.</p>
 <p>Para graficar mapas es necesario contar con información geoespacial, datos que contienen las coordenadas o delimitaciones geográficas de determinado país o región. Sitios web como <a href="http://www.diva-gis.org/gdata" class="uri">http://www.diva-gis.org/gdata</a> ofrecen de manera gratuita bases de datos o <code>shapes</code> que contienen los vectores asociados a las geografías correspondientes.</p>
 <p>Dichos conjuntos de datos poseen observaciones sobre la longitud y latitud lo cuál permite graficar en <code>R</code> un conjunto de puntos cuya unión en el gráfico formarán las formas los polígonos que dan forma a las áreas geográficas. Entre las distintas librería para realizar mapas en <code>R</code> están <code>tmap</code> y <code>ggplot2</code>. A continuación, se ilustra cómo se generan mapas, inicalmente con la librería <code>tmap</code>:</p>
 <p>Inicialmente, para realizar el mapa hay que contar con el archivo de <em>shepefile</em> el cual se carga de la siguiente manera::</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="creando-mapas.html#cb392-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb392-2"><a href="creando-mapas.html#cb392-2" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb392-3"><a href="creando-mapas.html#cb392-3" tabindex="-1"></a>shapeBigCity <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;Data/shapeBigCity/BigCity.shp&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="creando-mapas.html#cb390-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb390-2"><a href="creando-mapas.html#cb390-2" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb390-3"><a href="creando-mapas.html#cb390-3" tabindex="-1"></a>shapeBigCity <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;Data/shapeBigCity/BigCity.shp&quot;</span>)</span></code></pre></div>
 <p>Una vez cargado el shape, el mapa se genera usando las funciones tm_shape y lo que se desea graficar en el mapa se incluye con la función tm_polygons. Para este ejemplo, solo grafiquemos las regiones en el mapa:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="creando-mapas.html#cb393-1" tabindex="-1"></a><span class="fu">tm_shape</span>(shapeBigCity) <span class="sc">+</span> </span>
-<span id="cb393-2"><a href="creando-mapas.html#cb393-2" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;Region&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="creando-mapas.html#cb391-1" tabindex="-1"></a><span class="fu">tm_shape</span>(shapeBigCity) <span class="sc">+</span> </span>
+<span id="cb391-2"><a href="creando-mapas.html#cb391-2" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">&quot;Region&quot;</span>) </span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-47-1.svg" width="672" />
 Si ahora el objetivo es graficar en las regiones el procentaje de probreza para hombres, inicialmente se debe agregar esa información a la base de datos con la que se graficará el mapa como sigue:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="creando-mapas.html#cb394-1" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb394-2"><a href="creando-mapas.html#cb394-2" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span>      <span class="co"># shapefile</span></span>
-<span id="cb394-3"><a href="creando-mapas.html#cb394-3" tabindex="-1"></a>    <span class="fu">left_join</span>(          <span class="co"># Agregando una variable</span></span>
-<span id="cb394-4"><a href="creando-mapas.html#cb394-4" tabindex="-1"></a>      prop_RegionH_Pobreza <span class="sc">%&gt;%</span></span>
-<span id="cb394-5"><a href="creando-mapas.html#cb394-5" tabindex="-1"></a>        <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>), <span class="co"># Filtrando el nivel de interés. </span></span>
-<span id="cb394-6"><a href="creando-mapas.html#cb394-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="creando-mapas.html#cb392-1" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb392-2"><a href="creando-mapas.html#cb392-2" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span>      <span class="co"># shapefile</span></span>
+<span id="cb392-3"><a href="creando-mapas.html#cb392-3" tabindex="-1"></a>    <span class="fu">left_join</span>(          <span class="co"># Agregando una variable</span></span>
+<span id="cb392-4"><a href="creando-mapas.html#cb392-4" tabindex="-1"></a>      prop_RegionH_Pobreza <span class="sc">%&gt;%</span></span>
+<span id="cb392-5"><a href="creando-mapas.html#cb392-5" tabindex="-1"></a>        <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>), <span class="co"># Filtrando el nivel de interés. </span></span>
+<span id="cb392-6"><a href="creando-mapas.html#cb392-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span></code></pre></div>
 <p>Una vez generado la base de datos, se procede a crear el mapa. En este ejemplo, agregarán unos puntos de corte en el mapas que son definidos en el argumento brks como se muestra a continuación:</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="creando-mapas.html#cb395-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">2</span>, .<span class="dv">4</span>, .<span class="dv">6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)</span>
-<span id="cb395-2"><a href="creando-mapas.html#cb395-2" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb395-3"><a href="creando-mapas.html#cb395-3" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;prop&quot;</span>,              </span>
-<span id="cb395-4"><a href="creando-mapas.html#cb395-4" tabindex="-1"></a>  <span class="at">breaks =</span> brks,        </span>
-<span id="cb395-5"><a href="creando-mapas.html#cb395-5" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;pobreza&quot;</span>,   </span>
-<span id="cb395-6"><a href="creando-mapas.html#cb395-6" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="creando-mapas.html#cb393-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">2</span>, .<span class="dv">4</span>, .<span class="dv">6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>)</span>
+<span id="cb393-2"><a href="creando-mapas.html#cb393-2" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb393-3"><a href="creando-mapas.html#cb393-3" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;prop&quot;</span>,              </span>
+<span id="cb393-4"><a href="creando-mapas.html#cb393-4" tabindex="-1"></a>  <span class="at">breaks =</span> brks,        </span>
+<span id="cb393-5"><a href="creando-mapas.html#cb393-5" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;pobreza&quot;</span>,   </span>
+<span id="cb393-6"><a href="creando-mapas.html#cb393-6" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) </span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-48-1.svg" width="672" /></p>
 <p>A modo de otro ejemplo, se desea graficar ahora los coeficientes de variación de las estimaciones de los ingresos medios obtenidas por el diseño a nivel de región:</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="creando-mapas.html#cb396-1" tabindex="-1"></a>prom_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="sc">~</span>Income, <span class="sc">~</span>Region, diseno,</span>
-<span id="cb396-2"><a href="creando-mapas.html#cb396-2" tabindex="-1"></a>  svymean,</span>
-<span id="cb396-3"><a href="creando-mapas.html#cb396-3" tabindex="-1"></a>  <span class="at">na.rm =</span> T, <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb396-4"><a href="creando-mapas.html#cb396-4" tabindex="-1"></a>  <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;cv&quot;</span>))</span>
-<span id="cb396-5"><a href="creando-mapas.html#cb396-5" tabindex="-1"></a>prom_region</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="creando-mapas.html#cb394-1" tabindex="-1"></a>prom_region <span class="ot">&lt;-</span> <span class="fu">svyby</span>(<span class="sc">~</span>Income, <span class="sc">~</span>Region, diseno,</span>
+<span id="cb394-2"><a href="creando-mapas.html#cb394-2" tabindex="-1"></a>  svymean,</span>
+<span id="cb394-3"><a href="creando-mapas.html#cb394-3" tabindex="-1"></a>  <span class="at">na.rm =</span> T, <span class="at">covmat =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb394-4"><a href="creando-mapas.html#cb394-4" tabindex="-1"></a>  <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;cv&quot;</span>))</span>
+<span id="cb394-5"><a href="creando-mapas.html#cb394-5" tabindex="-1"></a>prom_region</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -333,73 +354,73 @@ Si ahora el objetivo es graficar en las regiones el procentaje de probreza para 
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="creando-mapas.html#cb397-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>)</span>
-<span id="cb397-2"><a href="creando-mapas.html#cb397-2" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb397-3"><a href="creando-mapas.html#cb397-3" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb397-4"><a href="creando-mapas.html#cb397-4" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb397-5"><a href="creando-mapas.html#cb397-5" tabindex="-1"></a>      prom_region,</span>
-<span id="cb397-6"><a href="creando-mapas.html#cb397-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
-<span id="cb397-7"><a href="creando-mapas.html#cb397-7" tabindex="-1"></a></span>
-<span id="cb397-8"><a href="creando-mapas.html#cb397-8" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb397-9"><a href="creando-mapas.html#cb397-9" tabindex="-1"></a>  <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb397-10"><a href="creando-mapas.html#cb397-10" tabindex="-1"></a>  <span class="at">breaks =</span> brks,</span>
-<span id="cb397-11"><a href="creando-mapas.html#cb397-11" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;cv&quot;</span>,</span>
-<span id="cb397-12"><a href="creando-mapas.html#cb397-12" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#000000&quot;</span>),</span>
-<span id="cb397-13"><a href="creando-mapas.html#cb397-13" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="creando-mapas.html#cb395-1" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="dv">1</span>)</span>
+<span id="cb395-2"><a href="creando-mapas.html#cb395-2" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb395-3"><a href="creando-mapas.html#cb395-3" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb395-4"><a href="creando-mapas.html#cb395-4" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb395-5"><a href="creando-mapas.html#cb395-5" tabindex="-1"></a>      prom_region,</span>
+<span id="cb395-6"><a href="creando-mapas.html#cb395-6" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
+<span id="cb395-7"><a href="creando-mapas.html#cb395-7" tabindex="-1"></a></span>
+<span id="cb395-8"><a href="creando-mapas.html#cb395-8" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb395-9"><a href="creando-mapas.html#cb395-9" tabindex="-1"></a>  <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb395-10"><a href="creando-mapas.html#cb395-10" tabindex="-1"></a>  <span class="at">breaks =</span> brks,</span>
+<span id="cb395-11"><a href="creando-mapas.html#cb395-11" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;cv&quot;</span>,</span>
+<span id="cb395-12"><a href="creando-mapas.html#cb395-12" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;#FFFFFF&quot;</span>, <span class="st">&quot;#000000&quot;</span>),</span>
+<span id="cb395-13"><a href="creando-mapas.html#cb395-13" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/hist26-1.svg" width="672" />
 Ahora, realizar el mismo ejercicio anterior pero por zona y sexo:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="creando-mapas.html#cb398-1" tabindex="-1"></a>prom_region_Sex <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span></span>
-<span id="cb398-2"><a href="creando-mapas.html#cb398-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Region, Zone, Sex, pobreza) <span class="sc">%&gt;%</span></span>
-<span id="cb398-3"><a href="creando-mapas.html#cb398-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;cv&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb398-4"><a href="creando-mapas.html#cb398-4" tabindex="-1"></a>  <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>, Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>, Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb398-5"><a href="creando-mapas.html#cb398-5" tabindex="-1"></a></span>
-<span id="cb398-6"><a href="creando-mapas.html#cb398-6" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
-<span id="cb398-7"><a href="creando-mapas.html#cb398-7" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb398-8"><a href="creando-mapas.html#cb398-8" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
-<span id="cb398-9"><a href="creando-mapas.html#cb398-9" tabindex="-1"></a>      prom_region_Sex,</span>
-<span id="cb398-10"><a href="creando-mapas.html#cb398-10" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
-<span id="cb398-11"><a href="creando-mapas.html#cb398-11" tabindex="-1"></a></span>
-<span id="cb398-12"><a href="creando-mapas.html#cb398-12" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
-<span id="cb398-13"><a href="creando-mapas.html#cb398-13" tabindex="-1"></a>  <span class="st">&quot;prop&quot;</span>,</span>
-<span id="cb398-14"><a href="creando-mapas.html#cb398-14" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Pobreza&quot;</span>,</span>
-<span id="cb398-15"><a href="creando-mapas.html#cb398-15" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="creando-mapas.html#cb396-1" tabindex="-1"></a>prom_region_Sex <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span></span>
+<span id="cb396-2"><a href="creando-mapas.html#cb396-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Region, Zone, Sex, pobreza) <span class="sc">%&gt;%</span></span>
+<span id="cb396-3"><a href="creando-mapas.html#cb396-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;cv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb396-4"><a href="creando-mapas.html#cb396-4" tabindex="-1"></a>  <span class="fu">filter</span>(pobreza <span class="sc">==</span> <span class="dv">1</span>, Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>, Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb396-5"><a href="creando-mapas.html#cb396-5" tabindex="-1"></a></span>
+<span id="cb396-6"><a href="creando-mapas.html#cb396-6" tabindex="-1"></a>shape_temp <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(</span>
+<span id="cb396-7"><a href="creando-mapas.html#cb396-7" tabindex="-1"></a>  shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb396-8"><a href="creando-mapas.html#cb396-8" tabindex="-1"></a>    <span class="fu">left_join</span>(</span>
+<span id="cb396-9"><a href="creando-mapas.html#cb396-9" tabindex="-1"></a>      prom_region_Sex,</span>
+<span id="cb396-10"><a href="creando-mapas.html#cb396-10" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>))</span>
+<span id="cb396-11"><a href="creando-mapas.html#cb396-11" tabindex="-1"></a></span>
+<span id="cb396-12"><a href="creando-mapas.html#cb396-12" tabindex="-1"></a>shape_temp <span class="sc">+</span> <span class="fu">tm_polygons</span>(</span>
+<span id="cb396-13"><a href="creando-mapas.html#cb396-13" tabindex="-1"></a>  <span class="st">&quot;prop&quot;</span>,</span>
+<span id="cb396-14"><a href="creando-mapas.html#cb396-14" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Pobreza&quot;</span>,</span>
+<span id="cb396-15"><a href="creando-mapas.html#cb396-15" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="dv">0</span>)</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-49-1.svg" width="672" /></p>
 <p>Como se comentó en la introducción de esta sección, los gráficos también se pueden hacer usando la librería ggplot2. Esta librería se apoya en las librerías biscale y cowplot. El procedimiento en R para hacer los mapas es muy similar al mostrado con la librería tmap y se realiza de la siguiente manera:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="creando-mapas.html#cb399-1" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
-<span id="cb399-2"><a href="creando-mapas.html#cb399-2" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb399-3"><a href="creando-mapas.html#cb399-3" tabindex="-1"></a>temp_shape <span class="ot">&lt;-</span> shapeBigCity <span class="sc">%&gt;%</span></span>
-<span id="cb399-4"><a href="creando-mapas.html#cb399-4" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
-<span id="cb399-5"><a href="creando-mapas.html#cb399-5" tabindex="-1"></a>    prom_region_Sex,</span>
-<span id="cb399-6"><a href="creando-mapas.html#cb399-6" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>)</span>
-<span id="cb399-7"><a href="creando-mapas.html#cb399-7" tabindex="-1"></a></span>
-<span id="cb399-8"><a href="creando-mapas.html#cb399-8" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb399-9"><a href="creando-mapas.html#cb399-9" tabindex="-1"></a>datos.RM.bi <span class="ot">&lt;-</span> <span class="fu">bi_class</span>(temp_shape,</span>
-<span id="cb399-10"><a href="creando-mapas.html#cb399-10" tabindex="-1"></a>  <span class="at">y =</span> prop, <span class="at">x =</span> prop_cv, <span class="at">dim =</span> k,</span>
-<span id="cb399-11"><a href="creando-mapas.html#cb399-11" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">&quot;fisher&quot;</span>)</span>
-<span id="cb399-12"><a href="creando-mapas.html#cb399-12" tabindex="-1"></a></span>
-<span id="cb399-13"><a href="creando-mapas.html#cb399-13" tabindex="-1"></a>map.RM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb399-14"><a href="creando-mapas.html#cb399-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb399-15"><a href="creando-mapas.html#cb399-15" tabindex="-1"></a>    <span class="at">data =</span> datos.RM.bi,</span>
-<span id="cb399-16"><a href="creando-mapas.html#cb399-16" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> bi_class, <span class="at">geometry =</span> geometry),</span>
-<span id="cb399-17"><a href="creando-mapas.html#cb399-17" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb399-18"><a href="creando-mapas.html#cb399-18" tabindex="-1"></a>  <span class="fu">bi_scale_fill</span>(<span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k) <span class="sc">+</span></span>
-<span id="cb399-19"><a href="creando-mapas.html#cb399-19" tabindex="-1"></a>  <span class="fu">bi_theme</span>() <span class="sc">+</span></span>
-<span id="cb399-20"><a href="creando-mapas.html#cb399-20" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb399-21"><a href="creando-mapas.html#cb399-21" tabindex="-1"></a>map.RM</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="creando-mapas.html#cb397-1" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
+<span id="cb397-2"><a href="creando-mapas.html#cb397-2" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb397-3"><a href="creando-mapas.html#cb397-3" tabindex="-1"></a>temp_shape <span class="ot">&lt;-</span> shapeBigCity <span class="sc">%&gt;%</span></span>
+<span id="cb397-4"><a href="creando-mapas.html#cb397-4" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb397-5"><a href="creando-mapas.html#cb397-5" tabindex="-1"></a>    prom_region_Sex,</span>
+<span id="cb397-6"><a href="creando-mapas.html#cb397-6" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;Region&quot;</span>)</span>
+<span id="cb397-7"><a href="creando-mapas.html#cb397-7" tabindex="-1"></a></span>
+<span id="cb397-8"><a href="creando-mapas.html#cb397-8" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb397-9"><a href="creando-mapas.html#cb397-9" tabindex="-1"></a>datos.RM.bi <span class="ot">&lt;-</span> <span class="fu">bi_class</span>(temp_shape,</span>
+<span id="cb397-10"><a href="creando-mapas.html#cb397-10" tabindex="-1"></a>  <span class="at">y =</span> prop, <span class="at">x =</span> prop_cv, <span class="at">dim =</span> k,</span>
+<span id="cb397-11"><a href="creando-mapas.html#cb397-11" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">&quot;fisher&quot;</span>)</span>
+<span id="cb397-12"><a href="creando-mapas.html#cb397-12" tabindex="-1"></a></span>
+<span id="cb397-13"><a href="creando-mapas.html#cb397-13" tabindex="-1"></a>map.RM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb397-14"><a href="creando-mapas.html#cb397-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb397-15"><a href="creando-mapas.html#cb397-15" tabindex="-1"></a>    <span class="at">data =</span> datos.RM.bi,</span>
+<span id="cb397-16"><a href="creando-mapas.html#cb397-16" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> bi_class, <span class="at">geometry =</span> geometry),</span>
+<span id="cb397-17"><a href="creando-mapas.html#cb397-17" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb397-18"><a href="creando-mapas.html#cb397-18" tabindex="-1"></a>  <span class="fu">bi_scale_fill</span>(<span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k) <span class="sc">+</span></span>
+<span id="cb397-19"><a href="creando-mapas.html#cb397-19" tabindex="-1"></a>  <span class="fu">bi_theme</span>() <span class="sc">+</span></span>
+<span id="cb397-20"><a href="creando-mapas.html#cb397-20" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb397-21"><a href="creando-mapas.html#cb397-21" tabindex="-1"></a>map.RM</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-50-1.svg" width="672" /></p>
 <p>Ahora, para crear la leyenda del mapa se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="creando-mapas.html#cb400-1" tabindex="-1"></a>legend1 <span class="ot">&lt;-</span> <span class="fu">bi_legend</span>(</span>
-<span id="cb400-2"><a href="creando-mapas.html#cb400-2" tabindex="-1"></a>  <span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k,</span>
-<span id="cb400-3"><a href="creando-mapas.html#cb400-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Coeficiente de variaci&lt;U+00F3&gt;n&quot;</span>,</span>
-<span id="cb400-4"><a href="creando-mapas.html#cb400-4" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Pobreza&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>)</span>
-<span id="cb400-5"><a href="creando-mapas.html#cb400-5" tabindex="-1"></a></span>
-<span id="cb400-6"><a href="creando-mapas.html#cb400-6" tabindex="-1"></a>mapa1 <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
-<span id="cb400-7"><a href="creando-mapas.html#cb400-7" tabindex="-1"></a>  <span class="fu">draw_plot</span>(map.RM, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">scale =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb400-8"><a href="creando-mapas.html#cb400-8" tabindex="-1"></a>  <span class="fu">draw_plot</span>(legend1, <span class="fl">0.75</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="at">scale =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb400-9"><a href="creando-mapas.html#cb400-9" tabindex="-1"></a>  <span class="fu">draw_text</span>(<span class="st">&quot;Estimaciones directas de la pobreza en la mujer rural&quot;</span>,</span>
-<span id="cb400-10"><a href="creando-mapas.html#cb400-10" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">13</span>, <span class="at">size =</span> <span class="dv">18</span>)</span>
-<span id="cb400-11"><a href="creando-mapas.html#cb400-11" tabindex="-1"></a></span>
-<span id="cb400-12"><a href="creando-mapas.html#cb400-12" tabindex="-1"></a>mapa1</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="creando-mapas.html#cb398-1" tabindex="-1"></a>legend1 <span class="ot">&lt;-</span> <span class="fu">bi_legend</span>(</span>
+<span id="cb398-2"><a href="creando-mapas.html#cb398-2" tabindex="-1"></a>  <span class="at">pal =</span> <span class="st">&quot;GrPink&quot;</span>, <span class="at">dim =</span> k,</span>
+<span id="cb398-3"><a href="creando-mapas.html#cb398-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Coeficiente de variaci&lt;U+00F3&gt;n&quot;</span>,</span>
+<span id="cb398-4"><a href="creando-mapas.html#cb398-4" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Pobreza&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>)</span>
+<span id="cb398-5"><a href="creando-mapas.html#cb398-5" tabindex="-1"></a></span>
+<span id="cb398-6"><a href="creando-mapas.html#cb398-6" tabindex="-1"></a>mapa1 <span class="ot">&lt;-</span> <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
+<span id="cb398-7"><a href="creando-mapas.html#cb398-7" tabindex="-1"></a>  <span class="fu">draw_plot</span>(map.RM, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">scale =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb398-8"><a href="creando-mapas.html#cb398-8" tabindex="-1"></a>  <span class="fu">draw_plot</span>(legend1, <span class="fl">0.75</span>, <span class="fl">0.4</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="at">scale =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb398-9"><a href="creando-mapas.html#cb398-9" tabindex="-1"></a>  <span class="fu">draw_text</span>(<span class="st">&quot;Estimaciones directas de la pobreza en la mujer rural&quot;</span>,</span>
+<span id="cb398-10"><a href="creando-mapas.html#cb398-10" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">13</span>, <span class="at">size =</span> <span class="dv">18</span>)</span>
+<span id="cb398-11"><a href="creando-mapas.html#cb398-11" tabindex="-1"></a></span>
+<span id="cb398-12"><a href="creando-mapas.html#cb398-12" tabindex="-1"></a>mapa1</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/hist31-1.svg" width="672" /></p>
 
 </div>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R</title>
+  <title>6.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R" />
+  <meta property="og:title" content="6.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="6.1 Estimación de los parámetros en un modelo de regresión con muestras complejas. | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-22" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,102 +141,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="06-Regresión.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<li class="chapter" data-level="1" data-path="06-Regresión.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="06-Regresión.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="06-Regresión.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
-<li class="chapter" data-level="1.2" data-path="06-Regresión.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="1.3" data-path="06-Regresión.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="1.6" data-path="06-Regresión.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
+<li class="chapter" data-level="2.1" data-path="06-Regresión.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="06-Regresión.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="06-Regresión.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="06-Regresión.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
+<li class="chapter" data-level="2.5.1" data-path="06-Regresión.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="1.8" data-path="06-Regresión.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="2.6" data-path="06-Regresión.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="06-Regresión.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="2.2" data-path="06-Regresión.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="2.3" data-path="06-Regresión.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="2.4" data-path="06-Regresión.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="2.9" data-path="06-Regresión.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="2.12" data-path="06-Regresión.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="2.7" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="06-Regresión.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="3.2" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="3.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="06-Regresión.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="06-Regresión.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="3.3.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="3.3.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="3.1" data-path="06-Regresión.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="06-Regresión.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="06-Regresión.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="06-Regresión.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="06-Regresión.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="06-Regresión.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="3.6" data-path="06-Regresión.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="4.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="06-Regresión.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="4.1" data-path="06-Regresión.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.2" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.3" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.3.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="4.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="06-Regresión.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="7.2" data-path="06-Regresión.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="06-Regresión.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="5.1" data-path="06-Regresión.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="06-Regresión.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="8.2" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="8.3" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="5.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="9.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="5.2.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="10.2" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="10.3" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="10.4" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="10.5" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="10.6" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="10.7" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="6.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="6.2" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="6.3" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="8.2" data-path="06-Regresión.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="06-Regresión.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="06-Regresión.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="9.2" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="10.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="10.3" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="11.2" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="11.3" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="11.4" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="11.5" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="11.6" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="11.7" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -257,8 +278,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas." class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Estimación de los parámetros en un modelo de regresión con muestras complejas.<a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas." class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Estimación de los parámetros en un modelo de regresión con muestras complejas.<a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Una vez se establecen los supuestos del modelo y las características distribucionales de los errores el paso siguientes es el proceso de estimación de los parámetros. A modo ilustrativo e introductorio al proceso de estimación de los parámetros con información provenientes de muestras complejas, si en lugar de observar una muestra de tamaño <span class="math inline">\(n\)</span> de los <span class="math inline">\(N\)</span> elementos de población se hubiera realizado un censo completo, el parámetro de regresión de población finita <span class="math inline">\(\beta_{1}\)</span> podría calcularse como sigue <strong>(Tellez, et. al 2016)</strong>:</p>
 <p><span class="math display">\[
 \beta_{1}  =  \frac{{ \sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}}{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)^{2}}
@@ -284,23 +305,23 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 \end{array}\right]
 \end{eqnarray*}\]</span></p>
 <p>Para ejemplificar los conceptos trabajados hasta este momento, se tomará la misma base que se ha venido trabajando durante todo el desarrollo de este libro. Se inicia con el cargue de las librerías, la base de datos y la definición del diseño de muestreo:</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">error =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb282-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb282-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytex.verbose =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb282-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-4" tabindex="-1"></a><span class="fu">library</span> (survey)</span>
-<span id="cb282-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-5" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb282-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-6" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
-<span id="cb282-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-7" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
-<span id="cb282-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-8" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
-<span id="cb282-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-9" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb282-10"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-10" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
-<span id="cb282-11"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-11" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">error =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb280-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb280-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytex.verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb280-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-4" tabindex="-1"></a><span class="fu">library</span> (survey)</span>
+<span id="cb280-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-5" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb280-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-6" tabindex="-1"></a><span class="fu">library</span>(convey)</span>
+<span id="cb280-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-7" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb280-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-8" tabindex="-1"></a><span class="fu">library</span>(printr)</span>
+<span id="cb280-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-9" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb280-10"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-10" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb280-11"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb280-11" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div>
 <p>Cargue de la base y definición del diseño muestral:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
-<span id="cb283-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb283-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-3" tabindex="-1"></a></span>
-<span id="cb283-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-4" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
-<span id="cb283-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-5" tabindex="-1"></a><span class="fu">head</span>(encuesta)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb281-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
+<span id="cb281-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb281-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb281-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb281-3" tabindex="-1"></a></span>
+<span id="cb281-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb281-4" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
+<span id="cb281-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb281-5" tabindex="-1"></a><span class="fu">head</span>(encuesta)</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="6%" />
@@ -483,34 +504,34 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb284-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb284-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb284-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb284-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb284-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb284-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb284-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb282-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb282-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb282-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb282-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb282-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb282-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb282-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb282-8" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Para efectos de los ejemplos y como se ha hecho en anteriores ocasiones, se divide la muestra en sub-grupos de la encuesta como sigue:</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb285-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
-<span id="cb285-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb285-2" tabindex="-1"></a>sub_Rural  <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
-<span id="cb285-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb285-3" tabindex="-1"></a>sub_Mujer  <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb285-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb285-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
+<span id="cb283-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-2" tabindex="-1"></a>sub_Rural  <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
+<span id="cb283-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-3" tabindex="-1"></a>sub_Mujer  <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb283-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb283-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
 <p>En este capítulo se ajustarán los modelos de regresión usando la base de datos de ejemplo que se ha venido trabajando en capítulos anteriores. Puesto que, en modelos de regresión, se utiliza muy frecuente el recurso gráfico. A continuación, se define un tema estándar que la CEPAL tiene para generar sus gráficos el cual se utilizará en este capítulo.</p>
 <p>Para observar que existe una correlación entre el ingreso y el gasto, las cuales son las variables que se utilizarán para el ajuste de los modelos, se construye un scatterplot usando la librería <code>ggplot</code>. Cabe resaltar que, como la base de datos encuesta, la cual se usa para ejemplificar es una muestra de la base <code>BigCity</code>, analizaremos de manera gráfica si poblacionalmente las dos variables mencionadas anteriormente tienen correlación como se muestra a continuación:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2); <span class="fu">library</span>(ggpmisc)</span>
-<span id="cb286-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-2" tabindex="-1"></a>plot_BigCity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> BigCity,</span>
-<span id="cb286-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-3" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span></span>
-<span id="cb286-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-4" tabindex="-1"></a>                       <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb286-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-5" tabindex="-1"></a>                       <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb286-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-6" tabindex="-1"></a>                       <span class="at">formula =</span> y <span class="sc">~</span> x) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
-<span id="cb286-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-7" tabindex="-1"></a></span>
-<span id="cb286-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-8" tabindex="-1"></a>plot_BigCity <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,</span>
-<span id="cb286-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-9" tabindex="-1"></a>   ..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>),<span class="at">size =</span> <span class="dv">3</span>), <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2); <span class="fu">library</span>(ggpmisc)</span>
+<span id="cb284-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-2" tabindex="-1"></a>plot_BigCity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> BigCity,</span>
+<span id="cb284-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-3" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span></span>
+<span id="cb284-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-4" tabindex="-1"></a>                       <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb284-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-5" tabindex="-1"></a>                       <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb284-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-6" tabindex="-1"></a>                       <span class="at">formula =</span> y <span class="sc">~</span> x) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
+<span id="cb284-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-7" tabindex="-1"></a></span>
+<span id="cb284-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-8" tabindex="-1"></a>plot_BigCity <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,</span>
+<span id="cb284-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb284-9" tabindex="-1"></a>   ..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>),<span class="at">size =</span> <span class="dv">3</span>), <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="06-Regresi%C3%B3n_files/figure-html/plot1-1.svg" width="672" /></p>
 <p>Si bien, existen unas observaciones por fuera de la nube de punto, el comportamiento general de la relación ingresos vs gastos mantiene una tendencia lineal.</p>
 <p>Una vez hecho el análisis gráfico de las variables a utilizar en los modelos a trabajar, se realizará primero un ajuste del modelo con los datos poblacionales y con esto poder analizar qué tan bueno serán los ajustes que se realizarán posteriormente. A continuación, se muestra el ajuste del modelo con los datos poblacionales:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb287-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> BigCity)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb285-1" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> BigCity)</span></code></pre></div>
 <p>Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función <code>modelsummary</code> de la librería <code>modelsummary</code> de la siguiente manera:</p>
 <!-- preamble start -->
 
@@ -629,19 +650,19 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 <!-- hack to avoid NA insertion in last line -->
 <p>De la anterior salida se puede observar que, el intercepto es igual a 123.337 y el parámetro <span class="math inline">\(\beta_{1}\)</span> asociado al gasto es 1.229. La demás información relacionada a esta salida se analizará más adelante.</p>
 <p>Una vez revisada la información poblacional, se utilizará la información obtenida de la muestra para estimar los parámetros y con ello analizar qué tan buenas son las estimaciones. A continuación, se presenta una sintaxis similar a la anterior que permite construir el scatterplot pero para los datos de la muestra.</p>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-1" tabindex="-1"></a>plot_sin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> encuesta,</span>
-<span id="cb288-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-2" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span></span>
-<span id="cb288-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-3" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb288-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-4" tabindex="-1"></a>            <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb288-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-5" tabindex="-1"></a>            <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula =</span> y <span class="sc">~</span> x) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
-<span id="cb288-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-6" tabindex="-1"></a></span>
-<span id="cb288-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-7" tabindex="-1"></a>plot_sin <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,</span>
-<span id="cb288-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb288-8" tabindex="-1"></a>     ..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>), <span class="at">size =</span> <span class="dv">5</span>), <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-1" tabindex="-1"></a>plot_sin <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> encuesta,</span>
+<span id="cb286-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-2" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span></span>
+<span id="cb286-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-3" tabindex="-1"></a>            <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb286-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-4" tabindex="-1"></a>            <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb286-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-5" tabindex="-1"></a>            <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula =</span> y <span class="sc">~</span> x) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
+<span id="cb286-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-6" tabindex="-1"></a></span>
+<span id="cb286-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-7" tabindex="-1"></a>plot_sin <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,</span>
+<span id="cb286-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb286-8" tabindex="-1"></a>     ..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>), <span class="at">size =</span> <span class="dv">5</span>), <span class="at">parse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="06-Regresi%C3%B3n_files/figure-html/plot2-1.svg" width="672" /></p>
 <p>Como se puede observar, los datos de la muestra tienen una tendencia lineal aunque un poco dispersa a medida que crecen los gastos en las familias.</p>
 <p>Una vez hecho los análisis gráficos se procede a ajustar los modelos de regresión lineal. A modo de comparar el efecto que tiene hacer un correcto uso de los factores de expansión del diseño, primero, se ajustará un modelo sin tener encuesta dichos factores como se muestra a continuación:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb289-1" tabindex="-1"></a>fit_sinP <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> encuesta)</span>
-<span id="cb289-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb289-2" tabindex="-1"></a>fit_sinP</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb287-1" tabindex="-1"></a>fit_sinP <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> encuesta)</span>
+<span id="cb287-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb287-2" tabindex="-1"></a>fit_sinP</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Income ~ Expenditure, data = encuesta)
@@ -649,9 +670,9 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 ## Coefficients:
 ## (Intercept)  Expenditure  
 ##      121.52         1.22</code></pre>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-1" tabindex="-1"></a><span class="fu">stargazer</span>(fit_sinP, <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb291-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-2" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Modelo sin factores de expansion&quot;</span>, </span>
-<span id="cb291-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-3" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;ajps&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb289-1" tabindex="-1"></a><span class="fu">stargazer</span>(fit_sinP, <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb289-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb289-2" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Modelo sin factores de expansion&quot;</span>, </span>
+<span id="cb289-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb289-3" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;ajps&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## \begin{table}[!htbp] \centering 
 ##   \caption{Modelo sin factores de expansion} 
@@ -675,17 +696,17 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 ## \end{table}</code></pre>
 <p>Para el modelo ajustado sin factores de expansión, el <span class="math inline">\(\hat{\beta}_{0}\)</span> es 121.52 y el <span class="math inline">\(\hat{\beta}_{1}\)</span> asociado a la variable gastos es 1.22.</p>
 <p>Ahora, haciendo un Scatterplot con los datos encuesta pero utilizando los factores de expansión del diseño se debe agregar <code>mapping = aes(weight = wk)</code> en la función <code>geom_smooth</code>como sigue:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-1" tabindex="-1"></a>plot_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> encuesta,</span>
-<span id="cb293-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-2" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
-<span id="cb293-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-3" tabindex="-1"></a>                     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk)) <span class="sc">+</span></span>
-<span id="cb293-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-4" tabindex="-1"></a>                     <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula =</span> y <span class="sc">~</span> x,                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">weight =</span> wk)) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
-<span id="cb293-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-5" tabindex="-1"></a></span>
-<span id="cb293-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-6" tabindex="-1"></a>plot_Ponde <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">weight =</span> wk, </span>
-<span id="cb293-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb293-7" tabindex="-1"></a><span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>)), <span class="at">parse =</span> <span class="cn">TRUE</span>,<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-1" tabindex="-1"></a>plot_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> encuesta,</span>
+<span id="cb291-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-2" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> Expenditure, <span class="at">y =</span> Income)) <span class="sc">+</span> </span>
+<span id="cb291-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-3" tabindex="-1"></a>                     <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk)) <span class="sc">+</span></span>
+<span id="cb291-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-4" tabindex="-1"></a>                     <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">formula =</span> y <span class="sc">~</span> x,                      <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">weight =</span> wk)) <span class="sc">+</span> <span class="fu">theme_cepal</span>()</span>
+<span id="cb291-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-5" tabindex="-1"></a></span>
+<span id="cb291-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-6" tabindex="-1"></a>plot_Ponde <span class="sc">+</span> <span class="fu">stat_poly_eq</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="fu">aes</span>(<span class="at">weight =</span> wk, </span>
+<span id="cb291-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb291-7" tabindex="-1"></a><span class="at">label =</span> <span class="fu">paste</span>(..eq.label..,..rr.label.., <span class="at">sep =</span> <span class="st">&quot;~~~&quot;</span>)), <span class="at">parse =</span> <span class="cn">TRUE</span>,<span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
 <p><img src="06-Regresi%C3%B3n_files/figure-html/plot3-1.svg" width="672" /></p>
 <p>En este sentido, para ajustar modelos teniendo en cuenta los factores de expansión existen 2 formas, la primera es usando la función <code>lm</code> y la segunda es usando la función <code>svyglm</code> de la librería <code>survey</code>. A continuación. se ajusta el modelo usando la función <code>lm</code>:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb294-1" tabindex="-1"></a>fit_Ponde <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> encuesta, <span class="at">weights =</span> wk)</span>
-<span id="cb294-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb294-2" tabindex="-1"></a>fit_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb292-1" tabindex="-1"></a>fit_Ponde <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income <span class="sc">~</span> Expenditure, <span class="at">data =</span> encuesta, <span class="at">weights =</span> wk)</span>
+<span id="cb292-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb292-2" tabindex="-1"></a>fit_Ponde</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Income ~ Expenditure, data = encuesta, weights = wk)
@@ -693,9 +714,9 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 ## Coefficients:
 ## (Intercept)  Expenditure  
 ##      103.14         1.26</code></pre>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-1" tabindex="-1"></a><span class="fu">stargazer</span>(fit_Ponde, <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb296-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-2" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Modelo encuesta ponderada&quot;</span>, </span>
-<span id="cb296-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-3" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;ajps&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb294-1" tabindex="-1"></a><span class="fu">stargazer</span>(fit_Ponde, <span class="at">header =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb294-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb294-2" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">&quot;Modelo encuesta ponderada&quot;</span>, </span>
+<span id="cb294-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb294-3" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&quot;ajps&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ## \begin{table}[!htbp] \centering 
 ##   \caption{Modelo encuesta ponderada} 
@@ -718,9 +739,9 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 ## \end{tabular} 
 ## \end{table}</code></pre>
 <p>Para el modelo ajustado con factores de expansión usando la función <code>lm</code>, el <span class="math inline">\(\hat{\beta}_{0}\)</span> es 103.14 y el <span class="math inline">\(\hat{\beta}_{1}\)</span> asociado a la variable gastos es 1.26. Ahora, haciendo el mismo ajuste pero usando la función <code>svyglm</code>:</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-1" tabindex="-1"></a>fit_svy <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(Income <span class="sc">~</span> Expenditure, </span>
-<span id="cb298-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-2" tabindex="-1"></a>                  <span class="at">design =</span> diseno, <span class="at">family=</span>stats<span class="sc">::</span><span class="fu">gaussian</span>())</span>
-<span id="cb298-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-3" tabindex="-1"></a>fit_svy</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-1" tabindex="-1"></a>fit_svy <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(Income <span class="sc">~</span> Expenditure, </span>
+<span id="cb296-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-2" tabindex="-1"></a>                  <span class="at">design =</span> diseno, <span class="at">family=</span>stats<span class="sc">::</span><span class="fu">gaussian</span>())</span>
+<span id="cb296-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb296-3" tabindex="-1"></a>fit_svy</span></code></pre></div>
 <pre><code>## Stratified 1 - level Cluster Sampling design (with replacement)
 ## With (238) clusters.
 ## Called via srvyr
@@ -740,22 +761,22 @@ cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) &amp; cov\left(\hat{\beta}_{1},\
 ## Residual Deviance: 3.11e+08  AIC: 38300</code></pre>
 <p>Obteniendo estimaciones para el <span class="math inline">\(\hat{\beta}_{0}\)</span> es 103.14 y el <span class="math inline">\(\hat{\beta}_{1}\)</span> asociado a la variable gastos es 1.26. Siendo exactamente las mismas que con la función <code>lm</code> ya que, como se definió en los argumentos de la función, la función de enlace es Gausiana.</p>
 <p>Por último y a modo de resumen se muestra un gráfico donde se encuentran depositados todos los modelos estimados anteriormente y así poder comparar de manera gráfica su ajuste:</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-1" tabindex="-1"></a>df_model <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb300-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-2" tabindex="-1"></a>  <span class="at">intercept =</span> <span class="fu">c</span>(<span class="fu">coefficients</span>(fit)[<span class="dv">1</span>],</span>
-<span id="cb300-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-3" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_sinP)[<span class="dv">1</span>], </span>
-<span id="cb300-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-4" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_Ponde)[<span class="dv">1</span>],</span>
-<span id="cb300-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-5" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_svy)[<span class="dv">1</span>]), </span>
-<span id="cb300-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-6" tabindex="-1"></a>  <span class="at">slope =</span> <span class="fu">c</span>(<span class="fu">coefficients</span>(fit)[<span class="dv">2</span>],</span>
-<span id="cb300-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-7" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_sinP)[<span class="dv">2</span>], </span>
-<span id="cb300-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-8" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_Ponde)[<span class="dv">2</span>],</span>
-<span id="cb300-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-9" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_svy)[<span class="dv">2</span>]),</span>
-<span id="cb300-10"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-10" tabindex="-1"></a>  <span class="at">Modelo =</span> <span class="fu">c</span>(<span class="st">&quot;Población&quot;</span>, <span class="st">&quot;Sin ponderar&quot;</span>, </span>
-<span id="cb300-11"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-11" tabindex="-1"></a>             <span class="st">&quot;Ponderado(lm)&quot;</span>, <span class="st">&quot;Ponderado(svyglm)&quot;</span>))</span>
-<span id="cb300-12"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-12" tabindex="-1"></a>plot_BigCity <span class="sc">+</span>  <span class="fu">geom_abline</span>( <span class="at">data =</span> df_model,</span>
-<span id="cb300-13"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-13" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">slope =</span> slope,</span>
-<span id="cb300-14"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-14" tabindex="-1"></a>      <span class="at">intercept =</span> intercept, <span class="at">linetype =</span> Modelo,</span>
-<span id="cb300-15"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-15" tabindex="-1"></a>      <span class="at">color =</span> Modelo ), <span class="at">size =</span> <span class="dv">2</span></span>
-<span id="cb300-16"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb300-16" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-1" tabindex="-1"></a>df_model <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb298-2"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-2" tabindex="-1"></a>  <span class="at">intercept =</span> <span class="fu">c</span>(<span class="fu">coefficients</span>(fit)[<span class="dv">1</span>],</span>
+<span id="cb298-3"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-3" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_sinP)[<span class="dv">1</span>], </span>
+<span id="cb298-4"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-4" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_Ponde)[<span class="dv">1</span>],</span>
+<span id="cb298-5"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-5" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_svy)[<span class="dv">1</span>]), </span>
+<span id="cb298-6"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-6" tabindex="-1"></a>  <span class="at">slope =</span> <span class="fu">c</span>(<span class="fu">coefficients</span>(fit)[<span class="dv">2</span>],</span>
+<span id="cb298-7"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-7" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_sinP)[<span class="dv">2</span>], </span>
+<span id="cb298-8"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-8" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_Ponde)[<span class="dv">2</span>],</span>
+<span id="cb298-9"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-9" tabindex="-1"></a>               <span class="fu">coefficients</span>(fit_svy)[<span class="dv">2</span>]),</span>
+<span id="cb298-10"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-10" tabindex="-1"></a>  <span class="at">Modelo =</span> <span class="fu">c</span>(<span class="st">&quot;Población&quot;</span>, <span class="st">&quot;Sin ponderar&quot;</span>, </span>
+<span id="cb298-11"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-11" tabindex="-1"></a>             <span class="st">&quot;Ponderado(lm)&quot;</span>, <span class="st">&quot;Ponderado(svyglm)&quot;</span>))</span>
+<span id="cb298-12"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-12" tabindex="-1"></a>plot_BigCity <span class="sc">+</span>  <span class="fu">geom_abline</span>( <span class="at">data =</span> df_model,</span>
+<span id="cb298-13"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-13" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>( <span class="at">slope =</span> slope,</span>
+<span id="cb298-14"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-14" tabindex="-1"></a>      <span class="at">intercept =</span> intercept, <span class="at">linetype =</span> Modelo,</span>
+<span id="cb298-15"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-15" tabindex="-1"></a>      <span class="at">color =</span> Modelo ), <span class="at">size =</span> <span class="dv">2</span></span>
+<span id="cb298-16"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html#cb298-16" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="06-Regresi%C3%B3n_files/figure-html/plot4-1.svg" width="672" /></p>
 </div>
             </section>

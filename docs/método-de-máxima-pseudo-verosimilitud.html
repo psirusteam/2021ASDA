@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R</title>
+  <title>9.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R" />
+  <meta property="og:title" content="9.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="9.3 Método de Máxima Pseudo-Verosimilitud | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-22" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,102 +141,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<li class="chapter" data-level="1" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="09-Generalizados2.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="09-Generalizados2.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
-<li class="chapter" data-level="1.2" data-path="09-Generalizados2.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="1.3" data-path="09-Generalizados2.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="1.6" data-path="09-Generalizados2.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
+<li class="chapter" data-level="2.1" data-path="09-Generalizados2.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="09-Generalizados2.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="09-Generalizados2.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="09-Generalizados2.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
+<li class="chapter" data-level="2.5.1" data-path="09-Generalizados2.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="1.8" data-path="09-Generalizados2.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="2.6" data-path="09-Generalizados2.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="09-Generalizados2.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="2.2" data-path="09-Generalizados2.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="2.3" data-path="09-Generalizados2.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="2.4" data-path="09-Generalizados2.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="2.9" data-path="09-Generalizados2.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="2.12" data-path="09-Generalizados2.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="2.7" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="09-Generalizados2.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="3.2" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="09-Generalizados2.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="09-Generalizados2.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="3.3.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="3.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="3.1" data-path="09-Generalizados2.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="09-Generalizados2.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="09-Generalizados2.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="09-Generalizados2.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="09-Generalizados2.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="09-Generalizados2.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="3.6" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="4.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="09-Generalizados2.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="4.1" data-path="09-Generalizados2.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.2" data-path="09-Generalizados2.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.3" data-path="09-Generalizados2.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.3.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="09-Generalizados2.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="4.4" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="09-Generalizados2.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="09-Generalizados2.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="7.2" data-path="09-Generalizados2.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="09-Generalizados2.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="5.1" data-path="09-Generalizados2.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="09-Generalizados2.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="8.2" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="8.3" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="5.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="9.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="5.2.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="09-Generalizados2.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="10.2" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="10.3" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="10.4" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="10.5" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="10.6" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="10.7" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="6.1" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="6.2" data-path="09-Generalizados2.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="6.3" data-path="09-Generalizados2.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="09-Generalizados2.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="8.2" data-path="09-Generalizados2.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="09-Generalizados2.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="09-Generalizados2.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="9.2" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="09-Generalizados2.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="10.2" data-path="09-Generalizados2.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="10.3" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="11.2" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="11.3" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="11.4" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="11.5" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="11.6" data-path="09-Generalizados2.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="11.7" data-path="09-Generalizados2.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -257,8 +278,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="método-de-máxima-pseudo-verosimilitud" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Método de Máxima Pseudo-Verosimilitud<a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="método-de-máxima-pseudo-verosimilitud" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Método de Máxima Pseudo-Verosimilitud<a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El anterior método tiene la particularidad de que <span class="math inline">\(y_{i}\)</span> son IID, en la vida real muchas veces no es posible poder cumplir ese supuesto. En los procedimientos actuales se recurre a obtener una muestra compleja mediante la realización de conglomerados que tengan alguna relación particular de aglomeración para luego estratificarlos y llegar al individuo de interés que nos proporcione información sobre el estudio. Con esa muestra compleja cumplimos con que todos los individuos tienen una probabilidad de inclusión desigual sin la necesidad de utilizar un marco muestral.</p>
 <p>A partir de eso <em>Pfeffermann(1993)</em> discutió la posibilidad de hacer inferencia en la población partiendo de la información de una muestra, para esto se propuso crear un pseudo-parámetro que tenga en cuenta el diseño muestral, es decir, que el score <span class="math inline">\(u_{i}\)</span> sea ponderado por el inverso de la probabilidad de inclusión que denominaremos <span class="math inline">\(u_{i}\)</span>. Este método es conocido como Máxima Pseudo Verosimilitud(MPV).</p>
 <p><span class="math display">\[
@@ -380,22 +401,22 @@ T=\dfrac{\partial l(Y;X\beta)}{\partial\beta}=-\dfrac{1}{2\sigma^{2}}(-2X&#39;WY
 Con este <span class="math inline">\(\beta\)</span> podemos estimar un modelo partiendo de una muestra probabilística compleja.</p>
 <p>A continuación, se ejemplifican los códigos computacionales para los modelos lineales generalizado. Inicialmente, se carga la base de datos como sigue:</p>
 <p>Cargue de las bases de datos,</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-1" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
-<span id="cb457-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-2" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb457-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-3" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
-<span id="cb457-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BigCity&quot;</span>, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb458-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-2" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb458-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-3" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb458-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-4" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb458-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-5" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb458-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-6" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb458-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb455-1" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb455-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb455-2" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb455-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb455-3" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span>
+<span id="cb455-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb455-4" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;BigCity&quot;</span>, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb456-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-2" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb456-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-3" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb456-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-4" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb456-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-5" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb456-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-6" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb456-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb456-7" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Luego, se define la variable pobreza con los datos de la base como sigue:</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> </span>
-<span id="cb459-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb459-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-3" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb459-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-4" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> </span>
+<span id="cb457-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb457-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-3" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb457-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb457-4" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
 <p>A continuación, se carga el tema de la CEPAL con el que se realizarán las gráficas:</p>
 <p>Para la ejemplificación de la metodología de este capítulo, se definirá primero el modelo Gamma.</p>
 <p><em>Modelo gamma para variable continua</em></p>
@@ -408,21 +429,21 @@ o, similarmente:</p>
 \mu_{i} = \frac{1}{B_0 + B_1x_1}
 \]</span>
 Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigth como sigue:</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb460-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
-<span id="cb460-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-3" tabindex="-1"></a></span>
-<span id="cb460-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-4" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
-<span id="cb460-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-5" tabindex="-1"></a></span>
-<span id="cb460-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-6" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb460-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-7" tabindex="-1"></a>  <span class="fu">as_survey_design</span>( <span class="at">strata =</span> Stratum,</span>
-<span id="cb460-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-8" tabindex="-1"></a>    <span class="at">ids =</span> PSU, <span class="at">weights =</span> wk2,</span>
-<span id="cb460-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-9" tabindex="-1"></a>    <span class="at">nest =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb458-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
+<span id="cb458-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-3" tabindex="-1"></a></span>
+<span id="cb458-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-4" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
+<span id="cb458-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-5" tabindex="-1"></a></span>
+<span id="cb458-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-6" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb458-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-7" tabindex="-1"></a>  <span class="fu">as_survey_design</span>( <span class="at">strata =</span> Stratum,</span>
+<span id="cb458-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-8" tabindex="-1"></a>    <span class="at">ids =</span> PSU, <span class="at">weights =</span> wk2,</span>
+<span id="cb458-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb458-9" tabindex="-1"></a>    <span class="at">nest =</span> T)</span></code></pre></div>
 <p>El modelo ajustado es el siguiente:</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> Income <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span></span>
-<span id="cb461-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-2" tabindex="-1"></a>                   Region <span class="sc">+</span> Zone,</span>
-<span id="cb461-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-3" tabindex="-1"></a>                   <span class="at">design =</span> diseno, </span>
-<span id="cb461-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-4" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>)) </span>
-<span id="cb461-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb461-5" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-1" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> Income <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span></span>
+<span id="cb459-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-2" tabindex="-1"></a>                   Region <span class="sc">+</span> Zone,</span>
+<span id="cb459-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-3" tabindex="-1"></a>                   <span class="at">design =</span> diseno, </span>
+<span id="cb459-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-4" tabindex="-1"></a>                  <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;inverse&quot;</span>)) </span>
+<span id="cb459-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb459-5" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(modelo)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -494,16 +515,16 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </table>
 <p>De la tabla anterior, el intercepto, la variable edad y la zona rural resultaron significativo tomando una confianza del 95%.</p>
 <p>Por otro lado, es útil la estimación de la dispersión que ofrece <em>svyglm</em> de forma predeterminada dado que no tiene en cuenta la información especial sobre la dispersión que se puede calcular utilizando la distribución Gamma. <strong>No todos los GLM tienen una forma mejorada y específica del modelo para estimar</strong>.</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-1" tabindex="-1"></a>alpha <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">gamma.dispersion</span>(modelo)</span>
-<span id="cb462-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-2" tabindex="-1"></a>alpha</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-1" tabindex="-1"></a>alpha <span class="ot">=</span> MASS<span class="sc">::</span><span class="fu">gamma.dispersion</span>(modelo)</span>
+<span id="cb460-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb460-2" tabindex="-1"></a>alpha</span></code></pre></div>
 <pre><code>## [1] 0.4830962</code></pre>
 <p>Luego, el parámetro de dispersión es:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb464-1" tabindex="-1"></a>mod_s <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo, <span class="at">dispersion =</span> alpha)</span>
-<span id="cb464-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb464-2" tabindex="-1"></a>mod_s<span class="sc">$</span>dispersion</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-1" tabindex="-1"></a>mod_s <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo, <span class="at">dispersion =</span> alpha)</span>
+<span id="cb462-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb462-2" tabindex="-1"></a>mod_s<span class="sc">$</span>dispersion</span></code></pre></div>
 <pre><code>##      variance     SE
 ## [1,]  0.59097 0.0876</code></pre>
 <p>Los coeficientes del modelo también se pueden obtener de la siguiente manera:</p>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-1" tabindex="-1"></a>mod_s<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb464-1" tabindex="-1"></a>mod_s<span class="sc">$</span>coefficients</span></code></pre></div>
 <table>
 <colgroup>
 <col width="23%" />
@@ -581,14 +602,14 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </tbody>
 </table>
 <p>Una vez estimado los coeficientes, se estiman los intervalos de confianza para la predicción como sigue:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T))</span>
-<span id="cb467-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-2" tabindex="-1"></a></span>
-<span id="cb467-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-3" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T)))</span>
-<span id="cb467-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-4" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
-<span id="cb467-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-5" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
-<span id="cb467-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-6" tabindex="-1"></a>pred<span class="sc">$</span>Income <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income</span>
-<span id="cb467-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-7" tabindex="-1"></a>pred<span class="sc">$</span>Age <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Age</span>
-<span id="cb467-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb467-8" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T))</span>
+<span id="cb465-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-2" tabindex="-1"></a></span>
+<span id="cb465-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-3" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(modelo, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">se =</span> T)))</span>
+<span id="cb465-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-4" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
+<span id="cb465-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-5" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
+<span id="cb465-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-6" tabindex="-1"></a>pred<span class="sc">$</span>Income <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income</span>
+<span id="cb465-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-7" tabindex="-1"></a>pred<span class="sc">$</span>Age <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Age</span>
+<span id="cb465-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb465-8" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -652,15 +673,15 @@ Ahora bien, para el ajuste del modelo Gamma, primero se definen los pesos qweigt
 </tbody>
 </table>
 <p>A continuación, como se ha mostrado anteriormente, se realiza un Scaterplot de la predicción:</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-1" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
-<span id="cb468-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-2" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
-<span id="cb468-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Age , <span class="at">y =</span> response)) <span class="sc">+</span></span>
-<span id="cb468-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-4" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
-<span id="cb468-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-5" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
-<span id="cb468-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-6" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb468-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-7" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb468-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb468-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb468-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-1" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
+<span id="cb466-2"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-2" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
+<span id="cb466-3"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Age , <span class="at">y =</span> response)) <span class="sc">+</span></span>
+<span id="cb466-4"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-4" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
+<span id="cb466-5"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-5" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
+<span id="cb466-6"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-6" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb466-7"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-7" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb466-8"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb466-9"><a href="método-de-máxima-pseudo-verosimilitud.html#cb466-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="09-Generalizados2_files/figure-html/unnamed-chunk-14-1.svg" width="672" /></p>
 </div>
             </section>

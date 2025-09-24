@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R</title>
+  <title>8.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R" />
+  <meta property="og:title" content="8.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="8.3 Modelo log lineal para tablas de contingencia | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-22" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,102 +141,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<li class="chapter" data-level="1" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="08-Generalizados.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="08-Generalizados.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
-<li class="chapter" data-level="1.2" data-path="08-Generalizados.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="1.3" data-path="08-Generalizados.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="1.6" data-path="08-Generalizados.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
+<li class="chapter" data-level="2.1" data-path="08-Generalizados.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="08-Generalizados.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="08-Generalizados.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="08-Generalizados.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
+<li class="chapter" data-level="2.5.1" data-path="08-Generalizados.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="1.8" data-path="08-Generalizados.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="2.6" data-path="08-Generalizados.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="08-Generalizados.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="2.2" data-path="08-Generalizados.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="2.3" data-path="08-Generalizados.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="2.4" data-path="08-Generalizados.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="2.9" data-path="08-Generalizados.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="2.12" data-path="08-Generalizados.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="2.7" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="08-Generalizados.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="3.2" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="3.3" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="08-Generalizados.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="08-Generalizados.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="3.3.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="3.3.3" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="3.1" data-path="08-Generalizados.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="08-Generalizados.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="08-Generalizados.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="08-Generalizados.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="08-Generalizados.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="08-Generalizados.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.5" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="3.6" data-path="08-Generalizados.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="4.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="08-Generalizados.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="4.1" data-path="08-Generalizados.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.2" data-path="08-Generalizados.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.3" data-path="08-Generalizados.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.3.1" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="08-Generalizados.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="4.4" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="08-Generalizados.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="08-Generalizados.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="7.2" data-path="08-Generalizados.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="08-Generalizados.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="5.1" data-path="08-Generalizados.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="08-Generalizados.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="8.2" data-path="08-Generalizados.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="8.3" data-path="08-Generalizados.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="5.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="9.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="5.2.1" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="08-Generalizados.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="10.2" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="10.3" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="10.4" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="10.5" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="10.6" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="10.7" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="6.1" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="6.2" data-path="08-Generalizados.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="6.3" data-path="08-Generalizados.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="08-Generalizados.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="8.2" data-path="08-Generalizados.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="08-Generalizados.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="08-Generalizados.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="9.2" data-path="08-Generalizados.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="08-Generalizados.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="10.2" data-path="08-Generalizados.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="10.3" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="11.2" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="11.3" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="11.4" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="11.5" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="11.6" data-path="08-Generalizados.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="11.7" data-path="08-Generalizados.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -257,8 +278,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="modelo-log-lineal-para-tablas-de-contingencia" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Modelo log lineal para tablas de contingencia<a href="modelo-log-lineal-para-tablas-de-contingencia.html#modelo-log-lineal-para-tablas-de-contingencia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelo-log-lineal-para-tablas-de-contingencia" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Modelo log lineal para tablas de contingencia<a href="modelo-log-lineal-para-tablas-de-contingencia.html#modelo-log-lineal-para-tablas-de-contingencia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El término modelo log-lineal, que básicamente describe el papel de la función de enlace que se utiliza en los modelos lineales generalizados. Iniciaremos esta sección con los modelos log-lineales en tablas de contingencia. El modelo estadístico es el siguiente:</p>
 <p><span class="math display">\[
   \log(p_{ijk}) = \mu + \lambda_i^X + \lambda_j^Y + \lambda_k^Z + \lambda_{ij}^{XY}  ,   
@@ -269,10 +290,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><span class="math inline">\(\mu = \log(p_{0})=\frac{1}{\#\ de\ celdas}\)</span></p></li>
 </ul>
 <p>El modelo log-lineal en <code>R</code> se ajusta utilizando la función <code>svyloglin</code> como sigue:</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">svyloglin</span>(<span class="at">formula =</span> <span class="sc">~</span>pobreza<span class="sc">+</span>Sex <span class="sc">+</span> pobreza<span class="sc">:</span>Sex, </span>
-<span id="cb417-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-2" tabindex="-1"></a>                    <span class="at">design =</span> diseno)</span>
-<span id="cb417-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-3" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod1)</span>
-<span id="cb417-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-4" tabindex="-1"></a>s1</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb415-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">svyloglin</span>(<span class="at">formula =</span> <span class="sc">~</span>pobreza<span class="sc">+</span>Sex <span class="sc">+</span> pobreza<span class="sc">:</span>Sex, </span>
+<span id="cb415-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb415-2" tabindex="-1"></a>                    <span class="at">design =</span> diseno)</span>
+<span id="cb415-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb415-3" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod1)</span>
+<span id="cb415-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb415-4" tabindex="-1"></a>s1</span></code></pre></div>
 <pre><code>## Loglinear model: svyloglin(formula = ~pobreza + Sex + pobreza:Sex, design = diseno)
 ##                   coef      se        p
 ## pobreza1      0.219673 0.06778 0.001192
@@ -280,16 +301,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## pobreza1:Sex1 0.005583 0.02350 0.812175</code></pre>
 <p>En la salida anterior se puede observar que, con una confianza del 95% el estado de pobreza es independiente del sexo, como se ha mostrado con las pruebas anteriores.</p>
 <p>Ahora bien, puesto que en la salida anterior se pudo observar que la interacción es no significativa, entonces, ajustemos ahora el modelo sin interacción:</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb419-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">svyloglin</span>(<span class="at">formula =</span> <span class="sc">~</span>pobreza<span class="sc">+</span>Sex, </span>
-<span id="cb419-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb419-2" tabindex="-1"></a>                  <span class="at">design =</span> diseno)</span>
-<span id="cb419-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb419-3" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod2)</span>
-<span id="cb419-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb419-4" tabindex="-1"></a>s2</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-1" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">svyloglin</span>(<span class="at">formula =</span> <span class="sc">~</span>pobreza<span class="sc">+</span>Sex, </span>
+<span id="cb417-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-2" tabindex="-1"></a>                  <span class="at">design =</span> diseno)</span>
+<span id="cb417-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-3" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod2)</span>
+<span id="cb417-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb417-4" tabindex="-1"></a>s2</span></code></pre></div>
 <pre><code>## Loglinear model: svyloglin(formula = ~pobreza + Sex, design = diseno)
 ##             coef      se         p
 ## pobreza1 0.21997 0.06752 0.0011230
 ## Sex1     0.05405 0.01577 0.0006076</code></pre>
 <p>Por último, mediante un análisis de varianza es posible comparar los dos modelos como sigue:</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb421-1" tabindex="-1"></a><span class="fu">anova</span>(mod1, mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb419-1" tabindex="-1"></a><span class="fu">anova</span>(mod1, mod2)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ##  Model 1: y ~ pobreza + Sex
 ## Model 2: y ~ pobreza + Sex + pobreza:Sex 
@@ -339,10 +360,10 @@ por ende, el intervalo de confianza es:</p>
     CI\left(\psi\right)=\exp\left(\hat{B}_{j}\pm t_{df,1-\frac{\alpha}{2}}se\left(\hat{B}_{j}\right)\right)
 \]</span></p>
 <p>A continuación, se muestra el ajuste de un modelo logístico teniendo e cuenta el diseño muestral:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-1" tabindex="-1"></a>  mod_loglin <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region,</span>
-<span id="cb423-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-2" tabindex="-1"></a>                       <span class="at">family =</span> binomial, </span>
-<span id="cb423-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-3" tabindex="-1"></a>                       <span class="at">design=</span>diseno)</span>
-<span id="cb423-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-4" tabindex="-1"></a>  <span class="fu">tidy</span>(mod_loglin) </span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb421-1" tabindex="-1"></a>  mod_loglin <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region,</span>
+<span id="cb421-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb421-2" tabindex="-1"></a>                       <span class="at">family =</span> binomial, </span>
+<span id="cb421-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb421-3" tabindex="-1"></a>                       <span class="at">design=</span>diseno)</span>
+<span id="cb421-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb421-4" tabindex="-1"></a>  <span class="fu">tidy</span>(mod_loglin) </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -406,7 +427,7 @@ por ende, el intervalo de confianza es:</p>
 </tbody>
 </table>
 <p>La función <em>tidy</em> muestra que ninguna de las covariables son significativas con una confianza del 95%. A continuación, se presentan los intervalos de confianza en los cuales se pueden concluir que en todos los parámetros el cero se encuentra dentro del intrevalo:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb424-1" tabindex="-1"></a><span class="fu">confint</span>(mod_loglin, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb422-1" tabindex="-1"></a><span class="fu">confint</span>(mod_loglin, <span class="at">level =</span> <span class="fl">0.95</span>) </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -454,35 +475,35 @@ por ende, el intervalo de confianza es:</p>
 </tbody>
 </table>
 <p>Para verificar de manera gráfica la distribución de los parámetros del modelo, se realizará un gráfico de estos usando la función <em>plot_summs</em> como se muestra a continuación,</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb425-1" tabindex="-1"></a><span class="fu">library</span>(ggstance)</span>
-<span id="cb425-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb425-2" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin, </span>
-<span id="cb425-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb425-3" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-1" tabindex="-1"></a><span class="fu">library</span>(ggstance)</span>
+<span id="cb423-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-2" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin, </span>
+<span id="cb423-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb423-3" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="08-Generalizados_files/figure-html/unnamed-chunk-18-1.svg" width="80%" /></p>
 <p>Se puede observar en el gráfico que el número cero se encuentra dentro del intervalo de confianza de cada uno de los parámetros, lo que confirma la no significancia al 95% de los parámetros del modelo.</p>
 <p>Por otro parte, el estadístico de Wald para el cada una de las variables del modelo se calcula a continuación con la función <em>regTermTest</em> para las variables del modelo:</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb426-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Sex)</span></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb424-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Sex)</span></code></pre></div>
 <pre><code>## Wald test for Sex
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno, 
 ##     family = binomial)
 ## F =  0.00893  on  1  and  113  df: p= 0.92</code></pre>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb428-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Zone)</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb426-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Zone)</span></code></pre></div>
 <pre><code>## Wald test for Zone
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno, 
 ##     family = binomial)
 ## F =  3.278  on  1  and  113  df: p= 0.073</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Region)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb428-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin, <span class="sc">~</span>Region)</span></code></pre></div>
 <pre><code>## Wald test for Region
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno, 
 ##     family = binomial)
 ## F =  0.3654  on  4  and  113  df: p= 0.83</code></pre>
 <p>Concluyendo que con una confianza del 95% no son significativas en el modelo como se había mencionado anteriormente.</p>
 <p>Como es tradicional en el ejuste de modelos de regresión ya sea, clásico o generalizado, se pueden realizar ajustes con interacciones. A continuación, se present cómo se ajustan modelos loglineales con interacción:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-1" tabindex="-1"></a>mod_loglin_int <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region <span class="sc">+</span> </span>
-<span id="cb432-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-2" tabindex="-1"></a>                           Sex<span class="sc">:</span>Zone <span class="sc">+</span> Sex<span class="sc">:</span>Region,</span>
-<span id="cb432-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-3" tabindex="-1"></a>                           <span class="at">family=</span>binomial, </span>
-<span id="cb432-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-4" tabindex="-1"></a>                           <span class="at">design=</span>diseno)</span>
-<span id="cb432-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-5" tabindex="-1"></a>tab_mod <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mod_loglin_int) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(p.value)</span>
-<span id="cb432-6"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-6" tabindex="-1"></a>tab_mod</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-1" tabindex="-1"></a>mod_loglin_int <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region <span class="sc">+</span> </span>
+<span id="cb430-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-2" tabindex="-1"></a>                           Sex<span class="sc">:</span>Zone <span class="sc">+</span> Sex<span class="sc">:</span>Region,</span>
+<span id="cb430-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-3" tabindex="-1"></a>                           <span class="at">family=</span>binomial, </span>
+<span id="cb430-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-4" tabindex="-1"></a>                           <span class="at">design=</span>diseno)</span>
+<span id="cb430-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-5" tabindex="-1"></a>tab_mod <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mod_loglin_int) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(p.value)</span>
+<span id="cb430-6"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb430-6" tabindex="-1"></a>tab_mod</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -582,57 +603,57 @@ por ende, el intervalo de confianza es:</p>
 </table>
 <p>Observando que la interacción tampoco es significativa con una confianza del 95%.</p>
 <p>El gráfico de la distribución de los parámetros del modelo con intercepto y sin intercepto se presenta a continuación:</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb433-1" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin_int, mod_loglin, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb431-1" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin_int, mod_loglin, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="08-Generalizados_files/figure-html/unnamed-chunk-21-1.svg" width="60%" /></p>
 <p>El estadístico de Wald sobre los parámetros del modelo con intercepto son:</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb434-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb432-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex)</span></code></pre></div>
 <pre><code>## Wald test for Sex
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region, 
 ##     design = diseno, family = binomial)
 ## F =  0.05753  on  1  and  108  df: p= 0.81</code></pre>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb436-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Zone)</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb434-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Zone)</span></code></pre></div>
 <pre><code>## Wald test for Zone
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region, 
 ##     design = diseno, family = binomial)
 ## F =  2.749  on  1  and  108  df: p= 0.1</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb438-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Region)</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb436-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Region)</span></code></pre></div>
 <pre><code>## Wald test for Region
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region, 
 ##     design = diseno, family = binomial)
 ## F =  0.8999  on  4  and  108  df: p= 0.47</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb440-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex<span class="sc">:</span>Zone)</span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb438-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex<span class="sc">:</span>Zone)</span></code></pre></div>
 <pre><code>## Wald test for Sex:Zone
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region, 
 ##     design = diseno, family = binomial)
 ## F =  0.006789  on  1  and  108  df: p= 0.93</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex<span class="sc">:</span>Region)</span></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb440-1" tabindex="-1"></a>  <span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_int, <span class="sc">~</span>Sex<span class="sc">:</span>Region)</span></code></pre></div>
 <pre><code>## Wald test for Sex:Region
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region, 
 ##     design = diseno, family = binomial)
 ## F =  1.058  on  4  and  108  df: p= 0.38</code></pre>
 <p>Observándose que con una confianza del 95% ninguno de los parámetros del modelo es significativo.</p>
 <p>Ahora bien, como se ha explicado a los largo de los capítulos relacionado con modelos, se pueden ajustar modelos usando <em>Q_Weighting</em>. A continuación, se presenta cómo se ajusta el modelo usando estos pesos:</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-1" tabindex="-1"></a>  fit_wgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span>  Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region ,</span>
-<span id="cb444-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-2" tabindex="-1"></a>                <span class="at">data =</span> encuesta)</span>
-<span id="cb444-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-3" tabindex="-1"></a>  wgt_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_wgt)</span>
-<span id="cb444-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-4" tabindex="-1"></a>  encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">wk2 =</span> wk<span class="sc">/</span>wgt_hat)</span>
-<span id="cb444-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-5" tabindex="-1"></a>  </span>
-<span id="cb444-6"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-6" tabindex="-1"></a>  diseno_qwgt <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb444-7"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-7" tabindex="-1"></a>    <span class="fu">as_survey_design</span>(</span>
-<span id="cb444-8"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-8" tabindex="-1"></a>      <span class="at">strata =</span> Stratum,</span>
-<span id="cb444-9"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-9" tabindex="-1"></a>      <span class="at">ids =</span> PSU,</span>
-<span id="cb444-10"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-10" tabindex="-1"></a>      <span class="at">weights =</span> wk2,</span>
-<span id="cb444-11"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-11" tabindex="-1"></a>      <span class="at">nest =</span> T</span>
-<span id="cb444-12"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-12" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-1" tabindex="-1"></a>  fit_wgt <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span>  Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region ,</span>
+<span id="cb442-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-2" tabindex="-1"></a>                <span class="at">data =</span> encuesta)</span>
+<span id="cb442-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-3" tabindex="-1"></a>  wgt_hat <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_wgt)</span>
+<span id="cb442-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-4" tabindex="-1"></a>  encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">wk2 =</span> wk<span class="sc">/</span>wgt_hat)</span>
+<span id="cb442-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-5" tabindex="-1"></a>  </span>
+<span id="cb442-6"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-6" tabindex="-1"></a>  diseno_qwgt <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb442-7"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-7" tabindex="-1"></a>    <span class="fu">as_survey_design</span>(</span>
+<span id="cb442-8"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-8" tabindex="-1"></a>      <span class="at">strata =</span> Stratum,</span>
+<span id="cb442-9"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-9" tabindex="-1"></a>      <span class="at">ids =</span> PSU,</span>
+<span id="cb442-10"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-10" tabindex="-1"></a>      <span class="at">weights =</span> wk2,</span>
+<span id="cb442-11"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-11" tabindex="-1"></a>      <span class="at">nest =</span> T</span>
+<span id="cb442-12"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb442-12" tabindex="-1"></a>    )</span></code></pre></div>
 <p>Defiendo la variable pobreza dentro de la base de datos.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb445-1" tabindex="-1"></a>diseno_qwgt <span class="ot">&lt;-</span> diseno_qwgt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb445-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb445-2" tabindex="-1"></a><span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb443-1" tabindex="-1"></a>diseno_qwgt <span class="ot">&lt;-</span> diseno_qwgt <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb443-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb443-2" tabindex="-1"></a><span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
 <p>Ajustando el modelo se tiene:</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-1" tabindex="-1"></a>mod_loglin_qwgt <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region,</span>
-<span id="cb446-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-2" tabindex="-1"></a>                          <span class="at">family=</span>quasibinomial,</span>
-<span id="cb446-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-3" tabindex="-1"></a>                          <span class="at">design=</span>diseno_qwgt)</span>
-<span id="cb446-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-4" tabindex="-1"></a>tab_mod <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mod_loglin_qwgt)</span>
-<span id="cb446-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-5" tabindex="-1"></a>tab_mod</span></code></pre></div>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-1" tabindex="-1"></a>mod_loglin_qwgt <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(<span class="at">formula =</span> pobreza <span class="sc">~</span> Sex <span class="sc">+</span> Zone <span class="sc">+</span> Region,</span>
+<span id="cb444-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-2" tabindex="-1"></a>                          <span class="at">family=</span>quasibinomial,</span>
+<span id="cb444-3"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-3" tabindex="-1"></a>                          <span class="at">design=</span>diseno_qwgt)</span>
+<span id="cb444-4"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-4" tabindex="-1"></a>tab_mod <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mod_loglin_qwgt)</span>
+<span id="cb444-5"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb444-5" tabindex="-1"></a>tab_mod</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -696,21 +717,21 @@ por ende, el intervalo de confianza es:</p>
 </tbody>
 </table>
 <p>Concluyendo que, con una confianza del 95% y basado en la muestra, ninguno de los parámetros del modelo es significativo. Lo cual se puede corroborar con el gráfico de la distribución de los parámetros del modelo con los pesos ajustados y sin los pesos:</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb447-1" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin, mod_loglin_qwgt, </span>
-<span id="cb447-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb447-2" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb445-1" tabindex="-1"></a><span class="fu">plot_summs</span>(mod_loglin, mod_loglin_qwgt, </span>
+<span id="cb445-2"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb445-2" tabindex="-1"></a>             <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">plot.distributions =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="08-Generalizados_files/figure-html/unnamed-chunk-25-1.svg" width="40%" /></p>
 <p>El Estadístico de Wald sobre los parámetros del modelo se obtiene de manera similar a lo visto anteriormente:</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb448-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Sex)</span></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb446-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Sex)</span></code></pre></div>
 <pre><code>## Wald test for Sex
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt, 
 ##     family = quasibinomial)
 ## F =  0.0743  on  1  and  113  df: p= 0.79</code></pre>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb450-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Zone)</span></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb448-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Zone)</span></code></pre></div>
 <pre><code>## Wald test for Zone
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt, 
 ##     family = quasibinomial)
 ## F =  2.221  on  1  and  113  df: p= 0.14</code></pre>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb452-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Region)</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="modelo-log-lineal-para-tablas-de-contingencia.html#cb450-1" tabindex="-1"></a><span class="fu">regTermTest</span>(<span class="at">model =</span> mod_loglin_qwgt, <span class="sc">~</span>Region)</span></code></pre></div>
 <pre><code>## Wald test for Region
 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt, 
 ##     family = quasibinomial)

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.3 Scaterplot | Análisis de encuestas con R</title>
+  <title>7.3 Scaterplot | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.3 Scaterplot | Análisis de encuestas con R" />
+  <meta property="og:title" content="7.3 Scaterplot | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.3 Scaterplot | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="7.3 Scaterplot | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-22" />
+<meta name="date" content="2025-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,102 +141,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
-<li class="chapter" data-level="1" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<li class="chapter" data-level="1" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="07-Gráficas.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="07-Gráficas.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1.1</b> Conceptos básicos en encuestas de hogares</a></li>
-<li class="chapter" data-level="1.2" data-path="07-Gráficas.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>1.2</b> Universo de estudio y población objetivo</a></li>
-<li class="chapter" data-level="1.3" data-path="07-Gráficas.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>1.3</b> Unidades de análisis</a></li>
-<li class="chapter" data-level="1.4" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>1.4</b> Unidades de muestreo</a></li>
-<li class="chapter" data-level="1.5" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>1.5</b> Marcos de muestreo</a></li>
-<li class="chapter" data-level="1.6" data-path="07-Gráficas.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>1.6</b> Motivación</a>
+<li class="chapter" data-level="2.1" data-path="07-Gráficas.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="07-Gráficas.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="07-Gráficas.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
 <ul>
-<li class="chapter" data-level="1.6.1" data-path="07-Gráficas.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.6.1</b> La importancia de considerar el diseño muestral</a></li>
+<li class="chapter" data-level="2.5.1" data-path="07-Gráficas.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>1.7</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
-<li class="chapter" data-level="1.8" data-path="07-Gráficas.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>1.8</b> Práctica en <code>R</code></a></li>
-<li class="chapter" data-level="1.9" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>1.9</b> Calibrando con <code>R</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>2</b> Manejando una base de encuestas de hogares con R</a>
+<li class="chapter" data-level="2.6" data-path="07-Gráficas.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="07-Gráficas.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>2.1</b> Fundamentos básicos de R y Rstudio</a></li>
-<li class="chapter" data-level="2.2" data-path="07-Gráficas.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>2.2</b> Algunas librerías de interés</a></li>
-<li class="chapter" data-level="2.3" data-path="07-Gráficas.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>2.3</b> Cración de proyectos en <code>R</code></a></li>
-<li class="chapter" data-level="2.4" data-path="07-Gráficas.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>2.4</b> Lectura de las bases de datos y manipulación</a></li>
-<li class="chapter" data-level="2.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>2.5</b> El operador <code>pipe</code></a></li>
-<li class="chapter" data-level="2.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>2.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
-<li class="chapter" data-level="2.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>2.7</b> Medidas descriptivos y reflexiones</a></li>
-<li class="chapter" data-level="2.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>2.8</b> Algunas reflexiones generales</a></li>
-<li class="chapter" data-level="2.9" data-path="07-Gráficas.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>2.9</b> <strong>¡Observación importante!</strong></a></li>
-<li class="chapter" data-level="2.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>2.10</b> Medias y totales</a></li>
-<li class="chapter" data-level="2.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>2.11</b> Medianas y percentiles</a></li>
-<li class="chapter" data-level="2.12" data-path="07-Gráficas.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>2.12</b> Varianza, desviación estándar y rangos</a></li>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3</b> Análisis de las variables continuas en encuestas de hogares</a>
+<li class="chapter" data-level="2.7" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="07-Gráficas.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>3.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
-<li class="chapter" data-level="3.2" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>3.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
-<li class="chapter" data-level="3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>3.3</b> Estimación puntual</a>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="07-Gráficas.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="07-Gráficas.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>3.3.1</b> Estimación de totales e intervalos de confianza</a></li>
-<li class="chapter" data-level="3.3.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>3.3.2</b> Estimación de la media e intervalo de confianza</a></li>
-<li class="chapter" data-level="3.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>3.3.3</b> Estimación de medidas de dispersión y localización</a></li>
+<li class="chapter" data-level="3.1" data-path="07-Gráficas.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="07-Gráficas.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="07-Gráficas.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="07-Gráficas.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="07-Gráficas.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="07-Gráficas.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>3.5</b> Análisis de la relación entre dos variable continuas</a></li>
-<li class="chapter" data-level="3.6" data-path="07-Gráficas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>3.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.7</b> Estimando razones en encuestas de hogares</a></li>
-<li class="chapter" data-level="3.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.8</b> Estimando contrastes en encuestas de hogares</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de variables categóricas en encuestas de hogares</a>
+<li class="chapter" data-level="4" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="estimaciones-de-totales.html"><a href="estimaciones-de-totales.html"><i class="fa fa-check"></i><b>4.1</b> Estimaciones de totales</a></li>
-<li class="chapter" data-level="4.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>4.2</b> Estimación de proporciones</a></li>
-<li class="chapter" data-level="4.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>4.3</b> Tablas cruzadas.</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="07-Gráficas.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>5</b> Modelos de regresión bajo diseños de muestreo complejos</a>
+<li class="chapter" data-level="4.1" data-path="07-Gráficas.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.2" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.2</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.3" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.3</b> Inferencia sobre los parámetros del Modelo</a></li>
+<li class="chapter" data-level="4.3.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="4.4" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-ginni-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Ginni en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.5</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.6" data-path="07-Gráficas.html"><a href="#prueba-de-hip%C3%B3tesis-para-la-diferencia-de-medias-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.6</b> Prueba de hipótesis para la diferencia de medias en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.7" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.7</b> Estimando razones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<li class="chapter" data-level="4.8" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="07-Gráficas.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
-<li class="chapter" data-level="7.2" data-path="07-Gráficas.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
-<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="07-Gráficas.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<li class="chapter" data-level="5.1" data-path="07-Gráficas.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="07-Gráficas.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
-<li class="chapter" data-level="8.2" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
-<li class="chapter" data-level="8.3" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
-<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<li class="chapter" data-level="5.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
-<li class="chapter" data-level="9.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
-<li class="chapter" data-level="9.3" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+<li class="chapter" data-level="5.2.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas..html"><a href="tablas-cruzadas..html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#modelos-de-regresi%C3%B3n-bajo-dise%C3%B1os-de-muestreo-complejos"><i class="fa fa-check"></i><b>6</b> Modelos de regresión bajo diseños de muestreo complejos</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
-<li class="chapter" data-level="10.2" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
-<li class="chapter" data-level="10.3" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
-<li class="chapter" data-level="10.4" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
-<li class="chapter" data-level="10.5" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
-<li class="chapter" data-level="10.6" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
-<li class="chapter" data-level="10.7" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+<li class="chapter" data-level="6.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>6.1</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
+<li class="chapter" data-level="6.2" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>6.2</b> Diagnóstico del modelo</a></li>
+<li class="chapter" data-level="6.3" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>6.3</b> Inferencia sobre los parámetros del Modelo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="chapter" data-level="7" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>7</b> Gráficas en R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>7.1</b> Histogramas para graficar variables continuas.</a></li>
+<li class="chapter" data-level="7.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>7.2</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="7.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>7.3</b> Scaterplot</a></li>
+<li class="chapter" data-level="7.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>7.4</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="7.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>7.5</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>8.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="8.2" data-path="07-Gráficas.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>8.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="8.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>8.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="07-Gráficas.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="07-Gráficas.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>9.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="9.2" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="07-Gráficas.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>9.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="9.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>9.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>10</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>10.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="10.2" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>10.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="10.3" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>10.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>11</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>11.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="11.2" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>11.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="11.3" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>11.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="11.4" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="11.5" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>11.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="11.6" data-path="07-Gráficas.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>11.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="11.7" data-path="07-Gráficas.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>11.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a Análisis de encuestas con R </a></li>
 
@@ -257,77 +278,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="scaterplot" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Scaterplot<a href="scaterplot.html#scaterplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="scaterplot" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Scaterplot<a href="scaterplot.html#scaterplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Un diagrama de dispersión o Scaterplot representa cada observación como un punto, posicionado según el valor de dos variables. Además de una posición horizontal y vertical, cada punto también tiene un tamaño, un color y una forma. Estos atributos se denominan estética y son las propiedades que se pueden percibir en el gráfico. Cada estética puede asignarse a una variable o establecerse en un valor constante. Para realizar este tipo de gráfico se usará la función <code>geom_point</code>. Para ejemplificar el uso de esta función, se graficarán las variables ingresos y gastos como se muestra a continuación:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="scaterplot.html#cb375-1" tabindex="-1"></a>plot19_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( </span>
-<span id="cb375-2"><a href="scaterplot.html#cb375-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb375-3"><a href="scaterplot.html#cb375-3" tabindex="-1"></a>      <span class="fu">aes</span>(</span>
-<span id="cb375-4"><a href="scaterplot.html#cb375-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
-<span id="cb375-5"><a href="scaterplot.html#cb375-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb375-6"><a href="scaterplot.html#cb375-6" tabindex="-1"></a>      <span class="at">weight =</span> wk)) <span class="sc">+</span></span>
-<span id="cb375-7"><a href="scaterplot.html#cb375-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb375-8"><a href="scaterplot.html#cb375-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb375-9"><a href="scaterplot.html#cb375-9" tabindex="-1"></a>plot19_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="scaterplot.html#cb373-1" tabindex="-1"></a>plot19_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( </span>
+<span id="cb373-2"><a href="scaterplot.html#cb373-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb373-3"><a href="scaterplot.html#cb373-3" tabindex="-1"></a>      <span class="fu">aes</span>(</span>
+<span id="cb373-4"><a href="scaterplot.html#cb373-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
+<span id="cb373-5"><a href="scaterplot.html#cb373-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
+<span id="cb373-6"><a href="scaterplot.html#cb373-6" tabindex="-1"></a>      <span class="at">weight =</span> wk)) <span class="sc">+</span></span>
+<span id="cb373-7"><a href="scaterplot.html#cb373-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb373-8"><a href="scaterplot.html#cb373-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb373-9"><a href="scaterplot.html#cb373-9" tabindex="-1"></a>plot19_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-31-1.svg" width="672" />
 Note, que en este caso el parámetro <code>weight</code> no está aportando información visual al gráfico. El parámetro <code>weight</code> se puede usar para controlar el tamaño de los puntos, y así, tener un mejor panorama del comportamiento de la muestra:</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="scaterplot.html#cb376-1" tabindex="-1"></a>plot20_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb376-2"><a href="scaterplot.html#cb376-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb376-3"><a href="scaterplot.html#cb376-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
-<span id="cb376-4"><a href="scaterplot.html#cb376-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb376-5"><a href="scaterplot.html#cb376-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb376-6"><a href="scaterplot.html#cb376-6" tabindex="-1"></a>plot20_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="scaterplot.html#cb374-1" tabindex="-1"></a>plot20_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb374-2"><a href="scaterplot.html#cb374-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb374-3"><a href="scaterplot.html#cb374-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
+<span id="cb374-4"><a href="scaterplot.html#cb374-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb374-5"><a href="scaterplot.html#cb374-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb374-6"><a href="scaterplot.html#cb374-6" tabindex="-1"></a>plot20_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/hist14-1.svg" width="672" /></p>
 <p>Otra forma de usar la variable <code>wk</code>, es asignar la intensidad del color según el valor de la variable:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="scaterplot.html#cb377-1" tabindex="-1"></a>plot21_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb377-2"><a href="scaterplot.html#cb377-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb377-3"><a href="scaterplot.html#cb377-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
-<span id="cb377-4"><a href="scaterplot.html#cb377-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb377-5"><a href="scaterplot.html#cb377-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb377-6"><a href="scaterplot.html#cb377-6" tabindex="-1"></a>plot21_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="scaterplot.html#cb375-1" tabindex="-1"></a>plot21_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb375-2"><a href="scaterplot.html#cb375-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb375-3"><a href="scaterplot.html#cb375-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
+<span id="cb375-4"><a href="scaterplot.html#cb375-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb375-5"><a href="scaterplot.html#cb375-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb375-6"><a href="scaterplot.html#cb375-6" tabindex="-1"></a>plot21_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-32-1.svg" width="672" /></p>
 <p>Se puede extender las bondades de los gráfico de <code>ggplot2</code> para obtener mayor información de las muestra. Por ejemplo, agrupar los datos por Zona. Para lograr esto se introduce el parámetro <code>shape</code>:</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="scaterplot.html#cb378-1" tabindex="-1"></a>plot22_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb378-2"><a href="scaterplot.html#cb378-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb378-3"><a href="scaterplot.html#cb378-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, </span>
-<span id="cb378-4"><a href="scaterplot.html#cb378-4" tabindex="-1"></a>        <span class="at">x =</span> Expenditure,</span>
-<span id="cb378-5"><a href="scaterplot.html#cb378-5" tabindex="-1"></a>        <span class="at">shape =</span> Zone)) <span class="sc">+</span> </span>
-<span id="cb378-6"><a href="scaterplot.html#cb378-6" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk, <span class="at">color =</span> Zone), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb378-7"><a href="scaterplot.html#cb378-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorZona) <span class="sc">+</span></span>
-<span id="cb378-8"><a href="scaterplot.html#cb378-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb378-9"><a href="scaterplot.html#cb378-9" tabindex="-1"></a>plot22_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="scaterplot.html#cb376-1" tabindex="-1"></a>plot22_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb376-2"><a href="scaterplot.html#cb376-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb376-3"><a href="scaterplot.html#cb376-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, </span>
+<span id="cb376-4"><a href="scaterplot.html#cb376-4" tabindex="-1"></a>        <span class="at">x =</span> Expenditure,</span>
+<span id="cb376-5"><a href="scaterplot.html#cb376-5" tabindex="-1"></a>        <span class="at">shape =</span> Zone)) <span class="sc">+</span> </span>
+<span id="cb376-6"><a href="scaterplot.html#cb376-6" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk, <span class="at">color =</span> Zone), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb376-7"><a href="scaterplot.html#cb376-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorZona) <span class="sc">+</span></span>
+<span id="cb376-8"><a href="scaterplot.html#cb376-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb376-9"><a href="scaterplot.html#cb376-9" tabindex="-1"></a>plot22_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-33-1.svg" width="672" /></p>
 <p>De forma similar se puede obtener el resultado por sexo:</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="scaterplot.html#cb379-1" tabindex="-1"></a>plot23_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb379-2"><a href="scaterplot.html#cb379-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb379-3"><a href="scaterplot.html#cb379-3" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb379-4"><a href="scaterplot.html#cb379-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
-<span id="cb379-5"><a href="scaterplot.html#cb379-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb379-6"><a href="scaterplot.html#cb379-6" tabindex="-1"></a>      <span class="at">shape =</span> Sex)) <span class="sc">+</span></span>
-<span id="cb379-7"><a href="scaterplot.html#cb379-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
-<span id="cb379-8"><a href="scaterplot.html#cb379-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
-<span id="cb379-9"><a href="scaterplot.html#cb379-9" tabindex="-1"></a>    <span class="at">color =</span> Sex),</span>
-<span id="cb379-10"><a href="scaterplot.html#cb379-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb379-11"><a href="scaterplot.html#cb379-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb379-12"><a href="scaterplot.html#cb379-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorSex) <span class="sc">+</span></span>
-<span id="cb379-13"><a href="scaterplot.html#cb379-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb379-14"><a href="scaterplot.html#cb379-14" tabindex="-1"></a>plot23_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="scaterplot.html#cb377-1" tabindex="-1"></a>plot23_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb377-2"><a href="scaterplot.html#cb377-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb377-3"><a href="scaterplot.html#cb377-3" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb377-4"><a href="scaterplot.html#cb377-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
+<span id="cb377-5"><a href="scaterplot.html#cb377-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
+<span id="cb377-6"><a href="scaterplot.html#cb377-6" tabindex="-1"></a>      <span class="at">shape =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb377-7"><a href="scaterplot.html#cb377-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
+<span id="cb377-8"><a href="scaterplot.html#cb377-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
+<span id="cb377-9"><a href="scaterplot.html#cb377-9" tabindex="-1"></a>    <span class="at">color =</span> Sex),</span>
+<span id="cb377-10"><a href="scaterplot.html#cb377-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb377-11"><a href="scaterplot.html#cb377-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb377-12"><a href="scaterplot.html#cb377-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorSex) <span class="sc">+</span></span>
+<span id="cb377-13"><a href="scaterplot.html#cb377-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb377-14"><a href="scaterplot.html#cb377-14" tabindex="-1"></a>plot23_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-34-1.svg" width="672" /></p>
 <p>Un resultado equivalente se obtiene por región:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="scaterplot.html#cb380-1" tabindex="-1"></a>plot24_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb380-2"><a href="scaterplot.html#cb380-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb380-3"><a href="scaterplot.html#cb380-3" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
-<span id="cb380-4"><a href="scaterplot.html#cb380-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
-<span id="cb380-5"><a href="scaterplot.html#cb380-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb380-6"><a href="scaterplot.html#cb380-6" tabindex="-1"></a>      <span class="at">shape =</span> Region)) <span class="sc">+</span></span>
-<span id="cb380-7"><a href="scaterplot.html#cb380-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
-<span id="cb380-8"><a href="scaterplot.html#cb380-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
-<span id="cb380-9"><a href="scaterplot.html#cb380-9" tabindex="-1"></a>    <span class="at">color =</span> Region),</span>
-<span id="cb380-10"><a href="scaterplot.html#cb380-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb380-11"><a href="scaterplot.html#cb380-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb380-12"><a href="scaterplot.html#cb380-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorRegion) <span class="sc">+</span></span>
-<span id="cb380-13"><a href="scaterplot.html#cb380-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb380-14"><a href="scaterplot.html#cb380-14" tabindex="-1"></a>plot24_Ponde</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="scaterplot.html#cb378-1" tabindex="-1"></a>plot24_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb378-2"><a href="scaterplot.html#cb378-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb378-3"><a href="scaterplot.html#cb378-3" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb378-4"><a href="scaterplot.html#cb378-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
+<span id="cb378-5"><a href="scaterplot.html#cb378-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
+<span id="cb378-6"><a href="scaterplot.html#cb378-6" tabindex="-1"></a>      <span class="at">shape =</span> Region)) <span class="sc">+</span></span>
+<span id="cb378-7"><a href="scaterplot.html#cb378-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
+<span id="cb378-8"><a href="scaterplot.html#cb378-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
+<span id="cb378-9"><a href="scaterplot.html#cb378-9" tabindex="-1"></a>    <span class="at">color =</span> Region),</span>
+<span id="cb378-10"><a href="scaterplot.html#cb378-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb378-11"><a href="scaterplot.html#cb378-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb378-12"><a href="scaterplot.html#cb378-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorRegion) <span class="sc">+</span></span>
+<span id="cb378-13"><a href="scaterplot.html#cb378-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb378-14"><a href="scaterplot.html#cb378-14" tabindex="-1"></a>plot24_Ponde</span></code></pre></div>
 <p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-35-1.svg" width="672" /></p>
 </div>
             </section>

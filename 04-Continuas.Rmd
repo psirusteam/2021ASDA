@@ -478,6 +478,17 @@ diseno %>% group_by(Zone, Sex) %>%
 
 ```
 
+Las medias o promedios poblacionales son esenciales para describir la tendencia central de una variable. Por ejemplo, el gasto promedio de los hogares es un indicador representativo del comportamiento económico de la población. Su cálculo consiste en dividir el total estimado de la variable entre el tamaño poblacional estimado, de modo que su precisión depende de la exactitud en ambos componentes.
+
+El estimador de la media poblacional se puede expresar como:
+
+$$
+\widehat{\bar{Y}} = \frac{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} y_{hik}} {\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}} = \frac{\hat{Y}}{\hat{N}}
+$$
+
+Dado que $\widehat{\bar{Y}}$ es un estimador no lineal, su varianza exacta no puede expresarse en forma cerrada. Por ello, los paquetes estadísticos especializados en encuestas complejas emplean métodos como el remuestreo o la aproximación de Taylor, que se implementan automáticamente para facilitar su cálculo.
+
+
 ### Estimación de medidas de dispersión y localización
 
 En las encuestas de hogares siempre es necesario estimar medidas de dispersión de las variables estudiadas. Esto con el fin de, por ejemplo, ver qué tan disímiles son los ingresos medios de los hogares en un país determinado y con esto poder tomar acciones de política pública. Por lo anterior, es importante estudiar este parámetro en este texto. A continuación, se presenta el estimador de la desviación estándar:
@@ -791,22 +802,39 @@ y con una confianza del 95% y basado en la muestra tampoco se rechaza la hipóte
 
 ## Estimando razones en encuestas de hogares
 
-Un caso particular de una función no lineal de totales es la razón poblacional. Esta se define como el cociente de dos totales poblacionales de características de interés. En las encuestas de hogares, en ocasiones se requiere estimar este parámetro, por ejemplo, cantidad de hombres por cada mujer o la cantidad de mascotas por cada hogar en un país determinado. Puesto que la razón es un cociente de totales, tanto en numerador como el denominador son cantidades desconocidas y por tanto requieren estimarse *(Bautista, 1998)*. Por definición la razón poblacional se define de la siguiente manera:
+Un caso particular de una función no lineal de totales es la **razón poblacional**, definida como el cociente de dos totales poblacionales de características de interés. En encuestas de hogares, este parámetro es relevante cuando, por ejemplo, se requiere conocer la cantidad de hombres por cada mujer, la proporción de ocupados respecto a la población en edad de trabajar, o la cantidad de mascotas por cada hogar. Puesto que la razón es un cociente de totales, tanto el numerador como el denominador son cantidades desconocidas y, por lo tanto, deben estimarse *(Bautista, 1998)*. Formalmente, la razón poblacional se define como:
 
-\begin{eqnarray*}
-R & = & \frac{Y}{X}
-\end{eqnarray*}
+$$
+R = \frac{Y}{X}
+$$
 
-El estimador puntual de una razón en muestreos complejos no es más que estimar los totales por separados como se define a continuación:
+y su estimador puntual en el marco de un muestreo complejo se expresa como:
 
-\begin{eqnarray*}
-\hat{R} & = & \frac{\hat{Y}}{\hat{X}}\\
- & = & \frac{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{nh\alpha}}\omega_{h\alpha i}y_{h\alpha i}}{{ \sum_{h=1}^{H}\sum_{\alpha=1}^{\alpha_{h}}\sum_{i=1}^{nh\alpha}}\omega_{h\alpha i}x_{h\alpha i}}
-\end{eqnarray*}
+$$
+\hat{R} = \frac{\hat{Y}}{\hat{X}}
+= \frac{\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i} y_{h\alpha i}}
+       {\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i} x_{h\alpha i}}.
+$$
 
-Sin embargo, dado que estimador de la razón es un cociente entre dos estimadores, es decir, dos variables aleatorias, el cálculo de la estimación de la varianza no es sencillo de obtener. Para ellos, se debe aplicar linealización de Taylor como lo muestra *Gutiérrez (2016)*. 
+Sin embargo, dado que \$\hat{R}\$ es un cociente entre dos estimadores —es decir, dos variables aleatorias— el cálculo de su varianza no es trivial. Para ello se emplea la linealización de Taylor, como lo muestra *Gutiérrez (2016)*, o bien métodos de remuestreo. En términos de la función de estimación, se define:
 
-De manera computacional, la función `survey_ratio` tiene implementado los procedimientos para estimar las razones y sus varianzas. Para un correcto cálculo de la estimación de la razón y su varianza estimada se le debe introducir a la función el numerados de la razón (numerator) y el denominador (denominator). Adicional a esto, se le debe indicar el nivel de confianza de los intervalos y qué estadística de resúmenes debe calcular (vartype). A continuación, se muestran los códigos computacionales para estimar la razón entre el gasto y el ingreso.
+$$
+z_{hik} = y_{hik} - \hat{R}x_{hik},
+$$
+
+y a partir de esta expresión se aplica el estimador de varianza descrito en la Sección 9.2.
+
+
+### Implementación computacional en `R` {-}
+
+En la práctica, estos cálculos se facilitan gracias a los paquetes especializados. En particular, la función `survey_ratio` implementa la estimación de razones y sus varianzas en el marco de encuestas complejas. Para ello es necesario especificar claramente:
+
+* La variable del **Expenditure** (`numerator`),
+* La variable del **Income** (`denominator`),
+* El nivel de confianza (`level`) para los intervalos, y
+* Las estadísticas de resumen deseadas (`vartype`).
+
+A continuación, se ilustra cómo estimar la razón entre el gasto y el ingreso de los hogares:
 
 
 ```{r, eval=TRUE}
@@ -818,6 +846,17 @@ diseno %>% summarise(
     vartype =  c("se", "ci")
     ))
 ```
+
+
+
+### Interpretación aplicada {-}
+
+Las razones permiten expresar la relación entre dos variables, lo cual resulta especialmente útil para construir indicadores comparativos y de seguimiento. Un ejemplo directo en encuestas de hogares es la razón **gasto/ingreso**, que ayuda a identificar patrones de consumo y niveles de sostenibilidad económica de los hogares.
+
+Más allá de este caso, las razones también se utilizan en marcos internacionales. Por ejemplo, el **Indicador 2.1.1 de los Objetivos de Desarrollo Sostenible (ODS)** —prevalencia de subalimentación— se calcula a partir de la razón entre el consumo de alimentos, medido en calorías ingeridas, y los requerimientos energéticos mínimos de la dieta, determinados según edad, sexo y nivel de actividad física.
+
+De esta forma, las razones constituyen una herramienta central para transformar los resultados de encuestas en indicadores significativos que facilitan el análisis de realidades socioeconómicas y poblacionales.
+
 
 Como se puede observar, la razón entre el gasto y el ingreso es, aproximando, 0.71. Lo que implica que por cada unidad 100 unidades monetarias que le ingrese al hogar, se gastan 71 unidades, consiguiendo un intervalo de confianza al 95% de 0.65 y 0.76.
 
