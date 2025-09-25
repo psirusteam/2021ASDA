@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.12 Varianza, desviación estándar y rangos | 03-Basesdedatos.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.12 Varianza, desviación estándar y rangos | 03-Basesdedatos.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.12 Varianza, desviación estándar y rangos | 03-Basesdedatos.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="medianas-y-percentiles.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis de encuestas con R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>1</b> Manejando una base de encuestas de hogares con R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>1.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>1.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>1.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>1.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="1.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>1.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="1.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>1.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="1.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>1.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="1.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>1.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="1.9" data-path=""><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>1.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="1.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>1.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="1.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>1.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="1.12" data-path=""><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>1.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a Análisis de encuestas con R </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="varianza-desviación-estándar-y-rangos" class="section level2 hasAnchor" number="1.12">
+<h2><span class="header-section-number">1.12</span> Varianza, desviación estándar y rangos<a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Utilizando la función <code>summarise</code> podemos conocer también el comportamiento variacional de los ingresos sobre los respondientes.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="varianza-desviación-estándar-y-rangos.html#cb51-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">varianza =</span> <span class="fu">var</span>(ingcorte),</span>
+<span id="cb51-2"><a href="varianza-desviación-estándar-y-rangos.html#cb51-2" tabindex="-1"></a>                    <span class="at">desv =</span> <span class="fu">sd</span>(ingcorte))</span></code></pre></div>
+<pre><code>##   varianza    desv
+## 1  3407496 1845.94</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="varianza-desviación-estándar-y-rangos.html#cb53-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mini =</span> <span class="fu">min</span>(ingcorte),</span>
+<span id="cb53-2"><a href="varianza-desviación-estándar-y-rangos.html#cb53-2" tabindex="-1"></a>                    <span class="at">maxi =</span> <span class="fu">max</span>(ingcorte),</span>
+<span id="cb53-3"><a href="varianza-desviación-estándar-y-rangos.html#cb53-3" tabindex="-1"></a>                    <span class="at">rango =</span> maxi <span class="sc">-</span> mini,</span>
+<span id="cb53-4"><a href="varianza-desviación-estándar-y-rangos.html#cb53-4" tabindex="-1"></a>                    <span class="at">rangoiq =</span> <span class="fu">IQR</span>(ingcorte))</span></code></pre></div>
+<pre><code>##   mini   maxi  rango  rangoiq
+## 1    0 171000 171000 869.8312</code></pre>
+<p>Ahora bien, si se desea realizar el cálculo de la media, la desviación estándar y el rango de los ingresos por hogares, se realiza de la siguiente manera:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="varianza-desviación-estándar-y-rangos.html#cb55-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(paren_ee <span class="sc">==</span> <span class="st">&quot;Jefe&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="varianza-desviación-estándar-y-rangos.html#cb55-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sexoj) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="varianza-desviación-estándar-y-rangos.html#cb55-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb55-4"><a href="varianza-desviación-estándar-y-rangos.html#cb55-4" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(ingcorte),</span>
+<span id="cb55-5"><a href="varianza-desviación-estándar-y-rangos.html#cb55-5" tabindex="-1"></a>            <span class="at">desv =</span> <span class="fu">sd</span>(ingcorte),</span>
+<span id="cb55-6"><a href="varianza-desviación-estándar-y-rangos.html#cb55-6" tabindex="-1"></a>            <span class="at">rangoiq =</span> <span class="fu">IQR</span>(ingcorte))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   sexoj           n media  desv rangoiq
+##   &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Jefe hombre 70154 1456. 2325.   1026.
+## 2 Jefa mujer  47785 1334. 2076.    943.</code></pre>
+<p>y por condicción de ocupación se realizaría:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="varianza-desviación-estándar-y-rangos.html#cb57-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(condact) <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="varianza-desviación-estándar-y-rangos.html#cb57-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb57-3"><a href="varianza-desviación-estándar-y-rangos.html#cb57-3" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(ingcorte),</span>
+<span id="cb57-4"><a href="varianza-desviación-estándar-y-rangos.html#cb57-4" tabindex="-1"></a>            <span class="at">desv =</span> <span class="fu">sd</span>(ingcorte),</span>
+<span id="cb57-5"><a href="varianza-desviación-estándar-y-rangos.html#cb57-5" tabindex="-1"></a>            <span class="at">rangoiq =</span> <span class="fu">IQR</span>(ingcorte))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   condact      n media  desv rangoiq
+##     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1      -1  22937  764. 1136.    524.
+## 2       1 165325 1458. 2191.   1028.
+## 3       2  17896  695.  949.    497.
+## 4       3 150746 1003. 1527.    706.</code></pre>
+<p>a nivel de hogar:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="varianza-desviación-estándar-y-rangos.html#cb59-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(paren_ee <span class="sc">==</span> <span class="st">&quot;Jefe&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="varianza-desviación-estándar-y-rangos.html#cb59-2" tabindex="-1"></a>  <span class="fu">group_by</span>(condact) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="varianza-desviación-estándar-y-rangos.html#cb59-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb59-4"><a href="varianza-desviación-estándar-y-rangos.html#cb59-4" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(ingcorte),</span>
+<span id="cb59-5"><a href="varianza-desviación-estándar-y-rangos.html#cb59-5" tabindex="-1"></a>            <span class="at">desv =</span> <span class="fu">sd</span>(ingcorte),</span>
+<span id="cb59-6"><a href="varianza-desviación-estándar-y-rangos.html#cb59-6" tabindex="-1"></a>            <span class="at">rangoiq =</span> <span class="fu">IQR</span>(ingcorte))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##   condact     n media  desv rangoiq
+##     &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1       1 77852 1526. 2459.   1096.
+## 2       2  4469  535.  778.    441.
+## 3       3 35618 1256. 1730.    880.</code></pre>
+<p>Si se desea hacer un descriptivo a nivel de hogar para el ingreso se realizaría de la siguiente manera:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="varianza-desviación-estándar-y-rangos.html#cb61-1" tabindex="-1"></a>data2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(paren_ee <span class="sc">==</span> <span class="st">&quot;Jefe&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2"><a href="varianza-desviación-estándar-y-rangos.html#cb61-2" tabindex="-1"></a>  <span class="fu">group_by</span>(pobreza) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="varianza-desviación-estándar-y-rangos.html#cb61-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb61-4"><a href="varianza-desviación-estándar-y-rangos.html#cb61-4" tabindex="-1"></a>            <span class="at">media =</span> <span class="fu">mean</span>(ingcorte),</span>
+<span id="cb61-5"><a href="varianza-desviación-estándar-y-rangos.html#cb61-5" tabindex="-1"></a>            <span class="at">desv =</span> <span class="fu">sd</span>(ingcorte),</span>
+<span id="cb61-6"><a href="varianza-desviación-estándar-y-rangos.html#cb61-6" tabindex="-1"></a>            <span class="at">rangoiq =</span> <span class="fu">IQR</span>(ingcorte))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##   pobreza                  n  media   desv rangoiq
+##   &lt;fct&gt;                &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Pobreza extrema       3918   79.9   52.7    88.9
+## 2 Pobreza no extrema   13688  269.    62.5   107. 
+## 3 Fuera de la pobreza 100333 1614.  2355.   1055.</code></pre>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="medianas-y-percentiles.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/%s",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": false,
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
+});
+});
+</script>
+
+</body>
+
+</html>

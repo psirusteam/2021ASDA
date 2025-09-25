@@ -43,6 +43,7 @@ Como es costumbre, iniciamos cargando las librerías necesarias y configurando o
 options(digits = 4)
 
 # Paquetes para manejo de encuestas y visualización
+library(tidyverse)
 library(survey)      # Diseños muestrales complejos
 library(srvyr)       # Interfaz amigable con dplyr para encuestas
 library(ggplot2)     # Gramática de gráficos

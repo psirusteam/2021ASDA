@@ -1,7 +1,8 @@
 --- 
 title: "Análisis de encuestas con R"
-author: "Andrés Gutiérrez^[Experto Regional en Estadísticas Sociales - Comisión Económica para América Latina y el Caribe (CEPAL) -  andres.gutierrez@cepal.org], Cristian Téllez^[Profesor - Universidad Santo Tomás - cristiantellez@usta.edu.co], Stalyn Guerrero^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL), guerrerostalyn@gmail.com]"
+author: "Andrés Gutiérrez^[Experto Regional en Estadísticas Sociales - Comisión Económica para América Latina y el Caribe (CEPAL) -  andres.gutierrez@cepal.org],Stalyn Guerrero^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL), guerrerostalyn@gmail.com], Cristian Téllez^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL), cftellezp@unal.edu.co], Giovany Babativa^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL), gbabativam@gmail.com] "
 date: "`r Sys.Date()`"
+lang: es
 documentclass: book
 # bibliography: [CEPAL.bib]
 biblio-style: apalike
@@ -11,11 +12,13 @@ lot: yes
 lof: yes
 fontsize: 12pt
 geometry: margin = 3cm
-header-includes: \usepackage[spanish, spanishkw, onelanguage, linesnumbered]{algorithm2e}
-github-repo: psirusteam/HHS-Handbook
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+  - \usepackage{tabularray}
+github-repo: psirusteam/2021ASDA
 description: "Este es el repositorio del libro *Análisis de encuestas con R*."
 knit: "bookdown::render_book"
-lang: es
 linkcolor: blue
 output:
   pdf_document:

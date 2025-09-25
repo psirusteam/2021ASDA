@@ -282,7 +282,7 @@ fit <- lm(Income ~ Expenditure, data = BigCity)
 
 Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función `modelsummary` de la librería `modelsummary` de la siguiente manera:
 
-```{r, results='asis', echo=FALSE, eval = TRUE}
+```{r, results='asis', echo=FALSE, eval = FALSE}
 library(modelsummary)
 modelsummary(list(Pob = fit), statistic = NULL, 
              title = "Modelo BigCity",
@@ -620,7 +620,7 @@ $$
 
 donde:
 
-* $w_i^\*$ son los pesos de la encuesta,
+* $w_i^*$ son los pesos de la encuesta,
 * $e_i$ es el residual de la observación *i*,
 * $p$ es el número de parámetros del modelo,
 * $\phi$ es el parámetro de dispersión en el modelo lineal generalizado,

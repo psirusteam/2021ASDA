@@ -5,13 +5,12 @@ new_session: yes
 
 rmd_files: [
   "index.Rmd",
-  
   "01-Intro.Rmd",
   "02-Conceptos.Rmd",
   "03-Basesdedatos.Rmd",
-  "04-Continuas.Rmd",
-  "05-Categóricas.Rmd",
-   "06-Regresión.Rmd",
+  #"04-Continuas.Rmd",
+  #"05-Categóricas.Rmd",
+  # "06-Regresión.Rmd",
    "07-Gráficas.Rmd",
    "08-Generalizados.Rmd",
    "09-Generalizados2.Rmd",
