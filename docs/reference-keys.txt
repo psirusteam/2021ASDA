@@ -69,7 +69,10 @@ prueba-de-independencia-chi2
 prueba-chi2-clásica
 ajustes-para-encuestas-prueba-de-rao-scott
 ejemplo-en-r
-modelos-de-regresión-bajo-diseños-de-muestreo-complejos
+modelos-de-regresión-en-encuestas-de-hogares
+antecedentes-históricos-y-desarrollos-metodológicos
+relevancia-práctica
+aplicar-o-no-aplicar-ponderaciones
 estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.
 diagnóstico-del-modelo
 inferencia-sobre-los-parámetros-del-modelo

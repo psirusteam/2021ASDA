@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R</title>
+  <title>5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R" />
+  <meta property="og:title" content="5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="diagnóstico-del-modelo.html"/>
-<link rel="next" href="gráficas-en-r.html"/>
+<link rel="prev" href="estimación-de-proporciones-y-tablas-cruzadas.html"/>
+<link rel="next" href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -305,278 +305,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="inferencia-sobre-los-parámetros-del-modelo" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> Inferencia sobre los parámetros del Modelo<a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroborando las propiedades distribucionales de los errores y por ende, de la variable respuesta <span class="math inline">\(y\)</span>, el paso siguiente es verificar si los parámetros estimados son significativos y por ende, las covariables utilizadas para ajustar el modelo aportan significativamente para explicar o predecir a la variable de estudio <span class="math inline">\(y\)</span>.</p>
-<p>Dada las propiedades distribucionales de los <span class="math inline">\(\beta&#39;s\)</span>, un estadístico de prueba natural para evaluar la significancia de dicho parámetro se basa en la distribución “t-student” y se describe a continuación:</p>
-<p><span class="math display">\[
-t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
-\]</span></p>
-<p>Donde <span class="math inline">\(p\)</span> es el número de parámetros del modelo y <span class="math inline">\(n\)</span> el tamaño de la muestra de la encuesta. En este sentido, el estadístico de prueba anterior evalúa las hipótesis <span class="math inline">\(H_{0}:\beta_{k}=0\)</span> versus la alternativa <span class="math inline">\(H_{1}:\beta_{k}\neq0\)</span>.</p>
-<p>De las propiedades distribucionales de los <span class="math inline">\(\beta\)</span>, se puede construir un intervalo de confianza al <span class="math inline">\((1-\alpha)\times100\%\)</span> para <span class="math inline">\(\beta_{k}\)</span> está dado por:</p>
-<p><span class="math display">\[
-\hat{\beta}_{k}\pm t_{1-\frac{\alpha}{2},\,df}\,se\left(\hat{\beta}_{k}\right)
-\]</span></p>
-<p>Donde, los grados de libertad para el intervalo (<span class="math inline">\(df\)</span>) en una encuesta de hogares (muestras complejas) está dado por el número de conglomerados finales de la primera etapa menos el número de estratos de la etapa primaria <span class="math inline">\(\left(df=\sum_{h}a_{h}-H\right)\)</span>.</p>
-<p>Para la aplicación de las temáticas vistas, es decir, realizar la prueba de hipótesis y los intervalos de confianza para los parámetros utilizaremos el modelo que se ha venido trabajando y aplicaremos las funciones <code>summary.svyglm</code> para las pruebas t y <code>confint.svyglm</code> para los intervalos de confianza como sigue:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb322-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">summary.svyglm</span>(mod_svy)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## svyglm(formula = Income ~ Expenditure + Zone + Sex + Age2, design = diseno_qwgt)
-## 
-## Survey design:
-## Called via srvyr
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 62.18419   62.98928    0.99     0.33    
-## Expenditure  1.22548    0.19798    6.19  9.5e-09 ***
-## ZoneUrban   63.46000   40.09025    1.58     0.12    
-## SexMale     21.73256   15.78081    1.38     0.17    
-## Age2         0.00852    0.00557    1.53     0.13    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 118297)
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb324-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">confint.svyglm</span>(mod_svy)</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">2.5 %</th>
-<th align="right">97.5 %</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">-62.5855</td>
-<td align="right">186.9538</td>
-</tr>
-<tr class="even">
-<td align="left">Expenditure</td>
-<td align="right">0.8333</td>
-<td align="right">1.6176</td>
-</tr>
-<tr class="odd">
-<td align="left">ZoneUrban</td>
-<td align="right">-15.9511</td>
-<td align="right">142.8711</td>
-</tr>
-<tr class="even">
-<td align="left">SexMale</td>
-<td align="right">-9.5262</td>
-<td align="right">52.9913</td>
-</tr>
-<tr class="odd">
-<td align="left">Age2</td>
-<td align="right">-0.0025</td>
-<td align="right">0.0196</td>
-</tr>
-</tbody>
-</table>
-<p>De lo anterior se puede observar que, con una confianza del 95% el único parámetro significativo del modelo es Expenditure y ese mismo resultado lo reflejan los intervalos de confianza.</p>
-<p><em>Estimación de una observación</em></p>
-<p>Los modelos de regresión lineales, según <em>(Neter et al., 1996).</em>, son utilizado esencialmente con 2 fines, el primero es tratar de explicar la variable respuesta en términos de covariables que pueden encontrarse en la encuesta o en registros administrativos, censos, etc. Adicionalmente, también son usados para predecir valores de la variable en estudio ya sea dentro del intervalo de valores recogidos en la muestra o por fuera de dicho intervalo. Lo primero se ha abordado a lo largo de todo el capítulo y lo segundo se obtiene de la siguiente manera:</p>
-<p><span class="math display">\[
-\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\boldsymbol{x}_{obs,i}\hat{\boldsymbol{\beta}}
-\]</span></p>
-<p>De manera explícita, si se ajusta un modelo con 4 covariables la expresión sería:</p>
-<p><span class="math display">\[
-\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\hat{\beta}_{0}+\hat{\beta}_{1}x_{1i}+\hat{\beta}_{2}x_{2i}+\hat{\beta}_{3}x_{3i}+\hat{\beta}_{4}x_{4i}
-\]</span></p>
-<p>La varianza de la estimación se calcula de la siguiente manera:</p>
-<p><span class="math display">\[
-var\left(\hat{E}\left(y_{i}\mid x_{obs,i}\right)\right)
-=  x&#39;_{obs,i}cov\left(\hat{\beta}\right)x{}_{obs,i}
-\]</span></p>
-<p>A continuación, se presenta cómo se realiza la estimación del valor esperado, primero se estiman los parámetros del modelo:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">term</th>
-<th align="right">estimate</th>
-<th align="right">std.error</th>
-<th align="right">statistic</th>
-<th align="right">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">62.1842</td>
-<td align="right">62.9893</td>
-<td align="right">0.9872</td>
-<td align="right">0.3256</td>
-</tr>
-<tr class="even">
-<td align="left">Expenditure</td>
-<td align="right">1.2255</td>
-<td align="right">0.1980</td>
-<td align="right">6.1901</td>
-<td align="right">0.0000</td>
-</tr>
-<tr class="odd">
-<td align="left">ZoneUrban</td>
-<td align="right">63.4600</td>
-<td align="right">40.0902</td>
-<td align="right">1.5829</td>
-<td align="right">0.1162</td>
-</tr>
-<tr class="even">
-<td align="left">SexMale</td>
-<td align="right">21.7326</td>
-<td align="right">15.7808</td>
-<td align="right">1.3772</td>
-<td align="right">0.1711</td>
-</tr>
-<tr class="odd">
-<td align="left">Age2</td>
-<td align="right">0.0085</td>
-<td align="right">0.0056</td>
-<td align="right">1.5297</td>
-<td align="right">0.1288</td>
-</tr>
-</tbody>
-</table>
-<p>Por lo anterior, la estimación del valor esperado o predicción queda:</p>
-<p><span class="math display">\[
-\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=62.2+1.2x_{1i}+63.5x_{2i}+21.7x_{3i}+0.01x_{4i}
-\]</span>
-Para calcular la varianza de la estimación, primero se deben obtener las varianzas de la estimación de los parámetros:</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb325-1" tabindex="-1"></a><span class="fu">vcov</span>(mod_svy)</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">(Intercept)</th>
-<th align="right">Expenditure</th>
-<th align="right">ZoneUrban</th>
-<th align="right">SexMale</th>
-<th align="right">Age2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">3967.6496</td>
-<td align="right">-11.3101</td>
-<td align="right">275.9858</td>
-<td align="right">312.4533</td>
-<td align="right">-0.1852</td>
-</tr>
-<tr class="even">
-<td align="left">Expenditure</td>
-<td align="right">-11.3101</td>
-<td align="right">0.0392</td>
-<td align="right">-3.5526</td>
-<td align="right">-0.5004</td>
-<td align="right">0.0005</td>
-</tr>
-<tr class="odd">
-<td align="left">ZoneUrban</td>
-<td align="right">275.9858</td>
-<td align="right">-3.5526</td>
-<td align="right">1607.2280</td>
-<td align="right">-130.7108</td>
-<td align="right">-0.0559</td>
-</tr>
-<tr class="even">
-<td align="left">SexMale</td>
-<td align="right">312.4533</td>
-<td align="right">-0.5004</td>
-<td align="right">-130.7108</td>
-<td align="right">249.0339</td>
-<td align="right">-0.0043</td>
-</tr>
-<tr class="odd">
-<td align="left">Age2</td>
-<td align="right">-0.1852</td>
-<td align="right">0.0005</td>
-<td align="right">-0.0559</td>
-<td align="right">-0.0043</td>
-<td align="right">0.0000</td>
-</tr>
-</tbody>
-</table>
-<p>Ahora bien, se procede a realizar los cálculos como lo indica la expresión mostrada anteriormente:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-1" tabindex="-1"></a>xobs <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(mod_svy) <span class="sc">%&gt;%</span></span>
-<span id="cb326-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-2" tabindex="-1"></a>        <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb326-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-3" tabindex="-1"></a></span>
-<span id="cb326-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-4" tabindex="-1"></a>cov_beta <span class="ot">&lt;-</span> <span class="fu">vcov</span>(mod_svy) <span class="sc">%&gt;%</span> <span class="fu">as.matrix</span>()</span>
-<span id="cb326-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-5" tabindex="-1"></a></span>
-<span id="cb326-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb326-6" tabindex="-1"></a><span class="fu">as.numeric</span>(xobs <span class="sc">%*%</span> cov_beta <span class="sc">%*%</span> <span class="fu">t</span>(xobs))</span></code></pre></div>
-<pre><code>## [1] 1921</code></pre>
-<p>Si el objetivo ahora es calcular el intervalo de confianza para la predicción se utiliza la siguiente ecuación:</p>
-<p><span class="math display">\[
-\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)}
-\]</span></p>
-<p>Para realizar los cálculos en R, se utiliza la función <code>confint</code> y <code>predict</code> como sigue:</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>))</span>
-<span id="cb328-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-2" tabindex="-1"></a>pred_IC <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy, <span class="at">type =</span> <span class="st">&quot;link&quot;</span>)))</span>
-<span id="cb328-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-3" tabindex="-1"></a><span class="fu">colnames</span>(pred_IC) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lim_Inf&quot;</span>, <span class="st">&quot;Lim_Sup&quot;</span>)</span>
-<span id="cb328-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb328-4" tabindex="-1"></a>pred_IC</span></code></pre></div>
-<p>Ahora, de manera gráfica las predicciones e intervalos se vería de la siguiente manera:</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-1" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(pred, pred_IC)</span>
-<span id="cb329-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-2" tabindex="-1"></a>pred<span class="sc">$</span>Expenditure <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Expenditure</span>
-<span id="cb329-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-3" tabindex="-1"></a>pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span>
-<span id="cb329-4"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-4" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.2</span>)</span>
-<span id="cb329-5"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-5" tabindex="-1"></a><span class="fu">ggplot</span>(pred <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span><span class="dt">L</span>),</span>
-<span id="cb329-6"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-6" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Expenditure , <span class="at">y =</span> link)) <span class="sc">+</span></span>
-<span id="cb329-7"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-7" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Lim_Inf,</span>
-<span id="cb329-8"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-8" tabindex="-1"></a>                    <span class="at">ymax =</span> Lim_Sup),</span>
-<span id="cb329-9"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-9" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb329-10"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-10" tabindex="-1"></a>                <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb329-11"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb329-12"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb329-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p>Por último, si el interés es hacer una predicción fuera del rango de valores que fue capturado en la muestra. Para esto, supongamos que se desea predecir:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-1" tabindex="-1"></a>datos_nuevos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Expenditure =</span> <span class="dv">1600</span>, </span>
-<span id="cb330-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-2" tabindex="-1"></a>                           <span class="at">Age2 =</span> <span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>, <span class="at">Sex =</span> <span class="st">&quot;Male&quot;</span>, </span>
-<span id="cb330-3"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb330-3" tabindex="-1"></a>                           <span class="at">Zone =</span> <span class="st">&quot;Urban&quot;</span>)</span></code></pre></div>
-<p>La varianza para la predicción se hace siguiendo la siguiente ecuación:</p>
-<p><span class="math display">\[
-var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i} + \hat{\sigma}^2_{yx}
-\]</span></p>
-<p>Por tanto, se construye la matriz de observaciones y se calcula la varianza como sigue:</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb331-1" tabindex="-1"></a>x_noObs <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1600</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">40</span><span class="sc">^</span><span class="dv">2</span>),<span class="at">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb331-2"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb331-2" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(x_noObs<span class="sc">%*%</span>cov_beta<span class="sc">%*%</span><span class="fu">t</span>(x_noObs)))</span></code></pre></div>
-<pre><code>## [1] 244.6</code></pre>
-<p>Por último, el intervalo de confianza sigue la siguiente ecuación:</p>
-<p><span class="math display">\[
-\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)+\hat{\sigma}_{yx}^{2}}
-\]</span>
-En <code>R</code> se hace la predicción de la siguiente manera:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb333-1" tabindex="-1"></a><span class="fu">predict</span>(mod_svy, <span class="at">newdata =</span> datos_nuevos, <span class="at">type =</span>  <span class="st">&quot;link&quot;</span>)</span></code></pre></div>
-<pre><code>##   link  SE
-## 1 2122 245</code></pre>
-<p>y el intervalo:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb335-1" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">predict</span>(mod_svy,<span class="at">newdata =</span> datos_nuevos))</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="right">2.5 %</th>
-<th align="right">97.5 %</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">1642</td>
-<td align="right">2601</td>
-</tr>
-</tbody>
-</table>
-
+<div id="modelos-de-regresión-en-encuestas-de-hogares" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Modelos de regresión en encuestas de hogares<a href="#modelos-de-regresi%C3%B3n-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La regresión estadística constituye una técnica fundamental para examinar los vínculos entre variables en el marco de los datos muestrales obtenidos mediante encuestas. A través de este procedimiento, es posible determinar la forma en que una o varias variables de respuesta (dependientes) se relacionan con una o varias variables explicativas (independientes). Tal como exponen Nolan y Speed (2000) y Freedman (2005), la validez de los resultados depende de una adecuada formulación del modelo.</p>
+<p>Un ejemplo ilustrativo sería la estimación del ingreso de los hogares (variable dependiente) en función del nivel educativo alcanzado y de la situación laboral de sus miembros (variables independientes), empleando datos provenientes de encuestas de hogares. Estos análisis permiten identificar patrones, cuantificar efectos y generar evidencia útil para la formulación de políticas públicas.</p>
+<p>No obstante, dado que estas encuestas suelen estar sustentadas en <strong>diseños muestrales complejos</strong>, los enfoques tradicionales de regresión resultan insuficientes. Ignorar los pesos muestrales, la estratificación o la conglomeración puede derivar en sesgos en los coeficientes estimados y, sobre todo, en una subestimación de sus varianzas, lo cual compromete la validez de las inferencias. Por esta razón, los modelos de regresión aplicados a encuestas deben ser modificados y ajustados para garantizar resultados representativos y robustos.</p>
+<p>En este sentido, el análisis de datos provenientes de encuestas exige una atención detallada al diseño de muestreo. La incorporación de los <strong>pesos de la encuesta</strong> y de los ajustes correspondientes a la estratificación y a la conglomeración permite obtener inferencias válidas y precisas. Además, en algunos casos se han planteado alternativas simplificadas, como el uso de pesos normalizados o enfoques de ponderación aproximada, que buscan balancear la complejidad metodológica con la factibilidad práctica del análisis.</p>
+<div id="antecedentes-históricos-y-desarrollos-metodológicos" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Antecedentes históricos y desarrollos metodológicos<a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El estudio de la regresión bajo diseños de muestreo complejos tiene una trayectoria bien documentada. De manera empírica, <strong>Kish y Frankel (1974)</strong> fueron de los primeros en discutir el impacto de estos diseños en las inferencias derivadas de modelos de regresión. Posteriormente, <strong>Fuller (1975)</strong> desarrolló un estimador de varianza apoyado en técnicas de linealización para modelos de regresión lineal múltiple con ponderación desigual, e introdujo métodos específicos para diseños estratificados y de dos etapas.</p>
+<p>Más adelante, <strong>Sha et al. (1977)</strong> abordaron el problema de las violaciones a los supuestos clásicos de los modelos de regresión al trabajar con datos de encuestas, proponiendo alternativas de inferencia robusta para los parámetros. En paralelo, <strong>Binder (1983)</strong> se enfocó en las distribuciones muestrales de los estimadores de regresión en poblaciones finitas, definiendo procedimientos para estimar varianzas bajo esquemas complejos.</p>
+<p>En los años siguientes, <strong>Skinner et al. (1989)</strong> ampliaron estos aportes al trabajar con estimadores de varianza para los coeficientes de regresión que contemplaban la estratificación y la conglomeración, recomendando explícitamente el uso de métodos de linealización o técnicas alternativas para la estimación de la varianza. Avanzando en la línea de tiempo, <strong>Fuller (2002)</strong> realizó un compendio de los métodos de estimación aplicables a modelos de regresión en encuestas complejas, mientras que <strong>Pfeffermann (2011)</strong> discutió enfoques más recientes, como los métodos de ponderación “q-weighted”, mostrando evidencia empírica de su utilidad.</p>
 </div>
-<!-- </div> -->
+<div id="relevancia-práctica" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Relevancia práctica<a href="#relevancia-pr%C3%A1ctica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En la actualidad, los modelos de regresión bajo diseños de muestreo complejos representan una herramienta esencial para el análisis de encuestas de hogares. Estos modelos permiten ir más allá de las estadísticas descriptivas y aproximarse a explicaciones causales o predictivas, siempre que se reconozcan y se ajusten las particularidades del diseño muestral. Su correcta aplicación abre la posibilidad de analizar cómo las características sociodemográficas y económicas se asocian con distintos resultados de interés, aportando evidencia clave para la formulación de políticas públicas.</p>
+<p>En las siguientes secciones se mostrará cómo implementar estos modelos en <code>R</code>, utilizando la librería <code>survey</code>. Se abordará la especificación del diseño muestral, la estimación de modelos lineales y logísticos, así como la obtención de errores estándar y pruebas de hipótesis ajustadas al diseño. De este modo, se integrarán los fundamentos teóricos con ejemplos prácticos en un flujo de trabajo reproducible.</p>
+<p>Un primer paso consiste en comprender la estructura básica de los modelos de regresión. El modelo de regresión lineal simple se define como</p>
+<p><span class="math display">\[
+y = \beta_{0} + \beta_{1}x + \varepsilon,
+\]</span></p>
+<p>donde <span class="math inline">\(y\)</span> es la variable dependiente, <span class="math inline">\(x\)</span> la variable independiente, <span class="math inline">\(\beta_{0}\)</span> y <span class="math inline">\(\beta_{1}\)</span> los parámetros del modelo, y <span class="math inline">\(\varepsilon\)</span> el error aleatorio, definido como la diferencia entre el valor observado y el valor ajustado del modelo:</p>
+<p><span class="math display">\[
+\varepsilon = y - \hat{y} = y - (\beta_{0} + \beta_{1}x).
+\]</span></p>
+<p>Generalizando este planteamiento, los modelos de regresión lineal múltiple incorporan varias covariables:</p>
+<p><span class="math display">\[
+y = \beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p} + \varepsilon,
+\]</span></p>
+<p>lo cual puede expresarse en notación matricial como</p>
+<p><span class="math display">\[
+y_{i} = x_{i}\boldsymbol{\beta} + \varepsilon_{i}, \quad i=1,\ldots,n,
+\]</span></p>
+<p>donde <span class="math inline">\(x_{i} = [1, x_{1i}, \ldots, x_{pi}]\)</span> corresponde al vector de covariables del individuo <span class="math inline">\(i\)</span>, y <span class="math inline">\(\boldsymbol{\beta}^{T} = [\beta_{0}, \beta_{1}, \ldots, \beta_{p}]\)</span> es el vector de parámetros.</p>
+<p>En este contexto, el valor esperado de la variable respuesta condicionado a las covariables puede escribirse como:</p>
+<p><span class="math display">\[
+E(y \mid x) = \hat{\beta}_{0} + \hat{\beta}_{1}x_{1} + \cdots + \hat{\beta}_{p}x_{p}.
+\]</span></p>
+<p>Para que estos modelos sean válidos, es necesario que se cumplan ciertos <strong>supuestos clásicos</strong>, recogidos en la literatura (Heeringa, West y Berglund, 2017), entre los que destacan:</p>
+<ul>
+<li><strong>Esperanza nula de los residuos</strong>: <span class="math inline">\(E(\varepsilon_{i} \mid x_{i}) = 0\)</span>.</li>
+<li><strong>Homogeneidad de varianza</strong>: <span class="math inline">\(Var(\varepsilon_{i} \mid x_{i}) = \sigma^2\)</span>.</li>
+<li><strong>Normalidad de los errores</strong>: <span class="math inline">\(\varepsilon_{i} \mid x_{i} \sim N(0,\sigma^2)\)</span>.</li>
+<li><strong>Independencia de los residuos</strong>: <span class="math inline">\(cov(\varepsilon_{i},\varepsilon_{j}\mid x_{i},x_{j})=0\)</span>.</li>
+</ul>
+<p>Estos supuestos permiten garantizar que los estimadores obtenidos tengan buenas propiedades estadísticas (insesgamiento, eficiencia y consistencia). Sin embargo, al trabajar con encuestas bajo <strong>diseños complejos</strong>, estas condiciones rara vez se cumplen de manera estricta, por lo que se requieren adaptaciones que serán abordadas en las próximas secciones.</p>
+<p>Una vez definido el modelo de regresión lineal y sus supuestos, se puede deducir los siguiente:</p>
+<p><span class="math display">\[
+\hat{y}  =  E\left(y\mid x\right)
+=  E\left(\boldsymbol{x}\boldsymbol{\beta}\right)+E\left(\varepsilon\right)
+=  \boldsymbol{x}\boldsymbol{\beta}+0
+  =  \beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}
+\]</span></p>
+<p>y Adicionalmente,</p>
+<p><span class="math display">\[
+var\left(y_{i}\mid x_{i}\right)  =  \sigma_{y,x}^{2}
+\]</span></p>
+<p><span class="math display">\[
+cov\left(y_{i},y_{j}\mid x_{i},x_{j}\right)  = 0
+\]</span></p>
+<p><span class="math display">\[
+y_{i}  \sim  N\left(x_{i}\boldsymbol{\beta},\sigma_{y,x}^{2}\right)
+\]</span></p>
+</div>
+<div id="aplicar-o-no-aplicar-ponderaciones" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> ¿Aplicar o no aplicar ponderaciones?<a href="modelos-de-regresión-en-encuestas-de-hogares.html#aplicar-o-no-aplicar-ponderaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Heeringa, West y Berglund (2017) examinan el desafío de determinar cómo utilizar adecuadamente los pesos en modelos de regresión y si conviene emplear factores de expansión al estimar coeficientes de regresión en encuestas con diseños complejos. En este marco, se distinguen dos enfoques principales para incorporar los pesos en los modelos:</p>
+<ul>
+<li><p><strong>Enfoque orientado al diseño</strong>: busca realizar inferencias válidas sobre la población total. Los pesos de la encuesta resultan indispensables para obtener estimaciones insesgadas de los coeficientes, ya que corrigen las probabilidades desiguales de selección derivadas del diseño muestral. No obstante, este método no protege frente a la mala especificación del modelo: si la relación planteada no refleja adecuadamente lo que ocurre en la población, los coeficientes estimados, aunque insesgados en el marco del diseño, pueden carecer de utilidad sustantiva.</p></li>
+<li><p><strong>Enfoque orientado al modelo</strong>: sostiene que los pesos no son necesarios siempre que el modelo esté correctamente formulado y el muestreo sea no informativo, es decir, que el modelo válido para la muestra coincida con el de la población. En este escenario, se asume que las relaciones entre variables están bien descritas por el modelo independientemente del diseño muestral, y que la utilización de ponderaciones podría incrementar innecesariamente la variabilidad de las estimaciones, elevando los errores estándar.</p></li>
+</ul>
+<p>La decisión entre utilizar o no ponderaciones en los modelos de regresión depende tanto del contexto como de la sensibilidad de los resultados a su inclusión. Autores como <strong>Skinner, Holt y Smith (1989)</strong> y <strong>Pfeffermann (2011)</strong> han debatido ampliamente sobre la pertinencia de incorporar los pesos muestrales en la estimación de los parámetros de regresión y en sus errores estándar.</p>
+<p>Una recomendación metodológica ampliamente aceptada es estimar los modelos con y sin ponderaciones y comparar los resultados. Si al incluir los pesos se observan variaciones significativas en los coeficientes o en las conclusiones, ello indica que el muestreo fue informativo o que el modelo presenta deficiencias de especificación, por lo que conviene utilizar estimaciones ponderadas. En cambio, si los pesos solo aumentan los errores estándar sin modificar sustancialmente los coeficientes, se puede asumir que el modelo está bien planteado y que no es indispensable ponderar.</p>
+<p>En términos prácticos, la decisión puede resumirse en dos escenarios:</p>
+<ul>
+<li><p><strong>Inferencia descriptiva</strong>: es obligatorio aplicar ponderaciones, ya que el objetivo es reflejar con precisión la estructura de la población.</p></li>
+<li><p><strong>Inferencia analítica</strong>: es posible recurrir a modelos no ponderados o ajustados por pesos. En este caso, si la meta es analizar relaciones o verificar hipótesis, la ponderación no siempre es necesaria, especialmente cuando el modelo incluye variables del diseño muestral (estratos o conglomerados). Sin embargo, el uso de modelos sin ponderar debe justificarse de forma explícita, pues implica supuestos más restrictivos que los modelos ponderados.</p></li>
+</ul>
+<p>El uso de ponderaciones en encuestas permite asegurar que los modelos de regresión sean representativos de la población, ya que corrigen posibles sesgos de sobre o subrepresentación de determinados grupos y garantizan que la distribución poblacional se refleje adecuadamente. Asimismo, las ponderaciones contribuyen a obtener estimaciones de varianza más exactas, pues consideran la estratificación, el agrupamiento y las probabilidades desiguales de selección, lo cual genera errores estándar, intervalos de confianza y pruebas estadísticas más confiables.</p>
+<p>Dentro del enfoque basado en el diseño, los coeficientes de regresión se estiman a partir de ecuaciones poblacionales ajustadas con ponderaciones. Esto permite que los resultados ponderados se aproximen a valores insesgados comparables a los que se obtendrían en un censo completo, incluso cuando el modelo estadístico no esté formulado de manera óptima.</p>
+<p>Un aspecto que no debe pasarse por alto es que el uso de ponderaciones puede aumentar la varianza de las estimaciones de los parámetros, en especial cuando los pesos presentan gran dispersión. En situaciones donde existen valores extremos o muy variables, las estimaciones tienden a volverse inestables, ya que ciertas observaciones llegan a ejercer una influencia desproporcionada sobre el ajuste del modelo. En este sentido, cuando el propósito es explicativo o analítico (como en el análisis de relaciones entre variables), los modelos sin ponderar pueden, en ocasiones, generar resultados más consistentes y eficientes.</p>
+<p>No obstante, cuando el modelo está mal especificado, la regresión sin ponderaciones puede producir estimaciones poco útiles o carentes de validez. Por ello, resulta fundamental que los analistas seleccionen e incorporen las variables pertinentes para lograr una especificación adecuada. Incluso en los casos en que el modelo esté correctamente definido, es indispensable tener en cuenta la estratificación y la conglomeración del diseño muestral al calcular los errores estándar bajo un enfoque no ponderado.</p>
+<p>En definitiva, la decisión sobre <strong>aplicar o no ponderaciones</strong> no puede basarse únicamente en una regla rígida, sino que exige un análisis crítico de los objetivos del estudio, del diseño de la encuesta y de la robustez de los modelos estimados. Asimismo, un análisis diagnóstico riguroso resulta esencial para validar las inferencias y garantizar que los resultados reflejen de manera adecuada la realidad poblacional (véase la Subsección 9.6.4).</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="diagnóstico-del-modelo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="gráficas-en-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimación-de-proporciones-y-tablas-cruzadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
