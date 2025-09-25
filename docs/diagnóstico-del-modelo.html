@@ -23,14 +23,14 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-24" />
+<meta name="date" content="2025-09-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html"/>
+<link rel="prev" href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"/>
 <link rel="next" href="inferencia-sobre-los-parámetros-del-modelo.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -242,18 +242,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.1" data-path="06-Regresión.html"><a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>5.5.1</b> Antecedentes históricos y desarrollos metodológicos</a></li>
 <li class="chapter" data-level="5.5.2" data-path="06-Regresión.html"><a href="#relevancia-pr%C3%A1ctica"><i class="fa fa-check"></i><b>5.5.2</b> Relevancia práctica</a></li>
 <li class="chapter" data-level="5.5.3" data-path="modelos-de-regresión-en-encuestas-de-hogares.html"><a href="modelos-de-regresión-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5.5.3</b> ¿Aplicar o no aplicar ponderaciones?</a></li>
+<li class="chapter" data-level="5.5.4" data-path="06-Regresión.html"><a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>5.5.4</b> Enfoques inferenciales para el análisis de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.7" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.8" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del Modelo</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="5.6" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas"><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.6.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-par%C3%A1metros"><i class="fa fa-check"></i><b>5.6.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.6.2" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><i class="fa fa-check"></i><b>5.6.2</b> Uso de ponderaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="06-Regresión.html"><a href="#coeficiente-de-determinaci%C3%B3n"><i class="fa fa-check"></i><b>5.7.1</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="5.7.2" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-de-los-residuales"><i class="fa fa-check"></i><b>5.7.2</b> Diagnóstico de los residuales</a></li>
+<li class="chapter" data-level="5.7.3" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>5.7.3</b> Observaciones influyentes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#visualizaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>6</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6.1</b> Gráficas en <code>R</code></a></li>
+<li class="chapter" data-level="6.2" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html"><i class="fa fa-check"></i><b>6.2</b> Histogramas para graficar variables continuas</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html#histogramas-ponderados-y-no-ponderados"><i class="fa fa-check"></i><b>6.2.1</b> Histogramas ponderados y no ponderados</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.3</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="06-Regresión.html"><a href="#diagramas-de-dispersi%C3%B3n-scatterplots"><i class="fa fa-check"></i><b>6.4</b> Diagramas de dispersión (Scatterplots)</a></li>
+<li class="chapter" data-level="6.5" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.5</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.6" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.6</b> Creando mapas</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
@@ -307,35 +321,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="diagnóstico-del-modelo" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Diagnóstico del modelo<a href="#diagn%C3%B3stico-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En el análisis de las encuestas de hogares cuando se ajusten modelo estadístico es importante realizar verificaciones de calidad y con esto tener certezas de las conclusiones que se obtienen. La mayoría de textos académicos dan un panorama bastante detallado de los supuestos y consideraciones que se deben tener en cuenta para tener un modelo correctamente definido. A continuación, se enlistan algunas de ellas <em>(Tellez, 2016)</em></p>
+<p>En el análisis de encuestas de hogares, cuando se ajusta un modelo estadístico, es crucial realizar <strong>verificaciones de calidad</strong> que garanticen la validez de las conclusiones. La literatura metodológica destaca que un modelo bien especificado no solo depende de la elección de las covariables, sino también de que se cumplan los supuestos básicos que aseguran la coherencia de los resultados <em>(Téllez, 2016)</em>.</p>
+<p>Entre los elementos que deben revisarse al aplicar un modelo de regresión lineal en encuestas complejas se encuentran los siguientes:</p>
 <ul>
-<li>Determinar si el modelo proporciona un adecuado ajuste a los datos.</li>
-<li>Examinar si los errores están normalmente distribuidos.</li>
-<li>Examinar si los errores tienen varianza constante.</li>
-<li>Verificar si los errores se pueden asumir no correlacionados.</li>
-<li>Determinar si alguno de los datos tiene valores con un efecto inusualmente grande sobre el modelo de regresión estimado, estos se conocen
-como datos influyentes.</li>
-<li>Determinar si algún punto no sigue la tendencia de la mayoría de los
-datos cuando se toma en cuenta el modelo, estos puntos se conocen como outliers.</li>
+<li><strong>Adecuación del ajuste</strong>: comprobar si el modelo logra explicar una proporción significativa de la variabilidad de la variable de interés y si las predicciones se ajustan razonablemente a los datos observados.</li>
+<li><strong>Normalidad de los errores</strong>: verificar si los errores se distribuyen aproximadamente de manera normal, lo que garantiza la validez de las pruebas de significancia.</li>
+<li><strong>Homogeneidad de la varianza (homocedasticidad)</strong>: confirmar que la variabilidad de los errores se mantenga constante a lo largo de los valores de las covariables. La presencia de heterocedasticidad puede sesgar las inferencias.</li>
+<li><strong>Independencia de los errores</strong>: examinar si los errores son independientes entre sí, evitando correlaciones que comprometan la validez de las pruebas estadísticas.</li>
+<li><strong>Casos influyentes</strong>: identificar observaciones que ejercen un efecto desproporcionado en la estimación del modelo, lo que podría distorsionar los resultados.</li>
+<li><strong>Datos atípicos (outliers)</strong>: detectar unidades que se apartan significativamente de la tendencia general de la muestra y que pueden afectar el ajuste del modelo.</li>
 </ul>
-<p>En este capítulo se abordarán alguno de los supuestos que se deben tener en cuenta al momento de ajustar un modelo de regresión lineal.</p>
-<p><em>Estimación del <span class="math inline">\(R^{2}\)</span> y <span class="math inline">\(R_{adj}^{2}\)</span></em></p>
-<p>Una medida del ajuste del modelo de regresión es el coeficiente de determinación o coeficiente de correlación múltiple (<span class="math inline">\(R^{2})\)</span>). Dicho parámetro estima la proporción de la varianza de la población explicada por la regresión y oscila entre 0 y 1. Entre más cercano esté de uno significa que mayor variabilidad explica y lo contrario ocurrirá si está cerca de cero. Lo anterior, en ocasiones es muy ambigüo puesto que por ejemplo, los físicos pueden obtienen <span class="math inline">\(R^{2}\)</span> altísimos (mayores a 0.98–0.99) mientras que los químicos obtienen <span class="math inline">\(R^{2}\)</span> superiores a 0.90. Sin embargo, los científicos sociales y demás que trabajen con poblaciones humanas encontrarán que su mejor modelo de regresión a menudo explicará solo entre el 20 % y el 40 % de la variación en la variable dependiente (<em>Heringa</em>). A continuación, se presenta como se calcula este coeficiente:</p>
+<p>En el contexto de encuestas complejas, estas verificaciones adquieren una relevancia particular. Problemas como la multicolinealidad, la falta de independencia entre observaciones o la presencia de valores extremos pueden acentuarse debido al diseño muestral (estratificación, conglomeración y ponderación). Por ello, los procedimientos de diagnóstico no deben limitarse a la revisión de los supuestos clásicos, sino también considerar las especificidades del diseño.</p>
+<p>La aplicación sistemática de estas pruebas diagnósticas permite evaluar la solidez del modelo, incrementar la confianza en las inferencias y garantizar que los resultados derivados sean representativos y útiles para el análisis de políticas públicas o para la investigación social aplicada.</p>
+<div id="coeficiente-de-determinación" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Coeficiente de determinación<a href="#coeficiente-de-determinaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Una medida clásica para evaluar el ajuste de un modelo de regresión es el <strong>coeficiente de determinación</strong> (<span class="math inline">\(R^{2}\)</span>), también conocido como coeficiente de correlación múltiple. Este indicador estima la proporción de la varianza de la variable dependiente que es explicada por el modelo, y sus valores oscilan entre 0 y 1. Cuanto más próximo esté de 1, mayor será la proporción de variabilidad explicada; por el contrario, un valor cercano a 0 refleja que el modelo aporta poca capacidad explicativa.</p>
+<p>No obstante, la interpretación de <span class="math inline">\(R^{2}\)</span> varía según el campo disciplinar. En ciencias físicas, es común obtener valores superiores al 0.98 o 0.99, mientras que en ciencias químicas suelen alcanzarse niveles por encima de 0.90. En contraste, en ciencias sociales y, en general, en estudios con poblaciones humanas, incluso los mejores modelos explicativos rara vez superan un rango del 20 % al 40 % de la variabilidad de la variable de interés (<em>Heringa</em>). Este contraste resalta que la magnitud de <span class="math inline">\(R^{2}\)</span> no debe interpretarse de manera absoluta, sino en función del contexto y la naturaleza de los datos analizados.</p>
+<p>El coeficiente de determinación se calcula a partir de las sumas de cuadrados totales y de error, de la siguiente manera:</p>
 <p><span class="math display">\[
-R^{2} =  1-\frac{SSE}{SST}
+R^{2} = 1 - \frac{SSE}{SST},
 \]</span></p>
-<p>Donde, SST es la suma de cuadrados totales y SSE es la suma de cuadrados del error. El estimador de este parámetro usando muestras complejas está dado por:</p>
+<p>donde <span class="math inline">\(SST\)</span> representa la suma de cuadrados totales y <span class="math inline">\(SSE\)</span> la suma de cuadrados del error.</p>
+<p>En encuestas con <strong>diseños de muestreo complejos</strong>, es necesario ajustar esta medida para reflejar la estructura del diseño y los pesos muestrales. En este caso, el estimador ponderado se define como:</p>
 <p><span class="math display">\[
-R_{\omega}^{2} = 1-\frac{WSSE}{WSST}
+\hat{R}_\omega^2 = 1 - \frac{(\widehat{SSE})_\omega}{(\widehat{SST})_\omega},
 \]</span></p>
-<p>Donde, WSST es la variabilidad total estimada y WSSE es la suma de cuadrados estimada y se define como:</p>
+<p>donde <span class="math inline">\((\widehat{SSE})_\omega\)</span> corresponde a la <strong>suma ponderada de errores al cuadrado</strong>, calculada como:</p>
 <p><span class="math display">\[
-\hat{WSSE_{\omega}}  =  \sum_{h}^{H}\sum_{\alpha}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}\left(y_{h\alpha i}-x_{h\alpha i}\hat{\beta}\right)^{2}
+(\widehat{SSE})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} \,(y_{hik} - x_{hik}\hat{\beta})^2,
 \]</span></p>
-<p>Por último, <span class="math inline">\(R_{adj}^{2}\)</span> se estima:</p>
+<p>y <span class="math inline">\((\widehat{SST})_\omega\)</span> representa la <strong>suma total ponderada de cuadrados</strong>, definida por:</p>
 <p><span class="math display">\[
-R_{adj}^{2}  =  1-\frac{\left(n-1\right)}{\left(n-p\right)}R_{\omega}^{2}
+(\widehat{SST})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}\,(y_{hik} - \hat{\bar{Y}})^2.
 \]</span></p>
+<p>Finalmente, dado que <span class="math inline">\(R^{2}\)</span> tiende a incrementarse a medida que se incluyen más variables en el modelo, se recomienda emplear también el <strong>coeficiente de determinación ajustado</strong> (<span class="math inline">\(R_{adj}^{2}\)</span>), que incorpora una corrección en función del número de covariables y del tamaño de la muestra:</p>
+<p><span class="math display">\[
+R_{adj}^{2} = 1 - \frac{(n-1)}{(n-p)} \,(1 - R_{\omega}^{2}),
+\]</span></p>
+<p>donde <span class="math inline">\(n\)</span> es el tamaño muestral efectivo y <span class="math inline">\(p\)</span> el número de parámetros estimados.</p>
+<p>Este ajuste permite una comparación más justa entre modelos con diferente número de predictores y es particularmente útil en el análisis de encuestas, donde la complejidad del diseño y el uso de ponderaciones pueden influir notablemente en la magnitud de <span class="math inline">\(R^{2}\)</span>.</p>
 <p>Para continuar con los modelos ajustados en la sección anterior, se procede a estimar los <span class="math inline">\(R^{2}\)</span> utilizando <code>R</code>. Inicialmente, se procede a estimar los parámetros del modelo utilizando la función <code>svyglm</code> de <code>survey</code> como se mostró anteriormente y también, se ajusta un modelo solo con el intercepto para obtener la estimación de la SST:</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="diagnóstico-del-modelo.html#cb300-1" tabindex="-1"></a>fit_svy <span class="ot">&lt;-</span> <span class="fu">svyglm</span>(Income <span class="sc">~</span> Expenditure, </span>
 <span id="cb300-2"><a href="diagnóstico-del-modelo.html#cb300-2" tabindex="-1"></a>                  <span class="at">design =</span> diseno)</span>
@@ -407,15 +431,29 @@ Residual Deviance: 3.08e+08 AIC: 38300</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="diagnóstico-del-modelo.html#cb310-1" tabindex="-1"></a><span class="fu">stargazer</span>(mod_svy, <span class="at">header =</span> <span class="cn">FALSE</span>,<span class="at">single.row =</span> T,</span>
 <span id="cb310-2"><a href="diagnóstico-del-modelo.html#cb310-2" tabindex="-1"></a>           <span class="at">title =</span> <span class="st">&quot;Modelo propuesto&quot;</span>, </span>
 <span id="cb310-3"><a href="diagnóstico-del-modelo.html#cb310-3" tabindex="-1"></a>           <span class="at">style =</span> <span class="st">&quot;ajps&quot;</span>,  <span class="at">omit.stat=</span><span class="fu">c</span>(<span class="st">&quot;bic&quot;</span>, <span class="st">&quot;ll&quot;</span>))</span></code></pre></div>
-<p><em>Diagnósticos de los residuales</em></p>
-<p>En el diagnóstico de los modelos es crucial el análisis de los residuales. Estos análisis proporcionan, bajo el supuesto que el modelo ajustado es
-adecuado, una estimación de los errores. Por tanto, un estudio cuidadoso
-de los residuales deberá ayudar al investigador a concluir si el procedimiento de ajuste no ha violado los supuestos o si, por el contrario, uno o varios de los supuestos no se verifican y hay necesidad de revisar el procedimiento de ajuste.</p>
-<p>Para realizar el análisis de los residuales, en primera instancia, se definen los residuales de Pearson como sigue <em>(Heeringa)</em></p>
+</div>
+<div id="diagnóstico-de-los-residuales" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> Diagnóstico de los residuales<a href="#diagn%C3%B3stico-de-los-residuales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el diagnóstico de los modelos, el análisis de los residuales constituye una herramienta fundamental. Bajo el supuesto de que el modelo ajustado es adecuado, los residuales proporcionan una estimación de los errores y, en consecuencia, permiten evaluar la validez de los supuestos del modelo. Un examen cuidadoso de los mismos ayuda al investigador a determinar si el procedimiento de ajuste ha respetado dichos supuestos o, por el contrario, si alguno de ellos ha sido violado, en cuyo caso sería necesario revisar la especificación del modelo o incluso replantear el método de ajuste.</p>
+<p>En encuestas con diseños muestrales complejos, los <strong>residuales de Pearson</strong> son una forma habitual de evaluar discrepancias entre los valores observados y los esperados. Se definen como:</p>
 <p><span class="math display">\[
-r_{p_{i}}  =  \left(y_{i}-\mu_{i}\left(\hat{\beta}_{\omega}\right)\right)\sqrt{\frac{\omega_{i}}{V\left(\hat{\mu}_{i}\right)}}
-\]</span>
-Donde, <span class="math inline">\(\mu_{i}\)</span> es el valor esperado de <span class="math inline">\(y_{i}\)</span>, <span class="math inline">\(w_{i}\)</span> es la ponderación de la encuesta para el i-ésimo individuo del diseño muestral complejo, Por último, <span class="math inline">\(V(\mu_{i})\)</span> es la función de varianza del resultado.</p>
+r_{p_{i}} = \left(y_{i} - \mu_{i}(\hat{\beta}_{\omega})\right) \sqrt{\frac{\omega_{i}}{V(\hat{\mu}_{i})}},
+\]</span></p>
+<p>donde <span class="math inline">\(\mu_{i}\)</span> representa el valor esperado de <span class="math inline">\(y_{i}\)</span> bajo el modelo ajustado, <span class="math inline">\(\omega_{i}\)</span> es el peso muestral correspondiente al individuo <span class="math inline">\(i\)</span> y <span class="math inline">\(V(\hat{\mu}_{i})\)</span> es la función de varianza del resultado.</p>
+<div id="residuos-estandarizados" class="section level4 hasAnchor" number="5.7.2.1">
+<h4><span class="header-section-number">5.7.2.1</span> Residuos estandarizados<a href="diagnóstico-del-modelo.html#residuos-estandarizados" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>En términos generales, los residuos corresponden a la diferencia entre los valores observados y los estimados por el modelo. El análisis de estos residuos es esencial para verificar el cumplimiento de los supuestos de la regresión. Una práctica común consiste en graficar los residuos frente a los valores predichos o frente a las variables independientes. En un modelo correctamente especificado, la nube de puntos resultante debería mostrar un patrón aleatorio; la presencia de formas sistemáticas puede indicar problemas como <strong>heterocedasticidad</strong> (varianza no constante) o <strong>relaciones no lineales</strong> no captadas por el modelo.</p>
+<p>El análisis gráfico es un procedimiento ampliamente utilizado para identificar posibles deficiencias en el modelo. En particular, los <strong>gráficos de residuos frente a valores predichos</strong> son una de las herramientas más informativas para evaluar la adecuación del ajuste. La inspección visual de estos gráficos ayuda a determinar si el modelo cumple con los supuestos de normalidad e independencia de los errores.</p>
+<p>En el contexto de encuestas complejas, los residuos pueden expresarse de la siguiente manera:</p>
+<p><span class="math display">\[
+r_{(p_k)} = \frac{y_k - \hat{\mu}_k}{\sqrt{V(\hat{\mu}_k)/w_k}},
+\]</span></p>
+<p>donde <span class="math inline">\(\hat{\mu}_k\)</span> es el valor predicho de <span class="math inline">\(y_k\)</span>, <span class="math inline">\(w_k\)</span> es el peso muestral de la unidad <span class="math inline">\(k\)</span> y <span class="math inline">\(V(\hat{\mu}_k)\)</span> corresponde a la función de varianza asociada. Estos residuos ponderados se emplean para evaluar tanto la <strong>normalidad</strong> como la <strong>homogeneidad de la varianza</strong> en los errores.</p>
+</div>
+<div id="evaluación-de-la-homocedasticidad" class="section level4 hasAnchor" number="5.7.2.2">
+<h4><span class="header-section-number">5.7.2.2</span> Evaluación de la homocedasticidad<a href="#evaluaci%C3%B3n-de-la-homocedasticidad" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Uno de los supuestos más relevantes en los modelos de regresión es la constancia de la varianza de los errores (homocedasticidad). Si este supuesto se viola, los estimadores de los parámetros del modelo permanecen insesgados y consistentes, pero pierden eficiencia, es decir, ya no alcanzan la menor varianza posible entre todos los estimadores insesgados.</p>
+<p>Para evaluar este aspecto, se recomienda representar los residuos frente a los valores predichos <span class="math inline">\(\hat{y}\)</span> o frente a alguna covariable <span class="math inline">\(x_j\)</span>. La aparición de un patrón sistemático (por ejemplo, forma de embudo o curvaturas) es un indicio de <strong>heterocedasticidad</strong>. En tales casos, pueden considerarse estrategias de corrección, como transformaciones de la variable dependiente, inclusión de términos adicionales en el modelo o el uso de estimadores robustos de varianza.</p>
 <p>Otra definición que se debe tener en consideración para el análisis de los residuales es el de la matriz hat, la cual se estima como:</p>
 <p><span class="math display">\[
 H  =  W^{1/2}X\left(X&#39;WX\right)^{-1}X&#39;W^{1/2}
@@ -425,52 +463,58 @@ donde,</p>
 W  =  diag\left\{ \frac{\omega_{1}}{V\left(\mu_{1}\right)\left[g&#39;\left(\mu_{1}\right)\right]^{2}},...,\frac{\omega_{n}}{V\left(\mu_{n}\right)\left[g&#39;\left(\mu_{n}\right)\right]^{2}}\right\}
 \]</span>
 <span class="math inline">\(W\)</span> es una matriz diagonal de <span class="math inline">\(n\times n\)</span> y <span class="math inline">\(g()\)</span> es la función de enlace del modelo lineal generalizado.</p>
-<p>Otras técnicas utilizadas también para el análisis de los modelos consisten en el análisis de observaciones influyentes. Una observación se denomina influyente si al removerlo de la nube de puntos este causa un cambio grande en el ajuste del modelo. Una observación importante para resaltar es que un punto influyente podría o no ser un dato atípico. Para detectar observaciones influyentes es necesario tener claro qué tipo de influencia se quiere detectar. Lo anterior puesto que, por ejemplo, una observación puede ser influyente sobre la estimación de los parámetros, pero no para la estimación de la varianza del error. A continuación, se presentan las distintas técnicas estadísticas para la detección de datos influyentes:</p>
-<p><em>Distancia de Cook’s</em>: Diagnostica si la i-ésima observación es influyente
-en la estimación del modelo, por estar lejos del centro de masa de los
-datos. Se calcula de la siguiente manera:</p>
+</div>
+</div>
+<div id="observaciones-influyentes" class="section level3 hasAnchor" number="5.7.3">
+<h3><span class="header-section-number">5.7.3</span> Observaciones influyentes<a href="diagnóstico-del-modelo.html#observaciones-influyentes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el análisis diagnóstico de modelos, una técnica fundamental consiste en la identificación de observaciones influyentes. Estas son unidades muestrales cuyo impacto sobre el ajuste del modelo es desproporcionado en comparación con el resto de la muestra. Es importante destacar que una observación influyente no necesariamente corresponde a un valor atípico: mientras que un atípico puede estar alejado del patrón general de los datos, su efecto sobre el ajuste puede ser mínimo. Por el contrario, una observación influyente puede alterar de manera significativa las estimaciones de los parámetros, incluso si no luce atípica.</p>
+<p>Una observación se considera influyente si su exclusión provoca cambios sustanciales en el ajuste global del modelo o en parámetros específicos. Para detectar este tipo de observaciones es esencial precisar el tipo de influencia que se desea evaluar, ya que una unidad puede ser influyente sobre la estimación de los parámetros pero no sobre la varianza del error, o viceversa.</p>
+<p>En el caso de encuestas complejas, este análisis requiere especial atención, pues los pesos muestrales, las estratificaciones y las unidades primarias de muestreo (PSU) amplifican o reducen la influencia de cada observación en comparación con los modelos ajustados bajo supuestos de muestreo simple aleatorio. Para este propósito, la literatura recomienda el uso de herramientas adaptadas a diseños muestrales complejos, tales como el paquete <code>svydiags</code> en R (véase Valliant, 2024), que implementa diagnósticos extendidos compatibles con datos de encuestas.</p>
+<p>A continuación, se describen los principales estadísticos utilizados para la detección de observaciones influyentes en modelos de regresión, con sus respectivas adaptaciones al contexto de encuestas complejas:</p>
+<div id="distancia-de-cook" class="section level4 hasAnchor" number="5.7.3.1">
+<h4><span class="header-section-number">5.7.3.1</span> Distancia de Cook<a href="diagnóstico-del-modelo.html#distancia-de-cook" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La <strong>distancia de Cook</strong> mide el efecto de eliminar la observación <em>i</em> sobre el ajuste global del modelo. Evalúa simultáneamente el tamaño del residual, la varianza estimada y el apalancamiento de la observación. En el contexto de encuestas complejas, su cálculo se adapta incorporando los pesos muestrales:</p>
 <p><span class="math display">\[
-c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
-\]</span></p>
-<p>donde,</p>
-<ul>
-<li><span class="math inline">\(w_i^* =\)</span> Pesos de la encuesta.</li>
-<li><span class="math inline">\(w_i\)</span> Elementos por fuera de la diagonal de la matriz hat</li>
-<li><span class="math inline">\(e_i=\)</span> residuales</li>
-<li><span class="math inline">\(p=\)</span> número de parámetros del Modelo de regresión.</li>
-<li><span class="math inline">\(\phi =\)</span> parámetro de dispersión en el glm</li>
-<li><span class="math inline">\(\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right) =\)</span> estimación de varianza linealizada de la ecuación de puntuación, que se utiliza para pseudo MLE en modelos lineales generalizados ajustados a datos de encuestas de muestras complejas.</li>
-</ul>
-<p>Luego del cálculo de la distancia de Cook’s para las observaciones de la muestra, se procede a calcular el siguiente estadístico de prueba para evaluar la importancia de la estadística:</p>
-<p><span class="math display">\[
-\frac{\left(df-p+1\right)\times c_{i}}{df} \doteq F_{\left(p,df-p\right)}
-\]</span></p>
-<p>donde <span class="math inline">\(df=\)</span> grados de liberta basados en el diseño. Por otro lado, la literatura como <em>Tellez (2016)</em>, <em>Heeringa</em> considera a las observaciones influyentes cuando <span class="math inline">\(c_{i}\)</span> sean mayores a 2 o 3.</p>
-<p><em><span class="math inline">\(D_fBeta_{(i)}\)</span></em>: Este estadístico mide el cambio en la estimación
-del vector de coeficientes de regresión cuando la i-ésima observación
-es eliminada. Se evalúa con la siguiente expresión:</p>
-<p><span class="math display">\[
-D_fBeta_{(i)} = \hat{B}-\hat{B}_{\left(i\right)}=\frac{\boldsymbol{A}^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}w_{i}}{1-h_{ii}}
-\]</span></p>
-<p>Donde <span class="math inline">\(\boldsymbol{A} =\boldsymbol{X}^{t}\boldsymbol{WX}\)</span> <span class="math inline">\(\hat{B}_{(i)}\)</span> es el vector de parámetros estimados una vez se ha eliminado la
-i-ésima observación, <span class="math inline">\(h_{ii}\)</span> es el correspondiente elemento de la diagonal de <em>H</em> y <span class="math inline">\(\hat{e}_i\)</span> es el residual de la i-ésima observación.</p>
-<p>Otra forma de reescribir este estadístico en términos de la matriz <span class="math inline">\(H\)</span> es:</p>
-<p><span class="math display">\[
-D_fBetas_{\left(i\right)}=\frac{{c_{ji}e_{i}}\big/{\left(1-h_{ii}\right)}}{\sqrt{v\left(\hat{B}_{j}\right)}}
+c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
 \]</span></p>
 <p>donde:</p>
 <ul>
-<li><p><span class="math inline">\(c_{ji}=\)</span> es el ji-estimo elemento de <span class="math inline">\(\boldsymbol{A}^{-1}w_{i}^{2}\boldsymbol{X}_{\left(i\right)}\boldsymbol{X}_{\left(i\right)}^{t}\boldsymbol{A}^{-1}\)</span></p></li>
-<li><p>El estimador de <span class="math inline">\(v\left(\hat{B}_{j}\right)\)</span> basado en el Modelo se obtiene como: <span class="math inline">\(v_{m}\left(\hat{B}_{j}\right)=\hat{\sigma}\sum_{i=1}^{n}c_{ji}^{2}\)</span> con <span class="math inline">\(\hat{\sigma}=\sum_{i\in s}w_{i}e^2/ \left( \hat{N} - p \right)\)</span> y <span class="math inline">\(\hat{N} = \sum_{i \in s}w_{i}\)</span></p></li>
-<li><p>La i-ésima observación es influyente para <span class="math inline">\(B_j\)</span> si <span class="math inline">\(\mid D_{f}Betas_{\left(i\right)j}\mid\geq\frac{z}{\sqrt{n}}\)</span> con <span class="math inline">\(z=\)</span> 2 o 3</p></li>
-<li><p>Como alternativa puede usar <span class="math inline">\(t_{0.025,n-p}/\sqrt(n)\)</span> donde <span class="math inline">\(t_{0.025,n-p}\)</span> es el percentil <span class="math inline">\(97.5\)</span></p></li>
+<li><span class="math inline">\(w_i^\*\)</span> son los pesos de la encuesta,</li>
+<li><span class="math inline">\(e_i\)</span> es el residual de la observación <em>i</em>,</li>
+<li><span class="math inline">\(p\)</span> es el número de parámetros del modelo,</li>
+<li><span class="math inline">\(\phi\)</span> es el parámetro de dispersión en el modelo lineal generalizado,</li>
+<li><span class="math inline">\(h_{ii}\)</span> corresponde al apalancamiento de la observación <em>i</em>,</li>
+<li><span class="math inline">\(\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)\)</span> es la varianza linealizada de la ecuación de puntuación.</li>
 </ul>
-<p><em>Estadístico <span class="math inline">\(D_{f}Fits_{\left(i\right)}\)</span></em>: Este estadístico mide el cambio en el ajuste del modelo cuando se elimina el registro i-ésimo. Se calcula de la siguiente manera:</p>
+<p>Para evaluar su magnitud, se compara <span class="math inline">\(c_i\)</span> con puntos de referencia. Una aproximación es el estadístico:</p>
+<p><span class="math display">\[
+\frac{\left(df-p+1\right)\times c_{i}}{df} \doteq F_{\left(p,df-p\right)}
+\]</span></p>
+<p>donde <span class="math inline">\(df\)</span> son los grados de libertad basados en el diseño. En la práctica, la literatura (Heeringa; Téllez, 2016) suele considerar como observaciones influyentes aquellas cuyo <span class="math inline">\(c_i\)</span> excede valores críticos como 2 o 3.</p>
+</div>
+<div id="d_ftextbeta" class="section level4 hasAnchor" number="5.7.3.2">
+<h4><span class="header-section-number">5.7.3.2</span> <span class="math inline">\(D_f\text{Beta}\)</span><a href="diagnóstico-del-modelo.html#d_ftextbeta" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>El estadístico <strong><span class="math inline">\(D_f \text{Beta}_{(i)}\)</span></strong> cuantifica el cambio en los coeficientes de regresión cuando la observación <em>i</em> es eliminada:</p>
+<p><span class="math display">\[
+D_f \text{Beta}_{(i)} = \hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{\left(i\right)}=\frac{\boldsymbol{A}^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}w_{i}}{1-h_{ii}}
+\]</span></p>
+<p>donde <span class="math inline">\(\boldsymbol{A} =\boldsymbol{X}^{t}\boldsymbol{WX}\)</span> y <span class="math inline">\(\hat{\boldsymbol{\beta}}_{(i)}\)</span> es el vector de parámetros estimados sin la observación <em>i</em>.</p>
+<p>En su forma estandarizada:</p>
+<p><span class="math display">\[
+D_f Betas_{\left(i\right)}=\frac{{c_{ji}e_{i}}\big/{\left(1-h_{ii}\right)}}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
+\]</span></p>
+<p>La interpretación es directa: una observación es influyente sobre el coeficiente <span class="math inline">\(\hat{\beta}*j\)</span> si <span class="math inline">\(|D_f Betas*{(i)j}|\geq \frac{z}{\sqrt{n}}\)</span>, con <span class="math inline">\(z=2\)</span> o <span class="math inline">\(3\)</span>, o alternativamente si supera el umbral <span class="math inline">\(t_{0.025,n-p}/\sqrt{n}\)</span>.</p>
+</div>
+<div id="d_f-textfits" class="section level4 hasAnchor" number="5.7.3.3">
+<h4><span class="header-section-number">5.7.3.3</span> <span class="math inline">\(D_f \text{Fits}\)</span><a href="diagnóstico-del-modelo.html#d_f-textfits" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Finalmente, el estadístico <strong><span class="math inline">\(D_f \text{Fits}_{(i)}\)</span></strong> mide la influencia de una observación sobre el ajuste total del modelo. Se calcula como:</p>
 <p><span class="math display">\[
 D_{f}Fits_{\left(i\right)}= \frac{h_{ii}e_{i}\big/\left(1-h_{ii}\right)}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
 \]</span></p>
-<p>Donde, <span class="math inline">\(\sqrt{v\left(\hat{\beta}_{j}\right)}\)</span> puede ser aproximada por el diseño o el Modelo. La i-ésima observación se considera influyente en el ajuste del Modelo si
-<span class="math inline">\(\mid DfFits\left(i\right)\mid\geq z\sqrt{\frac{p}{n}}\)</span> con <span class="math inline">\(z =\)</span> 2 o 3</p>
+<p>La observación <em>i</em> se considera influyente si:</p>
+<p><span class="math display">\[
+|D_f Fits_{(i)}| \geq z\sqrt{\frac{p}{n}} \quad \text{con } z=2 \text{ o } 3
+\]</span></p>
 <p>Por otro lado, un análisis que es de vital importancia en el ajuste de modelos de regresión más específicamente en el análisis de residuales es el de varianza constante en los errores. La principal consecuencia de no tener en cuenta la violación de este supuesto es que los estimadores pierden eficiencia. Si el supuesto de varianza constante no se cumple, los estimadores siguen siendo insesgados y consistentes, pero dejan de ser eficientes, es decir, dejan de ser los mejores en cuanto a que ya no tienen la menor varianza entre todos los estimadores insesgados. Como consecuencia de lo anterior, los intervalos de confianza serán más amplios y las pruebas t y F darán resultados imprecisos <em>(Tellez, 2016)</em>.</p>
 <p>Una de las formas de analizar el supuesto de varianzas constantes en los errores es hacerlo de manera gráfica. Para ello, se grafica los residuos del modelo contra <span class="math inline">\(\hat{y}\)</span> o los residuos del modelo contra <span class="math inline">\(X_{i}\)</span>. Si al realizar estos gráficos se logra evidenciar un patrón (funciones cuadráticas, cúbicas, logarítmicas, etc), se puede decir que la varianza de los errores no es constante.</p>
 <p>Otro supuesto que se debe revisar en los errores al momento de realizar ajustes es la normalidad en lo errores. Una forma muy común para hacer dicha evaluación es realizar un gráfico cuantil-cuantil normal o QQplot. El QQplot es una gráfica de cuantiles para los residuos observados frente a los calculados a partir de una distribución normal teórica que tiene la misma media y varianza que la distribución de los residuos observados. Por lo tanto, una línea recta de 45° en este gráfico sugeriría que la normalidad es una suposición razonable para los errores aleatorios en el modelo.</p>
@@ -741,12 +785,14 @@ D_{f}Fits_{\left(i\right)}= \frac{h_{ii}e_{i}\big/\left(1-h_{ii}\right)}{\sqrt{v
 <p><img src="06-Regresi%C3%B3n_files/figure-html/hat-1.svg" width="672" /></p>
 <p>Dado que esta última técnica es empírica, se puede observar en el gráfico anterior que hay varias observaciones posiblemente influyentes en el conjunto de datos de la muestra de hogares.</p>
 </div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas..html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="inferencia-sobre-los-parámetros-del-modelo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

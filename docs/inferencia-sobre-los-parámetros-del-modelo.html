@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R</title>
+  <title>5.8 Inferencia sobre los parámetros del modelo | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R" />
+  <meta property="og:title" content="5.8 Inferencia sobre los parámetros del modelo | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.8 Inferencia sobre los parámetros del Modelo | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="5.8 Inferencia sobre los parámetros del modelo | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-24" />
+<meta name="date" content="2025-09-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="diagnóstico-del-modelo.html"/>
-<link rel="next" href="gráficas-en-r.html"/>
+<link rel="next" href="visualización-de-datos.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -242,18 +242,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.1" data-path="06-Regresión.html"><a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>5.5.1</b> Antecedentes históricos y desarrollos metodológicos</a></li>
 <li class="chapter" data-level="5.5.2" data-path="06-Regresión.html"><a href="#relevancia-pr%C3%A1ctica"><i class="fa fa-check"></i><b>5.5.2</b> Relevancia práctica</a></li>
 <li class="chapter" data-level="5.5.3" data-path="modelos-de-regresión-en-encuestas-de-hogares.html"><a href="modelos-de-regresión-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5.5.3</b> ¿Aplicar o no aplicar ponderaciones?</a></li>
+<li class="chapter" data-level="5.5.4" data-path="06-Regresión.html"><a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>5.5.4</b> Enfoques inferenciales para el análisis de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.7" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.8" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del Modelo</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="5.6" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas"><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.6.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-par%C3%A1metros"><i class="fa fa-check"></i><b>5.6.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.6.2" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><i class="fa fa-check"></i><b>5.6.2</b> Uso de ponderaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="06-Regresión.html"><a href="#coeficiente-de-determinaci%C3%B3n"><i class="fa fa-check"></i><b>5.7.1</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="5.7.2" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-de-los-residuales"><i class="fa fa-check"></i><b>5.7.2</b> Diagnóstico de los residuales</a></li>
+<li class="chapter" data-level="5.7.3" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>5.7.3</b> Observaciones influyentes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#visualizaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>6</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6.1</b> Gráficas en <code>R</code></a></li>
+<li class="chapter" data-level="6.2" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html"><i class="fa fa-check"></i><b>6.2</b> Histogramas para graficar variables continuas</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html#histogramas-ponderados-y-no-ponderados"><i class="fa fa-check"></i><b>6.2.1</b> Histogramas ponderados y no ponderados</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.3</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="06-Regresión.html"><a href="#diagramas-de-dispersi%C3%B3n-scatterplots"><i class="fa fa-check"></i><b>6.4</b> Diagramas de dispersión (Scatterplots)</a></li>
+<li class="chapter" data-level="6.5" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.5</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.6" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.6</b> Creando mapas</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
@@ -306,18 +320,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="inferencia-sobre-los-parámetros-del-modelo" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> Inferencia sobre los parámetros del Modelo<a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroborando las propiedades distribucionales de los errores y por ende, de la variable respuesta <span class="math inline">\(y\)</span>, el paso siguiente es verificar si los parámetros estimados son significativos y por ende, las covariables utilizadas para ajustar el modelo aportan significativamente para explicar o predecir a la variable de estudio <span class="math inline">\(y\)</span>.</p>
-<p>Dada las propiedades distribucionales de los <span class="math inline">\(\beta&#39;s\)</span>, un estadístico de prueba natural para evaluar la significancia de dicho parámetro se basa en la distribución “t-student” y se describe a continuación:</p>
+<h2><span class="header-section-number">5.8</span> Inferencia sobre los parámetros del modelo<a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroboradas las propiedades distribucionales de los errores —y, en consecuencia, de la variable respuesta <span class="math inline">\(y\)</span>—, el siguiente paso consiste en verificar si los parámetros estimados son estadísticamente significativos. Esto permite determinar si las covariables incluidas en el modelo aportan de manera sustantiva a la explicación o predicción de la variable de estudio.</p>
+<p>En los modelos de regresión, el enfoque clásico para contrastar hipótesis sobre los parámetros <span class="math inline">\(\beta_k\)</span> se basa en las propiedades distribucionales de sus estimadores. Un estadístico de prueba natural para evaluar la significancia de un coeficiente se construye a partir de la distribución <em>t-Student</em> y se define como:</p>
 <p><span class="math display">\[
-t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
+t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)} \sim t_{n-p}
 \]</span></p>
-<p>Donde <span class="math inline">\(p\)</span> es el número de parámetros del modelo y <span class="math inline">\(n\)</span> el tamaño de la muestra de la encuesta. En este sentido, el estadístico de prueba anterior evalúa las hipótesis <span class="math inline">\(H_{0}:\beta_{k}=0\)</span> versus la alternativa <span class="math inline">\(H_{1}:\beta_{k}\neq0\)</span>.</p>
-<p>De las propiedades distribucionales de los <span class="math inline">\(\beta\)</span>, se puede construir un intervalo de confianza al <span class="math inline">\((1-\alpha)\times100\%\)</span> para <span class="math inline">\(\beta_{k}\)</span> está dado por:</p>
+<p>donde <span class="math inline">\(p\)</span> es el número de parámetros del modelo y <span class="math inline">\(n\)</span> el tamaño muestral. Este estadístico permite contrastar la hipótesis nula <span class="math inline">\(H_{0}:\beta_{k}=0\)</span> frente a la alternativa <span class="math inline">\(H_{1}:\beta_{k}\neq 0\)</span>.</p>
+<p>En consecuencia, cuando <span class="math inline">\(|t|\)</span> es lo suficientemente grande, se rechaza la hipótesis nula, concluyendo que la covariable asociada al parámetro <span class="math inline">\(\beta_k\)</span> tiene un efecto significativo en la variable respuesta.</p>
+<p>De igual manera, las propiedades distribucionales de los <span class="math inline">\(\beta\)</span> permiten construir intervalos de confianza al nivel <span class="math inline">\((1-\alpha)\times100%\)</span>, definidos como:</p>
 <p><span class="math display">\[
 \hat{\beta}_{k}\pm t_{1-\frac{\alpha}{2},\,df}\,se\left(\hat{\beta}_{k}\right)
 \]</span></p>
-<p>Donde, los grados de libertad para el intervalo (<span class="math inline">\(df\)</span>) en una encuesta de hogares (muestras complejas) está dado por el número de conglomerados finales de la primera etapa menos el número de estratos de la etapa primaria <span class="math inline">\(\left(df=\sum_{h}a_{h}-H\right)\)</span>.</p>
+<p>donde <span class="math inline">\(se(\hat{\beta}*k)\)</span> es el error estándar del estimador y <span class="math inline">\(t*{1-\frac{\alpha}{2},,df}\)</span> corresponde al percentil de la distribución <em>t-Student</em> con <span class="math inline">\(df\)</span> grados de libertad.</p>
+<p>En el caso particular de las encuestas de hogares con <strong>diseños muestrales complejos</strong>, los grados de libertad no se calculan simplemente como <span class="math inline">\(n-p\)</span> (como en el enfoque clásico), sino que deben ajustarse para reflejar la estructura del muestreo. De acuerdo con la teoría de diseño, se establece que:</p>
+<p><span class="math display">\[
+df = \sum_{h} a_{h} - H
+\]</span></p>
+<p>donde <span class="math inline">\(\sum_{h}a_{h}\)</span> es el número total de conglomerados finales de la primera etapa y <span class="math inline">\(H\)</span> el número de estratos de dicha etapa.</p>
+<p>Este ajuste es fundamental porque asegura que la inferencia refleje de manera adecuada la variabilidad introducida por la estratificación, la conglomeración y las probabilidades de selección desiguales, evitando conclusiones erróneas sobre la significancia de los parámetros en el análisis de encuestas complejas.</p>
 <p>Para la aplicación de las temáticas vistas, es decir, realizar la prueba de hipótesis y los intervalos de confianza para los parámetros utilizaremos el modelo que se ha venido trabajando y aplicaremos las funciones <code>summary.svyglm</code> para las pruebas t y <code>confint.svyglm</code> para los intervalos de confianza como sigue:</p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="inferencia-sobre-los-parámetros-del-modelo.html#cb322-1" tabindex="-1"></a>survey<span class="sc">:::</span><span class="fu">summary.svyglm</span>(mod_svy)</span></code></pre></div>
 <pre><code>## 
@@ -576,7 +597,7 @@ En <code>R</code> se hace la predicción de la siguiente manera:</p>
         </div>
       </div>
 <a href="diagnóstico-del-modelo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="gráficas-en-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visualización-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

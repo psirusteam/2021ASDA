@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.4 Diagrama de barras para variables categoricas | Análisis de encuestas con R</title>
+  <title>6.5 Diagrama de barras para variables categoricas | Análisis de encuestas con R</title>
   <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.4 Diagrama de barras para variables categoricas | Análisis de encuestas con R" />
+  <meta property="og:title" content="6.5 Diagrama de barras para variables categoricas | Análisis de encuestas con R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.4 Diagrama de barras para variables categoricas | Análisis de encuestas con R" />
+  <meta name="twitter:title" content="6.5 Diagrama de barras para variables categoricas | Análisis de encuestas con R" />
   
   <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Andrés Gutiérrez, Cristian Téllez, Stalyn Guerrero" />
 
 
-<meta name="date" content="2025-09-24" />
+<meta name="date" content="2025-09-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="scaterplot.html"/>
+<link rel="prev" href="diagramas-de-dispersión-scatterplots.html"/>
 <link rel="next" href="creando-mapas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -242,18 +242,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.1" data-path="07-Gráficas.html"><a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>5.5.1</b> Antecedentes históricos y desarrollos metodológicos</a></li>
 <li class="chapter" data-level="5.5.2" data-path="07-Gráficas.html"><a href="#relevancia-pr%C3%A1ctica"><i class="fa fa-check"></i><b>5.5.2</b> Relevancia práctica</a></li>
 <li class="chapter" data-level="5.5.3" data-path="modelos-de-regresión-en-encuestas-de-hogares.html"><a href="modelos-de-regresión-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5.5.3</b> ¿Aplicar o no aplicar ponderaciones?</a></li>
+<li class="chapter" data-level="5.5.4" data-path="07-Gráficas.html"><a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>5.5.4</b> Enfoques inferenciales para el análisis de datos</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas."><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas.</a></li>
-<li class="chapter" data-level="5.7" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a></li>
-<li class="chapter" data-level="5.8" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del Modelo</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6</b> Gráficas en R</a>
+<li class="chapter" data-level="5.6" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas"><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="histogramas-para-graficar-variables-continuas..html"><a href="histogramas-para-graficar-variables-continuas..html"><i class="fa fa-check"></i><b>6.1</b> Histogramas para graficar variables continuas.</a></li>
-<li class="chapter" data-level="6.2" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.2</b> Agregando densidades y graficando Boxplot</a></li>
-<li class="chapter" data-level="6.3" data-path="scaterplot.html"><a href="scaterplot.html"><i class="fa fa-check"></i><b>6.3</b> Scaterplot</a></li>
-<li class="chapter" data-level="6.4" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.4</b> Diagrama de barras para variables categoricas</a></li>
-<li class="chapter" data-level="6.5" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.5</b> Creando mapas</a></li>
+<li class="chapter" data-level="5.6.1" data-path="07-Gráficas.html"><a href="#estimaci%C3%B3n-de-par%C3%A1metros"><i class="fa fa-check"></i><b>5.6.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.6.2" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><i class="fa fa-check"></i><b>5.6.2</b> Uso de ponderaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="07-Gráficas.html"><a href="#coeficiente-de-determinaci%C3%B3n"><i class="fa fa-check"></i><b>5.7.1</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="5.7.2" data-path="07-Gráficas.html"><a href="#diagn%C3%B3stico-de-los-residuales"><i class="fa fa-check"></i><b>5.7.2</b> Diagnóstico de los residuales</a></li>
+<li class="chapter" data-level="5.7.3" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>5.7.3</b> Observaciones influyentes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="07-Gráficas.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="07-Gráficas.html"><a href="#visualizaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>6</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="07-Gráficas.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6.1</b> Gráficas en <code>R</code></a></li>
+<li class="chapter" data-level="6.2" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html"><i class="fa fa-check"></i><b>6.2</b> Histogramas para graficar variables continuas</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html#histogramas-ponderados-y-no-ponderados"><i class="fa fa-check"></i><b>6.2.1</b> Histogramas ponderados y no ponderados</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.3</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="07-Gráficas.html"><a href="#diagramas-de-dispersi%C3%B3n-scatterplots"><i class="fa fa-check"></i><b>6.4</b> Diagramas de dispersión (Scatterplots)</a></li>
+<li class="chapter" data-level="6.5" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.5</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.6" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.6</b> Creando mapas</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
 <ul>
@@ -305,9 +319,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="diagrama-de-barras-para-variables-categoricas" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Diagrama de barras para variables categoricas<a href="diagrama-de-barras-para-variables-categoricas.html#diagrama-de-barras-para-variables-categoricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Para realizar estos gráfico, en primer lugar, se deben realizar las estimaciones puntuales de los tamaños que se van a graficar:</p>
+<div id="diagrama-de-barras-para-variables-categoricas" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Diagrama de barras para variables categoricas<a href="diagrama-de-barras-para-variables-categoricas.html#diagrama-de-barras-para-variables-categoricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los gráficos de barras son una de las formas más comunes de representar información categórica en el análisis de encuestas. Permiten mostrar la magnitud de las estimaciones asociadas a distintas categorías, ya sea en términos de conteos o proporciones, incorporando los factores de expansión para que los resultados representen de manera adecuada a la población. A diferencia de los gráficos de barras construidos con datos no ponderados, el uso de pesos garantiza que la visualización corresponda a una estimación válida a nivel poblacional.</p>
+<p>Es recomendable acompañar las barras con líneas de error que indiquen los intervalos de confianza de las estimaciones puntuales. Esta práctica no solo comunica el valor central de interés, sino que también transmite la incertidumbre asociada al proceso de estimación muestral. De esta forma, los gráficos de barras no solo son útiles para describir patrones generales, sino también para evaluar la precisión y robustez de las conclusiones.</p>
+<p>La construcción de gráficos de barras en <code>R</code> requiere en primera instancia calcular las estimaciones que se desean graficar. Para ello, se utilizan funciones como <code>survey_total()</code> dentro de la librería <code>srvyr</code>, que permiten obtener tanto los estimadores puntuales como sus errores estándar e intervalos de confianza. A continuación, estas estimaciones se representan gráficamente mediante funciones del paquete <code>ggplot2</code>, lo que ofrece gran flexibilidad para definir colores, títulos, escalas y otros elementos visuales.</p>
+<p>Una de las ventajas de los gráficos de barras es que pueden extenderse fácilmente a comparaciones entre varias variables categóricas. Por ejemplo, es posible analizar el tamaño poblacional de distintos grupos de pobreza cruzado con la situación de empleo, distinguiendo además subcategorías como desempleo o población infantil. Este tipo de análisis gráfico resulta especialmente útil para identificar intersecciones de vulnerabilidad, al mostrar de manera simultánea dos o más características poblacionales.</p>
+<p>En síntesis, los gráficos de barras permiten no solo una descripción clara de los patrones de consumo, empleo o pobreza en la población, sino también una visualización intuitiva de la incertidumbre estadística. Cuando se aplican correctamente, constituyen una herramienta poderosa para comunicar hallazgos de encuestas de hogares a tomadores de decisiones, investigadores y público en general, manteniendo siempre el rigor estadístico en la representación de los resultados.</p>
 <div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="diagrama-de-barras-para-variables-categoricas.html#cb380-1" tabindex="-1"></a>tamano_zona <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span></span>
 <span id="cb380-2"><a href="diagrama-de-barras-para-variables-categoricas.html#cb380-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span></span>
 <span id="cb380-3"><a href="diagrama-de-barras-para-variables-categoricas.html#cb380-3" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="at">Nd =</span> <span class="fu">survey_total</span>(<span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>)))</span>
@@ -669,7 +687,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="scaterplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="diagramas-de-dispersión-scatterplots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="creando-mapas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

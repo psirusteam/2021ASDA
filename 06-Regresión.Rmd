@@ -131,42 +131,69 @@ No obstante, cuando el modelo está mal especificado, la regresión sin ponderac
 En definitiva, la decisión sobre **aplicar o no ponderaciones** no puede basarse únicamente en una regla rígida, sino que exige un análisis crítico de los objetivos del estudio, del diseño de la encuesta y de la robustez de los modelos estimados. Asimismo, un análisis diagnóstico riguroso resulta esencial para validar las inferencias y garantizar que los resultados reflejen de manera adecuada la realidad poblacional (véase la Subsección 9.6.4).
 
 
-## Estimación de los parámetros en un modelo de regresión con muestras complejas.
+### Enfoques inferenciales para el análisis de datos
 
-Una vez se establecen los supuestos del modelo y las características distribucionales de los errores el paso siguientes es el proceso de estimación de los parámetros. A modo ilustrativo e introductorio al proceso de estimación de los parámetros con información provenientes de muestras complejas, si en lugar de observar una muestra de tamaño $n$ de los $N$ elementos de población se hubiera realizado un censo completo, el parámetro de regresión de población finita $\beta_{1}$ podría calcularse como sigue **(Tellez, et. al 2016)**:
+En el análisis de encuestas, uno de los principales retos consiste en manejar adecuadamente la variabilidad de los datos. Esta proviene de dos fuentes fundamentales: el diseño muestral, que determina cómo se recolecta la información, y el modelo estadístico, que define cómo se interpreta dicha información para inferir propiedades de la población. Ignorar cualquiera de estas dimensiones puede comprometer la validez de los resultados.
 
-$$
-\beta_{1}  =  \frac{{ \sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}}{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)^{2}}
-$$
+Por ello, se han desarrollado metodologías inferenciales avanzadas que permiten integrar ambas fuentes de incertidumbre en un mismo marco analítico. Estas técnicas buscan reflejar tanto la estructura del diseño como los supuestos y limitaciones del modelo. Entre las aproximaciones más relevantes se encuentran la seudo-verosimilitud (Molina & Skinner, 1992) y la inferencia combinada (Binder, 2011).
 
-Ahora bien, cuando se desea estimar los parámetros de un modelo de regresión lineal, pero considerando que la información muestral proviene de encuestas con muestras complejas se altera el enfoque estándar que se le da a la estimación de coeficientes de regresión y sus errores estándar.
 
-La principal razón por la que los métodos de estimación de parámetros de los coeficientes de regresión cambian es que la información recolectada por medio de una encuesta con muestra compleja generalmente no está distribuida de manera idéntica dado que el diseño muestral así es planeado. En este contexto, al ajustar modelos  de regresión con este conjunto de datos, dado que los diseños complejos en su mayoría contienen estratificación, conglomerados, probabilidades de selección desiguales, etc, impiden el uso de estimadores de varianza convencionales que se pueden derivar por máxima verosimilitud puesto que, con esta metodología se asumen que los datos son independientes e idénticamente distribuidos y que provienen de alguna distribución de probabilidad (binomial, Poisson, exponencial, normal, etc.). En su lugar, según *Wolter, (2007)* se emplean métodos no paramétricos robustos basados en linealización de Taylor o métodos de estimación de la varianza usando replicación (Jackknife, bootstrapping, etc).
+El método de seudo-verosimilitud extiende las técnicas tradicionales de máxima verosimilitud para ajustarlas a las particularidades de los diseños muestrales complejos. En este enfoque, la distribución de muestreo definida por el diseño tiene un rol central, mientras que la distribución del modelo ocupa un lugar secundario. Si bien, en contextos de modelos bien especificados, los estimadores basados en seudo-verosimilitud tienden a ser insesgados o consistentes, lo crucial es que este procedimiento evita sesgos que se originarían si se ignorara el diseño muestral. En términos prácticos, la seudo-verosimilitud traduce el modelo tradicional en uno que respete la forma en que los datos fueron obtenidos, garantizando inferencias más sólidas.
 
-Con el fin de ilustrar la forma cómo se estiman los parámetros de regresión del modelo en el contexto de encuestas complejas se realizará estimando el parámetro $\beta_{1}$ y su varianza para una regresión lineal simple. La extensión a la estimación de los parámetros de un modelo de regresión múltiple, algebraicamente es compleja y se sale del contexto de este libro. A continuación, se presenta la estimación del intercepto y su varianza en un modelo de regresión lineal simple:
 
-$$
-\hat{\beta_{1}}  =  \frac{{\sum_{h}^{H}\sum_{\alpha}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}\left(y_{h\alpha i}-\bar{y}_{\omega}\right)\left(x_{h\alpha i}-\bar{x}_{\omega}\right)}}{{ \sum_{h}^{H}\sum_{\alpha}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}\left(x_{h\alpha i}-\bar{x}_{\omega}\right)^{2}}}
-  = \frac{t_{xy}}{t_{x^{2}}}
-$$
+En contraste, la inferencia combinada propone un marco unificado en el que se integran simultáneamente la variabilidad del muestreo y la incertidumbre del modelo. Al considerar ambas fuentes, este enfoque ofrece una visión más completa de la variabilidad y permite obtener estimaciones más precisas y confiables. Su principal aporte radica en que evita sesgos que pueden aparecer cuando se analiza únicamente desde la perspectiva del diseño o del modelo. De esta manera, la inferencia combinada resulta especialmente útil en aplicaciones donde se requiere un balance entre representatividad poblacional y solidez estadística de los modelos ajustados.
 
-Como se puede observar en la ecuación anterior, el estimador del parámetro es un cociente de totales, por ende, su varianza estimada está dada por:
+## Estimación de los parámetros en un modelo de regresión con muestras complejas
+
+Una vez se establecen los supuestos del modelo y las características distribucionales de los errores, el paso siguiente es el proceso de estimación de los parámetros. A modo ilustrativo, si en lugar de observar una muestra de tamaño $n$ de los $N$ elementos de la población se hubiera realizado un censo completo, el parámetro de regresión de población finita $\beta_{1}$ podría calcularse como sigue **(Téllez et al., 2016)**:
 
 $$
-var\left(\hat{\beta_{1}}\right)  =  \frac{var\left(t_{xy}\right)+\hat{\beta}_{1}^{2}var\left(t_{x^{2}}\right)-2\hat{\beta}_{1}cov\left(t_{xy},t_{x^{2}}\right)}{\left(t_{x^{2}}\right)^{2}}
+\beta_{1}  =  \frac{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)^{2}}
 $$
 
-A modo de generalización según **Kish y Frankel, (1974)** para la estimación de la varianza en un modelo de regresión lineal múltiple los métodos de aproximación requieren totales de muestra ponderados para los cuadrados y productos cruzados de todas las combinaciones $y$ y $x = {1 x_{1} … x_{p}}$. A continuación, se presenta la estimación:
+Sin embargo, cuando se desea estimar los parámetros de un modelo de regresión lineal utilizando información proveniente de encuestas con diseños complejos, el enfoque estándar cambia. La principal razón es que los datos no cumplen con los supuestos clásicos de independencia e idéntica distribución, ya que el diseño muestral introduce elementos como estratificación, conglomerados o probabilidades de selección desiguales. En consecuencia, los estimadores tradicionales (como los obtenidos por máxima verosimilitud o mínimos cuadrados) pueden resultar sesgados y sus errores estándar poco confiables.
+
+En este contexto, **Wolter (2007)** propone el uso de métodos no paramétricos robustos, como la linealización de Taylor o los procedimientos de replicación (Jackknife, Bootstrap, Balanced Repeated Replication, entre otros), para estimar varianzas y obtener inferencias válidas.
+
+### Estimación de parámetros
 
 
-\begin{eqnarray*}
-var\left(\hat{\beta}\right)=\hat{\Sigma}\left(\hat{\beta}\right) & = & \left[\begin{array}{cccc}
-var\left(\hat{\beta}_{0}\right) & cov\left(\hat{\beta}_{0},\hat{\beta}_{1}\right) & \cdots & cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right)\\
-cov\left(\hat{\beta}_{0},\hat{\beta}_{1}\right) & var\left(\hat{\beta}_{1}\right) & \cdots & cov\left(\hat{\beta}_{1},\hat{\beta}_{p}\right)\\
-\vdots & \vdots & \ddots & \vdots\\
-cov\left(\hat{\beta}_{0},\hat{\beta}_{p}\right) & cov\left(\hat{\beta}_{1},\hat{\beta}_{p}\right) & \cdots & var\left(\hat{\beta}_{p}\right)
-\end{array}\right]
-\end{eqnarray*}
+En el caso de un modelo de regresión lineal simple, la estimación de la pendiente $(\beta_1)$ bajo un esquema de encuesta compleja se realiza mediante un estimador ponderado, que puede expresarse de la siguiente forma:
+
+$$
+\hat{\beta_{1}}  =  
+\frac{\sum_{h=1}^H \sum_{\alpha=1}^{a_h} \sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}\,(y_{h\alpha i}-\bar{y}_{\omega})(x_{h\alpha i}-\bar{x}_{\omega})}
+{\sum_{h=1}^H \sum_{\alpha=1}^{a_h} \sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}\,(x_{h\alpha i}-\bar{x}_{\omega})^{2}}
+= \frac{t_{xy}}{t_{x^{2}}}
+$$
+
+donde $\omega_{h\alpha i}$ representa los pesos de muestreo. La principal diferencia respecto al estimador clásico es la incorporación explícita de dichos pesos, que corrigen las probabilidades desiguales de selección y aseguran la representatividad de las estimaciones.
+
+
+La varianza del estimador $\hat{\beta_1}$ puede expresarse como:
+
+$$
+var\left(\hat{\beta_{1}}\right)  
+=  \frac{var(t_{xy})+\hat{\beta}_{1}^{2}var(t_{x^{2}})-2\hat{\beta}_{1}cov(t_{xy},t_{x^{2}})}{(t_{x^{2}})^{2}}
+$$
+
+Este enfoque permite cuantificar la precisión del coeficiente considerando tanto los pesos como la estructura del diseño muestral.
+
+
+En el caso de la regresión múltiple, el cálculo de la varianza de cada coeficiente se realiza considerando su interdependencia con los demás. Esto se refleja en la construcción de una **matriz de varianza-covarianza**, que recoge tanto la variabilidad individual como las covarianzas entre todos los parámetros. De acuerdo con **Kish y Frankel (1974)**, esta estimación requiere utilizar totales ponderados de cuadrados y productos cruzados de todas las combinaciones entre la variable dependiente $y$ y el conjunto de predictores $x = {1, x_1, …, x_p}$. En términos generales:
+
+$$
+var(\hat{\beta}) = \hat{\Sigma}(\hat{\beta}) =
+\begin{bmatrix}
+var(\hat{\beta}_{0}) & cov(\hat{\beta}_{0},\hat{\beta}_{1}) & \cdots & cov(\hat{\beta}_{0},\hat{\beta}_{p}) \\
+cov(\hat{\beta}_{0},\hat{\beta}_{1}) & var(\hat{\beta}_{1}) & \cdots & cov(\hat{\beta}_{1},\hat{\beta}_{p}) \\
+\vdots & \vdots & \ddots & \vdots \\
+cov(\hat{\beta}_{0},\hat{\beta}_{p}) & cov(\hat{\beta}_{1},\hat{\beta}_{p}) & \cdots & var(\hat{\beta}_{p})
+\end{bmatrix}
+$$
+
+Este marco permite evaluar la estabilidad y precisión de los parámetros en modelos más complejos, garantizando que las inferencias reflejen adecuadamente tanto el diseño de la encuesta como la relación entre las variables.
+
 
 Para ejemplificar los conceptos trabajados hasta este momento, se tomará la misma base que se ha venido trabajando durante todo el desarrollo de este libro. Se inicia con el cargue de las librerías, la base de datos y la definición del diseño de muestreo:
 
@@ -349,46 +376,95 @@ plot_BigCity +  geom_abline( data = df_model,
 ```
 
 
+### Uso de ponderaciones
+
+En el análisis de datos provenientes de encuestas con diseños complejos surge un interrogante clave: **¿cómo deben incorporarse los pesos muestrales en los modelos de regresión?** La respuesta no es trivial, ya que los pesos reflejan tanto la probabilidad de selección como los ajustes por no respuesta y calibración, pero su uso directo en el modelado puede generar problemas de eficiencia y aumentar la varianza de los estimadores.
+
+Para enfrentar estas limitaciones, se han propuesto diferentes estrategias de ajuste que buscan lograr un balance entre precisión y eficiencia en la estimación. Entre los procedimientos más utilizados destacan los siguientes:
+
+**Pesos tipo Senado**
+Este procedimiento ajusta los pesos de manera que su suma coincida con el tamaño de la muestra, en lugar del tamaño de la población. El objetivo es mantener la representatividad relativa de las unidades, pero reduciendo la dispersión de los pesos originales, lo que resulta particularmente ventajoso en encuestas donde existe alta variabilidad entre los factores de expansión:
+
+$$
+w_k^{Senate} = w_k \times \frac{n}{\sum w_k}
+$$
+
+**Pesos normalizados**
+En este enfoque los pesos originales se reescalan para que su suma sea igual a uno, lo que evita un incremento innecesario de la varianza en los modelos. Esta técnica es especialmente útil cuando se trabaja con diferentes subconjuntos de datos (por ejemplo, modelos estimados en subpoblaciones) o cuando se busca minimizar la inflación de la varianza:
+
+$$
+w_k^{Normalized} = \frac{w_k}{\sum w_k}
+$$
+
+
+Es importante resaltar que, en ambos métodos, los pesos ajustados se obtienen mediante transformaciones multiplicativas directas de los pesos muestrales originales. Por esta razón, no deben emplearse para calcular **totales poblacionales**, ni modifican los coeficientes de variación asociados a ellos. Asimismo, estos procedimientos no afectan las estimaciones de **razones**, como medias o proporciones, ya que en dichos casos los pesos se cancelan en el cociente.
+
+En la práctica, el uso de estos ajustes puede considerarse una solución pragmática en contextos donde no se dispone de software especializado para encuestas. Sin embargo, cuando se cuenta con programas estadísticos que permiten la incorporación directa de pesos y del diseño muestral —como los descritos en la Subsección 9.3.4— el reescalamiento de los pesos deja de ser necesario, ya que dichos programas realizan el tratamiento adecuado para preservar tanto la representatividad como las propiedades inferenciales del modelo.
+
+
+
 ## Diagnóstico del modelo
 
-En el análisis de las encuestas de hogares cuando se ajusten modelo estadístico es importante realizar verificaciones de calidad y con esto tener certezas de las conclusiones que se obtienen. La mayoría de textos académicos dan un panorama bastante detallado de los supuestos y consideraciones que se deben tener en cuenta para tener un modelo correctamente definido. A continuación, se enlistan algunas de ellas *(Tellez, 2016)*
+En el análisis de encuestas de hogares, cuando se ajusta un modelo estadístico, es crucial realizar **verificaciones de calidad** que garanticen la validez de las conclusiones. La literatura metodológica destaca que un modelo bien especificado no solo depende de la elección de las covariables, sino también de que se cumplan los supuestos básicos que aseguran la coherencia de los resultados *(Téllez, 2016)*.
 
--   Determinar si el modelo proporciona un adecuado ajuste a los datos.
--   Examinar si los errores están normalmente distribuidos.
--   Examinar si los errores tienen varianza constante.
--   Verificar si los errores se pueden asumir no correlacionados.
--   Determinar si alguno de los datos tiene valores con un efecto inusualmente grande sobre el modelo de regresión estimado, estos se conocen
-como datos influyentes.
--   Determinar si algún punto no sigue la tendencia de la mayoría de los
-datos cuando se toma en cuenta el modelo, estos puntos se conocen como outliers.
+Entre los elementos que deben revisarse al aplicar un modelo de regresión lineal en encuestas complejas se encuentran los siguientes:
 
-En este capítulo se abordarán alguno de los supuestos que se deben tener en cuenta al momento de ajustar un modelo de regresión lineal.
+* **Adecuación del ajuste**: comprobar si el modelo logra explicar una proporción significativa de la variabilidad de la variable de interés y si las predicciones se ajustan razonablemente a los datos observados.
+* **Normalidad de los errores**: verificar si los errores se distribuyen aproximadamente de manera normal, lo que garantiza la validez de las pruebas de significancia.
+* **Homogeneidad de la varianza (homocedasticidad)**: confirmar que la variabilidad de los errores se mantenga constante a lo largo de los valores de las covariables. La presencia de heterocedasticidad puede sesgar las inferencias.
+* **Independencia de los errores**: examinar si los errores son independientes entre sí, evitando correlaciones que comprometan la validez de las pruebas estadísticas.
+* **Casos influyentes**: identificar observaciones que ejercen un efecto desproporcionado en la estimación del modelo, lo que podría distorsionar los resultados.
+* **Datos atípicos (outliers)**: detectar unidades que se apartan significativamente de la tendencia general de la muestra y que pueden afectar el ajuste del modelo.
 
-*Estimación del $R^{2}$ y $R_{adj}^{2}$*
 
-Una medida del ajuste del modelo de regresión es el coeficiente de determinación o coeficiente de correlación múltiple ($R^{2})$). Dicho parámetro estima la proporción de la varianza de la población explicada por la regresión y oscila entre 0 y 1. Entre más cercano esté de uno significa que mayor variabilidad explica y lo contrario ocurrirá si está cerca de cero. Lo anterior, en ocasiones es muy ambigüo puesto que por ejemplo, los físicos pueden obtienen $R^{2}$ altísimos (mayores a 0.98–0.99) mientras que los químicos obtienen $R^{2}$ superiores a 0.90. Sin embargo, los científicos sociales y demás que trabajen con poblaciones humanas encontrarán que su mejor modelo de regresión a menudo explicará solo entre el 20 % y el 40 % de la variación en la variable dependiente (*Heringa*). A continuación, se presenta como se calcula este coeficiente:
+En el contexto de encuestas complejas, estas verificaciones adquieren una relevancia particular. Problemas como la multicolinealidad, la falta de independencia entre observaciones o la presencia de valores extremos pueden acentuarse debido al diseño muestral (estratificación, conglomeración y ponderación). Por ello, los procedimientos de diagnóstico no deben limitarse a la revisión de los supuestos clásicos, sino también considerar las especificidades del diseño.
 
-$$
-R^{2} =  1-\frac{SSE}{SST}
-$$
+La aplicación sistemática de estas pruebas diagnósticas permite evaluar la solidez del modelo, incrementar la confianza en las inferencias y garantizar que los resultados derivados sean representativos y útiles para el análisis de políticas públicas o para la investigación social aplicada.
 
-Donde, SST es la suma de cuadrados totales y SSE es la suma de cuadrados del error. El estimador de este parámetro usando muestras complejas está dado por:
 
-$$
-R_{\omega}^{2} = 1-\frac{WSSE}{WSST}
-$$
 
-Donde, WSST es la variabilidad total estimada y WSSE es la suma de cuadrados estimada y se define como:
+### Coeficiente de determinación
+
+Una medida clásica para evaluar el ajuste de un modelo de regresión es el **coeficiente de determinación** ($R^{2}$), también conocido como coeficiente de correlación múltiple. Este indicador estima la proporción de la varianza de la variable dependiente que es explicada por el modelo, y sus valores oscilan entre 0 y 1. Cuanto más próximo esté de 1, mayor será la proporción de variabilidad explicada; por el contrario, un valor cercano a 0 refleja que el modelo aporta poca capacidad explicativa.
+
+No obstante, la interpretación de $R^{2}$ varía según el campo disciplinar. En ciencias físicas, es común obtener valores superiores al 0.98 o 0.99, mientras que en ciencias químicas suelen alcanzarse niveles por encima de 0.90. En contraste, en ciencias sociales y, en general, en estudios con poblaciones humanas, incluso los mejores modelos explicativos rara vez superan un rango del 20 % al 40 % de la variabilidad de la variable de interés (*Heringa*). Este contraste resalta que la magnitud de $R^{2}$ no debe interpretarse de manera absoluta, sino en función del contexto y la naturaleza de los datos analizados.
+
+El coeficiente de determinación se calcula a partir de las sumas de cuadrados totales y de error, de la siguiente manera:
 
 $$
-\hat{WSSE_{\omega}}  =  \sum_{h}^{H}\sum_{\alpha}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i}\left(y_{h\alpha i}-x_{h\alpha i}\hat{\beta}\right)^{2}
+R^{2} = 1 - \frac{SSE}{SST},
 $$
 
-Por último, $R_{adj}^{2}$ se estima:
+donde $SST$ representa la suma de cuadrados totales y $SSE$ la suma de cuadrados del error.
+
+En encuestas con **diseños de muestreo complejos**, es necesario ajustar esta medida para reflejar la estructura del diseño y los pesos muestrales. En este caso, el estimador ponderado se define como:
 
 $$
-R_{adj}^{2}  =  1-\frac{\left(n-1\right)}{\left(n-p\right)}R_{\omega}^{2}
+\hat{R}_\omega^2 = 1 - \frac{(\widehat{SSE})_\omega}{(\widehat{SST})_\omega},
 $$
+
+donde $(\widehat{SSE})_\omega$ corresponde a la **suma ponderada de errores al cuadrado**, calculada como:
+
+$$
+(\widehat{SSE})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} \,(y_{hik} - x_{hik}\hat{\beta})^2,
+$$
+
+y $(\widehat{SST})_\omega$ representa la **suma total ponderada de cuadrados**, definida por:
+
+$$
+(\widehat{SST})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}\,(y_{hik} - \hat{\bar{Y}})^2.
+$$
+
+Finalmente, dado que $R^{2}$ tiende a incrementarse a medida que se incluyen más variables en el modelo, se recomienda emplear también el **coeficiente de determinación ajustado** ($R_{adj}^{2}$), que incorpora una corrección en función del número de covariables y del tamaño de la muestra:
+
+$$
+R_{adj}^{2} = 1 - \frac{(n-1)}{(n-p)} \,(1 - R_{\omega}^{2}),
+$$
+
+donde $n$ es el tamaño muestral efectivo y $p$ el número de parámetros estimados.
+
+Este ajuste permite una comparación más justa entre modelos con diferente número de predictores y es particularmente útil en el análisis de encuestas, donde la complejidad del diseño y el uso de ponderaciones pueden influir notablemente en la magnitud de $R^{2}$.
+
 
 Para continuar con los modelos ajustados en la sección anterior, se procede a estimar los $R^{2}$ utilizando `R`. Inicialmente, se procede a estimar los parámetros del modelo utilizando la función `svyglm` de `survey` como se mostró anteriormente y también, se ajusta un modelo solo con el intercepto para obtener la estimación de la SST:
 
@@ -475,19 +551,40 @@ stargazer(mod_svy, header = FALSE,single.row = T,
 ```
 
 
+### Diagnóstico de los residuales
 
-*Diagnósticos de los residuales*
+En el diagnóstico de los modelos, el análisis de los residuales constituye una herramienta fundamental. Bajo el supuesto de que el modelo ajustado es adecuado, los residuales proporcionan una estimación de los errores y, en consecuencia, permiten evaluar la validez de los supuestos del modelo. Un examen cuidadoso de los mismos ayuda al investigador a determinar si el procedimiento de ajuste ha respetado dichos supuestos o, por el contrario, si alguno de ellos ha sido violado, en cuyo caso sería necesario revisar la especificación del modelo o incluso replantear el método de ajuste.
 
-En el diagnóstico de los modelos es crucial el análisis de los residuales. Estos análisis proporcionan, bajo el supuesto que el modelo ajustado es
-adecuado, una estimación de los errores. Por tanto, un estudio cuidadoso
-de los residuales deberá ayudar al investigador a concluir si el procedimiento de ajuste no ha violado los supuestos o si, por el contrario, uno o varios de los supuestos no se verifican y hay necesidad de revisar el procedimiento de ajuste. 
-
-Para realizar el análisis de los residuales, en primera instancia, se definen los residuales de Pearson como sigue *(Heeringa)*
+En encuestas con diseños muestrales complejos, los **residuales de Pearson** son una forma habitual de evaluar discrepancias entre los valores observados y los esperados. Se definen como:
 
 $$
-r_{p_{i}}  =  \left(y_{i}-\mu_{i}\left(\hat{\beta}_{\omega}\right)\right)\sqrt{\frac{\omega_{i}}{V\left(\hat{\mu}_{i}\right)}}
+r_{p_{i}} = \left(y_{i} - \mu_{i}(\hat{\beta}_{\omega})\right) \sqrt{\frac{\omega_{i}}{V(\hat{\mu}_{i})}},
 $$
-Donde, $\mu_{i}$ es el valor esperado de $y_{i}$,  $w_{i}$ es la ponderación de la encuesta para el i-ésimo individuo del diseño muestral complejo, Por último, $V(\mu_{i})$ es la función de varianza del resultado.
+
+donde $\mu_{i}$ representa el valor esperado de $y_{i}$ bajo el modelo ajustado, $\omega_{i}$ es el peso muestral correspondiente al individuo $i$ y $V(\hat{\mu}_{i})$ es la función de varianza del resultado.
+
+#### Residuos estandarizados
+
+En términos generales, los residuos corresponden a la diferencia entre los valores observados y los estimados por el modelo. El análisis de estos residuos es esencial para verificar el cumplimiento de los supuestos de la regresión. Una práctica común consiste en graficar los residuos frente a los valores predichos o frente a las variables independientes. En un modelo correctamente especificado, la nube de puntos resultante debería mostrar un patrón aleatorio; la presencia de formas sistemáticas puede indicar problemas como **heterocedasticidad** (varianza no constante) o **relaciones no lineales** no captadas por el modelo.
+
+
+El análisis gráfico es un procedimiento ampliamente utilizado para identificar posibles deficiencias en el modelo. En particular, los **gráficos de residuos frente a valores predichos** son una de las herramientas más informativas para evaluar la adecuación del ajuste. La inspección visual de estos gráficos ayuda a determinar si el modelo cumple con los supuestos de normalidad e independencia de los errores.
+
+En el contexto de encuestas complejas, los residuos pueden expresarse de la siguiente manera:
+
+$$
+r_{(p_k)} = \frac{y_k - \hat{\mu}_k}{\sqrt{V(\hat{\mu}_k)/w_k}},
+$$
+
+donde $\hat{\mu}_k$ es el valor predicho de $y_k$, $w_k$ es el peso muestral de la unidad $k$ y $V(\hat{\mu}_k)$ corresponde a la función de varianza asociada. Estos residuos ponderados se emplean para evaluar tanto la **normalidad** como la **homogeneidad de la varianza** en los errores.
+
+#### Evaluación de la homocedasticidad
+
+Uno de los supuestos más relevantes en los modelos de regresión es la constancia de la varianza de los errores (homocedasticidad). Si este supuesto se viola, los estimadores de los parámetros del modelo permanecen insesgados y consistentes, pero pierden eficiencia, es decir, ya no alcanzan la menor varianza posible entre todos los estimadores insesgados.
+
+Para evaluar este aspecto, se recomienda representar los residuos frente a los valores predichos $\hat{y}$ o frente a alguna covariable $x_j$. La aparición de un patrón sistemático (por ejemplo, forma de embudo o curvaturas) es un indicio de **heterocedasticidad**. En tales casos, pueden considerarse estrategias de corrección, como transformaciones de la variable dependiente, inclusión de términos adicionales en el modelo o el uso de estimadores robustos de varianza.
+
+
 
 Otra definición que se debe tener en consideración para el análisis de los residuales es el de la matriz hat, la cual se estima como:
 
@@ -501,71 +598,77 @@ W  =  diag\left\{ \frac{\omega_{1}}{V\left(\mu_{1}\right)\left[g'\left(\mu_{1}\r
 $$
 $W$ es una matriz diagonal de $n\times n$ y $g()$ es la función de enlace del modelo lineal generalizado.
 
-Otras técnicas utilizadas también para el análisis de los modelos consisten en el análisis de observaciones influyentes. Una observación se denomina influyente si al removerlo de la nube de puntos este causa un cambio grande en el ajuste del modelo. Una observación importante para resaltar es que un punto influyente podría o no ser un dato atípico. Para detectar observaciones influyentes es necesario tener claro qué tipo de influencia se quiere detectar. Lo anterior puesto que, por ejemplo, una observación puede ser influyente sobre la estimación de los parámetros, pero no para la estimación de la varianza del error. A continuación, se presentan las distintas técnicas estadísticas para la detección de datos influyentes:
 
-*Distancia de Cook's*: Diagnostica si la i-ésima observación es influyente
-en la estimación del modelo, por estar lejos del centro de masa de los
-datos. Se calcula de la siguiente manera:
+### Observaciones influyentes
+
+En el análisis diagnóstico de modelos, una técnica fundamental consiste en la identificación de observaciones influyentes. Estas son unidades muestrales cuyo impacto sobre el ajuste del modelo es desproporcionado en comparación con el resto de la muestra. Es importante destacar que una observación influyente no necesariamente corresponde a un valor atípico: mientras que un atípico puede estar alejado del patrón general de los datos, su efecto sobre el ajuste puede ser mínimo. Por el contrario, una observación influyente puede alterar de manera significativa las estimaciones de los parámetros, incluso si no luce atípica.
+
+Una observación se considera influyente si su exclusión provoca cambios sustanciales en el ajuste global del modelo o en parámetros específicos. Para detectar este tipo de observaciones es esencial precisar el tipo de influencia que se desea evaluar, ya que una unidad puede ser influyente sobre la estimación de los parámetros pero no sobre la varianza del error, o viceversa.
+
+En el caso de encuestas complejas, este análisis requiere especial atención, pues los pesos muestrales, las estratificaciones y las unidades primarias de muestreo (PSU) amplifican o reducen la influencia de cada observación en comparación con los modelos ajustados bajo supuestos de muestreo simple aleatorio. Para este propósito, la literatura recomienda el uso de herramientas adaptadas a diseños muestrales complejos, tales como el paquete `svydiags` en R (véase Valliant, 2024), que implementa diagnósticos extendidos compatibles con datos de encuestas.
+
+A continuación, se describen los principales estadísticos utilizados para la detección de observaciones influyentes en modelos de regresión, con sus respectivas adaptaciones al contexto de encuestas complejas:
+
+
+#### Distancia de Cook
+
+La **distancia de Cook** mide el efecto de eliminar la observación *i* sobre el ajuste global del modelo. Evalúa simultáneamente el tamaño del residual, la varianza estimada y el apalancamiento de la observación. En el contexto de encuestas complejas, su cálculo se adapta incorporando los pesos muestrales:
 
 $$
-c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
+c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
 $$
 
-donde,
+donde:
 
--   $w_i^* =$ Pesos de la encuesta.
--   $w_i$ Elementos por fuera de la diagonal de la matriz hat
--   $e_i=$ residuales
--   $p=$ número de parámetros del Modelo de regresión.
--   $\phi =$ parámetro de dispersión en el glm
--   $\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{B}}_{w}\right)\right) =$ estimación de varianza linealizada de la ecuación de puntuación, que se utiliza para pseudo MLE en modelos lineales generalizados ajustados a datos de encuestas de muestras complejas.
+* $w_i^\*$ son los pesos de la encuesta,
+* $e_i$ es el residual de la observación *i*,
+* $p$ es el número de parámetros del modelo,
+* $\phi$ es el parámetro de dispersión en el modelo lineal generalizado,
+* $h_{ii}$ corresponde al apalancamiento de la observación *i*,
+* $\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)$ es la varianza linealizada de la ecuación de puntuación.
 
-Luego del cálculo de la distancia de Cook's para las observaciones de la muestra, se procede a calcular el siguiente estadístico de prueba para evaluar la importancia de la estadística:
-
+Para evaluar su magnitud, se compara $c_i$ con puntos de referencia. Una aproximación es el estadístico:
 
 $$
 \frac{\left(df-p+1\right)\times c_{i}}{df} \doteq F_{\left(p,df-p\right)}
 $$
 
-donde $df=$ grados de liberta basados en el diseño. Por otro lado, la literatura como *Tellez (2016)*, *Heeringa* considera a las observaciones influyentes cuando $c_{i}$ sean mayores a 2 o 3.
+donde $df$ son los grados de libertad basados en el diseño. En la práctica, la literatura (Heeringa; Téllez, 2016) suele considerar como observaciones influyentes aquellas cuyo $c_i$ excede valores críticos como 2 o 3.
 
 
-*$D_fBeta_{(i)}$*: Este estadístico mide el cambio en la estimación
-del vector de coeficientes de regresión cuando la i-ésima observación
-es eliminada. Se evalúa con la siguiente expresión:
+#### $D_f\text{Beta}$
 
-$$
-D_fBeta_{(i)} = \hat{B}-\hat{B}_{\left(i\right)}=\frac{\boldsymbol{A}^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}w_{i}}{1-h_{ii}}
-$$
-
-Donde $\boldsymbol{A} =\boldsymbol{X}^{t}\boldsymbol{WX}$ $\hat{B}_{(i)}$ es el vector de parámetros estimados una vez se ha eliminado la
-i-ésima observación, $h_{ii}$ es el correspondiente elemento de la diagonal de *H* y $\hat{e}_i$ es el residual de la i-ésima observación.
-
-Otra forma de reescribir este estadístico en términos de la matriz $H$ es:
+El estadístico **$D_f \text{Beta}_{(i)}$** cuantifica el cambio en los coeficientes de regresión cuando la observación *i* es eliminada:
 
 $$
-D_fBetas_{\left(i\right)}=\frac{{c_{ji}e_{i}}\big/{\left(1-h_{ii}\right)}}{\sqrt{v\left(\hat{B}_{j}\right)}}
+D_f \text{Beta}_{(i)} = \hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{\left(i\right)}=\frac{\boldsymbol{A}^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}w_{i}}{1-h_{ii}}
 $$
 
-donde: 
+donde $\boldsymbol{A} =\boldsymbol{X}^{t}\boldsymbol{WX}$ y $\hat{\boldsymbol{\beta}}_{(i)}$ es el vector de parámetros estimados sin la observación *i*.
 
-  - $c_{ji}=$ es el ji-estimo elemento de $\boldsymbol{A}^{-1}w_{i}^{2}\boldsymbol{X}_{\left(i\right)}\boldsymbol{X}_{\left(i\right)}^{t}\boldsymbol{A}^{-1}$
+En su forma estandarizada:
 
- - El estimador de $v\left(\hat{B}_{j}\right)$ basado en el Modelo se obtiene como: $v_{m}\left(\hat{B}_{j}\right)=\hat{\sigma}\sum_{i=1}^{n}c_{ji}^{2}$ con $\hat{\sigma}=\sum_{i\in s}w_{i}e^2/ \left( \hat{N} - p \right)$ y $\hat{N} = \sum_{i \in s}w_{i}$
+$$
+D_f Betas_{\left(i\right)}=\frac{{c_{ji}e_{i}}\big/{\left(1-h_{ii}\right)}}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
+$$
 
-  - La i-ésima observación es influyente para $B_j$ si $\mid D_{f}Betas_{\left(i\right)j}\mid\geq\frac{z}{\sqrt{n}}$ con $z=$ 2 o 3
-
-  - Como alternativa puede usar $t_{0.025,n-p}/\sqrt(n)$ donde $t_{0.025,n-p}$ es el percentil $97.5$
+La interpretación es directa: una observación es influyente sobre el coeficiente $\hat{\beta}*j$ si $|D_f Betas*{(i)j}|\geq \frac{z}{\sqrt{n}}$, con $z=2$ o $3$, o alternativamente si supera el umbral $t_{0.025,n-p}/\sqrt{n}$.
 
 
-*Estadístico $D_{f}Fits_{\left(i\right)}$*: Este estadístico mide el cambio en el ajuste del modelo cuando se elimina el registro i-ésimo. Se calcula de la siguiente manera:
+#### $D_f \text{Fits}$
+
+Finalmente, el estadístico **$D_f \text{Fits}_{(i)}$** mide la influencia de una observación sobre el ajuste total del modelo. Se calcula como:
 
 $$
 D_{f}Fits_{\left(i\right)}= \frac{h_{ii}e_{i}\big/\left(1-h_{ii}\right)}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
 $$
 
-Donde, $\sqrt{v\left(\hat{\beta}_{j}\right)}$ puede ser aproximada por el diseño o el Modelo. La i-ésima observación se considera influyente en el ajuste del Modelo si
-$\mid DfFits\left(i\right)\mid\geq z\sqrt{\frac{p}{n}}$ con $z =$ 2 o 3
+La observación *i* se considera influyente si:
+
+$$
+|D_f Fits_{(i)}| \geq z\sqrt{\frac{p}{n}} \quad \text{con } z=2 \text{ o } 3
+$$
+
 
 Por otro lado, un análisis que es de vital importancia en el ajuste de modelos de regresión más específicamente en el análisis de residuales es el de varianza constante en los errores. La principal consecuencia de no tener en cuenta la violación de este supuesto es que los estimadores pierden eficiencia. Si el supuesto de varianza constante no se cumple, los estimadores siguen siendo insesgados y consistentes, pero dejan de ser eficientes, es decir, dejan de ser los mejores en cuanto a que ya no tienen la menor varianza entre todos los estimadores insesgados. Como consecuencia de lo anterior, los intervalos de confianza serán más amplios y las pruebas t y F darán resultados imprecisos *(Tellez, 2016)*.
 
@@ -735,26 +838,39 @@ ggplot(d_hat, aes(y = hat, x = id)) +
 Dado que esta última técnica es empírica, se puede observar en el gráfico anterior que hay varias observaciones posiblemente influyentes en el conjunto de datos de la muestra de hogares.
 
 
-## Inferencia sobre los parámetros del Modelo
+## Inferencia sobre los parámetros del modelo
 
-Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroborando las propiedades distribucionales de los errores y por ende, de la variable respuesta $y$, el paso siguiente es verificar si los parámetros estimados son significativos y por ende, las covariables utilizadas para ajustar el modelo aportan significativamente para explicar o predecir a la variable de estudio $y$. 
+Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroboradas las propiedades distribucionales de los errores —y, en consecuencia, de la variable respuesta $y$—, el siguiente paso consiste en verificar si los parámetros estimados son estadísticamente significativos. Esto permite determinar si las covariables incluidas en el modelo aportan de manera sustantiva a la explicación o predicción de la variable de estudio.
 
-Dada las propiedades distribucionales de los $\beta's$, un estadístico de prueba natural para evaluar la significancia de dicho parámetro se basa en la distribución "t-student" y se describe a continuación:
-
+En los modelos de regresión, el enfoque clásico para contrastar hipótesis sobre los parámetros $\beta_k$ se basa en las propiedades distribucionales de sus estimadores. Un estadístico de prueba natural para evaluar la significancia de un coeficiente se construye a partir de la distribución *t-Student* y se define como:
 
 $$
-t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)}\sim t_{n-p}
+t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)} \sim t_{n-p}
 $$
 
-Donde $p$ es el número de parámetros del modelo y $n$ el tamaño de la muestra de la encuesta. En este sentido, el estadístico de prueba anterior evalúa las hipótesis $H_{0}:\beta_{k}=0$ versus la alternativa $H_{1}:\beta_{k}\neq0$.
+donde $p$ es el número de parámetros del modelo y $n$ el tamaño muestral. Este estadístico permite contrastar la hipótesis nula $H_{0}:\beta_{k}=0$ frente a la alternativa $H_{1}:\beta_{k}\neq 0$.
 
-De las propiedades distribucionales de los $\beta$, se puede construir un intervalo de confianza al $(1-\alpha)\times100\%$ para $\beta_{k}$ está dado por:
+En consecuencia, cuando $|t|$ es lo suficientemente grande, se rechaza la hipótesis nula, concluyendo que la covariable asociada al parámetro $\beta_k$ tiene un efecto significativo en la variable respuesta.
+
+De igual manera, las propiedades distribucionales de los $\beta$ permiten construir intervalos de confianza al nivel $(1-\alpha)\times100%$, definidos como:
 
 $$
 \hat{\beta}_{k}\pm t_{1-\frac{\alpha}{2},\,df}\,se\left(\hat{\beta}_{k}\right)
 $$
 
-Donde, los grados de libertad para el intervalo ($df$) en una encuesta de hogares (muestras complejas) está dado por el número de conglomerados finales de la primera etapa menos el número de estratos de la etapa primaria $\left(df=\sum_{h}a_{h}-H\right)$.
+donde $se(\hat{\beta}*k)$ es el error estándar del estimador y $t*{1-\frac{\alpha}{2},,df}$ corresponde al percentil de la distribución *t-Student* con $df$ grados de libertad.
+
+En el caso particular de las encuestas de hogares con **diseños muestrales complejos**, los grados de libertad no se calculan simplemente como $n-p$ (como en el enfoque clásico), sino que deben ajustarse para reflejar la estructura del muestreo. De acuerdo con la teoría de diseño, se establece que:
+
+$$
+df = \sum_{h} a_{h} - H
+$$
+
+donde $\sum_{h}a_{h}$ es el número total de conglomerados finales de la primera etapa y $H$ el número de estratos de dicha etapa.
+
+Este ajuste es fundamental porque asegura que la inferencia refleje de manera adecuada la variabilidad introducida por la estratificación, la conglomeración y las probabilidades de selección desiguales, evitando conclusiones erróneas sobre la significancia de los parámetros en el análisis de encuestas complejas.
+
+
 
 Para la aplicación de las temáticas vistas, es decir, realizar la prueba de hipótesis y los intervalos de confianza para los parámetros utilizaremos el modelo que se ha venido trabajando y aplicaremos las funciones `summary.svyglm` para las pruebas t y `confint.svyglm` para los intervalos de confianza como sigue:
 

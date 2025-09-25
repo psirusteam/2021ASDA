@@ -4,27 +4,51 @@ knitr::opts_chunk$set(warning = FALSE,
                       cache = TRUE)
 ```
 
-# Gráficas en R
+# Visualización de datos
 
-El objetivo de esta capítulo es mostrarle al lector cómo hacer gráficos generales en `R`. En todo análisis de encuestas, el componente gráfico es fundamental para revisar tendencias en algunas variables de interés. También son muy necesarias las gráficas cuando se el objetivo es chequear algunos supuestos en el ajustes de modelo, por ejemplo, varianza constante en los errores, normalidad, etc.
+En esta sección se aborda la manera de presentar datos y estimaciones provenientes de encuestas de hogares mediante representaciones gráficas. Los gráficos, cuando se diseñan de forma adecuada, permiten identificar patrones, tendencias y relaciones en los datos, lo que facilita la interpretación de los hallazgos y su comunicación a públicos diversos.
 
-Uno de los paquetes más usados para graficar en `R` es ggplot2 el cual es un paquete potente y flexible, implementado por Hadley Wickham, para producir gráficos elegantes. El gg en ggplot2 significa Grammar of Graphics, el cual es un concepto gráfico que describe gráficos usando gramática.
+Si bien es posible utilizar gráficos estándar para mostrar distribuciones y asociaciones a partir de datos muestrales sin ponderar, estos pueden generar interpretaciones erróneas respecto a las distribuciones y asociaciones poblacionales. Por ello, se recomienda emplear gráficos modificados que incorporen los factores de expansión o pesos muestrales.
 
-Como es de costumbre, se inicia este capítulo cargando las librerías y bases de datos:
+
+Por ejemplo, un gráfico de barras que represente la distribución del ingreso debe incorporar los pesos muestrales para reflejar de manera adecuada la distribución estimada de la población total. De igual forma, los diagramas de dispersión que analizan asociaciones entre variables deben utilizar marcadores ponderados o ajustes de densidad con el fin de asegurar representaciones más precisas.
+
+Además, al mostrar estimaciones derivadas de encuestas —que están sujetas a error de muestreo— es esencial reflejar esta condición presentando tanto los estimadores puntuales como los errores estándar o los intervalos de confianza.
+
+
+Incorporar las características del diseño en las visualizaciones contribuye a que los lectores comprendan la incertidumbre inherente a las estimaciones de encuestas, favoreciendo interpretaciones más fundamentadas. Cuando las unidades de la encuesta poseen diferentes pesos de muestreo, estos deben ser considerados en los gráficos, ya que cada peso refleja la cantidad de unidades poblacionales representadas por la observación muestral.
+
+
+Si los gráficos se elaboran sin considerar los pesos, la representación visual reflejará la muestra en lugar de la población. Esta discrepancia puede distorsionar las distribuciones, proporciones o relaciones entre variables. Incorporar los pesos garantiza que los gráficos ofrezcan una representación precisa de la población.
+
+
+## Gráficas en `R`
+
+El objetivo de esta sección es mostrar cómo generar gráficos a partir de encuestas complejas en `R`. En todo análisis de encuestas, el componente gráfico cumple dos funciones principales:
+
+1. **Análisis exploratorio:** permite revisar tendencias en variables de interés, distribuciones y asociaciones.
+2. **Diagnóstico de modelos:** ayuda a verificar supuestos en el ajuste de modelos, tales como la homogeneidad de varianzas o la normalidad de los errores.
+
+Uno de los paquetes más utilizados en `R` para graficar es `ggplot2`, desarrollado por Hadley Wickham. Este paquete implementa el enfoque **Grammar of Graphics**, el cual plantea que cualquier gráfico puede describirse mediante una gramática compuesta de capas (datos, estéticas, geometrías, estadísticas, escalas y temas).
+
+En combinación con paquetes como **`survey`** y **`srvyr`**, es posible generar gráficos que consideren los pesos de la encuesta y que representen correctamente tanto estimaciones como errores de muestreo.
+
+
+Como es costumbre, iniciamos cargando las librerías necesarias y configurando opciones generales:
 
 
 ```{r}
+# Configuración general
 # knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)
 options(digits = 4)
-library(survey)
-library(srvyr)
-library(convey)
-library(TeachingSampling)
-library(printr)
-library(ggplot2)
-library(patchwork)
 
+# Paquetes para manejo de encuestas y visualización
+library(survey)      # Diseños muestrales complejos
+library(srvyr)       # Interfaz amigable con dplyr para encuestas
+library(ggplot2)     # Gramática de gráficos
+library(patchwork)   # Composición de gráficos
 ```
+
 
 
 El cargue de la base de datos se hace a continuación,
@@ -89,12 +113,26 @@ theme_cepal <- function(...) {
 }
 ```
 
-## Histogramas para graficar variables continuas. 
 
-Un histograma es una representación gráfica de los datos de una variable empleando
-rectángulos (barras) cuya altura es proporcional a la frecuencia de los valores representados y su ancho proporcional a la amplitud de los intervalos de la clase.
+## Histogramas para graficar variables continuas
 
-Como se mencionó anteriormente, las gráficas se realizarán principalmente con la librería `ggplot2`y nos apoyamos en la librería `patchwork` para organizar la visual de las gráficas. A continuacuón, se presenta cómo realizar un histograma para la variable ingresos utilizando los factores de expansión de la encuesta. EN primera instancia se define la fuente de información (data), luego se definen la variable a graficar (x) y los pesos de muestreo (weight). Una vez definido los parámetros generales del gráfico se define el tipo de gráfico, que para nuestro caso como es un histograma es geom_histogram. Se definen los títulos que se quiere que tenga el histograma y por último, se aplica el tema de la CEPAL.
+Un histograma es una representación gráfica de la distribución de los datos de una variable numérica continua. Está compuesto por rectángulos (barras) cuya altura es proporcional a la frecuencia de los valores representados y cuyo ancho es proporcional a la amplitud de los intervalos de clase (bins).
+
+Como se mencionó anteriormente, para el análisis de encuestas se recomienda incorporar los factores de expansión o pesos muestrales, de modo que los histogramas reflejen la distribución poblacional estimada y no solo la de la muestra observada.
+
+En esta sección, se construyen histogramas en R utilizando principalmente el paquete `ggplot2`, apoyados en `patchwork` para organizar comparaciones visuales.
+
+
+### Histogramas ponderados y no ponderados
+
+En primera instancia se presenta un histograma de la variable `Income`, incluyendo los pesos muestrales (`wk`) de la encuesta. Para ello se definen:
+
+* la fuente de información (`data`),
+* la variable a graficar (`x`),
+* y los pesos de muestreo (`weight`).
+
+Luego se especifica el tipo de gráfico con `geom_histogram`, se ajustan los títulos y se aplica un tema de estilo (en este caso, `theme_cepal`).
+
 
 ```{r, hist1, echo = TRUE, eval = TRUE}
 
@@ -109,7 +147,8 @@ plot1_Ponde <- ggplot(
 plot1_Ponde
 ```
 
-De forma análoga se define el siguiente histograma, note que en este caso se omitió el parámetro `weight`. Es decir, se genera un histograma sin pesos de muestreo:
+
+De manera análoga, se construye un histograma **sin aplicar pesos**, es decir, tomando la muestra sin expandir:
 
 ```{r, hist1a, echo = TRUE, eval = TRUE}
 plot1_SinPonde <-
@@ -121,7 +160,11 @@ plot1_SinPonde <-
 plot1_SinPonde
 ```
 
-Ahora bien, para efectos de comparación, se grafica la variable ingreso tomada de la población (BigCity) y se muestran los tres histogramas para notar las diferencias que tienen en comparación con el poblacional.  
+
+#### Comparación con la población {-}
+
+Para efectos de contraste, se incluye también el histograma de la población completa (`BigCity`). Así es posible visualizar las diferencias entre la distribución poblacional, la estimación muestral ponderada y la no ponderada:
+
 
 ```{r, hist1b, echo = TRUE, eval = TRUE}
 plot1_censo <- ggplot(BigCity, aes(x = Income)) +
@@ -133,6 +176,19 @@ plot1_censo <- ggplot(BigCity, aes(x = Income)) +
 
 plot1_censo | plot1_Ponde | plot1_SinPonde
 ```
+
+Los histogramas muestran cómo se distribuyen los valores de una variable numérica continua en la encuesta. El eje horizontal se divide en intervalos (bins), y cada barra representa la frecuencia de observaciones en dicho rango.
+
+A diferencia de un gráfico de barras, en un histograma **el área de cada barra tiene un significado analítico**: corresponde a la proporción de observaciones en el intervalo, mientras que la altura se obtiene dividiendo esa frecuencia por el ancho del bin.
+
+En el caso de encuestas, los histogramas deben construirse incorporando los **pesos de muestreo**. Así, la distribución gráfica refleja la cantidad de unidades poblacionales representadas, en lugar de limitarse a la frecuencia de la muestra. Una aplicación común es graficar la **distribución del ingreso o del gasto**, permitiendo observar su forma, dispersión y tendencia poblacional.
+
+
+Además, los histogramas pueden emplearse para **comparar subgrupos de la población**, como zonas geográficas (urbana y rural) o características demográficas (sexo, edad, etnia, etc.). Esta estrategia permite detectar diferencias relevantes, por ejemplo, en la forma como se distribuye el ingreso o el gasto en distintos segmentos de la población.
+
+Cuando se combinan histogramas con **curvas de densidad suavizadas**, se obtiene una visión más detallada de las distribuciones poblacionales, lo que contribuye a un análisis más claro y robusto.
+
+
 
 Por otro lado, repetimos ahora la secuencia de gráficos pero en este caso para la variable *Expenditure*:
 
@@ -554,9 +610,23 @@ plot17_Ponde / plot18_Ponde
 ```
 
 
-## Scaterplot  
+## Diagramas de dispersión (Scatterplots)
 
-Un diagrama de dispersión o Scaterplot representa cada observación como un punto, posicionado según el valor de dos variables. Además de una posición horizontal y vertical, cada punto también tiene un tamaño, un color y una forma. Estos atributos se denominan estética y son las propiedades que se pueden percibir en el gráfico. Cada estética puede asignarse a una variable o establecerse en un valor constante. Para realizar este tipo de gráfico se usará la función `geom_point`. Para ejemplificar el uso de esta función, se graficarán las variables ingresos y gastos como se muestra a continuación:   
+Los diagramas de dispersión son ideales para explorar relaciones entre dos variables continuas. Permiten detectar patrones, tendencias y posibles asociaciones en los datos. En el contexto de encuestas con diseño muestral complejo, es importante reflejar que las distintas observaciones pueden tener diferentes pesos de muestreo. Para tamaños de muestra pequeños o moderados, esto se puede mostrar mediante puntos de tamaños variables, donde el tamaño del símbolo corresponde al peso de cada observación.
+
+Según Lumley (2010), cuando se trabaja con conjuntos de datos grandes, graficar todos los puntos puede resultar confuso. Existen varias estrategias para manejar este problema:
+
+1. **Submuestreo:** Seleccionar una submuestra aleatoria proporcional a los pesos de muestreo. Esto mantiene la representatividad y facilita la visualización sin perder precisión.
+
+2. **Diagramas de dispersión con hexágonos (hexbin plots):** Dividir el área del gráfico en una cuadrícula de hexágonos y representar cada hexágono con sombreado o tamaño proporcional a la suma de pesos de las observaciones dentro de él. Esta técnica condensa la información de manera clara.
+
+3. **Diagramas de dispersión suavizados:** En lugar de graficar cada punto, se estima una tendencia (por ejemplo, cuantiles de la variable y condicionados a x) y se suaviza a lo largo del eje x. Esto destaca patrones generales y reduce el desorden visual.
+
+
+Los diagramas de dispersión ponderados permiten observar relaciones a nivel poblacional. Al incorporar los pesos de la encuesta y aplicar estrategias de visualización para conjuntos de datos grandes, estos gráficos ofrecen información clara y significativa sobre la asociación entre variables continuas. Ya sea usando puntos ponderados, hexbin plots o técnicas de suavizado, los scatterplots siguen siendo fundamentales para la exploración visual de datos en encuestas.
+
+
+Para realizar este tipo de gráfico se usará la función `geom_point`. Para ejemplificar el uso de esta función, se graficarán las variables ingresos y gastos como se muestra a continuación:   
 
 ```{r, echo = TRUE, eval = TRUE}
 plot19_Ponde <- ggplot( 
@@ -645,7 +715,18 @@ plot24_Ponde
 
 ## Diagrama de barras para variables categoricas  
 
-Para realizar estos gráfico, en primer lugar, se deben realizar las estimaciones puntuales de los tamaños que se van a graficar:
+Los gráficos de barras son una de las formas más comunes de representar información categórica en el análisis de encuestas. Permiten mostrar la magnitud de las estimaciones asociadas a distintas categorías, ya sea en términos de conteos o proporciones, incorporando los factores de expansión para que los resultados representen de manera adecuada a la población. A diferencia de los gráficos de barras construidos con datos no ponderados, el uso de pesos garantiza que la visualización corresponda a una estimación válida a nivel poblacional.
+
+
+Es recomendable acompañar las barras con líneas de error que indiquen los intervalos de confianza de las estimaciones puntuales. Esta práctica no solo comunica el valor central de interés, sino que también transmite la incertidumbre asociada al proceso de estimación muestral. De esta forma, los gráficos de barras no solo son útiles para describir patrones generales, sino también para evaluar la precisión y robustez de las conclusiones.
+
+La construcción de gráficos de barras en `R` requiere en primera instancia calcular las estimaciones que se desean graficar. Para ello, se utilizan funciones como `survey_total()` dentro de la librería `srvyr`, que permiten obtener tanto los estimadores puntuales como sus errores estándar e intervalos de confianza. A continuación, estas estimaciones se representan gráficamente mediante funciones del paquete `ggplot2`, lo que ofrece gran flexibilidad para definir colores, títulos, escalas y otros elementos visuales.
+
+Una de las ventajas de los gráficos de barras es que pueden extenderse fácilmente a comparaciones entre varias variables categóricas. Por ejemplo, es posible analizar el tamaño poblacional de distintos grupos de pobreza cruzado con la situación de empleo, distinguiendo además subcategorías como desempleo o población infantil. Este tipo de análisis gráfico resulta especialmente útil para identificar intersecciones de vulnerabilidad, al mostrar de manera simultánea dos o más características poblacionales.
+
+En síntesis, los gráficos de barras permiten no solo una descripción clara de los patrones de consumo, empleo o pobreza en la población, sino también una visualización intuitiva de la incertidumbre estadística. Cuando se aplican correctamente, constituyen una herramienta poderosa para comunicar hallazgos de encuestas de hogares a tomadores de decisiones, investigadores y público en general, manteniendo siempre el rigor estadístico en la representación de los resultados.
+
+
 
 ```{r, echo = TRUE, eval = TRUE}
 tamano_zona <- diseno %>%
