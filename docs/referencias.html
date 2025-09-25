@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Referencias | Análisis de encuestas con R</title>
+  <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Referencias | Análisis de encuestas con R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="github-repo" content="psirusteam/2021ASDA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Referencias | Análisis de encuestas con R" />
+  
+  <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  
+
+<meta name="author" content="Andrés Gutiérrez,Stalyn Guerrero, Cristian Téllez, Giovany Babativa" />
+
+
+<meta name="date" content="2025-09-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estimación-de-totales-medias-y-razones.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis de encuestas con R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="1" data-path="99-Referencias.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>1</b> Análisis de las variables continuas en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="99-Referencias.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>1.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="1.2" data-path="99-Referencias.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>1.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="1.3" data-path="99-Referencias.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>1.3</b> Estimación de totales, medias y razones</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="99-Referencias.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>1.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="1.3.2" data-path="99-Referencias.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>1.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="1.3.3" data-path="99-Referencias.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>1.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>2</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a Análisis de encuestas con R </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de encuestas con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="referencias" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Referencias<a href="referencias.html#referencias" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li><p>Asparouhov, T., &amp; Muthen, B. (2006, August). Multilevel modeling of complex survey data. In Proceedings of the joint statistical meeting in Seattle (pp. 2718-2726).</p></li>
+<li><p>Asparouhov, T. (2006). General multi-level modeling with sampling weights. Communications in Statistics—Theory and Methods, 35(3), 439-460.</p></li>
+<li><p>Pfeffermann, D., Skinner, C. J., Holmes, D. J., Goldstein, H., &amp; Rasbash, J. (1998). Weighting for unequal selection probabilities in multilevel models. Journal of the Royal Statistical Society: series B (statistical methodology), 60(1), 23-40.</p></li>
+<li><p>Cai, T. (2013). Investigation of ways to handle sampling weights for multilevel model analyses. Sociological Methodology, 43(1), 178-219.</p></li>
+<li><p>Finch, W. H., Bolin, J. E., &amp; Kelley, K. (2019). Multilevel modeling using R. Crc Press.</p></li>
+<li><p>Merlo, J., Chaix, B., Ohlsson, H., Beckman, A., Johnell, K., Hjerpe, P., … &amp; Larsen, K. (2006). A brief conceptual tutorial of multilevel analysis in social epidemiology: using measures of clustering in multilevel logistic regression to investigate contextual phenomena. Journal of Epidemiology &amp; Community Health, 60(4), 290-297.</p></li>
+<li><p>Sarndal, C., Swensson, B. &amp;Wretman, J. (1992), Model Assisted Survey Sampling, Springer, New York.</p></li>
+<li><p>Rojas, H. A. G. (2016). Estrategias de muestreo: diseño de encuestas y estimación de parámetros. Ediciones de la U.</p></li>
+<li><p>Santana Sepúlveda, S., &amp; Mateos Farfán, E. (2014). El arte de programar en R: un lenguaje para la estadística.</p></li>
+<li><p>Lumley, T. (2011). Complex surveys: a guide to analysis using R. John Wiley &amp; Sons.</p></li>
+<li><p>Bache, S. M., Wickham, H., Henry, L., &amp; Henry, M. L. (2022). Package ‘magrittr’.</p></li>
+<li><p>Tellez Piñerez, C. F., &amp; Lemus Polanía, D. F. (2015). Estadística Descriptiva y Probabilidad con aplicaciones en R. Fundación Universitaria Los Libertadore.</p></li>
+<li><p>Groves, R. M., Fowler Jr, F. J., Couper, M. P., Lepkowski, J. M., Singer, E., &amp; Tourangeau, R. (2011). Survey methodology. John Wiley &amp; Sons.</p></li>
+<li><p>Tille, Y. &amp; Ardilly, P. (2006), Sampling Methods: Exercises and Solutions, Springer.</p></li>
+<li><p>Gambino, J. G., &amp; do Nascimento Silva, P. L. (2009). Sampling and estimation in household surveys. In Handbook of Statistics (Vol. 29, pp. 407-439). Elsevier.</p></li>
+<li><p>Cochran, W. G. (1977) <em>Sampling Techniques</em>. John Wiley and Sons.</p></li>
+<li><p>Gutiérrez, H. A. (2017) <code>TeachingSampling</code>. <em>R package</em>.</p></li>
+<li><p>Wickham, H., Chang, W., &amp; Wickham, M. H. (2016). Package ‘ggplot2’. Create elegant data visualisations using the grammar of graphics. Version, 2(1), 1-189.</p></li>
+<li><p>Lumley, T. (2020). Package ‘survey’. Available at the following link: <a href="https://cran" class="uri">https://cran</a>. r-project. org.</p></li>
+<li><p>Hansen, M. H., &amp; Steinberg, J. (1956). Control of errors in surveys. Biometrics, 12(4), 462-474.</p></li>
+<li><p>Heeringa, S. G., West, B. T., &amp; Berglund, P. A. (2017). Applied survey data analysis. chapman and hall/CRC.</p></li>
+<li><p>Valliant, R., Dever, J.A., and Kreuter, F., Practical Tools for Designing and Weighting Survey Samples, Springer, New York, 2013.</p></li>
+<li><p>Valliant, R., Dorfman, A.H., and Royall, R.M., Finite Population Sampling and Inference: A Prediction Approach, John Wiley &amp; Sons, New York, 2000.</p></li>
+<li><p>Loomis, D., Richardson, D.B., and Elliott, L., Poisson regression analysis of ungrouped data, Occupational and Environmental Medicine, 62, 325–329, 2005.</p></li>
+<li><p>Kovar, J.G., Rao, J.N.K., and Wu, C.F.J., Bootstrap and other methods to measure errors in survey estimates, Canadian Journal of Statistics, 16(Suppl.), 25–45, 1988.</p></li>
+<li><p>Binder, D.A. and Kovacevic, M.S., Estimating some measures of income inequality from survey data: An application of the estimating equations approach, Survey Methodology, 21(2), 137–145, 1995.</p></li>
+<li><p>Kovacevic, M. S., &amp; Binder, D. A. (1997). Variance estimation for measures of income inequality and polarization-the estimating equations approach. Journal of Official Statistics, 13(1), 41.</p></li>
+<li><p>Bautista, J. (1998), Diseños de muestreo estadístico, Universidad Nacional de Colombia.</p></li>
+<li><p>Monroy, L. G. D., Rivera, M. A. M., &amp; Dávila, L. R. L. (2018). Análisis estadístico de datos categóricos. Universidad Nacional de Colombia.</p></li>
+<li><p>Kish, L. and Frankel, M.R., Inference from complex samples, Journal of the Royal Statistical Society, Series B, 36, 1–37, 1974.</p></li>
+<li><p>Fuller, W.A., Regression analysis for sample survey, Sankyha, Series C, 37, 117–132, 1975.</p></li>
+<li><p>Shah, B.V., Holt, M.M., and Folsom, R.F., Inference about regression models from sample survey data, Bulletin of the International Statistical Institute, 41(3), 43–57, 1977.</p></li>
+<li><p>Skinner, C.J., Holt, D., and Smith, T.M.F., Analysis of Complex Surveys, John Wiley &amp; Sons, New York, 1989.</p></li>
+<li><p>Binder, D.A., On the variances of asymptotically normal estimators from complex surveys, International Statistical Review, 51, 279–292, 1983.</p></li>
+<li><p>Fuller, W.A., Regression estimation for survey samples (with discussion), Survey Methodology, 28(1), 5–23, 2002.</p></li>
+<li><p>Pfeffermann, D., Modelling of complex survey data: Why model? Why is it a problem? How can we approach it? Survey Methodology, 37(2), 115–136, 2011.</p></li>
+<li><p>Wolter, K.M., Introduction to Variance Estimation (2nd ed.), Springer-Verlag, New York, 2007.</p></li>
+<li><p>Tellez, C. F., &amp; Morales, M. A. (2016). Modelos Estadísticos lineales con aplicaciones en R. Ediciones de la U.</p></li>
+<li><p>Fay, R.E., On adjusting the Pearson Chi-square statistic for cluster sampling, In Proceedings of the Social Statistics Section, American Statistical Association, Washington, DC, 402–405, 1979.</p></li>
+<li><p>Fay, R.E., A jack-knifed chi-squared test for complex samples, Journal of the American Statistical Association, 80, 148–157, 1985.</p></li>
+<li><p>Fellegi, I.P., Approximate tests of independence and goodness of fit based on stratified multistage samples, Journal of the American Statistical Association, 75, 261–268, 1980.</p></li>
+<li><p>Thomas, D.R. and Rao, J.N.K., Small-sample comparisons of level and power for simple goodness-of-fit statistics under cluster sampling, Journal of the American Statistical Association, 82, 630–636, 1987.</p></li>
+<li><p>Rao, J.N.K. and Scott, A.J., On chi-squared test for multiway contingency tables with cell proportions estimated from survey data, The Annals of Statistics, 12, 46–60, 1984.</p></li>
+<li><p>Van Buuren, S., Flexible Imputation of Missing Data, Chapman &amp; Hall, Boca Raton, FL, 2012.</p></li>
+<li><p>Carpenter, J.R. and Kenward, M.G., Multiple Imputation and Its Application, John Wiley &amp; Sons, Chichester, West Sussex, UK, 2013.</p></li>
+<li><p>Berglund, P.A. and Heeringa, S.G., Multiple Imputation of Missing Data Using SAS®, SAS Institute Inc., Cary, NC, 2014.</p></li>
+<li><p>Chambers, R.L., Steel, D.G., Wang, S., and Welsh, A.H., Maximum Likelihood Estimation for Sample Surveys, Chapman &amp; Hall, Boca Raton, FL, 2012.</p></li>
+<li><p>Zhou, H., Elliott, M.R., and Raghunathan, T.E., Multiple imputation in two-stage cluster samples using the weighted finite population Bayesian Bootstrap, Journal of Survey Statistics and Methodology, 4, 139–170, 2016a.</p></li>
+<li><p>Zhou, H., Elliott, M.R., and Raghunathan, T.E., Synthetic multiple-imputation procedure for multistage complex samples, Journal of Official Statistics, 32(1), 231–256, 2016b.</p></li>
+<li><p>Kim, J.K. and Shao, J., Statistical Methods for Handling Incomplete Data, Chapman &amp; Hall, Boca Raton, FL, 2014.</p></li>
+<li><p>Kim, J.K. and Fuller, W.A., Fractional Hotdeck imputation, Biometrika, 89, 470–477, 2004.</p></li>
+<li><p>StataCorp., Release 14, P Manual, STATA Survey Data Manual, Stata Press, College Station, TX, 2015.</p></li>
+<li><p>Raghunathan, T.E., Missing Data Analysis in Practice, Chapman &amp; Hall/CRC Interdisciplinary Statistics, Boca Raton, FL, 2016.</p></li>
+<li><p>Rubin, D. B. (1987). Multiple imputation for survey nonresponse.</p></li>
+<li><p>Goldstein, H. (2011). Multilevel statistical models (Vol. 922). John Wiley &amp; Sons.</p></li>
+<li><p>Data analysis using regression and multilevel/hierarchical models” de Andrew Gelman y Jennifer Hill (2006)</p></li>
+<li><p>Sophia, R. H., &amp; Skrondal, A. (2012). Multilevel and longitudinal modeling using Stata. STATA press.</p></li>
+<li><p>Browne, W. J., &amp; Draper, D. (2006). A comparison of Bayesian and likelihood-based methods for fitting multilevel models.</p></li>
+</ul>
+
+</div>
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estimación-de-totales-medias-y-razones.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/99-Referencias.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -378,14 +378,14 @@ Por otro lado, para el cálculo del intervalo de confianza, lo único que requie
 Paras seguir ilustrando el uso de la función `svytotal` y de `confint`, estimemos el total de gastos de los hogares, pero ahora el intervalo de confianza se calculará al 90% de confianza. Los siguientes códigos realizan las estimaciones:
 
 ```{r}
-total_gastos<- svytotal (~Expenditure, diseno, deff=T) 
+total_gastos<- svytotal (~Expenditure, diseno, deff=T)
 total_gastos
 confint(total_gastos, level = 0.9)
 ```
 
 
 Si el objetivo ahora es estimar el total de los ingreso de los hogares pero discriminado por sexo, se utilizará ahora la función `cascade`de la libraría `srvyr`, la cual permite agregar
-la suma de las categorías al final la tabla. También se utilizará la función `group_by` la cual permite obtener resultados agrupados por los niveles de interés. 
+la suma de las categorías al final la tabla. También se utilizará la función `group_by` la cual permite obtener resultados agrupados por los niveles de interés.
 
 ```{r}
 diseno %>% group_by(Sex) %>%
@@ -422,12 +422,12 @@ Como se puede observar, el cálculo de la estimación de la varianza tiene compo
 
 
 ```{r}
-Media_ingresos<- svymean(~Income, diseno, deff=T) 
+Media_ingresos<- svymean(~Income, diseno, deff=T)
 Media_ingresos
 confint(Media_ingresos, level = 0.95)
 ```
 
-Como se puede observar, los argumentos que utiliza la función `svymean` para realizar la estimación de la media de los ingresos de los hogares y la desviación estándar estimada del estimador son similares a los utilizando con la función `svytotal`. Similarmente ocurre con el intervalo de confianza. 
+Como se puede observar, los argumentos que utiliza la función `svymean` para realizar la estimación de la media de los ingresos de los hogares y la desviación estándar estimada del estimador son similares a los utilizando con la función `svytotal`. Similarmente ocurre con el intervalo de confianza.
 
 Por otro lado, tal como se realizó con el total, a manera de ejemplo, se estima la media de los gastos en los hogares como sigue a continuación:
 
@@ -446,7 +446,7 @@ diseno %>% group_by(Sex) %>%
   cascade(
     Media = survey_mean(
       Expenditure, level = 0.95,
-       vartype =  c("se", "ci")), 
+       vartype =  c("se", "ci")),
         .fill = "El gasto medio"  ) %>%
   arrange(desc(Sex))
 ```
@@ -458,7 +458,7 @@ diseno %>% group_by(Zone) %>%
   cascade(
     Media = survey_mean(
       Expenditure, level = 0.95,
-       vartype =  c("se", "ci")), 
+       vartype =  c("se", "ci")),
         .fill = "El gasto medio")%>%
   arrange(desc(Zone))
 ```
@@ -500,7 +500,7 @@ s\left(y\right){}_{\omega} & = & \frac{\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum
 Para llevar a cabo la estimación en `R` de la desviación estándar en encuestas de hogares, se utilizan la función `survey_var` la cual se ejemplifica a continuación:
 
 ```{r}
-(sd_Est <- diseno %>% group_by(Zone) %>% 
+(sd_Est <- diseno %>% group_by(Zone) %>%
    summarise(Sd = sqrt(
   survey_var(
     Income,
@@ -515,7 +515,7 @@ Si el interés ahora se centra en estimar la desviación estándar clasificando 
 
 
 ```{r}
-(sd_Est <- diseno %>% group_by(Zone, Sex) %>% 
+(sd_Est <- diseno %>% group_by(Zone, Sex) %>%
    summarise(Sd = sqrt(
   survey_var(
     Income,
@@ -526,7 +526,7 @@ Si el interés ahora se centra en estimar la desviación estándar clasificando 
 
 ```
 
-Las medidas de posición no central (Percentiles) se diseñaron con el fin de conocer otros puntos característicos de la distribución de los datos que no son los valores centrales. Entre las medidas de posición no central más importantes están la mediana, cuartiles y percentiles. En la mayoría de las encuestas de hogares no solo estiman totales, medias y proporciones. En algunos indicadores es necesario estimar otros parámetros, por ejemplo, medianas y percentiles. Como lo menciona **Tellez et al (2015)** la mediana una medida de tendencia central la cual, a diferencia del promedio, no es fácilmente influenciada por datos atípicos y, por esto, se conoce como una medida robusta. La mediana es el valor que divide la población en dos partes iguales. Lo que implica que, la mitad de las observaciones de la característica de interés está por encima de la media y la otra mitad está por debajo. 
+Las medidas de posición no central (Percentiles) se diseñaron con el fin de conocer otros puntos característicos de la distribución de los datos que no son los valores centrales. Entre las medidas de posición no central más importantes están la mediana, cuartiles y percentiles. En la mayoría de las encuestas de hogares no solo estiman totales, medias y proporciones. En algunos indicadores es necesario estimar otros parámetros, por ejemplo, medianas y percentiles. Como lo menciona **Tellez et al (2015)** la mediana una medida de tendencia central la cual, a diferencia del promedio, no es fácilmente influenciada por datos atípicos y, por esto, se conoce como una medida robusta. La mediana es el valor que divide la población en dos partes iguales. Lo que implica que, la mitad de las observaciones de la característica de interés está por encima de la media y la otra mitad está por debajo.
 
 Por otro lado, la estimación de percentiles de ingresos en un país determinado puede definir el inicio de una política pública. por ejemplo, poner a tributar aquellas personas naturales que son el 10% más alto de la distribución de los ingresos o por el contrario, generar subsidios de transporte a aquellas familias que están en el 15% inferior de la distribución de los ingresos.
 
@@ -559,12 +559,12 @@ Ahora bien, la estimación del q-ésimo cuantil $Y_{q}$ en un diseño de muestre
 \hat{Y}_{q} & = & y_{j}+\frac{q-\hat{F}\left(y_{j}\right)}{\hat{F}\left(y_{j+1}\right)-\hat{F}\left(y_{j}\right)}\left(y_{j+1}-y_{j}\right)
 \end{eqnarray*}
 
-Para la estimación de la varianza e intervalos de confianza de cuantiles, **Kovar et al. (1988)** muestra los resultados de un estudio de simulación en donde recomienda el uso de Balanced Repeated Replication (BRR) para estimarla. 
+Para la estimación de la varianza e intervalos de confianza de cuantiles, **Kovar et al. (1988)** muestra los resultados de un estudio de simulación en donde recomienda el uso de Balanced Repeated Replication (BRR) para estimarla.
 
 Los estimadores y procedimientos antes mencionados para la estimación de percentiles y sus varianzas están implementados en `R`. Particularmente, la estimación de la mediana se realiza usando la función `survey_median`. A continuación, se muestra la sintaxis de cómo calcular la mediana de los gastos, la desviación estándar y el intervalo de confianza al 95% de los hogares en la base de datos de ejemplo.
 
 ```{r}
-diseno %>% summarise(Mediana = 
+diseno %>% summarise(Mediana =
   survey_median(
     Expenditure,
     level = 0.95,
@@ -578,8 +578,8 @@ Ahora bien, al igual que con los demás parámetros, si el objetivo ahora es est
 
 
 ```{r}
-diseno %>% group_by(Zone) %>% 
-  summarise(Mediana = 
+diseno %>% group_by(Zone) %>%
+  summarise(Mediana =
   survey_median(
     Expenditure,
     level = 0.95,
@@ -589,8 +589,8 @@ diseno %>% group_by(Zone) %>%
 
 
 ```{r}
-diseno %>% group_by(Sex) %>% 
-  summarise(Mediana = 
+diseno %>% group_by(Sex) %>%
+  summarise(Mediana =
   survey_median(
     Expenditure,
     level = 0.95,
@@ -602,7 +602,7 @@ Si el objetivo ahora es estimar cuantiles, por ejemplo, el cuantil 0.25 de los g
 
 
 ```{r}
-diseno %>% 
+diseno %>%
   summarise(
     Q =  survey_quantile(
     Expenditure,
@@ -617,7 +617,7 @@ si ahora se desea estimar el cuantil 0.25 pero discriminando por sexo y por zona
 
 
 ```{r}
-diseno %>% group_by(Sex) %>% 
+diseno %>% group_by(Sex) %>%
   summarise(
     Q =  survey_quantile(
     Expenditure,
@@ -630,7 +630,7 @@ diseno %>% group_by(Sex) %>%
 
 
 ```{r}
-diseno %>% group_by(Zone) %>% 
+diseno %>% group_by(Zone) %>%
   summarise(
     Q =  survey_quantile(
     Expenditure,
@@ -672,7 +672,7 @@ Autores como Osier (2009) y Langel y Tillé (2013) profundizan en aspectos técn
 
 
 
-Para calcular el índice de Gini y su varianza estimada en una encuesta de hogares, `R` tiene cargados los procedimientos en la librería `convey`.  A continuación, se muestra la sintaxis de cómo se realiza la estimación del índice de Gini para los hogares en la base de ejemplo de este capítulo. 
+Para calcular el índice de Gini y su varianza estimada en una encuesta de hogares, `R` tiene cargados los procedimientos en la librería `convey`.  A continuación, se muestra la sintaxis de cómo se realiza la estimación del índice de Gini para los hogares en la base de ejemplo de este capítulo.
 
 ```{r, eval=T}
 library(convey)
@@ -689,56 +689,56 @@ Para realizar la curva de Lorenz en `R` se utiliza la función `svylorenz`. A co
 
 ```{r, out.width="70%", fig.align="center"}
 library(convey)
-svylorenz(formula = ~Income, 
-          design = diseno_gini, 
-          quantiles = seq(0,1,.05), 
+svylorenz(formula = ~Income,
+          design = diseno_gini,
+          quantiles = seq(0,1,.05),
           alpha = .01 )
 
 ```
 
 Los argumentos que requiere la función son, inicialmente, los ingresos de los hogares y el diseño muestral complejo. Adicionalmente, se definen una secuencia de probabilidades que define la suma de los cuantiles a calcular (quantiles) y por último, un número que especifica el nivel de confianza para el gráfico (alpha).
 
-## Análisis de correlación en encuestas de hogares  
+## Análisis de correlación en encuestas de hogares
 
-En el estudio de encuestas de hogares, además de describir variables de forma individual, resulta fundamental analizar cómo se relacionan entre sí. Una de las herramientas más utilizadas es el coeficiente de correlación de Pearson, que mide la fuerza y la dirección de la relación lineal entre dos variables numéricas. Sus valores oscilan entre –1 y 1:  
+En el estudio de encuestas de hogares, además de describir variables de forma individual, resulta fundamental analizar cómo se relacionan entre sí. Una de las herramientas más utilizadas es el coeficiente de correlación de Pearson, que mide la fuerza y la dirección de la relación lineal entre dos variables numéricas. Sus valores oscilan entre –1 y 1:
 
-- Un valor positivo indica que ambas variables tienden a aumentar al mismo tiempo.  
-- Un valor negativo señala que cuando una variable crece, la otra tiende a disminuir.  
-- Valores próximos a cero sugieren una relación lineal débil o inexistente.  
+- Un valor positivo indica que ambas variables tienden a aumentar al mismo tiempo.
+- Un valor negativo señala que cuando una variable crece, la otra tiende a disminuir.
+- Valores próximos a cero sugieren una relación lineal débil o inexistente.
 
-Por ejemplo, puede ser de interés analizar si el ingreso de los hogares está asociado con su nivel de gasto, y en qué magnitud.  
+Por ejemplo, puede ser de interés analizar si el ingreso de los hogares está asociado con su nivel de gasto, y en qué magnitud.
 
-### Ajuste al diseño muestral  
+### Ajuste al diseño muestral
 
-En encuestas complejas, la correlación no puede calcularse como en una muestra simple. Es necesario incorporar los pesos muestrales para que la estimación sea representativa de la población. Este ajuste tiene en cuenta la estratificación, la conglomeración y las probabilidades de selección desiguales.  
+En encuestas complejas, la correlación no puede calcularse como en una muestra simple. Es necesario incorporar los pesos muestrales para que la estimación sea representativa de la población. Este ajuste tiene en cuenta la estratificación, la conglomeración y las probabilidades de selección desiguales.
 
-El cálculo ponderado implica evaluar la covarianza entre las dos variables y dividirla entre el producto de sus desviaciones estándar ponderadas, eliminando así la influencia de las unidades de medida.  
+El cálculo ponderado implica evaluar la covarianza entre las dos variables y dividirla entre el producto de sus desviaciones estándar ponderadas, eliminando así la influencia de las unidades de medida.
 
-### Expresión formal  
+### Expresión formal
 
-El coeficiente de correlación de Pearson ajustado por pesos se expresa como:  
+El coeficiente de correlación de Pearson ajustado por pesos se expresa como:
 
-$$\hat{\rho}_{xy} = \frac{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})(x_{hik} - \widehat{\bar{X}})} {\sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})^2} \sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (x_{hik} - \widehat{\bar{X}})^2}}$$  
+$$\hat{\rho}_{xy} = \frac{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})(x_{hik} - \widehat{\bar{X}})} {\sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (y_{hik} - \widehat{\bar{Y}})^2} \sqrt{\displaystyle \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} (x_{hik} - \widehat{\bar{X}})^2}}$$
 
-Cuando las variables son categóricas u ordinales, se deben emplear otras medidas de asociación (como el coeficiente de contingencia o de correlación policórica).  
+Cuando las variables son categóricas u ordinales, se deben emplear otras medidas de asociación (como el coeficiente de contingencia o de correlación policórica).
 
-### Implementación en R  
+### Implementación en R
 
-El paquete `survey` cuenta con la función `svyvar` que permite obtener matrices de covarianzas ponderadas, a partir de las cuales se puede calcular la correlación. Otra opción más directa es usar `svycor` de paquetes complementarios como `svycor` o implementar el cálculo manualmente.  
+El paquete `survey` cuenta con la función `svyvar` que permite obtener matrices de covarianzas ponderadas, a partir de las cuales se puede calcular la correlación. Otra opción más directa es usar `svycor` de paquetes complementarios como `svycor` o implementar el cálculo manualmente.
 
-Ejemplo con ingreso y gasto de los hogares:  
+Ejemplo con ingreso y gasto de los hogares:
 
 ```{r}
 # Covarianza ponderada
 svy_cov <- svyvar(~Income + Expenditure, design = diseno)
 ```
 
-El resultado entrega la matriz de correlaciones entre las variables analizadas bajo el diseño complejo.  
+El resultado entrega la matriz de correlaciones entre las variables analizadas bajo el diseño complejo.
 
 
 ## Análisis de la relación entre dos variable continuas
 
-En muchos análisis de variables relacionadas con encuestas de hogares no solo basta con analizar el comportamiento de variables de manera individual, por ejemplo, ingresos medios de hombres y mujeres en un país sino también, analizar la diferencia entre los ingresos de los hombres y las mujeres. Esto último con el fin de ir cerrando la brecha salarial que existe. 
+En muchos análisis de variables relacionadas con encuestas de hogares no solo basta con analizar el comportamiento de variables de manera individual, por ejemplo, ingresos medios de hombres y mujeres en un país sino también, analizar la diferencia entre los ingresos de los hombres y las mujeres. Esto último con el fin de ir cerrando la brecha salarial que existe.
 
 En este capítulo se estudiará la prueba de hipótesis para diferencia de medias, se darán las herramientas computacionales para estimar razones y contrastes.
 
@@ -756,7 +756,7 @@ Una prueba de hipótesis parte de dos proposiciones antagónicas:
 $$
 \begin{cases}
 H_{0}: & \theta = \theta_0 \quad \text{(hipótesis nula)} \\
-H_{1}: & \theta \neq \theta_0 \quad \text{(hipótesis alternativa, bilateral)} 
+H_{1}: & \theta \neq \theta_0 \quad \text{(hipótesis alternativa, bilateral)}
 \end{cases}
 $$
 
@@ -830,7 +830,7 @@ En encuestas complejas, estas pruebas se implementan con la función `svyttest()
 **Ejemplo 1. Diferencia de ingresos por sexo (población total):**
 
 ```{r, eval=TRUE}
-svyttest(Income ~ Sex, design = diseno, level = 0.95) 
+svyttest(Income ~ Sex, design = diseno, level = 0.95)
 ```
 
 **Resultados (ejemplo ficticio):**
@@ -845,7 +845,7 @@ Interpretación: con un 95% de confianza no existe evidencia estadística sufici
 **Ejemplo 2. Diferencia de ingresos por sexo en zona urbana:**
 
 ```{r, eval=TRUE}
-svyttest(Income ~ Sex, design = sub_Urbano, level = 0.95) 
+svyttest(Income ~ Sex, design = sub_Urbano, level = 0.95)
 ```
 
 Resultado: nuevamente no se rechaza $H_0$, lo que indica ausencia de diferencias significativas en el ingreso medio por sexo en la zona urbana.
@@ -854,8 +854,8 @@ Resultado: nuevamente no se rechaza $H_0$, lo que indica ausencia de diferencias
 **Ejemplo 3. Diferencia de ingresos por sexo, restringido a mayores de 18 años:**
 
 ```{r, eval=TRUE}
-svyttest(Income ~ Sex, 
-         design = diseno %>% filter(Age > 18), 
+svyttest(Income ~ Sex,
+         design = diseno %>% filter(Age > 18),
          level = 0.95)
 ```
 
@@ -882,13 +882,13 @@ $$
        {\sum_{h=1}^{H}\sum_{\alpha=1}^{a_{h}}\sum_{i=1}^{n_{h\alpha}}\omega_{h\alpha i} x_{h\alpha i}}.
 $$
 
-Sin embargo, dado que \$\hat{R}\$ es un cociente entre dos estimadores —es decir, dos variables aleatorias— el cálculo de su varianza no es trivial. Para ello se emplea la linealización de Taylor, como lo muestra *Gutiérrez (2016)*, o bien métodos de remuestreo. En términos de la función de estimación, se define:
+Sin embargo, dado que $\hat{R}$ es un cociente entre dos estimadores —es decir, dos variables aleatorias— el cálculo de su varianza no es trivial. Para ello se emplea la linealización de Taylor, como lo muestra *Gutiérrez (2016)*, o bien métodos de remuestreo. En términos de la función de estimación, se define:
 
 $$
 z_{hik} = y_{hik} - \hat{R}x_{hik},
 $$
 
-y a partir de esta expresión se aplica el estimador de varianza descrito en la Sección 9.2.
+<!-- y a partir de esta expresión se aplica el estimador de varianza descrito previamente -->
 
 
 ### Implementación computacional en `R` {-}
@@ -1003,7 +1003,7 @@ var\left(\sum_{j=1}^{J}a_{j}\hat{\theta}_{j}\right) & = & \sum_{j=1}^{J}a_{j}^{2
 
 Los procedimientos metodológicos para implementar los contrastes en diseños de muestreo complejos están desarrolladas en la función `svycontrast`. A continuación, se muestra el uso de dicha función para el cálculo de contraste en la base de datos de ejemplo, comparando el promedio de ingresos por región.
 
-Como primer ejemplo, se realizará la comparación de dos poblaciones, las regiones Norte y Sur ($\bar{Y}_{Norte} - \bar{Y}_{Sur}$) y luego sí se compararán todas las regiones. 
+Como primer ejemplo, se realizará la comparación de dos poblaciones, las regiones Norte y Sur ($\bar{Y}_{Norte} - \bar{Y}_{Sur}$) y luego sí se compararán todas las regiones.
 
 Puesto que esto es un contraste en donde hay 5 regiones y solo se construirá el contraste para la región Norte y la Sur, el contraste queda definido de la siguiente manera:
 
@@ -1029,12 +1029,12 @@ Como se puede observar, en este caso el vector de contraste es $\left[1,\,-1,\,0
 Ahora bien, para realizar el procesos de la construcción del estimador del contraste y su varianza estimada paso a paso se inicia con calcular las medias estimadas por región con la función `svyby` como se muestra a continuación:
 
 ```{r, eval =T}
-prom_region <- svyby(formula = ~Income, 
-                      by = ~Region, 
-                      design = diseno, 
-                      FUN = svymean, 
-                      na.rm=T, 
-                      covmat = TRUE, 
+prom_region <- svyby(formula = ~Income,
+                      by = ~Region,
+                      design = diseno,
+                      FUN = svymean,
+                      na.rm=T,
+                      covmat = TRUE,
                       vartype = c("se", "ci"))
 prom_region
 ```
@@ -1043,7 +1043,7 @@ La función `svyby` permite aplicar una función, en este caso la media (svymean
 
 
 ```{r, eval=TRUE}
-# Paso 1: diferencia de estimaciones (Norte - Sur) 
+# Paso 1: diferencia de estimaciones (Norte - Sur)
 552.4 - 625.8
 ```
 
@@ -1055,7 +1055,7 @@ El paso siguiente es calcular la matriz de varianzas y covarianzas y de allí ex
 vcov(prom_region)
 ```
 
-Para calcular el error estándar de la diferencia (contraste) se usará las propiedades de la varianza como es 
+Para calcular el error estándar de la diferencia (contraste) se usará las propiedades de la varianza como es
 $se\left(\hat{\bar{y}}_{Norte}-\hat{\bar{y}}_{Sur}\right)=\sqrt{var\left(\hat{\bar{y}}_{Norte}\right)+var\left(\hat{\bar{y}}_{Sur}\right)-2\,cov\left(\hat{\bar{y}}_{Norte},\hat{\bar{y}}_{Sur}\right)}$ tenemos:
 
 ```{r}
@@ -1066,7 +1066,7 @@ Finalmente, la función `svycontrast` nos devuelve el contraste estimado y su er
 
 
 ```{r}
-svycontrast(stat = prom_region, 
+svycontrast(stat = prom_region,
             contrasts = list(diff_NS = c(1, -1, 0, 0, 0))) %>%
             data.frame()
 
@@ -1076,11 +1076,11 @@ Obteniendo como resultado que los ingresos medios estimados para la región Sur 
 
 Ahora bien, si el objetivo es estimar los siguientes contrastes:
 
--   $\bar{Y}_{Norte} - \bar{Y}_{Centro}$, 
--   $\bar{Y}_{Sur}-\bar{Y}_{Centro}$ 	
--   $\bar{Y}_{Occidente}-\bar{Y}_{Oriente}$	
+-   $\bar{Y}_{Norte} - \bar{Y}_{Centro}$,
+-   $\bar{Y}_{Sur}-\bar{Y}_{Centro}$
+-   $\bar{Y}_{Occidente}-\bar{Y}_{Oriente}$
 
-Que escritas de forma matricial se tiene: 
+Que escritas de forma matricial se tiene:
 
 $$
 \left[\begin{array}{ccccc}
@@ -1094,7 +1094,7 @@ Ahora, aplicando la función `svycontrast` en R se obtiene:
 
 ```{r, eval=TRUE}
 
-svycontrast(stat = prom_region, 
+svycontrast(stat = prom_region,
             contrasts = list(
                              Norte_sur = c(1, 0, -1, 0, 0),
                              Sur_centro = c(0, 1, -1, 0, 0),
@@ -1107,10 +1107,10 @@ De lo cual se puede concluir que, las regiones con los ingresos medios de los ho
 También es posible construir contraste en variables que estén correlacionadas. Por ejemplo, Ingreso y Sexo. Como se hizo en el ejemplo anterior, se inicia con el promedio estimado por sexo.
 
 ```{r, eval=T}
-prom_sexo <- svyby(formula = ~Income, 
-                   by = ~Sex, 
+prom_sexo <- svyby(formula = ~Income,
+                   by = ~Sex,
                    design = diseno,
-                   FUN = svymean, 
+                   FUN = svymean,
                    na.rm=T,
                    covmat = TRUE,
                    vartype = c("se", "ci"))
@@ -1122,17 +1122,17 @@ prom_sexo
 El contraste a estimar es:
 
 $$ \bar{Y}_{F} - \bar{Y}_{M}$$
-Por tanto, usando la función `svycontrast` se obtiene el contraste estimado: 
+Por tanto, usando la función `svycontrast` se obtiene el contraste estimado:
 
 ```{r}
 svycontrast(stat = prom_sexo,
-            contrasts = list(diff_Sexo = c(1, -1))) %>% 
+            contrasts = list(diff_Sexo = c(1, -1))) %>%
             data.frame()
 ```
 
 Obteniendo como resultado que, en promedio, los hombres obtienen 28.3 unidades monetarias más que las mujeres con una desviación de 20.76.
 
-Otra posibilidad es poder obtener resultados agregados, por ejemplo: 
+Otra posibilidad es poder obtener resultados agregados, por ejemplo:
 
 $\hat{\bar{y}}_{Norte}+\hat{\bar{y}}_{Sur} +\hat{\bar{y}}_{Centro}$
 
@@ -1144,7 +1144,7 @@ sum_region <- svyby( ~ Income,  ~ Region,
 sum_region
 ```
 
-La matriz de contraste queda como: 
+La matriz de contraste queda como:
 $$
 \left[\begin{array}{cccccc}
 1 & 1 & 1 & 0 & 0
@@ -1168,10 +1168,10 @@ $$
 donde $K$ es el número de categorías de la variable. En R se hace de la siguiente manera:
 
 ```{r, eval=TRUE}
-prom_edad <- svyby(formula = ~Income, 
+prom_edad <- svyby(formula = ~Income,
                    by = ~CatAge,
-                   design =  diseno, 
-                   FUN = svymean, 
+                   design =  diseno,
+                   FUN = svymean,
                    na.rm=T,
                    covmat = TRUE)
 prom_edad
@@ -1184,10 +1184,10 @@ $$
 \end{array}\right]
 $$
 
-El procedimiento en R es: 
+El procedimiento en R es:
 
 ```{r, eval=TRUE}
-svycontrast(stat = prom_edad, 
+svycontrast(stat = prom_edad,
             contrasts = list(
                              agregado_edad = c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6)))             %>% data.frame()
 
@@ -1196,12 +1196,12 @@ svycontrast(stat = prom_edad,
 Puesto que los contrastes, como ya se mencionó, es una función lineal de parámetros, se puede también realizar contraste con parámetros tipo razón. Por ejemplo, la relación de gastos contra ingresos por sexo. A continuación, se muestran los códigos computacionales:
 
 ```{r,c2, echo=TRUE, eval=T}
-razon_sexo <- svyby( formula = ~Income, 
+razon_sexo <- svyby( formula = ~Income,
                      by = ~Sex,
                      denominator = ~Expenditure,
-                     design = diseno, 
-                     FUN = svyratio, 
-                     na.rm=T, covmat = TRUE, 
+                     design = diseno,
+                     FUN = svyratio,
+                     na.rm=T, covmat = TRUE,
                      vartype = c("se", "ci"))
 razon_sexo
 ```
@@ -1209,7 +1209,7 @@ razon_sexo
 Cuya estimación de contraste sería:
 
 ```{r}
-svycontrast(stat = razon_sexo, 
+svycontrast(stat = razon_sexo,
             contrasts = list(
                              diff_sexo = c(1, -1))) %>% data.frame()
 
