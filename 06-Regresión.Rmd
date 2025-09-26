@@ -282,12 +282,16 @@ fit <- lm(Income ~ Expenditure, data = BigCity)
 
 Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función `modelsummary` de la librería `modelsummary` de la siguiente manera:
 
-```{r, results='asis', echo=FALSE, eval = FALSE}
+```{r, results='asis', echo=FALSE, eval = TRUE}
 library(modelsummary)
-modelsummary(list(Pob = fit), statistic = NULL, 
-             title = "Modelo BigCity",
-             output = "markdown", 
-             gof_omit = 'BIC|Log|AIC|F' )
+
+modelsummary(
+  list(Pob = fit),
+  output = "latex_tabular",   # 🔑 fuerza tabular en lugar de talltblr
+  title = "Modelo BigCity",
+  statistic = NULL,
+  gof_omit = "BIC|Log|AIC|F"
+)
 ```
 
 De la anterior salida se puede observar que, el intercepto es igual a 123.337 y el parámetro $\beta_{1}$ asociado al gasto es 1.229. La demás información relacionada a esta salida se analizará más adelante.
@@ -308,44 +312,43 @@ plot_sin + stat_poly_eq(formula = y~x, aes(label = paste(..eq.label..,
 Como se puede observar, los datos de la muestra tienen una tendencia lineal aunque un poco dispersa a medida que crecen los gastos en las familias.
  
  Una vez hecho los análisis gráficos se procede a ajustar los modelos de regresión lineal. A modo de comparar el efecto que tiene hacer un correcto uso de los factores de expansión del diseño, primero, se ajustará un modelo sin tener encuesta dichos factores como se muestra a continuación:
- 
-```{r, tab3, echo = TRUE, eval = TRUE}
+
+```{r, results='asis', tab3, echo = TRUE, eval = TRUE}
 fit_sinP <- lm(Income ~ Expenditure, data = encuesta)
-fit_sinP
-stargazer(fit_sinP, header = FALSE,
-          title = "Modelo sin factores de expansion", 
-          style = "ajps")
+stargazer(fit_sinP, type = "latex",
+          title = "Modelo sin factores de expansion",
+          label = "tab:sin_factores",
+          header = FALSE)
 ```
 
-Para el modelo ajustado sin factores de expansión, el $\hat{\beta}_{0}$ es  121.52 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.22. 
+Para el modelo ajustado sin factores de expansión, el $\hat{\beta}_{0}$ es  121.52 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.22.
 
 Ahora, haciendo un Scatterplot con los datos encuesta pero utilizando los factores de expansión del diseño se debe agregar ` mapping = aes(weight = wk)` en la función `geom_smooth`como sigue:
 
 ```{r, plot3, echo = TRUE, eval = TRUE}
 plot_Ponde <- ggplot(data = encuesta,
-                     aes(x = Expenditure, y = Income)) + 
+                     aes(x = Expenditure, y = Income)) +
                      geom_point(aes(size = wk)) +
                      geom_smooth(method = "lm", se = FALSE, formula = y ~ x,                      mapping = aes(weight = wk)) + theme_cepal()
 
-plot_Ponde + stat_poly_eq(formula = y~x, aes(weight = wk, 
+plot_Ponde + stat_poly_eq(formula = y~x, aes(weight = wk,
 label = paste(..eq.label..,..rr.label.., sep = "~~~")), parse = TRUE,size = 5)
 ```
 
 
 En este sentido, para ajustar modelos teniendo en cuenta los factores de expansión existen 2 formas, la primera es usando la función `lm` y la segunda es usando la función `svyglm` de la librería `survey`. A continuación. se ajusta el modelo usando la función `lm`:
 
-```{r, tab4, echo = TRUE, eval = TRUE}
+```{r ,results='asis', tab4, echo = TRUE, eval = TRUE}
 fit_Ponde <- lm(Income ~ Expenditure, data = encuesta, weights = wk)
-fit_Ponde
 stargazer(fit_Ponde, header = FALSE,
-          title = "Modelo encuesta ponderada", 
-          style = "ajps")
+          title = "Modelo encuesta ponderada",
+          type = "latex")
 ```
 
 Para el modelo ajustado con factores de expansión usando la función `lm`, el $\hat{\beta}_{0}$ es  103.14 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.26. Ahora, haciendo el mismo ajuste pero usando la función `svyglm`:
 
 ```{r, tab6, echo = TRUE, eval = TRUE}
-fit_svy <- svyglm(Income ~ Expenditure, 
+fit_svy <- svyglm(Income ~ Expenditure,
                   design = diseno, family=stats::gaussian())
 fit_svy
 ```
@@ -358,14 +361,14 @@ Por último y a modo de resumen se muestra un gráfico donde se encuentran depos
 ```{r, plot4, echo=TRUE, eval=TRUE}
 df_model <- data.frame(
   intercept = c(coefficients(fit)[1],
-               coefficients(fit_sinP)[1], 
+               coefficients(fit_sinP)[1],
                coefficients(fit_Ponde)[1],
-               coefficients(fit_svy)[1]), 
+               coefficients(fit_svy)[1]),
   slope = c(coefficients(fit)[2],
-               coefficients(fit_sinP)[2], 
+               coefficients(fit_sinP)[2],
                coefficients(fit_Ponde)[2],
                coefficients(fit_svy)[2]),
-  Modelo = c("Población", "Sin ponderar", 
+  Modelo = c("Población", "Sin ponderar",
              "Ponderado(lm)", "Ponderado(svyglm)"))
 plot_BigCity +  geom_abline( data = df_model,
     mapping = aes( slope = slope,
@@ -469,7 +472,7 @@ Este ajuste permite una comparación más justa entre modelos con diferente núm
 Para continuar con los modelos ajustados en la sección anterior, se procede a estimar los $R^{2}$ utilizando `R`. Inicialmente, se procede a estimar los parámetros del modelo utilizando la función `svyglm` de `survey` como se mostró anteriormente y también, se ajusta un modelo solo con el intercepto para obtener la estimación de la SST:
 
 ```{r, tab7, echo = TRUE, eval = TRUE}
-fit_svy <- svyglm(Income ~ Expenditure, 
+fit_svy <- svyglm(Income ~ Expenditure,
                   design = diseno)
 
 modNul <- svyglm(Income ~ 1, design = diseno)
@@ -481,7 +484,7 @@ WSST<- s0$dispersion
 WSSE<- s1$dispersion
 ```
 
-Por tanto, la estimación del $R^{2}$ es: 
+Por tanto, la estimación del $R^{2}$ es:
 
 
 ```{r}
@@ -527,7 +530,7 @@ Ahora bien, una vez definido el diseño muestral con los nuevos pesos q-weigthed
 n = sum(diseno_qwgt$variables$wk)
 p<- 2
 R2Adj = 1-( ( (n-1)/(n-p) )*R2 )
-R2Adj             
+R2Adj
 ```
 
 Como se puede observar, el $R_{adj}^{2}$ es un poco más bajo que el $R^{2}$ y cercanos al 50% que como se comentó anteriormente, dependiendo del contexto del problema se podrá concluir si es grande o pequeño.
@@ -537,7 +540,7 @@ Después de realizar la comparación entre las diferentes formas de estimar los 
 
 ```{r, echo=TRUE, eval=TRUE, results='asis'}
 
-diseno_qwgt %<>% mutate(Age2 = Age^2) 
+diseno_qwgt %<>% mutate(Age2 = Age^2)
 mod_svy <- svyglm( Income ~ Expenditure + Zone + Sex + Age2 ,
                        design = diseno_qwgt)
 s1 <- summary(mod_svy)
@@ -546,8 +549,8 @@ s0 <- summary(modNul)
 mod_svy
 
 stargazer(mod_svy, header = FALSE,single.row = T,
-           title = "Modelo propuesto", 
-           style = "ajps",  omit.stat=c("bic", "ll"))
+           title = "Modelo propuesto",
+           type = "latex",  omit.stat=c("bic", "ll"))
 ```
 
 
@@ -594,7 +597,7 @@ $$
 donde,
 
 $$
-W  =  diag\left\{ \frac{\omega_{1}}{V\left(\mu_{1}\right)\left[g'\left(\mu_{1}\right)\right]^{2}},...,\frac{\omega_{n}}{V\left(\mu_{n}\right)\left[g'\left(\mu_{n}\right)\right]^{2}}\right\} 
+W  =  diag\left\{ \frac{\omega_{1}}{V\left(\mu_{1}\right)\left[g'\left(\mu_{1}\right)\right]^{2}},...,\frac{\omega_{n}}{V\left(\mu_{n}\right)\left[g'\left(\mu_{n}\right)\right]^{2}}\right\}
 $$
 $W$ es una matriz diagonal de $n\times n$ y $g()$ es la función de enlace del modelo lineal generalizado.
 
@@ -686,7 +689,7 @@ plot(mod_svy)
 
 Como se puedo observar en el QQplot, hay evidencia gráfica de que los errores no se distribuyen según una distribución normal.
 
-La librería `svydiags` está pensada en ayudar en el diagnostico de modelos de regresión lineal, siendo una extensión más para complementar el paquete `survey`. Con las librerías `svydiags` se extraen los residuales estandarizados como sigue: 
+La librería `svydiags` está pensada en ayudar en el diagnostico de modelos de regresión lineal, siendo una extensión más para complementar el paquete `survey`. Con las librerías `svydiags` se extraen los residuales estandarizados como sigue:
 
 ```{r, echo = TRUE, eval=TRUE}
 library(svydiags)
@@ -695,13 +698,13 @@ diseno_qwgt$variables %<>% mutate(stdresids = stdresids)
 ```
 
 
-Podemos hacer el análisis de normalidad también por medio del histograma de los residuales estandarizados como sigue: 
+Podemos hacer el análisis de normalidad también por medio del histograma de los residuales estandarizados como sigue:
 
 ```{r, echo = TRUE, eval = FALSE}
 ggplot(data = diseno_qwgt$variables,
        aes(x = stdresids)) +
   geom_histogram(aes(y = ..density..),
-                 colour = "black", 
+                 colour = "black",
                  fill = "blue", alpha = 0.3) +
   geom_density(size = 2, colour = "blue") +
   geom_function(fun = dnorm, colour = "red",
@@ -709,7 +712,7 @@ ggplot(data = diseno_qwgt$variables,
   theme_cepal()+labs(y = "")
 ```
 
-y como se puede observar gráficamente los errores no siguen una distribución normal. 
+y como se puede observar gráficamente los errores no siguen una distribución normal.
 
 Por otro lado, el otro análisis que se realiza de manera gráfica es el de varianzas constantes el cual se realizará a continuación:
 
@@ -718,7 +721,7 @@ Primero, agreguemos las predicciones a la base de datos para poder realizar las 
 
 ```{r, echo=TRUE, eval=TRUE,size="tiny"}
 library(patchwork)
-diseno_qwgt$variables %<>% 
+diseno_qwgt$variables %<>%
   mutate(pred = predict(mod_svy))
 g2 <- ggplot(data = diseno_qwgt$variables,
        aes(x = Expenditure, y = stdresids))+
@@ -749,20 +752,20 @@ Como se puede observar en las gráficas de gastos y edad, ambas muestran tendenc
 Otros de os análisis a realizar es revisar si existen datos influyentes en la base de datos. Para ejemplificar los conceptos definidos, se seguirán con los modelos ajustados en la sección anterior. Una vez ajustados estos modelos y verificados los supuestos, se procede a hacer el cálculo de la distancia de Cook's usando la función `svyCooksD`del paquete `svydiags` como sigue:
 
 ```{r, dcook, eval=FALSE}
-library(svydiags) 
+library(svydiags)
 d_cook = data.frame(
-   cook = svyCooksD(mod_svy), 
+   cook = svyCooksD(mod_svy),
      id = 1:length(svyCooksD(mod_svy)))
 
 table(d_cook$cook>3)
 
 
 ggplot(d_cook, aes(y = cook, x = id)) +
-  geom_point() + 
+  geom_point() +
   theme_bw(20)
 ```
 
-Como se puede observar, ninguna de las distancias de Cook's es mayor a 3 por lo que, podemos decir que no existen observaciones influyentes. 
+Como se puede observar, ninguna de las distancias de Cook's es mayor a 3 por lo que, podemos decir que no existen observaciones influyentes.
 
 Ahora bien, se desea observar si hay observaciones influyentes pero utilizando $D_{f}Betas_{\left(i\right)j}$ se realiza con la función `svydfbetas` como se muestra a continuación:
 
@@ -771,7 +774,7 @@ d_dfbetas = data.frame(t(svydfbetas(mod_svy)$Dfbetas))
 colnames(d_dfbetas) <- paste0("Beta_", 1:5)
 d_dfbetas %>% slice(1:10L)
 ```
-Una vez calculado los $D_{f}Betas_{\left(i\right)j}$ se procede a acomodar la salida con para verificar cuáles observaciones son influyentes. Para esto, de calcula el umbral (cutoff) para definir si es o no influyente la observación. Ese umbral es tomado de las salidas de la función `svydfbetas`. Por último, se genera una variable dicotómica que indique si la observación es o no influyente como se muestra a continuación: 
+Una vez calculado los $D_{f}Betas_{\left(i\right)j}$ se procede a acomodar la salida con para verificar cuáles observaciones son influyentes. Para esto, de calcula el umbral (cutoff) para definir si es o no influyente la observación. Ese umbral es tomado de las salidas de la función `svydfbetas`. Por último, se genera una variable dicotómica que indique si la observación es o no influyente como se muestra a continuación:
 
 ```{r eval=TRUE, echo=TRUE}
 d_dfbetas$id <- 1:nrow(d_dfbetas)
@@ -779,7 +782,7 @@ d_dfbetas <- reshape2::melt(d_dfbetas, id.vars = "id")
 cutoff <- svydfbetas(mod_svy)$cutoff
 d_dfbetas %<>% mutate( Criterio = ifelse(abs(value) > cutoff, "Si", "No"))
 
-tex_label <- d_dfbetas %>% 
+tex_label <- d_dfbetas %>%
   filter(Criterio == "Si") %>%
   arrange(desc(abs(value))) %>%
   slice(1:10L)
@@ -804,15 +807,15 @@ ggplot(d_dfbetas, aes(y = abs(value), x = id)) +
 Si el objetivo ahora es detectar observaciones influyentes pero considerando ahora la estadística $D_{f}Fits_{\left(i\right)}$, se utiliza la función `svydffits` y se siguen los mismos pasos mostrados para el estadístico $D_{f}Betas_{\left(i\right)j}$:
 
 ```{r,plot_dffit, echo=TRUE, eval=FALSE}
-d_dffits = data.frame( dffits = svydffits(mod_svy)$Dffits, 
+d_dffits = data.frame( dffits = svydffits(mod_svy)$Dffits,
                        id = 1:length(svydffits(mod_svy)$Dffits))
 
 cutoff <- svydffits(mod_svy)$cutoff
 
 d_dffits %<>% mutate(C_cutoff = ifelse(abs(dffits) > cutoff, "Si", "No"))
 ggplot(d_dffits, aes(y = abs(dffits), x = id)) +
-  geom_point(aes(col = C_cutoff)) + 
-  geom_hline(yintercept = cutoff) + 
+  geom_point(aes(col = C_cutoff)) +
+  geom_hline(yintercept = cutoff) +
    scale_color_manual(
     values = c("Si" = "red", "No" = "black"))+
   theme_cepal()
@@ -828,7 +831,7 @@ d_hat = data.frame(hat = vec_hat, id = 1:length(vec_hat))
 d_hat %<>% mutate(C_cutoff = ifelse(hat > (3 * mean(hat)),"Si", "No"))
 
 ggplot(d_hat, aes(y = hat, x = id)) +
-  geom_point(aes(col = C_cutoff)) + 
+  geom_point(aes(col = C_cutoff)) +
   geom_hline(yintercept = (3 * mean(d_hat$hat))) +
   scale_color_manual(
     values = c("Si" = "red", "No" = "black"))+
@@ -900,7 +903,7 @@ $$
 La varianza de la estimación se calcula de la siguiente manera:
 
 $$
-var\left(\hat{E}\left(y_{i}\mid x_{obs,i}\right)\right) 
+var\left(\hat{E}\left(y_{i}\mid x_{obs,i}\right)\right)
 =  x'_{obs,i}cov\left(\hat{\beta}\right)x{}_{obs,i}
 $$
 
@@ -916,7 +919,7 @@ Por lo anterior, la estimación del valor esperado o predicción queda:
 $$
 \hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=62.2+1.2x_{1i}+63.5x_{2i}+21.7x_{3i}+0.01x_{4i}
 $$
-Para calcular la varianza de la estimación, primero se deben obtener las varianzas de la estimación de los parámetros: 
+Para calcular la varianza de la estimación, primero se deben obtener las varianzas de la estimación de los parámetros:
 
 ```{r}
 vcov(mod_svy)
@@ -969,8 +972,8 @@ ggplot(pred %>% slice(1:100L),
 Por último, si el interés es hacer una predicción fuera del rango de valores que fue capturado en la muestra. Para esto, supongamos que se desea predecir:
 
 ```{r}
-datos_nuevos <- data.frame(Expenditure = 1600, 
-                           Age2 = 40^2, Sex = "Male", 
+datos_nuevos <- data.frame(Expenditure = 1600,
+                           Age2 = 40^2, Sex = "Male",
                            Zone = "Urban")
 ```
 

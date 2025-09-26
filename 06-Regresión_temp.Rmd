@@ -1,0 +1,1004 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE,
+                      cache = TRUE)
+```
+
+## Modelos de regresión en encuestas de hogares
+
+La regresión estadística constituye una técnica fundamental para examinar los vínculos entre variables en el marco de los datos muestrales obtenidos mediante encuestas. A través de este procedimiento, es posible determinar la forma en que una o varias variables de respuesta (dependientes) se relacionan con una o varias variables explicativas (independientes). Tal como exponen Nolan y Speed (2000) y Freedman (2005), la validez de los resultados depende de una adecuada formulación del modelo.
+
+Un ejemplo ilustrativo sería la estimación del ingreso de los hogares (variable dependiente) en función del nivel educativo alcanzado y de la situación laboral de sus miembros (variables independientes), empleando datos provenientes de encuestas de hogares. Estos análisis permiten identificar patrones, cuantificar efectos y generar evidencia útil para la formulación de políticas públicas.
+
+No obstante, dado que estas encuestas suelen estar sustentadas en **diseños muestrales complejos**, los enfoques tradicionales de regresión resultan insuficientes. Ignorar los pesos muestrales, la estratificación o la conglomeración puede derivar en sesgos en los coeficientes estimados y, sobre todo, en una subestimación de sus varianzas, lo cual compromete la validez de las inferencias. Por esta razón, los modelos de regresión aplicados a encuestas deben ser modificados y ajustados para garantizar resultados representativos y robustos.
+
+En este sentido, el análisis de datos provenientes de encuestas exige una atención detallada al diseño de muestreo. La incorporación de los **pesos de la encuesta** y de los ajustes correspondientes a la estratificación y a la conglomeración permite obtener inferencias válidas y precisas. Además, en algunos casos se han planteado alternativas simplificadas, como el uso de pesos normalizados o enfoques de ponderación aproximada, que buscan balancear la complejidad metodológica con la factibilidad práctica del análisis.
+
+### Antecedentes históricos y desarrollos metodológicos
+
+El estudio de la regresión bajo diseños de muestreo complejos tiene una trayectoria bien documentada. De manera empírica, **Kish y Frankel (1974)** fueron de los primeros en discutir el impacto de estos diseños en las inferencias derivadas de modelos de regresión. Posteriormente, **Fuller (1975)** desarrolló un estimador de varianza apoyado en técnicas de linealización para modelos de regresión lineal múltiple con ponderación desigual, e introdujo métodos específicos para diseños estratificados y de dos etapas.
+
+Más adelante, **Sha et al. (1977)** abordaron el problema de las violaciones a los supuestos clásicos de los modelos de regresión al trabajar con datos de encuestas, proponiendo alternativas de inferencia robusta para los parámetros. En paralelo, **Binder (1983)** se enfocó en las distribuciones muestrales de los estimadores de regresión en poblaciones finitas, definiendo procedimientos para estimar varianzas bajo esquemas complejos.
+
+En los años siguientes, **Skinner et al. (1989)** ampliaron estos aportes al trabajar con estimadores de varianza para los coeficientes de regresión que contemplaban la estratificación y la conglomeración, recomendando explícitamente el uso de métodos de linealización o técnicas alternativas para la estimación de la varianza. Avanzando en la línea de tiempo, **Fuller (2002)** realizó un compendio de los métodos de estimación aplicables a modelos de regresión en encuestas complejas, mientras que **Pfeffermann (2011)** discutió enfoques más recientes, como los métodos de ponderación “q-weighted”, mostrando evidencia empírica de su utilidad.
+
+### Relevancia práctica
+
+En la actualidad, los modelos de regresión bajo diseños de muestreo complejos representan una herramienta esencial para el análisis de encuestas de hogares. Estos modelos permiten ir más allá de las estadísticas descriptivas y aproximarse a explicaciones causales o predictivas, siempre que se reconozcan y se ajusten las particularidades del diseño muestral. Su correcta aplicación abre la posibilidad de analizar cómo las características sociodemográficas y económicas se asocian con distintos resultados de interés, aportando evidencia clave para la formulación de políticas públicas.
+
+En las siguientes secciones se mostrará cómo implementar estos modelos en `R`, utilizando la librería `survey`. Se abordará la especificación del diseño muestral, la estimación de modelos lineales y logísticos, así como la obtención de errores estándar y pruebas de hipótesis ajustadas al diseño. De este modo, se integrarán los fundamentos teóricos con ejemplos prácticos en un flujo de trabajo reproducible.
+
+Un primer paso consiste en comprender la estructura básica de los modelos de regresión. El modelo de regresión lineal simple se define como
+
+$$
+y = \beta_{0} + \beta_{1}x + \varepsilon,
+$$
+
+donde $y$ es la variable dependiente, $x$ la variable independiente, $\beta_{0}$ y $\beta_{1}$ los parámetros del modelo, y $\varepsilon$ el error aleatorio, definido como la diferencia entre el valor observado y el valor ajustado del modelo:
+
+$$
+\varepsilon = y - \hat{y} = y - (\beta_{0} + \beta_{1}x).
+$$
+
+Generalizando este planteamiento, los modelos de regresión lineal múltiple incorporan varias covariables:
+
+$$
+y = \beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p} + \varepsilon,
+$$
+
+lo cual puede expresarse en notación matricial como
+
+$$
+y_{i} = x_{i}\boldsymbol{\beta} + \varepsilon_{i}, \quad i=1,\ldots,n,
+$$
+
+donde $x_{i} = [1, x_{1i}, \ldots, x_{pi}]$ corresponde al vector de covariables del individuo $i$, y $\boldsymbol{\beta}^{T} = [\beta_{0}, \beta_{1}, \ldots, \beta_{p}]$ es el vector de parámetros.
+
+En este contexto, el valor esperado de la variable respuesta condicionado a las covariables puede escribirse como:
+
+$$
+E(y \mid x) = \hat{\beta}_{0} + \hat{\beta}_{1}x_{1} + \cdots + \hat{\beta}_{p}x_{p}.
+$$
+
+Para que estos modelos sean válidos, es necesario que se cumplan ciertos **supuestos clásicos**, recogidos en la literatura (Heeringa, West y Berglund, 2017), entre los que destacan:
+
+* **Esperanza nula de los residuos**: $E(\varepsilon_{i} \mid x_{i}) = 0$.
+* **Homogeneidad de varianza**: $Var(\varepsilon_{i} \mid x_{i}) = \sigma^2$.
+* **Normalidad de los errores**: $\varepsilon_{i} \mid x_{i} \sim N(0,\sigma^2)$.
+* **Independencia de los residuos**: $cov(\varepsilon_{i},\varepsilon_{j}\mid x_{i},x_{j})=0$.
+
+Estos supuestos permiten garantizar que los estimadores obtenidos tengan buenas propiedades estadísticas (insesgamiento, eficiencia y consistencia). Sin embargo, al trabajar con encuestas bajo **diseños complejos**, estas condiciones rara vez se cumplen de manera estricta, por lo que se requieren adaptaciones que serán abordadas en las próximas secciones.
+
+
+Una vez definido el modelo de regresión lineal y sus supuestos, se puede deducir los siguiente:
+
+
+$$
+\hat{y}  =  E\left(y\mid x\right)
+ =  E\left(\boldsymbol{x}\boldsymbol{\beta}\right)+E\left(\varepsilon\right)
+=  \boldsymbol{x}\boldsymbol{\beta}+0
+  =  \beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}
+$$
+
+y Adicionalmente,
+
+$$
+var\left(y_{i}\mid x_{i}\right)  =  \sigma_{y,x}^{2}
+$$
+
+$$
+cov\left(y_{i},y_{j}\mid x_{i},x_{j}\right)  = 0
+$$
+
+$$
+y_{i}  \sim  N\left(x_{i}\boldsymbol{\beta},\sigma_{y,x}^{2}\right)
+$$
+
+
+### ¿Aplicar o no aplicar ponderaciones?
+
+
+Heeringa, West y Berglund (2017) examinan el desafío de determinar cómo utilizar adecuadamente los pesos en modelos de regresión y si conviene emplear factores de expansión al estimar coeficientes de regresión en encuestas con diseños complejos. En este marco, se distinguen dos enfoques principales para incorporar los pesos en los modelos:
+
+* **Enfoque orientado al diseño**: busca realizar inferencias válidas sobre la población total. Los pesos de la encuesta resultan indispensables para obtener estimaciones insesgadas de los coeficientes, ya que corrigen las probabilidades desiguales de selección derivadas del diseño muestral. No obstante, este método no protege frente a la mala especificación del modelo: si la relación planteada no refleja adecuadamente lo que ocurre en la población, los coeficientes estimados, aunque insesgados en el marco del diseño, pueden carecer de utilidad sustantiva.
+
+* **Enfoque orientado al modelo**: sostiene que los pesos no son necesarios siempre que el modelo esté correctamente formulado y el muestreo sea no informativo, es decir, que el modelo válido para la muestra coincida con el de la población. En este escenario, se asume que las relaciones entre variables están bien descritas por el modelo independientemente del diseño muestral, y que la utilización de ponderaciones podría incrementar innecesariamente la variabilidad de las estimaciones, elevando los errores estándar.
+
+
+
+La decisión entre utilizar o no ponderaciones en los modelos de regresión depende tanto del contexto como de la sensibilidad de los resultados a su inclusión. Autores como **Skinner, Holt y Smith (1989)** y **Pfeffermann (2011)** han debatido ampliamente sobre la pertinencia de incorporar los pesos muestrales en la estimación de los parámetros de regresión y en sus errores estándar.
+
+Una recomendación metodológica ampliamente aceptada es estimar los modelos con y sin ponderaciones y comparar los resultados. Si al incluir los pesos se observan variaciones significativas en los coeficientes o en las conclusiones, ello indica que el muestreo fue informativo o que el modelo presenta deficiencias de especificación, por lo que conviene utilizar estimaciones ponderadas. En cambio, si los pesos solo aumentan los errores estándar sin modificar sustancialmente los coeficientes, se puede asumir que el modelo está bien planteado y que no es indispensable ponderar.
+
+En términos prácticos, la decisión puede resumirse en dos escenarios:
+
+* **Inferencia descriptiva**: es obligatorio aplicar ponderaciones, ya que el objetivo es reflejar con precisión la estructura de la población.
+
+* **Inferencia analítica**: es posible recurrir a modelos no ponderados o ajustados por pesos. En este caso, si la meta es analizar relaciones o verificar hipótesis, la ponderación no siempre es necesaria, especialmente cuando el modelo incluye variables del diseño muestral (estratos o conglomerados). Sin embargo, el uso de modelos sin ponderar debe justificarse de forma explícita, pues implica supuestos más restrictivos que los modelos ponderados.
+
+
+El uso de ponderaciones en encuestas permite asegurar que los modelos de regresión sean representativos de la población, ya que corrigen posibles sesgos de sobre o subrepresentación de determinados grupos y garantizan que la distribución poblacional se refleje adecuadamente. Asimismo, las ponderaciones contribuyen a obtener estimaciones de varianza más exactas, pues consideran la estratificación, el agrupamiento y las probabilidades desiguales de selección, lo cual genera errores estándar, intervalos de confianza y pruebas estadísticas más confiables.
+
+Dentro del enfoque basado en el diseño, los coeficientes de regresión se estiman a partir de ecuaciones poblacionales ajustadas con ponderaciones. Esto permite que los resultados ponderados se aproximen a valores insesgados comparables a los que se obtendrían en un censo completo, incluso cuando el modelo estadístico no esté formulado de manera óptima.
+
+
+Un aspecto que no debe pasarse por alto es que el uso de ponderaciones puede aumentar la varianza de las estimaciones de los parámetros, en especial cuando los pesos presentan gran dispersión. En situaciones donde existen valores extremos o muy variables, las estimaciones tienden a volverse inestables, ya que ciertas observaciones llegan a ejercer una influencia desproporcionada sobre el ajuste del modelo. En este sentido, cuando el propósito es explicativo o analítico (como en el análisis de relaciones entre variables), los modelos sin ponderar pueden, en ocasiones, generar resultados más consistentes y eficientes.
+
+
+
+No obstante, cuando el modelo está mal especificado, la regresión sin ponderaciones puede producir estimaciones poco útiles o carentes de validez. Por ello, resulta fundamental que los analistas seleccionen e incorporen las variables pertinentes para lograr una especificación adecuada. Incluso en los casos en que el modelo esté correctamente definido, es indispensable tener en cuenta la estratificación y la conglomeración del diseño muestral al calcular los errores estándar bajo un enfoque no ponderado.
+
+En definitiva, la decisión sobre **aplicar o no ponderaciones** no puede basarse únicamente en una regla rígida, sino que exige un análisis crítico de los objetivos del estudio, del diseño de la encuesta y de la robustez de los modelos estimados. Asimismo, un análisis diagnóstico riguroso resulta esencial para validar las inferencias y garantizar que los resultados reflejen de manera adecuada la realidad poblacional (véase la Subsección 9.6.4).
+
+
+### Enfoques inferenciales para el análisis de datos
+
+En el análisis de encuestas, uno de los principales retos consiste en manejar adecuadamente la variabilidad de los datos. Esta proviene de dos fuentes fundamentales: el diseño muestral, que determina cómo se recolecta la información, y el modelo estadístico, que define cómo se interpreta dicha información para inferir propiedades de la población. Ignorar cualquiera de estas dimensiones puede comprometer la validez de los resultados.
+
+Por ello, se han desarrollado metodologías inferenciales avanzadas que permiten integrar ambas fuentes de incertidumbre en un mismo marco analítico. Estas técnicas buscan reflejar tanto la estructura del diseño como los supuestos y limitaciones del modelo. Entre las aproximaciones más relevantes se encuentran la seudo-verosimilitud (Molina & Skinner, 1992) y la inferencia combinada (Binder, 2011).
+
+
+El método de seudo-verosimilitud extiende las técnicas tradicionales de máxima verosimilitud para ajustarlas a las particularidades de los diseños muestrales complejos. En este enfoque, la distribución de muestreo definida por el diseño tiene un rol central, mientras que la distribución del modelo ocupa un lugar secundario. Si bien, en contextos de modelos bien especificados, los estimadores basados en seudo-verosimilitud tienden a ser insesgados o consistentes, lo crucial es que este procedimiento evita sesgos que se originarían si se ignorara el diseño muestral. En términos prácticos, la seudo-verosimilitud traduce el modelo tradicional en uno que respete la forma en que los datos fueron obtenidos, garantizando inferencias más sólidas.
+
+
+En contraste, la inferencia combinada propone un marco unificado en el que se integran simultáneamente la variabilidad del muestreo y la incertidumbre del modelo. Al considerar ambas fuentes, este enfoque ofrece una visión más completa de la variabilidad y permite obtener estimaciones más precisas y confiables. Su principal aporte radica en que evita sesgos que pueden aparecer cuando se analiza únicamente desde la perspectiva del diseño o del modelo. De esta manera, la inferencia combinada resulta especialmente útil en aplicaciones donde se requiere un balance entre representatividad poblacional y solidez estadística de los modelos ajustados.
+
+## Estimación de los parámetros en un modelo de regresión con muestras complejas
+
+Una vez se establecen los supuestos del modelo y las características distribucionales de los errores, el paso siguiente es el proceso de estimación de los parámetros. A modo ilustrativo, si en lugar de observar una muestra de tamaño $n$ de los $N$ elementos de la población se hubiera realizado un censo completo, el parámetro de regresión de población finita $\beta_{1}$ podría calcularse como sigue **(Téllez et al., 2016)**:
+
+$$
+\beta_{1}  =  \frac{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}{\sum_{i=1}^{N}\left(X_{i}-\bar{X}\right)^{2}}
+$$
+
+Sin embargo, cuando se desea estimar los parámetros de un modelo de regresión lineal utilizando información proveniente de encuestas con diseños complejos, el enfoque estándar cambia. La principal razón es que los datos no cumplen con los supuestos clásicos de independencia e idéntica distribución, ya que el diseño muestral introduce elementos como estratificación, conglomerados o probabilidades de selección desiguales. En consecuencia, los estimadores tradicionales (como los obtenidos por máxima verosimilitud o mínimos cuadrados) pueden resultar sesgados y sus errores estándar poco confiables.
+
+En este contexto, **Wolter (2007)** propone el uso de métodos no paramétricos robustos, como la linealización de Taylor o los procedimientos de replicación (Jackknife, Bootstrap, Balanced Repeated Replication, entre otros), para estimar varianzas y obtener inferencias válidas.
+
+### Estimación de parámetros
+
+
+En el caso de un modelo de regresión lineal simple, la estimación de la pendiente $(\beta_1)$ bajo un esquema de encuesta compleja se realiza mediante un estimador ponderado, que puede expresarse de la siguiente forma:
+
+$$
+\hat{\beta_{1}}  =  
+\frac{\sum_{h=1}^H \sum_{\alpha=1}^{a_h} \sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}\,(y_{h\alpha i}-\bar{y}_{\omega})(x_{h\alpha i}-\bar{x}_{\omega})}
+{\sum_{h=1}^H \sum_{\alpha=1}^{a_h} \sum_{i=1}^{n_{h\alpha}} \omega_{h\alpha i}\,(x_{h\alpha i}-\bar{x}_{\omega})^{2}}
+= \frac{t_{xy}}{t_{x^{2}}}
+$$
+
+donde $\omega_{h\alpha i}$ representa los pesos de muestreo. La principal diferencia respecto al estimador clásico es la incorporación explícita de dichos pesos, que corrigen las probabilidades desiguales de selección y aseguran la representatividad de las estimaciones.
+
+
+La varianza del estimador $\hat{\beta_1}$ puede expresarse como:
+
+$$
+var\left(\hat{\beta_{1}}\right)  
+=  \frac{var(t_{xy})+\hat{\beta}_{1}^{2}var(t_{x^{2}})-2\hat{\beta}_{1}cov(t_{xy},t_{x^{2}})}{(t_{x^{2}})^{2}}
+$$
+
+Este enfoque permite cuantificar la precisión del coeficiente considerando tanto los pesos como la estructura del diseño muestral.
+
+
+En el caso de la regresión múltiple, el cálculo de la varianza de cada coeficiente se realiza considerando su interdependencia con los demás. Esto se refleja en la construcción de una **matriz de varianza-covarianza**, que recoge tanto la variabilidad individual como las covarianzas entre todos los parámetros. De acuerdo con **Kish y Frankel (1974)**, esta estimación requiere utilizar totales ponderados de cuadrados y productos cruzados de todas las combinaciones entre la variable dependiente $y$ y el conjunto de predictores $x = {1, x_1, …, x_p}$. En términos generales:
+
+$$
+var(\hat{\beta}) = \hat{\Sigma}(\hat{\beta}) =
+\begin{bmatrix}
+var(\hat{\beta}_{0}) & cov(\hat{\beta}_{0},\hat{\beta}_{1}) & \cdots & cov(\hat{\beta}_{0},\hat{\beta}_{p}) \\
+cov(\hat{\beta}_{0},\hat{\beta}_{1}) & var(\hat{\beta}_{1}) & \cdots & cov(\hat{\beta}_{1},\hat{\beta}_{p}) \\
+\vdots & \vdots & \ddots & \vdots \\
+cov(\hat{\beta}_{0},\hat{\beta}_{p}) & cov(\hat{\beta}_{1},\hat{\beta}_{p}) & \cdots & var(\hat{\beta}_{p})
+\end{bmatrix}
+$$
+
+Este marco permite evaluar la estabilidad y precisión de los parámetros en modelos más complejos, garantizando que las inferencias reflejen adecuadamente tanto el diseño de la encuesta como la relación entre las variables.
+
+
+Para ejemplificar los conceptos trabajados hasta este momento, se tomará la misma base que se ha venido trabajando durante todo el desarrollo de este libro. Se inicia con el cargue de las librerías, la base de datos y la definición del diseño de muestreo:
+
+
+```{r setup2, eval=TRUE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, error = FALSE)
+options(digits = 4)
+options(tinytex.verbose = TRUE)
+library (survey)
+library(srvyr)
+library(convey)
+library(TeachingSampling)
+library(printr)
+library(stargazer)
+library(jtools)
+library(broom)
+```
+
+
+Cargue de la base y definición del diseño muestral:
+
+```{r, eval=TRUE}
+data(BigCity, package = "TeachingSampling")
+library(tidyverse)
+
+encuesta <- readRDS("Data/encuesta.rds")
+head(encuesta)
+
+library(srvyr)
+diseno <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk,
+    nest = T
+  )
+```
+
+Para efectos de los ejemplos y como se ha hecho en anteriores ocasiones, se divide la muestra en sub-grupos de la encuesta como sigue:
+
+```{r}
+sub_Urbano <- diseno %>%  filter(Zone == "Urban")
+sub_Rural  <- diseno %>%  filter(Zone == "Rural")
+sub_Mujer  <- diseno %>%  filter(Sex == "Female")
+sub_Hombre <- diseno %>%  filter(Sex == "Male")
+```
+
+En este capítulo se ajustarán los modelos de regresión usando la base de datos de ejemplo que se ha venido trabajando en capítulos anteriores. Puesto que, en modelos de regresión, se utiliza muy frecuente el recurso gráfico. A continuación, se define un tema estándar que la CEPAL tiene para generar sus gráficos el cual se utilizará en este capítulo.
+
+
+```{r, echo=FALSE, eval=TRUE}
+theme_cepal <- function(...) theme_light(10) + 
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="bottom", 
+        legend.justification = "left", 
+        legend.direction="horizontal",
+        plot.title = element_text(size = 20, hjust = 0.5),
+        ...) 
+```
+
+Para observar que existe una correlación entre el ingreso y el gasto, las cuales son las variables que se utilizarán para el ajuste de los modelos, se construye un scatterplot usando la librería `ggplot`. Cabe resaltar que, como la base de datos encuesta, la cual se usa para ejemplificar es una muestra de la base `BigCity`, analizaremos de manera gráfica si poblacionalmente las dos variables mencionadas anteriormente tienen correlación como se muestra a continuación:
+
+```{r, plot1, echo = TRUE, eval = TRUE}
+library(ggplot2); library(ggpmisc)
+plot_BigCity <- ggplot(data = BigCity,
+                       aes(x = Expenditure, y = Income)) +
+                       geom_point() + geom_smooth(method = "lm",
+                       se = FALSE,
+                       formula = y ~ x) + theme_cepal()
+
+plot_BigCity + stat_poly_eq(formula = y~x, aes(label = paste(..eq.label..,
+   ..rr.label.., sep = "~~~"),size = 3), parse = TRUE)
+
+```
+
+Si bien, existen unas observaciones por fuera de la nube de punto, el comportamiento general de la relación ingresos vs gastos mantiene una tendencia lineal.
+
+Una vez hecho el análisis gráfico de las variables a utilizar en los modelos a trabajar, se realizará primero un ajuste del modelo con los datos poblacionales y con esto poder analizar qué tan bueno serán los ajustes que se realizarán posteriormente. A continuación, se muestra el ajuste del modelo con los datos poblacionales:
+
+```{r, tab1, results='asis', echo=TRUE, eval = TRUE}
+fit <- lm(Income ~ Expenditure, data = BigCity)
+```
+
+Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función `modelsummary` de la librería `modelsummary` de la siguiente manera:
+
+```{r, results='asis', echo=FALSE, eval = TRUE}
+library(modelsummary)
+modelsummary(list(Pob = fit), statistic = NULL, 
+             title = "Modelo BigCity",
+             output = "latex", 
+             gof_omit = 'BIC|Log|AIC|F' )
+```
+
+De la anterior salida se puede observar que, el intercepto es igual a 123.337 y el parámetro $\beta_{1}$ asociado al gasto es 1.229. La demás información relacionada a esta salida se analizará más adelante.
+
+Una vez revisada la información poblacional, se utilizará la información obtenida de la muestra para estimar los parámetros y con ello analizar qué tan buenas son las estimaciones. A continuación, se presenta una sintaxis similar a la anterior que permite construir el scatterplot pero para los datos de la muestra.
+
+```{r, plot2, echo = TRUE, eval = TRUE}
+plot_sin <- ggplot(data = encuesta,
+            aes(x = Expenditure, y = Income)) +
+            geom_point() +
+            geom_smooth(method = "lm",
+            se = FALSE, formula = y ~ x) + theme_cepal()
+
+plot_sin + stat_poly_eq(formula = y~x, aes(label = paste(..eq.label..,
+     ..rr.label.., sep = "~~~"), size = 5), parse = TRUE)
+```
+
+Como se puede observar, los datos de la muestra tienen una tendencia lineal aunque un poco dispersa a medida que crecen los gastos en las familias.
+ 
+ Una vez hecho los análisis gráficos se procede a ajustar los modelos de regresión lineal. A modo de comparar el efecto que tiene hacer un correcto uso de los factores de expansión del diseño, primero, se ajustará un modelo sin tener encuesta dichos factores como se muestra a continuación:
+ 
+```{r, tab3, echo = TRUE, eval = TRUE}
+fit_sinP <- lm(Income ~ Expenditure, data = encuesta)
+fit_sinP
+stargazer(fit_sinP, header = FALSE,
+          title = "Modelo sin factores de expansion", 
+          style = "ajps")
+```
+
+Para el modelo ajustado sin factores de expansión, el $\hat{\beta}_{0}$ es  121.52 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.22. 
+
+Ahora, haciendo un Scatterplot con los datos encuesta pero utilizando los factores de expansión del diseño se debe agregar ` mapping = aes(weight = wk)` en la función `geom_smooth`como sigue:
+
+```{r, plot3, echo = TRUE, eval = TRUE}
+plot_Ponde <- ggplot(data = encuesta,
+                     aes(x = Expenditure, y = Income)) + 
+                     geom_point(aes(size = wk)) +
+                     geom_smooth(method = "lm", se = FALSE, formula = y ~ x,                      mapping = aes(weight = wk)) + theme_cepal()
+
+plot_Ponde + stat_poly_eq(formula = y~x, aes(weight = wk, 
+label = paste(..eq.label..,..rr.label.., sep = "~~~")), parse = TRUE,size = 5)
+```
+
+
+En este sentido, para ajustar modelos teniendo en cuenta los factores de expansión existen 2 formas, la primera es usando la función `lm` y la segunda es usando la función `svyglm` de la librería `survey`. A continuación. se ajusta el modelo usando la función `lm`:
+
+```{r, tab4, echo = TRUE, eval = TRUE}
+fit_Ponde <- lm(Income ~ Expenditure, data = encuesta, weights = wk)
+fit_Ponde
+stargazer(fit_Ponde, header = FALSE,
+          title = "Modelo encuesta ponderada", 
+          style = "ajps")
+```
+
+Para el modelo ajustado con factores de expansión usando la función `lm`, el $\hat{\beta}_{0}$ es  103.14 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.26. Ahora, haciendo el mismo ajuste pero usando la función `svyglm`:
+
+```{r, tab6, echo = TRUE, eval = TRUE}
+fit_svy <- svyglm(Income ~ Expenditure, 
+                  design = diseno, family=stats::gaussian())
+fit_svy
+```
+
+Obteniendo estimaciones para el $\hat{\beta}_{0}$ es  103.14 y el $\hat{\beta}_{1}$ asociado a la variable gastos es 1.26. Siendo exactamente las mismas que con la función `lm` ya que, como se definió en los argumentos de la función, la función de enlace es Gausiana.
+
+Por último y a modo de resumen se muestra un gráfico donde se encuentran depositados todos los modelos estimados anteriormente y así poder comparar de manera gráfica su ajuste:
+
+
+```{r, plot4, echo=TRUE, eval=TRUE}
+df_model <- data.frame(
+  intercept = c(coefficients(fit)[1],
+               coefficients(fit_sinP)[1], 
+               coefficients(fit_Ponde)[1],
+               coefficients(fit_svy)[1]), 
+  slope = c(coefficients(fit)[2],
+               coefficients(fit_sinP)[2], 
+               coefficients(fit_Ponde)[2],
+               coefficients(fit_svy)[2]),
+  Modelo = c("Población", "Sin ponderar", 
+             "Ponderado(lm)", "Ponderado(svyglm)"))
+plot_BigCity +  geom_abline( data = df_model,
+    mapping = aes( slope = slope,
+      intercept = intercept, linetype = Modelo,
+      color = Modelo ), size = 2
+  )
+
+```
+
+
+### Uso de ponderaciones
+
+En el análisis de datos provenientes de encuestas con diseños complejos surge un interrogante clave: **¿cómo deben incorporarse los pesos muestrales en los modelos de regresión?** La respuesta no es trivial, ya que los pesos reflejan tanto la probabilidad de selección como los ajustes por no respuesta y calibración, pero su uso directo en el modelado puede generar problemas de eficiencia y aumentar la varianza de los estimadores.
+
+Para enfrentar estas limitaciones, se han propuesto diferentes estrategias de ajuste que buscan lograr un balance entre precisión y eficiencia en la estimación. Entre los procedimientos más utilizados destacan los siguientes:
+
+**Pesos tipo Senado**
+Este procedimiento ajusta los pesos de manera que su suma coincida con el tamaño de la muestra, en lugar del tamaño de la población. El objetivo es mantener la representatividad relativa de las unidades, pero reduciendo la dispersión de los pesos originales, lo que resulta particularmente ventajoso en encuestas donde existe alta variabilidad entre los factores de expansión:
+
+$$
+w_k^{Senate} = w_k \times \frac{n}{\sum w_k}
+$$
+
+**Pesos normalizados**
+En este enfoque los pesos originales se reescalan para que su suma sea igual a uno, lo que evita un incremento innecesario de la varianza en los modelos. Esta técnica es especialmente útil cuando se trabaja con diferentes subconjuntos de datos (por ejemplo, modelos estimados en subpoblaciones) o cuando se busca minimizar la inflación de la varianza:
+
+$$
+w_k^{Normalized} = \frac{w_k}{\sum w_k}
+$$
+
+
+Es importante resaltar que, en ambos métodos, los pesos ajustados se obtienen mediante transformaciones multiplicativas directas de los pesos muestrales originales. Por esta razón, no deben emplearse para calcular **totales poblacionales**, ni modifican los coeficientes de variación asociados a ellos. Asimismo, estos procedimientos no afectan las estimaciones de **razones**, como medias o proporciones, ya que en dichos casos los pesos se cancelan en el cociente.
+
+En la práctica, el uso de estos ajustes puede considerarse una solución pragmática en contextos donde no se dispone de software especializado para encuestas. Sin embargo, cuando se cuenta con programas estadísticos que permiten la incorporación directa de pesos y del diseño muestral —como los descritos en la Subsección 9.3.4— el reescalamiento de los pesos deja de ser necesario, ya que dichos programas realizan el tratamiento adecuado para preservar tanto la representatividad como las propiedades inferenciales del modelo.
+
+
+
+## Diagnóstico del modelo
+
+En el análisis de encuestas de hogares, cuando se ajusta un modelo estadístico, es crucial realizar **verificaciones de calidad** que garanticen la validez de las conclusiones. La literatura metodológica destaca que un modelo bien especificado no solo depende de la elección de las covariables, sino también de que se cumplan los supuestos básicos que aseguran la coherencia de los resultados *(Téllez, 2016)*.
+
+Entre los elementos que deben revisarse al aplicar un modelo de regresión lineal en encuestas complejas se encuentran los siguientes:
+
+* **Adecuación del ajuste**: comprobar si el modelo logra explicar una proporción significativa de la variabilidad de la variable de interés y si las predicciones se ajustan razonablemente a los datos observados.
+* **Normalidad de los errores**: verificar si los errores se distribuyen aproximadamente de manera normal, lo que garantiza la validez de las pruebas de significancia.
+* **Homogeneidad de la varianza (homocedasticidad)**: confirmar que la variabilidad de los errores se mantenga constante a lo largo de los valores de las covariables. La presencia de heterocedasticidad puede sesgar las inferencias.
+* **Independencia de los errores**: examinar si los errores son independientes entre sí, evitando correlaciones que comprometan la validez de las pruebas estadísticas.
+* **Casos influyentes**: identificar observaciones que ejercen un efecto desproporcionado en la estimación del modelo, lo que podría distorsionar los resultados.
+* **Datos atípicos (outliers)**: detectar unidades que se apartan significativamente de la tendencia general de la muestra y que pueden afectar el ajuste del modelo.
+
+
+En el contexto de encuestas complejas, estas verificaciones adquieren una relevancia particular. Problemas como la multicolinealidad, la falta de independencia entre observaciones o la presencia de valores extremos pueden acentuarse debido al diseño muestral (estratificación, conglomeración y ponderación). Por ello, los procedimientos de diagnóstico no deben limitarse a la revisión de los supuestos clásicos, sino también considerar las especificidades del diseño.
+
+La aplicación sistemática de estas pruebas diagnósticas permite evaluar la solidez del modelo, incrementar la confianza en las inferencias y garantizar que los resultados derivados sean representativos y útiles para el análisis de políticas públicas o para la investigación social aplicada.
+
+
+
+### Coeficiente de determinación
+
+Una medida clásica para evaluar el ajuste de un modelo de regresión es el **coeficiente de determinación** ($R^{2}$), también conocido como coeficiente de correlación múltiple. Este indicador estima la proporción de la varianza de la variable dependiente que es explicada por el modelo, y sus valores oscilan entre 0 y 1. Cuanto más próximo esté de 1, mayor será la proporción de variabilidad explicada; por el contrario, un valor cercano a 0 refleja que el modelo aporta poca capacidad explicativa.
+
+No obstante, la interpretación de $R^{2}$ varía según el campo disciplinar. En ciencias físicas, es común obtener valores superiores al 0.98 o 0.99, mientras que en ciencias químicas suelen alcanzarse niveles por encima de 0.90. En contraste, en ciencias sociales y, en general, en estudios con poblaciones humanas, incluso los mejores modelos explicativos rara vez superan un rango del 20 % al 40 % de la variabilidad de la variable de interés (*Heringa*). Este contraste resalta que la magnitud de $R^{2}$ no debe interpretarse de manera absoluta, sino en función del contexto y la naturaleza de los datos analizados.
+
+El coeficiente de determinación se calcula a partir de las sumas de cuadrados totales y de error, de la siguiente manera:
+
+$$
+R^{2} = 1 - \frac{SSE}{SST},
+$$
+
+donde $SST$ representa la suma de cuadrados totales y $SSE$ la suma de cuadrados del error.
+
+En encuestas con **diseños de muestreo complejos**, es necesario ajustar esta medida para reflejar la estructura del diseño y los pesos muestrales. En este caso, el estimador ponderado se define como:
+
+$$
+\hat{R}_\omega^2 = 1 - \frac{(\widehat{SSE})_\omega}{(\widehat{SST})_\omega},
+$$
+
+donde $(\widehat{SSE})_\omega$ corresponde a la **suma ponderada de errores al cuadrado**, calculada como:
+
+$$
+(\widehat{SSE})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik} \,(y_{hik} - x_{hik}\hat{\beta})^2,
+$$
+
+y $(\widehat{SST})_\omega$ representa la **suma total ponderada de cuadrados**, definida por:
+
+$$
+(\widehat{SST})_\omega = \sum_{h=1}^{H} \sum_{i \in s_{1h}} \sum_{k \in s_{hi}} w_{hik}\,(y_{hik} - \hat{\bar{Y}})^2.
+$$
+
+Finalmente, dado que $R^{2}$ tiende a incrementarse a medida que se incluyen más variables en el modelo, se recomienda emplear también el **coeficiente de determinación ajustado** ($R_{adj}^{2}$), que incorpora una corrección en función del número de covariables y del tamaño de la muestra:
+
+$$
+R_{adj}^{2} = 1 - \frac{(n-1)}{(n-p)} \,(1 - R_{\omega}^{2}),
+$$
+
+donde $n$ es el tamaño muestral efectivo y $p$ el número de parámetros estimados.
+
+Este ajuste permite una comparación más justa entre modelos con diferente número de predictores y es particularmente útil en el análisis de encuestas, donde la complejidad del diseño y el uso de ponderaciones pueden influir notablemente en la magnitud de $R^{2}$.
+
+
+Para continuar con los modelos ajustados en la sección anterior, se procede a estimar los $R^{2}$ utilizando `R`. Inicialmente, se procede a estimar los parámetros del modelo utilizando la función `svyglm` de `survey` como se mostró anteriormente y también, se ajusta un modelo solo con el intercepto para obtener la estimación de la SST:
+
+```{r, tab7, echo = TRUE, eval = TRUE}
+fit_svy <- svyglm(Income ~ Expenditure, 
+                  design = diseno)
+
+modNul <- svyglm(Income ~ 1, design = diseno)
+
+s1 <- summary(fit_svy)
+s0 <-summary(modNul)
+
+WSST<- s0$dispersion
+WSSE<- s1$dispersion
+```
+
+Por tanto, la estimación del $R^{2}$ es: 
+
+
+```{r}
+R2 = 1- WSSE/WSST
+R2
+```
+
+y, para estimar el $R_{adj}^{2}$ se requiere definir el diseño muestral pero incluyendo los q-weigthed **(Pffeferman, 2011)**. A continuación, se muestra los pasos para encontrar los q-weigthed:
+
+-   Ajustar un modelo de regresión a los pesos finales de la encuesta utilizando las variables predictoras en el modelo de regresión de interés.
+
+
+```{r, eval=TRUE}
+fit_Nul <- lm(wk ~ 1, data = encuesta)
+```
+
+-   Obtener las predicciones de los pesos de la encuesta para cada caso como una función de las variables predictoras en el conjunto de datos
+
+```{r, eval=TRUE}
+qw <- predict(fit_Nul)
+```
+
+- Dividir los pesos finales de la encuesta por los valores predichos en el paso anterior:
+
+```{r, eval=TRUE}
+encuesta %<>% mutate(wk1 = wk/qw)
+```
+
+- Usar los nuevos pesos obtenidos para el ajuste de los modelos de regresión:
+
+```{r, eval=TRUE}
+diseno_qwgt <- encuesta %>%
+  as_survey_design(
+    strata = Stratum,
+    ids = PSU,
+    weights = wk1,
+    nest = T)
+```
+
+Ahora bien, una vez definido el diseño muestral con los nuevos pesos q-weigthed, se procede a calcular el $R_{adj}^{2}$ como sigue:
+
+```{r, echo = TRUE, eval = TRUE}
+n = sum(diseno_qwgt$variables$wk)
+p<- 2
+R2Adj = 1-( ( (n-1)/(n-p) )*R2 )
+R2Adj             
+```
+
+Como se puede observar, el $R_{adj}^{2}$ es un poco más bajo que el $R^{2}$ y cercanos al 50% que como se comentó anteriormente, dependiendo del contexto del problema se podrá concluir si es grande o pequeño.
+
+
+Después de realizar la comparación entre las diferentes formas de estimar los coeficientes del modelo se opta  por la metodología consolidadas en  `svyglm`:
+
+```{r, echo=TRUE, eval=TRUE, results='asis'}
+
+diseno_qwgt %<>% mutate(Age2 = Age^2) 
+mod_svy <- svyglm( Income ~ Expenditure + Zone + Sex + Age2 ,
+                       design = diseno_qwgt)
+s1 <- summary(mod_svy)
+s0 <- summary(modNul)
+
+mod_svy
+
+stargazer(mod_svy, header = FALSE,single.row = T,
+           title = "Modelo propuesto", 
+           style = "ajps",  omit.stat=c("bic", "ll"))
+```
+
+
+### Diagnóstico de los residuales
+
+En el diagnóstico de los modelos, el análisis de los residuales constituye una herramienta fundamental. Bajo el supuesto de que el modelo ajustado es adecuado, los residuales proporcionan una estimación de los errores y, en consecuencia, permiten evaluar la validez de los supuestos del modelo. Un examen cuidadoso de los mismos ayuda al investigador a determinar si el procedimiento de ajuste ha respetado dichos supuestos o, por el contrario, si alguno de ellos ha sido violado, en cuyo caso sería necesario revisar la especificación del modelo o incluso replantear el método de ajuste.
+
+En encuestas con diseños muestrales complejos, los **residuales de Pearson** son una forma habitual de evaluar discrepancias entre los valores observados y los esperados. Se definen como:
+
+$$
+r_{p_{i}} = \left(y_{i} - \mu_{i}(\hat{\beta}_{\omega})\right) \sqrt{\frac{\omega_{i}}{V(\hat{\mu}_{i})}},
+$$
+
+donde $\mu_{i}$ representa el valor esperado de $y_{i}$ bajo el modelo ajustado, $\omega_{i}$ es el peso muestral correspondiente al individuo $i$ y $V(\hat{\mu}_{i})$ es la función de varianza del resultado.
+
+#### Residuos estandarizados
+
+En términos generales, los residuos corresponden a la diferencia entre los valores observados y los estimados por el modelo. El análisis de estos residuos es esencial para verificar el cumplimiento de los supuestos de la regresión. Una práctica común consiste en graficar los residuos frente a los valores predichos o frente a las variables independientes. En un modelo correctamente especificado, la nube de puntos resultante debería mostrar un patrón aleatorio; la presencia de formas sistemáticas puede indicar problemas como **heterocedasticidad** (varianza no constante) o **relaciones no lineales** no captadas por el modelo.
+
+
+El análisis gráfico es un procedimiento ampliamente utilizado para identificar posibles deficiencias en el modelo. En particular, los **gráficos de residuos frente a valores predichos** son una de las herramientas más informativas para evaluar la adecuación del ajuste. La inspección visual de estos gráficos ayuda a determinar si el modelo cumple con los supuestos de normalidad e independencia de los errores.
+
+En el contexto de encuestas complejas, los residuos pueden expresarse de la siguiente manera:
+
+$$
+r_{(p_k)} = \frac{y_k - \hat{\mu}_k}{\sqrt{V(\hat{\mu}_k)/w_k}},
+$$
+
+donde $\hat{\mu}_k$ es el valor predicho de $y_k$, $w_k$ es el peso muestral de la unidad $k$ y $V(\hat{\mu}_k)$ corresponde a la función de varianza asociada. Estos residuos ponderados se emplean para evaluar tanto la **normalidad** como la **homogeneidad de la varianza** en los errores.
+
+#### Evaluación de la homocedasticidad
+
+Uno de los supuestos más relevantes en los modelos de regresión es la constancia de la varianza de los errores (homocedasticidad). Si este supuesto se viola, los estimadores de los parámetros del modelo permanecen insesgados y consistentes, pero pierden eficiencia, es decir, ya no alcanzan la menor varianza posible entre todos los estimadores insesgados.
+
+Para evaluar este aspecto, se recomienda representar los residuos frente a los valores predichos $\hat{y}$ o frente a alguna covariable $x_j$. La aparición de un patrón sistemático (por ejemplo, forma de embudo o curvaturas) es un indicio de **heterocedasticidad**. En tales casos, pueden considerarse estrategias de corrección, como transformaciones de la variable dependiente, inclusión de términos adicionales en el modelo o el uso de estimadores robustos de varianza.
+
+
+
+Otra definición que se debe tener en consideración para el análisis de los residuales es el de la matriz hat, la cual se estima como:
+
+$$
+H  =  W^{1/2}X\left(X'WX\right)^{-1}X'W^{1/2}
+$$
+donde,
+
+$$
+W  =  diag\left\{ \frac{\omega_{1}}{V\left(\mu_{1}\right)\left[g'\left(\mu_{1}\right)\right]^{2}},...,\frac{\omega_{n}}{V\left(\mu_{n}\right)\left[g'\left(\mu_{n}\right)\right]^{2}}\right\} 
+$$
+$W$ es una matriz diagonal de $n\times n$ y $g()$ es la función de enlace del modelo lineal generalizado.
+
+
+### Observaciones influyentes
+
+En el análisis diagnóstico de modelos, una técnica fundamental consiste en la identificación de observaciones influyentes. Estas son unidades muestrales cuyo impacto sobre el ajuste del modelo es desproporcionado en comparación con el resto de la muestra. Es importante destacar que una observación influyente no necesariamente corresponde a un valor atípico: mientras que un atípico puede estar alejado del patrón general de los datos, su efecto sobre el ajuste puede ser mínimo. Por el contrario, una observación influyente puede alterar de manera significativa las estimaciones de los parámetros, incluso si no luce atípica.
+
+Una observación se considera influyente si su exclusión provoca cambios sustanciales en el ajuste global del modelo o en parámetros específicos. Para detectar este tipo de observaciones es esencial precisar el tipo de influencia que se desea evaluar, ya que una unidad puede ser influyente sobre la estimación de los parámetros pero no sobre la varianza del error, o viceversa.
+
+En el caso de encuestas complejas, este análisis requiere especial atención, pues los pesos muestrales, las estratificaciones y las unidades primarias de muestreo (PSU) amplifican o reducen la influencia de cada observación en comparación con los modelos ajustados bajo supuestos de muestreo simple aleatorio. Para este propósito, la literatura recomienda el uso de herramientas adaptadas a diseños muestrales complejos, tales como el paquete `svydiags` en R (véase Valliant, 2024), que implementa diagnósticos extendidos compatibles con datos de encuestas.
+
+A continuación, se describen los principales estadísticos utilizados para la detección de observaciones influyentes en modelos de regresión, con sus respectivas adaptaciones al contexto de encuestas complejas:
+
+
+#### Distancia de Cook
+
+La **distancia de Cook** mide el efecto de eliminar la observación *i* sobre el ajuste global del modelo. Evalúa simultáneamente el tamaño del residual, la varianza estimada y el apalancamiento de la observación. En el contexto de encuestas complejas, su cálculo se adapta incorporando los pesos muestrales:
+
+$$
+c_{i}=\frac{w_{i}^{*}w_{i}e_{i}^{2}}{p\phi V\left(\hat{\mu}_{i}\right)\left(1-h_{ii}\right)^{2}}\boldsymbol{x}_{i}^{t}\left[\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)\right]^{-1}\boldsymbol{x}_{i}
+$$
+
+donde:
+
+* $w_i^*$ son los pesos de la encuesta,
+* $e_i$ es el residual de la observación *i*,
+* $p$ es el número de parámetros del modelo,
+* $\phi$ es el parámetro de dispersión en el modelo lineal generalizado,
+* $h_{ii}$ corresponde al apalancamiento de la observación *i*,
+* $\widehat{Var}\left(U_{w}\left(\hat{\boldsymbol{\beta}}_{w}\right)\right)$ es la varianza linealizada de la ecuación de puntuación.
+
+Para evaluar su magnitud, se compara $c_i$ con puntos de referencia. Una aproximación es el estadístico:
+
+$$
+\frac{\left(df-p+1\right)\times c_{i}}{df} \doteq F_{\left(p,df-p\right)}
+$$
+
+donde $df$ son los grados de libertad basados en el diseño. En la práctica, la literatura (Heeringa; Téllez, 2016) suele considerar como observaciones influyentes aquellas cuyo $c_i$ excede valores críticos como 2 o 3.
+
+
+#### $D_f\text{Beta}$
+
+El estadístico **$D_f \text{Beta}_{(i)}$** cuantifica el cambio en los coeficientes de regresión cuando la observación *i* es eliminada:
+
+$$
+D_f \text{Beta}_{(i)} = \hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{\left(i\right)}=\frac{\boldsymbol{A}^{-1}\boldsymbol{X}_{\left(i\right)}^{t}\hat{e}_{i}w_{i}}{1-h_{ii}}
+$$
+
+donde $\boldsymbol{A} =\boldsymbol{X}^{t}\boldsymbol{WX}$ y $\hat{\boldsymbol{\beta}}_{(i)}$ es el vector de parámetros estimados sin la observación *i*.
+
+En su forma estandarizada:
+
+$$
+D_f Betas_{\left(i\right)}=\frac{{c_{ji}e_{i}}\big/{\left(1-h_{ii}\right)}}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
+$$
+
+La interpretación es directa: una observación es influyente sobre el coeficiente $\hat{\beta}*j$ si $|D_f Betas*{(i)j}|\geq \frac{z}{\sqrt{n}}$, con $z=2$ o $3$, o alternativamente si supera el umbral $t_{0.025,n-p}/\sqrt{n}$.
+
+
+#### $D_f \text{Fits}$
+
+Finalmente, el estadístico **$D_f \text{Fits}_{(i)}$** mide la influencia de una observación sobre el ajuste total del modelo. Se calcula como:
+
+$$
+D_{f}Fits_{\left(i\right)}= \frac{h_{ii}e_{i}\big/\left(1-h_{ii}\right)}{\sqrt{v\left(\hat{\beta}_{j}\right)}}
+$$
+
+La observación *i* se considera influyente si:
+
+$$
+|D_f Fits_{(i)}| \geq z\sqrt{\frac{p}{n}} \quad \text{con } z=2 \text{ o } 3
+$$
+
+
+Por otro lado, un análisis que es de vital importancia en el ajuste de modelos de regresión más específicamente en el análisis de residuales es el de varianza constante en los errores. La principal consecuencia de no tener en cuenta la violación de este supuesto es que los estimadores pierden eficiencia. Si el supuesto de varianza constante no se cumple, los estimadores siguen siendo insesgados y consistentes, pero dejan de ser eficientes, es decir, dejan de ser los mejores en cuanto a que ya no tienen la menor varianza entre todos los estimadores insesgados. Como consecuencia de lo anterior, los intervalos de confianza serán más amplios y las pruebas t y F darán resultados imprecisos *(Tellez, 2016)*.
+
+Una de las formas de analizar el supuesto de varianzas constantes en los errores es hacerlo de manera gráfica. Para ello, se grafica los residuos del modelo contra $\hat{y}$ o los residuos del modelo contra $X_{i}$. Si al realizar estos gráficos se logra evidenciar un patrón (funciones cuadráticas, cúbicas, logarítmicas, etc), se puede decir que la varianza de los errores no es constante.
+
+Otro supuesto que se debe revisar en los errores al momento de realizar ajustes es la normalidad en lo errores. Una forma muy común para hacer dicha evaluación es realizar un gráfico cuantil-cuantil normal o QQplot. El QQplot es una gráfica de cuantiles para los residuos observados frente a los calculados a partir de una distribución normal teórica que tiene la misma media y varianza que la distribución de los residuos observados. Por lo tanto, una línea recta de 45° en este gráfico sugeriría que la normalidad es una suposición razonable para los errores aleatorios en el modelo.
+
+A manera de ejemplificar los conceptos vistos, se van a utilizar los modelos previamente ajustados. En primero instancia, el análisis del modelo se centrará en los supuestos de normalidad y varianza constante en los errores. Primero, se realizará el análisis de la normalidad en los errores de manera gráfica como se muestra a continuación:
+
+
+```{r}
+par(mfrow = c(2,2))
+plot(mod_svy)
+```
+
+Como se puedo observar en el QQplot, hay evidencia gráfica de que los errores no se distribuyen según una distribución normal.
+
+La librería `svydiags` está pensada en ayudar en el diagnostico de modelos de regresión lineal, siendo una extensión más para complementar el paquete `survey`. Con las librerías `svydiags` se extraen los residuales estandarizados como sigue: 
+
+```{r, echo = TRUE, eval=TRUE}
+library(svydiags)
+stdresids = as.numeric(svystdres(mod_svy)$stdresids)
+diseno_qwgt$variables %<>% mutate(stdresids = stdresids)
+```
+
+
+Podemos hacer el análisis de normalidad también por medio del histograma de los residuales estandarizados como sigue: 
+
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = diseno_qwgt$variables,
+       aes(x = stdresids)) +
+  geom_histogram(aes(y = ..density..),
+                 colour = "black", 
+                 fill = "blue", alpha = 0.3) +
+  geom_density(size = 2, colour = "blue") +
+  geom_function(fun = dnorm, colour = "red",
+                size = 2) +
+  theme_cepal()+labs(y = "")
+```
+
+y como se puede observar gráficamente los errores no siguen una distribución normal. 
+
+Por otro lado, el otro análisis que se realiza de manera gráfica es el de varianzas constantes el cual se realizará a continuación:
+
+
+Primero, agreguemos las predicciones a la base de datos para poder realizar las gráficas.
+
+```{r, echo=TRUE, eval=TRUE,size="tiny"}
+library(patchwork)
+diseno_qwgt$variables %<>% 
+  mutate(pred = predict(mod_svy))
+g2 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Expenditure, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+g3 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Age2, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+```
+
+
+```{r, plot6, echo=TRUE, eval=FALSE,size="tiny"}
+g4 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Zone, y = stdresids))+
+  geom_point() +
+  geom_hline(yintercept = 0) + theme_cepal()
+g5 <- ggplot(data = diseno_qwgt$variables,
+       aes(x = Sex, y = stdresids))+
+  geom_point() +  geom_hline(yintercept = 0) +
+  theme_cepal()
+
+(g2|g3)/(g4|g5)
+```
+
+Como se puede observar en las gráficas de gastos y edad, ambas muestran tendencias y no un comportamiento aleatorio. Por lo anterior, se puede decir que las varianzas no son constantes.
+
+Otros de os análisis a realizar es revisar si existen datos influyentes en la base de datos. Para ejemplificar los conceptos definidos, se seguirán con los modelos ajustados en la sección anterior. Una vez ajustados estos modelos y verificados los supuestos, se procede a hacer el cálculo de la distancia de Cook's usando la función `svyCooksD`del paquete `svydiags` como sigue:
+
+```{r, dcook, eval=FALSE}
+library(svydiags) 
+d_cook = data.frame(
+   cook = svyCooksD(mod_svy), 
+     id = 1:length(svyCooksD(mod_svy)))
+
+table(d_cook$cook>3)
+
+
+ggplot(d_cook, aes(y = cook, x = id)) +
+  geom_point() + 
+  theme_bw(20)
+```
+
+Como se puede observar, ninguna de las distancias de Cook's es mayor a 3 por lo que, podemos decir que no existen observaciones influyentes. 
+
+Ahora bien, se desea observar si hay observaciones influyentes pero utilizando $D_{f}Betas_{\left(i\right)j}$ se realiza con la función `svydfbetas` como se muestra a continuación:
+
+```{r}
+d_dfbetas = data.frame(t(svydfbetas(mod_svy)$Dfbetas))
+colnames(d_dfbetas) <- paste0("Beta_", 1:5)
+d_dfbetas %>% slice(1:10L)
+```
+Una vez calculado los $D_{f}Betas_{\left(i\right)j}$ se procede a acomodar la salida con para verificar cuáles observaciones son influyentes. Para esto, de calcula el umbral (cutoff) para definir si es o no influyente la observación. Ese umbral es tomado de las salidas de la función `svydfbetas`. Por último, se genera una variable dicotómica que indique si la observación es o no influyente como se muestra a continuación: 
+
+```{r eval=TRUE, echo=TRUE}
+d_dfbetas$id <- 1:nrow(d_dfbetas)
+d_dfbetas <- reshape2::melt(d_dfbetas, id.vars = "id")
+cutoff <- svydfbetas(mod_svy)$cutoff
+d_dfbetas %<>% mutate( Criterio = ifelse(abs(value) > cutoff, "Si", "No"))
+
+tex_label <- d_dfbetas %>% 
+  filter(Criterio == "Si") %>%
+  arrange(desc(abs(value))) %>%
+  slice(1:10L)
+tex_label
+```
+
+Como se pudo observar en la salida anterior hay varias observaciones que resultan influyentes dado el criterio del $D_{f}Betas_{\left(i\right)j}$. A continuación, y de manera ilustrativa, se grafican los $D_{f}Betas_{\left(i\right)j}$ y el umbral con el fin de ver de manera gráfica aquellas observaciones influyentes, teniendo en cuenta que, aquellos puntos rojos en la gráfica representan observaciones influyentes.
+
+```{r eval=FALSE, plot_dfbetas, echo=TRUE}
+ggplot(d_dfbetas, aes(y = abs(value), x = id)) +
+  geom_point(aes(col = Criterio)) +
+  geom_text(data = tex_label,
+            angle = 45,
+            vjust = -1,
+            aes(label = id)) +
+  geom_hline(aes(yintercept = cutoff)) +
+  facet_wrap(. ~ variable, nrow = 2) +
+  scale_color_manual(
+    values = c("Si" = "red", "No" = "black")) +
+  theme_cepal()
+```
+Si el objetivo ahora es detectar observaciones influyentes pero considerando ahora la estadística $D_{f}Fits_{\left(i\right)}$, se utiliza la función `svydffits` y se siguen los mismos pasos mostrados para el estadístico $D_{f}Betas_{\left(i\right)j}$:
+
+```{r,plot_dffit, echo=TRUE, eval=FALSE}
+d_dffits = data.frame( dffits = svydffits(mod_svy)$Dffits, 
+                       id = 1:length(svydffits(mod_svy)$Dffits))
+
+cutoff <- svydffits(mod_svy)$cutoff
+
+d_dffits %<>% mutate(C_cutoff = ifelse(abs(dffits) > cutoff, "Si", "No"))
+ggplot(d_dffits, aes(y = abs(dffits), x = id)) +
+  geom_point(aes(col = C_cutoff)) + 
+  geom_hline(yintercept = cutoff) + 
+   scale_color_manual(
+    values = c("Si" = "red", "No" = "black"))+
+  theme_cepal()
+```
+
+Como se puede observar en el gráfico anterior, también hay observaciones influyentes utilizando $D_{f}Fits_{\left(i\right)}$, las cuales se muestran en rojo en el gráfico.
+
+Un último acercamiento que se trabajará en este texto para la detección de datos influyentes está encaminado al uso de la matriz *H*. En este sentido, la matriz asociada al Estimador de Pseudo Máxima Verosimilitud (PMLE) de $\hat{\boldsymbol{B}}$ es $\boldsymbol{H}=\boldsymbol{XA}^{-1}\boldsymbol{X}^{-t}\boldsymbol{W}$ cuya diagonal esta dado por $h_{ii} = \boldsymbol{x_{i}^tA}^{-1}\boldsymbol{x_{i}}^{-t}w_{i}$. Utilizando la matriz *H*, una observación puede ser grande y, como resultado, influir en las predicciones, cuando un $x_i$ es considerablemente diferente del promedio ponderado $\bar{x}_w=\sum_{i\in s}w_{i}\boldsymbol{x_{i}}\big/\sum_{i\in s}w_i$. Según *(Tellez, 2016)* una observación es considerada grande si es mayor a tres veces el promedio de los $h_{ii}$. A continuación, se muestra el procedimiento en `R` cuya función a utilizar es `svyhat`:
+
+```{r, hat, eval=TRUE, echo=TRUE}
+vec_hat <- svyhat(mod_svy, doplot = FALSE)
+d_hat = data.frame(hat = vec_hat, id = 1:length(vec_hat))
+d_hat %<>% mutate(C_cutoff = ifelse(hat > (3 * mean(hat)),"Si", "No"))
+
+ggplot(d_hat, aes(y = hat, x = id)) +
+  geom_point(aes(col = C_cutoff)) + 
+  geom_hline(yintercept = (3 * mean(d_hat$hat))) +
+  scale_color_manual(
+    values = c("Si" = "red", "No" = "black"))+
+  theme_cepal()
+```
+
+Dado que esta última técnica es empírica, se puede observar en el gráfico anterior que hay varias observaciones posiblemente influyentes en el conjunto de datos de la muestra de hogares.
+
+
+## Inferencia sobre los parámetros del modelo
+
+Una vez evaluado el correcto ajuste del modelo utilizando las metodologías vistas anteriormente y corroboradas las propiedades distribucionales de los errores —y, en consecuencia, de la variable respuesta $y$—, el siguiente paso consiste en verificar si los parámetros estimados son estadísticamente significativos. Esto permite determinar si las covariables incluidas en el modelo aportan de manera sustantiva a la explicación o predicción de la variable de estudio.
+
+En los modelos de regresión, el enfoque clásico para contrastar hipótesis sobre los parámetros $\beta_k$ se basa en las propiedades distribucionales de sus estimadores. Un estadístico de prueba natural para evaluar la significancia de un coeficiente se construye a partir de la distribución *t-Student* y se define como:
+
+$$
+t=\frac{\hat{\beta}_{k}-\beta_{k}}{se\left(\hat{\beta}_{k}\right)} \sim t_{n-p}
+$$
+
+donde $p$ es el número de parámetros del modelo y $n$ el tamaño muestral. Este estadístico permite contrastar la hipótesis nula $H_{0}:\beta_{k}=0$ frente a la alternativa $H_{1}:\beta_{k}\neq 0$.
+
+En consecuencia, cuando $|t|$ es lo suficientemente grande, se rechaza la hipótesis nula, concluyendo que la covariable asociada al parámetro $\beta_k$ tiene un efecto significativo en la variable respuesta.
+
+De igual manera, las propiedades distribucionales de los $\beta$ permiten construir intervalos de confianza al nivel $(1-\alpha)\times100%$, definidos como:
+
+$$
+\hat{\beta}_{k}\pm t_{1-\frac{\alpha}{2},\,df}\,se\left(\hat{\beta}_{k}\right)
+$$
+
+donde $se(\hat{\beta}*k)$ es el error estándar del estimador y $t*{1-\frac{\alpha}{2},,df}$ corresponde al percentil de la distribución *t-Student* con $df$ grados de libertad.
+
+En el caso particular de las encuestas de hogares con **diseños muestrales complejos**, los grados de libertad no se calculan simplemente como $n-p$ (como en el enfoque clásico), sino que deben ajustarse para reflejar la estructura del muestreo. De acuerdo con la teoría de diseño, se establece que:
+
+$$
+df = \sum_{h} a_{h} - H
+$$
+
+donde $\sum_{h}a_{h}$ es el número total de conglomerados finales de la primera etapa y $H$ el número de estratos de dicha etapa.
+
+Este ajuste es fundamental porque asegura que la inferencia refleje de manera adecuada la variabilidad introducida por la estratificación, la conglomeración y las probabilidades de selección desiguales, evitando conclusiones erróneas sobre la significancia de los parámetros en el análisis de encuestas complejas.
+
+
+
+Para la aplicación de las temáticas vistas, es decir, realizar la prueba de hipótesis y los intervalos de confianza para los parámetros utilizaremos el modelo que se ha venido trabajando y aplicaremos las funciones `summary.svyglm` para las pruebas t y `confint.svyglm` para los intervalos de confianza como sigue:
+
+```{r}
+survey:::summary.svyglm(mod_svy)
+
+survey:::confint.svyglm(mod_svy)
+```
+
+De lo anterior se puede observar que, con una confianza del 95% el único parámetro significativo del modelo es Expenditure y ese mismo resultado lo reflejan los intervalos de confianza.
+
+*Estimación de una observación*
+
+Los modelos de regresión lineales, según *(Neter et al., 1996).*, son utilizado esencialmente con 2 fines, el primero es tratar de explicar la variable respuesta en términos de covariables que pueden encontrarse en la encuesta o en registros administrativos, censos, etc. Adicionalmente, también son usados para predecir valores de la variable en estudio ya sea dentro del intervalo de valores recogidos en la muestra o por fuera de dicho intervalo. Lo primero se ha abordado a lo largo de todo el capítulo y lo segundo se obtiene de la siguiente manera:
+
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\boldsymbol{x}_{obs,i}\hat{\boldsymbol{\beta}}
+$$
+
+De manera explícita, si se ajusta un modelo con 4 covariables la expresión sería:
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=\hat{\beta}_{0}+\hat{\beta}_{1}x_{1i}+\hat{\beta}_{2}x_{2i}+\hat{\beta}_{3}x_{3i}+\hat{\beta}_{4}x_{4i}
+$$
+
+La varianza de la estimación se calcula de la siguiente manera:
+
+$$
+var\left(\hat{E}\left(y_{i}\mid x_{obs,i}\right)\right) 
+=  x'_{obs,i}cov\left(\hat{\beta}\right)x{}_{obs,i}
+$$
+
+A continuación, se presenta cómo se realiza la estimación del valor esperado, primero se estiman los parámetros del modelo:
+
+```{r, echo=FALSE}
+mod_svy %>% broom::tidy()
+
+```
+
+Por lo anterior, la estimación del valor esperado o predicción queda:
+
+$$
+\hat{E}(y_{i}\mid\boldsymbol{x}_{obs,i})=62.2+1.2x_{1i}+63.5x_{2i}+21.7x_{3i}+0.01x_{4i}
+$$
+Para calcular la varianza de la estimación, primero se deben obtener las varianzas de la estimación de los parámetros: 
+
+```{r}
+vcov(mod_svy)
+```
+
+Ahora bien, se procede a realizar los cálculos como lo indica la expresión mostrada anteriormente:
+
+```{r, echo=TRUE}
+xobs <- model.matrix(mod_svy) %>%
+        data.frame() %>% slice(1) %>% as.matrix()
+
+cov_beta <- vcov(mod_svy) %>% as.matrix()
+
+as.numeric(xobs %*% cov_beta %*% t(xobs))
+```
+
+Si el objetivo ahora es calcular el intervalo de confianza para la predicción se utiliza la siguiente ecuación:
+
+
+$$
+\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)}
+$$
+
+Para realizar los cálculos en R, se utiliza la función `confint` y `predict` como sigue:
+
+```{r,pred01, echo=TRUE,eval=FALSE}
+pred <- data.frame(predict(mod_svy, type = "link"))
+pred_IC <- data.frame(confint(predict(mod_svy, type = "link")))
+colnames(pred_IC) <- c("Lim_Inf", "Lim_Sup")
+pred_IC
+```
+
+Ahora, de manera gráfica las predicciones e intervalos se vería de la siguiente manera:
+
+```{r, plot_pred, echo=TRUE,eval=FALSE}
+pred <- bind_cols(pred, pred_IC)
+pred$Expenditure <- encuesta$Expenditure
+pred %>% slice(1:6L)
+pd <- position_dodge(width = 0.2)
+ggplot(pred %>% slice(1:100L),
+       aes(x = Expenditure , y = link)) +
+  geom_errorbar(aes(ymin = Lim_Inf,
+                    ymax = Lim_Sup),
+                width = .1,
+                linetype = 1) +
+  geom_point(size = 2, position = pd) +
+  theme_bw()
+```
+
+Por último, si el interés es hacer una predicción fuera del rango de valores que fue capturado en la muestra. Para esto, supongamos que se desea predecir:
+
+```{r}
+datos_nuevos <- data.frame(Expenditure = 1600, 
+                           Age2 = 40^2, Sex = "Male", 
+                           Zone = "Urban")
+```
+
+La varianza para la predicción se hace siguiendo la siguiente ecuación:
+
+$$
+var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)=\boldsymbol{x}_{obs,i}^{t}cov\left(\boldsymbol{\beta}\right)\boldsymbol{x}_{obs,i} + \hat{\sigma}^2_{yx}
+$$
+
+Por tanto, se construye la matriz de observaciones y se calcula la varianza como sigue:
+
+```{r}
+x_noObs = matrix(c(1,1600,1,1,40^2),nrow = 1)
+as.numeric(sqrt(x_noObs%*%cov_beta%*%t(x_noObs)))
+```
+
+Por último, el intervalo de confianza sigue la siguiente ecuación:
+
+$$
+\boldsymbol{x}_{obs,i}\hat{\beta}\pm t_{\left(1-\frac{\alpha}{2},n-p\right)}\sqrt{var\left(\hat{E}\left(y_{i}\mid\boldsymbol{x}_{obs,i}\right)\right)+\hat{\sigma}_{yx}^{2}}
+$$
+En `R` se hace la predicción de la siguiente manera:
+
+```{r}
+predict(mod_svy, newdata = datos_nuevos, type =  "link")
+```
+
+y el intervalo:
+```{r}
+confint(predict(mod_svy,newdata = datos_nuevos))
+```

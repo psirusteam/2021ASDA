@@ -435,7 +435,7 @@ $$
 v(\hat{p}) \dot{=} \frac{V(\hat{N}_{1})+\hat{p}^{2}V(\hat{N})-2\hat{p}\,cov(\hat{N}_{1},\hat{N})}{\hat{N}^{2}}.
 $$
 
-Cuando la proporción estimada se aproxima a 0 o 1, los intervalos de confianza estándar pueden producir límites fuera del rango $\[0,1]$. Para solventar este problema, se proponen intervalos de confianza basados en transformaciones, como el *Wilson modificado* o el uso del *logit* de $\hat{p}$:
+Cuando la proporción estimada se aproxima a 0 o 1, los intervalos de confianza estándar pueden producir límites fuera del rango $[0,1]$. Para solventar este problema, se proponen intervalos de confianza basados en transformaciones, como el *Wilson modificado* o el uso del *logit* de $\hat{p}$:
 
 $$
 IC[\text{logit}(\hat{p})] = \left\{ \ln\left(\frac{\hat{p}}{1-\hat{p}}\right) \pm \frac{t_{1-\alpha/2,gl}\,se(\hat{p})}{\hat{p}(1-\hat{p})}\right\},

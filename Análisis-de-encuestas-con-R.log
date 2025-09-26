@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.25)  25 SEP 2025 15:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.26)  26 SEP 2025 08:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -542,15 +542,7 @@ Package: xparse 2024-08-16 L3 Experimental document command parser
 \l__tblr_last_cell_table_dp_dim=\dimen307
 \l__tblr_last_vline_wd_dim=\dimen308
 \l__tblr_tikz_node_box=\box101
-) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip87
-\bibsep=\skip88
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count363
-) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
-Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
-(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
@@ -573,13 +565,13 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count364
+\c@section@level=\count363
 ) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen309
-\Hy@linkcounter=\count365
-\Hy@pagecounter=\count366
+\Hy@linkcounter=\count364
+\Hy@pagecounter=\count365
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -587,7 +579,7 @@ Now handling font encoding PD1 ...
 ) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count367
+\Hy@SavedSpaceFactor=\count366
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -601,7 +593,7 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count368
+\c@Hy@tempcnt=\count367
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -613,7 +605,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count369
+\Fld@menulength=\count368
 \Field@Width=\dimen311
 \Fld@charsize=\dimen312
 Package hyperref Info: Hyper figures OFF on input line 6078.
@@ -623,15 +615,15 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count370
-\c@Item=\count371
-\c@Hfootnote=\count372
+\Hy@abspage=\count369
+\c@Item=\count370
+\c@Hfootnote=\count371
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count373
-\c@bookmark@seq@number=\count374
+\Fld@listcount=\count372
+\c@bookmark@seq@number=\count373
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -639,44 +631,170 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
-\Hy@SectionHShift=\skip89
-) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
-File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
-\BKM@id=\count375
+\Hy@SectionHShift=\skip87
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2025-07-09 v3.4.14 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count374
+\l__siunitx_number_exponent_fixed_int=\count375
+\l__siunitx_number_min_decimal_int=\count376
+\l__siunitx_number_min_integer_int=\count377
+\l__siunitx_number_round_precision_int=\count378
+\l__siunitx_number_lower_threshold_int=\count379
+\l__siunitx_number_upper_threshold_int=\count380
+\l__siunitx_number_group_first_int=\count381
+\l__siunitx_number_group_size_int=\count382
+\l__siunitx_number_group_minimum_int=\count383
+\l__siunitx_angle_tmp_dim=\dimen313
+\l__siunitx_angle_marker_box=\box102
+\l__siunitx_angle_unit_box=\box103
+\l__siunitx_compound_count_int=\count384
+\l__siunitx_table_tmp_box=\box104
+\l__siunitx_table_tmp_dim=\dimen314
+\l__siunitx_table_column_width_dim=\dimen315
+\l__siunitx_table_integer_box=\box105
+\l__siunitx_table_decimal_box=\box106
+\l__siunitx_table_uncert_box=\box107
+\l__siunitx_table_before_box=\box108
+\l__siunitx_table_after_box=\box109
+\l__siunitx_table_before_dim=\dimen316
+\l__siunitx_table_carry_dim=\dimen317
+\l__siunitx_unit_tmp_int=\count385
+\l__siunitx_unit_position_int=\count386
+\l__siunitx_unit_total_int=\count387
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip88
+\multirow@cntb=\count388
+\multirow@dima=\skip89
+\bigstrutjot=\dimen318
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen319
+\WF@size=\dimen320
+\c@WF@wrappedlines=\count389
+\WF@box=\box110
+\WF@everypar=\toks36
+Package: wrapfig 2003/01/31  v 3.6
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count390
+\float@exts=\toks37
+\float@box=\box111
+\@float@everytoks=\toks38
+\@floatcapt=\box112
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
+\everycr=\toks39
+\minrowclearance=\skip90
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box113
+\sift@deathcycles=\count391
+\@vwid@loff=\dimen321
+\@vwid@roff=\dimen322
+)
+==> First Aid for varwidth.sty applied!
+\c@taburow=\count392
+\tabu@nbcols=\count393
+\tabu@cnt=\count394
+\tabu@Xcol=\count395
+\tabu@alloc=\count396
+\tabu@nested=\count397
+\tabu@target=\dimen323
+\tabu@spreadtarget=\dimen324
+\tabu@naturalX=\dimen325
+\tabucolX=\dimen326
+\tabu@Xsum=\dimen327
+\extrarowdepth=\dimen328
+\abovetabulinesep=\dimen329
+\belowtabulinesep=\dimen330
+\tabustrutrule=\dimen331
+\tabu@thebody=\toks40
+\tabu@footnotes=\toks41
+\tabu@box=\box114
+\tabu@arstrutbox=\box115
+\tabu@hleads=\box116
+\tabu@vleads=\box117
+\tabu@cellskip=\skip91
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box118
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 154.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 160.
+\TPTL@width=\skip92
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box119
+\UL@hyphenbox=\box120
+\UL@skip=\skip93
+\UL@hook=\toks42
+\UL@height=\dimen332
+\UL@pe=\count398
+\UL@pixel=\dimen333
+\ULC@box=\box121
+Package: ulem 2019/11/18
+\ULdepth=\dimen334
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen335
+\c@nlinenum=\count399
+\TeXr@lab=\toks43
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip94
+\bibsep=\skip95
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count400
+) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
+File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
+\BKM@id=\count401
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 170.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 176.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (./Análisis-de-encuestas-con-R.aux
+
+LaTeX Warning: Label `' multiply defined.
+
 )
-No file Análisis-de-encuestas-con-R.aux.
 \openout1 = `Análisis-de-encuestas-con-R.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 160.
-LaTeX Font Info:    ... okay on input line 160.
-LaTeX Info: Redefining \microtypecontext on input line 160.
-Package microtype Info: Applying patch `item' on input line 160.
-Package microtype Info: Applying patch `toc' on input line 160.
-Package microtype Info: Applying patch `eqnum' on input line 160.
-Package microtype Info: Applying patch `footnote' on input line 160.
-Package microtype Info: Applying patch `verbatim' on input line 160.
-LaTeX Info: Redefining \microtypesetup on input line 160.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+Package microtype Info: Patching varwidth to enable character protrusion.
+\MT@vwid@leftmargin=\dimen336
+\MT@vwid@rightmargin=\dimen337
+LaTeX Info: Redefining \microtypecontext on input line 176.
+Package microtype Info: Applying patch `item' on input line 176.
+Package microtype Info: Applying patch `toc' on input line 176.
+Package microtype Info: Applying patch `eqnum' on input line 176.
+Package microtype Info: Applying patch `footnote' on input line 176.
+Package microtype Info: Applying patch `verbatim' on input line 176.
+LaTeX Info: Redefining \microtypesetup on input line 176.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -729,53 +847,53 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 160.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 162.
+Package hyperref Info: Link coloring ON on input line 176.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 162.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 162.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 162.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 162.
+(Font)              <14.4> on input line 178.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 162.
+(Font)              <10> on input line 178.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 162.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 162.
+(Font)              <7> on input line 178.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 162.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 178.
 (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-Overfull \hbox (17.18709pt too wide) in paragraph at lines 162--162
+Overfull \hbox (17.18707pt too wide) in paragraph at lines 178--178
  [][] 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 162.
+(Font)              <10.95> on input line 178.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 162.
+(Font)              <8> on input line 178.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 162.
+(Font)              <6> on input line 178.
 
-Underfull \hbox (badness 1902) in paragraph at lines 162--162
+Underfull \hbox (badness 1902) in paragraph at lines 178--178
 [][]\T1/lmr/m/n/10.95 (+20) Consultor - Comisi�n Econ�mica para Am�rica Latina y el Caribe (CEPAL),
  []
 
@@ -788,21 +906,19 @@ Underfull \hbox (badness 1902) in paragraph at lines 162--162
 
 [2
 
-]
-No file Análisis-de-encuestas-con-R.toc.
-\tf@toc=\write4
-\openout4 = `Análisis-de-encuestas-con-R.toc'.
-
-
+] (./Análisis-de-encuestas-con-R.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 5.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 21.
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 
 [3]
 
-[4
-
-]
-No file Análisis-de-encuestas-con-R.lof.
-\tf@lof=\write5
-\openout5 = `Análisis-de-encuestas-con-R.lof'.
+[4])
+\tf@toc=\write4
+\openout4 = `Análisis-de-encuestas-con-R.toc'.
 
 
 
@@ -810,10 +926,9 @@ No file Análisis-de-encuestas-con-R.lof.
 
 [6
 
-]
-No file Análisis-de-encuestas-con-R.lot.
-\tf@lot=\write6
-\openout6 = `Análisis-de-encuestas-con-R.lot'.
+] (./Análisis-de-encuestas-con-R.lof)
+\tf@lof=\write5
+\openout5 = `Análisis-de-encuestas-con-R.lof'.
 
 
 
@@ -821,280 +936,2917 @@ No file Análisis-de-encuestas-con-R.lot.
 
 [8
 
-]
+] (./Análisis-de-encuestas-con-R.lot)
+\tf@lot=\write6
+\openout6 = `Análisis-de-encuestas-con-R.lot'.
+
+
 
 [9]
 
 [10
 
 ]
+
+[11]
+
+[12
+
+]
 \bbl@ensure@spanish {Cap\'\i tulo} 1.
 
 
-[11]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 190.
-(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+[13]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 208.
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 191.
 
-Overfull \hbox (50.42177pt too wide) in paragraph at lines 213--213
+[14{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+
+[15]
+
+[16
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 2.
+
+
+[17]
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+
+
+[18]
+
+[19]
+
+[20{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+
+[21]
+
+[22{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+[23]
+
+[24]
+
+[25]
+Underfull \hbox (badness 3746) in paragraph at lines 498--498
+[]\T1/lmr/bx/n/17.28 (+20) Muestreo aleatorio simple en dos etapas
+ []
+
+
+
+[26]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 519.
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 525.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 537.
+(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[27]
+Underfull \vbox (badness 4024) has occurred while \output is active []
+
+
+
+[28]
+Underfull \vbox (badness 1565) has occurred while \output is active []
+
+
+
+[29]
+
+[30]
+
+[31]
+
+[32]
+<02-Conceptos_files/figure-latex/unnamed-chunk-20-1.pdf, id=352, 469.755pt x 325.215pt>
+File: 02-Conceptos_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
+<use 02-Conceptos_files/figure-latex/unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: 02-Conceptos_files/figure-latex/unnamed-chunk-20-1.pdf  used on input line 889.
+(pdftex.def)             Requested size: 399.21791pt x 276.37947pt.
+<02-Conceptos_files/figure-latex/unnamed-chunk-21-1.pdf, id=353, 469.755pt x 325.215pt>
+File: 02-Conceptos_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use 02-Conceptos_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: 02-Conceptos_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 897.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 5161) has occurred while \output is active []
+
+
+
+[33 <./02-Conceptos_files/figure-latex/unnamed-chunk-20-1.pdf>]
+
+[34 <./02-Conceptos_files/figure-latex/unnamed-chunk-21-1.pdf>]
+
+[35]
+
+[36
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 3.
+
+
+[37]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 38 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[38]
+Underfull \hbox (badness 5667) in paragraph at lines 967--969
+[]\T1/lmtt/m/n/12 TeachingSampling\T1/lmr/m/n/12 (+20) , este paquete permite al usuario extraer muestras
+ []
+
+
+
+[39]
+<Imagenes/Cap 0/Proyecto1.png, id=398, 319.79475pt x 204.765pt>
+File: Imagenes/Cap 0/Proyecto1.png Graphic file (type png)
+<use Imagenes/Cap 0/Proyecto1.png>
+Package pdftex.def Info: Imagenes/Cap 0/Proyecto1.png  used on input line 1014.
+(pdftex.def)             Requested size: 338.77586pt x 216.91861pt.
+
+Overfull \hbox (82.70279pt too wide) in paragraph at lines 1014--1016
+[]\T1/lmr/bx/n/12 (-20) Paso 2: \T1/lmr/m/n/12 (-20) ir a file -> New Project [] 
+ []
+
+
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 40 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[40 <./Imagenes/Cap 0/Proyecto1.png>]
+<Imagenes/Cap 0/Proyecto2.png, id=403, 325.215pt x 230.0595pt>
+File: Imagenes/Cap 0/Proyecto2.png Graphic file (type png)
+<use Imagenes/Cap 0/Proyecto2.png>
+Package pdftex.def Info: Imagenes/Cap 0/Proyecto2.png  used on input line 1023.
+(pdftex.def)             Requested size: 338.79126pt x 239.66344pt.
+<Imagenes/Cap 0/Proyecto3.png, id=405, 322.806pt x 230.0595pt>
+File: Imagenes/Cap 0/Proyecto3.png Graphic file (type png)
+<use Imagenes/Cap 0/Proyecto3.png>
+Package pdftex.def Info: Imagenes/Cap 0/Proyecto3.png  used on input line 1037.
+(pdftex.def)             Requested size: 338.78882pt x 241.45024pt.
+<Imagenes/Cap 0/Proyecto4.png, id=406, 324.0105pt x 227.6505pt>
+File: Imagenes/Cap 0/Proyecto4.png Graphic file (type png)
+<use Imagenes/Cap 0/Proyecto4.png>
+Package pdftex.def Info: Imagenes/Cap 0/Proyecto4.png  used on input line 1049.
+(pdftex.def)             Requested size: 338.77246pt x 238.02228pt.
+
+
+[41
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1058 
+        <./Imagenes/Cap 0/Proyecto2.png>]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 42 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[42
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1058 
+       
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1058 
+        <./Imagenes/Cap 0/Proyecto3.png> <./Imagenes/Cap 0/Proyecto4.png>]
+
+[43]
+<Imagenes/Cap 0/1.png, id=423, 1368.11125pt x 824.07875pt>
+File: Imagenes/Cap 0/1.png Graphic file (type png)
+<use Imagenes/Cap 0/1.png>
+Package pdftex.def Info: Imagenes/Cap 0/1.png  used on input line 1121.
+(pdftex.def)             Requested size: 639.90192pt x 385.44348pt.
+
+Overfull \hbox (196.32344pt too wide) in paragraph at lines 1121--1122
+ [][] 
+ []
+
+
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 44 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[44
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1134 
+        <./Imagenes/Cap 0/1.png>]
+
+[45]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 46 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[46]
+
+[47]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 48 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[48]
+
+
+Overfull \hbox (90.33655pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  FUNCIONES \T1/lmr/bx/sl/12 MUTATE, SUMMARISE Y GROUP_BY \T1/lmr/m/sl/12 EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 49
+ []
+
+[49]
+Underfull \vbox (badness 1383) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 50 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[50]
+
+[51]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 52 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[52]
+
+[53]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 54 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[54]
+
+[55]
+
+
+Overfull \hbox (5.16405pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 56 [][]\T1/lmr/m/sl/12 CAP�TULO[] 3.  MANEJANDO UNA BASE DE ENCUESTAS DE HOGARES CON R[]
+ []
+
+[56]
+\bbl@ensure@spanish {Cap\'\i tulo} 4.
+
+Underfull \hbox (badness 1910) in paragraph at lines 1754--1755
+\T1/lmr/m/n/12 (+20) Los desarrollos estad�sticos est�n en permanente evoluci�n, surgiendo nuevas
+ []
+
+
+
+[57
+
+]
+Overfull \hbox (50.42177pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ##        HHID   Stratum NIh nIh  dI PersonID     PSU  Zone    Sex Age MaritalST[] 
  []
 
 
-Overfull \hbox (50.40776pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 1 idHH00031 idStrt001   9   2 4.5  idPer01 PSU0003 Rural   Male  68   Married[] 
  []
 
 
-Overfull \hbox (50.40776pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 2 idHH00031 idStrt001   9   2 4.5  idPer02 PSU0003 Rural Female  56   Married[] 
  []
 
 
-Overfull \hbox (50.41476pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.41476pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 3 idHH00031 idStrt001   9   2 4.5  idPer03 PSU0003 Rural Female  24   Married[] 
  []
 
 
-Overfull \hbox (50.40776pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 4 idHH00031 idStrt001   9   2 4.5  idPer04 PSU0003 Rural   Male  26   Married[] 
  []
 
 
-Overfull \hbox (50.41476pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.41476pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 5 idHH00031 idStrt001   9   2 4.5  idPer05 PSU0003 Rural Female   3      <NA>[] 
  []
 
 
-Overfull \hbox (50.40076pt too wide) in paragraph at lines 213--213
+Overfull \hbox (50.40076pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 6 idHH00041 idStrt001   9   2 4.5  idPer01 PSU0003 Rural Female  61   Widowed[] 
  []
 
 
-Overfull \hbox (19.54675pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.54675pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ##   Income Expenditure Employment Poverty dki dk       wk Region    CatAge[] 
  []
 
 
-Overfull \hbox (19.51874pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.51874pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 1 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte M�s de 60[] 
  []
 
 
-Overfull \hbox (19.49773pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.49773pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 2 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     46-60[] 
  []
 
 
-Overfull \hbox (19.50473pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.50473pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 3 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     16-30[] 
  []
 
 
-Overfull \hbox (19.51874pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.51874pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 4 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte     16-30[] 
  []
 
 
-Overfull \hbox (19.51173pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.51173pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 5 409.87      346.34       <NA> NotPoor   8 36 33.63761  Norte       0-5[] 
  []
 
 
-Overfull \hbox (19.50473pt too wide) in paragraph at lines 213--213
+Overfull \hbox (19.50473pt too wide) in paragraph at lines 1792--1792
 []\T1/lmtt/m/n/12 ## 6 823.75      392.24   Employed NotPoor   8 36 33.63761  Norte M�s de 60[] 
  []
 
 
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 12 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 58 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
  []
 
-[12]
-Underfull \hbox (badness 3396) in paragraph at lines 259--259
+[58]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[59]
+<04-Continuas_files/figure-latex/hist1-1.pdf, id=493, 469.755pt x 325.215pt>
+File: 04-Continuas_files/figure-latex/hist1-1.pdf Graphic file (type pdf)
+<use 04-Continuas_files/figure-latex/hist1-1.pdf>
+Package pdftex.def Info: 04-Continuas_files/figure-latex/hist1-1.pdf  used on input line 1840.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 60 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[60 <./04-Continuas_files/figure-latex/hist1-1.pdf>]
+<04-Continuas_files/figure-latex/hist2-1.pdf, id=504, 469.755pt x 325.215pt>
+File: 04-Continuas_files/figure-latex/hist2-1.pdf Graphic file (type pdf)
+<use 04-Continuas_files/figure-latex/hist2-1.pdf>
+Package pdftex.def Info: 04-Continuas_files/figure-latex/hist2-1.pdf  used on input line 1867.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[61]
+Underfull \vbox (badness 10000) detected at line 1894
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 62 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[62 <./04-Continuas_files/figure-latex/hist2-1.pdf>]
+<04-Continuas_files/figure-latex/unnamed-chunk-3-1.pdf, id=520, 469.755pt x 325.215pt>
+File: 04-Continuas_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
+<use 04-Continuas_files/figure-latex/unnamed-chunk-3-1.pdf>
+Package pdftex.def Info: 04-Continuas_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 1896.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Overfull \vbox (0.15973pt too high) detected at line 1922
+ []
+
+
+
+[63 <./04-Continuas_files/figure-latex/unnamed-chunk-3-1.pdf>]
+<04-Continuas_files/figure-latex/box1-1.pdf, id=531, 469.755pt x 325.215pt>
+File: 04-Continuas_files/figure-latex/box1-1.pdf Graphic file (type pdf)
+<use 04-Continuas_files/figure-latex/box1-1.pdf>
+Package pdftex.def Info: 04-Continuas_files/figure-latex/box1-1.pdf  used on input line 1924.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 64 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[64 <./04-Continuas_files/figure-latex/box1-1.pdf>]
+
+[65]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 66 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[66]
+
+[67]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 68 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[68]
+
+[69]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 70 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[70]
+
+[71]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 72 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[72]
+
+[73]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 74 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[74]
+Overfull \hbox (1.02174pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ##             Zone            Sex    Media Media_se Media_low Media_upp[] 
+ []
+
+
+Overfull \hbox (0.95871pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 1          Urban           Male 469.8124 26.96068  416.4276  523.1973[] 
+ []
+
+
+Overfull \hbox (1.00073pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 2          Urban         Female 450.8151 20.11853  410.9784  490.6518[] 
+ []
+
+
+Overfull \hbox (0.98672pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 3          Urban El gasto medio 459.6162 22.20655  415.6450  503.5874[] 
+ []
+
+
+Overfull \hbox (1.00774pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 4          Rural           Male 275.3018 10.24848  255.0088  295.5948[] 
+ []
+
+
+Overfull \hbox (0.95871pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 5          Rural         Female 272.6769 11.61470  249.6786  295.6751[] 
+ []
+
+
+Overfull \hbox (0.97272pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 6          Rural El gasto medio 273.9461 10.26141  253.6275  294.2647[] 
+ []
+
+
+Overfull \hbox (0.98672pt too wide) in paragraph at lines 2348--2348
+[]\T1/lmtt/m/n/12 ## 7 El gasto medio El gasto medio 370.5263 13.29444  344.2020  396.8506[] 
+ []
+
+
+
+[75]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 76 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[76]
+
+[77]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 78 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[78]
+
+[79]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 80 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[80]
+
+
+Overfull \hbox (3.44498pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 IV.  ESTIMACI�N DEL COEFICIENTE DE GINI EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 81
+ []
+
+[81]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 82 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[82]
+<04-Continuas_files/figure-latex/unnamed-chunk-21-1.pdf, id=627, 469.755pt x 325.215pt>
+File: 04-Continuas_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use 04-Continuas_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: 04-Continuas_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 2655.
+(pdftex.def)             Requested size: 310.50357pt x 214.96512pt.
+
+
+
+Overfull \hbox (3.44498pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 IV.  ESTIMACI�N DEL COEFICIENTE DE GINI EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 83
+ []
+
+[83 <./04-Continuas_files/figure-latex/unnamed-chunk-21-1.pdf>]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 84 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[84]
+Underfull \hbox (badness 1888) in paragraph at lines 2729--2729
+[]\T1/lmr/bx/n/17.28 (+20) An�lisis de la relaci�n entre dos variable
+ []
+
+
+
+[85]
+Underfull \hbox (badness 1609) in paragraph at lines 2772--2773
+[]\T1/lmr/m/n/12 (+20) Este marco general abarca, entre otros casos, la \T1/lmr/bx/n/12 (+20) diferencia entre medias
+ []
+
+
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 86 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[86]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 2812.
+
+
+[87]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 88 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[88]
+
+[89]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 90 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[90]
+
+[91]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 92 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[92]
+
+[93]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 94 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[94]
+
+[95]
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 96 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[96]
+
+[97]
+Overfull \hbox (19.54675pt too wide) in paragraph at lines 3390--3390
+[]\T1/lmtt/m/n/12 ##           Sex Income/Expenditure se.Income/Expenditure     ci_l     ci_u[] 
+ []
+
+
+Overfull \hbox (19.51173pt too wide) in paragraph at lines 3390--3390
+[]\T1/lmtt/m/n/12 ## Female Female           1.519060            0.04582607 1.429243 1.608878[] 
+ []
+
+
+Overfull \hbox (19.50473pt too wide) in paragraph at lines 3390--3390
+[]\T1/lmtt/m/n/12 ## Male     Male           1.564762            0.07044239 1.426698 1.702827[] 
+ []
+
+
+
+
+Overfull \hbox (68.94482pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 98 [][]\T1/lmr/m/sl/12 CAP�TULO[] 4.  AN�LISIS DE LAS VARIABLES CONTINUAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[98]
+\bbl@ensure@spanish {Cap\'\i tulo} 5.
+
+
+[99
+
+]
+Overfull \hbox (50.42177pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ##        HHID   Stratum NIh nIh  dI PersonID     PSU  Zone    Sex Age MaritalST[] 
+ []
+
+
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 1 idHH00031 idStrt001   9   2 4.5  idPer01 PSU0003 Rural   Male  68   Married[] 
+ []
+
+
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 2 idHH00031 idStrt001   9   2 4.5  idPer02 PSU0003 Rural Female  56   Married[] 
+ []
+
+
+Overfull \hbox (50.41476pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 3 idHH00031 idStrt001   9   2 4.5  idPer03 PSU0003 Rural Female  24   Married[] 
+ []
+
+
+Overfull \hbox (50.40776pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 4 idHH00031 idStrt001   9   2 4.5  idPer04 PSU0003 Rural   Male  26   Married[] 
+ []
+
+
+Overfull \hbox (50.41476pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 5 idHH00031 idStrt001   9   2 4.5  idPer05 PSU0003 Rural Female   3      <NA>[] 
+ []
+
+
+Overfull \hbox (50.40076pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 6 idHH00041 idStrt001   9   2 4.5  idPer01 PSU0003 Rural Female  61   Widowed[] 
+ []
+
+
+Overfull \hbox (19.54675pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ##   Income Expenditure Employment Poverty dki dk       wk Region    CatAge[] 
+ []
+
+
+Overfull \hbox (19.51874pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 1 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte M�s de 60[] 
+ []
+
+
+Overfull \hbox (19.49773pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 2 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     46-60[] 
+ []
+
+
+Overfull \hbox (19.50473pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 3 409.87      346.34   Employed NotPoor   8 36 33.63761  Norte     16-30[] 
+ []
+
+
+Overfull \hbox (19.51874pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 4 409.87      346.34   Employed NotPoor   8 36 34.50371  Norte     16-30[] 
+ []
+
+
+Overfull \hbox (19.51173pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 5 409.87      346.34       <NA> NotPoor   8 36 33.63761  Norte       0-5[] 
+ []
+
+
+Overfull \hbox (19.50473pt too wide) in paragraph at lines 3445--3445
+[]\T1/lmtt/m/n/12 ## 6 823.75      392.24   Employed NotPoor   8 36 33.63761  Norte M�s de 60[] 
+ []
+
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 100 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[100]
+Underfull \hbox (badness 3396) in paragraph at lines 3491--3491
 []\T1/lmr/bx/n/17.28 (+20) Tama�o de poblaci�n y subpoblaciones en
  []
 
 
 
 
-Overfull \hbox (27.84303pt too wide) has occurred while \output is active
-[]\T1/lmr/m/sl/12 I.  TAMA�O DE POBLACI�N Y SUBPOBLACIONES EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 13
+Overfull \hbox (33.71802pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 I.  TAMA�O DE POBLACI�N Y SUBPOBLACIONES EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 101
  []
 
-[13]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 269.
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 279.
+[101]
 
 
-
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 14 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 102 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[14{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 309.
-(c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
+[102]
 
 
-Overfull \hbox (27.84303pt too wide) has occurred while \output is active
-[]\T1/lmr/m/sl/12 I.  TAMA�O DE POBLACI�N Y SUBPOBLACIONES EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 15
+Overfull \hbox (33.71802pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 I.  TAMA�O DE POBLACI�N Y SUBPOBLACIONES EN ENCUESTAS DE HOGARES[] \T1/lmr/m/n/12 103
  []
 
-[15{c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+[103]
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 16 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 104 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[16]
+[104]
 
-[17]
+[105]
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 18 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 106 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[18]
+[106]
 
-[19]
+[107]
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 20 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 108 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[20]
+[108]
 
-[21]
-Overfull \hbox (7.19675pt too wide) in paragraph at lines 674--674
+[109]
+Overfull \hbox (7.19675pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ##       edad_18 desempleo        Prop     Prop_se    Prop_low   Prop_upp[] 
  []
 
 
-Overfull \hbox (7.14072pt too wide) in paragraph at lines 674--674
+Overfull \hbox (7.14072pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ## 1  < 18 anios         0 0.166704172 0.014856561 0.139321648 0.19822898[] 
  []
 
 
-Overfull \hbox (7.14772pt too wide) in paragraph at lines 674--674
+Overfull \hbox (7.14772pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ## 2  < 18 anios         1 0.003729693 0.001969183 0.001309174 0.01057808[] 
  []
 
 
-Overfull \hbox (7.14072pt too wide) in paragraph at lines 674--674
+Overfull \hbox (7.14072pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ## 3  < 18 anios        NA 0.829566135 0.015009188 0.797760089 0.85726505[] 
  []
 
 
-Overfull \hbox (7.14772pt too wide) in paragraph at lines 674--674
+Overfull \hbox (7.14772pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ## 4 >= 18 anios         0 0.955234872 0.007552778 0.937660285 0.96802386[] 
  []
 
 
-Overfull \hbox (7.16173pt too wide) in paragraph at lines 674--674
+Overfull \hbox (7.16173pt too wide) in paragraph at lines 3906--3906
 []\T1/lmtt/m/n/12 ## 5 >= 18 anios         1 0.044765128 0.007552778 0.031976144 0.06233972[] 
  []
 
 
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 22 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 110 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[22]
-Overfull \hbox (1.02174pt too wide) in paragraph at lines 717--717
+[110]
+Overfull \hbox (1.02174pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ##   edad_rango Employment       Prop     Prop_se    Prop_low   Prop_upp[] 
  []
 
 
-Overfull \hbox (1.00774pt too wide) in paragraph at lines 717--717
+Overfull \hbox (1.00774pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 1    18 - 35 Unemployed 0.02893412 0.009142347 0.015403014 0.05370358[] 
  []
 
 
-Overfull \hbox (0.96571pt too wide) in paragraph at lines 717--717
+Overfull \hbox (0.96571pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 2    18 - 35   Inactive 0.51653851 0.037905184 0.441673039 0.59066889[] 
  []
 
 
-Overfull \hbox (0.99373pt too wide) in paragraph at lines 717--717
+Overfull \hbox (0.99373pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 3    18 - 35   Employed 0.45452737 0.035685710 0.385232560 0.52562948[] 
  []
 
 
-Overfull \hbox (1.00073pt too wide) in paragraph at lines 717--717
+Overfull \hbox (1.00073pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 4       Otro Unemployed 0.01015164 0.004026104 0.004617517 0.02217073[] 
  []
 
 
-Overfull \hbox (1.01474pt too wide) in paragraph at lines 717--717
+Overfull \hbox (1.01474pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 5       Otro   Inactive 0.35271022 0.020725430 0.312834830 0.39474850[] 
  []
 
 
-Overfull \hbox (0.99373pt too wide) in paragraph at lines 717--717
+Overfull \hbox (0.99373pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 6       Otro   Employed 0.25483870 0.021700305 0.214292062 0.30012671[] 
  []
 
 
-Overfull \hbox (0.97972pt too wide) in paragraph at lines 717--717
+Overfull \hbox (0.97972pt too wide) in paragraph at lines 3949--3949
 []\T1/lmtt/m/n/12 ## 7       Otro       <NA> 0.38229944 0.022313379 0.339191706 0.42734277[] 
  []
 
 
 
-[23]
+[111]
 
 
-Overfull \hbox (59.40889pt too wide) has occurred while \output is active
-\T1/lmr/m/n/12 24 [][]\T1/lmr/m/sl/12 CAP�TULO[] 1.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 112 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
  []
 
-[24]
+[112]
 
-Package longtable Warning: Column widths have changed
-(longtable)                in table 1.1 on input line 797.
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 1.2 on input line 812.
+[113]
 
 
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 114 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
 
-[25]
+[114]
 
-! LaTeX Error: Bad math environment delimiter.
+[115]
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.851 ...en producir límites fuera del rango \(\[
-                                                  0,1]\). Para solventar est...
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
 
- 
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 116 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[116]
+
+[117]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 118 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[118]
+
+[119]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 120 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[120]
+
+[121]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 122 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[122]
+
+[123]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 124 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[124]
+
+[125]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 126 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[126]
+
+[127]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 128 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[128]
+Underfull \hbox (badness 1527) in paragraph at lines 4840--4841
+\T1/lmr/m/n/12 (+20) se refleje adecuadamente. Asimismo, las ponderaciones contribuyen a obtener
+ []
+
+
+
+[129]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 130 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[130]
+
+
+Overfull \hbox (167.99745pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  ESTIMACI�N DE LOS PAR�METROS EN UN MODELO DE REGRESI�N CON MUESTRAS COMPLEJAS[] \T1/lmr/m/n/12 131
+ []
+
+[131]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 4894.
+
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 132 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[132]
+Overfull \hbox (545.15102pt too wide) in paragraph at lines 4938--4955
+[][] 
+ []
+
+
+
+
+Overfull \hbox (167.99745pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  ESTIMACI�N DE LOS PAR�METROS EN UN MODELO DE REGRESI�N CON MUESTRAS COMPLEJAS[] \T1/lmr/m/n/12 133
+ []
+
+[133]
+<06-Regresión_files/figure-latex/plot1-1.pdf, id=882, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/plot1-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/plot1-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/plot1-1.pdf  used on input line 4998.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 134 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[134 <./06-Regresión_files/figure-latex/plot1-1.pdf>]
+<06-Regresión_files/figure-latex/plot2-1.pdf, id=894, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/plot2-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/plot2-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/plot2-1.pdf  used on input line 5041.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (167.99745pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  ESTIMACI�N DE LOS PAR�METROS EN UN MODELO DE REGRESI�N CON MUESTRAS COMPLEJAS[] \T1/lmr/m/n/12 135
+ []
+
+[135]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 136 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[136 <./06-Regresión_files/figure-latex/plot2-1.pdf>]
+<06-Regresión_files/figure-latex/plot3-1.pdf, id=910, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/plot3-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/plot3-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/plot3-1.pdf  used on input line 5101.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (167.99745pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  ESTIMACI�N DE LOS PAR�METROS EN UN MODELO DE REGRESI�N CON MUESTRAS COMPLEJAS[] \T1/lmr/m/n/12 137
+ []
+
+[137
+pdfTeX warning (ext4): destination with the same identifier (name{table.5.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5103 E
+        n este sentido, para ajustar modelos teniendo en cuenta los factores...]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 138 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[138 <./06-Regresión_files/figure-latex/plot3-1.pdf>]
+Overfull \hbox (130.69681pt too wide) in paragraph at lines 5170--5170
+[]\T1/lmtt/m/n/12 ## Call:  svyglm(formula = Income ~ Expenditure, design = diseno, family = stats::gaussian())[] 
+ []
+
+
+
+
+Overfull \hbox (167.99745pt too wide) has occurred while \output is active
+[]\T1/lmr/m/sl/12 VI.  ESTIMACI�N DE LOS PAR�METROS EN UN MODELO DE REGRESI�N CON MUESTRAS COMPLEJAS[] \T1/lmr/m/n/12 139
+ []
+
+[139
+pdfTeX warning (ext4): destination with the same identifier (name{table.5.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5195 \end{Shaded}
+                   ]
+<06-Regresión_files/figure-latex/plot4-1.pdf, id=931, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/plot4-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/plot4-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/plot4-1.pdf  used on input line 5197.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 140 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[140 <./06-Regresión_files/figure-latex/plot4-1.pdf>]
+
+[141]
+Underfull \hbox (badness 3907) in paragraph at lines 5234--5236
+[]\T1/lmr/bx/n/12 (+20) Normalidad de los errores\T1/lmr/m/n/12 (+20) : verificar si los errores se distribuyen
+ []
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 5234--5236
+\T1/lmr/m/n/12 (+20) aproximadamente de manera normal, lo que garantiza la validez de las
+ []
+
+
+Overfull \hbox (5.26266pt too wide) in paragraph at lines 5240--5242
+[]\T1/lmr/bx/n/12 (-20) Casos influyentes\T1/lmr/m/n/12 (-20) : identificar observaciones que ejercen un efecto desproporcionado
+ []
+
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 142 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[142]
+
+[143]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 144 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[144]
+
+[145]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 146 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[146
+pdfTeX warning (ext4): destination with the same identifier (name{table.5.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.5474 
+       ]
+
+[147]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 148 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[148]
+
+[149]
+<06-Regresión_files/figure-latex/unnamed-chunk-12-1.pdf, id=988, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/unnamed-chunk-12-1.pdf  used on input line 5594.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 3000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 150 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[150]
+Overfull \vbox (1.92639pt too high) detected at line 5622
+ []
+
+
+
+[151 <./06-Regresión_files/figure-latex/unnamed-chunk-12-1.pdf>]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 152 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[152]
+
+[153]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 154 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[154]
+<06-Regresión_files/figure-latex/hat-1.pdf, id=1015, 469.755pt x 325.215pt>
+File: 06-Regresión_files/figure-latex/hat-1.pdf Graphic file (type pdf)
+<use 06-Regresión_files/figure-latex/hat-1.pdf>
+Package pdftex.def Info: 06-Regresión_files/figure-latex/hat-1.pdf  used on input line 5818.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[155]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 156 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[156 <./06-Regresión_files/figure-latex/hat-1.pdf>]
+Overfull \hbox (68.94678pt too wide) in paragraph at lines 5884--5884
+[]\T1/lmtt/m/n/12 ## svyglm(formula = Income ~ Expenditure + Zone + Sex + Age2, design = diseno_qwgt)[] 
+ []
+
+
+
+[157]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 158 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[158]
+
+[159]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 160 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[160]
+
+[161]
+
+
+Overfull \hbox (65.28387pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 162 [][]\T1/lmr/m/sl/12 CAP�TULO[] 5.  AN�LISIS DE VARIABLES CATEG�RICAS EN ENCUESTAS DE HOGARES[]
+ []
+
+[162
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 6.
+
+
+[163]
+
+[164]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[165]
+<07-Gráficas_files/figure-latex/hist1-1.pdf, id=1069, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist1-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist1-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist1-1.pdf  used on input line 6251.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[166]
+<07-Gráficas_files/figure-latex/hist1a-1.pdf, id=1075, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist1a-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist1a-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist1a-1.pdf  used on input line 6267.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[167 <./07-Gráficas_files/figure-latex/hist1-1.pdf>]
+<07-Gráficas_files/figure-latex/hist1b-1.pdf, id=1085, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist1b-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist1b-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist1b-1.pdf  used on input line 6287.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[168 <./07-Gráficas_files/figure-latex/hist1a-1.pdf>]
+
+[169 <./07-Gráficas_files/figure-latex/hist1b-1.pdf>]
+<07-Gráficas_files/figure-latex/hist2-1.pdf, id=1107, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist2-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist2-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist2-1.pdf  used on input line 6315.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<07-Gráficas_files/figure-latex/hist2a-1.pdf, id=1108, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist2a-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist2a-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist2a-1.pdf  used on input line 6329.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[170 <./07-Gráficas_files/figure-latex/hist2-1.pdf>]
+
+[171 <./07-Gráficas_files/figure-latex/hist2a-1.pdf>]
+<07-Gráficas_files/figure-latex/hist3-1.pdf, id=1127, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist3-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist3-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist3-1.pdf  used on input line 6365.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Overfull \vbox (0.42639pt too high) detected at line 6382
+ []
+
+
+
+[172 <./07-Gráficas_files/figure-latex/hist3-1.pdf>]
+<07-Gráficas_files/figure-latex/hist3a-1.pdf, id=1140, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist3a-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist3a-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist3a-1.pdf  used on input line 6384.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<07-Gráficas_files/figure-latex/unnamed-chunk-7-1.pdf, id=1141, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 6402.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[173 <./07-Gráficas_files/figure-latex/hist3a-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-8-1.pdf, id=1154, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-8-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 6422.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6422--6424
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[174 <./07-Gráficas_files/figure-latex/unnamed-chunk-7-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-9-1.pdf, id=1167, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-9-1.pdf  used on input line 6441.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[175 <./07-Gráficas_files/figure-latex/unnamed-chunk-8-1.pdf>]
+
+[176 <./07-Gráficas_files/figure-latex/unnamed-chunk-9-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-11-1.pdf, id=1193, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-11-1.pdf  used on input line 6477.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<07-Gráficas_files/figure-latex/unnamed-chunk-12-1.pdf, id=1194, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-12-1.pdf  used on input line 6494.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[177 <./07-Gráficas_files/figure-latex/unnamed-chunk-11-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-13-1.pdf, id=1207, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-13-1.pdf  used on input line 6512.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[178 <./07-Gráficas_files/figure-latex/unnamed-chunk-12-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-14-1.pdf, id=1220, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-14-1.pdf  used on input line 6532.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[179 <./07-Gráficas_files/figure-latex/unnamed-chunk-13-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-15-1.pdf, id=1233, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-15-1.pdf  used on input line 6549.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[180 <./07-Gráficas_files/figure-latex/unnamed-chunk-14-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-16-1.pdf, id=1247, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-16-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-16-1.pdf  used on input line 6567.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[181 <./07-Gráficas_files/figure-latex/unnamed-chunk-15-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-17-1.pdf, id=1261, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-17-1.pdf  used on input line 6580.
+(pdftex.def)             Requested size: 266.14978pt x 184.25793pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[182 <./07-Gráficas_files/figure-latex/unnamed-chunk-16-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-18-1.pdf, id=1274, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-18-1.pdf  used on input line 6591.
+(pdftex.def)             Requested size: 266.14978pt x 184.25793pt.
+<07-Gráficas_files/figure-latex/unnamed-chunk-19-1.pdf, id=1275, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-19-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-19-1.pdf  used on input line 6602.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[183 <./07-Gráficas_files/figure-latex/unnamed-chunk-17-1.pdf> <./07-Gráficas_files/figure-latex/unnamed-chunk-18-1.pdf>]
+
+[184 <./07-Gráficas_files/figure-latex/unnamed-chunk-19-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-21-1.pdf, id=1310, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 6663.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6663--6665
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[185]
+<07-Gráficas_files/figure-latex/unnamed-chunk-22-1.pdf, id=1315, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-22-1.pdf  used on input line 6676.
+(pdftex.def)             Requested size: 266.14978pt x 184.25793pt.
+
+
+[186 <./07-Gráficas_files/figure-latex/unnamed-chunk-21-1.pdf> <./07-Gráficas_files/figure-latex/unnamed-chunk-22-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-23-1.pdf, id=1330, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-23-1.pdf  used on input line 6703.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[187 <./07-Gráficas_files/figure-latex/unnamed-chunk-23-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-24-1.pdf, id=1341, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-24-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 6715.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6715--6717
+[][]
+ []
+
+
+Overfull \vbox (0.35832pt too high) detected at line 6738
+ []
+
+
+
+[188 <./07-Gráficas_files/figure-latex/unnamed-chunk-24-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-25-1.pdf, id=1351, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-25-1.pdf  used on input line 6740.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<07-Gráficas_files/figure-latex/unnamed-chunk-26-1.pdf, id=1352, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-26-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-26-1.pdf  used on input line 6755.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[189 <./07-Gráficas_files/figure-latex/unnamed-chunk-25-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-27-1.pdf, id=1362, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-27-1.pdf  used on input line 6771.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[190 <./07-Gráficas_files/figure-latex/unnamed-chunk-26-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-29-1.pdf, id=1373, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-29-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-29-1.pdf  used on input line 6801.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[191 <./07-Gráficas_files/figure-latex/unnamed-chunk-27-1.pdf>]
+
+[192 <./07-Gráficas_files/figure-latex/unnamed-chunk-29-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-31-1.pdf, id=1392, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-31-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-31-1.pdf  used on input line 6851.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6851--6853
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[193]
+<07-Gráficas_files/figure-latex/hist14-1.pdf, id=1401, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist14-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist14-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist14-1.pdf  used on input line 6865.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[194 <./07-Gráficas_files/figure-latex/unnamed-chunk-31-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-32-1.pdf, id=1411, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-32-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-32-1.pdf  used on input line 6880.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[195 <./07-Gráficas_files/figure-latex/hist14-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-33-1.pdf, id=1425, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-33-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-33-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-33-1.pdf  used on input line 6898.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[196 <./07-Gráficas_files/figure-latex/unnamed-chunk-32-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-34-1.pdf, id=1440, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-34-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-34-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-34-1.pdf  used on input line 6921.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[197 <./07-Gráficas_files/figure-latex/unnamed-chunk-33-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-35-1.pdf, id=1454, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-35-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-35-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-35-1.pdf  used on input line 6944.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[198 <./07-Gráficas_files/figure-latex/unnamed-chunk-34-1.pdf>]
+
+[199 <./07-Gráficas_files/figure-latex/unnamed-chunk-35-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-37-1.pdf, id=1482, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-37-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-37-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-37-1.pdf  used on input line 6995.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[200]
+Overfull \vbox (1.88971pt too high) detected at line 7036
+ []
+
+
+
+[201 <./07-Gráficas_files/figure-latex/unnamed-chunk-37-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-39-1.pdf, id=1496, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-39-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-39-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-39-1.pdf  used on input line 7038.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[202 <./07-Gráficas_files/figure-latex/unnamed-chunk-39-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-41-1.pdf, id=1507, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-41-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-41-1.pdf  used on input line 7086.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[203]
+
+[204 <./07-Gráficas_files/figure-latex/unnamed-chunk-41-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-43-1.pdf, id=1521, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-43-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-43-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-43-1.pdf  used on input line 7132.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 1348) detected at line 7145
+ []
+
+
+
+[205 <./07-Gráficas_files/figure-latex/unnamed-chunk-43-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-45-1.pdf, id=1532, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-45-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-45-1.pdf  used on input line 7181.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[206]
+
+[207 <./07-Gráficas_files/figure-latex/unnamed-chunk-45-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-47-1.pdf, id=1547, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-47-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-47-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-47-1.pdf  used on input line 7210.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 7210--7212
+[][]
+ []
+
+
+
+[208 <./07-Gráficas_files/figure-latex/unnamed-chunk-47-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-48-1.pdf, id=1557, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-48-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-48-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-48-1.pdf  used on input line 7237.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 1286) has occurred while \output is active []
+
+
+
+[209 <./07-Gráficas_files/figure-latex/unnamed-chunk-48-1.pdf>]
+<07-Gráficas_files/figure-latex/hist26-1.pdf, id=1567, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist26-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist26-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist26-1.pdf  used on input line 7278.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 7278--7280
+[][]
+ []
+
+
+Overfull \vbox (0.38971pt too high) detected at line 7299
+ []
+
+
+
+[210 <./07-Gráficas_files/figure-latex/hist26-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-49-1.pdf, id=1577, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-49-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-49-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-49-1.pdf  used on input line 7301.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 1331) detected at line 7329
+ []
+
+
+
+[211 <./07-Gráficas_files/figure-latex/unnamed-chunk-49-1.pdf>]
+<07-Gráficas_files/figure-latex/unnamed-chunk-50-1.pdf, id=1588, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/unnamed-chunk-50-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/unnamed-chunk-50-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/unnamed-chunk-50-1.pdf  used on input line 7331.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[212 <./07-Gráficas_files/figure-latex/unnamed-chunk-50-1.pdf>]
+<07-Gráficas_files/figure-latex/hist31-1.pdf, id=1596, 469.755pt x 325.215pt>
+File: 07-Gráficas_files/figure-latex/hist31-1.pdf Graphic file (type pdf)
+<use 07-Gráficas_files/figure-latex/hist31-1.pdf>
+Package pdftex.def Info: 07-Gráficas_files/figure-latex/hist31-1.pdf  used on input line 7352.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[213 <./07-Gráficas_files/figure-latex/hist31-1.pdf>]
+
+[214
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 7.
+
+
+[215]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 216 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[216]
+
+[217]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 218 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[218]
+
+[219]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 220 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[220]
+
+[221]
+Overfull \hbox (87.47179pt too wide) in paragraph at lines 7708--7708
+[]\T1/lmtt/m/n/12 ## Loglinear model: svyloglin(formula = ~pobreza + Sex + pobreza:Sex, design = diseno)[] 
+ []
+
+
+Overfull \hbox (1.02174pt too wide) in paragraph at lines 7728--7728
+[]\T1/lmtt/m/n/12 ## Loglinear model: svyloglin(formula = ~pobreza + Sex, design = diseno)[] 
+ []
+
+
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 222 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[222]
+
+[223]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 224 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[224]
+<08-Generalizados_files/figure-latex/unnamed-chunk-18-1.pdf, id=1656, 469.755pt x 325.215pt>
+File: 08-Generalizados_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type pdf)
+<use 08-Generalizados_files/figure-latex/unnamed-chunk-18-1.pdf>
+Package pdftex.def Info: 08-Generalizados_files/figure-latex/unnamed-chunk-18-1.pdf  used on input line 7875.
+(pdftex.def)             Requested size: 354.86412pt x 245.67229pt.
+
+
+[225 <./08-Generalizados_files/figure-latex/unnamed-chunk-18-1.pdf>]
+<08-Generalizados_files/figure-latex/unnamed-chunk-21-1.pdf, id=1670, 469.755pt x 325.215pt>
+File: 08-Generalizados_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (type pdf)
+<use 08-Generalizados_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: 08-Generalizados_files/figure-latex/unnamed-chunk-21-1.pdf  used on input line 7975.
+(pdftex.def)             Requested size: 266.14978pt x 184.25793pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 226 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[226]
+Overfull \hbox (38.07176pt too wide) in paragraph at lines 7990--7990
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region,[] 
+ []
+
+
+Overfull \hbox (38.07176pt too wide) in paragraph at lines 8003--8003
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region,[] 
+ []
+
+
+Overfull \hbox (38.07176pt too wide) in paragraph at lines 8016--8016
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region,[] 
+ []
+
+
+Overfull \hbox (38.07176pt too wide) in paragraph at lines 8029--8029
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region,[] 
+ []
+
+
+Overfull \hbox (38.07176pt too wide) in paragraph at lines 8042--8042
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region + Sex:Zone + Sex:Region,[] 
+ []
+
+
+
+[227 <./08-Generalizados_files/figure-latex/unnamed-chunk-21-1.pdf>]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 228 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[228]
+<08-Generalizados_files/figure-latex/unnamed-chunk-25-1.pdf, id=1692, 469.755pt x 325.215pt>
+File: 08-Generalizados_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use 08-Generalizados_files/figure-latex/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: 08-Generalizados_files/figure-latex/unnamed-chunk-25-1.pdf  used on input line 8115.
+(pdftex.def)             Requested size: 177.42868pt x 122.83366pt.
+
+Overfull \hbox (25.72176pt too wide) in paragraph at lines 8130--8130
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt,[] 
+ []
+
+
+Overfull \hbox (25.72176pt too wide) in paragraph at lines 8143--8143
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt,[] 
+ []
+
+
+Overfull \hbox (25.72176pt too wide) in paragraph at lines 8156--8156
+[]\T1/lmtt/m/n/12 ##  in svyglm(formula = pobreza ~ Sex + Zone + Region, design = diseno_qwgt,[] 
+ []
+
+
+
+[229 <./08-Generalizados_files/figure-latex/unnamed-chunk-25-1.pdf>]
+
+
+Overfull \hbox (56.9745pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 230 [][]\T1/lmr/m/sl/12 CAP�TULO[] 7.  MODELOS LINEALES GENERALIZADOS EN ENCUESTAS DE HOGARES[]
+ []
+
+[230
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 8.
+
+
+[231]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 232 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[232]
+
+[233]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 234 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[234]
+Underfull \vbox (badness 3612) has occurred while \output is active []
+
+
+
+[235]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 236 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[236]
+
+[237]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 238 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[238]
+
+[239]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 240 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[240]
+
+[241]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 242 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[242]
+
+[243]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 244 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[244]
+
+[245]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 246 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[246]
+
+[247]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 248 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[248]
+
+[249]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 250 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[250]
+<09-Generalizados2_files/figure-latex/unnamed-chunk-14-1.pdf, id=1795, 469.755pt x 325.215pt>
+File: 09-Generalizados2_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
+<use 09-Generalizados2_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: 09-Generalizados2_files/figure-latex/unnamed-chunk-14-1.pdf  used on input line 8970.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[251 <./09-Generalizados2_files/figure-latex/unnamed-chunk-14-1.pdf>]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 252 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[252]
+
+[253]
+Overfull \hbox (56.59677pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##   - HHID (chr), Stratum (chr), NIh (int), nIh (dbl), dI (dbl), PersonID (chr),[] 
+ []
+
+
+Overfull \hbox (62.77177pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##     PSU (chr), Zone (chr), Sex (chr), Age (int), MaritalST (fct), Income (dbl),[] 
+ []
+
+
+Overfull \hbox (62.77177pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##     Expenditure (dbl), Employment (fct), Poverty (fct), dki (dbl), dk (dbl), wk[] 
+ []
+
+
+Overfull \hbox (136.87181pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ## vglm(formula = formula, family = family, data = surveydata, weights = .survey.prob.weights,[] 
+ []
+
+
+Overfull \hbox (13.37175pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##     (Intercept):1     (Intercept):2             Age:1             Age:2[] 
+ []
+
+
+Overfull \hbox (13.34373pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##        2.29035224        2.09308478        0.02474836        0.02073894[] 
+ []
+
+
+Overfull \hbox (13.37175pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##         SexMale:1         SexMale:2       RegionSur:1       RegionSur:2[] 
+ []
+
+
+Overfull \hbox (13.32272pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##       -2.21949718       -0.55633376       -0.43624259       -0.27905123[] 
+ []
+
+
+Overfull \hbox (13.37175pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##    RegionCentro:1    RegionCentro:2 RegionOccidente:1 RegionOccidente:2[] 
+ []
+
+
+Overfull \hbox (13.34373pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##        0.37132724        0.25576105        0.25356331        0.09279505[] 
+ []
+
+
+Overfull \hbox (13.37175pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##   RegionOriente:1   RegionOriente:2       ZoneUrban:1       ZoneUrban:2[] 
+ []
+
+
+Overfull \hbox (13.31572pt too wide) in paragraph at lines 9131--9131
+[]\T1/lmtt/m/n/12 ##        0.61759957        0.47055482       -0.23461616        0.05674419[] 
+ []
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 9133.
+
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 254 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[254]
+
+[255]
+Underfull \vbox (badness 1701) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 256 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[256]
+
+[257]
+
+
+Overfull \hbox (221.49158pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 258 [][]\T1/lmr/m/sl/12 CAP�TULO[] 8.  MODELOS LINEALES GENERALIZADOS: INTRODUCCI�N A LA PSEUDO M�XIMA VEROSIMILITUD[]
+ []
+
+[258
+
+]
+\bbl@ensure@spanish {Cap\'\i tulo} 9.
+
+
+[259]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 260 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[260]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[261]
+<10-Multinivel_files/figure-latex/unnamed-chunk-5-1.pdf, id=1851, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 9456.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 262 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[262]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[263 <./10-Multinivel_files/figure-latex/unnamed-chunk-5-1.pdf>]
+<10-Multinivel_files/figure-latex/unnamed-chunk-7-1.pdf, id=1866, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 9510.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 264 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[264 <./10-Multinivel_files/figure-latex/unnamed-chunk-7-1.pdf>]
+<10-Multinivel_files/figure-latex/unnamed-chunk-9-1.pdf, id=1877, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-9-1.pdf  used on input line 9563.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[265]
+<10-Multinivel_files/figure-latex/unnamed-chunk-10-1.pdf, id=1883, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 9581.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 266 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[266 <./10-Multinivel_files/figure-latex/unnamed-chunk-9-1.pdf>]
+Underfull \vbox (badness 3168) has occurred while \output is active []
+
+
+
+[267 <./10-Multinivel_files/figure-latex/unnamed-chunk-10-1.pdf>]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 268 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[268]
+
+[269]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 270 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[270]
+
+[271]
+<10-Multinivel_files/figure-latex/unnamed-chunk-12-1.pdf, id=1924, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-12-1.pdf  used on input line 9743.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 272 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[272 <./10-Multinivel_files/figure-latex/unnamed-chunk-12-1.pdf>]
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+
+
+[273]
+<10-Multinivel_files/figure-latex/unnamed-chunk-17-1.pdf, id=1938, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-17-1.pdf  used on input line 9860.
+(pdftex.def)             Requested size: 310.50357pt x 214.96512pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 274 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[274 <./10-Multinivel_files/figure-latex/unnamed-chunk-17-1.pdf>]
+
+[275]
+<10-Multinivel_files/figure-latex/unnamed-chunk-20-1.pdf, id=1952, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-20-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-20-1.pdf  used on input line 9949.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 9949--9951
+[][]
+ []
+
+
+Underfull \vbox (badness 1360) detected at line 9962
+ []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 276 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[276 <./10-Multinivel_files/figure-latex/unnamed-chunk-20-1.pdf>]
+<10-Multinivel_files/figure-latex/unnamed-chunk-22-1.pdf, id=1962, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-22-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-22-1.pdf  used on input line 9992.
+(pdftex.def)             Requested size: 310.50357pt x 214.96512pt.
+
+
+[277 <./10-Multinivel_files/figure-latex/unnamed-chunk-22-1.pdf>]
+Underfull \vbox (badness 5954) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 278 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[278]
+<10-Multinivel_files/figure-latex/unnamed-chunk-25-1.pdf, id=1977, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-25-1.pdf  used on input line 10093.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[279]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 280 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[280 <./10-Multinivel_files/figure-latex/unnamed-chunk-25-1.pdf>]
+<10-Multinivel_files/figure-latex/unnamed-chunk-27-1.pdf, id=1991, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-27-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-27-1.pdf  used on input line 10136.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[281 <./10-Multinivel_files/figure-latex/unnamed-chunk-27-1.pdf>]
+<10-Multinivel_files/figure-latex/unnamed-chunk-29-1.pdf, id=2001, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/unnamed-chunk-29-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/unnamed-chunk-29-1.pdf  used on input line 10214.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 282 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[282]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[283 <./10-Multinivel_files/figure-latex/unnamed-chunk-29-1.pdf>]
+Overfull \vbox (9442.53209pt too high) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 284 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[284]
+
+[285]
+<10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio212-1.pdf, id=2024, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio212-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio212-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio212-1.pdf  used on input line 11691.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 286 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[286 <./10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio212-1.pdf>]
+
+[287]
+<10-Multinivel_files/figure-latex/modl_logit1-1.pdf, id=2039, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/modl_logit1-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/modl_logit1-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/modl_logit1-1.pdf  used on input line 11787.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 11787--11789
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 288 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[288]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[289 <./10-Multinivel_files/figure-latex/modl_logit1-1.pdf>]
+<10-Multinivel_files/figure-latex/modl_logit2-1.pdf, id=2055, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/modl_logit2-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/modl_logit2-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/modl_logit2-1.pdf  used on input line 11838.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 290 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[290 <./10-Multinivel_files/figure-latex/modl_logit2-1.pdf>]
+
+[291]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 292 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[292]
+
+[293]
+<10-Multinivel_files/figure-latex/plot_mod_Int_Aleatorio02-1.pdf, id=2077, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/plot_mod_Int_Aleatorio02-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/plot_mod_Int_Aleatorio02-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/plot_mod_Int_Aleatorio02-1.pdf  used on input line 12096.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 294 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[294 <./10-Multinivel_files/figure-latex/plot_mod_Int_Aleatorio02-1.pdf>]
+
+[295]
+<10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio02-1.pdf, id=2092, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio02-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio02-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio02-1.pdf  used on input line 12244.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 296 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[296]
+
+[297 <./10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio02-1.pdf>]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 298 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[298]
+<10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio002-1.pdf, id=2110, 469.755pt x 325.215pt>
+File: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio002-1.pdf Graphic file (type pdf)
+<use 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio002-1.pdf>
+Package pdftex.def Info: 10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio002-1.pdf  used on input line 12358.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 12358--12360
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[299 <./10-Multinivel_files/figure-latex/plot_mod_Pen_Aleatorio002-1.pdf>]
+
+
+Overfull \hbox (76.96236pt too wide) has occurred while \output is active
+\T1/lmr/m/n/12 300 [][]\T1/lmr/m/sl/12 CAP�TULO[] 9.  MODELOS MULTINIVEL EN EL CONTEXTO DE ENCUESTAS DE HOGARES[]
+ []
+
+[300]
+\bbl@ensure@spanish {Cap\'\i tulo} 10.
+
+
+[301
+
+]
+<Imagenes/Cap 8/fig1.png, id=2129, 487.8225pt x 305.943pt>
+File: Imagenes/Cap 8/fig1.png Graphic file (type png)
+<use Imagenes/Cap 8/fig1.png>
+Package pdftex.def Info: Imagenes/Cap 8/fig1.png  used on input line 12437.
+(pdftex.def)             Requested size: 188.20302pt x 118.0335pt.
+<Imagenes/Cap 8/fig2.png, id=2130, 451.6875pt x 301.125pt>
+File: Imagenes/Cap 8/fig2.png Graphic file (type png)
+<use Imagenes/Cap 8/fig2.png>
+Package pdftex.def Info: Imagenes/Cap 8/fig2.png  used on input line 12438.
+(pdftex.def)             Requested size: 188.20496pt x 125.46996pt.
+
+
+[302 <./Imagenes/Cap 8/fig1.png> <./Imagenes/Cap 8/fig2.png>]
+<11-Imputación_files/figure-latex/unnamed-chunk-6-1.pdf, id=2137, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-6-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 12528.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[303]
+<11-Imputación_files/figure-latex/unnamed-chunk-7-1.pdf, id=2142, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-7-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 12552.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 6691) has occurred while \output is active []
+
+
+
+[304 <./11-Imputación_files/figure-latex/unnamed-chunk-6-1.pdf>]
+<11-Imputación_files/figure-latex/unnamed-chunk-8-1.pdf, id=2152, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-8-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 12574.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[305 <./11-Imputación_files/figure-latex/unnamed-chunk-7-1.pdf>]
+
+[306 <./11-Imputación_files/figure-latex/unnamed-chunk-8-1.pdf>]
+<11-Imputación_files/figure-latex/unnamed-chunk-10-1.pdf, id=2177, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-10-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-10-1.pdf  used on input line 12639.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[307]
+<11-Imputación_files/figure-latex/MAR2-1.pdf, id=2183, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/MAR2-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/MAR2-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/MAR2-1.pdf  used on input line 12663.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[308 <./11-Imputación_files/figure-latex/unnamed-chunk-10-1.pdf>]
+
+[309 <./11-Imputación_files/figure-latex/MAR2-1.pdf>]
+<11-Imputación_files/figure-latex/MAR3-1.pdf, id=2206, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/MAR3-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/MAR3-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/MAR3-1.pdf  used on input line 12693.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[310 <./11-Imputación_files/figure-latex/MAR3-1.pdf>]
+<11-Imputación_files/figure-latex/MNAR1-1.pdf, id=2219, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/MNAR1-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/MNAR1-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/MNAR1-1.pdf  used on input line 12730.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[311]
+<11-Imputación_files/figure-latex/MNAR2-1.pdf, id=2224, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/MNAR2-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/MNAR2-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/MNAR2-1.pdf  used on input line 12750.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[312 <./11-Imputación_files/figure-latex/MNAR1-1.pdf>]
+<11-Imputación_files/figure-latex/MNAR3-1.pdf, id=2237, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/MNAR3-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/MNAR3-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/MNAR3-1.pdf  used on input line 12765.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[313 <./11-Imputación_files/figure-latex/MNAR2-1.pdf>]
+
+[314 <./11-Imputación_files/figure-latex/MNAR3-1.pdf>]
+
+[315]
+
+LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 12871.
+
+
+
+[316]
+<11-Imputación_files/figure-latex/Media_1-1.pdf, id=2269, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/Media_1-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/Media_1-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/Media_1-1.pdf  used on input line 12889.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<11-Imputación_files/figure-latex/unnamed-chunk-15-1.pdf, id=2270, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-15-1.pdf  used on input line 12906.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[317 <./11-Imputación_files/figure-latex/Media_1-1.pdf>]
+
+[318 <./11-Imputación_files/figure-latex/unnamed-chunk-15-1.pdf>]
+
+[319]
+
+[320]
+<11-Imputación_files/figure-latex/unnamed-chunk-24-1.pdf, id=2301, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-24-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-24-1.pdf  used on input line 13099.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[321]
+<11-Imputación_files/figure-latex/unnamed-chunk-25-1.pdf, id=2306, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-25-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-25-1.pdf  used on input line 13115.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[322 <./11-Imputación_files/figure-latex/unnamed-chunk-24-1.pdf>]
+
+[323 <./11-Imputación_files/figure-latex/unnamed-chunk-25-1.pdf>]
+
+[324]
+Underfull \vbox (badness 1132) has occurred while \output is active []
+
+
+
+[325]
+<11-Imputación_files/figure-latex/hot_deck_1-1.pdf, id=2338, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/hot_deck_1-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/hot_deck_1-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/hot_deck_1-1.pdf  used on input line 13290.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 3281) has occurred while \output is active []
+
+
+
+[326]
+<11-Imputación_files/figure-latex/unnamed-chunk-32-1.pdf, id=2343, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-32-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-32-1.pdf  used on input line 13304.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[327 <./11-Imputación_files/figure-latex/hot_deck_1-1.pdf>]
+
+[328 <./11-Imputación_files/figure-latex/unnamed-chunk-32-1.pdf>]
+
+[329]
+
+[330]
+Underfull \vbox (badness 2626) has occurred while \output is active []
+
+
+
+[331]
+<11-Imputación_files/figure-latex/unnamed-chunk-45-1.pdf, id=2378, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-45-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-45-1.pdf  used on input line 13638.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[332]
+<11-Imputación_files/figure-latex/regresion_2-1.pdf, id=2383, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/regresion_2-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/regresion_2-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/regresion_2-1.pdf  used on input line 13650.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[333 <./11-Imputación_files/figure-latex/unnamed-chunk-45-1.pdf>]
+
+[334 <./11-Imputación_files/figure-latex/regresion_2-1.pdf>]
+
+[335]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[336]
+
+[337]
+<11-Imputación_files/figure-latex/Vecino_1-1.pdf, id=2418, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/Vecino_1-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/Vecino_1-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/Vecino_1-1.pdf  used on input line 13907.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 1331) detected at line 13919
+ []
+
+
+
+[338 <./11-Imputación_files/figure-latex/Vecino_1-1.pdf>]
+<11-Imputación_files/figure-latex/Vecino_2-1.pdf, id=2431, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/Vecino_2-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/Vecino_2-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/Vecino_2-1.pdf  used on input line 13921.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[339 <./11-Imputación_files/figure-latex/Vecino_2-1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[340]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[341]
+
+[342]
+<11-Imputación_files/figure-latex/unnamed-chunk-61-1.pdf, id=2453, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-61-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-61-1.pdf  used on input line 14204.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+
+[343 <./11-Imputación_files/figure-latex/unnamed-chunk-61-1.pdf>]
+<11-Imputación_files/figure-latex/unnamed-chunk-62-1.pdf, id=2468, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-62-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-62-1.pdf  used on input line 14218.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14218--14220
+[][]
+ []
+
+
+
+[344 <./11-Imputación_files/figure-latex/unnamed-chunk-62-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 14242--14245
+
+ []
+
+
+
+[345]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[346]
+<11-Imputación_files/figure-latex/unnamed-chunk-65-1.pdf, id=2486, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-65-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-65-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-65-1.pdf  used on input line 14347.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[347]
+
+[348 <./11-Imputación_files/figure-latex/unnamed-chunk-65-1.pdf>]
+
+[349]
+Underfull \vbox (badness 2111) has occurred while \output is active []
+
+
+
+[350]
+<11-Imputación_files/figure-latex/unnamed-chunk-67-1.pdf, id=2512, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/unnamed-chunk-67-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/unnamed-chunk-67-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/unnamed-chunk-67-1.pdf  used on input line 14510.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[351]
+Underfull \vbox (badness 1184) detected at line 14547
+ []
+
+
+
+[352 <./11-Imputación_files/figure-latex/unnamed-chunk-67-1.pdf>]
+
+[353]
+
+[354]
+<11-Imputación_files/figure-latex/Bootstrap1-1.pdf, id=2534, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/Bootstrap1-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/Bootstrap1-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/Bootstrap1-1.pdf  used on input line 14679.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14679--14681
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[355]
+<11-Imputación_files/figure-latex/Bootstrap2-1.pdf, id=2540, 469.755pt x 325.215pt>
+File: 11-Imputación_files/figure-latex/Bootstrap2-1.pdf Graphic file (type pdf)
+<use 11-Imputación_files/figure-latex/Bootstrap2-1.pdf>
+Package pdftex.def Info: 11-Imputación_files/figure-latex/Bootstrap2-1.pdf  used on input line 14703.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14703--14705
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[356 <./11-Imputación_files/figure-latex/Bootstrap1-1.pdf>]
+Overfull \vbox (0.22304pt too high) detected at line 14738
+ []
+
+
+
+[357 <./11-Imputación_files/figure-latex/Bootstrap2-1.pdf>]
+Overfull \hbox (687.86552pt too wide) in paragraph at lines 14740--14747
+[][] 
+ []
+
+
+
+[358]
+
+[359]
+
+[360]
+\bbl@ensure@spanish {Cap\'\i tulo} 11.
+
+
+[361
+
+]
+
+[362]
+
+[363]
+
+[364] (./Análisis-de-encuestas-con-R.aux)
+ ***********
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+ ***********
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 19920 strings out of 469717
- 347370 string characters out of 5478379
- 854586 words of memory out of 5000000
- 47815 multiletter control sequences out of 15000+600000
- 712087 words of font info for 187 fonts, out of 8000000 for 9000
+ 26039 strings out of 469717
+ 523589 string characters out of 5478379
+ 1306563 words of memory out of 5000000
+ 53180 multiletter control sequences out of 15000+600000
+ 750356 words of font info for 305 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 88i,11n,93p,1025b,688s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 88i,17n,93p,1690b,1327s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxo10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtto10.pfb><c:/Users/guerr/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Análisis-de-encuestas-con-R.pdf (364 pages, 7468278 bytes).
+PDF statistics:
+ 3058 PDF objects out of 3580 (max. 8388607)
+ 2394 compressed objects within 24 object streams
+ 524 named destinations out of 1000 (max. 500000)
+ 64639 words of extra memory for PDF output out of 74296 (max. 10000000)
+

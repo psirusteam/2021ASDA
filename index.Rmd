@@ -16,6 +16,8 @@ header-includes:
   - \usepackage{amsmath}
   - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
   - \usepackage{tabularray}
+  - \usepackage{hyperref}
+  - \usepackage{siunitx}
 github-repo: psirusteam/2021ASDA
 description: "Este es el repositorio del libro *Análisis de encuestas con R*."
 knit: "bookdown::render_book"
