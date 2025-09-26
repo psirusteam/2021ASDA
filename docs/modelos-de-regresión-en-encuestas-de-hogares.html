@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R</title>
+  <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="github-repo" content="psirusteam/2021ASDA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5.5 Modelos de regresión en encuestas de hogares | Análisis de encuestas con R" />
+  
+  <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  
+
+<meta name="author" content="Andrés Gutiérrez,Stalyn Guerrero, Cristian Téllez, Giovany Babativa" />
+
+
+<meta name="date" content="2025-09-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="estimación-de-proporciones-y-tablas-cruzadas.html"/>
+<link rel="next" href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis de encuestas con R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="1" data-path="06-Regresión.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="06-Regresión.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="06-Regresión.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="06-Regresión.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="06-Regresión.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="06-Regresión.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="06-Regresión.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="06-Regresión.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="06-Regresión.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="06-Regresión.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="06-Regresión.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="06-Regresión.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="06-Regresión.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="06-Regresión.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="06-Regresión.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="06-Regresión.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="06-Regresión.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="06-Regresión.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="06-Regresión.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="06-Regresión.html"><a href="#pruebas-para-la-comparaci%C3%B3n-de-grupos"><i class="fa fa-check"></i><b>4.7</b> Pruebas para la comparación de grupos</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="06-Regresión.html"><a href="#planteamiento-general-de-hip%C3%B3tesis"><i class="fa fa-check"></i><b>4.7.1</b> Planteamiento general de hipótesis</a></li>
+<li class="chapter" data-level="4.7.2" data-path="pruebas-para-la-comparación-de-grupos.html"><a href="pruebas-para-la-comparación-de-grupos.html"><i class="fa fa-check"></i><b>4.7.2</b> Diferencia de medias poblacionales</a></li>
+<li class="chapter" data-level="4.7.3" data-path="06-Regresión.html"><a href="#estad%C3%ADstico-de-prueba-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.7.3</b> Estadístico de prueba e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.7.4" data-path="pruebas-para-la-comparación-de-grupos.html"><a href="pruebas-para-la-comparación-de-grupos.html#ejemplo-aplicado-en-r"><i class="fa fa-check"></i><b>4.7.4</b> Ejemplo aplicado en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="06-Regresión.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="06-Regresión.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="06-Regresión.html"><a href="#definici%C3%B3n-y-notaci%C3%B3n"><i class="fa fa-check"></i><b>5.3.1</b> Definición y notación</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html#tablas-de-doble-entrada"><i class="fa fa-check"></i><b>5.3.2</b> Tablas de doble entrada</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html#extensiones-y-aplicaciones"><i class="fa fa-check"></i><b>5.3.3</b> Extensiones y aplicaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-proporciones-y-tablas-cruzadas"><i class="fa fa-check"></i><b>5.4</b> Estimación de proporciones y tablas cruzadas</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html"><i class="fa fa-check"></i><b>5.4.1</b> Proporciones para variables binarias</a></li>
+<li class="chapter" data-level="5.4.2" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#proporciones-para-variables-multinomiales"><i class="fa fa-check"></i><b>5.4.2</b> Proporciones para variables multinomiales</a></li>
+<li class="chapter" data-level="5.4.3" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#tablas-cruzadas-o-de-contingencia"><i class="fa fa-check"></i><b>5.4.3</b> Tablas cruzadas o de contingencia</a></li>
+<li class="chapter" data-level="5.4.4" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#prueba-de-independencia-chi2"><i class="fa fa-check"></i><b>5.4.4</b> Prueba de independencia <span class="math inline">\(\chi^{2}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="06-Regresión.html"><a href="#modelos-de-regresi%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.5</b> Modelos de regresión en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="06-Regresión.html"><a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>5.5.1</b> Antecedentes históricos y desarrollos metodológicos</a></li>
+<li class="chapter" data-level="5.5.2" data-path="06-Regresión.html"><a href="#relevancia-pr%C3%A1ctica"><i class="fa fa-check"></i><b>5.5.2</b> Relevancia práctica</a></li>
+<li class="chapter" data-level="5.5.3" data-path="modelos-de-regresión-en-encuestas-de-hogares.html"><a href="modelos-de-regresión-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5.5.3</b> ¿Aplicar o no aplicar ponderaciones?</a></li>
+<li class="chapter" data-level="5.5.4" data-path="06-Regresión.html"><a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>5.5.4</b> Enfoques inferenciales para el análisis de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas"><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-par%C3%A1metros"><i class="fa fa-check"></i><b>5.6.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.6.2" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><i class="fa fa-check"></i><b>5.6.2</b> Uso de ponderaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="06-Regresión.html"><a href="#coeficiente-de-determinaci%C3%B3n"><i class="fa fa-check"></i><b>5.7.1</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="5.7.2" data-path="06-Regresión.html"><a href="#diagn%C3%B3stico-de-los-residuales"><i class="fa fa-check"></i><b>5.7.2</b> Diagnóstico de los residuales</a></li>
+<li class="chapter" data-level="5.7.3" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>5.7.3</b> Observaciones influyentes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="06-Regresión.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="06-Regresión.html"><a href="#visualizaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>6</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="06-Regresión.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6.1</b> Gráficas en <code>R</code></a></li>
+<li class="chapter" data-level="6.2" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html"><i class="fa fa-check"></i><b>6.2</b> Histogramas para graficar variables continuas</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html#histogramas-ponderados-y-no-ponderados"><i class="fa fa-check"></i><b>6.2.1</b> Histogramas ponderados y no ponderados</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.3</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="06-Regresión.html"><a href="#diagramas-de-dispersi%C3%B3n-scatterplots"><i class="fa fa-check"></i><b>6.4</b> Diagramas de dispersión (Scatterplots)</a></li>
+<li class="chapter" data-level="6.5" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.5</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.6" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.6</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="06-Regresión.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="06-Regresión.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="06-Regresión.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="06-Regresión.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="06-Regresión.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="06-Regresión.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="06-Regresión.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a Análisis de encuestas con R </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de encuestas con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelos-de-regresión-en-encuestas-de-hogares" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Modelos de regresión en encuestas de hogares<a href="#modelos-de-regresi%C3%B3n-en-encuestas-de-hogares" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La regresión estadística constituye una técnica fundamental para examinar los vínculos entre variables en el marco de los datos muestrales obtenidos mediante encuestas. A través de este procedimiento, es posible determinar la forma en que una o varias variables de respuesta (dependientes) se relacionan con una o varias variables explicativas (independientes). Tal como exponen Nolan y Speed (2000) y Freedman (2005), la validez de los resultados depende de una adecuada formulación del modelo.</p>
+<p>Un ejemplo ilustrativo sería la estimación del ingreso de los hogares (variable dependiente) en función del nivel educativo alcanzado y de la situación laboral de sus miembros (variables independientes), empleando datos provenientes de encuestas de hogares. Estos análisis permiten identificar patrones, cuantificar efectos y generar evidencia útil para la formulación de políticas públicas.</p>
+<p>No obstante, dado que estas encuestas suelen estar sustentadas en <strong>diseños muestrales complejos</strong>, los enfoques tradicionales de regresión resultan insuficientes. Ignorar los pesos muestrales, la estratificación o la conglomeración puede derivar en sesgos en los coeficientes estimados y, sobre todo, en una subestimación de sus varianzas, lo cual compromete la validez de las inferencias. Por esta razón, los modelos de regresión aplicados a encuestas deben ser modificados y ajustados para garantizar resultados representativos y robustos.</p>
+<p>En este sentido, el análisis de datos provenientes de encuestas exige una atención detallada al diseño de muestreo. La incorporación de los <strong>pesos de la encuesta</strong> y de los ajustes correspondientes a la estratificación y a la conglomeración permite obtener inferencias válidas y precisas. Además, en algunos casos se han planteado alternativas simplificadas, como el uso de pesos normalizados o enfoques de ponderación aproximada, que buscan balancear la complejidad metodológica con la factibilidad práctica del análisis.</p>
+<div id="antecedentes-históricos-y-desarrollos-metodológicos" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Antecedentes históricos y desarrollos metodológicos<a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El estudio de la regresión bajo diseños de muestreo complejos tiene una trayectoria bien documentada. De manera empírica, <strong>Kish y Frankel (1974)</strong> fueron de los primeros en discutir el impacto de estos diseños en las inferencias derivadas de modelos de regresión. Posteriormente, <strong>Fuller (1975)</strong> desarrolló un estimador de varianza apoyado en técnicas de linealización para modelos de regresión lineal múltiple con ponderación desigual, e introdujo métodos específicos para diseños estratificados y de dos etapas.</p>
+<p>Más adelante, <strong>Sha et al. (1977)</strong> abordaron el problema de las violaciones a los supuestos clásicos de los modelos de regresión al trabajar con datos de encuestas, proponiendo alternativas de inferencia robusta para los parámetros. En paralelo, <strong>Binder (1983)</strong> se enfocó en las distribuciones muestrales de los estimadores de regresión en poblaciones finitas, definiendo procedimientos para estimar varianzas bajo esquemas complejos.</p>
+<p>En los años siguientes, <strong>Skinner et al. (1989)</strong> ampliaron estos aportes al trabajar con estimadores de varianza para los coeficientes de regresión que contemplaban la estratificación y la conglomeración, recomendando explícitamente el uso de métodos de linealización o técnicas alternativas para la estimación de la varianza. Avanzando en la línea de tiempo, <strong>Fuller (2002)</strong> realizó un compendio de los métodos de estimación aplicables a modelos de regresión en encuestas complejas, mientras que <strong>Pfeffermann (2011)</strong> discutió enfoques más recientes, como los métodos de ponderación “q-weighted”, mostrando evidencia empírica de su utilidad.</p>
+</div>
+<div id="relevancia-práctica" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Relevancia práctica<a href="#relevancia-pr%C3%A1ctica" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En la actualidad, los modelos de regresión bajo diseños de muestreo complejos representan una herramienta esencial para el análisis de encuestas de hogares. Estos modelos permiten ir más allá de las estadísticas descriptivas y aproximarse a explicaciones causales o predictivas, siempre que se reconozcan y se ajusten las particularidades del diseño muestral. Su correcta aplicación abre la posibilidad de analizar cómo las características sociodemográficas y económicas se asocian con distintos resultados de interés, aportando evidencia clave para la formulación de políticas públicas.</p>
+<p>En las siguientes secciones se mostrará cómo implementar estos modelos en <code>R</code>, utilizando la librería <code>survey</code>. Se abordará la especificación del diseño muestral, la estimación de modelos lineales y logísticos, así como la obtención de errores estándar y pruebas de hipótesis ajustadas al diseño. De este modo, se integrarán los fundamentos teóricos con ejemplos prácticos en un flujo de trabajo reproducible.</p>
+<p>Un primer paso consiste en comprender la estructura básica de los modelos de regresión. El modelo de regresión lineal simple se define como</p>
+<p><span class="math display">\[
+y = \beta_{0} + \beta_{1}x + \varepsilon,
+\]</span></p>
+<p>donde <span class="math inline">\(y\)</span> es la variable dependiente, <span class="math inline">\(x\)</span> la variable independiente, <span class="math inline">\(\beta_{0}\)</span> y <span class="math inline">\(\beta_{1}\)</span> los parámetros del modelo, y <span class="math inline">\(\varepsilon\)</span> el error aleatorio, definido como la diferencia entre el valor observado y el valor ajustado del modelo:</p>
+<p><span class="math display">\[
+\varepsilon = y - \hat{y} = y - (\beta_{0} + \beta_{1}x).
+\]</span></p>
+<p>Generalizando este planteamiento, los modelos de regresión lineal múltiple incorporan varias covariables:</p>
+<p><span class="math display">\[
+y = \beta_{0} + \beta_{1}x_{1} + \cdots + \beta_{p}x_{p} + \varepsilon,
+\]</span></p>
+<p>lo cual puede expresarse en notación matricial como</p>
+<p><span class="math display">\[
+y_{i} = x_{i}\boldsymbol{\beta} + \varepsilon_{i}, \quad i=1,\ldots,n,
+\]</span></p>
+<p>donde <span class="math inline">\(x_{i} = [1, x_{1i}, \ldots, x_{pi}]\)</span> corresponde al vector de covariables del individuo <span class="math inline">\(i\)</span>, y <span class="math inline">\(\boldsymbol{\beta}^{T} = [\beta_{0}, \beta_{1}, \ldots, \beta_{p}]\)</span> es el vector de parámetros.</p>
+<p>En este contexto, el valor esperado de la variable respuesta condicionado a las covariables puede escribirse como:</p>
+<p><span class="math display">\[
+E(y \mid x) = \hat{\beta}_{0} + \hat{\beta}_{1}x_{1} + \cdots + \hat{\beta}_{p}x_{p}.
+\]</span></p>
+<p>Para que estos modelos sean válidos, es necesario que se cumplan ciertos <strong>supuestos clásicos</strong>, recogidos en la literatura (Heeringa, West y Berglund, 2017), entre los que destacan:</p>
+<ul>
+<li><strong>Esperanza nula de los residuos</strong>: <span class="math inline">\(E(\varepsilon_{i} \mid x_{i}) = 0\)</span>.</li>
+<li><strong>Homogeneidad de varianza</strong>: <span class="math inline">\(Var(\varepsilon_{i} \mid x_{i}) = \sigma^2\)</span>.</li>
+<li><strong>Normalidad de los errores</strong>: <span class="math inline">\(\varepsilon_{i} \mid x_{i} \sim N(0,\sigma^2)\)</span>.</li>
+<li><strong>Independencia de los residuos</strong>: <span class="math inline">\(cov(\varepsilon_{i},\varepsilon_{j}\mid x_{i},x_{j})=0\)</span>.</li>
+</ul>
+<p>Estos supuestos permiten garantizar que los estimadores obtenidos tengan buenas propiedades estadísticas (insesgamiento, eficiencia y consistencia). Sin embargo, al trabajar con encuestas bajo <strong>diseños complejos</strong>, estas condiciones rara vez se cumplen de manera estricta, por lo que se requieren adaptaciones que serán abordadas en las próximas secciones.</p>
+<p>Una vez definido el modelo de regresión lineal y sus supuestos, se puede deducir los siguiente:</p>
+<p><span class="math display">\[
+\hat{y}  =  E\left(y\mid x\right)
+=  E\left(\boldsymbol{x}\boldsymbol{\beta}\right)+E\left(\varepsilon\right)
+=  \boldsymbol{x}\boldsymbol{\beta}+0
+  =  \beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}
+\]</span></p>
+<p>y Adicionalmente,</p>
+<p><span class="math display">\[
+var\left(y_{i}\mid x_{i}\right)  =  \sigma_{y,x}^{2}
+\]</span></p>
+<p><span class="math display">\[
+cov\left(y_{i},y_{j}\mid x_{i},x_{j}\right)  = 0
+\]</span></p>
+<p><span class="math display">\[
+y_{i}  \sim  N\left(x_{i}\boldsymbol{\beta},\sigma_{y,x}^{2}\right)
+\]</span></p>
+</div>
+<div id="aplicar-o-no-aplicar-ponderaciones" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> ¿Aplicar o no aplicar ponderaciones?<a href="modelos-de-regresión-en-encuestas-de-hogares.html#aplicar-o-no-aplicar-ponderaciones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Heeringa, West y Berglund (2017) examinan el desafío de determinar cómo utilizar adecuadamente los pesos en modelos de regresión y si conviene emplear factores de expansión al estimar coeficientes de regresión en encuestas con diseños complejos. En este marco, se distinguen dos enfoques principales para incorporar los pesos en los modelos:</p>
+<ul>
+<li><p><strong>Enfoque orientado al diseño</strong>: busca realizar inferencias válidas sobre la población total. Los pesos de la encuesta resultan indispensables para obtener estimaciones insesgadas de los coeficientes, ya que corrigen las probabilidades desiguales de selección derivadas del diseño muestral. No obstante, este método no protege frente a la mala especificación del modelo: si la relación planteada no refleja adecuadamente lo que ocurre en la población, los coeficientes estimados, aunque insesgados en el marco del diseño, pueden carecer de utilidad sustantiva.</p></li>
+<li><p><strong>Enfoque orientado al modelo</strong>: sostiene que los pesos no son necesarios siempre que el modelo esté correctamente formulado y el muestreo sea no informativo, es decir, que el modelo válido para la muestra coincida con el de la población. En este escenario, se asume que las relaciones entre variables están bien descritas por el modelo independientemente del diseño muestral, y que la utilización de ponderaciones podría incrementar innecesariamente la variabilidad de las estimaciones, elevando los errores estándar.</p></li>
+</ul>
+<p>La decisión entre utilizar o no ponderaciones en los modelos de regresión depende tanto del contexto como de la sensibilidad de los resultados a su inclusión. Autores como <strong>Skinner, Holt y Smith (1989)</strong> y <strong>Pfeffermann (2011)</strong> han debatido ampliamente sobre la pertinencia de incorporar los pesos muestrales en la estimación de los parámetros de regresión y en sus errores estándar.</p>
+<p>Una recomendación metodológica ampliamente aceptada es estimar los modelos con y sin ponderaciones y comparar los resultados. Si al incluir los pesos se observan variaciones significativas en los coeficientes o en las conclusiones, ello indica que el muestreo fue informativo o que el modelo presenta deficiencias de especificación, por lo que conviene utilizar estimaciones ponderadas. En cambio, si los pesos solo aumentan los errores estándar sin modificar sustancialmente los coeficientes, se puede asumir que el modelo está bien planteado y que no es indispensable ponderar.</p>
+<p>En términos prácticos, la decisión puede resumirse en dos escenarios:</p>
+<ul>
+<li><p><strong>Inferencia descriptiva</strong>: es obligatorio aplicar ponderaciones, ya que el objetivo es reflejar con precisión la estructura de la población.</p></li>
+<li><p><strong>Inferencia analítica</strong>: es posible recurrir a modelos no ponderados o ajustados por pesos. En este caso, si la meta es analizar relaciones o verificar hipótesis, la ponderación no siempre es necesaria, especialmente cuando el modelo incluye variables del diseño muestral (estratos o conglomerados). Sin embargo, el uso de modelos sin ponderar debe justificarse de forma explícita, pues implica supuestos más restrictivos que los modelos ponderados.</p></li>
+</ul>
+<p>El uso de ponderaciones en encuestas permite asegurar que los modelos de regresión sean representativos de la población, ya que corrigen posibles sesgos de sobre o subrepresentación de determinados grupos y garantizan que la distribución poblacional se refleje adecuadamente. Asimismo, las ponderaciones contribuyen a obtener estimaciones de varianza más exactas, pues consideran la estratificación, el agrupamiento y las probabilidades desiguales de selección, lo cual genera errores estándar, intervalos de confianza y pruebas estadísticas más confiables.</p>
+<p>Dentro del enfoque basado en el diseño, los coeficientes de regresión se estiman a partir de ecuaciones poblacionales ajustadas con ponderaciones. Esto permite que los resultados ponderados se aproximen a valores insesgados comparables a los que se obtendrían en un censo completo, incluso cuando el modelo estadístico no esté formulado de manera óptima.</p>
+<p>Un aspecto que no debe pasarse por alto es que el uso de ponderaciones puede aumentar la varianza de las estimaciones de los parámetros, en especial cuando los pesos presentan gran dispersión. En situaciones donde existen valores extremos o muy variables, las estimaciones tienden a volverse inestables, ya que ciertas observaciones llegan a ejercer una influencia desproporcionada sobre el ajuste del modelo. En este sentido, cuando el propósito es explicativo o analítico (como en el análisis de relaciones entre variables), los modelos sin ponderar pueden, en ocasiones, generar resultados más consistentes y eficientes.</p>
+<p>No obstante, cuando el modelo está mal especificado, la regresión sin ponderaciones puede producir estimaciones poco útiles o carentes de validez. Por ello, resulta fundamental que los analistas seleccionen e incorporen las variables pertinentes para lograr una especificación adecuada. Incluso en los casos en que el modelo esté correctamente definido, es indispensable tener en cuenta la estratificación y la conglomeración del diseño muestral al calcular los errores estándar bajo un enfoque no ponderado.</p>
+<p>En definitiva, la decisión sobre <strong>aplicar o no ponderaciones</strong> no puede basarse únicamente en una regla rígida, sino que exige un análisis crítico de los objetivos del estudio, del diseño de la encuesta y de la robustez de los modelos estimados. Asimismo, un análisis diagnóstico riguroso resulta esencial para validar las inferencias y garantizar que los resultados reflejen de manera adecuada la realidad poblacional (véase la Subsección 9.6.4).</p>
+</div>
+<div id="enfoques-inferenciales-para-el-análisis-de-datos" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Enfoques inferenciales para el análisis de datos<a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el análisis de encuestas, uno de los principales retos consiste en manejar adecuadamente la variabilidad de los datos. Esta proviene de dos fuentes fundamentales: el diseño muestral, que determina cómo se recolecta la información, y el modelo estadístico, que define cómo se interpreta dicha información para inferir propiedades de la población. Ignorar cualquiera de estas dimensiones puede comprometer la validez de los resultados.</p>
+<p>Por ello, se han desarrollado metodologías inferenciales avanzadas que permiten integrar ambas fuentes de incertidumbre en un mismo marco analítico. Estas técnicas buscan reflejar tanto la estructura del diseño como los supuestos y limitaciones del modelo. Entre las aproximaciones más relevantes se encuentran la seudo-verosimilitud (Molina &amp; Skinner, 1992) y la inferencia combinada (Binder, 2011).</p>
+<p>El método de seudo-verosimilitud extiende las técnicas tradicionales de máxima verosimilitud para ajustarlas a las particularidades de los diseños muestrales complejos. En este enfoque, la distribución de muestreo definida por el diseño tiene un rol central, mientras que la distribución del modelo ocupa un lugar secundario. Si bien, en contextos de modelos bien especificados, los estimadores basados en seudo-verosimilitud tienden a ser insesgados o consistentes, lo crucial es que este procedimiento evita sesgos que se originarían si se ignorara el diseño muestral. En términos prácticos, la seudo-verosimilitud traduce el modelo tradicional en uno que respete la forma en que los datos fueron obtenidos, garantizando inferencias más sólidas.</p>
+<p>En contraste, la inferencia combinada propone un marco unificado en el que se integran simultáneamente la variabilidad del muestreo y la incertidumbre del modelo. Al considerar ambas fuentes, este enfoque ofrece una visión más completa de la variabilidad y permite obtener estimaciones más precisas y confiables. Su principal aporte radica en que evita sesgos que pueden aparecer cuando se analiza únicamente desde la perspectiva del diseño o del modelo. De esta manera, la inferencia combinada resulta especialmente útil en aplicaciones donde se requiere un balance entre representatividad poblacional y solidez estadística de los modelos ajustados.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="estimación-de-proporciones-y-tablas-cruzadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/06-Regresión.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

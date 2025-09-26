@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2.10 Práctica en R | Análisis de encuestas con R</title>
+  <meta name="description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2.10 Práctica en R | Análisis de encuestas con R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  <meta name="github-repo" content="psirusteam/2021ASDA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2.10 Práctica en R | Análisis de encuestas con R" />
+  
+  <meta name="twitter:description" content="Este es el repositorio del libro Análisis de encuestas con R." />
+  
+
+<meta name="author" content="Andrés Gutiérrez,Stalyn Guerrero, Cristian Téllez, Giovany Babativa" />
+
+
+<meta name="date" content="2025-09-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"/>
+<link rel="next" href="calibrando-con-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Análisis de encuestas con R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="1" data-path="02-Conceptos.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="02-Conceptos.html"><a href="#conceptos-b%C3%A1sicos-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>2</b> Conceptos básicos en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="02-Conceptos.html"><a href="#universo-de-estudio-y-poblaci%C3%B3n-objetivo"><i class="fa fa-check"></i><b>2.1</b> Universo de estudio y población objetivo</a></li>
+<li class="chapter" data-level="2.2" data-path="02-Conceptos.html"><a href="#unidades-de-an%C3%A1lisis"><i class="fa fa-check"></i><b>2.2</b> Unidades de análisis</a></li>
+<li class="chapter" data-level="2.3" data-path="unidades-de-muestreo.html"><a href="unidades-de-muestreo.html"><i class="fa fa-check"></i><b>2.3</b> Unidades de muestreo</a></li>
+<li class="chapter" data-level="2.4" data-path="marcos-de-muestreo.html"><a href="marcos-de-muestreo.html"><i class="fa fa-check"></i><b>2.4</b> Marcos de muestreo</a></li>
+<li class="chapter" data-level="2.5" data-path="02-Conceptos.html"><a href="#motivaci%C3%B3n"><i class="fa fa-check"></i><b>2.5</b> Motivación</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="02-Conceptos.html"><a href="#la-importancia-de-considerar-el-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>2.5.1</b> La importancia de considerar el diseño muestral</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="02-Conceptos.html"><a href="#par%C3%A1metros-y-estimadores"><i class="fa fa-check"></i><b>2.6</b> Parámetros y Estimadores</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html"><i class="fa fa-check"></i><b>2.6.1</b> Ajustes Adicionales de los Pesos</a></li>
+<li class="chapter" data-level="2.6.2" data-path="parámetros-y-estimadores.html"><a href="parámetros-y-estimadores.html#importancia-de-los-ajustes"><i class="fa fa-check"></i><b>2.6.2</b> Importancia de los Ajustes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales"><i class="fa fa-check"></i><b>2.7</b> Estimación de totales</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="estimación-de-totales.html"><a href="estimación-de-totales.html"><i class="fa fa-check"></i><b>2.7.1</b> Ejemplo ilustrativo</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="02-Conceptos.html"><a href="#efecto-del-dise%C3%B1o-deff"><i class="fa fa-check"></i><b>2.8</b> Efecto del diseño (DEFF)</a></li>
+<li class="chapter" data-level="2.9" data-path="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html"><i class="fa fa-check"></i><b>2.9</b> Muestreo aleatorio simple en dos etapas estratificado</a></li>
+<li class="chapter" data-level="2.10" data-path="02-Conceptos.html"><a href="#pr%C3%A1ctica-en-r"><i class="fa fa-check"></i><b>2.10</b> Práctica en <code>R</code></a></li>
+<li class="chapter" data-level="2.11" data-path="calibrando-con-r.html"><a href="calibrando-con-r.html"><i class="fa fa-check"></i><b>2.11</b> Calibrando con <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejando-una-base-de-encuestas-de-hogares-con-r.html"><a href="manejando-una-base-de-encuestas-de-hogares-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejando una base de encuestas de hogares con R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="02-Conceptos.html"><a href="#fundamentos-b%C3%A1sicos-de-r-y-rstudio"><i class="fa fa-check"></i><b>3.1</b> Fundamentos básicos de R y Rstudio</a></li>
+<li class="chapter" data-level="3.2" data-path="02-Conceptos.html"><a href="#algunas-librer%C3%ADas-de-inter%C3%A9s"><i class="fa fa-check"></i><b>3.2</b> Algunas librerías de interés</a></li>
+<li class="chapter" data-level="3.3" data-path="02-Conceptos.html"><a href="#craci%C3%B3n-de-proyectos-en-r"><i class="fa fa-check"></i><b>3.3</b> Cración de proyectos en <code>R</code></a></li>
+<li class="chapter" data-level="3.4" data-path="02-Conceptos.html"><a href="#lectura-de-las-bases-de-datos-y-manipulaci%C3%B3n"><i class="fa fa-check"></i><b>3.4</b> Lectura de las bases de datos y manipulación</a></li>
+<li class="chapter" data-level="3.5" data-path="el-operador-pipe.html"><a href="el-operador-pipe.html"><i class="fa fa-check"></i><b>3.5</b> El operador <code>pipe</code></a></li>
+<li class="chapter" data-level="3.6" data-path="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><a href="funciones-mutate-summarise-y-group_by-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>3.6</b> Funciones <strong>mutate, summarise y group_by</strong> en encuestas de hogares</a></li>
+<li class="chapter" data-level="3.7" data-path="medidas-descriptivos-y-reflexiones.html"><a href="medidas-descriptivos-y-reflexiones.html"><i class="fa fa-check"></i><b>3.7</b> Medidas descriptivos y reflexiones</a></li>
+<li class="chapter" data-level="3.8" data-path="algunas-reflexiones-generales.html"><a href="algunas-reflexiones-generales.html"><i class="fa fa-check"></i><b>3.8</b> Algunas reflexiones generales</a></li>
+<li class="chapter" data-level="3.9" data-path="02-Conceptos.html"><a href="#observaci%C3%B3n-importante"><i class="fa fa-check"></i><b>3.9</b> <strong>¡Observación importante!</strong></a></li>
+<li class="chapter" data-level="3.10" data-path="medias-y-totales.html"><a href="medias-y-totales.html"><i class="fa fa-check"></i><b>3.10</b> Medias y totales</a></li>
+<li class="chapter" data-level="3.11" data-path="medianas-y-percentiles.html"><a href="medianas-y-percentiles.html"><i class="fa fa-check"></i><b>3.11</b> Medianas y percentiles</a></li>
+<li class="chapter" data-level="3.12" data-path="02-Conceptos.html"><a href="#varianza-desviaci%C3%B3n-est%C3%A1ndar-y-rangos"><i class="fa fa-check"></i><b>3.12</b> Varianza, desviación estándar y rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-las-variables-continuas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4</b> Análisis de las variables continuas en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="02-Conceptos.html"><a href="#lectura-de-bases-de-datos-y-definici%C3%B3n-del-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.1</b> Lectura de bases de datos y definición del diseño muestral</a></li>
+<li class="chapter" data-level="4.2" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-gr%C3%A1fico-histogramas-y-boxplot"><i class="fa fa-check"></i><b>4.2</b> Análisis gráfico: Histogramas y Boxplot</a></li>
+<li class="chapter" data-level="4.3" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales-medias-y-razones"><i class="fa fa-check"></i><b>4.3</b> Estimación de totales, medias y razones</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-puntual"><i class="fa fa-check"></i><b>4.3.1</b> Estimación puntual</a></li>
+<li class="chapter" data-level="4.3.2" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-totales-e-intervalos-de-confianza"><i class="fa fa-check"></i><b>4.3.2</b> Estimación de totales e intervalos de confianza</a></li>
+<li class="chapter" data-level="4.3.3" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-la-media-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.3.3</b> Estimación de la media e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.3.4" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-medidas-de-dispersi%C3%B3n-y-localizaci%C3%B3n"><i class="fa fa-check"></i><b>4.3.4</b> Estimación de medidas de dispersión y localización</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-del-coeficiente-de-gini-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.4</b> Estimación del coeficiente de Gini en encuestas de hogares</a></li>
+<li class="chapter" data-level="4.5" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-correlaci%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>4.5</b> Análisis de correlación en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="02-Conceptos.html"><a href="#ajuste-al-dise%C3%B1o-muestral"><i class="fa fa-check"></i><b>4.5.1</b> Ajuste al diseño muestral</a></li>
+<li class="chapter" data-level="4.5.2" data-path="02-Conceptos.html"><a href="#expresi%C3%B3n-formal"><i class="fa fa-check"></i><b>4.5.2</b> Expresión formal</a></li>
+<li class="chapter" data-level="4.5.3" data-path="02-Conceptos.html"><a href="#implementaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>4.5.3</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-la-relaci%C3%B3n-entre-dos-variable-continuas"><i class="fa fa-check"></i><b>4.6</b> Análisis de la relación entre dos variable continuas</a></li>
+<li class="chapter" data-level="4.7" data-path="02-Conceptos.html"><a href="#pruebas-para-la-comparaci%C3%B3n-de-grupos"><i class="fa fa-check"></i><b>4.7</b> Pruebas para la comparación de grupos</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="02-Conceptos.html"><a href="#planteamiento-general-de-hip%C3%B3tesis"><i class="fa fa-check"></i><b>4.7.1</b> Planteamiento general de hipótesis</a></li>
+<li class="chapter" data-level="4.7.2" data-path="pruebas-para-la-comparación-de-grupos.html"><a href="pruebas-para-la-comparación-de-grupos.html"><i class="fa fa-check"></i><b>4.7.2</b> Diferencia de medias poblacionales</a></li>
+<li class="chapter" data-level="4.7.3" data-path="02-Conceptos.html"><a href="#estad%C3%ADstico-de-prueba-e-intervalo-de-confianza"><i class="fa fa-check"></i><b>4.7.3</b> Estadístico de prueba e intervalo de confianza</a></li>
+<li class="chapter" data-level="4.7.4" data-path="pruebas-para-la-comparación-de-grupos.html"><a href="pruebas-para-la-comparación-de-grupos.html#ejemplo-aplicado-en-r"><i class="fa fa-check"></i><b>4.7.4</b> Ejemplo aplicado en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="estimando-razones-en-encuestas-de-hogares.html"><a href="estimando-razones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.8</b> Estimando razones en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#implementaci%C3%B3n-computacional-en-r"><i class="fa fa-check"></i>Implementación computacional en <code>R</code></a></li>
+<li class="chapter" data-level="" data-path=""><a href="#interpretaci%C3%B3n-aplicada"><i class="fa fa-check"></i>Interpretación aplicada</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="estimando-contrastes-en-encuestas-de-hogares.html"><a href="estimando-contrastes-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>4.9</b> Estimando contrastes en encuestas de hogares</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="02-Conceptos.html"><a href="#an%C3%A1lisis-de-variables-categ%C3%B3ricas-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5</b> Análisis de variables categóricas en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="02-Conceptos.html"><a href="#tama%C3%B1o-de-poblaci%C3%B3n-y-subpoblaciones-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.1</b> Tamaño de población y subpoblaciones en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="" data-path="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><a href="tamaño-de-población-y-subpoblaciones-en-encuestas-de-hogares.html"><i class="fa fa-check"></i>Estimaciones de totales en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-proporciones"><i class="fa fa-check"></i><b>5.2</b> Estimación de proporciones</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-proporciones-en-r"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de proporciones en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html"><i class="fa fa-check"></i><b>5.3</b> Tablas cruzadas</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="02-Conceptos.html"><a href="#definici%C3%B3n-y-notaci%C3%B3n"><i class="fa fa-check"></i><b>5.3.1</b> Definición y notación</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html#tablas-de-doble-entrada"><i class="fa fa-check"></i><b>5.3.2</b> Tablas de doble entrada</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tablas-cruzadas.html"><a href="tablas-cruzadas.html#extensiones-y-aplicaciones"><i class="fa fa-check"></i><b>5.3.3</b> Extensiones y aplicaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-proporciones-y-tablas-cruzadas"><i class="fa fa-check"></i><b>5.4</b> Estimación de proporciones y tablas cruzadas</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html"><i class="fa fa-check"></i><b>5.4.1</b> Proporciones para variables binarias</a></li>
+<li class="chapter" data-level="5.4.2" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#proporciones-para-variables-multinomiales"><i class="fa fa-check"></i><b>5.4.2</b> Proporciones para variables multinomiales</a></li>
+<li class="chapter" data-level="5.4.3" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#tablas-cruzadas-o-de-contingencia"><i class="fa fa-check"></i><b>5.4.3</b> Tablas cruzadas o de contingencia</a></li>
+<li class="chapter" data-level="5.4.4" data-path="estimación-de-proporciones-y-tablas-cruzadas.html"><a href="estimación-de-proporciones-y-tablas-cruzadas.html#prueba-de-independencia-chi2"><i class="fa fa-check"></i><b>5.4.4</b> Prueba de independencia <span class="math inline">\(\chi^{2}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="02-Conceptos.html"><a href="#modelos-de-regresi%C3%B3n-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>5.5</b> Modelos de regresión en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="02-Conceptos.html"><a href="#antecedentes-hist%C3%B3ricos-y-desarrollos-metodol%C3%B3gicos"><i class="fa fa-check"></i><b>5.5.1</b> Antecedentes históricos y desarrollos metodológicos</a></li>
+<li class="chapter" data-level="5.5.2" data-path="02-Conceptos.html"><a href="#relevancia-pr%C3%A1ctica"><i class="fa fa-check"></i><b>5.5.2</b> Relevancia práctica</a></li>
+<li class="chapter" data-level="5.5.3" data-path="modelos-de-regresión-en-encuestas-de-hogares.html"><a href="modelos-de-regresión-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>5.5.3</b> ¿Aplicar o no aplicar ponderaciones?</a></li>
+<li class="chapter" data-level="5.5.4" data-path="02-Conceptos.html"><a href="#enfoques-inferenciales-para-el-an%C3%A1lisis-de-datos"><i class="fa fa-check"></i><b>5.5.4</b> Enfoques inferenciales para el análisis de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-los-par%C3%A1metros-en-un-modelo-de-regresi%C3%B3n-con-muestras-complejas"><i class="fa fa-check"></i><b>5.6</b> Estimación de los parámetros en un modelo de regresión con muestras complejas</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-par%C3%A1metros"><i class="fa fa-check"></i><b>5.6.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.6.2" data-path="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><a href="estimación-de-los-parámetros-en-un-modelo-de-regresión-con-muestras-complejas.html"><i class="fa fa-check"></i><b>5.6.2</b> Uso de ponderaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="02-Conceptos.html"><a href="#diagn%C3%B3stico-del-modelo"><i class="fa fa-check"></i><b>5.7</b> Diagnóstico del modelo</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="02-Conceptos.html"><a href="#coeficiente-de-determinaci%C3%B3n"><i class="fa fa-check"></i><b>5.7.1</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="5.7.2" data-path="02-Conceptos.html"><a href="#diagn%C3%B3stico-de-los-residuales"><i class="fa fa-check"></i><b>5.7.2</b> Diagnóstico de los residuales</a></li>
+<li class="chapter" data-level="5.7.3" data-path="diagnóstico-del-modelo.html"><a href="diagnóstico-del-modelo.html"><i class="fa fa-check"></i><b>5.7.3</b> Observaciones influyentes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="02-Conceptos.html"><a href="#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>5.8</b> Inferencia sobre los parámetros del modelo</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="02-Conceptos.html"><a href="#visualizaci%C3%B3n-de-datos"><i class="fa fa-check"></i><b>6</b> Visualización de datos</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="02-Conceptos.html"><a href="#gr%C3%A1ficas-en-r"><i class="fa fa-check"></i><b>6.1</b> Gráficas en <code>R</code></a></li>
+<li class="chapter" data-level="6.2" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html"><i class="fa fa-check"></i><b>6.2</b> Histogramas para graficar variables continuas</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="histogramas-para-graficar-variables-continuas.html"><a href="histogramas-para-graficar-variables-continuas.html#histogramas-ponderados-y-no-ponderados"><i class="fa fa-check"></i><b>6.2.1</b> Histogramas ponderados y no ponderados</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="agregando-densidades-y-graficando-boxplot.html"><a href="agregando-densidades-y-graficando-boxplot.html"><i class="fa fa-check"></i><b>6.3</b> Agregando densidades y graficando Boxplot</a></li>
+<li class="chapter" data-level="6.4" data-path="02-Conceptos.html"><a href="#diagramas-de-dispersi%C3%B3n-scatterplots"><i class="fa fa-check"></i><b>6.4</b> Diagramas de dispersión (Scatterplots)</a></li>
+<li class="chapter" data-level="6.5" data-path="diagrama-de-barras-para-variables-categoricas.html"><a href="diagrama-de-barras-para-variables-categoricas.html"><i class="fa fa-check"></i><b>6.5</b> Diagrama de barras para variables categoricas</a></li>
+<li class="chapter" data-level="6.6" data-path="creando-mapas.html"><a href="creando-mapas.html"><i class="fa fa-check"></i><b>6.6</b> Creando mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><a href="modelos-lineales-generalizados-en-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>7</b> Modelos lineales generalizados en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="prueba-de-independencia-f.html"><a href="prueba-de-independencia-f.html"><i class="fa fa-check"></i><b>7.1</b> Prueba de independencia F</a></li>
+<li class="chapter" data-level="7.2" data-path="02-Conceptos.html"><a href="#estad%C3%ADstico-de-wald"><i class="fa fa-check"></i><b>7.2</b> Estadístico de Wald</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-log-lineal-para-tablas-de-contingencia.html"><a href="modelo-log-lineal-para-tablas-de-contingencia.html"><i class="fa fa-check"></i><b>7.3</b> Modelo log lineal para tablas de contingencia</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="02-Conceptos.html"><a href="#modelos-lineales-generalizados-introducci%C3%B3n-a-la-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados: Introducción a la pseudo máxima verosimilitud</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="02-Conceptos.html"><a href="#acerca-de-las-muestras-aleatorias-y-su-an%C3%A1lisis"><i class="fa fa-check"></i><b>8.1</b> Acerca de las muestras aleatorias y su análisis</a></li>
+<li class="chapter" data-level="8.2" data-path="02-Conceptos.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>8.2</b> Método de Máxima Verosimilitud</a></li>
+<li class="chapter" data-level="8.3" data-path="02-Conceptos.html"><a href="#m%C3%A9todo-de-m%C3%A1xima-pseudo-verosimilitud"><i class="fa fa-check"></i><b>8.3</b> Método de Máxima Pseudo-Verosimilitud</a></li>
+<li class="chapter" data-level="8.4" data-path="modelo-multinomial.html"><a href="modelo-multinomial.html"><i class="fa fa-check"></i><b>8.4</b> Modelo multinomial</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><a href="modelos-multinivel-en-el-contexto-de-encuestas-de-hogares.html"><i class="fa fa-check"></i><b>9</b> Modelos multinivel en el contexto de encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modelos-multinivel-en-muestras-complejas.html"><a href="modelos-multinivel-en-muestras-complejas.html"><i class="fa fa-check"></i><b>9.1</b> Modelos multinivel en muestras complejas</a></li>
+<li class="chapter" data-level="9.2" data-path="02-Conceptos.html"><a href="#estimaci%C3%B3n-de-pseudo-m%C3%A1xima-verosimilitud"><i class="fa fa-check"></i><b>9.2</b> Estimación de pseudo máxima verosimilitud</a></li>
+<li class="chapter" data-level="9.3" data-path="02-Conceptos.html"><a href="#introducci%C3%B3n-a-los-modelos-log%C3%ADstico-multinivel."><i class="fa fa-check"></i><b>9.3</b> Introducción a los modelos logístico multinivel.</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-m%C3%BAltiple-en-encuestas-de-hogares"><i class="fa fa-check"></i><b>10</b> Imputación múltiple en encuestas de hogares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-la-media-no-condicional."><i class="fa fa-check"></i><b>10.1</b> Imputación por la media no condicional.</a></li>
+<li class="chapter" data-level="10.2" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-la-media-condicional"><i class="fa fa-check"></i><b>10.2</b> Imputación por la media condicional</a></li>
+<li class="chapter" data-level="10.3" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-hot-deck-y-cold-deck"><i class="fa fa-check"></i><b>10.3</b> Imputación por Hot-deck y Cold-deck</a></li>
+<li class="chapter" data-level="10.4" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.4</b> Imputación por regresión</a></li>
+<li class="chapter" data-level="10.5" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano"><i class="fa fa-check"></i><b>10.5</b> Imputación por el vecino más cercano</a></li>
+<li class="chapter" data-level="10.6" data-path="02-Conceptos.html"><a href="#imputaci%C3%B3n-por-el-vecino-m%C3%A1s-cercano-con-regresi%C3%B3n"><i class="fa fa-check"></i><b>10.6</b> Imputación por el vecino más cercano con regresión</a></li>
+<li class="chapter" data-level="10.7" data-path="02-Conceptos.html"><a href="#introducci%C3%B3n-a-la-imputaci%C3%B3n-m%C3%BAltiple."><i class="fa fa-check"></i><b>10.7</b> Introducción a la imputación múltiple.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>11</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a Análisis de encuestas con R </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis de encuestas con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="práctica-en-r" class="section level2 hasAnchor" number="2.10">
+<h2><span class="header-section-number">2.10</span> Práctica en <code>R</code><a href="#pr%C3%A1ctica-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta sección se utilizarán las funciones estudiadas en el capítulo anterior para la manipulación de la base de datos de ejemplo. Inicialmente, se cargarán las librerías <code>ggplot2</code> que permitirá generar gráficos de alta calidad en <code>R</code>, <code>TeachingSampling</code> que permite tomar muestras probabilísticas utilizando los diseños de muestreo usuales, <code>survey</code> y <code>srvyr</code> que permitirán definir los diseños muestrales y por último <code>dplyr</code> que permite la manipulación de las bases de datos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="práctica-en-r.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="práctica-en-r.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(TeachingSampling)</span>
+<span id="cb1-3"><a href="práctica-en-r.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="práctica-en-r.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb1-5"><a href="práctica-en-r.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span></code></pre></div>
+<p>Una vez cargada las librerías, se procede a calcular la cantidad de personas en la base de datos, el total de ingresos y total de gastos para cada UPM dentro de cada estrato:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="práctica-en-r.html#cb2-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&#39;BigCity&#39;</span>)</span>
+<span id="cb2-2"><a href="práctica-en-r.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="práctica-en-r.html#cb2-3" tabindex="-1"></a> FrameI <span class="ot">&lt;-</span> BigCity <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PSU) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="práctica-en-r.html#cb2-4" tabindex="-1"></a> <span class="fu">summarise</span>(<span class="at">Stratum =</span> <span class="fu">unique</span>(Stratum),</span>
+<span id="cb2-5"><a href="práctica-en-r.html#cb2-5" tabindex="-1"></a>           <span class="at">Persons =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-6"><a href="práctica-en-r.html#cb2-6" tabindex="-1"></a>           <span class="at">Income =</span> <span class="fu">sum</span>(Income),</span>
+<span id="cb2-7"><a href="práctica-en-r.html#cb2-7" tabindex="-1"></a>           <span class="at">Expenditure =</span> <span class="fu">sum</span>(Expenditure))</span>
+<span id="cb2-8"><a href="práctica-en-r.html#cb2-8" tabindex="-1"></a>             </span>
+<span id="cb2-9"><a href="práctica-en-r.html#cb2-9" tabindex="-1"></a><span class="fu">attach</span>(FrameI)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="práctica-en-r.html#cb3-1" tabindex="-1"></a><span class="fu">head</span>(FrameI, <span class="dv">10</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">PSU</th>
+<th align="left">Stratum</th>
+<th align="right">Persons</th>
+<th align="right">Income</th>
+<th align="right">Expenditure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">PSU0001</td>
+<td align="left">idStrt001</td>
+<td align="right">118</td>
+<td align="right">70911.72</td>
+<td align="right">44231.78</td>
+</tr>
+<tr class="even">
+<td align="left">PSU0002</td>
+<td align="left">idStrt001</td>
+<td align="right">136</td>
+<td align="right">68886.60</td>
+<td align="right">38381.90</td>
+</tr>
+<tr class="odd">
+<td align="left">PSU0003</td>
+<td align="left">idStrt001</td>
+<td align="right">96</td>
+<td align="right">37213.10</td>
+<td align="right">19494.78</td>
+</tr>
+<tr class="even">
+<td align="left">PSU0004</td>
+<td align="left">idStrt001</td>
+<td align="right">88</td>
+<td align="right">36926.46</td>
+<td align="right">24030.74</td>
+</tr>
+<tr class="odd">
+<td align="left">PSU0005</td>
+<td align="left">idStrt001</td>
+<td align="right">110</td>
+<td align="right">57493.88</td>
+<td align="right">31142.36</td>
+</tr>
+<tr class="even">
+<td align="left">PSU0006</td>
+<td align="left">idStrt001</td>
+<td align="right">116</td>
+<td align="right">75272.06</td>
+<td align="right">43473.28</td>
+</tr>
+<tr class="odd">
+<td align="left">PSU0007</td>
+<td align="left">idStrt001</td>
+<td align="right">68</td>
+<td align="right">33027.84</td>
+<td align="right">21832.66</td>
+</tr>
+<tr class="even">
+<td align="left">PSU0008</td>
+<td align="left">idStrt001</td>
+<td align="right">136</td>
+<td align="right">64293.02</td>
+<td align="right">47660.02</td>
+</tr>
+<tr class="odd">
+<td align="left">PSU0009</td>
+<td align="left">idStrt001</td>
+<td align="right">122</td>
+<td align="right">33156.14</td>
+<td align="right">23292.16</td>
+</tr>
+<tr class="even">
+<td align="left">PSU0010</td>
+<td align="left">idStrt002</td>
+<td align="right">70</td>
+<td align="right">65253.78</td>
+<td align="right">37114.76</td>
+</tr>
+</tbody>
+</table>
+<p>Ahora bien, para calcular los tamaños poblacionales de los estratos (NIh) y los tamaños de muestra dentro de cada estrato (nIh), se realiza de la siguiente manera:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="práctica-en-r.html#cb4-1" tabindex="-1"></a>sizes <span class="ot">=</span> FrameI <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="práctica-en-r.html#cb4-2" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">NIh =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-3"><a href="práctica-en-r.html#cb4-3" tabindex="-1"></a>        <span class="at">nIh =</span> <span class="dv">2</span>,</span>
+<span id="cb4-4"><a href="práctica-en-r.html#cb4-4" tabindex="-1"></a>        <span class="at">dI =</span> NIh<span class="sc">/</span>nIh)</span>
+<span id="cb4-5"><a href="práctica-en-r.html#cb4-5" tabindex="-1"></a>        </span>
+<span id="cb4-6"><a href="práctica-en-r.html#cb4-6" tabindex="-1"></a>NIh <span class="ot">&lt;-</span> sizes<span class="sc">$</span>NIh</span>
+<span id="cb4-7"><a href="práctica-en-r.html#cb4-7" tabindex="-1"></a>nIh <span class="ot">&lt;-</span> sizes<span class="sc">$</span>nIh</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="práctica-en-r.html#cb5-1" tabindex="-1"></a><span class="fu">head</span>(sizes, <span class="dv">10</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stratum</th>
+<th align="right">NIh</th>
+<th align="right">nIh</th>
+<th align="right">dI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt002</td>
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="right">5.5</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt003</td>
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="right">3.5</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt004</td>
+<td align="right">13</td>
+<td align="right">2</td>
+<td align="right">6.5</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt005</td>
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="right">5.5</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt006</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">2.5</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt007</td>
+<td align="right">14</td>
+<td align="right">2</td>
+<td align="right">7.0</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt008</td>
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="right">3.5</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt009</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">4.0</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt010</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>Si se desea extraer una muestra probabilística bajo un diseño aleatorio simple estratificado, se procede a utilizar la función <code>S.STSI</code> de la librería <code>TeachingSampling</code> como se muestra a continuación:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="práctica-en-r.html#cb6-1" tabindex="-1"></a>samI <span class="ot">&lt;-</span> <span class="fu">S.STSI</span>(Stratum, NIh, nIh)</span>
+<span id="cb6-2"><a href="práctica-en-r.html#cb6-2" tabindex="-1"></a>UI <span class="ot">&lt;-</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(FrameI<span class="sc">$</span>PSU))</span>
+<span id="cb6-3"><a href="práctica-en-r.html#cb6-3" tabindex="-1"></a>sampleI <span class="ot">&lt;-</span> UI[samI]</span></code></pre></div>
+<p>Ahora bien, con la función <code>left_join</code> se procede a pegar los tamaños muestrales a aquellas UPM’s que fueron seleccionadas en la muestra:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="práctica-en-r.html#cb7-1" tabindex="-1"></a>FrameII <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sizes, </span>
+<span id="cb7-2"><a href="práctica-en-r.html#cb7-2" tabindex="-1"></a>            BigCity[<span class="fu">which</span>(BigCity<span class="sc">$</span>PSU <span class="sc">%in%</span> sampleI), ])</span>
+<span id="cb7-3"><a href="práctica-en-r.html#cb7-3" tabindex="-1"></a><span class="fu">attach</span>(FrameII)</span></code></pre></div>
+<p>Una vez se tiene la base de datos con la muestra de UMP’s. se selecciona aquellas variables que son de inetrés para el estudio como sigue a continuación:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="práctica-en-r.html#cb8-1" tabindex="-1"></a><span class="fu">head</span>(FrameII, <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Stratum<span class="sc">:</span>Zone)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stratum</th>
+<th align="right">NIh</th>
+<th align="right">nIh</th>
+<th align="right">dI</th>
+<th align="left">HHID</th>
+<th align="left">PersonID</th>
+<th align="left">PSU</th>
+<th align="left">Zone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00067</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00067</td>
+<td align="left">idPer02</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00067</td>
+<td align="left">idPer03</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00067</td>
+<td align="left">idPer04</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00068</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00069</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00069</td>
+<td align="left">idPer02</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00069</td>
+<td align="left">idPer03</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00069</td>
+<td align="left">idPer04</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idHH00069</td>
+<td align="left">idPer05</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+</tbody>
+</table>
+<p>Luego de tener la información muestral de la primera etapa en la base FrameII se procede a calcular los tamaños de muestra dentro de cada UPM’s. En este caso, a modo de ejemplo, se tomará el 10% del tamaño de la UPM y se utilizará la función <code>ceiling</code> la cual aproxima al siguiente entero.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="práctica-en-r.html#cb9-1" tabindex="-1"></a>HHdb <span class="ot">&lt;-</span> FrameII <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="práctica-en-r.html#cb9-2" tabindex="-1"></a>        <span class="fu">group_by</span>(PSU) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="práctica-en-r.html#cb9-3" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">Ni =</span> <span class="fu">length</span>(<span class="fu">unique</span>(HHID)))</span>
+<span id="cb9-4"><a href="práctica-en-r.html#cb9-4" tabindex="-1"></a>        </span>
+<span id="cb9-5"><a href="práctica-en-r.html#cb9-5" tabindex="-1"></a>Ni <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(HHdb<span class="sc">$</span>Ni)</span>
+<span id="cb9-6"><a href="práctica-en-r.html#cb9-6" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(Ni <span class="sc">*</span> <span class="fl">0.1</span>)</span>
+<span id="cb9-7"><a href="práctica-en-r.html#cb9-7" tabindex="-1"></a><span class="fu">sum</span>(ni)</span></code></pre></div>
+<pre><code>## [1] 693</code></pre>
+<p>Teniendo el vector de tamaños de muestra para cada UMP, se procede a realizar la selección mediante un muestreo aleatorio simple con la función <code>S.SI</code> de la librería <code>TeachingSampling</code>. A modo ilustrativo, la selección en la segunda etapa del diseño se realizará, inicialmente para la primera UPM. Posterior a eso, se realizará un ciclo “for” para hacerlo con las demás UPM’s. Para la primera UPM se realiza de la siguiente manera:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="práctica-en-r.html#cb11-1" tabindex="-1"></a>sam <span class="ot">=</span> <span class="fu">S.SI</span>(Ni[<span class="dv">1</span>], ni[<span class="dv">1</span>])</span>
+<span id="cb11-2"><a href="práctica-en-r.html#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="práctica-en-r.html#cb11-3" tabindex="-1"></a>clusterII <span class="ot">=</span> FrameII[<span class="fu">which</span>(FrameII<span class="sc">$</span>PSU <span class="sc">==</span> sampleI[<span class="dv">1</span>]),]</span>
+<span id="cb11-4"><a href="práctica-en-r.html#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="práctica-en-r.html#cb11-5" tabindex="-1"></a>sam.HH <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">HHID =</span> <span class="fu">unique</span>(clusterII<span class="sc">$</span>HHID)[sam])</span>
+<span id="cb11-6"><a href="práctica-en-r.html#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="práctica-en-r.html#cb11-7" tabindex="-1"></a>clusterHH <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sam.HH, clusterII, <span class="at">by =</span> <span class="st">&quot;HHID&quot;</span>)</span>
+<span id="cb11-8"><a href="práctica-en-r.html#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="práctica-en-r.html#cb11-9" tabindex="-1"></a>clusterHH<span class="sc">$</span>dki <span class="ot">&lt;-</span> Ni[<span class="dv">1</span>] <span class="sc">/</span> ni[<span class="dv">1</span>]</span>
+<span id="cb11-10"><a href="práctica-en-r.html#cb11-10" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="práctica-en-r.html#cb11-11" tabindex="-1"></a>clusterHH<span class="sc">$</span>dk <span class="ot">&lt;-</span> clusterHH<span class="sc">$</span>dI <span class="sc">*</span> clusterHH<span class="sc">$</span>dki</span>
+<span id="cb11-12"><a href="práctica-en-r.html#cb11-12" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="práctica-en-r.html#cb11-13" tabindex="-1"></a>sam_data <span class="ot">=</span> clusterHH</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="práctica-en-r.html#cb12-1" tabindex="-1"></a><span class="fu">head</span>(sam_data, <span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Stratum<span class="sc">:</span>Zone)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Stratum</th>
+<th align="right">NIh</th>
+<th align="right">nIh</th>
+<th align="right">dI</th>
+<th align="left">PersonID</th>
+<th align="left">PSU</th>
+<th align="left">Zone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer02</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer03</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer04</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer05</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer02</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer03</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="odd">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer04</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+<tr class="even">
+<td align="left">idStrt001</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">4.5</td>
+<td align="left">idPer01</td>
+<td align="left">PSU0006</td>
+<td align="left">Rural</td>
+</tr>
+</tbody>
+</table>
+<p>Para las demás UPM’s seleccionadas en la etapa 1,</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="práctica-en-r.html#cb13-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(Ni)) {</span>
+<span id="cb13-2"><a href="práctica-en-r.html#cb13-2" tabindex="-1"></a>  sam <span class="ot">=</span> <span class="fu">S.SI</span>(Ni[i], ni[i])</span>
+<span id="cb13-3"><a href="práctica-en-r.html#cb13-3" tabindex="-1"></a>  </span>
+<span id="cb13-4"><a href="práctica-en-r.html#cb13-4" tabindex="-1"></a>  clusterII <span class="ot">=</span> FrameII[<span class="fu">which</span>(FrameII<span class="sc">$</span>PSU <span class="sc">==</span> sampleI[i]),]</span>
+<span id="cb13-5"><a href="práctica-en-r.html#cb13-5" tabindex="-1"></a>  </span>
+<span id="cb13-6"><a href="práctica-en-r.html#cb13-6" tabindex="-1"></a>  sam.HH <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">HHID =</span> <span class="fu">unique</span>(clusterII<span class="sc">$</span>HHID)[sam])</span>
+<span id="cb13-7"><a href="práctica-en-r.html#cb13-7" tabindex="-1"></a>  </span>
+<span id="cb13-8"><a href="práctica-en-r.html#cb13-8" tabindex="-1"></a>  clusterHH <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sam.HH, clusterII, <span class="at">by =</span> <span class="st">&quot;HHID&quot;</span>)</span>
+<span id="cb13-9"><a href="práctica-en-r.html#cb13-9" tabindex="-1"></a>  </span>
+<span id="cb13-10"><a href="práctica-en-r.html#cb13-10" tabindex="-1"></a>  clusterHH<span class="sc">$</span>dki <span class="ot">&lt;-</span> Ni[i] <span class="sc">/</span> ni[i]</span>
+<span id="cb13-11"><a href="práctica-en-r.html#cb13-11" tabindex="-1"></a>  </span>
+<span id="cb13-12"><a href="práctica-en-r.html#cb13-12" tabindex="-1"></a>  clusterHH<span class="sc">$</span>dk <span class="ot">&lt;-</span> clusterHH<span class="sc">$</span>dI <span class="sc">*</span> clusterHH<span class="sc">$</span>dki</span>
+<span id="cb13-13"><a href="práctica-en-r.html#cb13-13" tabindex="-1"></a>  </span>
+<span id="cb13-14"><a href="práctica-en-r.html#cb13-14" tabindex="-1"></a>  data1 <span class="ot">=</span> clusterHH</span>
+<span id="cb13-15"><a href="práctica-en-r.html#cb13-15" tabindex="-1"></a>  </span>
+<span id="cb13-16"><a href="práctica-en-r.html#cb13-16" tabindex="-1"></a>  sam_data <span class="ot">=</span> <span class="fu">rbind</span>(sam_data, data1)</span>
+<span id="cb13-17"><a href="práctica-en-r.html#cb13-17" tabindex="-1"></a>}</span>
+<span id="cb13-18"><a href="práctica-en-r.html#cb13-18" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> sam_data</span>
+<span id="cb13-19"><a href="práctica-en-r.html#cb13-19" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="práctica-en-r.html#cb13-20" tabindex="-1"></a><span class="fu">attach</span>(encuesta)</span></code></pre></div>
+<p>Una vez se obtiene la muestra (como se mostró anteriormente), el paso siguiente es definir el diseño utilizado y guardarlo como un objeto en <code>R</code> para posteriormente poderlo utilizar y realizar el proceso de estimación de parámetros y cálculo de indicadores. Para realizar esta tarea, se utilizará el paquete <code>srvyr</code> el cual ya fue definido en el capítulo anterior. Para este ejemplo, el diseño de muestreo utilizado fue un estratificado-multietápico en el cual, los estratos correspondieron a la variable <em>Stratum</em>, las UPM’s correspondieron a la variable <em>PSU</em>, los factores de expansión están en la variable <em>dk</em> y por último, se le indica a la función <code>as_survey_design</code> que las UPM’s están dentro de los estrato con el argumento <em>nest = T</em>. A continuación, se presenta el código computacional:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="práctica-en-r.html#cb14-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="práctica-en-r.html#cb14-2" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb14-3"><a href="práctica-en-r.html#cb14-3" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb14-4"><a href="práctica-en-r.html#cb14-4" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb14-5"><a href="práctica-en-r.html#cb14-5" tabindex="-1"></a>    <span class="at">weights =</span> dk,</span>
+<span id="cb14-6"><a href="práctica-en-r.html#cb14-6" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb14-7"><a href="práctica-en-r.html#cb14-7" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Ya definido el diseño de muestreo como un objeto de <code>R</code> se puede empezar a extraer información del mismo. Por ejemplo, se pueden extraer los pesos de muestreo de dicho diseño con la función <code>weights</code> y luego sumarlos para revisar hasta cuánto me está expandiendo mi muestra. El código es el siguiente:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="práctica-en-r.html#cb15-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">weights</span>(diseno))</span></code></pre></div>
+<pre><code>## [1] 148859.3</code></pre>
+<p>Como se puede observar, el tamaño poblacional estimado utilizando el diseño propuesto es de <span class="math inline">\(140579.2\)</span>. Sin embargo, el tamaño poblacional de la base BigCity es de <span class="math inline">\(150266\)</span>. Es normal que esto suceda pero debe ser corregido puesto que la suma de los factores de expansión debe sumar el total de la población. La solución para esto es calibrar los pesos de muestreo que se abordará a continuación.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="muestreo-aleatorio-simple-en-dos-etapas-estratificado.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="calibrando-con-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/psirusteam/2021ASDA/02-Conceptos.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["Análisis de encuestas con R.pdf", "Análisis de encuestas con R.epub", "Análisis de encuestas con R.mobi"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
