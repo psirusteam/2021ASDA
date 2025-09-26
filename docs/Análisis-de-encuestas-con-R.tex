@@ -2,11 +2,14 @@
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
-%
 \documentclass[
+  spanish,
   12pt,
 ]{book}
+\usepackage{xcolor}
+\usepackage[margin = 3cm]{geometry}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -37,8 +40,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
-\usepackage[margin = 3cm]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -104,19 +105,19 @@
 % Set default figure placement to htbp
 \def\fps@figure{htbp}
 \makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
 \ifLuaTeX
 \usepackage[bidi=basic]{babel}
 \else
 \usepackage[bidi=default]{babel}
 \fi
-\babelprovide[main,import]{spanish}
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
 \usepackage{setspace}
 %\linespread{1.5}
 %\usepackage{tikz}
@@ -136,9 +137,7 @@
 \makeatother
 \usepackage{amsmath}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\usepackage{tabularray}
 \usepackage{hyperref}
-\usepackage{siunitx}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -153,8 +152,6 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
-\usepackage[]{natbib}
-\bibliographystyle{apalike}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -656,25 +653,25 @@ Una vez se tiene la base de datos con la muestra de UMP's. se selecciona aquella
 \hline
 Stratum & NIh & nIh & dI & HHID & PersonID & PSU & Zone\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00067 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00001 & idPer01 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00067 & idPer02 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00001 & idPer02 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00067 & idPer03 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00001 & idPer03 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00067 & idPer04 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00001 & idPer04 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00068 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00001 & idPer05 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00069 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00002 & idPer01 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00069 & idPer02 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00002 & idPer02 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00069 & idPer03 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00002 & idPer03 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00069 & idPer04 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00002 & idPer04 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idHH00069 & idPer05 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idHH00002 & idPer05 & PSU0001 & Rural\\
 \hline
 \end{tabular}
 
@@ -693,7 +690,7 @@ Luego de tener la información muestral de la primera etapa en la base FrameII s
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 704
+## [1] 699
 \end{verbatim}
 
 Teniendo el vector de tamaños de muestra para cada UMP, se procede a realizar la selección mediante un muestreo aleatorio simple con la función \texttt{S.SI} de la librería \texttt{TeachingSampling}. A modo ilustrativo, la selección en la segunda etapa del diseño se realizará, inicialmente para la primera UPM. Posterior a eso, se realizará un ciclo ``for'' para hacerlo con las demás UPM's. Para la primera UPM se realiza de la siguiente manera:
@@ -726,25 +723,25 @@ Teniendo el vector de tamaños de muestra para cada UMP, se procede a realizar l
 \hline
 Stratum & NIh & nIh & dI & PersonID & PSU & Zone\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer02 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer02 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer03 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer02 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer04 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer03 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer05 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer04 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer02 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer02 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer03 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer03 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer04 & PSU0001 & Rural\\
 \hline
-idStrt001 & 9 & 2 & 4.5 & idPer04 & PSU0006 & Rural\\
+idStrt001 & 9 & 2 & 4.5 & idPer01 & PSU0001 & Rural\\
 \hline
 \end{tabular}
 
@@ -798,7 +795,7 @@ Ya definido el diseño de muestreo como un objeto de \texttt{R} se puede empezar
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 150139.4
+## [1] 153442.7
 \end{verbatim}
 
 Como se puede observar, el tamaño poblacional estimado utilizando el diseño propuesto es de \(140579.2\). Sin embargo, el tamaño poblacional de la base BigCity es de \(150266\). Es normal que esto suceda pero debe ser corregido puesto que la suma de los factores de expansión debe sumar el total de la población. La solución para esto es calibrar los pesos de muestreo que se abordará a continuación.
@@ -2135,7 +2132,7 @@ En este ejemplo se muestra cómo estimar totales y sus intervalos de confianza p
 
 \begin{verbatim}
 ##           total       SE DEff
-## Income 85793667  4778675   11
+## Income 85793667  4778674   11
 \end{verbatim}
 
 \begin{Shaded}
@@ -2164,7 +2161,7 @@ Paras seguir ilustrando el uso de la función \texttt{svytotal} y de \texttt{con
 
 \begin{verbatim}
 ##                total       SE   DEff
-## Expenditure 55677504  2604139 10.222
+## Expenditure 55677504  2604138 10.222
 \end{verbatim}
 
 \begin{Shaded}
@@ -3525,10 +3522,10 @@ En esta sección se presentan los procedimientos para estimar tamaños de poblac
 
 \begin{verbatim}
 ## # A tibble: 2 x 6
-##   Zone      n    Nd Nd_se Nd_low Nd_upp
-##   <chr> <int> <dbl> <dbl>  <dbl>  <dbl>
-## 1 Rural  1297 72102 3062. 66039. 78165.
-## 2 Urban  1308 78164 2847. 72526. 83802.
+##   Zone      n     Nd Nd_se Nd_low Nd_upp
+##   <chr> <int>  <dbl> <dbl>  <dbl>  <dbl>
+## 1 Rural  1297 72102. 3062. 66039. 78165.
+## 2 Urban  1308 78164. 2847. 72526. 83802.
 \end{verbatim}
 
 En la tabla resultante, \emph{n} indica el número de observaciones en la muestra por zona y \emph{Nd} representa la estimación del total de observaciones en la población. La función \texttt{unweighted()} calcula resúmenes no ponderados a partir de los datos muestrales.
@@ -5009,16 +5006,35 @@ Una vez hecho el análisis gráfico de las variables a utilizar en los modelos a
 
 Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función \texttt{modelsummary} de la librería \texttt{modelsummary} de la siguiente manera:
 
-\begin{tabular}{ll}
-\hline
-& Pob \\ \hline
-(Intercept) & \num{123.337} \\
-Expenditure & \num{1.229} \\
-Num.Obs. & \num{150266} \\
-R2 & \num{0.359} \\
-R2 Adj. & \num{0.359} \\
-RMSE & \num{461.74} \\
-\hline
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+ 
+\NormalTok{tabla }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Term =} \FunctionTok{c}\NormalTok{(}\StringTok{"(Intercept)"}\NormalTok{, }\StringTok{"Expenditure"}\NormalTok{, }\StringTok{"Num.Obs."}\NormalTok{, }\StringTok{"R2"}\NormalTok{, }\StringTok{"R2 Adj."}\NormalTok{, }\StringTok{"RMSE"}\NormalTok{),}
+  \AttributeTok{Pob =} \FunctionTok{c}\NormalTok{(}\FloatTok{123.337}\NormalTok{, }\FloatTok{1.229}\NormalTok{, }\DecValTok{150266}\NormalTok{, }\FloatTok{0.359}\NormalTok{, }\FloatTok{0.359}\NormalTok{, }\FloatTok{461.74}\NormalTok{)}
+\NormalTok{)}
+ 
+\FunctionTok{kable}\NormalTok{(tabla, }
+      \AttributeTok{format =} \StringTok{"latex"}\NormalTok{, }
+      \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{, }
+      \AttributeTok{digits =} \DecValTok{3}\NormalTok{,}
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"Pob"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{lr}
+\toprule
+ & Pob\\
+\midrule
+(Intercept) & 123.337\\
+Expenditure & 1.229\\
+Num.Obs. & 150266.000\\
+R2 & 0.359\\
+R2 Adj. & 0.359\\
+\addlinespace
+RMSE & 461.740\\
+\bottomrule
 \end{tabular}
 
 De la anterior salida se puede observar que, el intercepto es igual a 123.337 y el parámetro \(\beta_{1}\) asociado al gasto es 1.229. La demás información relacionada a esta salida se analizará más adelante.
@@ -5067,15 +5083,15 @@ Una vez hecho los análisis gráficos se procede a ajustar los modelos de regres
  Expenditure & 1.220$^{***}$ \\ 
   & (0.025) \\ 
   & \\ 
- Constant & 121.516$^{***}$ \\ 
-  & (11.408) \\ 
+ Constant & 121.500$^{***}$ \\ 
+  & (11.410) \\ 
   & \\ 
 \hline \\[-1.8ex] 
 Observations & 2,605 \\ 
 R$^{2}$ & 0.487 \\ 
 Adjusted R$^{2}$ & 0.487 \\ 
-Residual Std. Error & 345.012 (df = 2603) \\ 
-F Statistic & 2,472.919$^{***}$ (df = 1; 2603) \\ 
+Residual Std. Error & 345.000 (df = 2603) \\ 
+F Statistic & 2,473.000$^{***}$ (df = 1; 2603) \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
@@ -5124,15 +5140,15 @@ En este sentido, para ajustar modelos teniendo en cuenta los factores de expansi
  Expenditure & 1.263$^{***}$ \\ 
   & (0.024) \\ 
   & \\ 
- Constant & 103.136$^{***}$ \\ 
-  & (11.264) \\ 
+ Constant & 103.100$^{***}$ \\ 
+  & (11.260) \\ 
   & \\ 
 \hline \\[-1.8ex] 
 Observations & 2,605 \\ 
 R$^{2}$ & 0.509 \\ 
 Adjusted R$^{2}$ & 0.509 \\ 
-Residual Std. Error & 2,626.691 (df = 2603) \\ 
-F Statistic & 2,702.978$^{***}$ (df = 1; 2603) \\ 
+Residual Std. Error & 2,627.000 (df = 2603) \\ 
+F Statistic & 2,703.000$^{***}$ (df = 1; 2603) \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
@@ -5162,11 +5178,11 @@ Para el modelo ajustado con factores de expansión usando la función \texttt{lm
 ## 
 ## Coefficients:
 ## (Intercept)  Expenditure  
-##     103.136        1.263  
+##      103.14         1.26  
 ## 
 ## Degrees of Freedom: 2604 Total (i.e. Null);  118 Residual
-## Null Deviance:       634600000 
-## Residual Deviance: 311300000     AIC: 38280
+## Null Deviance:       6.35e+08 
+## Residual Deviance: 3.11e+08  AIC: 38300
 \end{verbatim}
 
 Obteniendo estimaciones para el \(\hat{\beta}_{0}\) es 103.14 y el \(\hat{\beta}_{1}\) asociado a la variable gastos es 1.26. Siendo exactamente las mismas que con la función \texttt{lm} ya que, como se definió en los argumentos de la función, la función de enlace es Gausiana.
@@ -5387,7 +5403,7 @@ Ahora bien, una vez definido el diseño muestral con los nuevos pesos q-weigthed
 
 \begin{verbatim}
 ##      variance    SE
-## [1,]  0.49058 19005
+## [1,]    0.491 19005
 \end{verbatim}
 
 Como se puede observar, el \(R_{adj}^{2}\) es un poco más bajo que el \(R^{2}\) y cercanos al 50\% que como se comentó anteriormente, dependiendo del contexto del problema se podrá concluir si es grande o pequeño.
@@ -5421,8 +5437,8 @@ Coefficients:
 62.18419 1.22548 63.46000 21.73256 0.00852
 
 Degrees of Freedom: 2604 Total (i.e.~Null); 115 Residual
-Null Deviance: 634600000
-Residual Deviance: 3.08e+08 AIC: 38260
+Null Deviance: 6.35e+08
+Residual Deviance: 3.08e+08 AIC: 38300
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5444,12 +5460,12 @@ Residual Deviance: 3.08e+08 AIC: 38260
 \hline \\[-1.8ex] 
  Expenditure & 1.225$^{***}$ (0.198) \\ 
   ZoneUrban & 63.460 (40.090) \\ 
-  SexMale & 21.733 (15.781) \\ 
+  SexMale & 21.730 (15.780) \\ 
   Age2 & 0.009 (0.006) \\ 
-  Constant & 62.184 (62.989) \\ 
+  Constant & 62.180 (62.990) \\ 
  \hline \\[-1.8ex] 
 Observations & 2,605 \\ 
-Akaike Inf. Crit. & 38,259.270 \\ 
+Akaike Inf. Crit. & 38,259.000 \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
@@ -5737,25 +5753,25 @@ Una vez calculado los \(D_{f}Betas_{\left(i\right)j}\) se procede a acomodar la 
 \hline
 id & variable & value & Criterio\\
 \hline
-889 & Beta\_1 & 0.2781445 & Si\\
+889 & Beta\_1 & 0.2781 & Si\\
 \hline
-890 & Beta\_2 & -0.2592704 & Si\\
+890 & Beta\_2 & -0.2593 & Si\\
 \hline
-891 & Beta\_1 & 0.2558846 & Si\\
+891 & Beta\_1 & 0.2559 & Si\\
 \hline
-889 & Beta\_2 & -0.2537377 & Si\\
+889 & Beta\_2 & -0.2537 & Si\\
 \hline
-891 & Beta\_2 & -0.2490529 & Si\\
+891 & Beta\_2 & -0.2491 & Si\\
 \hline
-890 & Beta\_1 & 0.2456031 & Si\\
+890 & Beta\_1 & 0.2456 & Si\\
 \hline
-2311 & Beta\_5 & 0.2056438 & Si\\
+2311 & Beta\_5 & 0.2056 & Si\\
 \hline
-889 & Beta\_5 & -0.1992701 & Si\\
+889 & Beta\_5 & -0.1993 & Si\\
 \hline
-890 & Beta\_5 & -0.1787722 & Si\\
+890 & Beta\_5 & -0.1788 & Si\\
 \hline
-890 & Beta\_4 & 0.1615834 & Si\\
+890 & Beta\_4 & 0.1616 & Si\\
 \hline
 \end{tabular}
 
@@ -6966,10 +6982,10 @@ En síntesis, los gráficos de barras permiten no solo una descripción clara de
 
 \begin{verbatim}
 ## # A tibble: 2 x 5
-##   Zone     Nd Nd_se Nd_low Nd_upp
-##   <chr> <dbl> <dbl>  <dbl>  <dbl>
-## 1 Rural 72102 3062. 66039. 78165.
-## 2 Urban 78164 2847. 72526. 83802.
+##   Zone      Nd Nd_se Nd_low Nd_upp
+##   <chr>  <dbl> <dbl>  <dbl>  <dbl>
+## 1 Rural 72102. 3062. 66039. 78165.
+## 2 Urban 78164. 2847. 72526. 83802.
 \end{verbatim}
 
 Ahora, se procede a hacer el gráfico como se mostró en las secciones anteriores:
@@ -8238,7 +8254,7 @@ Como es bien sabido, bajo la perspectiva de los modelos poblacionales y la infer
 \hline
 theta & Esp0\\
 \hline
-0.3 & 0.30192\\
+0.3 & 0.30092\\
 \hline
 \end{tabular}
 
@@ -8324,7 +8340,7 @@ En términos generales el siguiente esquema trata de reproducir gráficamente es
 \hline
 theta\_N & Esp1 & Esp2\\
 \hline
-0.27 & 0.2875601 & 0.1060103\\
+0.25 & 0.2650167 & 0.0950505\\
 \hline
 \end{tabular}
 
@@ -8399,7 +8415,7 @@ Con la siguiente simulación de Monte Carlo se comprueba fácilmente que \(\bar{
 \hline
 theta &  & \\
 \hline
-0.3 & 0.3105307 & 0.1164679\\
+0.3 & 0.318347 & 0.1174917\\
 \hline
 \end{tabular}
 
@@ -10030,7 +10046,7 @@ El ajuste del modelo se realiza utilizando la función \texttt{lmer} como se pre
 \hline
 ICC\_adjusted & ICC\_unadjusted & optional\\
 \hline
-0.6971 & 0.4598 & FALSE\\
+0.6975 & 0.4603 & FALSE\\
 \hline
 \end{tabular}
 
@@ -10046,25 +10062,25 @@ Los coeficientes del modelo son:
 \hline
   & (Intercept) & Expenditure\\
 \hline
-idStrt001 & -230.63 & 2.7761\\
+idStrt001 & -231.46 & 2.7781\\
 \hline
-idStrt002 & 31.07 & 1.6236\\
+idStrt002 & 30.81 & 1.6243\\
 \hline
-idStrt003 & 152.51 & 1.1621\\
+idStrt003 & 152.49 & 1.1621\\
 \hline
-idStrt004 & 230.80 & 1.3452\\
+idStrt004 & 229.89 & 1.3464\\
 \hline
-idStrt005 & -97.05 & 1.2964\\
+idStrt005 & -96.42 & 1.2955\\
 \hline
-idStrt006 & 30.34 & 1.2039\\
+idStrt006 & 30.79 & 1.2036\\
 \hline
-idStrt007 & 37.63 & 1.0771\\
+idStrt007 & 38.00 & 1.0769\\
 \hline
-idStrt008 & 167.70 & 0.9018\\
+idStrt008 & 167.88 & 0.9016\\
 \hline
-idStrt009 & 30.46 & 0.7488\\
+idStrt009 & 30.73 & 0.7496\\
 \hline
-idStrt010 & 74.87 & 1.8971\\
+idStrt010 & 74.05 & 1.8989\\
 \hline
 \end{tabular}
 
@@ -10109,17 +10125,17 @@ A continuación, se realizan las predicciones de los ingresos con el modelo:
 \hline
   & Pred & Income & Stratum\\
 \hline
-1 & 730.855 & 409.87 & idStrt001\\
+1 & 730.727 & 409.87 & idStrt001\\
 \hline
-6 & 858.279 & 823.75 & idStrt001\\
+6 & 858.245 & 823.75 & idStrt001\\
 \hline
-10 & -25.002 & 90.92 & idStrt001\\
+10 & -25.678 & 90.92 & idStrt001\\
 \hline
-13 & 1.982 & 135.33 & idStrt001\\
+13 & 1.325 & 135.33 & idStrt001\\
 \hline
-18 & 491.663 & 336.19 & idStrt001\\
+18 & 491.362 & 336.19 & idStrt001\\
 \hline
-22 & 1253.017 & 1539.75 & idStrt001\\
+22 & 1253.269 & 1539.75 & idStrt001\\
 \hline
 \end{tabular}
 
@@ -10187,17 +10203,17 @@ calculando las predicciones de los ingresos de los hogares por estrato:
 \hline
   & Pred & Income & Stratum\\
 \hline
-1 & 728.163 & 409.87 & idStrt001\\
+1 & 728.718 & 409.87 & idStrt001\\
 \hline
-6 & 854.365 & 823.75 & idStrt001\\
+6 & 854.725 & 823.75 & idStrt001\\
 \hline
-10 & -20.446 & 90.92 & idStrt001\\
+10 & -18.730 & 90.92 & idStrt001\\
 \hline
-13 & 6.279 & 135.33 & idStrt001\\
+13 & 7.954 & 135.33 & idStrt001\\
 \hline
-18 & 491.265 & 336.19 & idStrt001\\
+18 & 492.188 & 336.19 & idStrt001\\
 \hline
-22 & 1245.318 & 1539.75 & idStrt001\\
+22 & 1245.072 & 1539.75 & idStrt001\\
 \hline
 \end{tabular}
 
@@ -11592,17 +11608,17 @@ Agregando la variable estrato y así poder incorporar las zonas a la matriz de c
 \hline
 Stratum & (Intercept) & Expenditure & ZoneUrban & mu & Zone\\
 \hline
-idStrt002 & 53.18 & 1.593 & 28.20 & -0.1272 & Urban\\
+idStrt002 & 46.15 & 1.594 & 30.46 & -0.1138 & Urban\\
 \hline
-idStrt010 & 97.11 & 1.984 & 145.69 & -0.6724 & Urban\\
+idStrt010 & 84.82 & 1.980 & 152.75 & -0.6501 & Urban\\
 \hline
-idStrt015 & 36.22 & 1.754 & -149.89 & -0.0381 & Rural\\
+idStrt015 & 24.73 & 1.746 & -159.02 & 0.0095 & Rural\\
 \hline
-idStrt017 & 55.62 & 1.578 & 43.92 & -0.1375 & Rural\\
+idStrt017 & 50.91 & 1.579 & 35.45 & -0.1201 & Rural\\
 \hline
-idStrt022 & 41.14 & 1.133 & 27.03 & 0.2696 & Urban\\
+idStrt022 & 40.66 & 1.133 & 25.13 & 0.2744 & Urban\\
 \hline
-idStrt028 & 53.87 & 1.568 & -81.18 & -0.0079 & Urban\\
+idStrt028 & 45.78 & 1.572 & -82.04 & 0.0126 & Urban\\
 \hline
 \end{tabular}
 
@@ -11618,17 +11634,17 @@ Ahora bien, se agrega la media calculada para los estratos a la matriz de coefic
 \hline
 Stratum & (Intercept) & Expenditure & ZoneUrban & mu.x & Zone & mu.y\\
 \hline
-idStrt002 & 53.18 & 1.593 & 28.20 & -0.1272 & Urban & 286.2\\
+idStrt002 & 46.15 & 1.594 & 30.46 & -0.1138 & Urban & 286.2\\
 \hline
-idStrt010 & 97.11 & 1.984 & 145.69 & -0.6724 & Urban & 255.8\\
+idStrt010 & 84.82 & 1.980 & 152.75 & -0.6501 & Urban & 255.8\\
 \hline
-idStrt015 & 36.22 & 1.754 & -149.89 & -0.0381 & Rural & 357.0\\
+idStrt015 & 24.73 & 1.746 & -159.02 & 0.0095 & Rural & 357.0\\
 \hline
-idStrt017 & 55.62 & 1.578 & 43.92 & -0.1375 & Rural & 244.8\\
+idStrt017 & 50.91 & 1.579 & 35.45 & -0.1201 & Rural & 244.8\\
 \hline
-idStrt022 & 41.14 & 1.133 & 27.03 & 0.2696 & Urban & 524.0\\
+idStrt022 & 40.66 & 1.133 & 25.13 & 0.2744 & Urban & 524.0\\
 \hline
-idStrt028 & 53.87 & 1.568 & -81.18 & -0.0079 & Urban & 337.1\\
+idStrt028 & 45.78 & 1.572 & -82.04 & 0.0126 & Urban & 337.1\\
 \hline
 \end{tabular}
 
@@ -11651,17 +11667,17 @@ Escribiendo el anterior modelo en \texttt{R} se tiene:
 \hline
 Stratum & Zone & B0 & Expenditure\\
 \hline
-idStrt002 & Urban & 44.97 & 1.593\\
+idStrt002 & Urban & 44.06 & 1.594\\
 \hline
-idStrt010 & Urban & 70.82 & 1.984\\
+idStrt010 & Urban & 71.28 & 1.980\\
 \hline
-idStrt015 & Rural & 22.61 & 1.754\\
+idStrt015 & Rural & 28.13 & 1.746\\
 \hline
-idStrt017 & Rural & 21.97 & 1.578\\
+idStrt017 & Rural & 21.51 & 1.579\\
 \hline
-idStrt022 & Urban & 209.46 & 1.133\\
+idStrt022 & Urban & 209.57 & 1.133\\
 \hline
-idStrt028 & Urban & -29.97 & 1.568\\
+idStrt028 & Urban & -32.02 & 1.572\\
 \hline
 \end{tabular}
 
@@ -12199,17 +12215,17 @@ Los coeficientes del modelo son:
 \hline
   & (Intercept) & Expenditure\\
 \hline
-idStrt001 & 5.244 & -0.0271\\
+idStrt001 & 5.245 & -0.0272\\
 \hline
-idStrt002 & 11.058 & -0.0394\\
+idStrt002 & 11.061 & -0.0394\\
 \hline
-idStrt003 & -1.614 & -0.0060\\
+idStrt003 & -1.613 & -0.0060\\
 \hline
-idStrt004 & 1.655 & -0.0153\\
+idStrt004 & 1.657 & -0.0153\\
 \hline
-idStrt005 & 9.055 & -0.0289\\
+idStrt005 & 9.056 & -0.0289\\
 \hline
-idStrt006 & -1.354 & 0.0100\\
+idStrt006 & -1.355 & 0.0100\\
 \hline
 idStrt007 & 1.035 & -0.0136\\
 \hline
@@ -12217,7 +12233,7 @@ idStrt008 & 1.473 & -0.0056\\
 \hline
 idStrt009 & 4.050 & -0.0048\\
 \hline
-idStrt010 & 4.310 & -0.0214\\
+idStrt010 & 4.311 & -0.0214\\
 \hline
 \end{tabular}
 
@@ -12375,17 +12391,17 @@ Se logra observar que, hay una variación importante en el ajuste de los modelos
 \hline
 Pred & pobreza & Stratum & Zone & wk2\\
 \hline
-0.0074 & 0 & idStrt001 & Rural & 0.7770\\
+0.0145 & 0 & idStrt001 & Rural & 0.7770\\
 \hline
-0.0074 & 0 & idStrt001 & Rural & 0.7501\\
+0.0145 & 0 & idStrt001 & Rural & 0.7501\\
 \hline
-0.0074 & 0 & idStrt001 & Rural & 0.7463\\
+0.0145 & 0 & idStrt001 & Rural & 0.7463\\
 \hline
-0.0074 & 0 & idStrt001 & Rural & 0.7717\\
+0.0145 & 0 & idStrt001 & Rural & 0.7717\\
 \hline
-0.0074 & 0 & idStrt001 & Rural & 0.7438\\
+0.0145 & 0 & idStrt001 & Rural & 0.7438\\
 \hline
-0.0018 & 0 & idStrt001 & Rural & 0.7507\\
+0.0041 & 0 & idStrt001 & Rural & 0.7507\\
 \hline
 \end{tabular}
 
@@ -12403,9 +12419,9 @@ Por último, se verifica la calidad de las predicciones, obteniendo, como en los
 \hline
 Zone & Pred & pobreza\\
 \hline
-Rural & 0.4299 & 0.4298\\
+Rural & 0.4366 & 0.4298\\
 \hline
-Urban & 0.3389 & 0.3437\\
+Urban & 0.3366 & 0.3437\\
 \hline
 \end{tabular}
 
@@ -13374,7 +13390,7 @@ Para ejemplificar, imputemos la variable ingreso y la variable empleados tomadno
 \begin{verbatim}
 ## # weights:  15 (8 variable)
 ## initial  value 1651.214270 
-## iter  10 value 1182.110113
+## iter  10 value 1182.110114
 ## final  value 1132.682019 
 ## converged
 \end{verbatim}
@@ -14584,7 +14600,7 @@ Inicialmente, se extraen los datos a imputar y se calculan los tamaños de los d
 ## converged
 ## # weights:  15 (8 variable)
 ## initial  value 1651.214270 
-## iter  10 value 1165.750155
+## iter  10 value 1165.750154
 ## final  value 1125.933563 
 ## converged
 ## # weights:  15 (8 variable)

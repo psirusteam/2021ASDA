@@ -357,7 +357,7 @@ F_{R-S,LRT}=G_{R-S}^{2}\big/\left(C-1\right)\sim F_{\left(C-1\right),df}
 \]</span>
 donde <span class="math inline">\(C\)</span> es el número de columnas de la tabla cruzada.</p>
 <p>En <code>R</code>, el cálculo de las estadísticas chi-cuadrado y F se camculan usando la función <code>summary</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="prueba-de-independencia-f.html#cb407-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="prueba-de-independencia-f.html#cb408-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>##        Sex
 ## pobreza Female  Male
 ##       0  48366 43032
@@ -368,7 +368,7 @@ donde <span class="math inline">\(C\)</span> es el número de columnas de la tab
 ## data:  NextMethod()
 ## X-squared = 0.077, df = 1, p-value = 0.8</code></pre>
 <p>Basado en la estadística de Pearson, se puede concluir que el estado de pobreza y el sexo no están relacionados con una confianza del 95%.</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="prueba-de-independencia-f.html#cb409-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="prueba-de-independencia-f.html#cb410-1" tabindex="-1"></a><span class="fu">summary</span>(tab, <span class="at">statistic =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
 <pre><code>##        Sex
 ## pobreza Female  Male
 ##       0  48366 43032

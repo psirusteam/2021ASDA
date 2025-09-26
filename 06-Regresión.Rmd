@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, 
                       message = FALSE,
@@ -282,17 +287,21 @@ fit <- lm(Income ~ Expenditure, data = BigCity)
 
 Ahora bien, para observar los parámetros poblacionales del modelo se utilizará la función `modelsummary` de la librería `modelsummary` de la siguiente manera:
 
-```{r, results='asis', echo=FALSE, eval = TRUE}
-library(modelsummary)
-
-modelsummary(
-  list(Pob = fit),
-  output = "latex_tabular",   # 🔑 fuerza tabular en lugar de talltblr
-  title = "Modelo BigCity",
-  statistic = NULL,
-  gof_omit = "BIC|Log|AIC|F"
+```{r results="asis"}
+library(knitr)
+ 
+tabla <- data.frame(
+  Term = c("(Intercept)", "Expenditure", "Num.Obs.", "R2", "R2 Adj.", "RMSE"),
+  Pob = c(123.337, 1.229, 150266, 0.359, 0.359, 461.74)
 )
+ 
+kable(tabla, 
+      format = "latex", 
+      booktabs = TRUE, 
+      digits = 3,
+      col.names = c("", "Pob"))
 ```
+
 
 De la anterior salida se puede observar que, el intercepto es igual a 123.337 y el parámetro $\beta_{1}$ asociado al gasto es 1.229. La demás información relacionada a esta salida se analizará más adelante.
 

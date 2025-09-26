@@ -340,19 +340,19 @@ todos los individuos en la muestra.</li>
 </ul>
 <p>A modo de ejemplificar la teoría, realicemos un ejercicio de simulación de la siguiente manera. Simular un conjunto de <span class="math inline">\(n = 500\)</span> datos con una pendiente <span class="math inline">\(\beta = 10\)</span> y con una dispersión de <span class="math inline">\(\sigma = 2\)</span>. A su vez, el conjunto de datos tendrá <span class="math inline">\(n_0 = 200\)</span> valores faltantes en la variable respuesta.</p>
 <p>El algoritmo de simulación es el siguiente:</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="introducción-a-la-imputación-múltiple..html#cb645-1" tabindex="-1"></a>generar <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">n_0 =</span> <span class="dv">200</span>, </span>
-<span id="cb645-2"><a href="introducción-a-la-imputación-múltiple..html#cb645-2" tabindex="-1"></a>                    <span class="at">beta =</span> <span class="dv">10</span>, <span class="at">sigma =</span> <span class="dv">2</span>){</span>
-<span id="cb645-3"><a href="introducción-a-la-imputación-múltiple..html#cb645-3" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
-<span id="cb645-4"><a href="introducción-a-la-imputación-múltiple..html#cb645-4" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> beta <span class="sc">*</span> x</span>
-<span id="cb645-5"><a href="introducción-a-la-imputación-múltiple..html#cb645-5" tabindex="-1"></a>  y <span class="ot">&lt;-</span> mu <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma)</span>
-<span id="cb645-6"><a href="introducción-a-la-imputación-múltiple..html#cb645-6" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
-<span id="cb645-7"><a href="introducción-a-la-imputación-múltiple..html#cb645-7" tabindex="-1"></a>  faltantes <span class="ot">&lt;-</span> <span class="fu">sample</span>(n, n_0)</span>
-<span id="cb645-8"><a href="introducción-a-la-imputación-múltiple..html#cb645-8" tabindex="-1"></a>  datos<span class="sc">$</span>faltantes <span class="ot">&lt;-</span> <span class="st">&quot;No&quot;</span></span>
-<span id="cb645-9"><a href="introducción-a-la-imputación-múltiple..html#cb645-9" tabindex="-1"></a>  datos<span class="sc">$</span>faltantes[faltantes] <span class="ot">&lt;-</span> <span class="st">&quot;Si&quot;</span></span>
-<span id="cb645-10"><a href="introducción-a-la-imputación-múltiple..html#cb645-10" tabindex="-1"></a>  datos<span class="sc">$</span>y.per <span class="ot">&lt;-</span> y</span>
-<span id="cb645-11"><a href="introducción-a-la-imputación-múltiple..html#cb645-11" tabindex="-1"></a>  datos<span class="sc">$</span>y.per[faltantes] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb645-12"><a href="introducción-a-la-imputación-múltiple..html#cb645-12" tabindex="-1"></a>  <span class="fu">return</span>(datos)</span>
-<span id="cb645-13"><a href="introducción-a-la-imputación-múltiple..html#cb645-13" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="introducción-a-la-imputación-múltiple..html#cb646-1" tabindex="-1"></a>generar <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">n_0 =</span> <span class="dv">200</span>, </span>
+<span id="cb646-2"><a href="introducción-a-la-imputación-múltiple..html#cb646-2" tabindex="-1"></a>                    <span class="at">beta =</span> <span class="dv">10</span>, <span class="at">sigma =</span> <span class="dv">2</span>){</span>
+<span id="cb646-3"><a href="introducción-a-la-imputación-múltiple..html#cb646-3" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb646-4"><a href="introducción-a-la-imputación-múltiple..html#cb646-4" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> beta <span class="sc">*</span> x</span>
+<span id="cb646-5"><a href="introducción-a-la-imputación-múltiple..html#cb646-5" tabindex="-1"></a>  y <span class="ot">&lt;-</span> mu <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> sigma)</span>
+<span id="cb646-6"><a href="introducción-a-la-imputación-múltiple..html#cb646-6" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb646-7"><a href="introducción-a-la-imputación-múltiple..html#cb646-7" tabindex="-1"></a>  faltantes <span class="ot">&lt;-</span> <span class="fu">sample</span>(n, n_0)</span>
+<span id="cb646-8"><a href="introducción-a-la-imputación-múltiple..html#cb646-8" tabindex="-1"></a>  datos<span class="sc">$</span>faltantes <span class="ot">&lt;-</span> <span class="st">&quot;No&quot;</span></span>
+<span id="cb646-9"><a href="introducción-a-la-imputación-múltiple..html#cb646-9" tabindex="-1"></a>  datos<span class="sc">$</span>faltantes[faltantes] <span class="ot">&lt;-</span> <span class="st">&quot;Si&quot;</span></span>
+<span id="cb646-10"><a href="introducción-a-la-imputación-múltiple..html#cb646-10" tabindex="-1"></a>  datos<span class="sc">$</span>y.per <span class="ot">&lt;-</span> y</span>
+<span id="cb646-11"><a href="introducción-a-la-imputación-múltiple..html#cb646-11" tabindex="-1"></a>  datos<span class="sc">$</span>y.per[faltantes] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb646-12"><a href="introducción-a-la-imputación-múltiple..html#cb646-12" tabindex="-1"></a>  <span class="fu">return</span>(datos)</span>
+<span id="cb646-13"><a href="introducción-a-la-imputación-múltiple..html#cb646-13" tabindex="-1"></a>}</span></code></pre></div>
 <p>El código anterior realiza lo siguiente:</p>
 <ul>
 <li><p><em>generar &lt;- function(n = 500, n_0 = 200, beta = 10, sigma = 2){</em>:Esta línea de código define la función “generar” con cuatro argumentos opcionales: n, n_0, beta y sigma.</p></li>
@@ -365,9 +365,9 @@ todos los individuos en la muestra.</li>
 <li><p><em>datos<span class="math inline">\(y.per &lt;- y*, *datos\)</span>y.per[faltantes] &lt;- NA</em>: Esta línea crea una nueva columna en el data frame “datos” llamada “y.per” y la inicializa con los mismos valores que “y”. Luego, establece los valores de esta columna en “NA” para las filas seleccionadas por la muestra aleatoria anterior, lo que simula valores faltantes en los datos de “y”.</p></li>
 </ul>
 <p>Una vez creada la función anterior, se genera la población usando una semilla para poder reproducirla:</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="introducción-a-la-imputación-múltiple..html#cb646-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb646-2"><a href="introducción-a-la-imputación-múltiple..html#cb646-2" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">generar</span>()</span>
-<span id="cb646-3"><a href="introducción-a-la-imputación-múltiple..html#cb646-3" tabindex="-1"></a><span class="fu">head</span>(datos,<span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="introducción-a-la-imputación-múltiple..html#cb647-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb647-2"><a href="introducción-a-la-imputación-múltiple..html#cb647-2" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">generar</span>()</span>
+<span id="cb647-3"><a href="introducción-a-la-imputación-múltiple..html#cb647-3" tabindex="-1"></a><span class="fu">head</span>(datos,<span class="dv">12</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -453,15 +453,15 @@ todos los individuos en la muestra.</li>
 </tbody>
 </table>
 <p>A continuación, se grafican la relación entre “x” y “y” y “x” y “y.per” notando que, la distribución entre las dos relaciones es muy similar.</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="introducción-a-la-imputación-múltiple..html#cb647-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb647-2"><a href="introducción-a-la-imputación-múltiple..html#cb647-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb647-3"><a href="introducción-a-la-imputación-múltiple..html#cb647-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x , <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span>
-<span id="cb647-4"><a href="introducción-a-la-imputación-múltiple..html#cb647-4" tabindex="-1"></a></span>
-<span id="cb647-5"><a href="introducción-a-la-imputación-múltiple..html#cb647-5" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y.per)) <span class="sc">+</span></span>
-<span id="cb647-6"><a href="introducción-a-la-imputación-múltiple..html#cb647-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x , <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span>
-<span id="cb647-7"><a href="introducción-a-la-imputación-múltiple..html#cb647-7" tabindex="-1"></a>  </span>
-<span id="cb647-8"><a href="introducción-a-la-imputación-múltiple..html#cb647-8" tabindex="-1"></a>p1 <span class="sc">|</span> p1</span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/unnamed-chunk-65-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="introducción-a-la-imputación-múltiple..html#cb648-1" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb648-2"><a href="introducción-a-la-imputación-múltiple..html#cb648-2" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb648-3"><a href="introducción-a-la-imputación-múltiple..html#cb648-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x , <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span>
+<span id="cb648-4"><a href="introducción-a-la-imputación-múltiple..html#cb648-4" tabindex="-1"></a></span>
+<span id="cb648-5"><a href="introducción-a-la-imputación-múltiple..html#cb648-5" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y.per)) <span class="sc">+</span></span>
+<span id="cb648-6"><a href="introducción-a-la-imputación-múltiple..html#cb648-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x , <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span>
+<span id="cb648-7"><a href="introducción-a-la-imputación-múltiple..html#cb648-7" tabindex="-1"></a>  </span>
+<span id="cb648-8"><a href="introducción-a-la-imputación-múltiple..html#cb648-8" tabindex="-1"></a>p1 <span class="sc">|</span> p1</span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-65-1.svg" width="672" /></p>
 <p>Ahora, dado el 40% de valores faltantes, es necesario imputar dichos valores. Para esto, utilizaremos la técnica de imputación múltiple propuesta por <strong>Rubin (1987)</strong>. La idea consiste en generar <span class="math inline">\(M &gt; 1\)</span> conjuntos de valores
 para los datos faltantes. Al final, el valor <em>imputado</em> corresponderá al
 promedio de esos <span class="math inline">\(M\)</span> valores.</p>
@@ -505,34 +505,34 @@ expresión:
 <p>Por tanto, la varianza estimada es igual a:
 <span class="math display">\[\hat{V}(\hat{\beta} | Y_{obs}) = \bar{U} + (1 + \frac{1}{M}) B\]</span>
 A modo de ejemplo, a continuación, se crea una función que haga la estimación de los valores faltantes usando bootstrap:</p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb648-1"><a href="introducción-a-la-imputación-múltiple..html#cb648-1" tabindex="-1"></a>im.bootstrap <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, <span class="at">M =</span> <span class="dv">15</span>){</span>
-<span id="cb648-2"><a href="introducción-a-la-imputación-múltiple..html#cb648-2" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
-<span id="cb648-3"><a href="introducción-a-la-imputación-múltiple..html#cb648-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(datos)</span>
-<span id="cb648-4"><a href="introducción-a-la-imputación-múltiple..html#cb648-4" tabindex="-1"></a>  datos1 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(datos)</span>
-<span id="cb648-5"><a href="introducción-a-la-imputación-múltiple..html#cb648-5" tabindex="-1"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(datos1)</span>
-<span id="cb648-6"><a href="introducción-a-la-imputación-múltiple..html#cb648-6" tabindex="-1"></a>  n0 <span class="ot">&lt;-</span> n <span class="sc">-</span> n1</span>
-<span id="cb648-7"><a href="introducción-a-la-imputación-múltiple..html#cb648-7" tabindex="-1"></a>  Ind <span class="ot">&lt;-</span> <span class="fu">is.na</span>(datos<span class="sc">$</span>y.per)</span>
-<span id="cb648-8"><a href="introducción-a-la-imputación-múltiple..html#cb648-8" tabindex="-1"></a>  faltantes.boot <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb648-9"><a href="introducción-a-la-imputación-múltiple..html#cb648-9" tabindex="-1"></a>  beta1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb648-10"><a href="introducción-a-la-imputación-múltiple..html#cb648-10" tabindex="-1"></a>  sigma1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb648-11"><a href="introducción-a-la-imputación-múltiple..html#cb648-11" tabindex="-1"></a>  </span>
-<span id="cb648-12"><a href="introducción-a-la-imputación-múltiple..html#cb648-12" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
-<span id="cb648-13"><a href="introducción-a-la-imputación-múltiple..html#cb648-13" tabindex="-1"></a>    datos.m <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">sample_n</span>(datos1, n1, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb648-14"><a href="introducción-a-la-imputación-múltiple..html#cb648-14" tabindex="-1"></a>    model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x, <span class="at">data =</span> datos.m)</span>
-<span id="cb648-15"><a href="introducción-a-la-imputación-múltiple..html#cb648-15" tabindex="-1"></a>    beta <span class="ot">&lt;-</span> model1<span class="sc">$</span>coeff</span>
-<span id="cb648-16"><a href="introducción-a-la-imputación-múltiple..html#cb648-16" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">anova</span>(model1)[[<span class="st">&quot;Mean Sq&quot;</span>]][<span class="dv">2</span>])</span>
-<span id="cb648-17"><a href="introducción-a-la-imputación-múltiple..html#cb648-17" tabindex="-1"></a>    faltantes.boot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n0, datos<span class="sc">$</span>x[Ind] <span class="sc">*</span> beta, <span class="at">sd =</span> sigma)</span>
-<span id="cb648-18"><a href="introducción-a-la-imputación-múltiple..html#cb648-18" tabindex="-1"></a>    datos<span class="sc">$</span>y.per[Ind] <span class="ot">&lt;-</span>  faltantes.boot</span>
-<span id="cb648-19"><a href="introducción-a-la-imputación-múltiple..html#cb648-19" tabindex="-1"></a>    model.input <span class="ot">&lt;-</span> <span class="fu">lm</span>(y.per <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x, <span class="at">data =</span> datos)</span>
-<span id="cb648-20"><a href="introducción-a-la-imputación-múltiple..html#cb648-20" tabindex="-1"></a>    beta1[m] <span class="ot">&lt;-</span> model.input<span class="sc">$</span>coeff</span>
-<span id="cb648-21"><a href="introducción-a-la-imputación-múltiple..html#cb648-21" tabindex="-1"></a>    sigma1[m] <span class="ot">&lt;-</span> <span class="fu">summary</span>(model.input)<span class="sc">$</span>coeff[<span class="dv">2</span>]</span>
-<span id="cb648-22"><a href="introducción-a-la-imputación-múltiple..html#cb648-22" tabindex="-1"></a>  }</span>
-<span id="cb648-23"><a href="introducción-a-la-imputación-múltiple..html#cb648-23" tabindex="-1"></a>  beta.input <span class="ot">&lt;-</span> <span class="fu">mean</span>(beta1)</span>
-<span id="cb648-24"><a href="introducción-a-la-imputación-múltiple..html#cb648-24" tabindex="-1"></a>  u.bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(sigma1 <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb648-25"><a href="introducción-a-la-imputación-múltiple..html#cb648-25" tabindex="-1"></a>  B <span class="ot">&lt;-</span> <span class="fu">var</span>(beta1)</span>
-<span id="cb648-26"><a href="introducción-a-la-imputación-múltiple..html#cb648-26" tabindex="-1"></a>  beta.sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(u.bar <span class="sc">+</span> B <span class="sc">+</span> B<span class="sc">/</span>M)</span>
-<span id="cb648-27"><a href="introducción-a-la-imputación-múltiple..html#cb648-27" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">new =</span> datos, <span class="at">beta =</span> beta.input, <span class="at">sd =</span> beta.sd)</span>
-<span id="cb648-28"><a href="introducción-a-la-imputación-múltiple..html#cb648-28" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="introducción-a-la-imputación-múltiple..html#cb649-1" tabindex="-1"></a>im.bootstrap <span class="ot">&lt;-</span> <span class="cf">function</span>(datos, <span class="at">M =</span> <span class="dv">15</span>){</span>
+<span id="cb649-2"><a href="introducción-a-la-imputación-múltiple..html#cb649-2" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb649-3"><a href="introducción-a-la-imputación-múltiple..html#cb649-3" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(datos)</span>
+<span id="cb649-4"><a href="introducción-a-la-imputación-múltiple..html#cb649-4" tabindex="-1"></a>  datos1 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(datos)</span>
+<span id="cb649-5"><a href="introducción-a-la-imputación-múltiple..html#cb649-5" tabindex="-1"></a>  n1 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(datos1)</span>
+<span id="cb649-6"><a href="introducción-a-la-imputación-múltiple..html#cb649-6" tabindex="-1"></a>  n0 <span class="ot">&lt;-</span> n <span class="sc">-</span> n1</span>
+<span id="cb649-7"><a href="introducción-a-la-imputación-múltiple..html#cb649-7" tabindex="-1"></a>  Ind <span class="ot">&lt;-</span> <span class="fu">is.na</span>(datos<span class="sc">$</span>y.per)</span>
+<span id="cb649-8"><a href="introducción-a-la-imputación-múltiple..html#cb649-8" tabindex="-1"></a>  faltantes.boot <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb649-9"><a href="introducción-a-la-imputación-múltiple..html#cb649-9" tabindex="-1"></a>  beta1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb649-10"><a href="introducción-a-la-imputación-múltiple..html#cb649-10" tabindex="-1"></a>  sigma1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb649-11"><a href="introducción-a-la-imputación-múltiple..html#cb649-11" tabindex="-1"></a>  </span>
+<span id="cb649-12"><a href="introducción-a-la-imputación-múltiple..html#cb649-12" tabindex="-1"></a>  <span class="cf">for</span> (m <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M){</span>
+<span id="cb649-13"><a href="introducción-a-la-imputación-múltiple..html#cb649-13" tabindex="-1"></a>    datos.m <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">sample_n</span>(datos1, n1, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb649-14"><a href="introducción-a-la-imputación-múltiple..html#cb649-14" tabindex="-1"></a>    model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x, <span class="at">data =</span> datos.m)</span>
+<span id="cb649-15"><a href="introducción-a-la-imputación-múltiple..html#cb649-15" tabindex="-1"></a>    beta <span class="ot">&lt;-</span> model1<span class="sc">$</span>coeff</span>
+<span id="cb649-16"><a href="introducción-a-la-imputación-múltiple..html#cb649-16" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">anova</span>(model1)[[<span class="st">&quot;Mean Sq&quot;</span>]][<span class="dv">2</span>])</span>
+<span id="cb649-17"><a href="introducción-a-la-imputación-múltiple..html#cb649-17" tabindex="-1"></a>    faltantes.boot <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n0, datos<span class="sc">$</span>x[Ind] <span class="sc">*</span> beta, <span class="at">sd =</span> sigma)</span>
+<span id="cb649-18"><a href="introducción-a-la-imputación-múltiple..html#cb649-18" tabindex="-1"></a>    datos<span class="sc">$</span>y.per[Ind] <span class="ot">&lt;-</span>  faltantes.boot</span>
+<span id="cb649-19"><a href="introducción-a-la-imputación-múltiple..html#cb649-19" tabindex="-1"></a>    model.input <span class="ot">&lt;-</span> <span class="fu">lm</span>(y.per <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x, <span class="at">data =</span> datos)</span>
+<span id="cb649-20"><a href="introducción-a-la-imputación-múltiple..html#cb649-20" tabindex="-1"></a>    beta1[m] <span class="ot">&lt;-</span> model.input<span class="sc">$</span>coeff</span>
+<span id="cb649-21"><a href="introducción-a-la-imputación-múltiple..html#cb649-21" tabindex="-1"></a>    sigma1[m] <span class="ot">&lt;-</span> <span class="fu">summary</span>(model.input)<span class="sc">$</span>coeff[<span class="dv">2</span>]</span>
+<span id="cb649-22"><a href="introducción-a-la-imputación-múltiple..html#cb649-22" tabindex="-1"></a>  }</span>
+<span id="cb649-23"><a href="introducción-a-la-imputación-múltiple..html#cb649-23" tabindex="-1"></a>  beta.input <span class="ot">&lt;-</span> <span class="fu">mean</span>(beta1)</span>
+<span id="cb649-24"><a href="introducción-a-la-imputación-múltiple..html#cb649-24" tabindex="-1"></a>  u.bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(sigma1 <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb649-25"><a href="introducción-a-la-imputación-múltiple..html#cb649-25" tabindex="-1"></a>  B <span class="ot">&lt;-</span> <span class="fu">var</span>(beta1)</span>
+<span id="cb649-26"><a href="introducción-a-la-imputación-múltiple..html#cb649-26" tabindex="-1"></a>  beta.sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(u.bar <span class="sc">+</span> B <span class="sc">+</span> B<span class="sc">/</span>M)</span>
+<span id="cb649-27"><a href="introducción-a-la-imputación-múltiple..html#cb649-27" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">new =</span> datos, <span class="at">beta =</span> beta.input, <span class="at">sd =</span> beta.sd)</span>
+<span id="cb649-28"><a href="introducción-a-la-imputación-múltiple..html#cb649-28" tabindex="-1"></a>}</span></code></pre></div>
 <p>La función anterior realiza internamente lo siguiente:</p>
 <ul>
 <li><p>En la primera sección del código, desde <em>library(dplyr)</em> hasta <em>sigma1 &lt;- NULL</em> se calcula el número total de observaciones “n”, se eliminan las filas con valores faltantes y se calculan las longitudes de los datos “datos1” sin valores faltantes, “n1”, y los datos faltantes “n0”. También se crea una variable de índice “Ind” que indica qué observaciones tienen valores faltantes, y se inicializan varias variables que se usarán más adelante en la función.</p></li>
@@ -541,12 +541,12 @@ A modo de ejemplo, a continuación, se crea una función que haga la estimación
 </ul>
 <p>Al aplicar la función sobre el conjunto de datos creado, se obtienen las
 siguientes salidas:</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="introducción-a-la-imputación-múltiple..html#cb649-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">generar</span>()</span>
-<span id="cb649-2"><a href="introducción-a-la-imputación-múltiple..html#cb649-2" tabindex="-1"></a><span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>beta</span></code></pre></div>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb650-1"><a href="introducción-a-la-imputación-múltiple..html#cb650-1" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">generar</span>()</span>
+<span id="cb650-2"><a href="introducción-a-la-imputación-múltiple..html#cb650-2" tabindex="-1"></a><span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>beta</span></code></pre></div>
 <pre><code>## [1] 10.29741</code></pre>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="introducción-a-la-imputación-múltiple..html#cb651-1" tabindex="-1"></a><span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>sd</span></code></pre></div>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb652-1"><a href="introducción-a-la-imputación-múltiple..html#cb652-1" tabindex="-1"></a><span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>sd</span></code></pre></div>
 <pre><code>## [1] 0.2222246</code></pre>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="introducción-a-la-imputación-múltiple..html#cb653-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>new)</span></code></pre></div>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="introducción-a-la-imputación-múltiple..html#cb654-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>new)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -596,34 +596,34 @@ siguientes salidas:</p>
 </tbody>
 </table>
 <p>Nótese que existe una buena dispersión en los valores imputados.</p>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="introducción-a-la-imputación-múltiple..html#cb654-1" tabindex="-1"></a>nuevos <span class="ot">&lt;-</span> <span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>new</span>
-<span id="cb654-2"><a href="introducción-a-la-imputación-múltiple..html#cb654-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nuevos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y.per, <span class="at">color =</span> faltantes)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/unnamed-chunk-67-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="introducción-a-la-imputación-múltiple..html#cb655-1" tabindex="-1"></a>nuevos <span class="ot">&lt;-</span> <span class="fu">im.bootstrap</span>(datos)<span class="sc">$</span>new</span>
+<span id="cb655-2"><a href="introducción-a-la-imputación-múltiple..html#cb655-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nuevos, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y.per, <span class="at">color =</span> faltantes)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-67-1.svg" width="672" /></p>
 <p>Por otro lado, se ejemplificará la técnica de imputación múltiple para los datos de la encuesta que se utiliza de ejemplo en este texto:</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="introducción-a-la-imputación-múltiple..html#cb655-1" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
-<span id="cb655-2"><a href="introducción-a-la-imputación-múltiple..html#cb655-2" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
-<span id="cb655-3"><a href="introducción-a-la-imputación-múltiple..html#cb655-3" tabindex="-1"></a>encuesta_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="sc">!</span><span class="fu">is.na</span>(Income_missin))</span>
-<span id="cb655-4"><a href="introducción-a-la-imputación-múltiple..html#cb655-4" tabindex="-1"></a>encuesta_no_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="fu">is.na</span>(Income_missin))</span>
-<span id="cb655-5"><a href="introducción-a-la-imputación-múltiple..html#cb655-5" tabindex="-1"></a>n0 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(encuesta_no_obs)</span>
-<span id="cb655-6"><a href="introducción-a-la-imputación-múltiple..html#cb655-6" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(encuesta_obs)</span></code></pre></div>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="introducción-a-la-imputación-múltiple..html#cb656-1" tabindex="-1"></a>encuesta<span class="sc">$</span>Income_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Income_missin</span>
+<span id="cb656-2"><a href="introducción-a-la-imputación-múltiple..html#cb656-2" tabindex="-1"></a>encuesta<span class="sc">$</span>Employment_imp <span class="ot">&lt;-</span> encuesta<span class="sc">$</span>Employment_missin</span>
+<span id="cb656-3"><a href="introducción-a-la-imputación-múltiple..html#cb656-3" tabindex="-1"></a>encuesta_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="sc">!</span><span class="fu">is.na</span>(Income_missin))</span>
+<span id="cb656-4"><a href="introducción-a-la-imputación-múltiple..html#cb656-4" tabindex="-1"></a>encuesta_no_obs <span class="ot">&lt;-</span> <span class="fu">filter</span>(encuesta, <span class="fu">is.na</span>(Income_missin))</span>
+<span id="cb656-5"><a href="introducción-a-la-imputación-múltiple..html#cb656-5" tabindex="-1"></a>n0 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(encuesta_no_obs)</span>
+<span id="cb656-6"><a href="introducción-a-la-imputación-múltiple..html#cb656-6" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">nrow</span>(encuesta_obs)</span></code></pre></div>
 <p>Inicialmente, se extraen los datos a imputar y se calculan los tamaños de los datos observados y no observados.</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="introducción-a-la-imputación-múltiple..html#cb656-1" tabindex="-1"></a>M <span class="ot">=</span> <span class="dv">10</span> </span>
-<span id="cb656-2"><a href="introducción-a-la-imputación-múltiple..html#cb656-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb656-3"><a href="introducción-a-la-imputación-múltiple..html#cb656-3" tabindex="-1"></a><span class="cf">for</span> (ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
-<span id="cb656-4"><a href="introducción-a-la-imputación-múltiple..html#cb656-4" tabindex="-1"></a>vp <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Income_vp_&quot;</span>,ii)</span>
-<span id="cb656-5"><a href="introducción-a-la-imputación-múltiple..html#cb656-5" tabindex="-1"></a>vp2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Employment_vp_&quot;</span>,ii)</span>
-<span id="cb656-6"><a href="introducción-a-la-imputación-múltiple..html#cb656-6" tabindex="-1"></a></span>
-<span id="cb656-7"><a href="introducción-a-la-imputación-múltiple..html#cb656-7" tabindex="-1"></a>encuesta_temp <span class="ot">&lt;-</span> encuesta_obs <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="at">size =</span> n1, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb656-8"><a href="introducción-a-la-imputación-múltiple..html#cb656-8" tabindex="-1"></a></span>
-<span id="cb656-9"><a href="introducción-a-la-imputación-múltiple..html#cb656-9" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income<span class="sc">~</span> Zone <span class="sc">+</span> Sex <span class="sc">+</span> Expenditure, <span class="at">data =</span> encuesta_temp)</span>
-<span id="cb656-10"><a href="introducción-a-la-imputación-múltiple..html#cb656-10" tabindex="-1"></a>mod.mult <span class="ot">&lt;-</span> <span class="fu">multinom</span>(Employment<span class="sc">~</span>Zone <span class="sc">+</span> Sex <span class="sc">+</span>Expenditure,<span class="at">data =</span> encuesta_temp)</span>
-<span id="cb656-11"><a href="introducción-a-la-imputación-múltiple..html#cb656-11" tabindex="-1"></a></span>
-<span id="cb656-12"><a href="introducción-a-la-imputación-múltiple..html#cb656-12" tabindex="-1"></a>encuesta_no_obs[[vp]] <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, encuesta_no_obs)</span>
-<span id="cb656-13"><a href="introducción-a-la-imputación-múltiple..html#cb656-13" tabindex="-1"></a>encuesta_obs[[vp]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Income</span>
-<span id="cb656-14"><a href="introducción-a-la-imputación-múltiple..html#cb656-14" tabindex="-1"></a></span>
-<span id="cb656-15"><a href="introducción-a-la-imputación-múltiple..html#cb656-15" tabindex="-1"></a>encuesta_no_obs[[vp2]] <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod.mult, encuesta_no_obs,<span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span>
-<span id="cb656-16"><a href="introducción-a-la-imputación-múltiple..html#cb656-16" tabindex="-1"></a>encuesta_obs[[vp2]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Employment</span>
-<span id="cb656-17"><a href="introducción-a-la-imputación-múltiple..html#cb656-17" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="introducción-a-la-imputación-múltiple..html#cb657-1" tabindex="-1"></a>M <span class="ot">=</span> <span class="dv">10</span> </span>
+<span id="cb657-2"><a href="introducción-a-la-imputación-múltiple..html#cb657-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb657-3"><a href="introducción-a-la-imputación-múltiple..html#cb657-3" tabindex="-1"></a><span class="cf">for</span> (ii <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>M) {</span>
+<span id="cb657-4"><a href="introducción-a-la-imputación-múltiple..html#cb657-4" tabindex="-1"></a>vp <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Income_vp_&quot;</span>,ii)</span>
+<span id="cb657-5"><a href="introducción-a-la-imputación-múltiple..html#cb657-5" tabindex="-1"></a>vp2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Employment_vp_&quot;</span>,ii)</span>
+<span id="cb657-6"><a href="introducción-a-la-imputación-múltiple..html#cb657-6" tabindex="-1"></a></span>
+<span id="cb657-7"><a href="introducción-a-la-imputación-múltiple..html#cb657-7" tabindex="-1"></a>encuesta_temp <span class="ot">&lt;-</span> encuesta_obs <span class="sc">%&gt;%</span> <span class="fu">sample_n</span>(<span class="at">size =</span> n1, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb657-8"><a href="introducción-a-la-imputación-múltiple..html#cb657-8" tabindex="-1"></a></span>
+<span id="cb657-9"><a href="introducción-a-la-imputación-múltiple..html#cb657-9" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Income<span class="sc">~</span> Zone <span class="sc">+</span> Sex <span class="sc">+</span> Expenditure, <span class="at">data =</span> encuesta_temp)</span>
+<span id="cb657-10"><a href="introducción-a-la-imputación-múltiple..html#cb657-10" tabindex="-1"></a>mod.mult <span class="ot">&lt;-</span> <span class="fu">multinom</span>(Employment<span class="sc">~</span>Zone <span class="sc">+</span> Sex <span class="sc">+</span>Expenditure,<span class="at">data =</span> encuesta_temp)</span>
+<span id="cb657-11"><a href="introducción-a-la-imputación-múltiple..html#cb657-11" tabindex="-1"></a></span>
+<span id="cb657-12"><a href="introducción-a-la-imputación-múltiple..html#cb657-12" tabindex="-1"></a>encuesta_no_obs[[vp]] <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, encuesta_no_obs)</span>
+<span id="cb657-13"><a href="introducción-a-la-imputación-múltiple..html#cb657-13" tabindex="-1"></a>encuesta_obs[[vp]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Income</span>
+<span id="cb657-14"><a href="introducción-a-la-imputación-múltiple..html#cb657-14" tabindex="-1"></a></span>
+<span id="cb657-15"><a href="introducción-a-la-imputación-múltiple..html#cb657-15" tabindex="-1"></a>encuesta_no_obs[[vp2]] <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod.mult, encuesta_no_obs,<span class="at">type =</span> <span class="st">&quot;class&quot;</span>)</span>
+<span id="cb657-16"><a href="introducción-a-la-imputación-múltiple..html#cb657-16" tabindex="-1"></a>encuesta_obs[[vp2]] <span class="ot">&lt;-</span> encuesta_obs<span class="sc">$</span>Employment</span>
+<span id="cb657-17"><a href="introducción-a-la-imputación-múltiple..html#cb657-17" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## # weights:  15 (8 variable)
 ## initial  value 1651.214270 
 ## iter  10 value 1147.241384
@@ -688,7 +688,7 @@ siguientes salidas:</p>
 <li><p>Al finalizar el bucle se obtendrán 20 nuevas variables en las bases de datos “encuesta_no_obs” y “encuesta_obs” correspondientes a las predicciones de “Income” y “Employment” respectivamente, para cada una de las 10 iteraciones del bucle.</p></li>
 </ul>
 <p>Una vez corrido el código anterior, se seleccionan las variables de ingresos y sus 10 valores plausibles como se muestra a continuación:</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="introducción-a-la-imputación-múltiple..html#cb658-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(encuesta_no_obs, Income, <span class="fu">matches</span>(<span class="st">&quot;Income_vp_&quot;</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="introducción-a-la-imputación-múltiple..html#cb659-1" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(encuesta_no_obs, Income, <span class="fu">matches</span>(<span class="st">&quot;Income_vp_&quot;</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -762,60 +762,60 @@ siguientes salidas:</p>
 </tbody>
 </table>
 <p>A continuación, se grafica la distribución de los ingresos y los 10 valores plausibles observándose que, las distribuciones son muy similares:</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="introducción-a-la-imputación-múltiple..html#cb659-1" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(encuesta_obs, encuesta_no_obs)</span>
-<span id="cb659-2"><a href="introducción-a-la-imputación-múltiple..html#cb659-2" tabindex="-1"></a></span>
-<span id="cb659-3"><a href="introducción-a-la-imputación-múltiple..html#cb659-3" tabindex="-1"></a>dat_plot10 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
-<span id="cb659-4"><a href="introducción-a-la-imputación-múltiple..html#cb659-4" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,<span class="fu">matches</span>(<span class="st">&quot;Income_vp_&quot;</span>)),</span>
-<span id="cb659-5"><a href="introducción-a-la-imputación-múltiple..html#cb659-5" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
-<span id="cb659-6"><a href="introducción-a-la-imputación-múltiple..html#cb659-6" tabindex="-1"></a></span>
-<span id="cb659-7"><a href="introducción-a-la-imputación-múltiple..html#cb659-7" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot10, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">col =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb659-8"><a href="introducción-a-la-imputación-múltiple..html#cb659-8" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb659-9"><a href="introducción-a-la-imputación-múltiple..html#cb659-9" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">data =</span> encuesta ,<span class="fu">aes</span>(<span class="at">x =</span> Income), <span class="at">col =</span>  <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) </span>
-<span id="cb659-10"><a href="introducción-a-la-imputación-múltiple..html#cb659-10" tabindex="-1"></a></span>
-<span id="cb659-11"><a href="introducción-a-la-imputación-múltiple..html#cb659-11" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/Bootstrap1-1.svg" width="672" />
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="introducción-a-la-imputación-múltiple..html#cb660-1" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(encuesta_obs, encuesta_no_obs)</span>
+<span id="cb660-2"><a href="introducción-a-la-imputación-múltiple..html#cb660-2" tabindex="-1"></a></span>
+<span id="cb660-3"><a href="introducción-a-la-imputación-múltiple..html#cb660-3" tabindex="-1"></a>dat_plot10 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
+<span id="cb660-4"><a href="introducción-a-la-imputación-múltiple..html#cb660-4" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,<span class="fu">matches</span>(<span class="st">&quot;Income_vp_&quot;</span>)),</span>
+<span id="cb660-5"><a href="introducción-a-la-imputación-múltiple..html#cb660-5" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
+<span id="cb660-6"><a href="introducción-a-la-imputación-múltiple..html#cb660-6" tabindex="-1"></a></span>
+<span id="cb660-7"><a href="introducción-a-la-imputación-múltiple..html#cb660-7" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot10, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">col =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb660-8"><a href="introducción-a-la-imputación-múltiple..html#cb660-8" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb660-9"><a href="introducción-a-la-imputación-múltiple..html#cb660-9" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">data =</span> encuesta ,<span class="fu">aes</span>(<span class="at">x =</span> Income), <span class="at">col =</span>  <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) </span>
+<span id="cb660-10"><a href="introducción-a-la-imputación-múltiple..html#cb660-10" tabindex="-1"></a></span>
+<span id="cb660-11"><a href="introducción-a-la-imputación-múltiple..html#cb660-11" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/Bootstrap1-1.svg" width="672" />
 En el siguiente gráfico se presentan las frecuencias de los valores plausibles para la variable empleado. Se observa también que son muy aproximadas a la variable completa:</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="introducción-a-la-imputación-múltiple..html#cb660-1" tabindex="-1"></a>dat_plot11 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
-<span id="cb660-2"><a href="introducción-a-la-imputación-múltiple..html#cb660-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> </span>
-<span id="cb660-3"><a href="introducción-a-la-imputación-múltiple..html#cb660-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex, Employment,<span class="fu">matches</span>(<span class="st">&quot;Employment_vp_&quot;</span>)),</span>
-<span id="cb660-4"><a href="introducción-a-la-imputación-múltiple..html#cb660-4" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Employment2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex) <span class="sc">%&gt;%</span></span>
-<span id="cb660-5"><a href="introducción-a-la-imputación-múltiple..html#cb660-5" tabindex="-1"></a>  <span class="fu">group_by</span>(Caso,Employment2) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb660-6"><a href="introducción-a-la-imputación-múltiple..html#cb660-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Caso) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
-<span id="cb660-7"><a href="introducción-a-la-imputación-múltiple..html#cb660-7" tabindex="-1"></a></span>
-<span id="cb660-8"><a href="introducción-a-la-imputación-múltiple..html#cb660-8" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot11, </span>
-<span id="cb660-9"><a href="introducción-a-la-imputación-múltiple..html#cb660-9" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> Employment2, <span class="at">y =</span> prop,</span>
-<span id="cb660-10"><a href="introducción-a-la-imputación-múltiple..html#cb660-10" tabindex="-1"></a>            <span class="at">fill =</span> Caso, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb660-11"><a href="introducción-a-la-imputación-múltiple..html#cb660-11" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,</span>
-<span id="cb660-12"><a href="introducción-a-la-imputación-múltiple..html#cb660-12" tabindex="-1"></a>          <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>))  <span class="sc">+</span></span>
-<span id="cb660-13"><a href="introducción-a-la-imputación-múltiple..html#cb660-13" tabindex="-1"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb660-14"><a href="introducción-a-la-imputación-múltiple..html#cb660-14" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb660-15"><a href="introducción-a-la-imputación-múltiple..html#cb660-15" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Employment&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>))</span>
-<span id="cb660-16"><a href="introducción-a-la-imputación-múltiple..html#cb660-16" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/Bootstrap2-1.svg" width="672" />
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="introducción-a-la-imputación-múltiple..html#cb661-1" tabindex="-1"></a>dat_plot11 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
+<span id="cb661-2"><a href="introducción-a-la-imputación-múltiple..html#cb661-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> </span>
+<span id="cb661-3"><a href="introducción-a-la-imputación-múltiple..html#cb661-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex, Employment,<span class="fu">matches</span>(<span class="st">&quot;Employment_vp_&quot;</span>)),</span>
+<span id="cb661-4"><a href="introducción-a-la-imputación-múltiple..html#cb661-4" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Employment2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex) <span class="sc">%&gt;%</span></span>
+<span id="cb661-5"><a href="introducción-a-la-imputación-múltiple..html#cb661-5" tabindex="-1"></a>  <span class="fu">group_by</span>(Caso,Employment2) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb661-6"><a href="introducción-a-la-imputación-múltiple..html#cb661-6" tabindex="-1"></a>  <span class="fu">group_by</span>(Caso) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb661-7"><a href="introducción-a-la-imputación-múltiple..html#cb661-7" tabindex="-1"></a></span>
+<span id="cb661-8"><a href="introducción-a-la-imputación-múltiple..html#cb661-8" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot11, </span>
+<span id="cb661-9"><a href="introducción-a-la-imputación-múltiple..html#cb661-9" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> Employment2, <span class="at">y =</span> prop,</span>
+<span id="cb661-10"><a href="introducción-a-la-imputación-múltiple..html#cb661-10" tabindex="-1"></a>            <span class="at">fill =</span> Caso, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb661-11"><a href="introducción-a-la-imputación-múltiple..html#cb661-11" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb661-12"><a href="introducción-a-la-imputación-múltiple..html#cb661-12" tabindex="-1"></a>          <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.5</span>))  <span class="sc">+</span></span>
+<span id="cb661-13"><a href="introducción-a-la-imputación-múltiple..html#cb661-13" tabindex="-1"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb661-14"><a href="introducción-a-la-imputación-múltiple..html#cb661-14" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb661-15"><a href="introducción-a-la-imputación-múltiple..html#cb661-15" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;Employment&quot;</span> <span class="ot">=</span> <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb661-16"><a href="introducción-a-la-imputación-múltiple..html#cb661-16" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/Bootstrap2-1.svg" width="672" />
 Con los valores plausibles enocntrados anteriormente, se procede a definir el diseño muestral utilizado en este ejemplo y así poder hacer la estimación de los parámetros. A continuación, se define el diseño muestral:</p>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="introducción-a-la-imputación-múltiple..html#cb661-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb661-2"><a href="introducción-a-la-imputación-múltiple..html#cb661-2" tabindex="-1"></a></span>
-<span id="cb661-3"><a href="introducción-a-la-imputación-múltiple..html#cb661-3" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb661-4"><a href="introducción-a-la-imputación-múltiple..html#cb661-4" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb661-5"><a href="introducción-a-la-imputación-múltiple..html#cb661-5" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb661-6"><a href="introducción-a-la-imputación-múltiple..html#cb661-6" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb661-7"><a href="introducción-a-la-imputación-múltiple..html#cb661-7" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb661-8"><a href="introducción-a-la-imputación-múltiple..html#cb661-8" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb661-9"><a href="introducción-a-la-imputación-múltiple..html#cb661-9" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="introducción-a-la-imputación-múltiple..html#cb662-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb662-2"><a href="introducción-a-la-imputación-múltiple..html#cb662-2" tabindex="-1"></a></span>
+<span id="cb662-3"><a href="introducción-a-la-imputación-múltiple..html#cb662-3" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb662-4"><a href="introducción-a-la-imputación-múltiple..html#cb662-4" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb662-5"><a href="introducción-a-la-imputación-múltiple..html#cb662-5" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb662-6"><a href="introducción-a-la-imputación-múltiple..html#cb662-6" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb662-7"><a href="introducción-a-la-imputación-múltiple..html#cb662-7" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb662-8"><a href="introducción-a-la-imputación-múltiple..html#cb662-8" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb662-9"><a href="introducción-a-la-imputación-múltiple..html#cb662-9" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Con el diseño anterior, se estiman los ingresos medios para cada valor plausible junto ocn su varianza, como se muestra a continuación:</p>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="introducción-a-la-imputación-múltiple..html#cb662-1" tabindex="-1"></a>estimacion_vp <span class="ot">&lt;-</span>  diseno <span class="sc">%&gt;%</span> </span>
-<span id="cb662-2"><a href="introducción-a-la-imputación-múltiple..html#cb662-2" tabindex="-1"></a> <span class="fu">summarise</span>(</span>
-<span id="cb662-3"><a href="introducción-a-la-imputación-múltiple..html#cb662-3" tabindex="-1"></a>   <span class="at">vp1 =</span> <span class="fu">survey_mean</span>(Income_vp_1, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-4"><a href="introducción-a-la-imputación-múltiple..html#cb662-4" tabindex="-1"></a>   <span class="at">vp2 =</span> <span class="fu">survey_mean</span>(Income_vp_2, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-5"><a href="introducción-a-la-imputación-múltiple..html#cb662-5" tabindex="-1"></a>   <span class="at">vp3 =</span> <span class="fu">survey_mean</span>(Income_vp_3, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-6"><a href="introducción-a-la-imputación-múltiple..html#cb662-6" tabindex="-1"></a>   <span class="at">vp4 =</span> <span class="fu">survey_mean</span>(Income_vp_4, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-7"><a href="introducción-a-la-imputación-múltiple..html#cb662-7" tabindex="-1"></a>   <span class="at">vp5 =</span> <span class="fu">survey_mean</span>(Income_vp_5, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-8"><a href="introducción-a-la-imputación-múltiple..html#cb662-8" tabindex="-1"></a>   <span class="at">vp6 =</span> <span class="fu">survey_mean</span>(Income_vp_6, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-9"><a href="introducción-a-la-imputación-múltiple..html#cb662-9" tabindex="-1"></a>   <span class="at">vp7 =</span> <span class="fu">survey_mean</span>(Income_vp_7, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-10"><a href="introducción-a-la-imputación-múltiple..html#cb662-10" tabindex="-1"></a>   <span class="at">vp8 =</span> <span class="fu">survey_mean</span>(Income_vp_8, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-11"><a href="introducción-a-la-imputación-múltiple..html#cb662-11" tabindex="-1"></a>   <span class="at">vp9 =</span> <span class="fu">survey_mean</span>(Income_vp_9, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
-<span id="cb662-12"><a href="introducción-a-la-imputación-múltiple..html#cb662-12" tabindex="-1"></a>   <span class="at">vp10 =</span><span class="fu">survey_mean</span>(Income_vp_10, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)))</span>
-<span id="cb662-13"><a href="introducción-a-la-imputación-múltiple..html#cb662-13" tabindex="-1"></a>estimacion_vp</span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="introducción-a-la-imputación-múltiple..html#cb663-1" tabindex="-1"></a>estimacion_vp <span class="ot">&lt;-</span>  diseno <span class="sc">%&gt;%</span> </span>
+<span id="cb663-2"><a href="introducción-a-la-imputación-múltiple..html#cb663-2" tabindex="-1"></a> <span class="fu">summarise</span>(</span>
+<span id="cb663-3"><a href="introducción-a-la-imputación-múltiple..html#cb663-3" tabindex="-1"></a>   <span class="at">vp1 =</span> <span class="fu">survey_mean</span>(Income_vp_1, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-4"><a href="introducción-a-la-imputación-múltiple..html#cb663-4" tabindex="-1"></a>   <span class="at">vp2 =</span> <span class="fu">survey_mean</span>(Income_vp_2, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-5"><a href="introducción-a-la-imputación-múltiple..html#cb663-5" tabindex="-1"></a>   <span class="at">vp3 =</span> <span class="fu">survey_mean</span>(Income_vp_3, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-6"><a href="introducción-a-la-imputación-múltiple..html#cb663-6" tabindex="-1"></a>   <span class="at">vp4 =</span> <span class="fu">survey_mean</span>(Income_vp_4, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-7"><a href="introducción-a-la-imputación-múltiple..html#cb663-7" tabindex="-1"></a>   <span class="at">vp5 =</span> <span class="fu">survey_mean</span>(Income_vp_5, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-8"><a href="introducción-a-la-imputación-múltiple..html#cb663-8" tabindex="-1"></a>   <span class="at">vp6 =</span> <span class="fu">survey_mean</span>(Income_vp_6, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-9"><a href="introducción-a-la-imputación-múltiple..html#cb663-9" tabindex="-1"></a>   <span class="at">vp7 =</span> <span class="fu">survey_mean</span>(Income_vp_7, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-10"><a href="introducción-a-la-imputación-múltiple..html#cb663-10" tabindex="-1"></a>   <span class="at">vp8 =</span> <span class="fu">survey_mean</span>(Income_vp_8, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-11"><a href="introducción-a-la-imputación-múltiple..html#cb663-11" tabindex="-1"></a>   <span class="at">vp9 =</span> <span class="fu">survey_mean</span>(Income_vp_9, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)),</span>
+<span id="cb663-12"><a href="introducción-a-la-imputación-múltiple..html#cb663-12" tabindex="-1"></a>   <span class="at">vp10 =</span><span class="fu">survey_mean</span>(Income_vp_10, <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;var&quot;</span>)))</span>
+<span id="cb663-13"><a href="introducción-a-la-imputación-múltiple..html#cb663-13" tabindex="-1"></a>estimacion_vp</span></code></pre></div>
 <table>
 <colgroup>
 <col width="5%" />
@@ -889,9 +889,9 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tbody>
 </table>
 <p>A continuación se presentan los datos anteriores discriminado por promedio y varianza:</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="introducción-a-la-imputación-múltiple..html#cb663-1" tabindex="-1"></a><span class="fu">require</span>(tidyr)</span>
-<span id="cb663-2"><a href="introducción-a-la-imputación-múltiple..html#cb663-2" tabindex="-1"></a>(estimacion_vp <span class="sc">%&lt;&gt;%</span> tidyr<span class="sc">::</span><span class="fu">gather</span>() <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;vp&quot;</span>, <span class="st">&quot;estimacion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb663-3"><a href="introducción-a-la-imputación-múltiple..html#cb663-3" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">estimacion =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(estimacion), <span class="st">&quot;promedio&quot;</span>,<span class="st">&quot;var&quot;</span> )) <span class="sc">%&gt;%</span> <span class="fu">spread</span>(estimacion,value) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">vp =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="introducción-a-la-imputación-múltiple..html#cb664-1" tabindex="-1"></a><span class="fu">require</span>(tidyr)</span>
+<span id="cb664-2"><a href="introducción-a-la-imputación-múltiple..html#cb664-2" tabindex="-1"></a>(estimacion_vp <span class="sc">%&lt;&gt;%</span> tidyr<span class="sc">::</span><span class="fu">gather</span>() <span class="sc">%&gt;%</span>  <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;vp&quot;</span>, <span class="st">&quot;estimacion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb664-3"><a href="introducción-a-la-imputación-múltiple..html#cb664-3" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">estimacion =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(estimacion), <span class="st">&quot;promedio&quot;</span>,<span class="st">&quot;var&quot;</span> )) <span class="sc">%&gt;%</span> <span class="fu">spread</span>(estimacion,value) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">vp =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -954,14 +954,14 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tbody>
 </table>
 <p>Por último, para obtener la estimación de la media y su varianza utilizando la imputación múltiple, se realizan los siguientes cálculos que se derivan de las expresiones matemáticas antes mostradas:</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="introducción-a-la-imputación-múltiple..html#cb664-1" tabindex="-1"></a>Media_vp <span class="ot">=</span> <span class="fu">mean</span>(estimacion_vp<span class="sc">$</span>promedio)</span>
-<span id="cb664-2"><a href="introducción-a-la-imputación-múltiple..html#cb664-2" tabindex="-1"></a>(<span class="at">Ubar =</span> <span class="fu">mean</span>(estimacion_vp<span class="sc">$</span>var))</span></code></pre></div>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="introducción-a-la-imputación-múltiple..html#cb665-1" tabindex="-1"></a>Media_vp <span class="ot">=</span> <span class="fu">mean</span>(estimacion_vp<span class="sc">$</span>promedio)</span>
+<span id="cb665-2"><a href="introducción-a-la-imputación-múltiple..html#cb665-2" tabindex="-1"></a>(<span class="at">Ubar =</span> <span class="fu">mean</span>(estimacion_vp<span class="sc">$</span>var))</span></code></pre></div>
 <pre><code>## [1] 857.3931</code></pre>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="introducción-a-la-imputación-múltiple..html#cb666-1" tabindex="-1"></a>(<span class="at">B =</span> <span class="fu">var</span>(estimacion_vp<span class="sc">$</span>promedio))</span></code></pre></div>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="introducción-a-la-imputación-múltiple..html#cb667-1" tabindex="-1"></a>(<span class="at">B =</span> <span class="fu">var</span>(estimacion_vp<span class="sc">$</span>promedio))</span></code></pre></div>
 <pre><code>## [1] 1.645758</code></pre>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="introducción-a-la-imputación-múltiple..html#cb668-1" tabindex="-1"></a>var_vp <span class="ot">=</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M) </span>
-<span id="cb668-2"><a href="introducción-a-la-imputación-múltiple..html#cb668-2" tabindex="-1"></a>(resultado <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Media_vp, </span>
-<span id="cb668-3"><a href="introducción-a-la-imputación-múltiple..html#cb668-3" tabindex="-1"></a>                        <span class="at">Media_vp_se =</span> <span class="fu">sqrt</span>(var_vp)))</span></code></pre></div>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="introducción-a-la-imputación-múltiple..html#cb669-1" tabindex="-1"></a>var_vp <span class="ot">=</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M) </span>
+<span id="cb669-2"><a href="introducción-a-la-imputación-múltiple..html#cb669-2" tabindex="-1"></a>(resultado <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Media_vp, </span>
+<span id="cb669-3"><a href="introducción-a-la-imputación-múltiple..html#cb669-3" tabindex="-1"></a>                        <span class="at">Media_vp_se =</span> <span class="fu">sqrt</span>(var_vp)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -976,15 +976,15 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="introducción-a-la-imputación-múltiple..html#cb669-1" tabindex="-1"></a>estimacion_var_vp <span class="ot">&lt;-</span>  diseno <span class="sc">%&gt;%</span> </span>
-<span id="cb669-2"><a href="introducción-a-la-imputación-múltiple..html#cb669-2" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(<span class="fu">matches</span>(<span class="st">&quot;Income_vp&quot;</span>)), </span>
-<span id="cb669-3"><a href="introducción-a-la-imputación-múltiple..html#cb669-3" tabindex="-1"></a>               survey_var,  <span class="at">vartype =</span> <span class="st">&quot;var&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="introducción-a-la-imputación-múltiple..html#cb670-1" tabindex="-1"></a>estimacion_var_vp <span class="ot">&lt;-</span>  diseno <span class="sc">%&gt;%</span> </span>
+<span id="cb670-2"><a href="introducción-a-la-imputación-múltiple..html#cb670-2" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="fu">vars</span>(<span class="fu">matches</span>(<span class="st">&quot;Income_vp&quot;</span>)), </span>
+<span id="cb670-3"><a href="introducción-a-la-imputación-múltiple..html#cb670-3" tabindex="-1"></a>               survey_var,  <span class="at">vartype =</span> <span class="st">&quot;var&quot;</span> )</span></code></pre></div>
 <p>Por otro lado, otro parámetro de interés es la varianza de los ingresos. Este parámetro permite medir la variabilidad de los ingresos de los ciudadanos de la base de datos de ejemplo. La forma de estimarla es la misma que para el promedio de los ingresos y se utilizarán los mismo códigos mostrados anteriormente, cambiando el parámetro a estimar:</p>
-<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="introducción-a-la-imputación-múltiple..html#cb670-1" tabindex="-1"></a>(estimacion_var_vp <span class="sc">%&lt;&gt;%</span> tidyr<span class="sc">::</span><span class="fu">gather</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb670-2"><a href="introducción-a-la-imputación-múltiple..html#cb670-2" tabindex="-1"></a>   <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;vp&quot;</span>, <span class="st">&quot;estimacion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb670-3"><a href="introducción-a-la-imputación-múltiple..html#cb670-3" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">estimacion =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(estimacion), <span class="st">&quot;promedio&quot;</span>,<span class="st">&quot;var&quot;</span> ),</span>
-<span id="cb670-4"><a href="introducción-a-la-imputación-múltiple..html#cb670-4" tabindex="-1"></a>       <span class="at">A =</span> <span class="cn">NULL</span>, <span class="at">B =</span> <span class="cn">NULL</span>, <span class="at">vp =</span> <span class="fu">as.numeric</span>(vp)) <span class="sc">%&gt;%</span> </span>
-<span id="cb670-5"><a href="introducción-a-la-imputación-múltiple..html#cb670-5" tabindex="-1"></a>  <span class="fu">spread</span>(estimacion,value))</span></code></pre></div>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="introducción-a-la-imputación-múltiple..html#cb671-1" tabindex="-1"></a>(estimacion_var_vp <span class="sc">%&lt;&gt;%</span> tidyr<span class="sc">::</span><span class="fu">gather</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb671-2"><a href="introducción-a-la-imputación-múltiple..html#cb671-2" tabindex="-1"></a>   <span class="fu">separate</span>(key, <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;vp&quot;</span>, <span class="st">&quot;estimacion&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-3"><a href="introducción-a-la-imputación-múltiple..html#cb671-3" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">estimacion =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(estimacion), <span class="st">&quot;promedio&quot;</span>,<span class="st">&quot;var&quot;</span> ),</span>
+<span id="cb671-4"><a href="introducción-a-la-imputación-múltiple..html#cb671-4" tabindex="-1"></a>       <span class="at">A =</span> <span class="cn">NULL</span>, <span class="at">B =</span> <span class="cn">NULL</span>, <span class="at">vp =</span> <span class="fu">as.numeric</span>(vp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-5"><a href="introducción-a-la-imputación-múltiple..html#cb671-5" tabindex="-1"></a>  <span class="fu">spread</span>(estimacion,value))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1047,13 +1047,13 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tbody>
 </table>
 <p>Por último, se utilizan las ecuaciones mostradas anteriormente:</p>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="introducción-a-la-imputación-múltiple..html#cb671-1" tabindex="-1"></a>Media_var_vp <span class="ot">=</span> <span class="fu">mean</span>(estimacion_var_vp<span class="sc">$</span>promedio)</span>
-<span id="cb671-2"><a href="introducción-a-la-imputación-múltiple..html#cb671-2" tabindex="-1"></a>Ubar <span class="ot">=</span> <span class="fu">mean</span>(estimacion_var_vp<span class="sc">$</span>var)</span>
-<span id="cb671-3"><a href="introducción-a-la-imputación-múltiple..html#cb671-3" tabindex="-1"></a>B <span class="ot">=</span> <span class="fu">var</span>(estimacion_var_vp<span class="sc">$</span>promedio)</span>
-<span id="cb671-4"><a href="introducción-a-la-imputación-múltiple..html#cb671-4" tabindex="-1"></a>var_var_vp <span class="ot">=</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M)<span class="sc">*</span>B </span>
-<span id="cb671-5"><a href="introducción-a-la-imputación-múltiple..html#cb671-5" tabindex="-1"></a>resultado<span class="sc">$</span>var_vp <span class="ot">&lt;-</span> Media_var_vp</span>
-<span id="cb671-6"><a href="introducción-a-la-imputación-múltiple..html#cb671-6" tabindex="-1"></a>resultado<span class="sc">$</span>var_vp_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_var_vp)</span>
-<span id="cb671-7"><a href="introducción-a-la-imputación-múltiple..html#cb671-7" tabindex="-1"></a><span class="fu">cbind</span>(Media_var_vp, var_var_vp)</span></code></pre></div>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="introducción-a-la-imputación-múltiple..html#cb672-1" tabindex="-1"></a>Media_var_vp <span class="ot">=</span> <span class="fu">mean</span>(estimacion_var_vp<span class="sc">$</span>promedio)</span>
+<span id="cb672-2"><a href="introducción-a-la-imputación-múltiple..html#cb672-2" tabindex="-1"></a>Ubar <span class="ot">=</span> <span class="fu">mean</span>(estimacion_var_vp<span class="sc">$</span>var)</span>
+<span id="cb672-3"><a href="introducción-a-la-imputación-múltiple..html#cb672-3" tabindex="-1"></a>B <span class="ot">=</span> <span class="fu">var</span>(estimacion_var_vp<span class="sc">$</span>promedio)</span>
+<span id="cb672-4"><a href="introducción-a-la-imputación-múltiple..html#cb672-4" tabindex="-1"></a>var_var_vp <span class="ot">=</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M)<span class="sc">*</span>B </span>
+<span id="cb672-5"><a href="introducción-a-la-imputación-múltiple..html#cb672-5" tabindex="-1"></a>resultado<span class="sc">$</span>var_vp <span class="ot">&lt;-</span> Media_var_vp</span>
+<span id="cb672-6"><a href="introducción-a-la-imputación-múltiple..html#cb672-6" tabindex="-1"></a>resultado<span class="sc">$</span>var_vp_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_var_vp)</span>
+<span id="cb672-7"><a href="introducción-a-la-imputación-múltiple..html#cb672-7" tabindex="-1"></a><span class="fu">cbind</span>(Media_var_vp, var_var_vp)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1069,14 +1069,14 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tbody>
 </table>
 <p>Otro parámetro de interés a estimar es la proporción. A continuación, se realizará la estimación de la proporción utilizando valores plausibles. Para ello se estimará la variable empleado, como se muestra a continuación:</p>
-<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="introducción-a-la-imputación-múltiple..html#cb672-1" tabindex="-1"></a>estimacion_prop_vp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="st">&quot;Employment_vp_&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>),</span>
-<span id="cb672-2"><a href="introducción-a-la-imputación-múltiple..html#cb672-2" tabindex="-1"></a>       <span class="cf">function</span>(vp){diseno <span class="sc">%&gt;%</span> <span class="fu">group_by_at</span>(<span class="fu">vars</span>(<span class="at">Employment =</span> vp)) <span class="sc">%&gt;%</span> </span>
-<span id="cb672-3"><a href="introducción-a-la-imputación-múltiple..html#cb672-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;var&quot;</span>),<span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb672-4"><a href="introducción-a-la-imputación-múltiple..html#cb672-4" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">vp =</span> vp)}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="introducción-a-la-imputación-múltiple..html#cb673-1" tabindex="-1"></a>estimacion_prop_vp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">paste0</span>(<span class="st">&quot;Employment_vp_&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>),</span>
+<span id="cb673-2"><a href="introducción-a-la-imputación-múltiple..html#cb673-2" tabindex="-1"></a>       <span class="cf">function</span>(vp){diseno <span class="sc">%&gt;%</span> <span class="fu">group_by_at</span>(<span class="fu">vars</span>(<span class="at">Employment =</span> vp)) <span class="sc">%&gt;%</span> </span>
+<span id="cb673-3"><a href="introducción-a-la-imputación-múltiple..html#cb673-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">vartype =</span> <span class="st">&quot;var&quot;</span>),<span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb673-4"><a href="introducción-a-la-imputación-múltiple..html#cb673-4" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">vp =</span> vp)}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span></code></pre></div>
 <p>Se presenta la estimación de la proporción para cada uno de los 10 valores plausibles en cada categoría de la variable:</p>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="introducción-a-la-imputación-múltiple..html#cb673-1" tabindex="-1"></a>(estimacion_prop_vp <span class="sc">%&lt;&gt;%</span> <span class="fu">separate</span>(vp, <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;vp&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb673-2"><a href="introducción-a-la-imputación-múltiple..html#cb673-2" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">A =</span> <span class="cn">NULL</span>, <span class="at">B =</span> <span class="cn">NULL</span>, <span class="at">vp =</span> <span class="fu">as.numeric</span>(vp)) <span class="sc">%&gt;%</span></span>
-<span id="cb673-3"><a href="introducción-a-la-imputación-múltiple..html#cb673-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(vp,Employment<span class="sc">:</span>prop_var)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="introducción-a-la-imputación-múltiple..html#cb674-1" tabindex="-1"></a>(estimacion_prop_vp <span class="sc">%&lt;&gt;%</span> <span class="fu">separate</span>(vp, <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>,<span class="st">&quot;vp&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb674-2"><a href="introducción-a-la-imputación-múltiple..html#cb674-2" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">A =</span> <span class="cn">NULL</span>, <span class="at">B =</span> <span class="cn">NULL</span>, <span class="at">vp =</span> <span class="fu">as.numeric</span>(vp)) <span class="sc">%&gt;%</span></span>
+<span id="cb674-3"><a href="introducción-a-la-imputación-múltiple..html#cb674-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(vp,Employment<span class="sc">:</span>prop_var)) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1162,14 +1162,14 @@ Con los valores plausibles enocntrados anteriormente, se procede a definir el di
 </tbody>
 </table>
 <p>Por último, utilizando las ecuaciones de Rubin se obtiene la varianza estimada:</p>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="introducción-a-la-imputación-múltiple..html#cb674-1" tabindex="-1"></a>resultado <span class="ot">=</span> estimacion_prop_vp <span class="sc">%&gt;%</span> </span>
-<span id="cb674-2"><a href="introducción-a-la-imputación-múltiple..html#cb674-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
-<span id="cb674-3"><a href="introducción-a-la-imputación-múltiple..html#cb674-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_pv =</span> <span class="fu">mean</span>(prop),</span>
-<span id="cb674-4"><a href="introducción-a-la-imputación-múltiple..html#cb674-4" tabindex="-1"></a>            <span class="at">Ubar =</span> <span class="fu">mean</span>(prop_var),</span>
-<span id="cb674-5"><a href="introducción-a-la-imputación-múltiple..html#cb674-5" tabindex="-1"></a>            <span class="at">B =</span> <span class="fu">var</span>(prop)) <span class="sc">%&gt;%</span> </span>
-<span id="cb674-6"><a href="introducción-a-la-imputación-múltiple..html#cb674-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_pv_var =</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M)<span class="sc">*</span>B) <span class="sc">|&gt;</span> </span>
-<span id="cb674-7"><a href="introducción-a-la-imputación-múltiple..html#cb674-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Employment, prop_pv, prop_pv_var)</span>
-<span id="cb674-8"><a href="introducción-a-la-imputación-múltiple..html#cb674-8" tabindex="-1"></a>resultado</span></code></pre></div>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="introducción-a-la-imputación-múltiple..html#cb675-1" tabindex="-1"></a>resultado <span class="ot">=</span> estimacion_prop_vp <span class="sc">%&gt;%</span> </span>
+<span id="cb675-2"><a href="introducción-a-la-imputación-múltiple..html#cb675-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Employment) <span class="sc">%&gt;%</span> </span>
+<span id="cb675-3"><a href="introducción-a-la-imputación-múltiple..html#cb675-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">prop_pv =</span> <span class="fu">mean</span>(prop),</span>
+<span id="cb675-4"><a href="introducción-a-la-imputación-múltiple..html#cb675-4" tabindex="-1"></a>            <span class="at">Ubar =</span> <span class="fu">mean</span>(prop_var),</span>
+<span id="cb675-5"><a href="introducción-a-la-imputación-múltiple..html#cb675-5" tabindex="-1"></a>            <span class="at">B =</span> <span class="fu">var</span>(prop)) <span class="sc">%&gt;%</span> </span>
+<span id="cb675-6"><a href="introducción-a-la-imputación-múltiple..html#cb675-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_pv_var =</span> Ubar <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>M)<span class="sc">*</span>B) <span class="sc">|&gt;</span> </span>
+<span id="cb675-7"><a href="introducción-a-la-imputación-múltiple..html#cb675-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Employment, prop_pv, prop_pv_var)</span>
+<span id="cb675-8"><a href="introducción-a-la-imputación-múltiple..html#cb675-8" tabindex="-1"></a>resultado</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

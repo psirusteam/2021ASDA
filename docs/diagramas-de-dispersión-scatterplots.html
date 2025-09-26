@@ -331,75 +331,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Los diagramas de dispersión ponderados permiten observar relaciones a nivel poblacional. Al incorporar los pesos de la encuesta y aplicar estrategias de visualización para conjuntos de datos grandes, estos gráficos ofrecen información clara y significativa sobre la asociación entre variables continuas. Ya sea usando puntos ponderados, hexbin plots o técnicas de suavizado, los scatterplots siguen siendo fundamentales para la exploración visual de datos en encuestas.</p>
 <p>Para realizar este tipo de gráfico se usará la función <code>geom_point</code>. Para ejemplificar el uso de esta función, se graficarán las variables ingresos y gastos como se muestra a continuación:</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="diagramas-de-dispersión-scatterplots.html#cb368-1" tabindex="-1"></a>plot19_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( </span>
-<span id="cb368-2"><a href="diagramas-de-dispersión-scatterplots.html#cb368-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb368-3"><a href="diagramas-de-dispersión-scatterplots.html#cb368-3" tabindex="-1"></a>      <span class="fu">aes</span>(</span>
-<span id="cb368-4"><a href="diagramas-de-dispersión-scatterplots.html#cb368-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
-<span id="cb368-5"><a href="diagramas-de-dispersión-scatterplots.html#cb368-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb368-6"><a href="diagramas-de-dispersión-scatterplots.html#cb368-6" tabindex="-1"></a>      <span class="at">weight =</span> wk)) <span class="sc">+</span></span>
-<span id="cb368-7"><a href="diagramas-de-dispersión-scatterplots.html#cb368-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb368-8"><a href="diagramas-de-dispersión-scatterplots.html#cb368-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb368-9"><a href="diagramas-de-dispersión-scatterplots.html#cb368-9" tabindex="-1"></a>plot19_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/unnamed-chunk-31-1.svg" width="672" />
-Note, que en este caso el parámetro <code>weight</code> no está aportando información visual al gráfico. El parámetro <code>weight</code> se puede usar para controlar el tamaño de los puntos, y así, tener un mejor panorama del comportamiento de la muestra:</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="diagramas-de-dispersión-scatterplots.html#cb369-1" tabindex="-1"></a>plot20_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="diagramas-de-dispersión-scatterplots.html#cb369-1" tabindex="-1"></a>plot19_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( </span>
 <span id="cb369-2"><a href="diagramas-de-dispersión-scatterplots.html#cb369-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb369-3"><a href="diagramas-de-dispersión-scatterplots.html#cb369-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
-<span id="cb369-4"><a href="diagramas-de-dispersión-scatterplots.html#cb369-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb369-5"><a href="diagramas-de-dispersión-scatterplots.html#cb369-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb369-6"><a href="diagramas-de-dispersión-scatterplots.html#cb369-6" tabindex="-1"></a>plot20_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/hist14-1.svg" width="672" /></p>
-<p>Otra forma de usar la variable <code>wk</code>, es asignar la intensidad del color según el valor de la variable:</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="diagramas-de-dispersión-scatterplots.html#cb370-1" tabindex="-1"></a>plot21_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb369-3"><a href="diagramas-de-dispersión-scatterplots.html#cb369-3" tabindex="-1"></a>      <span class="fu">aes</span>(</span>
+<span id="cb369-4"><a href="diagramas-de-dispersión-scatterplots.html#cb369-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
+<span id="cb369-5"><a href="diagramas-de-dispersión-scatterplots.html#cb369-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
+<span id="cb369-6"><a href="diagramas-de-dispersión-scatterplots.html#cb369-6" tabindex="-1"></a>      <span class="at">weight =</span> wk)) <span class="sc">+</span></span>
+<span id="cb369-7"><a href="diagramas-de-dispersión-scatterplots.html#cb369-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb369-8"><a href="diagramas-de-dispersión-scatterplots.html#cb369-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb369-9"><a href="diagramas-de-dispersión-scatterplots.html#cb369-9" tabindex="-1"></a>plot19_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-31-1.svg" width="672" />
+Note, que en este caso el parámetro <code>weight</code> no está aportando información visual al gráfico. El parámetro <code>weight</code> se puede usar para controlar el tamaño de los puntos, y así, tener un mejor panorama del comportamiento de la muestra:</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="diagramas-de-dispersión-scatterplots.html#cb370-1" tabindex="-1"></a>plot20_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb370-2"><a href="diagramas-de-dispersión-scatterplots.html#cb370-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
 <span id="cb370-3"><a href="diagramas-de-dispersión-scatterplots.html#cb370-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
-<span id="cb370-4"><a href="diagramas-de-dispersión-scatterplots.html#cb370-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb370-4"><a href="diagramas-de-dispersión-scatterplots.html#cb370-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb370-5"><a href="diagramas-de-dispersión-scatterplots.html#cb370-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb370-6"><a href="diagramas-de-dispersión-scatterplots.html#cb370-6" tabindex="-1"></a>plot21_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/unnamed-chunk-32-1.svg" width="672" /></p>
-<p>Se puede extender las bondades de los gráfico de <code>ggplot2</code> para obtener mayor información de las muestra. Por ejemplo, agrupar los datos por Zona. Para lograr esto se introduce el parámetro <code>shape</code>:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="diagramas-de-dispersión-scatterplots.html#cb371-1" tabindex="-1"></a>plot22_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb370-6"><a href="diagramas-de-dispersión-scatterplots.html#cb370-6" tabindex="-1"></a>plot20_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/hist14-1.svg" width="672" /></p>
+<p>Otra forma de usar la variable <code>wk</code>, es asignar la intensidad del color según el valor de la variable:</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="diagramas-de-dispersión-scatterplots.html#cb371-1" tabindex="-1"></a>plot21_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb371-2"><a href="diagramas-de-dispersión-scatterplots.html#cb371-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb371-3"><a href="diagramas-de-dispersión-scatterplots.html#cb371-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, </span>
-<span id="cb371-4"><a href="diagramas-de-dispersión-scatterplots.html#cb371-4" tabindex="-1"></a>        <span class="at">x =</span> Expenditure,</span>
-<span id="cb371-5"><a href="diagramas-de-dispersión-scatterplots.html#cb371-5" tabindex="-1"></a>        <span class="at">shape =</span> Zone)) <span class="sc">+</span> </span>
-<span id="cb371-6"><a href="diagramas-de-dispersión-scatterplots.html#cb371-6" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk, <span class="at">color =</span> Zone), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb371-7"><a href="diagramas-de-dispersión-scatterplots.html#cb371-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorZona) <span class="sc">+</span></span>
-<span id="cb371-8"><a href="diagramas-de-dispersión-scatterplots.html#cb371-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb371-9"><a href="diagramas-de-dispersión-scatterplots.html#cb371-9" tabindex="-1"></a>plot22_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/unnamed-chunk-33-1.svg" width="672" /></p>
-<p>De forma similar se puede obtener el resultado por sexo:</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="diagramas-de-dispersión-scatterplots.html#cb372-1" tabindex="-1"></a>plot23_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb371-3"><a href="diagramas-de-dispersión-scatterplots.html#cb371-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure)) <span class="sc">+</span></span>
+<span id="cb371-4"><a href="diagramas-de-dispersión-scatterplots.html#cb371-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">col =</span> wk), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb371-5"><a href="diagramas-de-dispersión-scatterplots.html#cb371-5" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb371-6"><a href="diagramas-de-dispersión-scatterplots.html#cb371-6" tabindex="-1"></a>plot21_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-32-1.svg" width="672" /></p>
+<p>Se puede extender las bondades de los gráfico de <code>ggplot2</code> para obtener mayor información de las muestra. Por ejemplo, agrupar los datos por Zona. Para lograr esto se introduce el parámetro <code>shape</code>:</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="diagramas-de-dispersión-scatterplots.html#cb372-1" tabindex="-1"></a>plot22_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb372-2"><a href="diagramas-de-dispersión-scatterplots.html#cb372-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb372-3"><a href="diagramas-de-dispersión-scatterplots.html#cb372-3" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb372-4"><a href="diagramas-de-dispersión-scatterplots.html#cb372-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
-<span id="cb372-5"><a href="diagramas-de-dispersión-scatterplots.html#cb372-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb372-6"><a href="diagramas-de-dispersión-scatterplots.html#cb372-6" tabindex="-1"></a>      <span class="at">shape =</span> Sex)) <span class="sc">+</span></span>
-<span id="cb372-7"><a href="diagramas-de-dispersión-scatterplots.html#cb372-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
-<span id="cb372-8"><a href="diagramas-de-dispersión-scatterplots.html#cb372-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
-<span id="cb372-9"><a href="diagramas-de-dispersión-scatterplots.html#cb372-9" tabindex="-1"></a>    <span class="at">color =</span> Sex),</span>
-<span id="cb372-10"><a href="diagramas-de-dispersión-scatterplots.html#cb372-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb372-11"><a href="diagramas-de-dispersión-scatterplots.html#cb372-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb372-12"><a href="diagramas-de-dispersión-scatterplots.html#cb372-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorSex) <span class="sc">+</span></span>
-<span id="cb372-13"><a href="diagramas-de-dispersión-scatterplots.html#cb372-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb372-14"><a href="diagramas-de-dispersión-scatterplots.html#cb372-14" tabindex="-1"></a>plot23_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/unnamed-chunk-34-1.svg" width="672" /></p>
-<p>Un resultado equivalente se obtiene por región:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="diagramas-de-dispersión-scatterplots.html#cb373-1" tabindex="-1"></a>plot24_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb372-3"><a href="diagramas-de-dispersión-scatterplots.html#cb372-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Income, </span>
+<span id="cb372-4"><a href="diagramas-de-dispersión-scatterplots.html#cb372-4" tabindex="-1"></a>        <span class="at">x =</span> Expenditure,</span>
+<span id="cb372-5"><a href="diagramas-de-dispersión-scatterplots.html#cb372-5" tabindex="-1"></a>        <span class="at">shape =</span> Zone)) <span class="sc">+</span> </span>
+<span id="cb372-6"><a href="diagramas-de-dispersión-scatterplots.html#cb372-6" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> wk, <span class="at">color =</span> Zone), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb372-7"><a href="diagramas-de-dispersión-scatterplots.html#cb372-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorZona) <span class="sc">+</span></span>
+<span id="cb372-8"><a href="diagramas-de-dispersión-scatterplots.html#cb372-8" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb372-9"><a href="diagramas-de-dispersión-scatterplots.html#cb372-9" tabindex="-1"></a>plot22_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-33-1.svg" width="672" /></p>
+<p>De forma similar se puede obtener el resultado por sexo:</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="diagramas-de-dispersión-scatterplots.html#cb373-1" tabindex="-1"></a>plot23_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb373-2"><a href="diagramas-de-dispersión-scatterplots.html#cb373-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
-<span id="cb373-3"><a href="diagramas-de-dispersión-scatterplots.html#cb373-3" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb373-3"><a href="diagramas-de-dispersión-scatterplots.html#cb373-3" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
 <span id="cb373-4"><a href="diagramas-de-dispersión-scatterplots.html#cb373-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
 <span id="cb373-5"><a href="diagramas-de-dispersión-scatterplots.html#cb373-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
-<span id="cb373-6"><a href="diagramas-de-dispersión-scatterplots.html#cb373-6" tabindex="-1"></a>      <span class="at">shape =</span> Region)) <span class="sc">+</span></span>
+<span id="cb373-6"><a href="diagramas-de-dispersión-scatterplots.html#cb373-6" tabindex="-1"></a>      <span class="at">shape =</span> Sex)) <span class="sc">+</span></span>
 <span id="cb373-7"><a href="diagramas-de-dispersión-scatterplots.html#cb373-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
 <span id="cb373-8"><a href="diagramas-de-dispersión-scatterplots.html#cb373-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
-<span id="cb373-9"><a href="diagramas-de-dispersión-scatterplots.html#cb373-9" tabindex="-1"></a>    <span class="at">color =</span> Region),</span>
+<span id="cb373-9"><a href="diagramas-de-dispersión-scatterplots.html#cb373-9" tabindex="-1"></a>    <span class="at">color =</span> Sex),</span>
 <span id="cb373-10"><a href="diagramas-de-dispersión-scatterplots.html#cb373-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb373-11"><a href="diagramas-de-dispersión-scatterplots.html#cb373-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
-<span id="cb373-12"><a href="diagramas-de-dispersión-scatterplots.html#cb373-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorRegion) <span class="sc">+</span></span>
+<span id="cb373-12"><a href="diagramas-de-dispersión-scatterplots.html#cb373-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorSex) <span class="sc">+</span></span>
 <span id="cb373-13"><a href="diagramas-de-dispersión-scatterplots.html#cb373-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
-<span id="cb373-14"><a href="diagramas-de-dispersión-scatterplots.html#cb373-14" tabindex="-1"></a>plot24_Ponde</span></code></pre></div>
-<p><img src="07-Gra%CC%81ficas_files/figure-html/unnamed-chunk-35-1.svg" width="672" /></p>
+<span id="cb373-14"><a href="diagramas-de-dispersión-scatterplots.html#cb373-14" tabindex="-1"></a>plot23_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-34-1.svg" width="672" /></p>
+<p>Un resultado equivalente se obtiene por región:</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="diagramas-de-dispersión-scatterplots.html#cb374-1" tabindex="-1"></a>plot24_Ponde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb374-2"><a href="diagramas-de-dispersión-scatterplots.html#cb374-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta,</span>
+<span id="cb374-3"><a href="diagramas-de-dispersión-scatterplots.html#cb374-3" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb374-4"><a href="diagramas-de-dispersión-scatterplots.html#cb374-4" tabindex="-1"></a>      <span class="at">y =</span> Income,</span>
+<span id="cb374-5"><a href="diagramas-de-dispersión-scatterplots.html#cb374-5" tabindex="-1"></a>      <span class="at">x =</span> Expenditure,</span>
+<span id="cb374-6"><a href="diagramas-de-dispersión-scatterplots.html#cb374-6" tabindex="-1"></a>      <span class="at">shape =</span> Region)) <span class="sc">+</span></span>
+<span id="cb374-7"><a href="diagramas-de-dispersión-scatterplots.html#cb374-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(</span>
+<span id="cb374-8"><a href="diagramas-de-dispersión-scatterplots.html#cb374-8" tabindex="-1"></a>    <span class="at">size =</span> wk,</span>
+<span id="cb374-9"><a href="diagramas-de-dispersión-scatterplots.html#cb374-9" tabindex="-1"></a>    <span class="at">color =</span> Region),</span>
+<span id="cb374-10"><a href="diagramas-de-dispersión-scatterplots.html#cb374-10" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb374-11"><a href="diagramas-de-dispersión-scatterplots.html#cb374-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Peso&quot;</span>) <span class="sc">+</span></span>
+<span id="cb374-12"><a href="diagramas-de-dispersión-scatterplots.html#cb374-12" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colorRegion) <span class="sc">+</span></span>
+<span id="cb374-13"><a href="diagramas-de-dispersión-scatterplots.html#cb374-13" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span>
+<span id="cb374-14"><a href="diagramas-de-dispersión-scatterplots.html#cb374-14" tabindex="-1"></a>plot24_Ponde</span></code></pre></div>
+<p><img src="07-Gr%C3%A1ficas_files/figure-html/unnamed-chunk-35-1.svg" width="672" /></p>
 </div>
             </section>
 

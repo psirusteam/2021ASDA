@@ -330,57 +330,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Uno de los paquetes más utilizados en <code>R</code> para graficar es <code>ggplot2</code>, desarrollado por Hadley Wickham. Este paquete implementa el enfoque <strong>Grammar of Graphics</strong>, el cual plantea que cualquier gráfico puede describirse mediante una gramática compuesta de capas (datos, estéticas, geometrías, estadísticas, escalas y temas).</p>
 <p>En combinación con paquetes como <strong><code>survey</code></strong> y <strong><code>srvyr</code></strong>, es posible generar gráficos que consideren los pesos de la encuesta y que representen correctamente tanto estimaciones como errores de muestreo.</p>
 <p>Como es costumbre, iniciamos cargando las librerías necesarias y configurando opciones generales:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="gráficas-en-r.html#cb330-1" tabindex="-1"></a><span class="co"># Configuración general</span></span>
-<span id="cb330-2"><a href="gráficas-en-r.html#cb330-2" tabindex="-1"></a><span class="co"># knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)</span></span>
-<span id="cb330-3"><a href="gráficas-en-r.html#cb330-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb330-4"><a href="gráficas-en-r.html#cb330-4" tabindex="-1"></a></span>
-<span id="cb330-5"><a href="gráficas-en-r.html#cb330-5" tabindex="-1"></a><span class="co"># Paquetes para manejo de encuestas y visualización</span></span>
-<span id="cb330-6"><a href="gráficas-en-r.html#cb330-6" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb330-7"><a href="gráficas-en-r.html#cb330-7" tabindex="-1"></a><span class="fu">library</span>(survey)      <span class="co"># Diseños muestrales complejos</span></span>
-<span id="cb330-8"><a href="gráficas-en-r.html#cb330-8" tabindex="-1"></a><span class="fu">library</span>(srvyr)       <span class="co"># Interfaz amigable con dplyr para encuestas</span></span>
-<span id="cb330-9"><a href="gráficas-en-r.html#cb330-9" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     <span class="co"># Gramática de gráficos</span></span>
-<span id="cb330-10"><a href="gráficas-en-r.html#cb330-10" tabindex="-1"></a><span class="fu">library</span>(patchwork)   <span class="co"># Composición de gráficos</span></span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="gráficas-en-r.html#cb331-1" tabindex="-1"></a><span class="co"># Configuración general</span></span>
+<span id="cb331-2"><a href="gráficas-en-r.html#cb331-2" tabindex="-1"></a><span class="co"># knitr::opts_chunk$set(cache = TRUE, warning = FALSE, message = FALSE, error = FALSE)</span></span>
+<span id="cb331-3"><a href="gráficas-en-r.html#cb331-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb331-4"><a href="gráficas-en-r.html#cb331-4" tabindex="-1"></a></span>
+<span id="cb331-5"><a href="gráficas-en-r.html#cb331-5" tabindex="-1"></a><span class="co"># Paquetes para manejo de encuestas y visualización</span></span>
+<span id="cb331-6"><a href="gráficas-en-r.html#cb331-6" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb331-7"><a href="gráficas-en-r.html#cb331-7" tabindex="-1"></a><span class="fu">library</span>(survey)      <span class="co"># Diseños muestrales complejos</span></span>
+<span id="cb331-8"><a href="gráficas-en-r.html#cb331-8" tabindex="-1"></a><span class="fu">library</span>(srvyr)       <span class="co"># Interfaz amigable con dplyr para encuestas</span></span>
+<span id="cb331-9"><a href="gráficas-en-r.html#cb331-9" tabindex="-1"></a><span class="fu">library</span>(ggplot2)     <span class="co"># Gramática de gráficos</span></span>
+<span id="cb331-10"><a href="gráficas-en-r.html#cb331-10" tabindex="-1"></a><span class="fu">library</span>(patchwork)   <span class="co"># Composición de gráficos</span></span></code></pre></div>
 <p>El cargue de la base de datos se hace a continuación,</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="gráficas-en-r.html#cb331-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
-<span id="cb331-2"><a href="gráficas-en-r.html#cb331-2" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="gráficas-en-r.html#cb332-1" tabindex="-1"></a><span class="fu">data</span>(BigCity, <span class="at">package =</span> <span class="st">&quot;TeachingSampling&quot;</span>)</span>
+<span id="cb332-2"><a href="gráficas-en-r.html#cb332-2" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Data/encuesta.rds&quot;</span>)</span></code></pre></div>
 <p>A continuación, se define el diseño de muestreo:</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="gráficas-en-r.html#cb332-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
-<span id="cb332-2"><a href="gráficas-en-r.html#cb332-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
-<span id="cb332-3"><a href="gráficas-en-r.html#cb332-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
-<span id="cb332-4"><a href="gráficas-en-r.html#cb332-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
-<span id="cb332-5"><a href="gráficas-en-r.html#cb332-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
-<span id="cb332-6"><a href="gráficas-en-r.html#cb332-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
-<span id="cb332-7"><a href="gráficas-en-r.html#cb332-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
-<span id="cb332-8"><a href="gráficas-en-r.html#cb332-8" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="gráficas-en-r.html#cb333-1" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb333-2"><a href="gráficas-en-r.html#cb333-2" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span></span>
+<span id="cb333-3"><a href="gráficas-en-r.html#cb333-3" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb333-4"><a href="gráficas-en-r.html#cb333-4" tabindex="-1"></a>    <span class="at">strata =</span> Stratum,</span>
+<span id="cb333-5"><a href="gráficas-en-r.html#cb333-5" tabindex="-1"></a>    <span class="at">ids =</span> PSU,</span>
+<span id="cb333-6"><a href="gráficas-en-r.html#cb333-6" tabindex="-1"></a>    <span class="at">weights =</span> wk,</span>
+<span id="cb333-7"><a href="gráficas-en-r.html#cb333-7" tabindex="-1"></a>    <span class="at">nest =</span> T</span>
+<span id="cb333-8"><a href="gráficas-en-r.html#cb333-8" tabindex="-1"></a>  )</span></code></pre></div>
 <p>A partir de las variables de la encuesta, para efectos de los ejemplos, se definen las siguientes variables:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="gráficas-en-r.html#cb333-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb333-2"><a href="gráficas-en-r.html#cb333-2" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb333-3"><a href="gráficas-en-r.html#cb333-3" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb333-4"><a href="gráficas-en-r.html#cb333-4" tabindex="-1"></a>  <span class="at">edad_18 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb333-5"><a href="gráficas-en-r.html#cb333-5" tabindex="-1"></a>    Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;&lt; 18 años&quot;</span>,</span>
-<span id="cb333-6"><a href="gráficas-en-r.html#cb333-6" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;&gt;= 18 años&quot;</span></span>
-<span id="cb333-7"><a href="gráficas-en-r.html#cb333-7" tabindex="-1"></a>  )</span>
-<span id="cb333-8"><a href="gráficas-en-r.html#cb333-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="gráficas-en-r.html#cb334-1" tabindex="-1"></a>diseno <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb334-2"><a href="gráficas-en-r.html#cb334-2" tabindex="-1"></a>  <span class="at">pobreza =</span> <span class="fu">ifelse</span>(Poverty <span class="sc">!=</span> <span class="st">&quot;NotPoor&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb334-3"><a href="gráficas-en-r.html#cb334-3" tabindex="-1"></a>  <span class="at">desempleo =</span> <span class="fu">ifelse</span>(Employment <span class="sc">==</span> <span class="st">&quot;Unemployed&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb334-4"><a href="gráficas-en-r.html#cb334-4" tabindex="-1"></a>  <span class="at">edad_18 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb334-5"><a href="gráficas-en-r.html#cb334-5" tabindex="-1"></a>    Age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">&quot;&lt; 18 años&quot;</span>,</span>
+<span id="cb334-6"><a href="gráficas-en-r.html#cb334-6" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;&gt;= 18 años&quot;</span></span>
+<span id="cb334-7"><a href="gráficas-en-r.html#cb334-7" tabindex="-1"></a>  )</span>
+<span id="cb334-8"><a href="gráficas-en-r.html#cb334-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Como se mostró en capítulos anteriores, se divide la muestra en sub grupos para ejemplificar los conceptos que se mostrarán en este capítulo:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="gráficas-en-r.html#cb334-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
-<span id="cb334-2"><a href="gráficas-en-r.html#cb334-2" tabindex="-1"></a>sub_Rural <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
-<span id="cb334-3"><a href="gráficas-en-r.html#cb334-3" tabindex="-1"></a>sub_Mujer <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
-<span id="cb334-4"><a href="gráficas-en-r.html#cb334-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="gráficas-en-r.html#cb335-1" tabindex="-1"></a>sub_Urbano <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>)</span>
+<span id="cb335-2"><a href="gráficas-en-r.html#cb335-2" tabindex="-1"></a>sub_Rural <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Zone <span class="sc">==</span> <span class="st">&quot;Rural&quot;</span>)</span>
+<span id="cb335-3"><a href="gráficas-en-r.html#cb335-3" tabindex="-1"></a>sub_Mujer <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Female&quot;</span>)</span>
+<span id="cb335-4"><a href="gráficas-en-r.html#cb335-4" tabindex="-1"></a>sub_Hombre <span class="ot">&lt;-</span> diseno <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
 <p>Para crear las gráficas en este texto se utilizará por defecto el tema que la CEPAL tiene asignado por defecto. El tema se define a continuación:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="gráficas-en-r.html#cb335-1" tabindex="-1"></a>theme_cepal <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb335-2"><a href="gráficas-en-r.html#cb335-2" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb335-3"><a href="gráficas-en-r.html#cb335-3" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb335-4"><a href="gráficas-en-r.html#cb335-4" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb335-5"><a href="gráficas-en-r.html#cb335-5" tabindex="-1"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb335-6"><a href="gráficas-en-r.html#cb335-6" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb335-7"><a href="gráficas-en-r.html#cb335-7" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb335-8"><a href="gráficas-en-r.html#cb335-8" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb335-9"><a href="gráficas-en-r.html#cb335-9" tabindex="-1"></a>      <span class="at">legend.justification =</span> <span class="st">&quot;left&quot;</span>,</span>
-<span id="cb335-10"><a href="gráficas-en-r.html#cb335-10" tabindex="-1"></a>      <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
-<span id="cb335-11"><a href="gráficas-en-r.html#cb335-11" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb335-12"><a href="gráficas-en-r.html#cb335-12" tabindex="-1"></a>      ...</span>
-<span id="cb335-13"><a href="gráficas-en-r.html#cb335-13" tabindex="-1"></a>    )</span>
-<span id="cb335-14"><a href="gráficas-en-r.html#cb335-14" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="gráficas-en-r.html#cb336-1" tabindex="-1"></a>theme_cepal <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb336-2"><a href="gráficas-en-r.html#cb336-2" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb336-3"><a href="gráficas-en-r.html#cb336-3" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb336-4"><a href="gráficas-en-r.html#cb336-4" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb336-5"><a href="gráficas-en-r.html#cb336-5" tabindex="-1"></a>      <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb336-6"><a href="gráficas-en-r.html#cb336-6" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb336-7"><a href="gráficas-en-r.html#cb336-7" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb336-8"><a href="gráficas-en-r.html#cb336-8" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb336-9"><a href="gráficas-en-r.html#cb336-9" tabindex="-1"></a>      <span class="at">legend.justification =</span> <span class="st">&quot;left&quot;</span>,</span>
+<span id="cb336-10"><a href="gráficas-en-r.html#cb336-10" tabindex="-1"></a>      <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb336-11"><a href="gráficas-en-r.html#cb336-11" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb336-12"><a href="gráficas-en-r.html#cb336-12" tabindex="-1"></a>      ...</span>
+<span id="cb336-13"><a href="gráficas-en-r.html#cb336-13" tabindex="-1"></a>    )</span>
+<span id="cb336-14"><a href="gráficas-en-r.html#cb336-14" tabindex="-1"></a>}</span></code></pre></div>
 </div>
             </section>
 

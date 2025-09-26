@@ -347,15 +347,15 @@ Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
 <p>Como se mostró en capítulos anteriores, para tener estimaciones consistentes se calculan los pesos Qweighted siguiendo los pasos mostrados, tomando en este caso como covariables la edad del entrevistado, el sexo, la región y la zona donde reside. Adicionalmente, se calculan también los <em>senate-weight</em> para el ajuste de los modelos (Wk3, en el ajuste del modelo en <code>R</code>).</p>
 <p>Al usar pesos para estimar los parámetros de los modelos, se debe tener en cuenta la naturaleza del diseño de muestreo. Particularmente, cuando se trata de estimaciones de parámetros multinivel, debe tener en cuenta no solo los pesos de la unidad de muestreo final sino también los primeros pesos de la unidad de muestreo. Por ejemplo, supongamos que tiene una muestra de estudiantes seleccionados de un marco nacional de escuelas. Luego, tenemos dos conjuntos de pesos, el primero con respecto a las escuelas (observe que una escuela seleccionada se representa así misma y a otros que no están en la muestra) y la segunda con respecto a los estudiantes. Para continuar con el ejemplo, supongamos también que en la población finita se tienen 10.000 estudiantes y 40 escuelas. Consideremos que se han seleccionado a 500 estudiantes asignados en 8 escuelas. En aras de la facilidad, pensemos que se usa una muestra aleatoria simple para seleccionar estudiantes. Si se tiene en cuenta solo los pesos del estudiante para que se ajusten al modelo multinivel, se encontrarán que está estimando parámetros con una muestra ampliada que representa a 10.000 estudiantes que se asignan en una muestra de solo ocho escuelas. Entonces, cualquier conclusión establecida será incorrecta. Por ejemplo, al realizar un análisis de varianza simple, el porcentaje de varianza explicado por las escuelas será extremadamente bajo. Ahora, si se tiene en cuenta ambos conjuntos de pesos (estudiantes y escuelas), se encontrará ajustando un modelo con muestras expandidas que representan 10.000 estudiantes y 40 escuelas, lo cual es lo correcto.</p>
 <p>A continuación, se presentan los pesos de muestreos usados para el ajuste del modelo. Primero, se ajustará con los pesos que se tienen directamente del diseño muestral (Wk), los segundos son los pesos q-weigth (wk2) y los senate weigth (wk3).</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
-<span id="cb487-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
-<span id="cb487-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-3" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
-<span id="cb487-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-4" tabindex="-1"></a></span>
-<span id="cb487-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-5" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(encuesta)</span>
-<span id="cb487-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-6" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">wk3 =</span> n<span class="sc">*</span>wk<span class="sc">/</span><span class="fu">sum</span>(wk))</span>
-<span id="cb487-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-7" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">fep =</span> <span class="fu">sum</span>(wk),</span>
-<span id="cb487-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-8" tabindex="-1"></a>                       <span class="at">q_wei =</span> <span class="fu">sum</span>(wk2),</span>
-<span id="cb487-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb487-9" tabindex="-1"></a>                       <span class="at">fep2 =</span> <span class="fu">sum</span>(wk3) )</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-1" tabindex="-1"></a>mod_qw <span class="ot">&lt;-</span> <span class="fu">lm</span>(wk <span class="sc">~</span> Age <span class="sc">+</span> Sex <span class="sc">+</span> Region <span class="sc">+</span> Zone,</span>
+<span id="cb488-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-2" tabindex="-1"></a>             <span class="at">data =</span> encuesta)</span>
+<span id="cb488-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-3" tabindex="-1"></a>encuesta<span class="sc">$</span>wk2 <span class="ot">&lt;-</span>   encuesta<span class="sc">$</span>wk<span class="sc">/</span><span class="fu">predict</span>(mod_qw)</span>
+<span id="cb488-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-4" tabindex="-1"></a></span>
+<span id="cb488-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-5" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(encuesta)</span>
+<span id="cb488-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-6" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">wk3 =</span> n<span class="sc">*</span>wk<span class="sc">/</span><span class="fu">sum</span>(wk))</span>
+<span id="cb488-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-7" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">fep =</span> <span class="fu">sum</span>(wk),</span>
+<span id="cb488-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-8" tabindex="-1"></a>                       <span class="at">q_wei =</span> <span class="fu">sum</span>(wk2),</span>
+<span id="cb488-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-9" tabindex="-1"></a>                       <span class="at">fep2 =</span> <span class="fu">sum</span>(wk3) )</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -373,26 +373,26 @@ Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
 </tbody>
 </table>
 <p>A continuación, se presenta un gráfico comparando los pesos q-weigth y los senate weigth que se usarán para el ajuste del modelo multinivel:</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-1" tabindex="-1"></a><span class="fu">ggplot</span>(encuesta, <span class="fu">aes</span>(<span class="at">x =</span> wk2, <span class="at">y =</span> wk3)) <span class="sc">+</span> </span>
-<span id="cb488-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb488-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb488-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;q-weighted&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Alternativa&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-1" tabindex="-1"></a><span class="fu">ggplot</span>(encuesta, <span class="fu">aes</span>(<span class="at">x =</span> wk2, <span class="at">y =</span> wk3)) <span class="sc">+</span> </span>
+<span id="cb489-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb489-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;q-weighted&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Alternativa&quot;</span>)</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-12-1.svg" width="672" /></p>
 <p>En este sentido, se realizarán los ajustes de los modelos utilizando los dos pesos mostrados anteriormente:</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-1" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb489-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-2" tabindex="-1"></a></span>
-<span id="cb489-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-3" tabindex="-1"></a>mod_null  <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ),</span>
-<span id="cb489-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-4" tabindex="-1"></a>                   <span class="at">data  =</span>  encuesta, </span>
-<span id="cb489-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-5" tabindex="-1"></a>             <span class="at">weights  =</span>  wk2 ) </span>
-<span id="cb489-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-6" tabindex="-1"></a></span>
-<span id="cb489-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-7" tabindex="-1"></a>mod_null2  <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ), </span>
-<span id="cb489-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-8" tabindex="-1"></a>                    <span class="at">data  =</span>  encuesta, </span>
-<span id="cb489-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb489-9" tabindex="-1"></a>             <span class="at">weights  =</span>  wk3 )</span></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-1" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb490-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-2" tabindex="-1"></a></span>
+<span id="cb490-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-3" tabindex="-1"></a>mod_null  <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ),</span>
+<span id="cb490-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-4" tabindex="-1"></a>                   <span class="at">data  =</span>  encuesta, </span>
+<span id="cb490-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-5" tabindex="-1"></a>             <span class="at">weights  =</span>  wk2 ) </span>
+<span id="cb490-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-6" tabindex="-1"></a></span>
+<span id="cb490-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-7" tabindex="-1"></a>mod_null2  <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income  <span class="sc">~</span> ( <span class="dv">1</span>  <span class="sc">|</span>  Stratum ), </span>
+<span id="cb490-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-8" tabindex="-1"></a>                    <span class="at">data  =</span>  encuesta, </span>
+<span id="cb490-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-9" tabindex="-1"></a>             <span class="at">weights  =</span>  wk3 )</span></code></pre></div>
 <p>Comparando los modelos obtenidos:</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-1" tabindex="-1"></a>coef_mod_null <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="fu">coef</span>( mod_null )<span class="sc">$</span>Stratum, </span>
-<span id="cb490-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-2" tabindex="-1"></a>          <span class="fu">coef</span>(mod_null2 )<span class="sc">$</span>Stratum)</span>
-<span id="cb490-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-3" tabindex="-1"></a><span class="fu">colnames</span>(coef_mod_null) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Intercept Mod 1&quot;</span>,</span>
-<span id="cb490-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-4" tabindex="-1"></a>                             <span class="st">&quot;Intercept Mod 2&quot;</span>)</span>
-<span id="cb490-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb490-5" tabindex="-1"></a>coef_mod_null <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-1" tabindex="-1"></a>coef_mod_null <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(<span class="fu">coef</span>( mod_null )<span class="sc">$</span>Stratum, </span>
+<span id="cb491-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-2" tabindex="-1"></a>          <span class="fu">coef</span>(mod_null2 )<span class="sc">$</span>Stratum)</span>
+<span id="cb491-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-3" tabindex="-1"></a><span class="fu">colnames</span>(coef_mod_null) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Intercept Mod 1&quot;</span>,</span>
+<span id="cb491-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-4" tabindex="-1"></a>                             <span class="st">&quot;Intercept Mod 2&quot;</span>)</span>
+<span id="cb491-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-5" tabindex="-1"></a>coef_mod_null <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -466,7 +466,7 @@ Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
 </table>
 <p>Se puede observar que las estimaciones de los interceptos son similares utilizando los dos factores de expansión. Sin embargo, se debe tener en cuenta las características de cada metolodología.</p>
 <p>Para efectos de ejemplificar el cálculo de la correlación intraclases, se utiliza la función <code>icc</code> de la librería <code>performance</code>. El cálculo es el siguiente:</p>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb491-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_null)</span></code></pre></div>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb492-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_null)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -484,10 +484,10 @@ Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
 </tbody>
 </table>
 <p>se puede observar que la correlación intraclase, utilizando el modelo nulo es del 32%. Por otro lado, como el modelo que se está ajustando es el “modelo nulo”, la predicción del ingreso dentro de los estrato es constante, como se muestra a continuación:</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb492-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_null), </span>
-<span id="cb492-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb492-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
-<span id="cb492-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb492-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb492-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb492-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_null), </span>
+<span id="cb493-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
+<span id="cb493-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb493-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -537,9 +537,9 @@ Ingreso_{ij}=\beta_{0j}+\epsilon_{ij}
 </tbody>
 </table>
 <p>Como es bien sabido, si la predicción es correcta se espera estar sobre la línea de 45°. Naturalmente, en este caso eso no se obtiene y se puede verificar en la siguiente gráfica:</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb493-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb493-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb493-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb494-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb494-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-17-1.svg" width="70%" /></p>
 <p><em>Modelo con intercepto aleatoria</em></p>
 <p>Un modelo con pendiente aleatoria es un tipo de modelo de regresión que permite que la relación entre la variable independiente y la variable dependiente cambie según alguna otra variable explicativa. En otras palabras, permite que la pendiente de la relación entre las variables sea diferente en diferentes grupos o subconjuntos de datos.</p>
@@ -553,9 +553,9 @@ Ingreso_{ij}=\beta_{0}+\beta_{1j}Gasto_{ij}+\epsilon_{ij}
 \beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
 \]</span>
 Para este caso en particular, se va a variar la pendiente de acuerdo con los estratos socioeconómicos. Para ajustar el modelo se utiliza la función <code>lmer</code> como se muestra a continuación:</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-1" tabindex="-1"></a>mod_Int_Aleatorio <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Stratum),</span>
-<span id="cb494-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span>
-<span id="cb494-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb494-3" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_Int_Aleatorio)</span></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb495-1" tabindex="-1"></a>mod_Int_Aleatorio <span class="ot">&lt;-</span> <span class="fu">lmer</span>( Income <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Stratum),</span>
+<span id="cb495-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb495-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span>
+<span id="cb495-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb495-3" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_Int_Aleatorio)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -573,7 +573,7 @@ Para este caso en particular, se va a variar la pendiente de acuerdo con los est
 </tbody>
 </table>
 <p>Para cada estrato se tienen las siguientes estimaciones de <span class="math inline">\(\beta_{1j}\)</span></p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb495-1" tabindex="-1"></a><span class="fu">coef</span>(mod_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-1" tabindex="-1"></a><span class="fu">coef</span>(mod_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -626,29 +626,29 @@ Para este caso en particular, se va a variar la pendiente de acuerdo con los est
 </tbody>
 </table>
 <p>Organizando los coeficientes en un gráfico se tiene:</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-1" tabindex="-1"></a>Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
-<span id="cb496-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-2" tabindex="-1"></a>  <span class="fu">coef</span>(mod_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> </span>
-<span id="cb496-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-3" tabindex="-1"></a>       <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
-<span id="cb496-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-4" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>())</span>
-<span id="cb496-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-5" tabindex="-1"></a></span>
-<span id="cb496-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
-<span id="cb496-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-7" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
-<span id="cb496-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-8" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb496-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb496-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-10" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb496-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> Coef_Estimado,</span>
-<span id="cb496-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-12" tabindex="-1"></a>              <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">slope=</span>Expenditure, </span>
-<span id="cb496-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-13" tabindex="-1"></a>                          <span class="at">intercept=</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, </span>
-<span id="cb496-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-14" tabindex="-1"></a>                          <span class="at">colour =</span> Stratum))<span class="sc">+</span></span>
-<span id="cb496-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb496-15" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-1" tabindex="-1"></a>Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb497-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-2" tabindex="-1"></a>  <span class="fu">coef</span>(mod_Int_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> </span>
+<span id="cb497-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-3" tabindex="-1"></a>       <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
+<span id="cb497-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-4" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>())</span>
+<span id="cb497-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-5" tabindex="-1"></a></span>
+<span id="cb497-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
+<span id="cb497-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-7" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
+<span id="cb497-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-8" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb497-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb497-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-10" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb497-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> Coef_Estimado,</span>
+<span id="cb497-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-12" tabindex="-1"></a>              <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">slope=</span>Expenditure, </span>
+<span id="cb497-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-13" tabindex="-1"></a>                          <span class="at">intercept=</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, </span>
+<span id="cb497-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-14" tabindex="-1"></a>                          <span class="at">colour =</span> Stratum))<span class="sc">+</span></span>
+<span id="cb497-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-15" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-20-1.svg" width="672" />
 Se puede observar que, la estimación de la pendiente varía de manera importante para cada uno de los estratos, por tanto, el ajuste del modelo con pendiente aleatoria es adecuado.</p>
 <p>Por otro lado, la predicción de los ingresos usando este modelo se muestra a continuación:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb497-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-2" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_Int_Aleatorio), </span>
-<span id="cb497-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-3" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
-<span id="cb497-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-4" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb497-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb497-5" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb498-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-2" tabindex="-1"></a>  <span class="at">Pred =</span> <span class="fu">predict</span>(mod_Int_Aleatorio), </span>
+<span id="cb498-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-3" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
+<span id="cb498-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-4" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb498-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-5" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) </span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -698,9 +698,9 @@ Se puede observar que, la estimación de la pendiente varía de manera important
 </tbody>
 </table>
 <p>Gráficamente se muestran las estimaciones versus los valores estimados de los ingresos y se logra observar que la predicción está más cerca a la línea de 45 grados que el modelo anterior.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb498-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb498-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb498-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb499-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb499-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-22-1.svg" width="70%" /></p>
 <p><em>Modelo con intercepto y pendiente aleatoria</em></p>
 <p>Los modelos con intercepto y pendiente aleatoria, también conocidos como modelos mixtos de efectos mixtos o modelos de regresión lineal mixta, son un tipo de modelo estadístico que permite modelar la relación entre una variable de respuesta y una o más variables predictoras, teniendo en cuenta tanto efectos fijos como efectos aleatorios.</p>
@@ -720,10 +720,10 @@ y,</p>
 \beta_{1j} = \gamma_{10}+\gamma_{11}Stratum_{j} + \tau_{1j}
 \]</span>
 El ajuste del modelo se realiza utilizando la función <code>lmer</code> como se presenta a continuación:</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-1" tabindex="-1"></a>mod_Pen_Aleatorio <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Income <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> Expenditure<span class="sc">|</span> Stratum),</span>
-<span id="cb499-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span>
-<span id="cb499-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-3" tabindex="-1"></a></span>
-<span id="cb499-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb499-4" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_Pen_Aleatorio)</span></code></pre></div>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb500-1" tabindex="-1"></a>mod_Pen_Aleatorio <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Income <span class="sc">~</span> Expenditure  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> Expenditure<span class="sc">|</span> Stratum),</span>
+<span id="cb500-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb500-2" tabindex="-1"></a>  <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span>
+<span id="cb500-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb500-3" tabindex="-1"></a></span>
+<span id="cb500-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb500-4" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">icc</span>(mod_Pen_Aleatorio)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -741,7 +741,7 @@ El ajuste del modelo se realiza utilizando la función <code>lmer</code> como se
 </tbody>
 </table>
 <p>Los coeficientes del modelo son:</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb500-1" tabindex="-1"></a><span class="fu">coef</span>(mod_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-1" tabindex="-1"></a><span class="fu">coef</span>(mod_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -804,28 +804,28 @@ El ajuste del modelo se realiza utilizando la función <code>lmer</code> como se
 </tbody>
 </table>
 <p>Gráficamente,</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-1" tabindex="-1"></a>Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
-<span id="cb501-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-2" tabindex="-1"></a>  <span class="fu">coef</span>(mod_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> </span>
-<span id="cb501-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-3" tabindex="-1"></a>       <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
-<span id="cb501-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-4" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>())</span>
-<span id="cb501-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-5" tabindex="-1"></a></span>
-<span id="cb501-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
-<span id="cb501-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-7" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
-<span id="cb501-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-8" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb501-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
-<span id="cb501-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-10" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb501-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> Coef_Estimado,</span>
-<span id="cb501-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-12" tabindex="-1"></a>              <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">slope=</span>Expenditure, </span>
-<span id="cb501-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-13" tabindex="-1"></a>                          <span class="at">intercept=</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, </span>
-<span id="cb501-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-14" tabindex="-1"></a>                          <span class="at">colour =</span> Stratum))<span class="sc">+</span></span>
-<span id="cb501-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb501-15" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-1" tabindex="-1"></a>Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb502-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-2" tabindex="-1"></a>  <span class="fu">coef</span>(mod_Pen_Aleatorio)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span> </span>
+<span id="cb502-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-3" tabindex="-1"></a>       <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
+<span id="cb502-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-4" tabindex="-1"></a>encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>())</span>
+<span id="cb502-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-5" tabindex="-1"></a></span>
+<span id="cb502-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
+<span id="cb502-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-7" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
+<span id="cb502-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-8" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb502-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>,</span>
+<span id="cb502-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-10" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb502-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">data =</span> Coef_Estimado,</span>
+<span id="cb502-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-12" tabindex="-1"></a>              <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">slope=</span>Expenditure, </span>
+<span id="cb502-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-13" tabindex="-1"></a>                          <span class="at">intercept=</span><span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span>, </span>
+<span id="cb502-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-14" tabindex="-1"></a>                          <span class="at">colour =</span> Stratum))<span class="sc">+</span></span>
+<span id="cb502-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-15" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-25-1.svg" width="672" /></p>
 <p>Como se pudo observar en la gráfica anterior y en el coeficiente de correlación intraclase, el ajuste del modelo con intercepto y pendiente aleatoria se ajusta mejor a los datos que los otros dos modelos mostrados anteriormente.</p>
 <p>A continuación, se realizan las predicciones de los ingresos con el modelo:</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_Pen_Aleatorio), </span>
-<span id="cb502-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
-<span id="cb502-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb502-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb502-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_Pen_Aleatorio), </span>
+<span id="cb503-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
+<span id="cb503-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb503-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>) <span class="co"># Son las pendientes aleatorias</span></span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -875,9 +875,9 @@ El ajuste del modelo se realiza utilizando la función <code>lmer</code> como se
 </tbody>
 </table>
 <p>Para poder ver qué tan buena son las predicciones, se realiza el siguiente gráfico:</p>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb503-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb503-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb503-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb504-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb504-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-27-1.svg" width="672" /></p>
 <p>Del anterior gráfico se logra observar que las predicciones del ingreso son mejores que las realizadas con los dos modelos anteriores. Lo anterior se debe a la naturaleza misma de los datos en una encuesta de hogares.</p>
 <p>Ahora bien, para robustecer el modelo, se ajusta nuevamente, pero agregando la variable zona como se muestra a continuación:</p>
@@ -896,19 +896,19 @@ y,</p>
 \beta_{2j} = \gamma_{20}+\gamma_{21}Stratum_{j} + \gamma_{12}\mu_{j} + \tau_{2j}
 \]</span></p>
 <p>donde <span class="math inline">\(\mu_{j}\)</span> es el gasto medio de los hogares en el estrato <span class="math inline">\(j\)</span>. En <code>R</code> el ajuste se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-1" tabindex="-1"></a>media_estrato <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
-<span id="cb504-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mu =</span> <span class="fu">mean</span>(Expenditure))</span>
-<span id="cb504-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-3" tabindex="-1"></a></span>
-<span id="cb504-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-4" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(encuesta, media_estrato, <span class="at">by =</span> <span class="st">&quot;Stratum&quot;</span>)  </span>
-<span id="cb504-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-5" tabindex="-1"></a></span>
-<span id="cb504-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-6" tabindex="-1"></a>mod_Pen_Aleatorio2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Income <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">+</span> </span>
-<span id="cb504-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-7" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">|</span> Stratum ),</span>
-<span id="cb504-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb504-8" tabindex="-1"></a>    <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-1" tabindex="-1"></a>media_estrato <span class="ot">&lt;-</span> encuesta <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span> </span>
+<span id="cb505-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mu =</span> <span class="fu">mean</span>(Expenditure))</span>
+<span id="cb505-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-3" tabindex="-1"></a></span>
+<span id="cb505-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-4" tabindex="-1"></a>encuesta <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(encuesta, media_estrato, <span class="at">by =</span> <span class="st">&quot;Stratum&quot;</span>)  </span>
+<span id="cb505-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-5" tabindex="-1"></a></span>
+<span id="cb505-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-6" tabindex="-1"></a>mod_Pen_Aleatorio2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Income <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">+</span> </span>
+<span id="cb505-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-7" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">+</span> Expenditure <span class="sc">+</span> Zone <span class="sc">+</span> mu <span class="sc">|</span> Stratum ),</span>
+<span id="cb505-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-8" tabindex="-1"></a>    <span class="at">data =</span> encuesta, <span class="at">weights  =</span>  wk2)</span></code></pre></div>
 <p>calculando las predicciones de los ingresos de los hogares por estrato:</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_Pen_Aleatorio2), </span>
-<span id="cb505-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
-<span id="cb505-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb505-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb505-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-1" tabindex="-1"></a>(tab_pred <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Pred =</span> <span class="fu">predict</span>(mod_Pen_Aleatorio2), </span>
+<span id="cb506-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-2" tabindex="-1"></a>           <span class="at">Income =</span> encuesta<span class="sc">$</span>Income, </span>
+<span id="cb506-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-3" tabindex="-1"></a>           <span class="at">Stratum =</span> encuesta<span class="sc">$</span>Stratum)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb506-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-4" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="dt">L</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -958,13 +958,13 @@ y,</p>
 </tbody>
 </table>
 <p>Por último, haciendo el gráfico de las predicciones con los datos observados observándose que el ajuste de este modelo es levemente mejor que el que no incluye la variable zona.</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
-<span id="cb506-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb506-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb506-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb507-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tab_pred, <span class="fu">aes</span>(<span class="at">x =</span> Pred, <span class="at">y =</span> Income, <span class="at">colour =</span> Stratum)) <span class="sc">+</span> </span>
+<span id="cb507-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb507-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb507-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb507-3" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) </span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/unnamed-chunk-29-1.svg" width="672" /></p>
 <p>A continuación, se presentan todos los componentes que se requieren para escribir el modelo ajustado. Inicialmente, se calcula la matriz diseño:</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb507-1" tabindex="-1"></a><span class="fu">as.data.frame</span>( <span class="fu">model.matrix</span>(mod_Pen_Aleatorio2)) <span class="sc">%&gt;%</span> </span>
-<span id="cb507-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb507-2" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb508-1" tabindex="-1"></a><span class="fu">as.data.frame</span>( <span class="fu">model.matrix</span>(mod_Pen_Aleatorio2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb508-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb508-2" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -5704,9 +5704,9 @@ y,</p>
 </tbody>
 </table>
 <p>Agregando la variable estrato y así poder incorporar las zonas a la matriz de coeficientes,</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb508-1" tabindex="-1"></a>(Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>( <span class="fu">coef</span>(mod_Pen_Aleatorio2)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span></span>
-<span id="cb508-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb508-2" tabindex="-1"></a>    <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
-<span id="cb508-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb508-3" tabindex="-1"></a>  encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum, Zone) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() ))</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb509-1" tabindex="-1"></a>(Coef_Estimado <span class="ot">&lt;-</span> <span class="fu">inner_join</span>( <span class="fu">coef</span>(mod_Pen_Aleatorio2)<span class="sc">$</span>Stratum <span class="sc">%&gt;%</span></span>
+<span id="cb509-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb509-2" tabindex="-1"></a>    <span class="fu">add_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Stratum&quot;</span>),</span>
+<span id="cb509-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb509-3" tabindex="-1"></a>  encuesta_plot <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum, Zone) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>() ))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -5770,7 +5770,7 @@ y,</p>
 </tbody>
 </table>
 <p>Ahora bien, se agrega la media calculada para los estratos a la matriz de coeficientes:</p>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb509-1" tabindex="-1"></a>(Coef_Estimado<span class="ot">&lt;-</span> Coef_Estimado <span class="sc">%&gt;%</span>  <span class="fu">inner_join</span>(media_estrato, <span class="at">by =</span> <span class="st">&quot;Stratum&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb510-1" tabindex="-1"></a>(Coef_Estimado<span class="ot">&lt;-</span> Coef_Estimado <span class="sc">%&gt;%</span>  <span class="fu">inner_join</span>(media_estrato, <span class="at">by =</span> <span class="st">&quot;Stratum&quot;</span>))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -5845,8 +5845,8 @@ y,</p>
 \hat{y}_{ij}=51.1+1.59Expenditure_{ij}+28.98Zone_{ij}+\left(-0.12\right)\mu_{j}
 \]</span></p>
 <p>Escribiendo el anterior modelo en <code>R</code> se tiene:</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb510-1" tabindex="-1"></a>(Coef_Estimado <span class="sc">%&gt;%</span>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">B0 =</span> <span class="fu">ifelse</span>( Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>, <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> mu.y <span class="sc">*</span> mu.x <span class="sc">+</span> ZoneUrban,<span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> mu.y <span class="sc">*</span> mu.x)) <span class="sc">%&gt;%</span></span>
-<span id="cb510-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb510-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum, Zone, B0, Expenditure))</span></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-1" tabindex="-1"></a>(Coef_Estimado <span class="sc">%&gt;%</span>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">B0 =</span> <span class="fu">ifelse</span>( Zone <span class="sc">==</span> <span class="st">&quot;Urban&quot;</span>, <span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> mu.y <span class="sc">*</span> mu.x <span class="sc">+</span> ZoneUrban,<span class="st">`</span><span class="at">(Intercept)</span><span class="st">`</span> <span class="sc">+</span> mu.y <span class="sc">*</span> mu.x)) <span class="sc">%&gt;%</span></span>
+<span id="cb511-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Stratum, Zone, B0, Expenditure))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -5896,22 +5896,22 @@ y,</p>
 </tbody>
 </table>
 <p>Gráficamente,</p>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
-<span id="cb511-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
-<span id="cb511-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-3" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
-<span id="cb511-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb511-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
-<span id="cb511-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-6" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb511-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>( <span class="sc">~</span> Zone) <span class="sc">+</span></span>
-<span id="cb511-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-8" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
-<span id="cb511-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-9" tabindex="-1"></a>    <span class="at">data =</span> Coef_Estimado,</span>
-<span id="cb511-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-10" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb511-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-11" tabindex="-1"></a>      <span class="at">slope =</span> Expenditure,</span>
-<span id="cb511-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-12" tabindex="-1"></a>      <span class="at">intercept =</span> B0,</span>
-<span id="cb511-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-13" tabindex="-1"></a>      <span class="at">colour =</span> Stratum</span>
-<span id="cb511-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-14" tabindex="-1"></a>    )</span>
-<span id="cb511-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb511-16"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb511-16" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> encuesta_plot,</span>
+<span id="cb512-2"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Income, <span class="at">x =</span> Expenditure,</span>
+<span id="cb512-3"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-3" tabindex="-1"></a>           <span class="at">colour =</span> Stratum)) <span class="sc">+</span></span>
+<span id="cb512-4"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb512-5"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb512-6"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-6" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb512-7"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>( <span class="sc">~</span> Zone) <span class="sc">+</span></span>
+<span id="cb512-8"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-8" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb512-9"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-9" tabindex="-1"></a>    <span class="at">data =</span> Coef_Estimado,</span>
+<span id="cb512-10"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-10" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb512-11"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-11" tabindex="-1"></a>      <span class="at">slope =</span> Expenditure,</span>
+<span id="cb512-12"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-12" tabindex="-1"></a>      <span class="at">intercept =</span> B0,</span>
+<span id="cb512-13"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-13" tabindex="-1"></a>      <span class="at">colour =</span> Stratum</span>
+<span id="cb512-14"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-14" tabindex="-1"></a>    )</span>
+<span id="cb512-15"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-15" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb512-16"><a href="estimación-de-pseudo-máxima-verosimilitud.html#cb512-16" tabindex="-1"></a>  <span class="fu">theme_cepal</span>()</span></code></pre></div>
 <p><img src="10-Multinivel_files/figure-html/plot_mod_Pen_Aleatorio212-1.svg" width="672" /></p>
 </div>
             </section>

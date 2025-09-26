@@ -326,16 +326,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La imputación por la media condicional se basa en la idea de que la media de una variable puede variar en función de los valores de otras variables. Por lo tanto, en lugar de simplemente reemplazar los valores faltantes con la media aritmética de la variable completa, se utiliza la media de la variable para grupos de observaciones que tienen valores similares en otras variables.</p>
 <p>Por ejemplo, si se tiene una variable numérica llamada “Ingreso” y una variable categórica llamada “Educación”, se podría utilizar la media de ingresos para cada nivel de educación para imputar los valores faltantes en la variable “Ingreso”. De esta manera, se tiene en cuenta la relación entre la educación y el ingreso al realizar la imputación.</p>
 <p>El método de imputación por la media condicional puede ser más preciso que el método de imputación por la media no condicional en situaciones en las que las variables están correlacionadas o cuando hay patrones de valores faltantes en los datos. Sin embargo, también puede ser más complicado y requiere más tiempo y recursos computacionales para implementar. A continuación, se ejemplifica la técnica de imputación utilizando la variable estrato (Stratum en la base de datos) para hacer el cálculo de los promedios por cada uno de los estratos y así poder imputar los datos faltantes. Asumiendo que hay una relación directa entre los estratos y los ingresos de los hogares:</p>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="imputación-por-la-media-condicional.html#cb565-1" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span></span>
-<span id="cb565-2"><a href="imputación-por-la-media-condicional.html#cb565-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Income_imp =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Income_missin),</span>
-<span id="cb565-3"><a href="imputación-por-la-media-condicional.html#cb565-3" tabindex="-1"></a>     <span class="fu">mean</span>(Income_missin, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb565-4"><a href="imputación-por-la-media-condicional.html#cb565-4" tabindex="-1"></a>     Income_missin)) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
-<span id="cb565-5"><a href="imputación-por-la-media-condicional.html#cb565-5" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="imputación-por-la-media-condicional.html#cb566-1" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span> <span class="fu">group_by</span>(Stratum) <span class="sc">%&gt;%</span></span>
+<span id="cb566-2"><a href="imputación-por-la-media-condicional.html#cb566-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Income_imp =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Income_missin),</span>
+<span id="cb566-3"><a href="imputación-por-la-media-condicional.html#cb566-3" tabindex="-1"></a>     <span class="fu">mean</span>(Income_missin, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb566-4"><a href="imputación-por-la-media-condicional.html#cb566-4" tabindex="-1"></a>     Income_missin)) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
+<span id="cb566-5"><a href="imputación-por-la-media-condicional.html#cb566-5" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="imputación-por-la-media-condicional.html#cb567-1" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb567-2"><a href="imputación-por-la-media-condicional.html#cb567-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Income_imp =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Income_imp), </span>
-<span id="cb567-3"><a href="imputación-por-la-media-condicional.html#cb567-3" tabindex="-1"></a>                           promedio, Income_imp))</span>
-<span id="cb567-4"><a href="imputación-por-la-media-condicional.html#cb567-4" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="imputación-por-la-media-condicional.html#cb568-1" tabindex="-1"></a>encuesta <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb568-2"><a href="imputación-por-la-media-condicional.html#cb568-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">Income_imp =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Income_imp), </span>
+<span id="cb568-3"><a href="imputación-por-la-media-condicional.html#cb568-3" tabindex="-1"></a>                           promedio, Income_imp))</span>
+<span id="cb568-4"><a href="imputación-por-la-media-condicional.html#cb568-4" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(encuesta<span class="sc">$</span>Income_imp))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>A continuación, se decribe el código computacional utilizado:</p>
 <ul>
@@ -347,11 +347,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>sum(is.na(encuesta$Income_imp)): esta línea cuenta el número de valores faltantes en la nueva columna <em>Income_imp</em> de la base de datos encuesta utilizando la función <em>sum</em> y <em>is.na</em>.</p></li>
 </ul>
 <p>A continuación, se calculan las medias y desviaciones estándar tanto para los datos imputados como los originales y así poder comparar le efecto de la imputación realizada:</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="imputación-por-la-media-condicional.html#cb569-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
-<span id="cb569-2"><a href="imputación-por-la-media-condicional.html#cb569-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb569-3"><a href="imputación-por-la-media-condicional.html#cb569-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb569-4"><a href="imputación-por-la-media-condicional.html#cb569-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb569-5"><a href="imputación-por-la-media-condicional.html#cb569-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="imputación-por-la-media-condicional.html#cb570-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(</span>
+<span id="cb570-2"><a href="imputación-por-la-media-condicional.html#cb570-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb570-3"><a href="imputación-por-la-media-condicional.html#cb570-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb570-4"><a href="imputación-por-la-media-condicional.html#cb570-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb570-5"><a href="imputación-por-la-media-condicional.html#cb570-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -374,17 +374,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[
 BR=\frac{Income-Income_{imp}}{Income}\times100\%
 \]</span></p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="imputación-por-la-media-condicional.html#cb570-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">604.2494</span><span class="sc">-</span> <span class="fl">611.545</span>)<span class="sc">/</span><span class="fl">604.2494</span></span></code></pre></div>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="imputación-por-la-media-condicional.html#cb571-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">604.2494</span><span class="sc">-</span> <span class="fl">611.545</span>)<span class="sc">/</span><span class="fl">604.2494</span></span></code></pre></div>
 <pre><code>## [1] -1.207382</code></pre>
 <p>Como se puede observar, el sesgo relativo para el primedio de los ingresos es menor al 1.5%. Ahora bien, siguiendo la misma idea, el sesgo relativo para la desviación es:</p>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="imputación-por-la-media-condicional.html#cb572-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">513.1078</span><span class="sc">-</span> <span class="fl">488.7209</span>)<span class="sc">/</span><span class="fl">513.1078</span></span></code></pre></div>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="imputación-por-la-media-condicional.html#cb573-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">513.1078</span><span class="sc">-</span> <span class="fl">488.7209</span>)<span class="sc">/</span><span class="fl">513.1078</span></span></code></pre></div>
 <pre><code>## [1] 4.752783</code></pre>
 <p>Lo que generó un sesgo relativo para la desviación estándar inferior al 5%. Ahora bien, si se realiza la imputación utilizando la media condicional agrupando por la variable zona, se tienen los siguientes resultados:</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="imputación-por-la-media-condicional.html#cb574-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb574-2"><a href="imputación-por-la-media-condicional.html#cb574-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb574-3"><a href="imputación-por-la-media-condicional.html#cb574-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb574-4"><a href="imputación-por-la-media-condicional.html#cb574-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb574-5"><a href="imputación-por-la-media-condicional.html#cb574-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="imputación-por-la-media-condicional.html#cb575-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Zone) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb575-2"><a href="imputación-por-la-media-condicional.html#cb575-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb575-3"><a href="imputación-por-la-media-condicional.html#cb575-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb575-4"><a href="imputación-por-la-media-condicional.html#cb575-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb575-5"><a href="imputación-por-la-media-condicional.html#cb575-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -413,17 +413,17 @@ BR=\frac{Income-Income_{imp}}{Income}\times100\%
 </tbody>
 </table>
 <p>Realizando el mismo ejercicio anterior, se obtienen sesgos relativos para la media de los ingresos para la zona rural de 1.87%:</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="imputación-por-la-media-condicional.html#cb575-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">469.1217</span><span class="sc">-</span> <span class="fl">477.9042</span>)<span class="sc">/</span><span class="fl">469.1217</span></span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="imputación-por-la-media-condicional.html#cb576-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">469.1217</span><span class="sc">-</span> <span class="fl">477.9042</span>)<span class="sc">/</span><span class="fl">469.1217</span></span></code></pre></div>
 <pre><code>## [1] -1.872115</code></pre>
 <p>y para la zona urbana de 0.8%.:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="imputación-por-la-media-condicional.html#cb577-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">730.8793</span><span class="sc">-</span> <span class="fl">736.7815</span>)<span class="sc">/</span><span class="fl">730.8793</span></span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="imputación-por-la-media-condicional.html#cb578-1" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="fl">730.8793</span><span class="sc">-</span> <span class="fl">736.7815</span>)<span class="sc">/</span><span class="fl">730.8793</span></span></code></pre></div>
 <pre><code>## [1] -0.8075478</code></pre>
 <p>En ambos casos se observa una buena imputación de los ingresos. Ejercicio similar se puede realizar para sexo (Se le deja al lector realizar el cálculo del sesgo relativo).</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="imputación-por-la-media-condicional.html#cb579-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
-<span id="cb579-2"><a href="imputación-por-la-media-condicional.html#cb579-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
-<span id="cb579-3"><a href="imputación-por-la-media-condicional.html#cb579-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
-<span id="cb579-4"><a href="imputación-por-la-media-condicional.html#cb579-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
-<span id="cb579-5"><a href="imputación-por-la-media-condicional.html#cb579-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="imputación-por-la-media-condicional.html#cb580-1" tabindex="-1"></a>encuesta <span class="sc">%&gt;%</span><span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span>  <span class="fu">summarise</span>(</span>
+<span id="cb580-2"><a href="imputación-por-la-media-condicional.html#cb580-2" tabindex="-1"></a>  <span class="at">Income_ =</span> <span class="fu">mean</span>(Income),</span>
+<span id="cb580-3"><a href="imputación-por-la-media-condicional.html#cb580-3" tabindex="-1"></a>  <span class="at">Income_sd =</span> <span class="fu">sd</span>(Income),</span>
+<span id="cb580-4"><a href="imputación-por-la-media-condicional.html#cb580-4" tabindex="-1"></a>  <span class="at">Income_imp_ =</span> <span class="fu">mean</span>(Income_imp),</span>
+<span id="cb580-5"><a href="imputación-por-la-media-condicional.html#cb580-5" tabindex="-1"></a>  <span class="at">Income_imp_sd =</span> <span class="fu">sd</span>(Income_imp))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -452,29 +452,29 @@ BR=\frac{Income-Income_{imp}}{Income}\times100\%
 </tbody>
 </table>
 <p>Ahora bien, para observar la distribución de los datos imputados en comparación con los no imputado se realizan las siguientes gráficas:</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="imputación-por-la-media-condicional.html#cb580-1" tabindex="-1"></a>dat_plot5 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
-<span id="cb580-2"><a href="imputación-por-la-media-condicional.html#cb580-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
-<span id="cb580-3"><a href="imputación-por-la-media-condicional.html#cb580-3" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
-<span id="cb580-4"><a href="imputación-por-la-media-condicional.html#cb580-4" tabindex="-1"></a></span>
-<span id="cb580-5"><a href="imputación-por-la-media-condicional.html#cb580-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot5, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
-<span id="cb580-6"><a href="imputación-por-la-media-condicional.html#cb580-6" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb580-7"><a href="imputación-por-la-media-condicional.html#cb580-7" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
-<span id="cb580-8"><a href="imputación-por-la-media-condicional.html#cb580-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb580-9"><a href="imputación-por-la-media-condicional.html#cb580-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
-<span id="cb580-10"><a href="imputación-por-la-media-condicional.html#cb580-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb580-11"><a href="imputación-por-la-media-condicional.html#cb580-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
-<span id="cb580-12"><a href="imputación-por-la-media-condicional.html#cb580-12" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
-<span id="cb580-13"><a href="imputación-por-la-media-condicional.html#cb580-13" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb580-14"><a href="imputación-por-la-media-condicional.html#cb580-14" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/unnamed-chunk-24-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="imputación-por-la-media-condicional.html#cb581-1" tabindex="-1"></a>dat_plot5 <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">gather</span>(</span>
+<span id="cb581-2"><a href="imputación-por-la-media-condicional.html#cb581-2" tabindex="-1"></a>  encuesta <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Zone,Sex,Income, Income_imp),</span>
+<span id="cb581-3"><a href="imputación-por-la-media-condicional.html#cb581-3" tabindex="-1"></a>  <span class="at">key =</span> <span class="st">&quot;Caso&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Income2&quot;</span>, <span class="sc">-</span>Zone,<span class="sc">-</span>Sex)</span>
+<span id="cb581-4"><a href="imputación-por-la-media-condicional.html#cb581-4" tabindex="-1"></a></span>
+<span id="cb581-5"><a href="imputación-por-la-media-condicional.html#cb581-5" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot5, <span class="fu">aes</span>(<span class="at">x =</span> Income2, <span class="at">fill =</span> Caso)) <span class="sc">+</span> </span>
+<span id="cb581-6"><a href="imputación-por-la-media-condicional.html#cb581-6" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb581-7"><a href="imputación-por-la-media-condicional.html#cb581-7" tabindex="-1"></a>   <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb581-8"><a href="imputación-por-la-media-condicional.html#cb581-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb581-9"><a href="imputación-por-la-media-condicional.html#cb581-9" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income), </span>
+<span id="cb581-10"><a href="imputación-por-la-media-condicional.html#cb581-10" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb581-11"><a href="imputación-por-la-media-condicional.html#cb581-11" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb581-12"><a href="imputación-por-la-media-condicional.html#cb581-12" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income_imp), </span>
+<span id="cb581-13"><a href="imputación-por-la-media-condicional.html#cb581-13" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb581-14"><a href="imputación-por-la-media-condicional.html#cb581-14" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-24-1.svg" width="672" /></p>
 <p>Se puede observar que de manera general, la distribución de las observaciones imputadas y originales tienen un comportamiento mejor que con la media no condicional.</p>
 <p>Si se observa ahora la distribunción de los datos por zona y sexo, se puede observar también una buena imputación de las observaciones.</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="imputación-por-la-media-condicional.html#cb581-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot5, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
-<span id="cb581-2"><a href="imputación-por-la-media-condicional.html#cb581-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
-<span id="cb581-3"><a href="imputación-por-la-media-condicional.html#cb581-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb581-4"><a href="imputación-por-la-media-condicional.html#cb581-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
-<span id="cb581-5"><a href="imputación-por-la-media-condicional.html#cb581-5" tabindex="-1"></a>p1</span></code></pre></div>
-<p><img src="11-Imputacio%CC%81n_files/figure-html/unnamed-chunk-25-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="imputación-por-la-media-condicional.html#cb582-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat_plot5, <span class="fu">aes</span>(<span class="at">x=</span> Caso, <span class="at">y =</span> Income2)) <span class="sc">+</span> </span>
+<span id="cb582-2"><a href="imputación-por-la-media-condicional.html#cb582-2" tabindex="-1"></a>   <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(encuesta<span class="sc">$</span>Income),</span>
+<span id="cb582-3"><a href="imputación-por-la-media-condicional.html#cb582-3" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb582-4"><a href="imputación-por-la-media-condicional.html#cb582-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Zone<span class="sc">~</span>Sex) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span>
+<span id="cb582-5"><a href="imputación-por-la-media-condicional.html#cb582-5" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="11-Imputaci%C3%B3n_files/figure-html/unnamed-chunk-25-1.svg" width="672" /></p>
 </div>
             </section>
 
